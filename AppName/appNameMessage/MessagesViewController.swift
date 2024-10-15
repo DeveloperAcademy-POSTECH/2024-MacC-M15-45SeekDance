@@ -8,11 +8,36 @@
 import UIKit
 import Messages
 
-class MessagesViewController: MSMessagesAppViewController {
+class MessagesViewController: MSMessagesAppViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return sampleData.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ChallengeCollectionCell", for: indexPath) as! ChallengeCollectionCell
+
+                let challenge = sampleData[indexPath.item]
+                cell.configure(challenge)
+
+                return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let padding: CGFloat = 8 // 셀 사이의 간격
+        let collectionViewSize = collectionView.frame.size.width - padding * 4 
+
+        // 셀의 너비를 3개로 나누어서 계산
+        let cellWidth = collectionViewSize / 3
+        return CGSize(width: cellWidth, height: cellWidth) // 셀을 정사각형으로 설정
+    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+
+        self.challengeCollection.delegate = self
+        self.challengeCollection.dataSource = self
     }
     
     // MARK: - Conversation Handling
@@ -63,4 +88,23 @@ class MessagesViewController: MSMessagesAppViewController {
         // Use this method to finalize any behaviors associated with the change in presentation style.
     }
 
+    @IBOutlet weak var challengeCollection: UICollectionView!
+    
+
+
 }
+
+class ChallengeCollectionCell: UICollectionViewCell {
+
+    @IBOutlet weak var challengeTitle: UILabel!
+    @IBOutlet weak var challengeKwh: UILabel!
+    @IBOutlet weak var challengeDday: UILabel!
+
+    func configure(_ elec: ElecChallenge) {
+        challengeTitle.text = "\(elec.name)"
+        challengeKwh.text = "\(elec.totalKwh)kWh"
+        challengeDday.text = "D-\(elec.date)"
+    }
+}
+
+
