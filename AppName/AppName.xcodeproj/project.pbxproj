@@ -42,10 +42,18 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		BD74F5EA2CBF5D13007FB20C /* Exceptions for "appNameMessage" folder in "AppName" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Model/Data.swift,
+			);
+			target = BDD309C12CBA62C3003EDC28 /* AppName */;
+		};
 		BDD30A182CBA6388003EDC28 /* Exceptions for "appNameMessage" folder in "appNameMessage" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
+				Model/Data.swift,
 			);
 			target = BDD30A072CBA6387003EDC28 /* appNameMessage */;
 		};
@@ -60,6 +68,7 @@
 		BDD30A0C2CBA6387003EDC28 /* appNameMessage */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
+				BD74F5EA2CBF5D13007FB20C /* Exceptions for "appNameMessage" folder in "AppName" target */,
 				BDD30A182CBA6388003EDC28 /* Exceptions for "appNameMessage" folder in "appNameMessage" target */,
 			);
 			path = appNameMessage;
@@ -370,6 +379,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"AppName/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -399,6 +409,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"AppName/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -426,6 +437,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = appNameMessage/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = appNameMessage;
@@ -452,6 +464,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = appNameMessage/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = appNameMessage;
