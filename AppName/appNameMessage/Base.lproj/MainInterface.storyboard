@@ -46,7 +46,7 @@
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="ChallengeCollectionCell" reuseIdentifier="ChallengeCollectionCell" id="mfc-6d-6Qw" customClass="ChallengeCollectionCell" customModule="appNameMessage" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="96" height="96"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="ChallengeCollectionCell" insetsLayoutMarginsFromSafeArea="NO" id="FUN-Qx-C9l">
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="FUN-Qx-C9l">
                                             <rect key="frame" x="0.0" y="0.0" width="96" height="96"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
@@ -547,28 +547,7 @@
             </objects>
             <point key="canvasLocation" x="2022" y="-3"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="OYm-Xh-tXd">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="42f-D1-kYc" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wKL-TJ-GMI">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="DON-fC-oht" kind="relationship" relationship="rootViewController" id="aca-Xq-lKo"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ogQ-Mm-7Ey" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1165.6488549618321" y="-2.1126760563380285"/>
-        </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="yvY-DW-vx8"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="sampleIphone" width="336" height="232"/>
         <systemColor name="systemBackgroundColor">

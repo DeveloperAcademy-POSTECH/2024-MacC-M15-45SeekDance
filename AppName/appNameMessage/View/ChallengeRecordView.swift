@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ChallengeRecordView: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ChallengeRecordView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         recordTableView.delegate = self
@@ -15,8 +15,12 @@ class ChallengeRecordView: UIViewController, UITableViewDelegate, UITableViewDat
     }
 
     @IBOutlet weak var recordTableView: UITableView!
-    
 
+}
+
+// MARK: - TableView
+
+extension ChallengeRecordView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sampleRecords.count
     }
@@ -27,7 +31,4 @@ class ChallengeRecordView: UIViewController, UITableViewDelegate, UITableViewDat
         cell.configure(with: record)
         return cell
     }
-
-
-
 }
