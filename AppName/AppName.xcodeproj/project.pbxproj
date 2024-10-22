@@ -6,21 +6,6 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		BDD30A0B2CBA6387003EDC28 /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDD30A0A2CBA6387003EDC28 /* Messages.framework */; };
-		BDD30A172CBA6388003EDC28 /* appNameMessage.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = BDD30A082CBA6387003EDC28 /* appNameMessage.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-/* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		BDD30A152CBA6388003EDC28 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BDD309BA2CBA62C3003EDC28 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = BDD30A072CBA6387003EDC28;
-			remoteInfo = appNameMessage;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		BDD30A1C2CBA6388003EDC28 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -28,7 +13,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				BDD30A172CBA6388003EDC28 /* appNameMessage.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -37,41 +21,12 @@
 
 /* Begin PBXFileReference section */
 		BDD309C22CBA62C3003EDC28 /* AppName.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppName.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		BDD30A082CBA6387003EDC28 /* appNameMessage.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = appNameMessage.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		BDD30A0A2CBA6387003EDC28 /* Messages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Messages.framework; path = System/Library/Frameworks/Messages.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		BD74F5EA2CBF5D13007FB20C /* Exceptions for "appNameMessage" folder in "AppName" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Model/Data.swift,
-			);
-			target = BDD309C12CBA62C3003EDC28 /* AppName */;
-		};
-		BDD30A182CBA6388003EDC28 /* Exceptions for "appNameMessage" folder in "appNameMessage" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-				Model/Data.swift,
-			);
-			target = BDD30A072CBA6387003EDC28 /* appNameMessage */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		BDD309C42CBA62C3003EDC28 /* AppName */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = AppName;
-			sourceTree = "<group>";
-		};
-		BDD30A0C2CBA6387003EDC28 /* appNameMessage */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				BD74F5EA2CBF5D13007FB20C /* Exceptions for "appNameMessage" folder in "AppName" target */,
-				BDD30A182CBA6388003EDC28 /* Exceptions for "appNameMessage" folder in "appNameMessage" target */,
-			);
-			path = appNameMessage;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -84,14 +39,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BDD30A052CBA6387003EDC28 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BDD30A0B2CBA6387003EDC28 /* Messages.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -99,7 +46,6 @@
 			isa = PBXGroup;
 			children = (
 				BDD309C42CBA62C3003EDC28 /* AppName */,
-				BDD30A0C2CBA6387003EDC28 /* appNameMessage */,
 				BDD30A092CBA6387003EDC28 /* Frameworks */,
 				BDD309C32CBA62C3003EDC28 /* Products */,
 			);
@@ -109,7 +55,6 @@
 			isa = PBXGroup;
 			children = (
 				BDD309C22CBA62C3003EDC28 /* AppName.app */,
-				BDD30A082CBA6387003EDC28 /* appNameMessage.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -117,7 +62,6 @@
 		BDD30A092CBA6387003EDC28 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BDD30A0A2CBA6387003EDC28 /* Messages.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -137,7 +81,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				BDD30A162CBA6388003EDC28 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				BDD309C42CBA62C3003EDC28 /* AppName */,
@@ -148,28 +91,6 @@
 			productName = AppName;
 			productReference = BDD309C22CBA62C3003EDC28 /* AppName.app */;
 			productType = "com.apple.product-type.application";
-		};
-		BDD30A072CBA6387003EDC28 /* appNameMessage */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = BDD30A192CBA6388003EDC28 /* Build configuration list for PBXNativeTarget "appNameMessage" */;
-			buildPhases = (
-				BDD30A042CBA6387003EDC28 /* Sources */,
-				BDD30A052CBA6387003EDC28 /* Frameworks */,
-				BDD30A062CBA6387003EDC28 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				BDD30A0C2CBA6387003EDC28 /* appNameMessage */,
-			);
-			name = appNameMessage;
-			packageProductDependencies = (
-			);
-			productName = appNameMessage;
-			productReference = BDD30A082CBA6387003EDC28 /* appNameMessage.appex */;
-			productType = "com.apple.product-type.app-extension.messages";
 		};
 /* End PBXNativeTarget section */
 
@@ -182,9 +103,6 @@
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					BDD309C12CBA62C3003EDC28 = {
-						CreatedOnToolsVersion = 16.0;
-					};
-					BDD30A072CBA6387003EDC28 = {
 						CreatedOnToolsVersion = 16.0;
 					};
 				};
@@ -204,20 +122,12 @@
 			projectRoot = "";
 			targets = (
 				BDD309C12CBA62C3003EDC28 /* AppName */,
-				BDD30A072CBA6387003EDC28 /* appNameMessage */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		BDD309C02CBA62C3003EDC28 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BDD30A062CBA6387003EDC28 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -234,22 +144,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BDD30A042CBA6387003EDC28 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		BDD30A162CBA6388003EDC28 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = BDD30A072CBA6387003EDC28 /* appNameMessage */;
-			targetProxy = BDD30A152CBA6388003EDC28 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		BDD309CE2CBA62C5003EDC28 /* Debug */ = {
@@ -431,60 +326,6 @@
 			};
 			name = Release;
 		};
-		BDD30A1A2CBA6388003EDC28 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = appNameMessage/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = appNameMessage;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.45SeekDance.AppName.appNameMessage;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		BDD30A1B2CBA6388003EDC28 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = appNameMessage/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = appNameMessage;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.45SeekDance.AppName.appNameMessage;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -502,15 +343,6 @@
 			buildConfigurations = (
 				BDD309D12CBA62C5003EDC28 /* Debug */,
 				BDD309D22CBA62C5003EDC28 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		BDD30A192CBA6388003EDC28 /* Build configuration list for PBXNativeTarget "appNameMessage" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				BDD30A1A2CBA6388003EDC28 /* Debug */,
-				BDD30A1B2CBA6388003EDC28 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
