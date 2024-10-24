@@ -20,7 +20,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		BDD309C22CBA62C3003EDC28 /* AppName.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppName.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BDD309C22CBA62C3003EDC28 /* Gari.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gari.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -54,7 +54,7 @@
 		BDD309C32CBA62C3003EDC28 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BDD309C22CBA62C3003EDC28 /* AppName.app */,
+				BDD309C22CBA62C3003EDC28 /* Gari.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -69,9 +69,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		BDD309C12CBA62C3003EDC28 /* AppName */ = {
+		BDD309C12CBA62C3003EDC28 /* Gari */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BDD309D02CBA62C5003EDC28 /* Build configuration list for PBXNativeTarget "AppName" */;
+			buildConfigurationList = BDD309D02CBA62C5003EDC28 /* Build configuration list for PBXNativeTarget "Gari" */;
 			buildPhases = (
 				BDD309BE2CBA62C3003EDC28 /* Sources */,
 				BDD309BF2CBA62C3003EDC28 /* Frameworks */,
@@ -85,11 +85,11 @@
 			fileSystemSynchronizedGroups = (
 				BDD309C42CBA62C3003EDC28 /* AppName */,
 			);
-			name = AppName;
+			name = Gari;
 			packageProductDependencies = (
 			);
 			productName = AppName;
-			productReference = BDD309C22CBA62C3003EDC28 /* AppName.app */;
+			productReference = BDD309C22CBA62C3003EDC28 /* Gari.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -107,7 +107,7 @@
 					};
 				};
 			};
-			buildConfigurationList = BDD309BD2CBA62C3003EDC28 /* Build configuration list for PBXProject "AppName" */;
+			buildConfigurationList = BDD309BD2CBA62C3003EDC28 /* Build configuration list for PBXProject "Gari" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -121,7 +121,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				BDD309C12CBA62C3003EDC28 /* AppName */,
+				BDD309C12CBA62C3003EDC28 /* Gari */,
 			);
 		};
 /* End PBXProject section */
@@ -329,7 +329,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		BDD309BD2CBA62C3003EDC28 /* Build configuration list for PBXProject "AppName" */ = {
+		BDD309BD2CBA62C3003EDC28 /* Build configuration list for PBXProject "Gari" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BDD309CE2CBA62C5003EDC28 /* Debug */,
@@ -338,7 +338,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BDD309D02CBA62C5003EDC28 /* Build configuration list for PBXNativeTarget "AppName" */ = {
+		BDD309D02CBA62C5003EDC28 /* Build configuration list for PBXNativeTarget "Gari" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BDD309D12CBA62C5003EDC28 /* Debug */,
