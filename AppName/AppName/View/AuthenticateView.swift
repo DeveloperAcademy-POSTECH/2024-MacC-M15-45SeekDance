@@ -25,6 +25,7 @@ struct AuthenticateView: View {
             Button("Temporary tagging") {
                 // 포인트 부여 후 리더보드 수정
                 point += 78
+                gameCenterManager.submitPoint(point: point)
             }
             .buttonStyle(.borderedProminent)
         }
