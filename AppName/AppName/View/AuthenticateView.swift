@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AuthenticateView: View {
     let gameCenterManager = GameCenterManager()
-    @State private var point = 0
+    @AppStorage("point") var point = 0
     var body: some View {
         VStack {
             Button(action: {
