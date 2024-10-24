@@ -10,10 +10,12 @@ import SwiftUI
 struct AuthenticateView: View {
     let gameCenterManager = GameCenterManager()
     @AppStorage("point") var point = 0
+    @State private var isShowingGameCenterView = false
     var body: some View {
         VStack {
             Button(action: {
                 // 게임 센터로 이동
+                isShowingGameCenterView = true
             }, label: {
                 Image(systemName: "gamecontroller")
                     .font(.title)
@@ -28,6 +30,9 @@ struct AuthenticateView: View {
                 gameCenterManager.submitPoint(point: point)
             }
             .buttonStyle(.borderedProminent)
+        }
+        .sheet(isPresented: $isShowingGameCenterView) {
+            GameCenterView(format: .default)
         }
     }
     
