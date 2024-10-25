@@ -9,7 +9,7 @@ import Foundation
 import GameKit
 
 class GameCenterManager: NSObject {
-    let leaderboardID: String = "leaderboard1"
+    let leaderboardID: String = "leaderboard2"
     
     // 게임 센터 계정 인증하기
     func authenticateUser(){
