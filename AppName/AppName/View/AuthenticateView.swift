@@ -40,6 +40,13 @@ struct AuthenticateView: View {
                 Spacer()
                 Text("your point: \(point)")
                 Spacer()
+                Button("First 78 staircase tagging") {
+                    // 포인트 부여 후 리더보드 수정
+                    // 첫 78 계단 태깅 성취 설정
+                    point += 78
+                    gameCenterManager.submitPoint(point: point)
+                }
+                .buttonStyle(.borderedProminent)
                 Button("Temporary tagging") {
                     // 포인트 부여 후 리더보드 수정
                     point += 78
