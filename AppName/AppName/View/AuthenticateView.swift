@@ -33,6 +33,7 @@ struct AuthenticateView: View {
         }
         .sheet(isPresented: $isShowingGameCenterView) {
             GameCenterView(format: .default)
+                .ignoresSafeArea()
         }
     }
     
