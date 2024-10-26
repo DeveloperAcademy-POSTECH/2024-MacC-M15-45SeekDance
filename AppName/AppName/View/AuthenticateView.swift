@@ -6,34 +6,51 @@
 //
 
 import SwiftUI
+import GameKit
 
 struct AuthenticateView: View {
     let gameCenterManager = GameCenterManager()
     @AppStorage("point") var point = 0
     @State private var isShowingGameCenterView = false
+    @State private var gamecenterFormat: GKGameCenterViewControllerState = .default
     var body: some View {
-        VStack {
-            Button(action: {
-                // 게임 센터로 이동
-                isShowingGameCenterView = true
-            }, label: {
-                Image(systemName: "gamecontroller")
-                    .font(.title)
-            })
-            .buttonStyle(.bordered)
-            Spacer()
-            Text("your point: \(point)")
-            Spacer()
-            Button("Temporary tagging") {
-                // 포인트 부여 후 리더보드 수정
-                point += 78
-                gameCenterManager.submitPoint(point: point)
+        NavigationStack {
+            VStack {
+                HStack {
+                    Button(action: {
+                        // 성취로 이동
+                        isShowingGameCenterView = true
+                        gamecenterFormat = .achievements
+                    }, label: {
+                        Text("Achievements")
+                            .font(.title3)
+                    })
+                    .buttonStyle(.bordered)
+                    Spacer()
+                    Button(action: {
+                        // 순위표로 이동
+                        isShowingGameCenterView = true
+                        gamecenterFormat = .leaderboards
+                    }, label: {
+                        Text("Leaderboards")
+                            .font(.title3)
+                    })
+                    .buttonStyle(.bordered)
+                }
+                Spacer()
+                Text("your point: \(point)")
+                Spacer()
+                Button("Temporary tagging") {
+                    // 포인트 부여 후 리더보드 수정
+                    point += 78
+                    gameCenterManager.submitPoint(point: point)
+                }
+                .buttonStyle(.borderedProminent)
             }
-            .buttonStyle(.borderedProminent)
-        }
-        .sheet(isPresented: $isShowingGameCenterView) {
-            GameCenterView(format: .default)
-                .ignoresSafeArea()
+            .sheet(isPresented: $isShowingGameCenterView) {
+                GameCenterView(format: gamecenterFormat)
+                    .ignoresSafeArea()
+            }
         }
     }
     
