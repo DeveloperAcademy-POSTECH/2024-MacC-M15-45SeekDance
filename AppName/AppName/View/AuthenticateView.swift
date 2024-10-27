@@ -11,16 +11,18 @@ import GameKit
 struct AuthenticateView: View {
     let gameCenterManager = GameCenterManager()
     @AppStorage("point") var point = 0
-    @State private var isShowingGameCenterView = false
-    @State private var gamecenterFormat: GKGameCenterViewControllerState = .default
+    @AppStorage("GKGameCenterViewControllerState") var gameCenterViewControllerState: GKGameCenterViewControllerState = .default
+    @AppStorage("IsGameCenterActive") var isGKActive: Bool = false
     var body: some View {
-        NavigationStack {
+//        if isGKActive {
+//            GameCenterView(format: gameCenterViewControllerState)
+//        } else {
             VStack {
                 HStack {
                     Button(action: {
                         // 성취로 이동
-                        isShowingGameCenterView = true
-                        gamecenterFormat = .achievements
+                        gameCenterViewControllerState = .achievements
+                        isGKActive = true
                     }, label: {
                         Text("Achievements")
                             .font(.title3)
@@ -29,8 +31,8 @@ struct AuthenticateView: View {
                     Spacer()
                     Button(action: {
                         // 순위표로 이동
-                        isShowingGameCenterView = true
-                        gamecenterFormat = .leaderboards
+                        gameCenterViewControllerState = .leaderboards
+                        isGKActive = true
                     }, label: {
                         Text("Leaderboards")
                             .font(.title3)
@@ -47,12 +49,12 @@ struct AuthenticateView: View {
                 }
                 .buttonStyle(.borderedProminent)
             }
-            .sheet(isPresented: $isShowingGameCenterView) {
-                GameCenterView(format: gamecenterFormat)
+            .sheet(isPresented: $isGKActive) {
+                GameCenterView(format: gameCenterViewControllerState)
                     .ignoresSafeArea()
             }
         }
-    }
+//    }
     
     init() {
         // 사용자 게임 센터 인증
