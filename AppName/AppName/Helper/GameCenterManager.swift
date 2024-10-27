@@ -12,7 +12,7 @@ class GameCenterManager: NSObject {
     let leaderboardID: String = "leaderboard2"
     
     // 게임 센터 계정 인증하기
-    func authenticateUser(){
+    func authenticateUser() {
         GKLocalPlayer.local.authenticateHandler = { vc, error in
             guard error == nil else {
                 print(error?.localizedDescription ?? "")
@@ -23,7 +23,7 @@ class GameCenterManager: NSObject {
     }
     
     // 리더보드 점수 업데이트 하기
-    func submitPoint(point: Int){
+    func submitPoint(point: Int) {
         GKLeaderboard.submitScore(point, context: 0, player: GKLocalPlayer.local,
                                   leaderboardIDs: [leaderboardID]) { error in
             if error != nil {
@@ -37,12 +37,13 @@ class GameCenterManager: NSObject {
     }
     
     // 성취 업데이트하기
-    func reportAchievement(achievementID: String, isFirst: Bool = false){
+    func reportAchievement(achievementID: String, isFirst: Bool = false) {
         let achievement = GKAchievement(identifier: achievementID)
         if isFirst {
             achievement.percentComplete = 100.0
         } else {
-            achievement.percentComplete = 4.0
+            print(achievement.percentComplete)
+            achievement.percentComplete += 4.0
         }
         GKAchievement.report([achievement], withCompletionHandler: {(error: Error?) in
             if error != nil {
