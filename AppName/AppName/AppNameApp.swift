@@ -12,6 +12,7 @@ struct AppNameApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+            //NFCReadView()
         }
     }
 }
