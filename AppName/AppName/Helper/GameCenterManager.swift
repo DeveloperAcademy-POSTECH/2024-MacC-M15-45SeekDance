@@ -33,7 +33,7 @@ class GameCenterManager: NSObject {
         print("game center: updated leaderboard")
         // 78계단만 태깅할 때
         reportAchievement(achievementID: "testfirst78staircase", isFirst: true)
-        reportAchievement(achievementID: "test78staircase")
+//        reportAchievement(achievementID: "test78staircase")
     }
     
     // 성취 업데이트하기
@@ -43,7 +43,7 @@ class GameCenterManager: NSObject {
             achievement.percentComplete = 100.0
         } else {
             print(achievement.percentComplete)
-            achievement.percentComplete += 4.0
+//            achievement.percentComplete += 4.0
         }
         GKAchievement.report([achievement], withCompletionHandler: {(error: Error?) in
             if error != nil {
