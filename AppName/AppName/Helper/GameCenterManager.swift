@@ -38,14 +38,18 @@ class GameCenterManager: NSObject {
     
     // 성취 업데이트하기
     func reportAchievement(achievementID: String, isFirst: Bool = false) {
-        let achievement = GKAchievement(identifier: achievementID)
+        var achievement: GKAchievement? = nil
         if isFirst {
-            achievement.percentComplete = 100.0
+            achievement = GKAchievement(identifier: achievementID)
+            achievement!.percentComplete = 100.0
         } else {
-            print(achievement.percentComplete)
-//            achievement.percentComplete += 4.0
+//            GKAchievement.loadAchievements(completionHandler: { (achievements: [GKAchievement]?, error: Error?) in
+//                achievement = achievements?.first(where: { $0.identifier == achievementID})
+//                achievement?.percentComplete += 4.0
+//                print(achievement?.percentComplete)
+//            })
         }
-        GKAchievement.report([achievement], withCompletionHandler: {(error: Error?) in
+        GKAchievement.report([achievement!], withCompletionHandler: {(error: Error?) in
             if error != nil {
                 // Handle the error that occurs.
                 print("Error: \(String(describing: error))")
