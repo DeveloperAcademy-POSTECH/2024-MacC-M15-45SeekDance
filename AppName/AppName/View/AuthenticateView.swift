@@ -11,18 +11,11 @@ import GameKit
 struct AuthenticateView: View {
     let gameCenterManager = GameCenterManager()
     @AppStorage("point") var point = 0
-    @AppStorage("GKGameCenterViewControllerState") var gameCenterViewControllerState: GKGameCenterViewControllerState = .default
-    @AppStorage("IsGameCenterActive") var isGKActive: Bool = false
     var body: some View {
-//        if isGKActive {
-//            GameCenterView(format: gameCenterViewControllerState)
-//        } else {
             VStack {
                 HStack {
                     Button(action: {
-                        // 성취로 이동
-                        gameCenterViewControllerState = .achievements
-                        isGKActive = true
+                        gameCenterManager.showAchievements()
                     }, label: {
                         Text("Achievements")
                             .font(.title3)
@@ -30,9 +23,7 @@ struct AuthenticateView: View {
                     .buttonStyle(.bordered)
                     Spacer()
                     Button(action: {
-                        // 순위표로 이동
-                        gameCenterViewControllerState = .leaderboards
-                        isGKActive = true
+                        gameCenterManager.showLeaderboard()
                     }, label: {
                         Text("Leaderboards")
                             .font(.title3)
@@ -49,12 +40,7 @@ struct AuthenticateView: View {
                 }
                 .buttonStyle(.borderedProminent)
             }
-            .sheet(isPresented: $isGKActive) {
-                GameCenterView(format: gameCenterViewControllerState)
-                    .ignoresSafeArea()
-            }
         }
-//    }
     
     init() {
         // 사용자 게임 센터 인증
