@@ -108,7 +108,7 @@ struct MainView: View {
                     }
                     .frame(height: 50)
                     .frame(width: 152)
-                    .foregroundColor(Color.white)
+                    .foregroundColor(Color.blue)
                     .background(Color.buttons)
                     .cornerRadius(12)
                     
@@ -122,7 +122,7 @@ struct MainView: View {
                     }
                     .frame(height: 50)
                     .frame(width: 152)
-                    .foregroundColor(Color.white)
+                    .foregroundColor(Color.blue)
                     .background(Color.buttons)
                     .cornerRadius(12)
                 } // HStack // 아래 두개 버튼
