@@ -15,12 +15,13 @@ struct MainView: View {
     @State private var isButtonEnabled: Bool = true
     @State var isResultViewPresented: Bool = false
     @State var isShowingNFCAlert: Bool = false
+    @State var buttonCountMessage: String = ""
 
     @State private var nfcCount: Int = 0
     @State private var nfcMessage: String = ""
 
     @Environment(\.modelContext) var context
-    @Query(sort: [SortDescriptor(\StairStepModel.stairStepDate, order: .forward)]) var stairSteps: [StairStepModel]
+    @Query var stairSteps: [StairStepModel]
 
     var body: some View {
         ZStack {
@@ -30,7 +31,7 @@ struct MainView: View {
             VStack (alignment: .center) { // VStack 전체
 
                 VStack { // 당기면 보이는 값 위치
-                    Text("7 회")
+                    Text("\(countThisMonthStairSteps()) 회")
                         .fontWeight(.semibold)
                         .font(.subheadline)
                 }
@@ -38,7 +39,7 @@ struct MainView: View {
 
                 VStack (alignment: .center) { // 흰 카드 안 콘텐츠 (텍스트, 이미지, 서클, 버튼 두개)
 
-                    Text("엘리베이터 대신 \n계단 이용하기!")
+                    Text("엘리베이터 대신 78계단 이용하기!")
                         .multilineTextAlignment(.center)
                         .fontWeight(.regular)
                         .font(.title2)
@@ -53,7 +54,7 @@ struct MainView: View {
                         ZStack {
                             Circle()
                                 .frame(width: 52, height: 52)
-                                .foregroundColor(.gray)
+                                .foregroundColor(countTodayStairSteps() >= 1 ? .orange : .gray)
                             Text("1회")
                                 .foregroundColor(.white) // 텍스트 색상 설정
                         }
@@ -61,7 +62,7 @@ struct MainView: View {
                         ZStack {
                             Circle()
                                 .frame(width: 52, height: 52)
-                                .foregroundColor(.gray)
+                                .foregroundColor(countTodayStairSteps() >= 2 ? .pink : .gray)
                             Text("2회")
                                 .foregroundColor(.white)
                         }
@@ -69,7 +70,7 @@ struct MainView: View {
                         ZStack {
                             Circle()
                                 .frame(width: 52, height: 52)
-                                .foregroundColor(.gray)
+                                .foregroundColor(countTodayStairSteps() >= 3 ? .purple : .gray)
                             Text("3회")
                                 .foregroundColor(.white)
                         }
@@ -98,13 +99,23 @@ struct MainView: View {
                             }
                             nfcReader?.beginScanning()
                         } label: {
-                            Text("NFC 태깅하기")
-                                .foregroundColor(.white)
-                                .font(.body)
-                                .fontWeight(.regular)
-                                .frame(width: 264, height: 50)
-                                .background(Color.indigo)
-                                .cornerRadius(12)
+                            if isButtonEnabled {
+                                Text("NFC 태깅하기")
+                                    .foregroundColor(.white)
+                                    .font(.body)
+                                    .fontWeight(.regular)
+                                    .frame(width: 264, height: 50)
+                                    .background(Color.indigo)
+                                    .cornerRadius(12)
+                            } else {
+                                Text("\(buttonCountMessage)")
+                                    .foregroundColor(.white)
+                                    .font(.body)
+                                    .fontWeight(.regular)
+                                    .frame(width: 264, height: 50)
+                                    .background(Color.gray)
+                                    .cornerRadius(12)
+                            }
                         }
                         .disabled(!isButtonEnabled)
                         .onAppear {
@@ -142,6 +153,9 @@ struct MainView: View {
                 .cornerRadius(20)
                 .fullScreenCover(isPresented: $isResultViewPresented) {
                     ResultView(isResultViewPresented: $isResultViewPresented)
+                }
+                .onChange(of: isResultViewPresented) {
+                    startTimer()
                 }
 
                 // HStack 버튼
@@ -189,14 +203,23 @@ struct MainView: View {
         }
     }
 
-    // TODO: - 버튼 시간에 따른 업데이트 함수. SwiftData형식으로 변경 필요
     func updateButtonState() {
         if let lastStep = stairSteps.last {
-            // 임의로 10초 설정
-            isButtonEnabled = Date().timeIntervalSince(lastStep.stairStepDate) >= 10
-        } else {
-            isButtonEnabled = true
-        }
+                // 임의로 10초 설정
+                let elapsedTime = Date().timeIntervalSince(lastStep.stairStepDate)
+                let remainingTime = max(0, 10 - elapsedTime)
+
+                if remainingTime <= 0 {
+                    isButtonEnabled = true
+                } else {
+                    isButtonEnabled = false
+                    let minutes = Int(remainingTime) / 60
+                    let seconds = Int(remainingTime) % 60
+                    buttonCountMessage = String(format: "%02d분 %02d초 뒤 태깅 가능", minutes, seconds)
+                }
+            } else {
+                isButtonEnabled = true
+            }
     }
 
     // MARK: - 시리얼 정보를 통해 계단 찾기
@@ -208,10 +231,26 @@ struct MainView: View {
             return ("지원되지 않는 NFC입니다", 0)
         }
     }
-}
 
+    // MARK: - 오늘 계단 걷기 기록 횟수
+    func countTodayStairSteps() -> Int {
+        let calendar = Calendar.current
+        let today = Date()
 
+        return stairSteps.filter { stairStep in
+            let isToday = calendar.isDate(stairStep.stairStepDate, inSameDayAs: today)
+            return isToday
+        }.count
+    }
 
-#Preview {
-    MainView()
+    // MARK: - 이번달 계단 걷기 기록 횟수
+    func countThisMonthStairSteps() -> Int {
+        let calendar = Calendar.current
+        let startOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: Date()))!
+        let startOfNextMonth = calendar.date(byAdding: .month, value: 1, to: startOfMonth)!
+
+        return stairSteps.filter { stairStep in
+            stairStep.stairStepDate >= startOfMonth && stairStep.stairStepDate < startOfNextMonth
+        }.count
+    }
 }
