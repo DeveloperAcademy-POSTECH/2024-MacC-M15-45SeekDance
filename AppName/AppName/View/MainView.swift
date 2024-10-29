@@ -13,6 +13,7 @@ struct MainView: View {
     @State private var nfcReader: NFCReader?
     @State private var isButtonEnabled: Bool = true
     @State var isResultViewPresented: Bool = false
+    @State var isShowingNFCAlert: Bool = false
 
     @State private var nfcCount: Int = 0
     @State private var nfcMessage: String = ""
@@ -83,6 +84,8 @@ struct MainView: View {
                                     if nfcCount != 0 {
                                         sampleStepModels.append(StairStepModel(stairType: message, stairStepDate: Date()))
                                         isResultViewPresented.toggle()
+                                    } else {
+                                        isShowingNFCAlert.toggle()
                                     }
 
                                 case .failure(let error):
@@ -113,6 +116,11 @@ struct MainView: View {
                                 .foregroundColor(.secondary)
                                 .font(.footnote)
                         }
+                        .alert(isPresented: $isShowingNFCAlert) {
+                            Alert(title: Text("지원하지 않는 NFC입니다."),
+                                  message: Text("78계단에 위치한 NFC를 태그해주세요."),
+                                  dismissButton: .default(Text("확인")))
+                        }
                         .sheet(isPresented: $showSheet2) {
                             ExplainView()
                                 .presentationDragIndicator(.visible)
@@ -131,6 +139,7 @@ struct MainView: View {
                 .fullScreenCover(isPresented: $isResultViewPresented) {
                     ResultView(isResultViewPresented: $isResultViewPresented)
                 }
+
 
                 // HStack 버튼
                 HStack {
