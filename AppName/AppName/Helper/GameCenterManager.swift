@@ -10,7 +10,7 @@ import GameKit
 class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObject {
     let leaderboardID: String = "leaderboard2"
     
-    // 게임 센터 계정 인증하기
+    // MARK: 게임 센터 계정 인증하기
     func authenticateUser() {
         GKLocalPlayer.local.authenticateHandler = { vc, error in
             guard error == nil else {
@@ -21,7 +21,7 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
         print("game center: authenticated user")
     }
     
-    // 순위표 점수 업데이트 하기
+    // MARK: 순위표 점수 업데이트 하기
     func submitPoint(point: Int) {
         GKLeaderboard.submitScore(point, context: 0, player: GKLocalPlayer.local,
                                   leaderboardIDs: [leaderboardID]) { error in
@@ -30,18 +30,20 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
             }
         }
         print("game center: updated leaderboard")
-        // 78계단만 태깅할 때
+        // TODO: 78계단 이외 계단이 생길 때 수정하기
         reportAchievement(achievementID: "testfirst78staircase", isFirst: true)
 //        reportAchievement(achievementID: "test78staircase")
     }
     
-    // 성취 업데이트하기
+    // MARK: 성취 업데이트하기
     func reportAchievement(achievementID: String, isFirst: Bool = false) {
         var achievement: GKAchievement? = nil
         if isFirst {
             achievement = GKAchievement(identifier: achievementID)
-            achievement!.percentComplete = 100.0 // 수정 예정
+            guard let achievement else { return }
+            achievement.percentComplete = 100.0
         } else {
+            // TODO: 마스터 성취 업데이트할 때 수정하기
 //            GKAchievement.loadAchievements(completionHandler: { (achievements: [GKAchievement]?, error: Error?) in
 //                achievement = achievements?.first(where: { $0.identifier == achievementID})
 //                achievement?.percentComplete += 4.0
@@ -50,14 +52,13 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
         }
         GKAchievement.report([achievement!], withCompletionHandler: {(error: Error?) in
             if error != nil {
-                // Handle the error that occurs.
                 print("Error: \(String(describing: error))")
             }
         })
         print("game center: updated achievement")
     }
     
-    // 순위표 보기
+    // MARK: 순위표 보기
     func showLeaderboard() {
         let viewController = GKGameCenterViewController(leaderboardID: leaderboardID, playerScope: .friendsOnly, timeScope: .allTime)
         viewController.gameCenterDelegate = self
@@ -69,7 +70,7 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
         }
     }
 
-    // 성취 보기
+    // MARK: 성취 보기
     func showAchievements() {
         let viewController = GKGameCenterViewController(state: .achievements)
         viewController.gameCenterDelegate = self
@@ -81,7 +82,7 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
         }
     }
 
-    // Game Center 뷰 컨트롤러 닫기 핸들러
+    // MARK: Game Center 뷰 컨트롤러 닫기 핸들러
     func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
         gameCenterViewController.dismiss(animated: true, completion: nil)
     }
