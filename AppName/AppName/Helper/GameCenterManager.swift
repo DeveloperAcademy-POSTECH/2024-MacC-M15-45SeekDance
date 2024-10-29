@@ -8,7 +8,7 @@
 import GameKit
 
 class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObject {
-    let leaderboardID: String = "leaderboard2"
+    let leaderboardID: String = "leaderboardPhase2"
     
     // MARK: 게임 센터 계정 인증하기
     func authenticateUser() {
