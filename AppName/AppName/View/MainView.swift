@@ -39,24 +39,39 @@ struct MainView: View {
                         .frame(width: 240, height: 240)
                         .padding(.top, 10)
                     
-                    HStack (spacing: 16){ // 서클
-                        Circle()
-                            .frame(width: 52, height: 52)
-                            .foregroundColor(.gray)
-                        Circle()
-                            .frame(width: 52, height: 52)
-                            .foregroundColor(.gray)
-                        Circle()
-                            .frame(width: 52, height: 52)
-                            .foregroundColor(.gray)
-                    } //  HStack // 서클 3개
+                    HStack (spacing: 16) { // 서클
+                        ZStack {
+                            Circle()
+                                .frame(width: 52, height: 52)
+                                .foregroundColor(.gray)
+                            Text("1회")
+                                .foregroundColor(.white) // 텍스트 색상 설정
+                        }
+                        
+                        ZStack {
+                            Circle()
+                                .frame(width: 52, height: 52)
+                                .foregroundColor(.gray)
+                            Text("2회")
+                                .foregroundColor(.white)
+                        }
+                        
+                        ZStack {
+                            Circle()
+                                .frame(width: 52, height: 52)
+                                .foregroundColor(.gray)
+                            Text("3회")
+                                .foregroundColor(.white)
+                        }
+                    } // HStack
                     .padding(.top, 30)
                     
-                    VStack {
+                    
+                    VStack (alignment: .center) {
                         Button {
                             showSheet1.toggle()
                         } label: {
-                            Image(systemName: "")
+                            //                            Image(systemName: "")
                             Text("NFC 태깅하기")
                                 .foregroundColor(.white)
                                 .font(.body)
@@ -81,7 +96,7 @@ struct MainView: View {
                                 .font(.footnote)
                         }
                         .sheet(isPresented: $showSheet2) {
-                            SheetBasic2()
+                            ExplainView()
                                 .presentationDragIndicator(.visible)
                                 .presentationDetents([.large])
                         }
