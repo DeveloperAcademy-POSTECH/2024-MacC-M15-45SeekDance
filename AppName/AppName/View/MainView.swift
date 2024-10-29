@@ -65,11 +65,11 @@ struct MainView: View {
                                 .background(Color.indigo)
                                 .cornerRadius(12)
                         }
-//                        .sheet(isPresented: $showSheet1) {
-//                            SheetBasic1()
-//                                .presentationDragIndicator(.hidden)
-//                               .presentationDetents([.medium])
-//                        }
+                        //                        .sheet(isPresented: $showSheet1) {
+                        //                            SheetBasic1()
+                        //                                .presentationDragIndicator(.hidden)
+                        //                               .presentationDetents([.medium])
+                        //                        }
                         
                         Button {
                             showSheet2.toggle()
@@ -109,7 +109,7 @@ struct MainView: View {
                     .frame(height: 50)
                     .frame(width: 152)
                     .foregroundColor(Color.white)
-                    .background(Color.blue)
+                    .background(Color.buttons)
                     .cornerRadius(12)
                     
                     Spacer()
@@ -123,7 +123,7 @@ struct MainView: View {
                     .frame(height: 50)
                     .frame(width: 152)
                     .foregroundColor(Color.white)
-                    .background(Color.blue)
+                    .background(Color.buttons)
                     .cornerRadius(12)
                 } // HStack // 아래 두개 버튼
                 .padding(.top, 20)
