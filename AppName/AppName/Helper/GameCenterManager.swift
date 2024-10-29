@@ -5,7 +5,6 @@
 //  Created by Groo on 10/24/24.
 //
 
-import Foundation
 import GameKit
 
 class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObject {
@@ -41,7 +40,7 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
         var achievement: GKAchievement? = nil
         if isFirst {
             achievement = GKAchievement(identifier: achievementID)
-            achievement!.percentComplete = 100.0
+            achievement!.percentComplete = 100.0 // 수정 예정
         } else {
 //            GKAchievement.loadAchievements(completionHandler: { (achievements: [GKAchievement]?, error: Error?) in
 //                achievement = achievements?.first(where: { $0.identifier == achievementID})
