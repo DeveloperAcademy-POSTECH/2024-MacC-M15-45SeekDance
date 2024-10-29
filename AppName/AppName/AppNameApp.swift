@@ -11,8 +11,7 @@ import SwiftUI
 struct AppNameApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
-            //NFCReadView()
+            MainView()
         }
     }
 }
