@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreNFC
+import SwiftData
 
 struct MainView: View {
     @State var showSheet2: Bool = false
@@ -17,6 +18,9 @@ struct MainView: View {
 
     @State private var nfcCount: Int = 0
     @State private var nfcMessage: String = ""
+
+    @Environment(\.modelContext) var context
+    @Query(sort: [SortDescriptor(\StairStepModel.stairStepDate, order: .forward)]) var stairSteps: [StairStepModel]
 
     var body: some View {
         ZStack {
@@ -82,7 +86,7 @@ struct MainView: View {
                                     print(serialNumber)
 
                                     if nfcCount != 0 {
-                                        sampleStepModels.append(StairStepModel(stairType: message, stairStepDate: Date()))
+                                        context.insert(StairStepModel(stairType: message, stairStepDate: Date(), stairNum: nfcCount))
                                         isResultViewPresented.toggle()
                                     } else {
                                         isShowingNFCAlert.toggle()
@@ -140,7 +144,6 @@ struct MainView: View {
                     ResultView(isResultViewPresented: $isResultViewPresented)
                 }
 
-
                 // HStack 버튼
                 HStack {
                     Button {
@@ -188,8 +191,8 @@ struct MainView: View {
 
     // TODO: - 버튼 시간에 따른 업데이트 함수. SwiftData형식으로 변경 필요
     func updateButtonState() {
-        if let lastStep = sampleStepModels.last {
-            // 임의로 5초 설정
+        if let lastStep = stairSteps.last {
+            // 임의로 10초 설정
             isButtonEnabled = Date().timeIntervalSince(lastStep.stairStepDate) >= 10
         } else {
             isButtonEnabled = true
