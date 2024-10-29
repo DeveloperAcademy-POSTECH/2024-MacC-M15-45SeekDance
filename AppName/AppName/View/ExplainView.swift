@@ -9,7 +9,6 @@
 import SwiftUI
 
 struct ExplainView: View {
-    // property
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {

@@ -11,10 +11,11 @@ import CoreNFC
 struct MainView: View {
     @State var showSheet2: Bool = false
     @State private var nfcReader: NFCReader?
+    @State private var isButtonEnabled: Bool = true
+    @State var isResultViewPresented: Bool = false
+
     @State private var nfcCount: Int = 0
     @State private var nfcMessage: String = ""
-    @State private var isButtonEnabled: Bool = true
-
 
     var body: some View {
         ZStack {
@@ -70,7 +71,6 @@ struct MainView: View {
                     } // HStack
                     .padding(.top, 30)
 
-
                     VStack (alignment: .center) {
                         Button {
                             // TODO: - success 시에 시리얼 넘버 비교 이후 유효하면 게임센터에 계단 층수 추가 로직 필요.
@@ -79,11 +79,14 @@ struct MainView: View {
                                 case .success((let message, let serialNumber)):
                                     (nfcMessage, nfcCount) = findNFCSerialNuber(serialNumber: serialNumber)
                                     print(serialNumber)
+
                                     if nfcCount != 0 {
                                         sampleStepModels.append(StairStepModel(stairType: message, stairStepDate: Date()))
+                                        isResultViewPresented.toggle()
                                     }
+
                                 case .failure(let error):
-                                    nfcMessage = nfcMessage
+                                    print("error 발생")
                                 }
                             }
                             nfcReader?.beginScanning()
@@ -125,6 +128,9 @@ struct MainView: View {
                 .frame(width: 320, height: 580)
                 .background(Color.white)
                 .cornerRadius(20)
+                .fullScreenCover(isPresented: $isResultViewPresented) {
+                    ResultView(isResultViewPresented: $isResultViewPresented)
+                }
 
                 // HStack 버튼
                 HStack {
@@ -156,7 +162,6 @@ struct MainView: View {
                     .cornerRadius(12)
                 } // HStack // 아래 두개 버튼
                 .padding(.top, 20)
-
 
             } // VStack 전체
             .padding(.horizontal, 40)
