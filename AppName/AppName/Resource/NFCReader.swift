@@ -22,7 +22,7 @@ class NFCReader: NSObject, NFCTagReaderSessionDelegate {
 
     func beginScanning() {
         session = NFCTagReaderSession(pollingOption: .iso14443, delegate: self, queue: nil)
-        session?.alertMessage = "Hold your iPhone near an NFC tag."
+        session?.alertMessage = "[대상체 이름] 를 스캔하세요."
         session?.begin()
     }
 
@@ -52,7 +52,7 @@ class NFCReader: NSObject, NFCTagReaderSessionDelegate {
                 session.invalidate()
 
             default:
-                session.invalidate(errorMessage: "78계단이 아님")
+                session.invalidate(errorMessage: "지원되지 않는 NFC 입니다.")
             }
         }
     }
