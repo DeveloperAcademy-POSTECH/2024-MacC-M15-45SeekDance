@@ -31,7 +31,7 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
         }
         print("game center: updated leaderboard")
         // TODO: 78계단 이외 계단이 생길 때 수정하기
-        reportAchievement(achievementID: "testfirst78staircase", isFirst: true)
+        reportAchievement(achievementID: "first78staircase", isFirst: true)
 //        reportAchievement(achievementID: "test78staircase")
     }
     
