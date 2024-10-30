@@ -9,9 +9,7 @@
 import SwiftUI
 
 struct ResultView: View {
-    // property
-    @State var showSheet1: Bool = false
-    @State var showSheet2: Bool = false
+    @Binding var isResultViewPresented: Bool
     
     var body: some View {
         ZStack {
@@ -89,22 +87,19 @@ struct ResultView: View {
                     .font(.footnote)
                     .foregroundColor(Color.secondary)
                 
-                // 하단 버튼
-                HStack {
-                    Button(action: {
-                        // action 필요
-                    }) {
-                        Text("확인")
-                            .foregroundColor(.white)
-                            .font(.body)
-                            .fontWeight(.regular)
-                            .frame(width: 320, height: 50)
-                            .background(Color.indigo)
-                            .cornerRadius(12)
-                    }
-                } //  HStack 하단 버튼
+                Button(action: {
+                    isResultViewPresented.toggle()
+                }) {
+                    Text("확인")
+                        .foregroundColor(.white)
+                        .font(.body)
+                        .fontWeight(.regular)
+                        .frame(width: 320, height: 50)
+                        .background(Color.indigo)
+                        .cornerRadius(12)
+                }
                 .padding(.top, 40)
-               
+                
             } // 전체 VStack
             .padding(.horizontal, 40)
             .padding(.top, 90)
@@ -114,5 +109,5 @@ struct ResultView: View {
 }
 
 #Preview {
-    ResultView()
+    ResultView(isResultViewPresented: .constant(true))
 }
