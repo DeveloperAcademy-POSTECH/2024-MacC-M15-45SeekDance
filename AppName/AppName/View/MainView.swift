@@ -41,7 +41,7 @@ struct MainView: View {
 
                 VStack (alignment: .center) { // 흰 카드 안 콘텐츠 (텍스트, 이미지, 서클, 버튼 두개)
 
-                    Text("엘리베이터 대신 78계단 이용하기!")
+                    Text("엘리베이터 대신 \n78계단 이용하기!")
                         .multilineTextAlignment(.center)
                         .fontWeight(.regular)
                         .font(.title2)
@@ -130,7 +130,7 @@ struct MainView: View {
                         } label: {
                             Image(systemName: "info.square.fill")
                                 .foregroundColor(.secondary)
-                            Text("NFC 태깅 방법")
+                            Text("도움이 필요하신가요?")
                                 .foregroundColor(.secondary)
                                 .font(.footnote)
                         }
