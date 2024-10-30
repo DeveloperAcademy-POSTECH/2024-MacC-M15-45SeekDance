@@ -22,6 +22,8 @@ struct MainView: View {
 
     @Environment(\.modelContext) var context
     @Query var stairSteps: [StairStepModel]
+    
+    let gameCenterManager = GameCenterManager()
 
     var body: some View {
         ZStack {
@@ -89,6 +91,7 @@ struct MainView: View {
                                     if nfcCount != 0 {
                                         context.insert(StairStepModel(stairType: message, stairStepDate: Date(), stairNum: nfcCount))
                                         isResultViewPresented.toggle()
+                                        gameCenterManager.submitPoint(point: nfcCount)
                                     } else {
                                         isShowingNFCAlert.toggle()
                                     }
@@ -161,7 +164,8 @@ struct MainView: View {
                 // HStack 버튼
                 HStack {
                     Button {
-                        // action
+                        // MARK: 성취로 이동
+                        gameCenterManager.showAchievements()
                     } label: {
                         Image(systemName: "figure.stairs")
                         Text("달성 뱃지")
@@ -176,7 +180,8 @@ struct MainView: View {
                     Spacer()
 
                     Button {
-                        // action
+                        // MARK: 순위표로 이동
+                        gameCenterManager.showLeaderboard()
                     } label: {
                         Image(systemName: "figure.stairs")
                         Text("나의 순위")
@@ -195,6 +200,11 @@ struct MainView: View {
             .padding(.bottom, 70)
         } // ZStack // 배경색
     } // View
+    
+    init() {
+        // MARK: 사용자 게임 센터 인증
+        gameCenterManager.authenticateUser()
+    }
 
     // MARK: - 타이머
     func startTimer() {
