@@ -31,6 +31,7 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
         }
         print("game center: updated leaderboard")
         // TODO: 78계단 이외 계단이 생길 때 수정하기
+        // TODO: SwiftData에서 계단의 처음 이용하는지 여부 확인 후 성취 업데이트
         reportAchievement(achievementID: "first78staircase", isFirst: true)
 //        reportAchievement(achievementID: "test78staircase")
     }
