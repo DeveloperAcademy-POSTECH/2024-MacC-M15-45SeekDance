@@ -58,7 +58,9 @@ struct ExplainView: View {
 
                         // 오류 문의 버튼
                         Button(action: {
-                            // 오류 신고 action
+                            if let url = URL(string: "https://docs.google.com/forms/d/e/1FAIpQLScvUDBnW2y7YfmcOeIzlA9KvzSUcIYix6-wkENPDCiDRaf04Q/viewform") {
+                                UIApplication.shared.open(url)
+                            }
                         }) {
                             Text("오류 문의")
                                 .font(.body)
