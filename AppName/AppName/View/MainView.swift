@@ -95,7 +95,6 @@ struct MainView: View {
                     
                     VStack (alignment: .center) {
                         Button {
-                            // TODO: - success 시에 시리얼 넘버 비교 이후 유효하면 게임센터에 계단 층수 추가 로직 필요.
                             nfcReader = NFCReader { result in
                                 switch result {
                                 case .success((let message, let serialNumber)):
