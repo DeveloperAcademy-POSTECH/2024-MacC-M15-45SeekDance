@@ -10,7 +10,8 @@ import SwiftUI
 
 struct ResultView: View {
     @Binding var isResultViewPresented: Bool
-    
+    var thisMonthStairCount: Int
+
     var body: some View {
         ZStack {
             // Background
@@ -45,7 +46,7 @@ struct ResultView: View {
                             .font(.headline)
                             .foregroundColor(.primary)
                         HStack {
-                            Text("30")
+                            Text("\(thisMonthStairCount*30)")
                                 .font(.headline)
                             Text("Wh")
                                 .font(.headline)
@@ -67,7 +68,7 @@ struct ResultView: View {
                             .foregroundColor(.primary)
                         
                         HStack {
-                            Text("12.7")
+                            Text(String(format: "%.1f", Double(thisMonthStairCount)*12.7))
                                 .font(.headline)
                             Text("g")
                                 .font(.headline)
@@ -108,6 +109,3 @@ struct ResultView: View {
     }
 }
 
-#Preview {
-    ResultView(isResultViewPresented: .constant(true))
-}

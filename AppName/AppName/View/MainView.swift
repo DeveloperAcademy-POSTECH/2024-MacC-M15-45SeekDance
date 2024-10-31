@@ -21,8 +21,8 @@ struct MainView: View {
     @State private var nfcMessage: String = ""
     
     @Environment(\.modelContext) var context
-    @Query var stairSteps: [StairStepModel]
-    
+    @Query(sort: [SortDescriptor(\StairStepModel.stairStepDate, order: .forward)]) var stairSteps: [StairStepModel]
+
     let gameCenterManager = GameCenterManager()
     
     var body: some View {
@@ -58,24 +58,36 @@ struct MainView: View {
                             Circle()
                                 .frame(width: 52, height: 52)
                                 .foregroundColor(countTodayStairSteps() >= 1 ? .orange : .gray)
-                            Text("1회")
-                                .foregroundColor(.white)
+                            if countTodayStairSteps() >= 1 {
+                                Image(systemName: "figure.stairs")
+                            } else {
+                                Text("1회")
+                                    .foregroundColor(.white)
+                            }
                         }
                         
                         ZStack {
                             Circle()
                                 .frame(width: 52, height: 52)
                                 .foregroundColor(countTodayStairSteps() >= 2 ? .pink : .gray)
-                            Text("2회")
-                                .foregroundColor(.white)
+                            if countTodayStairSteps() >= 2 {
+                                Image(systemName: "figure.stairs")
+                            } else {
+                                Text("2회")
+                                    .foregroundColor(.white)
+                            }
                         }
                         
                         ZStack {
                             Circle()
                                 .frame(width: 52, height: 52)
                                 .foregroundColor(countTodayStairSteps() >= 3 ? .purple : .gray)
-                            Text("3회")
-                                .foregroundColor(.white)
+                            if countTodayStairSteps() >= 3 {
+                                Image(systemName: "figure.stairs")
+                            } else {
+                                Text("3회")
+                                    .foregroundColor(.white)
+                            }
                         }
                     }
                     .padding(.top, 30)
@@ -156,7 +168,7 @@ struct MainView: View {
                 .background(Color.white)
                 .cornerRadius(20)
                 .fullScreenCover(isPresented: $isResultViewPresented) {
-                    ResultView(isResultViewPresented: $isResultViewPresented)
+                    ResultView(isResultViewPresented: $isResultViewPresented, thisMonthStairCount: countThisMonthStairSteps())
                 }
                 .onChange(of: isResultViewPresented) {
                     startTimer()
