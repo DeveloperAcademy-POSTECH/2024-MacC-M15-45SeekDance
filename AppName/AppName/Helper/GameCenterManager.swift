@@ -23,7 +23,10 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
     
     // MARK: 순위표 점수 업데이트 하기
     func submitPoint(point: Int) {
-        GKLeaderboard.submitScore(point, context: 0, player: GKLocalPlayer.local,
+        let score = GKLeaderboardScore()
+        score.leaderboardID = leaderboardID
+        score.value = score.value + Int(point)
+        GKLeaderboard.submitScore(score.value, context: 0, player: GKLocalPlayer.local,
                                   leaderboardIDs: [leaderboardID]) { error in
             if error != nil {
                 print("Error: \(error!.localizedDescription).")
