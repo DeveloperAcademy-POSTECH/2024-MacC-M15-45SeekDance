@@ -36,7 +36,7 @@ struct ExplainView: View {
                                         Image("87stairs")
                                             .resizable()
                                             .scaledToFit()
-                                            .frame(maxHeight: 320)
+                                            .frame(maxHeight: 300)
                                             .cornerRadius(12)
                                         Spacer()
                                     }
