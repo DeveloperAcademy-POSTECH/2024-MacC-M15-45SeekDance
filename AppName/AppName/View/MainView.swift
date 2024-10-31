@@ -105,7 +105,10 @@ struct MainView: View {
                                     if nfcCount != 0 {
                                         context.insert(StairStepModel(stairType: message, stairStepDate: Date(), stairNum: nfcCount))
                                         isResultViewPresented.toggle()
-                                        gameCenterManager.submitPoint(point: nfcCount)
+                                        // MARK: - 순위표, 성취 업데이트 하기
+                                        Task {
+                                            await gameCenterManager.submitPoint(point: nfcCount)
+                                        }
                                     } else {
                                         isShowingNFCAlert.toggle()
                                     }
