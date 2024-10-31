@@ -169,7 +169,7 @@ struct MainView: View {
                         // MARK: 성취로 이동
                         gameCenterManager.showAchievements()
                     } label: {
-                        Image(systemName: "figure.stairs")
+                        Image(systemName: "rectangle.portrait.on.rectangle.portrait.fill")
                         Text("달성 뱃지")
                         
                     }
