@@ -21,12 +21,25 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
         print("game center: authenticated user")
     }
     
+    // MARK: 기존 순위표의 점수 가져오기
+    func loadFormerPoint() async -> Int {
+        let leaderboards = try? await GKLeaderboard.loadLeaderboards(IDs: [leaderboardID])
+        guard let leaderboard = leaderboards?.first else { return -1 }
+        let entries = try? await leaderboard.loadEntries(for: [GKLocalPlayer.local],
+                                                         timeScope: GKLeaderboard.TimeScope.today)
+        guard let entry = entries?.1.first else { return -1 }
+        print("former point: \(entry.score)")
+        return entry.score
+    }
+    
     // MARK: 순위표 점수 업데이트 하기
-    func submitPoint(point: Int) {
-        let score = GKLeaderboardScore()
-        score.leaderboardID = leaderboardID
-        score.value = score.value + Int(point)
-        GKLeaderboard.submitScore(score.value, context: 0, player: GKLocalPlayer.local,
+    func submitPoint(point: Int) async {
+        let formerPoint = await loadFormerPoint()
+        if formerPoint == -1 {
+            print("Error: cannot load former point from leaderboard.")
+            return
+        }
+        GKLeaderboard.submitScore(formerPoint + Int(point), context: 0, player: GKLocalPlayer.local,
                                   leaderboardIDs: [leaderboardID]) { error in
             if error != nil {
                 print("Error: \(error!.localizedDescription).")
@@ -45,11 +58,11 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
             achievement.showsCompletionBanner = true
         } else {
             // TODO: 마스터 성취 업데이트할 때 수정하기
-//            GKAchievement.loadAchievements(completionHandler: { (achievements: [GKAchievement]?, error: Error?) in
-//                achievement = achievements?.first(where: { $0.identifier == achievementID})
-//                achievement?.percentComplete += 4.0
-//                print(achievement?.percentComplete)
-//            })
+            //            GKAchievement.loadAchievements(completionHandler: { (achievements: [GKAchievement]?, error: Error?) in
+            //                achievement = achievements?.first(where: { $0.identifier == achievementID})
+            //                achievement?.percentComplete += 4.0
+            //                print(achievement?.percentComplete)
+            //            })
         }
         GKAchievement.report([achievement], withCompletionHandler: {(error: Error?) in
             if error != nil {
@@ -70,19 +83,19 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
             }
         }
     }
-
+    
     // MARK: 성취 보기
     func showAchievements() {
         let viewController = GKGameCenterViewController(state: .achievements)
         viewController.gameCenterDelegate = self
-
+        
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
             if let window = windowScene.windows.first {
                 window.rootViewController?.present(viewController, animated: true, completion: nil)
             }
         }
     }
-
+    
     // MARK: Game Center 뷰 컨트롤러 닫기 핸들러
     func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
         gameCenterViewController.dismiss(animated: true, completion: nil)
