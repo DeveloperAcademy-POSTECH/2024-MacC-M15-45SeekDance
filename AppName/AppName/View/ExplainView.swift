@@ -33,7 +33,7 @@ struct ExplainView: View {
 
                                     HStack {
                                         Spacer()
-                                        Image("IMG1")
+                                        Image("87stairs")
                                             .resizable()
                                             .scaledToFit()
                                             .frame(maxHeight: 320)
