@@ -48,10 +48,11 @@ struct MainView: View {
                         .font(.title2)
                         .padding(.top, 20)
                     
-                    RoundedRectangle(cornerRadius: 20)
-                        .foregroundStyle(.back)
-                        .frame(width: 240, height: 240)
-                        .padding(.top, 10)
+                    Image("MainIMG")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxHeight: 240)
+                        .cornerRadius(12)
                     
                     HStack (spacing: 16) { // 서클
                         ZStack {
@@ -180,7 +181,7 @@ struct MainView: View {
                         // MARK: 성취로 이동
                         gameCenterManager.showAchievements()
                     } label: {
-                        Image(systemName: "figure.stairs")
+                        Image(systemName: "rectangle.portrait.on.rectangle.portrait.fill")
                         Text("달성 뱃지")
                         
                     }

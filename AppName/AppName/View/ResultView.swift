@@ -15,15 +15,21 @@ struct ResultView: View {
     var body: some View {
         ZStack {
             // Background
-            Color.white.ignoresSafeArea()
+            Color.back.ignoresSafeArea()
             
             VStack(alignment: .center) { // 전체 VStack
                 
                 // 칭찬 관련 이미지 들어갈 자리
-                RoundedRectangle(cornerRadius: 20)
-                    .foregroundStyle(.secondary)
-                    .frame(width: 240, height: 240)
-                    .padding(.top, 10)
+//                RoundedRectangle(cornerRadius: 20)
+//                    .foregroundStyle(.secondary)
+//                    .frame(width: 240, height: 240)
+//                    .padding(.top, 10)
+                
+                Image("ResultIMG")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxHeight: 240)
+                    .cornerRadius(12)
                 
                 Text("당신을 응원합니다!")
                     .multilineTextAlignment(.center)
@@ -57,7 +63,7 @@ struct ResultView: View {
                     .padding()
                     .background(Color.white)
                     .cornerRadius(15)
-                    .shadow(color: .gray.opacity(0.3), radius: 5, x: 0, y: 5)
+//                    .shadow(color: .gray.opacity(0.3), radius: 5, x: 0, y: 5)
                     .frame(width: 150, height: 120) // 카드 크기
                     
                     VStack(alignment: .leading, spacing: 10) {
@@ -78,7 +84,7 @@ struct ResultView: View {
                     .padding()
                     .background(Color.white)
                     .cornerRadius(15)
-                    .shadow(color: .gray.opacity(0.3), radius: 5, x: 0, y: 5)
+//                    .shadow(color: .gray.opacity(0.3), radius: 5, x: 0, y: 5)
                     .frame(width: 150, height: 120) // 카드 크기
                     
                 } // HStack 카드
