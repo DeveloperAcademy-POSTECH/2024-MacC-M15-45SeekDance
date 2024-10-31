@@ -21,6 +21,9 @@ class NFCReader: NSObject, NFCTagReaderSessionDelegate {
     }
 
     func beginScanning() {
+        guard NFCNDEFReaderSession.readingAvailable else {
+            return
+        }
         session = NFCTagReaderSession(pollingOption: .iso14443, delegate: self, queue: nil)
         session?.alertMessage = "[대상체 이름] 를 스캔하세요."
         session?.begin()
