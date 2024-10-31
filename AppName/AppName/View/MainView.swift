@@ -230,9 +230,8 @@ struct MainView: View {
     
     func updateButtonState() {
         if let lastStep = stairSteps.last {
-            // 임의로 10초 설정
             let elapsedTime = Date().timeIntervalSince(lastStep.stairStepDate)
-            let remainingTime = max(0, 10 - elapsedTime)
+            let remainingTime = max(0, 300 - elapsedTime)
             
             if remainingTime <= 0 {
                 isButtonEnabled = true
