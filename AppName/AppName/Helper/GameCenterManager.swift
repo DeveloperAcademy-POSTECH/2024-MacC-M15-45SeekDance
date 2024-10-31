@@ -23,7 +23,10 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
     
     // MARK: 순위표 점수 업데이트 하기
     func submitPoint(point: Int) {
-        GKLeaderboard.submitScore(point, context: 0, player: GKLocalPlayer.local,
+        let score = GKLeaderboardScore()
+        score.leaderboardID = leaderboardID
+        score.value = score.value + Int(point)
+        GKLeaderboard.submitScore(score.value, context: 0, player: GKLocalPlayer.local,
                                   leaderboardIDs: [leaderboardID]) { error in
             if error != nil {
                 print("Error: \(error!.localizedDescription).")
@@ -31,18 +34,15 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
         }
         print("game center: updated leaderboard")
         // TODO: 78계단 이외 계단이 생길 때 수정하기
-        // TODO: SwiftData에서 계단의 처음 이용하는지 여부 확인 후 성취 업데이트
-        reportAchievement(achievementID: "first78staircase", isFirst: true)
-//        reportAchievement(achievementID: "test78staircase")
+        reportAchievement(achievementID: "first78staircase")
     }
     
     // MARK: 성취 업데이트하기
-    func reportAchievement(achievementID: String, isFirst: Bool = false) {
-        var achievement: GKAchievement? = nil
-        if isFirst {
-            achievement = GKAchievement(identifier: achievementID)
-            guard let achievement else { return }
+    func reportAchievement(achievementID: String) {
+        let achievement = GKAchievement(identifier: achievementID)
+        if !achievement.isCompleted {
             achievement.percentComplete = 100.0
+            achievement.showsCompletionBanner = true
         } else {
             // TODO: 마스터 성취 업데이트할 때 수정하기
 //            GKAchievement.loadAchievements(completionHandler: { (achievements: [GKAchievement]?, error: Error?) in
@@ -51,7 +51,7 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
 //                print(achievement?.percentComplete)
 //            })
         }
-        GKAchievement.report([achievement!], withCompletionHandler: {(error: Error?) in
+        GKAchievement.report([achievement], withCompletionHandler: {(error: Error?) in
             if error != nil {
                 print("Error: \(String(describing: error))")
             }
