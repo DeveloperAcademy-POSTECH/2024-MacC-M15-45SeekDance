@@ -33,16 +33,23 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
     }
     
     // MARK: 순위표 점수 업데이트 하기
+    // TODO: 로컬의 인증 횟수를 저장해서 그 값을 리더보드에 업데이트하기
     func submitPoint(point: Int) async {
         let formerPoint = await loadFormerPoint()
         if formerPoint == -1 {
             print("Error: cannot load former point from leaderboard.")
-            return
-        }
-        GKLeaderboard.submitScore(formerPoint + Int(point), context: 0, player: GKLocalPlayer.local,
-                                  leaderboardIDs: [leaderboardID]) { error in
-            if error != nil {
-                print("Error: \(error!.localizedDescription).")
+            GKLeaderboard.submitScore(Int(point), context: 0, player: GKLocalPlayer.local,
+                                      leaderboardIDs: [leaderboardID]) { error in
+                if error != nil {
+                    print("Error: \(error!.localizedDescription).")
+                }
+            }
+        } else {
+            GKLeaderboard.submitScore(formerPoint + Int(point), context: 0, player: GKLocalPlayer.local,
+                                      leaderboardIDs: [leaderboardID]) { error in
+                if error != nil {
+                    print("Error: \(error!.localizedDescription).")
+                }
             }
         }
         print("game center: updated leaderboard")
