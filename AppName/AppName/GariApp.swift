@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 @main
-struct AppNameApp: App {
+struct GariApp: App {
     var stairStepContainer: ModelContainer = {
         let schema = Schema([StairStepModel.self])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
