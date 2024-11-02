@@ -20,15 +20,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1B997D832CD1B5F700F7CDC5 /* Gari.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Gari.entitlements; sourceTree = "<group>"; };
-		BDD309C22CBA62C3003EDC28 /* Gari.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gari.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		BDECE49C2CD35A8700AD6229 /* Gari-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Gari-Info.plist"; sourceTree = "<group>"; };
+		1B997D832CD1B5F700F7CDC5 /* StepSquad.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StepSquad.entitlements; sourceTree = "<group>"; };
+		BDD309C22CBA62C3003EDC28 /* StepSquad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StepSquad.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BDECE49C2CD35A8700AD6229 /* StepSquad-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "StepSquad-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		BDD309C42CBA62C3003EDC28 /* AppName */ = {
+		BDD309C42CBA62C3003EDC28 /* StepSquad */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = AppName;
+			path = StepSquad;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -47,9 +47,9 @@
 		BDD309B92CBA62C3003EDC28 = {
 			isa = PBXGroup;
 			children = (
-				BDECE49C2CD35A8700AD6229 /* Gari-Info.plist */,
-				1B997D832CD1B5F700F7CDC5 /* Gari.entitlements */,
-				BDD309C42CBA62C3003EDC28 /* AppName */,
+				BDECE49C2CD35A8700AD6229 /* StepSquad-Info.plist */,
+				1B997D832CD1B5F700F7CDC5 /* StepSquad.entitlements */,
+				BDD309C42CBA62C3003EDC28 /* StepSquad */,
 				BDD30A092CBA6387003EDC28 /* Frameworks */,
 				BDD309C32CBA62C3003EDC28 /* Products */,
 			);
@@ -58,7 +58,7 @@
 		BDD309C32CBA62C3003EDC28 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BDD309C22CBA62C3003EDC28 /* Gari.app */,
+				BDD309C22CBA62C3003EDC28 /* StepSquad.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -73,9 +73,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		BDD309C12CBA62C3003EDC28 /* Gari */ = {
+		BDD309C12CBA62C3003EDC28 /* StepSquad */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BDD309D02CBA62C5003EDC28 /* Build configuration list for PBXNativeTarget "Gari" */;
+			buildConfigurationList = BDD309D02CBA62C5003EDC28 /* Build configuration list for PBXNativeTarget "StepSquad" */;
 			buildPhases = (
 				BDD309BE2CBA62C3003EDC28 /* Sources */,
 				BDD309BF2CBA62C3003EDC28 /* Frameworks */,
@@ -87,13 +87,13 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				BDD309C42CBA62C3003EDC28 /* AppName */,
+				BDD309C42CBA62C3003EDC28 /* StepSquad */,
 			);
-			name = Gari;
+			name = StepSquad;
 			packageProductDependencies = (
 			);
 			productName = AppName;
-			productReference = BDD309C22CBA62C3003EDC28 /* Gari.app */;
+			productReference = BDD309C22CBA62C3003EDC28 /* StepSquad.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -111,7 +111,7 @@
 					};
 				};
 			};
-			buildConfigurationList = BDD309BD2CBA62C3003EDC28 /* Build configuration list for PBXProject "Gari" */;
+			buildConfigurationList = BDD309BD2CBA62C3003EDC28 /* Build configuration list for PBXProject "StepSquad" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -125,7 +125,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				BDD309C12CBA62C3003EDC28 /* Gari */,
+				BDD309C12CBA62C3003EDC28 /* StepSquad */,
 			);
 		};
 /* End PBXProject section */
@@ -275,14 +275,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Gari.entitlements;
+				CODE_SIGN_ENTITLEMENTS = StepSquad.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"AppName/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"StepSquad/Preview Content\"";
 				DEVELOPMENT_TEAM = AZ7B294WMJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Gari-Info.plist";
+				INFOPLIST_FILE = "StepSquad-Info.plist";
 				INFOPLIST_KEY_NFCReaderUsageDescription = "Need to Scan";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -313,14 +313,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Gari.entitlements;
+				CODE_SIGN_ENTITLEMENTS = StepSquad.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"AppName/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"StepSquad/Preview Content\"";
 				DEVELOPMENT_TEAM = AZ7B294WMJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Gari-Info.plist";
+				INFOPLIST_FILE = "StepSquad-Info.plist";
 				INFOPLIST_KEY_NFCReaderUsageDescription = "Need to Scan";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -349,7 +349,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		BDD309BD2CBA62C3003EDC28 /* Build configuration list for PBXProject "Gari" */ = {
+		BDD309BD2CBA62C3003EDC28 /* Build configuration list for PBXProject "StepSquad" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BDD309CE2CBA62C5003EDC28 /* Debug */,
@@ -358,7 +358,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BDD309D02CBA62C5003EDC28 /* Build configuration list for PBXNativeTarget "Gari" */ = {
+		BDD309D02CBA62C5003EDC28 /* Build configuration list for PBXNativeTarget "StepSquad" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BDD309D12CBA62C5003EDC28 /* Debug */,
