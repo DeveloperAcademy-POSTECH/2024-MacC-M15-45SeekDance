@@ -103,6 +103,11 @@ struct MainView: View {
                                     
                                     if nfcCount != 0 {
                                         context.insert(StairStepModel(stairType: message, stairStepDate: Date(), stairNum: nfcCount))
+                                        do {
+                                            try context.save()
+                                        } catch {
+                                            print("Data error")
+                                        }
                                         isResultViewPresented.toggle()
                                         // MARK: - 순위표, 성취 업데이트 하기
                                         Task {
