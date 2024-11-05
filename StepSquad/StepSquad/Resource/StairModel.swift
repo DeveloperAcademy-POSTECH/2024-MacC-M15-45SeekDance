@@ -25,4 +25,6 @@ class StairModel: Codable {
 
 let gariStairs: [StairModel] = [
     StairModel(name: "78계단", numberOfStairs: 78, serialNumber: "04d1c489230289"),
+    StairModel(name: "C5 5층에서 6층", numberOfStairs: 25, serialNumber: "0443a4eb210289"),
+    StairModel(name: "C5 1층에서 5층", numberOfStairs: 114, serialNumber: "0463e4e1200289"),
 ]
