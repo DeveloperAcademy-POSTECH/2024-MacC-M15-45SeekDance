@@ -32,6 +32,18 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
         return entry.score
     }
     
+    // MARK: 리더보드에서 모든 사용자의 entry 읽기
+    func loadAllPoint() async {
+        let leaderboards = try? await GKLeaderboard.loadLeaderboards(IDs: [leaderboardID])
+        guard let leaderboard = leaderboards?.first else { return }
+        let entries = try? await leaderboard.loadEntries(for: GKLeaderboard.PlayerScope.global,
+                                                         timeScope: GKLeaderboard.TimeScope.week, range: NSMakeRange(1, 100))
+        for i in 0..<entries!.1.endIndex {
+            print(entries!.1[i])
+            print("")
+        }
+    }
+    
     // MARK: 순위표 점수 업데이트 하기
     // TODO: 로컬의 인증 횟수를 저장해서 그 값을 리더보드에 업데이트하기
     func submitPoint(point: Int) async {
