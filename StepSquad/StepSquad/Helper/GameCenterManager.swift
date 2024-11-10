@@ -23,13 +23,24 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
     
     // MARK: 기존 순위표의 점수 가져오기
     func loadFormerPoint() async -> Int {
-        let leaderboards = try? await GKLeaderboard.loadLeaderboards(IDs: [leaderboardID])
-        guard let leaderboard = leaderboards?.first else { return -1 }
-        let entries = try? await leaderboard.loadEntries(for: [GKLocalPlayer.local],
-                                                         timeScope: GKLeaderboard.TimeScope.today)
-        guard let entry = entries?.1.first else { return -1 }
-        print("former point: \(entry.score)")
-        return entry.score
+        do {
+            let leaderboards = try await GKLeaderboard.loadLeaderboards(IDs: [leaderboardID])
+            guard let leaderboard = leaderboards.first else { return -1 }
+            let entries = try await leaderboard.loadEntries(for: [GKLocalPlayer.local],
+                                                            timeScope: GKLeaderboard.TimeScope.today)
+            print("entries: \(entries)")
+            if entries.1.isEmpty { // 순위표 초기화 이후 불러올 점수가 없는 경우
+                print("There is no former point in the leaderboard.")
+                return 0
+            } else { // 순위표에 기존 점수가 있는 경우
+                guard let entry = entries.1.first else { return -1 }
+                print("former point: \(entry.score)")
+                return entry.score
+            }
+        } catch { // 점수를 불러오는 과정에서 에러가 발생하는 경우
+            print(error.localizedDescription)
+            return -1
+        }
     }
     
     // MARK: 리더보드에서 모든 사용자의 entry 읽기
