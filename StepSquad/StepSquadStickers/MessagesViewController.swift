@@ -10,11 +10,16 @@ import Messages
 
 class MessagesViewController: MSMessagesAppViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
-    let stickers = ["bearSticker0", "bearSticker1", "bearSticker2", "bearSticker3"]
+    var gariStairs: [StairModel] = []
+    var stickers: [String] = []
+
     var collectionView: UICollectionView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        loadInitalData()
+        updateStickers()
 
         // MARK: UICollectionViewFlowLayout 설정
         let layout = UICollectionViewFlowLayout()
@@ -81,4 +86,30 @@ class MessagesViewController: MSMessagesAppViewController, UICollectionViewDataS
         }
         return fileURL
     }
+
+    func loadGariStairsFromUserDefaults() -> [StairModel]? {
+        let defaults = UserDefaults(suiteName: "group.com.stepSquad")
+        if let data = defaults?.data(forKey: "gariStairs"),
+           let stairs = try? JSONDecoder().decode([StairModel].self, from: data) {
+            return stairs
+        }
+        return nil
+    }
+
+    func loadInitalData() {
+        if let loadedStairs = loadGariStairsFromUserDefaults() {
+            gariStairs = loadedStairs
+        } else {
+            print("no data")
+        }
+    }
+
+    func updateStickers() {
+        stickers = gariStairs
+            .filter { $0.isVisited }
+            .compactMap { $0.stickerName }
+        stickers
+            .append("bearSticker")
+    }
+
 }
