@@ -28,7 +28,7 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
             guard let leaderboard = leaderboards.first else { return -1 }
             let entries = try await leaderboard.loadEntries(for: [GKLocalPlayer.local],
                                                             timeScope: GKLeaderboard.TimeScope.today)
-            print("entries: \(entries)")
+//            print("entries: \(entries)")
             if entries.1.isEmpty { // 순위표 초기화 이후 불러올 점수가 없는 경우
                 print("There is no former point in the leaderboard.")
                 return 0
