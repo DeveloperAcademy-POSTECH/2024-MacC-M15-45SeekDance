@@ -4,10 +4,6 @@
 <dict>
 	<key>com.apple.developer.game-center</key>
 	<true/>
-	<key>com.apple.developer.healthkit</key>
-	<true/>
-	<key>com.apple.developer.healthkit.background-delivery</key>
-	<true/>
 	<key>com.apple.developer.nfc.readersession.formats</key>
 	<array>
 		<string>TAG</string>
