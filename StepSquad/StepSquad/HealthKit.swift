@@ -35,24 +35,6 @@ class HealthKitService: ObservableObject {
         }
         
         
-        class AppLaunchDateManager {
-            static let shared = AppLaunchDateManager()
-            private let launchDateKey = "AppLaunchDate"
-            
-            private init() {}
-            
-            func saveAppLaunchDate() {
-                if UserDefaults.standard.object(forKey: launchDateKey) == nil {
-                    UserDefaults.standard.set(Date(), forKey: launchDateKey)
-                }
-            }
-            
-            func getAppLaunchDate() -> Date? {
-                return UserDefaults.standard.object(forKey: launchDateKey) as? Date
-            }
-        }
-        
-        
         // 읽기 권한에 대해 설정
         let readTypes: Set = [HKObjectType.quantityType(forIdentifier: .flightsClimbed)!]
         
@@ -65,7 +47,7 @@ class HealthKitService: ObservableObject {
         }
     }
     
-    
+    // 오늘 걸음 수를 계단 오르기 수를 호출 및 앱스토리지 저장
     func getTodayStairDataAndSave() {
         if let stairType = HKObjectType.quantityType(forIdentifier: .flightsClimbed) {
             let calendar = Calendar.current
@@ -122,34 +104,10 @@ class HealthKitService: ObservableObject {
         }
     }
     
-    func getTodayStairData() {
-        if let stairType = HKObjectType.quantityType(forIdentifier: .flightsClimbed) {
-            let calendar = Calendar.current
-            let startDate = calendar.startOfDay(for: Date())
-            let endDate = Date() // 현재 날짜와 시간(분 단위까지)
-            let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: [])
-            let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
-            
-            let query = HKSampleQuery(sampleType: stairType, predicate: predicate, limit: 100, sortDescriptors: [sortDescriptor]) { (_, result, error) in
-                guard error == nil else {
-                    print("오늘의 계단 데이터 가져오기 오류: \(error!.localizedDescription)")
-                    return
-                }
-                
-                let totalFlightsClimbed = result?.compactMap {
-                    ($0 as? HKQuantitySample)?.quantity.doubleValue(for: HKUnit.count())
-                }.reduce(0, +) ?? 0.0
-                
-                UserDefaults(suiteName: "group.macmac.pratice.carot")?.set(totalFlightsClimbed, forKey: "TodayFlightsClimbed")
-                print("오늘 오른 계단 수: \(totalFlightsClimbed)")
-            }
-            healthStore.execute(query)
-        }
-    }
     
     
-    
-    func getWeeklyStairData() {
+    // 토 - 다음 금요일을 한주로 일주일 차 계단 오르기 수를 호출 및 앱스토리지 저장
+    func getWeeklyStairDataAndSave() {
         if let stairType = HKObjectType.quantityType(forIdentifier: .flightsClimbed) {
             let calendar = Calendar.current
             let today = Date()
