@@ -8,6 +8,7 @@
 import HealthKit
 import WidgetKit
 import Foundation
+import SwiftUI
 
 
 // 계단 오름 샘플 데이터를 저장할 구조체
@@ -27,9 +28,9 @@ class HealthKitService: ObservableObject {
     // 계단 오름 샘플 데이터를 저장할 배열
     @Published var stairClimbData = [StairClimbSample]()
     
-    // 헬스킷에서 데이터가 변경되면 뷰에 업데이트 되도록 @Published로 선언
-    @Published var TodayFlightsClimbed: Double = 0.0
-    @Published var weeklyFlightsClimbed: Double = 0.0
+    @AppStorage("TodayFlightsClimbed", store: UserDefaults(suiteName: "group.macmac.pratice.carot")) var TodayFlightsClimbed: Double = 0.0
+      @AppStorage("WeeklyFlightsClimbed", store: UserDefaults(suiteName: "group.macmac.pratice.carot")) var weeklyFlightsClimbed: Double = 0.0
+      
     
     // HealthKit 사용 권한을 요청하는 메서드
     func configure() {
