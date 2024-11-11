@@ -32,7 +32,7 @@ class HealthKitService: ObservableObject {
       @AppStorage("WeeklyFlightsClimbed", store: UserDefaults(suiteName: "group.macmac.pratice.carot")) var weeklyFlightsClimbed: Double = 0.0
       
     
-    // HealthKit 사용 권한을 요청하는 메서드
+    // MARK: - HealthKit 사용 권한을 요청하는 메서드
     func configure() {
         guard HKHealthStore.isHealthDataAvailable() else {
             print("HealthKit 데이터 사용 불가")

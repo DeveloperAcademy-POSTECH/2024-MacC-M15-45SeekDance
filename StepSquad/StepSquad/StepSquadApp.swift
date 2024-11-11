@@ -17,26 +17,27 @@ struct StepSquadApp: App {
     var stairStepContainer: ModelContainer = {
         let schema = Schema([StairStepModel.self])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
+        
         do {
             return try ModelContainer(for: schema, configurations: [modelConfiguration])
         } catch {
             fatalError("\(error)")
         }
     } ()
-
+    
     var body: some Scene {
         WindowGroup {
-//            MainView()
-            HealthKitView()
+            MainView()
+//            HealthKitView()
         }
         .modelContainer(stairStepContainer)
     }
+    // MARK: - HealthKit 사용 권한을 요청하는 메서드
     init() {
         setup()
         
     }
-    func setup() { // 첫 실행 시 Healthkit 권한 설정이 되도록 호출함
+    func setup() {
         service.configure()
     }
 }
