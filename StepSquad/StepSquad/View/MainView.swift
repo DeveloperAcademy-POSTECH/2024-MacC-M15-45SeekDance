@@ -103,6 +103,7 @@ struct MainView: View {
 
                                     if nfcCount != 0 {
                                         context.insert(StairStepModel(stairType: message, stairStepDate: Date(), stairNum: nfcCount))
+                                        saveGariStairsToUserDefaults()
                                         do {
                                             try context.save()
                                         } catch {
@@ -254,6 +255,7 @@ struct MainView: View {
     func findNFCSerialNuber(serialNumber: String) -> (String, Int) {
         if gariStairs.contains(where: { $0.serialNumber == serialNumber }) {
             let stair = gariStairs.first(where: { $0.serialNumber == serialNumber })!
+            stair.isVisited = true
             return (stair.name, stair.numberOfStairs)
         } else {
             return ("지원되지 않는 NFC입니다", 0)
@@ -280,5 +282,13 @@ struct MainView: View {
         return stairSteps.filter { stairStep in
             stairStep.stairStepDate >= startOfMonth && stairStep.stairStepDate < startOfNextMonth
         }.count
+    }
+
+    // MARK: - UserDefaults에 데이터를 저장하는 함수
+    func saveGariStairsToUserDefaults() {
+        if let data = try? JSONEncoder().encode(gariStairs) {
+            let defaults = UserDefaults(suiteName: "group.com.stepSquad")
+            defaults?.set(data, forKey: "gariStairs")
+        }
     }
 }
