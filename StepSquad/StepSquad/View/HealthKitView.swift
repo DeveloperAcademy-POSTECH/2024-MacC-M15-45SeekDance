@@ -11,6 +11,7 @@ struct HealthKitView: View {
     
     // ObservableObject의 인스턴스 구독
     @ObservedObject var service = HealthKitService()
+    @AppStorage("WeeklyFlightsClimbed") private var WeeklyFlightsClimbed: Double = 0.0
     
     @Environment(\.modelContext) var context
 
