@@ -110,9 +110,9 @@ struct MainView: View {
                                             print("Data error")
                                         }
                                         isResultViewPresented.toggle()
-                                        // TODO: - 순위표, 성취 업데이트 하기
+                                        // TODO: - 순위표, 수명 연장과 NFC 성취 업데이트 하기
                                         Task {
-                                            await gameCenterManager.submitPoint(point: nfcCount)
+                                            gameCenterManager.reportNfcAchievement(serialNumber: serialNumber)
                                         }
                                     } else {
                                         isShowingNFCAlert.toggle()

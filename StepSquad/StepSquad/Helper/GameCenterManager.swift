@@ -71,47 +71,60 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
             }
         }
         print("game center: updated leaderboard")
-        // TODO: 78계단 이외 계단이 생길 때 수정하기
-        // TODO: 순위표와 성취 구분하기
-        reportAchievement(achievementID: "first78staircase")
     }
     
-    // MARK: 성취 업데이트하기
-    // TODO: NFC와 구분된 레벨 성취로 수정하기
-    func reportAchievement(achievementID: String) {
-        let achievement = GKAchievement(identifier: achievementID)
+    // MARK: 수명 연장 성취 업데이트하기
+    func reportLifeAchievement(stairCount: Int) {
+        if stairCount >= 5 {
+            reportCompletedAchievement(achievement: GKAchievement(identifier: "min5"))
+        }
+        if stairCount >= 10 {
+            reportCompletedAchievement(achievement: GKAchievement(identifier: "min10"))
+        }
+        if stairCount >= 15 {
+            reportCompletedAchievement(achievement: GKAchievement(identifier: "min15"))
+        }
+        if stairCount >= 30 {
+            reportCompletedAchievement(achievement: GKAchievement(identifier: "min30"))
+        }
+        if stairCount >= 60 {
+            reportCompletedAchievement(achievement: GKAchievement(identifier: "hr1"))
+        }
+        if stairCount >= 90 {
+            reportCompletedAchievement(achievement: GKAchievement(identifier: "hr1min30"))
+        }
+        if stairCount >= 120 {
+            reportCompletedAchievement(achievement: GKAchievement(identifier: "hr2"))
+        }
+    }
+    
+    // MARK: 성취 달성 여부 확인 후 성취 업데이트하기
+    func reportCompletedAchievement(achievement: GKAchievement) {
         if !achievement.isCompleted {
             achievement.percentComplete = 100.0
             achievement.showsCompletionBanner = true
-        } else {
-            // TODO: 마스터 성취 업데이트할 때 수정하기
-            //            GKAchievement.loadAchievements(completionHandler: { (achievements: [GKAchievement]?, error: Error?) in
-            //                achievement = achievements?.first(where: { $0.identifier == achievementID})
-            //                achievement?.percentComplete += 4.0
-            //                print(achievement?.percentComplete)
-            //            })
+            GKAchievement.report([achievement], withCompletionHandler: {(error: Error?) in
+                if error != nil {
+                    print("Error: \(String(describing: error))")
+                }
+            })
+            print("game center: \(achievement.identifier) achievement completed.")
         }
-        GKAchievement.report([achievement], withCompletionHandler: {(error: Error?) in
-            if error != nil {
-                print("Error: \(String(describing: error))")
-            }
-        })
-        print("game center: updated achievement")
     }
     
     // MARK: NFC 태깅 성취 업데이트하기
-    func reportNfcAchievement(serialNumber: String, nfcCount: Int) {
+    func reportNfcAchievement(serialNumber: String) {
         let achievement = GKAchievement(identifier: serialNumber)
         if !achievement.isCompleted {
             achievement.percentComplete = 100.0
             achievement.showsCompletionBanner = true
+            GKAchievement.report([achievement], withCompletionHandler: {(error: Error?) in
+                if error != nil {
+                    print("Error: \(String(describing: error))")
+                }
+            })
+            print("game center: updated achievement of nfc")
         }
-        GKAchievement.report([achievement], withCompletionHandler: {(error: Error?) in
-            if error != nil {
-                print("Error: \(String(describing: error))")
-            }
-        })
-        print("game center: updated achievement of nfc")
     }
     
     // MARK: 순위표 보기
