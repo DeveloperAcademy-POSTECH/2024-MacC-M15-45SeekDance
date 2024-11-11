@@ -123,6 +123,7 @@ struct MainView: View {
                                 }
                             }
                             nfcReader?.beginScanning()
+                            print("\(weeklyScore(from: stairSteps))")
                         } label: {
                             if isButtonEnabled {
                                 Text("NFC 태깅하기")
@@ -291,4 +292,22 @@ struct MainView: View {
             defaults?.set(data, forKey: "gariStairs")
         }
     }
+
+    // MARK: - NFC 주간 점수 계산
+    func weeklyScore(from data: [StairStepModel], currentDate: Date = Date()) -> Int {
+        let calendar = Calendar.current
+        var startOfWeek = currentDate
+
+        while calendar.component(.weekday, from: startOfWeek) != 7 {
+            startOfWeek = calendar.date(byAdding: .day, value: -1, to: startOfWeek)!
+        }
+        startOfWeek = calendar.startOfDay(for: startOfWeek)
+
+        let totalScore = data
+            .filter { $0.stairStepDate >= startOfWeek && $0.stairStepDate <= currentDate }
+            .reduce(0) { $0 + $1.stairNum }
+
+        return totalScore
+    }
+
 }

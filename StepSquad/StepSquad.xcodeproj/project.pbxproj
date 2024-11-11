@@ -376,7 +376,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"StepSquad/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = AZ7B294WMJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "StepSquad-Info.plist";
@@ -450,7 +450,7 @@
 				CODE_SIGN_ENTITLEMENTS = StepSquadStickers/StepSquadStickers.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = AZ7B294WMJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = StepSquadStickers/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = StepSquadStickers;
