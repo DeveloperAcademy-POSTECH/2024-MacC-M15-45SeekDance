@@ -22,6 +22,7 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
     }
     
     // MARK: 기존 순위표의 점수 가져오기
+    // TODO: 로컬 정보 이용할 경우 submitPoint와 분리하기
     func loadFormerPoint() async -> Int {
         do {
             let leaderboards = try await GKLeaderboard.loadLeaderboards(IDs: [leaderboardID])
@@ -71,10 +72,12 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
         }
         print("game center: updated leaderboard")
         // TODO: 78계단 이외 계단이 생길 때 수정하기
+        // TODO: 순위표와 성취 구분하기
         reportAchievement(achievementID: "first78staircase")
     }
     
     // MARK: 성취 업데이트하기
+    // TODO: NFC와 구분된 레벨 성취로 수정하기
     func reportAchievement(achievementID: String) {
         let achievement = GKAchievement(identifier: achievementID)
         if !achievement.isCompleted {
@@ -94,6 +97,21 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
             }
         })
         print("game center: updated achievement")
+    }
+    
+    // MARK: NFC 태깅 성취 업데이트하기
+    func reportNfcAchievement(serialNumber: String, nfcCount: Int) {
+        let achievement = GKAchievement(identifier: serialNumber)
+        if !achievement.isCompleted {
+            achievement.percentComplete = 100.0
+            achievement.showsCompletionBanner = true
+        }
+        GKAchievement.report([achievement], withCompletionHandler: {(error: Error?) in
+            if error != nil {
+                print("Error: \(String(describing: error))")
+            }
+        })
+        print("game center: updated achievement of nfc")
     }
     
     // MARK: 순위표 보기
