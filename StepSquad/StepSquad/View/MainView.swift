@@ -123,7 +123,6 @@ struct MainView: View {
                                 }
                             }
                             nfcReader?.beginScanning()
-                            print("\(weeklyScore(from: stairSteps))")
                         } label: {
                             if isButtonEnabled {
                                 Text("NFC 태깅하기")

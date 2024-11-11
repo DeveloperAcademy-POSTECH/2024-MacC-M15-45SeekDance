@@ -8,18 +8,18 @@
 import SwiftUI
 
 struct ProgressView: View {
-    var CurrentStep: Int = 3
+    var currentStep: Int = 3
     var body: some View {
         HStack(spacing: 0) {
             ForEach(0 ..< 5, id: \.self) { item in
                 Circle()
                     .frame(width: 40, height: 40)
-                    .foregroundStyle(item <= CurrentStep ? Color.green : Color.gray)
+                    .foregroundStyle(item <= currentStep ? Color.green : Color.gray)
                     .overlay(content: {
                         Text("\(item + 1)층")
                             .fixedSize()
                             .offset(x: 3, y: 45)
-                            .foregroundStyle(item <= CurrentStep ? Color.green : Color.gray)
+                            .foregroundStyle(item <= currentStep ? Color.green : Color.gray)
                     })
 
                 if item < 5 - 1 {
@@ -29,7 +29,7 @@ struct ProgressView: View {
                             .foregroundStyle(Color.gray)
                         Rectangle()
                             .frame(height: 3)
-                            .frame(maxWidth: item >= CurrentStep ? 0 : .infinity, alignment: .leading)
+                            .frame(maxWidth: item >= currentStep ? 0 : .infinity, alignment: .leading)
                             .foregroundStyle(Color.green)
                     }
                 }
