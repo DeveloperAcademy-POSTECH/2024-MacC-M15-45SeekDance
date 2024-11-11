@@ -12,19 +12,25 @@ class StairModel: Codable {
     var name: String
     var numberOfStairs: Int
     var serialNumber: String
+    var isVisited: Bool
+    var stickerName: String
 
-    init(id: UUID = UUID(), name: String, numberOfStairs: Int, serialNumber: String) {
+    init(id: UUID = UUID(), name: String, numberOfStairs: Int, serialNumber: String, isVisited: Bool = false, stickerName: String = "") {
         self.id = id
         self.name = name
         self.numberOfStairs = numberOfStairs
         self.serialNumber = serialNumber
+        self.isVisited = isVisited
+        self.stickerName = stickerName
     }
 }
 
 // MARK: - NFC 태그를 설치한 계단들
 
 let gariStairs: [StairModel] = [
-    StairModel(name: "포스텍 78계단", numberOfStairs: 78, serialNumber: "04d1c489230289"),
-    StairModel(name: "포스텍 C5 5층에서 6층", numberOfStairs: 25, serialNumber: "0443a4eb210289"),
-    StairModel(name: "포스텍 C5 1층에서 5층", numberOfStairs: 114, serialNumber: "0463e4e1200289"),
+    StairModel(name: "포스텍 78계단", numberOfStairs: 78, serialNumber: "04d1c489230289", stickerName: "bearSticker0"),
+    StairModel(name: "포스텍 C5 5층에서 6층", numberOfStairs: 25, serialNumber: "0443a4eb210289", stickerName: "bearSticker1"),
+    StairModel(name: "포스텍 C5 1층에서 5층", numberOfStairs: 114, serialNumber: "0463e4e1200289", stickerName: "bearSticker2"),
+    StairModel(name: "test11", numberOfStairs: 1, serialNumber: "0431907b230289", stickerName: "bearSticker3"),
+    StairModel(name: "test12", numberOfStairs: 2, serialNumber: "0471737c230289", stickerName: "bearSticker4"),
 ]
