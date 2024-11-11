@@ -24,7 +24,12 @@ class HealthKitService: ObservableObject {
     
     let healthStore = HKHealthStore()
     
-    @Published var stairClimbData = [StairClimbSample]() // 계단 오름 샘플 데이터를 저장할 배열
+    // 계단 오름 샘플 데이터를 저장할 배열
+    @Published var stairClimbData = [StairClimbSample]()
+    
+    // 헬스킷에서 데이터가 변경되면 뷰에 업데이트 되도록 @Published로 선언
+    @Published var TodayFlightsClimbed: Double = 0.0
+    @Published var weeklyFlightsClimbed: Double = 0.0
     
     // HealthKit 사용 권한을 요청하는 메서드
     func configure() {
@@ -47,7 +52,7 @@ class HealthKitService: ObservableObject {
         }
     }
     
-    // 오늘 걸음 수를 계단 오르기 수를 호출 및 앱스토리지 저장
+    // MARK: - 오늘 계단 오르기 수를 호출 및 앱스토리지 저장하는 함수
     func getTodayStairDataAndSave() {
         if let stairType = HKObjectType.quantityType(forIdentifier: .flightsClimbed) {
             let calendar = Calendar.current
@@ -79,24 +84,29 @@ class HealthKitService: ObservableObject {
                 if let userDefaults = UserDefaults(suiteName: "group.macmac.pratice.carot") {
                     userDefaults.set(totalFlightsClimbed, forKey: "TodayFlightsClimbed")
                     print("오늘 오른 계단 수 \(totalFlightsClimbed)를 App Group UserDefaults에 저장했습니다.")
+                    
+                    // UI 업데이트를 위해 @Published 변수도 업데이트
+                                 DispatchQueue.main.async {
+                                     self.TodayFlightsClimbed = totalFlightsClimbed
+                                 }
+                    
                     WidgetCenter.shared.reloadAllTimelines()
                 } else {
                     print("UserDefaults에 접근하는 데 실패했습니다.")
                 }
                 
                 
-                
-                // 데이터 업데이트 후, Published 변수를 통해 UI와 연동
-                DispatchQueue.main.async {
-                    self.stairClimbData = result.compactMap { item in
-                        guard let sample = item as? HKQuantitySample else { return nil }
-                        let flights = sample.quantity.doubleValue(for: HKUnit.count())
-                        let startDate = sample.startDate
-                        let endDate = sample.endDate
-                        let sourceName = sample.sourceRevision.source.name
-                        return StairClimbSample(flightsClimbed: flights, startDate: startDate, endDate: endDate, source: sourceName)
-                    }
-                }
+                // TODO: - 각 데이터 업데이트 후, Published 변수를 통해 UI와 연동할 것, 현재는 쓰지 않고 있다.
+//                DispatchQueue.main.async {
+//                    self.stairClimbData = result.compactMap { item in
+//                        guard let sample = item as? HKQuantitySample else { return nil }
+//                        let flights = sample.quantity.doubleValue(for: HKUnit.count())
+//                        let startDate = sample.startDate
+//                        let endDate = sample.endDate
+//                        let sourceName = sample.sourceRevision.source.name
+//                        return StairClimbSample(flightsClimbed: flights, startDate: startDate, endDate: endDate, source: sourceName)
+//                    }
+//                }
             }
             healthStore.execute(query)
         } else {
@@ -105,20 +115,126 @@ class HealthKitService: ObservableObject {
     }
     
     
-    
-    // 토 - 다음 금요일을 한주로 일주일 차 계단 오르기 수를 호출 및 앱스토리지 저장
+    // MARK: - UserDefaults에 토-다음 금요일을 한주로 일주일 치 계단 오르기 수를 호출 및 앱스토리지에 저장하는 함수
+//    func getWeeklyStairDataAndSave() {
+//        if let stairType = HKObjectType.quantityType(forIdentifier: .flightsClimbed) {
+//            let calendar = Calendar.current
+//            let today = Date()
+//            
+//            // 주간 범위 설정 (이번 주 토요일부터 다음 금요일)
+//            var startOfWeek: Date?
+//            if calendar.component(.weekday, from: today) == 7 {
+//                // 오늘이 토요일인 경우, 오늘을 시작일로 설정
+//                startOfWeek = calendar.startOfDay(for: today)
+//            } else {
+//                // 오늘이 토요일이 아닌 경우, 지난 토요일을 시작일로 설정
+//                startOfWeek = calendar.nextDate(after: today, matching: DateComponents(weekday: 7), matchingPolicy: .nextTime, direction: .backward)
+//            }
+//            
+//            guard let startOfWeekDate = startOfWeek else {
+//                print("시작 날짜를 설정할 수 없습니다.")
+//                return
+//            }
+//            
+//            // 종료일을 다음 금요일로 설정
+//            let endOfWeekDate = calendar.date(byAdding: .day, value: 6, to: startOfWeekDate) ?? today
+//            
+//            let predicate = HKQuery.predicateForSamples(withStart: startOfWeekDate, end: endOfWeekDate, options: [])
+//            let query = HKStatisticsQuery(quantityType: stairType, quantitySamplePredicate: predicate, options: .cumulativeSum) { _, result, error in
+//                guard error == nil else {
+//                    print("주간 계단 데이터 가져오기 오류: \(error!.localizedDescription)")
+//                    return
+//                }
+//                
+//                let totalFlightsClimbed = result?.sumQuantity()?.doubleValue(for: HKUnit.count()) ?? 0.0
+//                
+//                DispatchQueue.main.async {
+//                    // 현재 주의 계단 수를 UserDefaults에 저장
+//                    UserDefaults(suiteName: "group.macmac.pratice.carot")?.set(totalFlightsClimbed, forKey: "WeeklyFlightsClimbed")
+//                    
+//                    // 현재 요일이 금요일인지 확인
+//                    if calendar.component(.weekday, from: today) == 6 {
+//                        // 지난 주 계단 수 저장
+//                        UserDefaults(suiteName: "group.macmac.pratice.carot")?.set(totalFlightsClimbed, forKey: "LastWeekFlightsClimbed")
+//                        
+//                        // WeeklyFlightsClimbed 초기화
+//                        UserDefaults(suiteName: "group.macmac.pratice.carot")?.set(0.0, forKey: "WeeklyFlightsClimbed")
+//                        
+//                        print("금요일입니다. 지난 주 계단 수를 LastWeekFlightsClimbed에 저장하고, WeeklyFlightsClimbed를 초기화했습니다.")
+//                    }
+//                    
+//                    // @AppStorage의 값 업데이트
+//                    self.weeklyFlightsClimbed = totalFlightsClimbed
+//                    print("주간 계단 수 (토-금): \(totalFlightsClimbed)를 UserDefaults에 저장했습니다.")
+//                }
+//            }
+//            healthStore.execute(query)
+//        }
+//    }
+
+//    func getWeeklyStairDataAndSave() {
+//        if let stairType = HKObjectType.quantityType(forIdentifier: .flightsClimbed) {
+//            let calendar = Calendar.current
+//            let today = Date()
+//            
+//            // 주간 범위 설정 (이번 주 토요일부터 다음 금요일)
+//            var startOfWeek: Date?
+//            if calendar.component(.weekday, from: today) == 7 {
+//                startOfWeek = calendar.startOfDay(for: today) // 오늘이 토요일인 경우
+//            } else {
+//                startOfWeek = calendar.nextDate(after: today, matching: DateComponents(weekday: 7), matchingPolicy: .nextTime, direction: .backward)
+//            }
+//            
+//            guard let startOfWeekDate = startOfWeek else {
+//                print("시작 날짜를 설정할 수 없습니다.")
+//                return
+//            }
+//            
+//            let endOfWeekDate = calendar.date(byAdding: .day, value: 6, to: startOfWeekDate) ?? today
+//            let predicate = HKQuery.predicateForSamples(withStart: startOfWeekDate, end: endOfWeekDate, options: [])
+//            
+//            let query = HKStatisticsQuery(quantityType: stairType, quantitySamplePredicate: predicate, options: .cumulativeSum) { _, result, error in
+//                guard error == nil else {
+//                    print("주간 계단 데이터 가져오기 오류: \(error!.localizedDescription)")
+//                    return
+//                }
+//                
+//                let totalFlightsClimbed = result?.sumQuantity()?.doubleValue(for: HKUnit.count()) ?? 0.0
+//                
+//                DispatchQueue.main.async {
+//                    // 주간 계단 수 저장
+//                    UserDefaults(suiteName: "group.macmac.pratice.carot")?.set(totalFlightsClimbed, forKey: "WeeklyFlightsClimbed")
+//                    
+//                    // 금요일 오후 11시가 지난 경우
+//                    if calendar.component(.weekday, from: today) == 6, calendar.component(.hour, from: today) == 23, calendar.component(.minute, from: today) > 0 {
+//                        // 누적된 계단 수를 지난 주에 저장
+//                        UserDefaults(suiteName: "group.macmac.pratice.carot")?.set(totalFlightsClimbed, forKey: "LastWeekFlightsClimbed")
+//                        
+//                        // 확인용 로그 출력
+//                        print("금요일 오후 11시가 지났습니다. LastWeekFlightsClimbed에 \(totalFlightsClimbed) 저장했습니다.")
+//                    }
+//                    
+//                    // @Published 변수 업데이트
+//                    self.weeklyFlightsClimbed = totalFlightsClimbed
+//                    print("주간 계단 수 (토-금): \(totalFlightsClimbed)를 UserDefaults에 저장했습니다.")
+//                }
+//            }
+//            healthStore.execute(query)
+//        }
+//    }
     func getWeeklyStairDataAndSave() {
         if let stairType = HKObjectType.quantityType(forIdentifier: .flightsClimbed) {
             let calendar = Calendar.current
             let today = Date()
             
+            // 현재 주 번호 계산 (시작일 기준으로 몇 번째 주인지)
+            let weekOfYear = calendar.component(.weekOfYear, from: today)
+            
             // 주간 범위 설정 (이번 주 토요일부터 다음 금요일)
             var startOfWeek: Date?
             if calendar.component(.weekday, from: today) == 7 {
-                // 오늘이 토요일인 경우, 오늘을 시작일로 설정
-                startOfWeek = calendar.startOfDay(for: today)
+                startOfWeek = calendar.startOfDay(for: today) // 오늘이 토요일인 경우
             } else {
-                // 오늘이 토요일이 아닌 경우, 지난 토요일을 시작일로 설정
                 startOfWeek = calendar.nextDate(after: today, matching: DateComponents(weekday: 7), matchingPolicy: .nextTime, direction: .backward)
             }
             
@@ -127,10 +243,9 @@ class HealthKitService: ObservableObject {
                 return
             }
             
-            // 종료일을 다음 금요일로 설정
             let endOfWeekDate = calendar.date(byAdding: .day, value: 6, to: startOfWeekDate) ?? today
-            
             let predicate = HKQuery.predicateForSamples(withStart: startOfWeekDate, end: endOfWeekDate, options: [])
+            
             let query = HKStatisticsQuery(quantityType: stairType, quantitySamplePredicate: predicate, options: .cumulativeSum) { _, result, error in
                 guard error == nil else {
                     print("주간 계단 데이터 가져오기 오류: \(error!.localizedDescription)")
@@ -138,11 +253,27 @@ class HealthKitService: ObservableObject {
                 }
                 
                 let totalFlightsClimbed = result?.sumQuantity()?.doubleValue(for: HKUnit.count()) ?? 0.0
-                UserDefaults(suiteName: "group.macmac.pratice.carot")?.set(totalFlightsClimbed, forKey: "WeeklyFlightsClimbed")
-                print("주간 계단 수 (토-금): \(totalFlightsClimbed)")
+                
+                DispatchQueue.main.async {
+                    // 주별 계단 수 저장
+                    UserDefaults(suiteName: "group.macmac.pratice.carot")?.set(totalFlightsClimbed, forKey: "week_\(weekOfYear)")
+                    
+                    // 금요일 오후 11시 조건 확인
+                    if calendar.component(.weekday, from: today) == 6, calendar.component(.hour, from: today) == 23 {
+                        // 주 번호에 해당하는 값 저장
+                        UserDefaults(suiteName: "group.macmac.pratice.carot")?.set(totalFlightsClimbed, forKey: "LastWeekFlightsClimbed_\(weekOfYear)")
+                        print("금요일 오후 11시입니다. 주 \(weekOfYear)의 계단 수를 LastWeekFlightsClimbed에 저장했습니다.")
+                    }
+                    
+                    // @Published 변수 업데이트
+                    self.weeklyFlightsClimbed = totalFlightsClimbed
+                    print("주간 계단 수 (토-금): \(totalFlightsClimbed)를 week_\(weekOfYear)에 저장했습니다.")
+                }
             }
             healthStore.execute(query)
         }
     }
+
+
 }
 

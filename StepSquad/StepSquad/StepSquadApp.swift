@@ -11,7 +11,7 @@ import SwiftData
 @main
 struct StepSquadApp: App {
     
-    // Healthkit 인증 코드가 있는 객체를 선언해줍니다.
+    // Healthkit 인증 코드가 있는 객체를 선언
     let service = HealthKitService()
     
     var stairStepContainer: ModelContainer = {
@@ -27,7 +27,8 @@ struct StepSquadApp: App {
 
     var body: some Scene {
         WindowGroup {
-            MainView2()
+//            MainView()
+            HealthKitView()
         }
         .modelContainer(stairStepContainer)
     }
@@ -35,7 +36,7 @@ struct StepSquadApp: App {
         setup()
         
     }
-    func setup() { // 첫 실행 시 Healthkit 권한 설정이 되도록 호출합니다.
+    func setup() { // 첫 실행 시 Healthkit 권한 설정이 되도록 호출함
         service.configure()
     }
 }
