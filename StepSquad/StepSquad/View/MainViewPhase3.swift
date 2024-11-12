@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct MainViewPhase3: View {
+    @State var isMaterialSheetPresented: Bool = false
+    
     var body: some View {
         ZStack() {
             Color.backgroundColor
@@ -23,6 +25,7 @@ struct MainViewPhase3: View {
                 VStack() {
                     Spacer()
 
+                    // TODO: - 헬스킷 연결 전엔 GetHealthKitView 이후는 LevelUpView 띄우기
                     //GetHealthKitView
                     LevelUpView
 
@@ -42,27 +45,35 @@ struct MainViewPhase3: View {
                     Button {
                         // MARK: 성취로 이동
                     } label: {
-                        Image(systemName: "rectangle.portrait.on.rectangle.portrait.fill")
-                        Text("달성 뱃지")
-
+                        HStack() {
+                            Image(systemName: "rectangle.portrait.on.rectangle.portrait.fill")
+                            Text("달성 뱃지")
+                        }
+                        .padding(.vertical, 14)
+                        .padding(.horizontal, 20)
+                        .font(.system(size: 17))
+                        .foregroundColor(Color.white)
+                        .background(Color.primaryColor,
+                                    in: RoundedRectangle(cornerRadius: 12))
                     }
-                    .frame(width: 152, height: 50)
-                    .foregroundColor(Color.white)
-                    .background(Color.primaryColor,
-                                in: RoundedRectangle(cornerRadius: 12))
+
 
                     Spacer()
 
                     Button {
 
                     } label: {
-                        Image(systemName: "figure.stairs")
-                        Text("나의 순위")
+                        HStack() {
+                            Image(systemName: "figure.stairs")
+                            Text("나의 순위")
+                        }
+                        .padding(.vertical, 14)
+                        .padding(.horizontal, 20)
+                        .font(.system(size: 17))
+                        .foregroundColor(Color.white)
+                        .background(Color.primaryColor,
+                                    in: RoundedRectangle(cornerRadius: 12))
                     }
-                    .frame(width: 152, height: 50)
-                    .foregroundColor(Color.white)
-                    .background(Color.primaryColor,
-                                in: RoundedRectangle(cornerRadius: 12))
                 }
                 .padding(.top, 12)
                 .padding(.horizontal, 36)
@@ -119,7 +130,7 @@ struct MainViewPhase3: View {
         VStack(spacing: 0) {
             Image("Easy1")
 
-            HStack(spacing: 0) {
+            HStack(spacing: 4) {
                 Text("Easy")
                     .font(.system(size: 12))
                     .foregroundStyle(Color.white)
@@ -143,7 +154,7 @@ struct MainViewPhase3: View {
                 .padding(.top, 4)
 
             Button {
-                // TODO: - 재료 페이지 연결
+                isMaterialSheetPresented.toggle()
             } label: {
                 HStack() {
                     Image(systemName: "leaf.fill")
@@ -156,6 +167,9 @@ struct MainViewPhase3: View {
             }
             .padding(.top, 16)
             .padding(.bottom, 30)
+            .sheet(isPresented: $isMaterialSheetPresented) {
+                MaterialsView(isMaterialSheetPresented: $isMaterialSheetPresented)
+            }
         }
     }
 
@@ -184,9 +198,9 @@ struct MainViewPhase3: View {
                     .padding(.horizontal, 12)
                     .padding(.vertical, 8)
                     .foregroundColor(Color(hex: 0x3A542B))
+                    .background(Color(hex: 0xCAE5B9),
+                                in: RoundedRectangle(cornerRadius: 4))
             }
-            .background(Color(hex: 0xCAE5B9),
-                        in: RoundedRectangle(cornerRadius: 4))
         }
     }
 }
