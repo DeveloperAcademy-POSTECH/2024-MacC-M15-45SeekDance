@@ -29,7 +29,7 @@ class HealthKitService: ObservableObject {
     @Published var stairClimbData = [StairClimbSample]()
     
     @AppStorage("TodayFlightsClimbed", store: UserDefaults(suiteName: "group.macmac.pratice.carot")) var TodayFlightsClimbed: Double = 0.0
-      @AppStorage("WeeklyFlightsClimbed", store: UserDefaults(suiteName: "group.macmac.pratice.carot")) var weeklyFlightsClimbed: Double = 0.0
+    @AppStorage("WeeklyFlightsClimbed", store: UserDefaults(suiteName: "group.macmac.pratice.carot")) var weeklyFlightsClimbed: Double = 0.0
       
     
     // MARK: - HealthKit 사용 권한을 요청하는 메서드
