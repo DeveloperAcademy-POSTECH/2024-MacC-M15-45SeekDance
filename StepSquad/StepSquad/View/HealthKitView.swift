@@ -19,7 +19,7 @@ struct HealthKitView: View {
             
             VStack(alignment: .center) {
                 VStack(alignment: .center) {
-                    let score = service.TodayFlightsClimbed * 16
+                    let score = service.weeklyFlightsClimbed * 16
                     Text("이번 주 점수: \(Int(score))")
                     Text("오늘 오른 계단 수: \(service.TodayFlightsClimbed, specifier: "%.0f") 층")
                         .font(.title3)
