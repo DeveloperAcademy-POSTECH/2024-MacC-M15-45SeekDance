@@ -31,7 +31,7 @@ class HealthKitService: ObservableObject {
     @AppStorage("TodayFlightsClimbed", store: UserDefaults(suiteName: "group.macmac.pratice.carot")) var TodayFlightsClimbed: Double = 0.0
     @AppStorage("WeeklyFlightsClimbed", store: UserDefaults(suiteName: "group.macmac.pratice.carot")) var weeklyFlightsClimbed: Double = 0.0
     @AppStorage("TotalFlightsClimbedSinceAuthorization", store: UserDefaults(suiteName: "group.macmac.pratice.carot")) var TotalFlightsClimbedSinceAuthorization: Double = 0.0
-      
+    
     
     // MARK: - HealthKit 사용 권한을 요청하는 메서드
     // 권한을 요청하고 받은 날짜를 기록하는 메서드
@@ -60,7 +60,7 @@ class HealthKitService: ObservableObject {
             }
         }
     }
-
+    
     // 권한 허용 날짜를 UserDefaults에 저장하는 함수
     private func storeAuthorizationDate() {
         let authorizationDateKey = "HealthKitAuthorizationDate"
@@ -79,9 +79,9 @@ class HealthKitService: ObservableObject {
             }
         }
     }
-
     
-
+    
+    
     func fetchAndSaveFlightsClimbedSinceAuthorization() {
         guard let authorizationDate = UserDefaults.standard.object(forKey: "HealthKitAuthorizationDate") as? Date else {
             print("권한 허용 날짜가 설정되지 않았습니다.")
@@ -94,9 +94,9 @@ class HealthKitService: ObservableObject {
         }
         
         // 권한 허용 날짜의 자정으로 시작 시점 설정
-           let calendar = Calendar.current
-           let startOfAuthorizationDate = calendar.startOfDay(for: authorizationDate)
-           let predicate = HKQuery.predicateForSamples(withStart: startOfAuthorizationDate, end: Date(), options: [])
+        let calendar = Calendar.current
+        let startOfAuthorizationDate = calendar.startOfDay(for: authorizationDate)
+        let predicate = HKQuery.predicateForSamples(withStart: startOfAuthorizationDate, end: Date(), options: [])
         
         // 데이터 소스 필터링을 위한 추가 조건
         let devicePredicate = HKQuery.predicateForObjects(from: [HKDevice.local()]) // 로컬 기기 데이터만 선택
@@ -120,7 +120,7 @@ class HealthKitService: ObservableObject {
         
         healthStore.execute(query)
     }
-
+    
     
     // MARK: - 오늘 계단 오르기 수를 호출 및 앱스토리지 저장하는 함수
     func getTodayStairDataAndSave() {
@@ -208,7 +208,12 @@ class HealthKitService: ObservableObject {
             let endOfWeekDate = calendar.date(byAdding: .day, value: 6, to: startOfWeekDate) ?? today
             
             let predicate = HKQuery.predicateForSamples(withStart: startOfWeekDate, end: endOfWeekDate, options: [])
-            let query = HKStatisticsQuery(quantityType: stairType, quantitySamplePredicate: predicate, options: .cumulativeSum) { _, result, error in
+            
+            // 데이터 소스 필터링을 위한 추가 조건
+            let devicePredicate = HKQuery.predicateForObjects(from: [HKDevice.local()]) // 로컬 기기 데이터만 선택
+            let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, devicePredicate])
+            
+            let query = HKStatisticsQuery(quantityType: stairType, quantitySamplePredicate: compoundPredicate, options: .cumulativeSum) { _, result, error in
                 guard error == nil else {
                     print("주간 계단 데이터 가져오기 오류: \(error!.localizedDescription)")
                     return
