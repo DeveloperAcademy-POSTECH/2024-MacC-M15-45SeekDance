@@ -28,7 +28,7 @@ struct StepSquadApp: App {
     var body: some Scene {
         WindowGroup {
             MainView()
-//            HealthKitView()
+            HealthKitView()
         }
         .modelContainer(stairStepContainer)
     }
