@@ -33,6 +33,11 @@ struct MainView: View {
             Color.back.ignoresSafeArea()
 
             VStack (alignment: .center) {
+                // TODO: 나중에 삭제할 버튼
+                Button("Test") {
+                    updateLeaderboard()
+                }
+                .buttonStyle(.borderedProminent)
                 HStack {
                     Text("이번 달 횟수")
                         .font(Font.custom("SF Pro", size: 17))
@@ -316,6 +321,7 @@ struct MainView: View {
         let weeklyNfcPoint = weeklyScore(from: stairSteps)
         service.getWeeklyStairDataAndSave()
         let weeklyStairPoint = service.weeklyFlightsClimbed * 16
+        print("이번주 걸은 층계 * 16: \(weeklyStairPoint), nfc 점수: \(weeklyNfcPoint)")
         Task {
             await gameCenterManager.submitPoint(point: Int(weeklyNfcPoint) + Int(weeklyStairPoint))
         }
