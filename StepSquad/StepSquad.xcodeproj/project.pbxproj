@@ -383,9 +383,6 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "StepSquad-Info.plist";
 				INFOPLIST_KEY_NFCReaderUsageDescription = "계단 인증을 위한 NFC 스캔이 필요합니다.";
-				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "\"This app needs access to health data to track your daily activity.\"";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "\"This app needs access to health data to track your daily activity.\"";
-				INFOPLIST_KEY_NSHomeKitUsageDescription = "\"This app needs access to health data to track your daily activity.\"";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -428,9 +425,6 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "StepSquad-Info.plist";
 				INFOPLIST_KEY_NFCReaderUsageDescription = "계단 인증을 위한 NFC 스캔이 필요합니다.";
-				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "\"This app needs access to health data to track your daily activity.\"";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "\"This app needs access to health data to track your daily activity.\"";
-				INFOPLIST_KEY_NSHomeKitUsageDescription = "\"This app needs access to health data to track your daily activity.\"";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
