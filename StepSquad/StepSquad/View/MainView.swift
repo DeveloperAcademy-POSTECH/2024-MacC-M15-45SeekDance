@@ -22,6 +22,8 @@ struct MainView: View {
 
     @Environment(\.modelContext) var context
     @Query(sort: [SortDescriptor(\StairStepModel.stairStepDate, order: .forward)]) var stairSteps: [StairStepModel]
+    
+    @ObservedObject var service = HealthKitService()
 
     let gameCenterManager = GameCenterManager()
 
@@ -307,6 +309,16 @@ struct MainView: View {
             .reduce(0) { $0 + $1.stairNum }
 
         return totalScore
+    }
+    
+    // MARK: 총 점수 계산 후 순위표 업데이트하기
+    func updateLeaderboard() {
+        let weeklyNfcPoint = weeklyScore(from: stairSteps)
+        service.getWeeklyStairDataAndSave()
+        let weeklyStairPoint = service.weeklyFlightsClimbed * 16
+        Task {
+            await gameCenterManager.submitPoint(point: Int(weeklyNfcPoint) + Int(weeklyStairPoint))
+        }
     }
 
 }
