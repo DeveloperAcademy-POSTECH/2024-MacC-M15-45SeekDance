@@ -15,43 +15,40 @@ struct ExplainView: View {
         NavigationView {
             ZStack(alignment: .topTrailing) {
                 // Background
-                Color.back.ignoresSafeArea()
+                Color.backgroundColor.ignoresSafeArea()
 
                 VStack {
-                    VStack(alignment: .leading, spacing: 0) {
-                        Group {
-                            Text("1. 계단을 오른다.")
-                            Divider()
-                            Text("2. 앱의 NFC 태깅하기 버튼을 누른다.")
-                            Divider()
-                            VStack(alignment: .leading, spacing: 5) {
-                                Text("3. 계단 중간에 위치한 계단 사랑단 마크를 스캔해 주세요.")
-                                Text("휴대폰 위쪽이 계단 사랑단 마크를 스캔하고 있는지 확인해주세요.")
-                                    .font(.footnote)
-                                    .foregroundColor(.gray)
+                    List {
+                        DisclosureGroup("NFC 어떻게 사용하나요?", content: {
+                                Text("1. NFC 태깅하기의 ‘열기’ 버튼을 탭합니다.\n2. '스캔 준비 완료' 창이 뜨면 NFC 태깅을 합니다.\n\ta. 휴대폰 상단부를 태그에 둬야합니다.")
+                                .listRowInsets(EdgeInsets(top: 11,
+                                                          leading: 8,
+                                                          bottom: 11,
+                                                          trailing: 8))
 
-                                HStack {
-                                    Spacer()
-                                    Image("87stairs")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(maxHeight: 300)
-                                        .cornerRadius(12)
-                                    Spacer()
-                                }
-                            }
+                        })
 
-                        }
-                        .padding(.vertical, 10)
-                        .padding(.horizontal)
+                        DisclosureGroup("획득 재료는 무엇인가요?", content: {
+                            VStack(spacing: 0) {
+                                Text("• 레벨의 난이도에 따라 흔한 것부터 귀한 재료(약재)까지 얻을 수 있습니다.\n• 계단 오르기 획득 재료: 흔함~귀함\n• NFC 태깅 획득 재료: 매우 귀함")
+                            }.listRowInsets(EdgeInsets(top: 11,
+                                                       leading: 8,
+                                                       bottom: 11,
+                                                       trailing: 8))
+                        })
+
+                        DisclosureGroup("레벨은 어떻게 구성이 되나요?", content: {
+                            VStack(spacing: 0) {
+                                Text("• 쉬운 레벨부터 어려운 레벨까지 순차적으로 구성이 되어 있습니다.\n• 앱과 ‘오른 계단' 데이터를 연동한 날짜부터 자동으로 측정하여 나의 현재 레벨을 보여줍니다.\n• 레벨업을 위한 계단 경험치는 누적이 됩니다.")
+                            }.listRowInsets(EdgeInsets(top: 11,
+                                                       leading: 8,
+                                                       bottom: 24,
+                                                       trailing: 8))
+                        })
                     }
-                    .background(
-                        RoundedRectangle(cornerRadius: 12)
-                            .stroke(Color.gray.opacity(0.3), lineWidth: 1)
-                            .background(RoundedRectangle(cornerRadius: 12).fill(Color.white))
-                    )
-                    .cornerRadius(10)
-                    .padding(.horizontal)
+                    .scrollContentBackground(.hidden)
+                    .background(.clear)
+                    .accentColor(Color(hex: 0x638D48))
 
                     Spacer()
 
@@ -63,8 +60,7 @@ struct ExplainView: View {
                     }) {
                         Text("오류 문의")
                             .font(.body)
-                            .fontWeight(.regular)
-                            .foregroundColor(.indigo)
+                            .foregroundColor(Color(hex: 0x638D48))
                     }
                     .padding(.horizontal)
                     .padding(.bottom, 88)
@@ -86,3 +82,6 @@ struct ExplainView: View {
     }
 }
 
+#Preview {
+    ExplainView()
+}

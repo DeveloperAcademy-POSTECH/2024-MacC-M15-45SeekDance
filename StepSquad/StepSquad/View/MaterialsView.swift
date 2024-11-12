@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MaterialsView: View {
     @Binding var isMaterialSheetPresented: Bool
-
+    
     let materials = ["황기", "도라지", "생강", "대추", "감초"]
     var body: some View {
         NavigationView {

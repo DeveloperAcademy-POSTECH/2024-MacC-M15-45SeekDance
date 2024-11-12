@@ -11,7 +11,7 @@ struct SplashView: View {
     var body: some View {
         ZStack {
             Color.backgroundColor
-            
+
             VStack(spacing: 0) {
                 Image("SplashIMG")
                     .resizable()
