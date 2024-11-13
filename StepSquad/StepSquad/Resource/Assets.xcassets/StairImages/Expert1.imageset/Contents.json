@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "Expert1.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
