@@ -22,8 +22,12 @@ struct MainView: View {
 
     @Environment(\.modelContext) var context
     @Query(sort: [SortDescriptor(\StairStepModel.stairStepDate, order: .forward)]) var stairSteps: [StairStepModel]
+    
+    @ObservedObject var service = HealthKitService()
 
     let gameCenterManager = GameCenterManager()
+    // - TODO: 이 값 지우기
+    @State private var stairCount = 0
 
     var body: some View {
         ZStack {
@@ -31,6 +35,38 @@ struct MainView: View {
             Color.back.ignoresSafeArea()
 
             VStack (alignment: .center) {
+                // - TODO: 나중에 삭제할 버튼
+                HStack {
+                    Button("Reset") {
+                        gameCenterManager.resetAchievements()
+                    }
+                    .buttonStyle(.borderedProminent)
+                    Button("78 first") {
+                        gameCenterManager.reportNfcAchievement(serialNumber: "first78staircase")
+                    }
+                    .buttonStyle(.borderedProminent)
+                    Button("78") {
+                        gameCenterManager.reportNfcAchievement(serialNumber: "04d1c489230289")
+                    }
+                    .buttonStyle(.bordered)
+                    Button("25") {
+                        gameCenterManager.reportNfcAchievement(serialNumber: "0443a4eb210289")
+                    }
+                    .buttonStyle(.bordered)
+                    Button("114") {
+                        gameCenterManager.reportNfcAchievement(serialNumber: "0463e4e1200289")
+                    }
+                    .buttonStyle(.bordered)
+                }
+                Picker("걸은 층수 임시 Picker", selection: $stairCount, content: {
+                    ForEach(0..<130) {
+                        Text("\($0)")
+                    }
+                })
+                Button("오른 층계 바탕으로 성취 업데이트") {
+                    gameCenterManager.reportLifeAchievement(stairCount: stairCount)
+                }
+                .buttonStyle(.bordered)
                 HStack {
                     Text("이번 달 횟수")
                         .font(Font.custom("SF Pro", size: 17))
@@ -110,9 +146,10 @@ struct MainView: View {
                                             print("Data error")
                                         }
                                         isResultViewPresented.toggle()
-                                        // MARK: - 순위표, 성취 업데이트 하기
+                                        // TODO: - 순위표, 수명 연장과 NFC 성취 업데이트 하기
                                         Task {
-                                            await gameCenterManager.submitPoint(point: nfcCount)
+                                            gameCenterManager.reportNfcAchievement(serialNumber: serialNumber)
+                                            updateLeaderboard()
                                         }
                                     } else {
                                         isShowingNFCAlert.toggle()
@@ -177,7 +214,7 @@ struct MainView: View {
                 .background(Color.white)
                 .cornerRadius(20)
                 .fullScreenCover(isPresented: $isResultViewPresented) {
-                    ResultView(isResultViewPresented: $isResultViewPresented, stairName: nfcMessage, stairCount: nfcCount)
+                    ResultView(isResultViewPresented: $isResultViewPresented, stairName: nfcMessage, stairCount: nfcCount, gameCenterManager: gameCenterManager)
                 }
                 .onChange(of: isResultViewPresented) {
                     startTimer()
@@ -307,6 +344,17 @@ struct MainView: View {
             .reduce(0) { $0 + $1.stairNum }
 
         return totalScore
+    }
+    
+    // MARK: 총 점수 계산 후 순위표 업데이트하기
+    func updateLeaderboard() {
+        let weeklyNfcPoint = weeklyScore(from: stairSteps)
+        service.getWeeklyStairDataAndSave()
+        let weeklyStairPoint = service.weeklyFlightsClimbed * 16
+        print("이번주 걸은 층계 * 16: \(weeklyStairPoint), nfc 점수: \(weeklyNfcPoint)")
+        Task {
+            await gameCenterManager.submitPoint(point: Int(weeklyNfcPoint) + Int(weeklyStairPoint))
+        }
     }
 
 }

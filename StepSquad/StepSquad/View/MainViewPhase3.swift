@@ -67,7 +67,7 @@ struct MainViewPhase3: View {
                                 .padding(.top, 17)
                                 .padding(.bottom, 25)
                                 .fullScreenCover(isPresented: $isResultViewPresented) {
-                                    ResultView(isResultViewPresented: $isResultViewPresented, stairName: nfcMessage, stairCount: nfcCount)
+                                    ResultView(isResultViewPresented: $isResultViewPresented, stairName: nfcMessage, stairCount: nfcCount, gameCenterManager: gameCenterManager)
                                 }
                                 .onChange(of: isResultViewPresented) {
                                     startTimer()
@@ -140,7 +140,8 @@ struct MainViewPhase3: View {
                         // TODO: - refresh 했을 때 헬스 킷에서 데이터 최신으로 업데이트
                         service.getWeeklyStairDataAndSave()
                         service.fetchAndSaveFlightsClimbedSinceAuthorization()
-                        
+                        // TODO: - 레벨 성취 업데이트 추가
+                        updateLeaderboard()
                     }
                     .scrollIndicators(ScrollIndicatorVisibility.hidden)
                 }
@@ -151,6 +152,8 @@ struct MainViewPhase3: View {
                 if scenePhase == .active {
                     service.getWeeklyStairDataAndSave()
                     service.fetchAndSaveFlightsClimbedSinceAuthorization()
+                    // TODO: - 레벨 성취 업데이트 추가
+                    updateLeaderboard()
                 }
             }
         }
@@ -265,9 +268,8 @@ struct MainViewPhase3: View {
                             }
                             isResultViewPresented.toggle()
                             // MARK: - 순위표, 성취 업데이트 하기
-                            Task {
-                                await gameCenterManager.submitPoint(point: nfcCount)
-                            }
+                            gameCenterManager.reportNfcAchievement(serialNumber: serialNumber)
+                            updateLeaderboard()
                         } else {
                             isShowingNFCAlert.toggle()
                         }
@@ -379,5 +381,16 @@ struct MainViewPhase3: View {
             .reduce(0) { $0 + $1.stairNum }
         
         return totalScore
+    }
+    
+    // MARK: - 총 점수 계산 후 순위표 업데이트하기
+    func updateLeaderboard() {
+        let weeklyNfcPoint = weeklyScore(from: stairSteps)
+        service.getWeeklyStairDataAndSave()
+        let weeklyStairPoint = service.weeklyFlightsClimbed * 16
+//        print("이번주 걸은 층계 * 16: \(weeklyStairPoint), nfc 점수: \(weeklyNfcPoint)")
+        Task {
+            await gameCenterManager.submitPoint(point: Int(weeklyNfcPoint) + Int(weeklyStairPoint))
+        }
     }
 }
