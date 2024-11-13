@@ -7,9 +7,9 @@
 
 import Foundation
 
-class CurrentLevel: Codable {
-    var totalStaircase: Int
-    var currentLevel: Level {
+class CurrentStatus: Codable {
+    var totalStaircase: Int // 누적 오른 층계
+    var currentLevel: Level { // 현재 레벨
         for level in levels {
             if level.minStaircase <= totalStaircase && totalStaircase <= level.maxStaircase {
                 return level
@@ -17,19 +17,39 @@ class CurrentLevel: Codable {
         }
         return levels.first! // 에러 발생시 레벨 1으로 설정
     }
-    var currentProgress: Int {
+    var currentProgress: Int { // 현재 레벨의 현재 단계
         let gap = (currentLevel.maxStaircase + 1) - currentLevel.minStaircase
         let rest = totalStaircase - currentLevel.minStaircase
         return Int(floor(Double(rest / gap) * 5 + 1))
     }
-    var progressImage: String {
+    var progressImage: String { // 현재 단계 이미지
         return "\(currentLevel.difficulty.rawValue)\(currentProgress)"
     }
     
     // TODO: - UserDefaults에서 불러올 경우 수정하기
-    init(totalStaircase: Int) {
+    init(totalStaircase: Int = 0) {
         self.totalStaircase = totalStaircase
     }
+    
+    // MARK: UserDefaults에 currentStatus 저장하기
+    func saveCurrentLevel(currentStatus: CurrentStatus) {
+        if let encodedData = try? JSONEncoder().encode(currentStatus) {
+            UserDefaults.standard.setValue(encodedData, forKey: "currentStatus")
+        }
+    }
+    
+    // MARK: UserDefaults에 저장한 currentStatus 반환하기
+    func loadCurrentLevel() -> CurrentStatus {
+        if let loadedData = UserDefaults.standard.data(forKey: "currentStatus") {
+            if let currentStatus = try? JSONDecoder().decode(CurrentStatus.self, from: loadedData) {
+                return currentStatus
+            }
+        }
+        print("Error: UserDefaults에서 이전 currentStatus 불러오기 실패.")
+        return .currentStatusExample
+    }
+    
+    static let currentStatusExample: CurrentStatus = CurrentStatus()
 }
 
 enum Difficulty: String, Codable {
