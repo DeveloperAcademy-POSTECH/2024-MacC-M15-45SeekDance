@@ -25,6 +25,10 @@ struct MainViewPhase3: View {
     @Environment(\.modelContext) var context
     @Query(sort: [SortDescriptor(\StairStepModel.stairStepDate, order: .forward)]) var stairSteps: [StairStepModel]
     
+    @ObservedObject var service = HealthKitService()
+    
+    @Environment(\.scenePhase) private var scenePhase
+    
     let gameCenterManager = GameCenterManager()
     
     var body: some View {
@@ -133,16 +137,25 @@ struct MainViewPhase3: View {
                         }
                     }
                     .refreshable {
-                        // TODO: - refresh 했을 때 필요한 동작 추가
-                        print("a")
+                        // TODO: - refresh 했을 때 헬스 킷에서 데이터 최신으로 업데이트
+                        service.getWeeklyStairDataAndSave()
+                        service.fetchAndSaveFlightsClimbedSinceAuthorization()
                         
                     }
                     .scrollIndicators(ScrollIndicatorVisibility.hidden)
                 }
             }
             .ignoresSafeArea()
+            // MARK: - scenePhase 연결
+            .onChange(of: scenePhase) {
+                if scenePhase == .active {
+                    service.getWeeklyStairDataAndSave()
+                    service.fetchAndSaveFlightsClimbedSinceAuthorization()
+                }
+            }
         }
     }
+    
     
     private var GetHealthKitView: some View {
         VStack(spacing: 0) {
@@ -193,7 +206,7 @@ struct MainViewPhase3: View {
             Text("5층 올라가기")
                 .font(.system(size: 20, weight: .semibold))
                 .padding(.top, 8)
-            Text("1층 올라가는 중")
+            Text("\(service.TotalFlightsClimbedSinceAuthorization, specifier: "%.0f") 층 올라가는 중")
                 .font(.system(size: 12))
                 .foregroundStyle(Color(hex: 0x3C3C43))
                 .padding(.top, 4)
