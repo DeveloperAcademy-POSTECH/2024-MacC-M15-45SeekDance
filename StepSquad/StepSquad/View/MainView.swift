@@ -149,6 +149,7 @@ struct MainView: View {
                                         // TODO: - 순위표, 수명 연장과 NFC 성취 업데이트 하기
                                         Task {
                                             gameCenterManager.reportNfcAchievement(serialNumber: serialNumber)
+                                            updateLeaderboard()
                                         }
                                     } else {
                                         isShowingNFCAlert.toggle()
