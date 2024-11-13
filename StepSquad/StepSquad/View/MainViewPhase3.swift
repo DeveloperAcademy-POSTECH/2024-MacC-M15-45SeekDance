@@ -18,7 +18,7 @@ struct MainViewPhase3: View {
     @State var isShowingNFCAlert: Bool = false
     @State var buttonCountMessage: String = ""
     @State var isLaunching: Bool = true
-
+    
     @State private var nfcCount: Int = 0
     @State private var nfcMessage: String = ""
     
@@ -38,104 +38,107 @@ struct MainViewPhase3: View {
         } else {
             ZStack() {
                 Color.backgroundColor
-
-                ScrollView {
+                
+                VStack() {
                     Text("당겨서 계단 정보 불러오기\n계단 업데이트: 방금")
                         .font(.footnote)
                         .foregroundColor(Color(hex: 0x808080))
                         .multilineTextAlignment(.center)
                         .padding(.top, 68)
                         .padding(.bottom, 15)
-
-                    VStack() {
-                        Spacer()
-
-                        // TODO: - 헬스킷 연결 전엔 GetHealthKitView 이후는 LevelUpView 띄우기
-                        //GetHealthKitView
-                        LevelUpView
-
-                        Divider()
-                            .padding(.horizontal, 16)
-                            .foregroundStyle(Color(hex: 0xCAE5B9))
-
-                        NFCReadingView
-                            .padding(.top, 17)
-                            .padding(.bottom, 25)
-                            .fullScreenCover(isPresented: $isResultViewPresented) {
-                                ResultView(isResultViewPresented: $isResultViewPresented, stairName: nfcMessage, stairCount: nfcCount)
-                            }
-                            .onChange(of: isResultViewPresented) {
-                                startTimer()
-                            }
-                            .alert(isPresented: $isShowingNFCAlert) {
-                                Alert(title: Text("지원하지 않는 NFC입니다."),
-                                      message: Text("계단에 위치한 NFC를 태그해주세요."),
-                                      dismissButton: .default(Text("확인")))
-                            }
-                    }
-                    .frame(width: 321, height: 532)
-                    .background(Color.white)
-                    .cornerRadius(16)
-
-                    HStack {
-                        Button {
-                            // MARK: 성취로 이동
-                            gameCenterManager.showAchievements()
-                        } label: {
-                            HStack() {
-                                Image(systemName: "rectangle.portrait.on.rectangle.portrait.fill")
-                                Text("달성 뱃지")
-                            }
-                            .padding(.vertical, 14)
-                            .padding(.horizontal, 20)
-                            .font(.system(size: 17))
-                            .foregroundColor(Color.white)
-                            .background(Color.primaryColor,
-                                        in: RoundedRectangle(cornerRadius: 12))
+                    
+                    ScrollView {
+                        VStack() {
+                            Spacer()
+                            
+                            // TODO: - 헬스킷 연결 전엔 GetHealthKitView 이후는 LevelUpView 띄우기
+                            //GetHealthKitView
+                            LevelUpView
+                            
+                            Divider()
+                                .padding(.horizontal, 16)
+                                .foregroundStyle(Color(hex: 0xCAE5B9))
+                            
+                            NFCReadingView
+                                .padding(.top, 17)
+                                .padding(.bottom, 25)
+                                .fullScreenCover(isPresented: $isResultViewPresented) {
+                                    ResultView(isResultViewPresented: $isResultViewPresented, stairName: nfcMessage, stairCount: nfcCount)
+                                }
+                                .onChange(of: isResultViewPresented) {
+                                    startTimer()
+                                }
+                                .alert(isPresented: $isShowingNFCAlert) {
+                                    Alert(title: Text("지원하지 않는 NFC입니다."),
+                                          message: Text("계단에 위치한 NFC를 태그해주세요."),
+                                          dismissButton: .default(Text("확인")))
+                                }
                         }
-
-                        Spacer()
-
-                        Button {
-                            // MARK: 순위표로 이동
-                            gameCenterManager.showLeaderboard()
-                        } label: {
-                            HStack() {
-                                Image(systemName: "figure.stairs")
-                                Text("나의 순위")
+                        .frame(width: 321, height: 532)
+                        .background(Color.white)
+                        .cornerRadius(16)
+                        
+                        HStack {
+                            Button {
+                                // MARK: 성취로 이동
+                                gameCenterManager.showAchievements()
+                            } label: {
+                                HStack() {
+                                    Image(systemName: "rectangle.portrait.on.rectangle.portrait.fill")
+                                    Text("달성 뱃지")
+                                }
+                                .padding(.vertical, 14)
+                                .padding(.horizontal, 20)
+                                .font(.system(size: 17))
+                                .foregroundColor(Color.white)
+                                .background(Color.primaryColor,
+                                            in: RoundedRectangle(cornerRadius: 12))
                             }
-                            .padding(.vertical, 14)
-                            .padding(.horizontal, 20)
-                            .font(.system(size: 17))
-                            .foregroundColor(Color.white)
-                            .background(Color.primaryColor,
-                                        in: RoundedRectangle(cornerRadius: 12))
+                            
+                            Spacer()
+                            
+                            Button {
+                                // MARK: 순위표로 이동
+                                gameCenterManager.showLeaderboard()
+                            } label: {
+                                HStack() {
+                                    Image(systemName: "figure.stairs")
+                                    Text("나의 순위")
+                                }
+                                .padding(.vertical, 14)
+                                .padding(.horizontal, 20)
+                                .font(.system(size: 17))
+                                .foregroundColor(Color.white)
+                                .background(Color.primaryColor,
+                                            in: RoundedRectangle(cornerRadius: 12))
+                            }
+                        }
+                        .padding(.top, 12)
+                        .padding(.horizontal, 36)
+                        
+                        Button {
+                            isExplainSheetPresented.toggle()
+                        } label: {
+                            Image(systemName: "info.circle")
+                                .imageScale(.small)
+                            Text("도움이 필요하신가요?")
+                                .font(.system(size: 12))
+                        }
+                        .foregroundColor(Color(hex: 0x0F5E3D))
+                        .padding(.top, 16)
+                        .sheet(isPresented: $isExplainSheetPresented) {
+                            ExplainView()
+                                .presentationDragIndicator(.visible)
+                                .presentationDetents([.large])
                         }
                     }
-                    .padding(.top, 12)
-                    .padding(.horizontal, 36)
-
-                    Button {
-                        isExplainSheetPresented.toggle()
-                    } label: {
-                        Image(systemName: "info.circle")
-                            .imageScale(.small)
-                        Text("도움이 필요하신가요?")
-                            .font(.system(size: 12))
+                    .refreshable {
+                        // TODO: - refresh 했을 때 필요한 동작 추가
+                        print("a")
+                        
                     }
-                    .foregroundColor(Color(hex: 0x0F5E3D))
-                    .padding(.top, 16)
-                    .sheet(isPresented: $isExplainSheetPresented) {
-                        ExplainView()
-                            .presentationDragIndicator(.visible)
-                            .presentationDetents([.large])
-                    }
+                    .scrollIndicators(ScrollIndicatorVisibility.hidden)
                 }
-                .refreshable {
-                    // TODO: - refresh 했을 때 필요한 동작 추가
-                    print("a")
-                }
-                .scrollIndicators(ScrollIndicatorVisibility.hidden)
             }
             .ignoresSafeArea()
         }
