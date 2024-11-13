@@ -31,24 +31,6 @@ class CurrentStatus: Codable {
         self.totalStaircase = totalStaircase
     }
     
-    // MARK: UserDefaults에 currentStatus 저장하기
-    func saveCurrentLevel(currentStatus: CurrentStatus) {
-        if let encodedData = try? JSONEncoder().encode(currentStatus) {
-            UserDefaults.standard.setValue(encodedData, forKey: "currentStatus")
-        }
-    }
-    
-    // MARK: UserDefaults에 저장한 currentStatus 반환하기
-    func loadCurrentLevel() -> CurrentStatus {
-        if let loadedData = UserDefaults.standard.data(forKey: "currentStatus") {
-            if let currentStatus = try? JSONDecoder().decode(CurrentStatus.self, from: loadedData) {
-                return currentStatus
-            }
-        }
-        print("Error: UserDefaults에서 이전 currentStatus 불러오기 실패.")
-        return .currentStatusExample
-    }
-    
     static let currentStatusExample: CurrentStatus = CurrentStatus()
 }
 

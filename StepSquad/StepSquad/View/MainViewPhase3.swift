@@ -31,6 +31,8 @@ struct MainViewPhase3: View {
     
     let gameCenterManager = GameCenterManager()
     
+    var currentStatus: CurrentStatus = CurrentStatus()
+    
     var body: some View {
         if isLaunching {
             SplashView()
@@ -298,6 +300,13 @@ struct MainViewPhase3: View {
     init() {
         // MARK: 사용자 게임 센터 인증
         gameCenterManager.authenticateUser()
+        // TODO: - 처음 실행될 때 설정하기, 아래는 test임
+        currentStatus = loadCurrentStatus()
+        currentStatus.totalStaircase = Int(service.weeklyFlightsClimbed)
+        saveCurrentStatus()
+        print(currentStatus.totalStaircase)
+        print(currentStatus.currentLevel.level)
+        print(currentStatus.currentProgress)
     }
     
     // MARK: - 타이머
@@ -392,5 +401,24 @@ struct MainViewPhase3: View {
         Task {
             await gameCenterManager.submitPoint(point: Int(weeklyNfcPoint) + Int(weeklyStairPoint))
         }
+    }
+    
+    // MARK: UserDefaults에 currentStatus 저장하기
+    // TODO: - totalStaircase 값 바뀔 때마다 실행하기
+    func saveCurrentStatus() {
+        if let encodedData = try? JSONEncoder().encode(currentStatus) {
+            UserDefaults.standard.setValue(encodedData, forKey: "currentStatus")
+        }
+    }
+    
+    // MARK: UserDefaults에 저장한 currentStatus 반환하기
+    func loadCurrentStatus() -> CurrentStatus {
+        if let loadedData = UserDefaults.standard.data(forKey: "currentStatus") {
+            if let decodedData = try? JSONDecoder().decode(CurrentStatus.self, from: loadedData) {
+                return decodedData
+            }
+        }
+        print("Error: UserDefaults에서 이전 currentStatus 불러오기 실패.")
+        return .currentStatusExample
     }
 }
