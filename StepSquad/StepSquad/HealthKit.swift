@@ -45,15 +45,20 @@ class HealthKitService: ObservableObject {
         
         healthStore.requestAuthorization(toShare: nil, read: readTypes) { [weak self] (success, error) in
             if let error = error {
-                print("HealthKit 권한 요청 오류: \(error.localizedDescription)")
+//                print("HealthKit 권한 요청 오류: \(error.localizedDescription)")
                 return
             }
             
             if success {
-                print("HealthKit 권한 허용됨")
+//                print("HealthKit 권한 허용됨")
                 
                 // 권한 요청 날짜를 기록하는 로직
                 self?.storeAuthorizationDate()
+                
+                // 권한 허용 후에만 데이터를 가져오는 로직 실행
+                self?.getWeeklyStairDataAndSave()
+                self?.fetchAndSaveFlightsClimbedSinceAuthorization()
+                
                 
             } else {
                 print("HealthKit 권한 거부됨")
@@ -109,7 +114,7 @@ class HealthKitService: ObservableObject {
             }
             
             let totalFlightsClimbed = result?.sumQuantity()?.doubleValue(for: HKUnit.count()) ?? 0.0
-            print("권한 허용 날짜 이후부터 지금까지 오른 총 계단 수: \(totalFlightsClimbed)")
+//            print("권한 허용 날짜 이후부터 지금까지 오른 총 계단 수: \(totalFlightsClimbed)")
             
             // UserDefaults에 저장
             let appGroupDefaults = UserDefaults(suiteName: "group.macmac.pratice.carot")
@@ -154,7 +159,7 @@ class HealthKitService: ObservableObject {
                 if let userDefaults = UserDefaults(suiteName: "group.macmac.pratice.carot") {
                     userDefaults.set(totalFlightsClimbed, forKey: "TodayFlightsClimbed")
                     print("오늘 오른 계단 수 \(totalFlightsClimbed)를 App Group UserDefaults에 저장했습니다.")
-                    // UI 업데이트를 위해 @Published 변수도 업데이트
+                   
                     DispatchQueue.main.async {
                         self.TodayFlightsClimbed = totalFlightsClimbed
                     }
@@ -164,7 +169,6 @@ class HealthKitService: ObservableObject {
                     print("UserDefaults에 접근하는 데 실패했습니다.")
                 }
                 
-                // 데이터 업데이트 후, Published 변수를 통해 UI와 연동
                 DispatchQueue.main.async {
                     self.stairClimbData = result.compactMap { item in
                         guard let sample = item as? HKQuantitySample else { return nil }
@@ -225,7 +229,7 @@ class HealthKitService: ObservableObject {
                 DispatchQueue.main.async {
                     self.weeklyFlightsClimbed = totalFlightsClimbed
                 }
-                print("주간 계단 수 (토-금): \(totalFlightsClimbed)를 UserDefaults에 저장했습니다.")
+//                print("주간 계단 수 (토-금): \(totalFlightsClimbed)를 UserDefaults에 저장했습니다.")
             }
             healthStore.execute(query)
         }
