@@ -214,7 +214,7 @@ struct MainView: View {
                 .background(Color.white)
                 .cornerRadius(20)
                 .fullScreenCover(isPresented: $isResultViewPresented) {
-                    ResultView(isResultViewPresented: $isResultViewPresented, stairName: nfcMessage, stairCount: nfcCount)
+                    ResultView(isResultViewPresented: $isResultViewPresented, stairName: nfcMessage, stairCount: nfcCount, gameCenterManager: gameCenterManager)
                 }
                 .onChange(of: isResultViewPresented) {
                     startTimer()

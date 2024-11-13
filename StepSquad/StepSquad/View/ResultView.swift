@@ -13,6 +13,8 @@ struct ResultView: View {
     var stairName: String = "포스텍 78 계단"
     var stairCount: Int = 78
     var materialName: String = "불로초"
+    
+    var gameCenterManager: GameCenterManager
 
     var body: some View {
         ZStack {
@@ -68,6 +70,8 @@ struct ResultView: View {
 
                 Button {
                     // TODO: - 리더보드 연결
+//                    isResultViewPresented = false
+                    gameCenterManager.showLeaderboard()
                 } label: {
                     Text("나의 순위")
                         .font(.system(size: 17))
