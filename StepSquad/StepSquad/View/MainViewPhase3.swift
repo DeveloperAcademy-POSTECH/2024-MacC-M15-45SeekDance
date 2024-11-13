@@ -146,6 +146,7 @@ struct MainViewPhase3: View {
                 }
             }
             .ignoresSafeArea()
+            // MARK: - scenePhase 연결
             .onChange(of: scenePhase) {
                 if scenePhase == .active {
                     service.getWeeklyStairDataAndSave()
