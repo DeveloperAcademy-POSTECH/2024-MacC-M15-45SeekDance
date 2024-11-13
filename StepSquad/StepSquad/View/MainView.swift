@@ -26,6 +26,8 @@ struct MainView: View {
     @ObservedObject var service = HealthKitService()
 
     let gameCenterManager = GameCenterManager()
+    // - TODO: 이 값 지우기
+    @State private var stairCount = 0
 
     var body: some View {
         ZStack {
@@ -33,11 +35,38 @@ struct MainView: View {
             Color.back.ignoresSafeArea()
 
             VStack (alignment: .center) {
-                // TODO: 나중에 삭제할 버튼
-                Button("Test") {
-                    updateLeaderboard()
+                // - TODO: 나중에 삭제할 버튼
+                HStack {
+                    Button("Reset") {
+                        gameCenterManager.resetAchievements()
+                    }
+                    .buttonStyle(.borderedProminent)
+                    Button("78 first") {
+                        gameCenterManager.reportNfcAchievement(serialNumber: "first78staircase")
+                    }
+                    .buttonStyle(.borderedProminent)
+                    Button("78") {
+                        gameCenterManager.reportNfcAchievement(serialNumber: "04d1c489230289")
+                    }
+                    .buttonStyle(.bordered)
+                    Button("25") {
+                        gameCenterManager.reportNfcAchievement(serialNumber: "0443a4eb210289")
+                    }
+                    .buttonStyle(.bordered)
+                    Button("114") {
+                        gameCenterManager.reportNfcAchievement(serialNumber: "0463e4e1200289")
+                    }
+                    .buttonStyle(.bordered)
                 }
-                .buttonStyle(.borderedProminent)
+                Picker("걸은 층수 임시 Picker", selection: $stairCount, content: {
+                    ForEach(0..<130) {
+                        Text("\($0)")
+                    }
+                })
+                Button("오른 층계 바탕으로 성취 업데이트") {
+                    gameCenterManager.reportLifeAchievement(stairCount: stairCount)
+                }
+                .buttonStyle(.bordered)
                 HStack {
                     Text("이번 달 횟수")
                         .font(Font.custom("SF Pro", size: 17))
