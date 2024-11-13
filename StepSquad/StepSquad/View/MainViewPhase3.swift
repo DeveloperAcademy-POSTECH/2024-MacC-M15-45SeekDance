@@ -27,6 +27,8 @@ struct MainViewPhase3: View {
     
     @ObservedObject var service = HealthKitService()
     
+    @Environment(\.scenePhase) private var scenePhase
+    
     let gameCenterManager = GameCenterManager()
     
     var body: some View {
@@ -144,16 +146,14 @@ struct MainViewPhase3: View {
                 }
             }
             .ignoresSafeArea()
-            .onAppear {
-                    if !isLaunching {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            service.getWeeklyStairDataAndSave()
-                            service.fetchAndSaveFlightsClimbedSinceAuthorization()
-                        }
-                    }
+            .onChange(of: scenePhase) {
+                if scenePhase == .active {
+                    service.getWeeklyStairDataAndSave()
+                    service.fetchAndSaveFlightsClimbedSinceAuthorization()
                 }
             }
         }
+    }
     
     
     private var GetHealthKitView: some View {
