@@ -7,6 +7,31 @@
 
 import Foundation
 
+class CurrentLevel: Codable {
+    var totalStaircase: Int
+    var currentLevel: Level {
+        for level in levels {
+            if level.minStaircase <= totalStaircase && totalStaircase <= level.maxStaircase {
+                return level
+            }
+        }
+        return levels.first! // 에러 발생시 레벨 1으로 설정
+    }
+    var currentProgress: Int {
+        let gap = (currentLevel.maxStaircase + 1) - currentLevel.minStaircase
+        let rest = totalStaircase - currentLevel.minStaircase
+        return Int(floor(Double(rest / gap) * 5 + 1))
+    }
+    var progressImage: String {
+        return "\(currentLevel.difficulty.rawValue)\(currentProgress)"
+    }
+    
+    // TODO: - UserDefaults에서 불러올 경우 수정하기
+    init(totalStaircase: Int) {
+        self.totalStaircase = totalStaircase
+    }
+}
+
 enum Difficulty: String, Codable {
     case easy = "Easy"
     case normal = "Normal"
