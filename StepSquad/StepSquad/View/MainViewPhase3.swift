@@ -145,12 +145,16 @@ struct MainViewPhase3: View {
             }
             .ignoresSafeArea()
             .onAppear {
-                        service.getWeeklyStairDataAndSave()
-                        service.fetchAndSaveFlightsClimbedSinceAuthorization()
+                    if !isLaunching {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            service.getWeeklyStairDataAndSave()
+                            service.fetchAndSaveFlightsClimbedSinceAuthorization()
+                        }
                     }
+                }
+            }
         }
-    }
-
+    
     
     private var GetHealthKitView: some View {
         VStack(spacing: 0) {
