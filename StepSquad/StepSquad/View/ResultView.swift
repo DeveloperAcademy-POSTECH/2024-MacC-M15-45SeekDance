@@ -10,74 +10,70 @@ import SwiftUI
 
 struct ResultView: View {
     @Binding var isResultViewPresented: Bool
-    var stairName: String
-    var stairCount: Int
-    var thisMonthStairCount: Int
+    var stairName: String = "포스텍 78 계단"
+    var stairCount: Int = 78
+    var materialName: String = "불로초"
 
     var body: some View {
         ZStack {
-            Color.back.ignoresSafeArea()
+            Color.backgroundColor
 
             VStack(alignment: .center) {
+                Text("재료 획득")
+                    .font(.system(size: 28, weight: .bold))
+                    .foregroundStyle(Color(hex: 0x7EB55D))
+
                 Image("ResultIMG")
                     .resizable()
                     .scaledToFit()
-                    .frame(maxHeight: 240)
-                    .cornerRadius(12)
+                    .frame(maxHeight: 223)
 
-                Text("\(stairCount)개 계단!")
-                    .multilineTextAlignment(.center)
-                    .fontWeight(.bold)
-                    .font(.largeTitle)
-                    .padding(.top, 32)
-                    .foregroundColor(Color(red: 0.35, green: 0.34, blue: 0.84))
+                Text("\(materialName)")
+                    .font(.system(size: 60))
+                    .foregroundStyle(Color(hex: 0x3A542B))
 
-                Text("\(stairName)")
-                    .font(Font.custom("SF Pro", size: 20))
-                    .multilineTextAlignment(.center)
-                    .padding(.top, 5)
-                    .foregroundColor(Color(red: 0.61, green: 0.61, blue: 0.61))
+                Text("\(stairName)의 \(stairCount)칸을 걸었어요!")
+                    .font(.system(size: 17))
+                    .foregroundStyle(Color(hex: 0x3C3C4399))
+                    .opacity(0.6)
 
-                Text("이번 달에 이만큼 아꼈어요!")
-                    .font(Font.custom("SF Pro", size: 16))
-                    .padding(.top, 28)
+                VStack(spacing: 8) {
+                    Text("특별 점수")
+                        .font(.system(size: 20))
+                        .foregroundStyle(Color(hex: 0x7EB55D))
 
-                HStack {
-                    VStack(alignment: .center, spacing: 0) {
-                        Text("전기 소비량")
-                            .font(.headline)
-                            .foregroundColor(.primary)
-                            .padding(.bottom, 16)
-
-                        Text("\(thisMonthStairCount*30)Wh")
-                            .font(.headline)
-                            .foregroundColor(.orange)
+                    HStack() {
+                        Image(systemName: "figure.stairs")
+                        Text("\(stairCount)칸")
                     }
-                    .padding(12)
-                    .background(Color.white)
-                    .cornerRadius(15)
-                    .frame(width: 150, height: 120)
-
-                    VStack(alignment: .center, spacing: 0) {
-                        Text("탄소 발자국")
-                            .font(.headline)
-                            .foregroundColor(.primary)
-                            .padding(.bottom, 16)
-
-                        Text(String(format: "%.1f", Double(thisMonthStairCount)*12.7) + "g")
-                            .font(.headline)
-                            .foregroundColor(.green)
-                    }
-                    .padding(12)
-                    .background(Color.white)
-                    .cornerRadius(15)
-                    .frame(width: 150, height: 120)
+                    .font(.system(size: 22))
+                    .foregroundStyle(Color(hex: 0x3A542B))
                 }
+                .padding(16)
+                .background(Color.white)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 12)
+                        .inset(by: 1)
+                        .stroke(
+                            LinearGradient(
+                                gradient: Gradient(colors: [Color(hex: 0x7EB55D), Color(hex: 0x3A542B)]),
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            ),
+                            lineWidth: 2
+                        ))
+                .padding(.top, 40)
 
-                Text("출처: 탄소중립포인트 에너지")
-                    .fontWeight(.regular)
-                    .font(.footnote)
-                    .foregroundColor(Color.secondary)
+                Spacer()
+
+                Button {
+                    // TODO: - 리더보드 연결
+                } label: {
+                    Text("나의 순위")
+                        .font(.system(size: 17))
+                        .foregroundStyle(Color(hex: 0x5B3833))
+                }
+                .padding(14)
 
                 Button(action: {
                     isResultViewPresented.toggle()
@@ -87,16 +83,15 @@ struct ResultView: View {
                         .font(.body)
                         .fontWeight(.regular)
                         .frame(width: 320, height: 50)
-                        .background(Color.indigo)
+                        .background(Color(hex: 0x5B3833))
                         .cornerRadius(12)
                 }
-                .padding(.top, 40)
-
+                .padding(.top, 4)
             }
             .padding(.horizontal, 40)
             .padding(.top, 80)
             .padding(.bottom, 70)
         }
+        .ignoresSafeArea()
     }
 }
-
