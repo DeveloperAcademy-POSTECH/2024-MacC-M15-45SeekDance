@@ -70,8 +70,6 @@ struct ResultView: View {
 
                 Button {
                     // TODO: - 리더보드 연결
-//                    isResultViewPresented = false
-                    gameCenterManager.showLeaderboard()
                 } label: {
                     Text("나의 순위")
                         .font(.system(size: 17))
