@@ -25,6 +25,8 @@ struct MainViewPhase3: View {
     @Environment(\.modelContext) var context
     @Query(sort: [SortDescriptor(\StairStepModel.stairStepDate, order: .forward)]) var stairSteps: [StairStepModel]
     
+    @ObservedObject var service = HealthKitService()
+    
     let gameCenterManager = GameCenterManager()
     
     var body: some View {
@@ -133,8 +135,9 @@ struct MainViewPhase3: View {
                         }
                     }
                     .refreshable {
-                        // TODO: - refresh 했을 때 필요한 동작 추가
-                        print("a")
+                        // TODO: - refresh 했을 때 헬스 킷에서 데이터 최신으로 업데이트
+                        service.getWeeklyStairDataAndSave()
+                        service.fetchAndSaveFlightsClimbedSinceAuthorization()
                         
                     }
                     .scrollIndicators(ScrollIndicatorVisibility.hidden)
@@ -143,6 +146,10 @@ struct MainViewPhase3: View {
             .ignoresSafeArea()
         }
     }
+//        .onAppear {
+//            service.getWeeklyStairDataAndSave()
+//            service.fetchAndSaveFlightsClimbedSinceAuthorization()
+//        }
     
     private var GetHealthKitView: some View {
         VStack(spacing: 0) {
