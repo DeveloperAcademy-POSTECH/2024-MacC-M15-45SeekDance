@@ -144,12 +144,13 @@ struct MainViewPhase3: View {
                 }
             }
             .ignoresSafeArea()
+            .onAppear {
+                        service.getWeeklyStairDataAndSave()
+                        service.fetchAndSaveFlightsClimbedSinceAuthorization()
+                    }
         }
     }
-//        .onAppear {
-//            service.getWeeklyStairDataAndSave()
-//            service.fetchAndSaveFlightsClimbedSinceAuthorization()
-//        }
+
     
     private var GetHealthKitView: some View {
         VStack(spacing: 0) {
@@ -200,7 +201,7 @@ struct MainViewPhase3: View {
             Text("5층 올라가기")
                 .font(.system(size: 20, weight: .semibold))
                 .padding(.top, 8)
-            Text("1층 올라가는 중")
+            Text("\(service.TotalFlightsClimbedSinceAuthorization, specifier: "%.0f") 층 올라가는 중")
                 .font(.system(size: 12))
                 .foregroundStyle(Color(hex: 0x3C3C43))
                 .padding(.top, 4)
