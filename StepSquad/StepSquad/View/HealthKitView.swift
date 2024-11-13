@@ -30,11 +30,16 @@ struct HealthKitView: View {
                         .font(.title3)
                         .fontWeight(.medium)
                         .padding(.top, 10)
+                    Text("권한 받은 이후: \(service.TotalFlightsClimbedSinceAuthorization, specifier: "%.0f") 층")
+                        .font(.title3)
+                        .fontWeight(.medium)
+                        .padding(.top, 10)
                     
                     HStack {
                         Button {
                             service.getTodayStairDataAndSave()
                             service.getWeeklyStairDataAndSave()
+                            service.fetchAndSaveFlightsClimbedSinceAuthorization()
                         } label: {
                             Image(systemName: "figure.stairs")
                             Text("헬스킷에서 계단 오르기 정보 가져오기")
