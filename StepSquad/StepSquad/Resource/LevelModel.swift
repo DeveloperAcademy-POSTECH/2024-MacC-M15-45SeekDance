@@ -40,8 +40,6 @@ class CurrentStatus: Codable {
     func updateStaircase(_ totalStaircase: Int) {
         self.totalStaircase = totalStaircase
     }
-    
-    static let currentStatusExample: CurrentStatus = CurrentStatus()
 }
 
 enum Difficulty: String, Codable {
