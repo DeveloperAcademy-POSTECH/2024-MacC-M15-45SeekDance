@@ -38,6 +38,7 @@ struct MainViewPhase3: View {
         }
     }
     @State private var completedLevels = CompletedLevels()
+    @State private var isShowingNewItem = false
     
     var body: some View {
         if isLaunching {
@@ -228,22 +229,29 @@ struct MainViewPhase3: View {
                 .foregroundStyle(Color(hex: 0x3C3C43))
                 .padding(.top, 4)
             
-            Button {
-                isMaterialSheetPresented.toggle()
-            } label: {
-                HStack() {
-                    Image(systemName: "leaf.fill")
-                    Text("획득 재료보기")
+            ZStack(alignment: .trailing) {
+                Button {
+                    isMaterialSheetPresented.toggle()
+                } label: {
+                    HStack() {
+                        Image(systemName: "leaf.fill")
+                        Text("획득 재료보기")
+                    }
+                    .padding(.vertical, 7)
+                    .padding(.horizontal, 14)
+                    .foregroundStyle(Color.white)
+                    .background(Color.secondaryColor, in: RoundedRectangle(cornerRadius: 30))
                 }
-                .padding(.vertical, 7)
-                .padding(.horizontal, 14)
-                .foregroundStyle(Color.white)
-                .background(Color.secondaryColor, in: RoundedRectangle(cornerRadius: 30))
-            }
-            .padding(.top, 16)
-            .padding(.bottom, 30)
-            .sheet(isPresented: $isMaterialSheetPresented) {
-                MaterialsView(isMaterialSheetPresented: $isMaterialSheetPresented)
+                .padding(.top, 16)
+                .padding(.bottom, 28)
+                .sheet(isPresented: $isMaterialSheetPresented) {
+                    MaterialsView(isMaterialSheetPresented: $isMaterialSheetPresented, isShowingNewItem: $isShowingNewItem)
+                }
+                if isShowingNewItem {
+                    // TODO: - 크기, 색 변경하기
+                    NewItemView()
+                        .offset(y: -20)
+                }
             }
         }
     }
@@ -441,6 +449,7 @@ struct MainViewPhase3: View {
     // MARK: 뷰에 접근했을 때 현재 레벨과 lastCompletedLevels와 비교해서 완료한 레벨 날짜를 기록하고 성취 전달
     func compareCurrentLevelAndUpdate() {
         if currentStatus.currentLevel.level - (completedLevels.lastUpdatedLevel) > 1 { // 만약 업데이트 되지 않은 레벨이 있다면,
+            isShowingNewItem = true
             for i in (completedLevels.lastUpdatedLevel + 1)..<currentStatus.currentLevel.level { // 업데이트 되지 않은 레벨부터 현재 전의 레벨까지 업데이트
                 completedLevels.upgradeLevel(level: i, completedDate: Date.now)
                 gameCenterManager.reportCompletedAchievement(achievementId: levels[i - 1].achievementId) // 해당 레벨의 성취 달성
@@ -455,4 +464,8 @@ struct MainViewPhase3: View {
         print("현재 단계: \(currentStatus.currentProgress)")
         print("사용자에게 보여준 마지막 성취: \(completedLevels.lastUpdatedLevel)")
     }
+}
+
+#Preview {
+    MainViewPhase3()
 }
