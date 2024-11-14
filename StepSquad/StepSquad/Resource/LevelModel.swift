@@ -7,41 +7,6 @@
 
 import Foundation
 
-class CurrentStatus: Codable {
-    private var totalStaircase: Int // 누적 오른 층계
-    var currentLevel: Level { // 현재 레벨
-        for level in levels {
-            if level.minStaircase <= totalStaircase && totalStaircase <= level.maxStaircase {
-                return level
-            }
-        }
-        return levels.first! // 에러 발생시 레벨 1으로 설정
-    }
-    var currentProgress: Int { // 현재 레벨의 현재 단계
-        let gap = (currentLevel.maxStaircase + 1) - currentLevel.minStaircase
-        let rest = totalStaircase - currentLevel.minStaircase
-        return Int(floor(Double(rest / gap) * 5 + 1))
-    }
-    var progressImage: String { // 현재 단계 이미지
-        return "\(currentLevel.difficulty.rawValue)\(currentProgress)"
-    }
-    
-    // TODO: - UserDefaults에서 불러올 경우 수정하기
-    init(totalStaircase: Int = 0) {
-        self.totalStaircase = totalStaircase
-    }
-    
-    // MARK: totalStaircase 업데이트하기
-    func getTotalStaircase() -> Int {
-        return self.totalStaircase
-    }
-    
-    // MARK: totalStaircase 업데이트하기
-    func updateStaircase(_ totalStaircase: Int) {
-        self.totalStaircase = totalStaircase
-    }
-}
-
 enum Difficulty: String, Codable {
     case easy = "Easy"
     case normal = "Normal"
@@ -56,19 +21,17 @@ class Level: Codable {
     var maxStaircase: Int
     var reward: String
     var rewardImage: String
-    var completedDate: Date?
     var difficulty: Difficulty
     var wikiLink: String
     var achievementId: String
     
     // TODO: - UserDefaults에서 불러올 경우 수정하기
-    init(level: Int, minStaircase: Int, maxStaircase: Int, reward: String, rewardImage: String, completedDate: Date? = nil, difficulty: Difficulty, wikiLink: String, achievementId: String) {
+    init(level: Int, minStaircase: Int, maxStaircase: Int, reward: String, rewardImage: String, difficulty: Difficulty, wikiLink: String, achievementId: String) {
         self.level = level
         self.minStaircase = minStaircase
         self.maxStaircase = maxStaircase
         self.reward = reward
         self.rewardImage = rewardImage
-        self.completedDate = completedDate
         self.difficulty = difficulty
         self.wikiLink = wikiLink
         self.achievementId = achievementId
