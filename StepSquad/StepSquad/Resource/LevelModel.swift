@@ -8,7 +8,7 @@
 import Foundation
 
 class CurrentStatus: Codable {
-    var totalStaircase: Int // 누적 오른 층계
+    private var totalStaircase: Int // 누적 오른 층계
     var currentLevel: Level { // 현재 레벨
         for level in levels {
             if level.minStaircase <= totalStaircase && totalStaircase <= level.maxStaircase {
@@ -28,6 +28,16 @@ class CurrentStatus: Codable {
     
     // TODO: - UserDefaults에서 불러올 경우 수정하기
     init(totalStaircase: Int = 0) {
+        self.totalStaircase = totalStaircase
+    }
+    
+    // MARK: totalStaircase 업데이트하기
+    func getTotalStaircase() -> Int {
+        return self.totalStaircase
+    }
+    
+    // MARK: totalStaircase 업데이트하기
+    func updateStaircase(_ totalStaircase: Int) {
         self.totalStaircase = totalStaircase
     }
     
