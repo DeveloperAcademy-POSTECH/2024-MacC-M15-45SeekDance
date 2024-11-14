@@ -26,12 +26,11 @@ class CurrentStatus: Codable {
         return "\(currentLevel.difficulty.rawValue)\(currentProgress)"
     }
     
-    // TODO: - UserDefaults에서 불러올 경우 수정하기
     init(totalStaircase: Int = 0) {
         self.totalStaircase = totalStaircase
     }
     
-    // MARK: totalStaircase 업데이트하기
+    // MARK: totalStaircase 값 반환하기
     func getTotalStaircase() -> Int {
         return self.totalStaircase
     }

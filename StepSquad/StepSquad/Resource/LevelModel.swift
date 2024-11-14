@@ -38,7 +38,7 @@ class Level: Codable {
     }
 }
 
-// MARK: 레벨 1 ~ 19 저장
+// MARK: 레벨 1 ~ 19 저장, 인덱스는 레벨 -1로 활용
 let levels: [Level] = [
     Level(
         level: 1,

@@ -32,7 +32,6 @@ struct MainViewPhase3: View {
     let gameCenterManager = GameCenterManager()
     
     var currentStatus: CurrentStatus = CurrentStatus() {
-        // MARK: 값이 변경될 때마다 UserDefaults에 저장하기
         didSet {
             saveCurrentStatus()
         }
@@ -150,7 +149,6 @@ struct MainViewPhase3: View {
                         service.getWeeklyStairDataAndSave()
                         service.fetchAndSaveFlightsClimbedSinceAuthorization()
                         currentStatus.updateStaircase(Int(service.weeklyFlightsClimbed))
-                        // TODO: - 레벨 성취 업데이트 추가
                         compareCurrentLevelAndUpdate()
                         updateLeaderboard()
                         printAll()
@@ -165,7 +163,6 @@ struct MainViewPhase3: View {
                     service.getWeeklyStairDataAndSave()
                     service.fetchAndSaveFlightsClimbedSinceAuthorization()
                     currentStatus.updateStaircase(Int(service.weeklyFlightsClimbed))
-                    // TODO: - 레벨 성취 업데이트 추가
                     compareCurrentLevelAndUpdate()
                     updateLeaderboard()
                     printAll()
@@ -319,6 +316,7 @@ struct MainViewPhase3: View {
     
     // MARK: - 생성자
     init() {
+        // TODO: - 테스트 이후 정리하기
         // MARK: 사용자 게임 센터 인증
         gameCenterManager.authenticateUser()
         print("------------before load------------")
@@ -417,7 +415,7 @@ struct MainViewPhase3: View {
         return totalScore
     }
     
-    // MARK: - 총 점수 계산 후 순위표 업데이트하기
+    // MARK: - 이번주 총 점수 계산 후 순위표 업데이트하기
     func updateLeaderboard() {
         let weeklyNfcPoint = weeklyScore(from: stairSteps)
         service.getWeeklyStairDataAndSave()
