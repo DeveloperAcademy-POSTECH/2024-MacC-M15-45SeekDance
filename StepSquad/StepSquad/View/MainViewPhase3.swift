@@ -37,15 +37,19 @@ struct MainViewPhase3: View {
             saveCurrentStatus()
         }
     }
-    var completedLevels: [Int: Date] = {
-        if let loaded = UserDefaults.standard.object(forKey: "completedLevels") as? [Int : Date] {
+    @State var completedLevels: [Int: Date] = {
+        if let loaded = UserDefaults.standard.object(forKey: "CompletedLevels") as? [Int : Date] {
             return loaded
         }
         return [:]
     }() {
+        // MARK: 값이 변경될 때마다 UserDefaults에 저장하기
         didSet {
-            UserDefaults.setValue(completedLevels, forKey: "completedLevels")
+            UserDefaults.setValue(completedLevels, forKey: "CompletedLevels")
         }
+    }
+    var lastCompletedLevel: Int? {
+        completedLevels.keys.max()
     }
     
     var body: some View {
@@ -159,7 +163,9 @@ struct MainViewPhase3: View {
                         service.fetchAndSaveFlightsClimbedSinceAuthorization()
                         currentStatus.updateStaircase(Int(service.weeklyFlightsClimbed))
                         // TODO: - 레벨 성취 업데이트 추가
+                        compareCurrentLevelAndUpdate()
                         updateLeaderboard()
+                        printAll()
                     }
                     .scrollIndicators(ScrollIndicatorVisibility.hidden)
                 }
@@ -172,7 +178,9 @@ struct MainViewPhase3: View {
                     service.fetchAndSaveFlightsClimbedSinceAuthorization()
                     currentStatus.updateStaircase(Int(service.weeklyFlightsClimbed))
                     // TODO: - 레벨 성취 업데이트 추가
+                    compareCurrentLevelAndUpdate()
                     updateLeaderboard()
+                    printAll()
                 }
             }
         }
@@ -287,7 +295,7 @@ struct MainViewPhase3: View {
                             }
                             isResultViewPresented.toggle()
                             // MARK: - 순위표, 성취 업데이트 하기
-                            gameCenterManager.reportNfcAchievement(serialNumber: serialNumber)
+                            gameCenterManager.reportCompletedAchievement(achievementId: serialNumber)
                             updateLeaderboard()
                         } else {
                             isShowingNFCAlert.toggle()
@@ -314,15 +322,21 @@ struct MainViewPhase3: View {
         }
     }
     
+    // MARK: - 생성자
     init() {
         // MARK: 사용자 게임 센터 인증
         gameCenterManager.authenticateUser()
+        print("------------before load------------")
+        printAll()
         // MARK: 저장된 레벨 정보 불러오고 헬스킷 정보로 업데이트하기
         currentStatus = loadCurrentStatus()
         if currentStatus.getTotalStaircase() != Int(service.weeklyFlightsClimbed) {
             currentStatus.updateStaircase(Int(service.weeklyFlightsClimbed))
         }
-        print(completedLevels)
+        compareCurrentLevelAndUpdate()
+        print("------------after load------------")
+        printAll()
+        
     }
     
     // MARK: - 타이머
@@ -420,7 +434,6 @@ struct MainViewPhase3: View {
     }
     
     // MARK: UserDefaults에 currentStatus 저장하기
-    // TODO: - totalStaircase 값 바뀔 때마다 실행하기
     func saveCurrentStatus() {
         if let encodedData = try? JSONEncoder().encode(currentStatus) {
             UserDefaults.standard.setValue(encodedData, forKey: "currentStatus")
@@ -436,5 +449,22 @@ struct MainViewPhase3: View {
         }
         print("Error: UserDefaults에서 이전 currentStatus 불러오기 실패.")
         return CurrentStatus()
+    }
+    
+    // MARK: 뷰에 접근했을 때 현재 레벨과 lastCompletedLevels와 비교해서 완료한 레벨 날짜를 기록하고 성취 전달
+    func compareCurrentLevelAndUpdate() {
+        if currentStatus.currentLevel.level - (lastCompletedLevel ?? 0) > 1 {
+            for notUpdatedLevel in (lastCompletedLevel ?? 1)..<currentStatus.currentLevel.level {
+                completedLevels[notUpdatedLevel] = Date.now
+                gameCenterManager.reportCompletedAchievement(achievementId: levels[notUpdatedLevel - 1].achievementId)
+            }
+        }
+    }
+    
+    func printAll() {
+        print("누적 층계: \(currentStatus.getTotalStaircase())")
+        print("현재 레벨: \(currentStatus.currentLevel.level)")
+        print("현재 단계: \(currentStatus.currentProgress)")
+        print(completedLevels)
     }
 }
