@@ -64,7 +64,8 @@ struct MainView: View {
                     }
                 })
                 Button("오른 층계 바탕으로 성취 업데이트") {
-                    gameCenterManager.reportLifeAchievement(stairCount: stairCount)
+                    // TODO: - View 삭제
+//                    gameCenterManager.reportLifeAchievement(stairCount: stairCount)
                 }
                 .buttonStyle(.bordered)
                 HStack {

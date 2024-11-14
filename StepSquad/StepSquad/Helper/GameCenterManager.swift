@@ -82,34 +82,10 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
         }
         print("game center: updated leaderboard")
     }
-    
-    // MARK: 수명 연장 성취 업데이트하기
-    func reportLifeAchievement(stairCount: Int) {
-        if stairCount >= 5 {
-            reportCompletedAchievement(achievement: GKAchievement(identifier: "min5"))
-        }
-        if stairCount >= 10 {
-            reportCompletedAchievement(achievement: GKAchievement(identifier: "min10"))
-        }
-        if stairCount >= 15 {
-            reportCompletedAchievement(achievement: GKAchievement(identifier: "min15"))
-        }
-        if stairCount >= 30 {
-            reportCompletedAchievement(achievement: GKAchievement(identifier: "min30"))
-        }
-        if stairCount >= 60 {
-            reportCompletedAchievement(achievement: GKAchievement(identifier: "hr1"))
-        }
-        if stairCount >= 90 {
-            reportCompletedAchievement(achievement: GKAchievement(identifier: "hr1min30"))
-        }
-        if stairCount >= 120 {
-            reportCompletedAchievement(achievement: GKAchievement(identifier: "hr2"))
-        }
-    }
-    
+        
     // MARK: 성취 달성 여부 확인 후 성취 업데이트하기
-    func reportCompletedAchievement(achievement: GKAchievement) {
+    func reportCompletedAchievement(achievementId: String) {
+        let achievement = GKAchievement(identifier: achievementId)
         if !achievement.isCompleted {
             achievement.percentComplete = 100.0
             achievement.showsCompletionBanner = true
@@ -119,21 +95,6 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
                 }
             })
             print("game center: \(achievement.identifier) achievement completed.")
-        }
-    }
-    
-    // MARK: NFC 태깅 성취 업데이트하기
-    func reportNfcAchievement(serialNumber: String) {
-        let achievement = GKAchievement(identifier: serialNumber)
-        if !achievement.isCompleted {
-            achievement.percentComplete = 100.0
-            achievement.showsCompletionBanner = true
-            GKAchievement.report([achievement], withCompletionHandler: {(error: Error?) in
-                if error != nil {
-                    print("Error: \(String(describing: error))")
-                }
-            })
-            print("game center: updated achievement of nfc")
         }
     }
     
