@@ -37,20 +37,7 @@ struct MainViewPhase3: View {
             saveCurrentStatus()
         }
     }
-    @State var completedLevels: [Int: Date] = {
-        if let loaded = UserDefaults.standard.object(forKey: "CompletedLevels") as? [Int : Date] {
-            return loaded
-        }
-        return [:]
-    }() {
-        // MARK: 값이 변경될 때마다 UserDefaults에 저장하기
-        didSet {
-            UserDefaults.setValue(completedLevels, forKey: "CompletedLevels")
-        }
-    }
-    var lastCompletedLevel: Int? {
-        completedLevels.keys.max()
-    }
+    @State private var completedLevels = CompletedLevels()
     
     var body: some View {
         if isLaunching {
@@ -453,18 +440,19 @@ struct MainViewPhase3: View {
     
     // MARK: 뷰에 접근했을 때 현재 레벨과 lastCompletedLevels와 비교해서 완료한 레벨 날짜를 기록하고 성취 전달
     func compareCurrentLevelAndUpdate() {
-        if currentStatus.currentLevel.level - (lastCompletedLevel ?? 0) > 1 {
-            for notUpdatedLevel in (lastCompletedLevel ?? 1)..<currentStatus.currentLevel.level {
-                completedLevels[notUpdatedLevel] = Date.now
-                gameCenterManager.reportCompletedAchievement(achievementId: levels[notUpdatedLevel - 1].achievementId)
+        if currentStatus.currentLevel.level - (completedLevels.lastUpdatedLevel) > 1 { // 만약 업데이트 되지 않은 레벨이 있다면,
+            for i in (completedLevels.lastUpdatedLevel + 1)..<currentStatus.currentLevel.level { // 업데이트 되지 않은 레벨부터 현재 전의 레벨까지 업데이트
+                completedLevels.upgradeLevel(level: i, completedDate: Date.now)
+                gameCenterManager.reportCompletedAchievement(achievementId: levels[i - 1].achievementId) // 해당 레벨의 성취 달성
             }
         }
     }
     
+    // MARK: Level 관련 테스트 프린트문
     func printAll() {
         print("누적 층계: \(currentStatus.getTotalStaircase())")
         print("현재 레벨: \(currentStatus.currentLevel.level)")
         print("현재 단계: \(currentStatus.currentProgress)")
-        print(completedLevels)
+        print("사용자에게 보여준 마지막 성취: \(completedLevels.lastUpdatedLevel)")
     }
 }
