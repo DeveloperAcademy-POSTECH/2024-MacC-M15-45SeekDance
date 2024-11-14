@@ -39,7 +39,7 @@ class Level: Codable {
 }
 
 // MARK: 레벨 1 ~ 19 저장
-var levels: [Level] = [
+let levels: [Level] = [
     Level(
         level: 1,
         minStaircase: 0,
