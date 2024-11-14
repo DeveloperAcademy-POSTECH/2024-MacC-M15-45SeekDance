@@ -465,7 +465,3 @@ struct MainViewPhase3: View {
         print("사용자에게 보여준 마지막 성취: \(completedLevels.lastUpdatedLevel)")
     }
 }
-
-#Preview {
-    MainViewPhase3()
-}
