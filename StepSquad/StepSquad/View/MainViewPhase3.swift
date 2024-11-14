@@ -37,6 +37,16 @@ struct MainViewPhase3: View {
             saveCurrentStatus()
         }
     }
+    var completedLevels: [Int: Date] = {
+        if let loaded = UserDefaults.standard.object(forKey: "completedLevels") as? [Int : Date] {
+            return loaded
+        }
+        return [:]
+    }() {
+        didSet {
+            UserDefaults.setValue(completedLevels, forKey: "completedLevels")
+        }
+    }
     
     var body: some View {
         if isLaunching {
@@ -312,6 +322,7 @@ struct MainViewPhase3: View {
         if currentStatus.getTotalStaircase() != Int(service.weeklyFlightsClimbed) {
             currentStatus.updateStaircase(Int(service.weeklyFlightsClimbed))
         }
+        print(completedLevels)
     }
     
     // MARK: - 타이머
@@ -402,7 +413,7 @@ struct MainViewPhase3: View {
         let weeklyNfcPoint = weeklyScore(from: stairSteps)
         service.getWeeklyStairDataAndSave()
         let weeklyStairPoint = service.weeklyFlightsClimbed * 16
-//        print("이번주 걸은 층계 * 16: \(weeklyStairPoint), nfc 점수: \(weeklyNfcPoint)")
+        //        print("이번주 걸은 층계 * 16: \(weeklyStairPoint), nfc 점수: \(weeklyNfcPoint)")
         Task {
             await gameCenterManager.submitPoint(point: Int(weeklyNfcPoint) + Int(weeklyStairPoint))
         }
