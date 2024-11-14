@@ -459,7 +459,11 @@ struct MainViewPhase3: View {
     func printAll() {
         print("누적 층계: \(currentStatus.getTotalStaircase())")
         print("현재 레벨: \(currentStatus.currentLevel.level)")
+        print("현재 레벨 난이도: \(currentStatus.currentLevel.difficulty.rawValue)")
+        print("목적지 약재: \(currentStatus.currentLevel.item)")
+        print("목적지 약재 이미지: \(currentStatus.currentLevel.itemImage)")
         print("현재 단계: \(currentStatus.currentProgress)")
-        print("사용자에게 보여준 마지막 성취: \(completedLevels.lastUpdatedLevel)")
+        print("현재 단계 이미지: \(currentStatus.progressImage)")
+        print("사용자에게 보여준 마지막 달성 레벨: \(completedLevels.lastUpdatedLevel)")
     }
 }
