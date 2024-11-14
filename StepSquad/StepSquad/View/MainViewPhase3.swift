@@ -31,7 +31,12 @@ struct MainViewPhase3: View {
     
     let gameCenterManager = GameCenterManager()
     
-    var currentStatus: CurrentStatus = CurrentStatus()
+    var currentStatus: CurrentStatus = CurrentStatus() {
+        // MARK: 값이 변경될 때마다 UserDefaults에 저장하기
+        didSet {
+            saveCurrentStatus()
+        }
+    }
     
     var body: some View {
         if isLaunching {
@@ -142,6 +147,7 @@ struct MainViewPhase3: View {
                         // TODO: - refresh 했을 때 헬스 킷에서 데이터 최신으로 업데이트
                         service.getWeeklyStairDataAndSave()
                         service.fetchAndSaveFlightsClimbedSinceAuthorization()
+                        currentStatus.updateStaircase(Int(service.weeklyFlightsClimbed))
                         // TODO: - 레벨 성취 업데이트 추가
                         updateLeaderboard()
                     }
@@ -154,6 +160,7 @@ struct MainViewPhase3: View {
                 if scenePhase == .active {
                     service.getWeeklyStairDataAndSave()
                     service.fetchAndSaveFlightsClimbedSinceAuthorization()
+                    currentStatus.updateStaircase(Int(service.weeklyFlightsClimbed))
                     // TODO: - 레벨 성취 업데이트 추가
                     updateLeaderboard()
                 }
@@ -300,13 +307,11 @@ struct MainViewPhase3: View {
     init() {
         // MARK: 사용자 게임 센터 인증
         gameCenterManager.authenticateUser()
-        // TODO: - 처음 실행될 때 설정하기, 아래는 test임
+        // MARK: 저장된 레벨 정보 불러오고 헬스킷 정보로 업데이트하기
         currentStatus = loadCurrentStatus()
-        currentStatus.totalStaircase = Int(service.weeklyFlightsClimbed)
-        saveCurrentStatus()
-        print(currentStatus.totalStaircase)
-        print(currentStatus.currentLevel.level)
-        print(currentStatus.currentProgress)
+        if currentStatus.getTotalStaircase() != Int(service.weeklyFlightsClimbed) {
+            currentStatus.updateStaircase(Int(service.weeklyFlightsClimbed))
+        }
     }
     
     // MARK: - 타이머
@@ -419,6 +424,6 @@ struct MainViewPhase3: View {
             }
         }
         print("Error: UserDefaults에서 이전 currentStatus 불러오기 실패.")
-        return .currentStatusExample
+        return CurrentStatus()
     }
 }
