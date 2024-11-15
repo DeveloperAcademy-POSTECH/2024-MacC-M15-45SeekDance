@@ -31,6 +31,7 @@ class HealthKitService: ObservableObject {
     @AppStorage("TodayFlightsClimbed", store: UserDefaults(suiteName: "group.macmac.pratice.carot")) var TodayFlightsClimbed: Double = 0.0
     @AppStorage("WeeklyFlightsClimbed", store: UserDefaults(suiteName: "group.macmac.pratice.carot")) var weeklyFlightsClimbed: Double = 0.0
     @AppStorage("TotalFlightsClimbedSinceAuthorization", store: UserDefaults(suiteName: "group.macmac.pratice.carot")) var TotalFlightsClimbedSinceAuthorization: Double = 0.0
+    @AppStorage("LastFetchTime", store: UserDefaults(suiteName: "group.macmac.pratice.carot")) var LastFetchTime: String = ""
     
     
     // MARK: - HealthKit 사용 권한을 요청하는 메서드
@@ -116,17 +117,28 @@ class HealthKitService: ObservableObject {
             
             let totalFlightsClimbed = result?.sumQuantity()?.doubleValue(for: HKUnit.count()) ?? 0.0
             
+            // 날짜 포맷 설정
+            let formatter = DateFormatter()
+            formatter.locale = Locale(identifier: "ko_KR")
+            formatter.dateFormat = "a hh:mm, yyyy/MM/dd" // "오후 11:29, 2024/11/10" 형식
+            
+            // 현재 시각 포맷팅
+            let currentFetchTime = Date()
+            let formattedFetchTime = formatter.string(from: currentFetchTime)
+            
             // UserDefaults에 계단 데이터와 함께 패치 시각 저장
             let appGroupDefaults = UserDefaults(suiteName: "group.macmac.pratice.carot")
             appGroupDefaults?.set(totalFlightsClimbed, forKey: "TotalFlightsClimbedSinceAuthorization")
-            appGroupDefaults?.set(Date(), forKey: "LastFetchTime") // 패치 시각 저장
+            appGroupDefaults?.set(formattedFetchTime, forKey: "LastFetchTime") // 포맷된 패치 시각 저장
             
+            // 패치 결과를 콘솔에 출력
             print("총 계단 오르기 수 \(totalFlightsClimbed)를 App Group UserDefaults에 저장했습니다.")
+            print("총 계단 오르기 수 \(totalFlightsClimbed)를 저장했습니다. (패치 시각: \(formattedFetchTime))")
         }
         
         healthStore.execute(query)
     }
-    
+
     
     // MARK: - 오늘 계단 오르기 수를 호출 및 앱스토리지 저장하는 함수
     func getTodayStairDataAndSave() {
