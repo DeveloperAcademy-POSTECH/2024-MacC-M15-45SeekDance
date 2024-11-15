@@ -38,4 +38,11 @@ class CompletedLevels: Codable {
             print("Unable to save data.")
         }
     }
+    
+    func getCompletedDateString(level: Int) -> String {
+        if level <= lastUpdatedLevel {
+            return levels[level]?.formatted(date: .numeric, time: .omitted) ?? "Error: 달성하지 않은 레벨"
+        }
+        return "Error: 달성하지 않은 레벨"
+    }
 }

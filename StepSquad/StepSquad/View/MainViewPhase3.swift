@@ -244,7 +244,7 @@ struct MainViewPhase3: View {
             .padding(.top, 16)
             .padding(.bottom, 28)
             .sheet(isPresented: $isMaterialSheetPresented) {
-                MaterialsView(isMaterialSheetPresented: $isMaterialSheetPresented, isShowingNewItem: $isShowingNewItem)
+                MaterialsView(isMaterialSheetPresented: $isMaterialSheetPresented, isShowingNewItem: $isShowingNewItem, completedLevels: completedLevels)
             }
         }
     }
