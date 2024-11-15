@@ -22,6 +22,8 @@ struct MainViewPhase3: View {
     @State private var nfcCount: Int = 0
     @State private var nfcMessage: String = ""
     
+    @State private var isHealthKitAuthorized: Bool = UserDefaults.standard.bool(forKey: "HealthKitAuthorized")
+    
     @Environment(\.modelContext) var context
     @Query(sort: [SortDescriptor(\StairStepModel.stairStepDate, order: .forward)]) var stairSteps: [StairStepModel]
     
@@ -30,6 +32,7 @@ struct MainViewPhase3: View {
     @Environment(\.scenePhase) private var scenePhase
     
     let gameCenterManager = GameCenterManager()
+    
     
     var currentStatus: CurrentStatus = CurrentStatus() {
         didSet {
@@ -52,18 +55,20 @@ struct MainViewPhase3: View {
                 Color.backgroundColor
                 
                 VStack() {
-                    Text("당겨서 계단 정보 불러오기\n계단 업데이트: 방금")
+                    Text("당겨서 계단 정보 불러오기\n계단 업데이트: \(service.LastFetchTime)")
                         .font(.footnote)
                         .foregroundColor(Color(hex: 0x808080))
                         .multilineTextAlignment(.center)
                         .padding(.top, 68)
                         .padding(.bottom, 15)
                     
+                    
                     ScrollView {
                         VStack() {
-                            // TODO: - 헬스킷 연결 전엔 GetHealthKitView 이후는 LevelUpView 띄우기
-                            //GetHealthKitView
+                            
                             LevelUpView
+                            //        GetHealthKitView
+                            
                             
                             Divider()
                                 .padding(.horizontal, 16)
@@ -183,7 +188,7 @@ struct MainViewPhase3: View {
                 .padding(.top, 38)
             
             Button {
-                // TODO: - 헬스 정보 연결
+                service.configure()
             } label: {
                 Text("계단 정보 연결하기")
                     .padding(.vertical, 14)
@@ -203,13 +208,13 @@ struct MainViewPhase3: View {
                 VStack(spacing: 0) {
                     HStack() {
                         Spacer()
-
+                        
                         ZStack() {
                             Image("Union")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 48, height: 60.5)
-
+                            
                             Image(currentStatus.currentLevel.itemImage)
                                 .resizable()
                                 .scaledToFit()
@@ -218,10 +223,10 @@ struct MainViewPhase3: View {
                     }
                     Spacer()
                 }
-
+                
                 VStack() {
                     Spacer()
-
+                    
                     Image(currentStatus.progressImage)
                         .resizable()
                         .scaledToFit()
@@ -230,7 +235,7 @@ struct MainViewPhase3: View {
             }
             .frame(width: 220, height: 276)
             .padding(.top, 33)
-
+            
             HStack(spacing: 4) {
                 Text(currentStatus.currentLevel.difficulty.rawValue)
                     .font(.system(size: 12))
@@ -293,9 +298,9 @@ struct MainViewPhase3: View {
                     .font(.system(size: 15))
                     .fontWeight(.semibold)
             }
-
+            
             Spacer()
-
+            
             Button {
                 nfcReader = NFCReader { result in
                     switch result {
@@ -363,7 +368,7 @@ struct MainViewPhase3: View {
         currentStatus.updateStaircase(Int(service.TotalFlightsClimbedSinceAuthorization))
         saveCurrentStatus()
         compareCurrentLevelAndUpdate()
-        printAll()
+    //    printAll()
     }
     
     // MARK: - 타이머
@@ -522,8 +527,16 @@ struct MainViewPhase3: View {
         print("현재 단계 이미지: \(currentStatus.progressImage)")
         print("사용자에게 보여준 마지막 달성 레벨: \(completedLevels.lastUpdatedLevel)")
     }
+    
+    // MARK: 헬스킷 권한 받는 함수
+    func setup() {
+        service.configure()
+    }
 }
+
 
 #Preview {
     MainViewPhase3()
 }
+
+
