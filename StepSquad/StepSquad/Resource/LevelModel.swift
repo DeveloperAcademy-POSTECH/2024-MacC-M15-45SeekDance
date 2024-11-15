@@ -111,7 +111,7 @@ let levels: [Level] = [
         itemImage: "8_ Chik",
         difficulty: .normal,
         wikiLink: "",
-        achievementId: ""),
+        achievementId: "hr2min30"),
     Level(
         level: 9,
         minStaircase: 150,
@@ -120,7 +120,7 @@ let levels: [Level] = [
         itemImage: "9_Oksususuyeom",
         difficulty: .normal,
         wikiLink: "",
-        achievementId: ""),
+        achievementId: "hr3"),
     Level(
         level: 10,
         minStaircase: 180,
@@ -129,7 +129,7 @@ let levels: [Level] = [
         itemImage: "10_Insam",
         difficulty: .hard,
         wikiLink: "",
-        achievementId: ""),
+        achievementId: "hr4"),
     Level(
         level: 11,
         minStaircase: 240,
@@ -138,7 +138,7 @@ let levels: [Level] = [
         itemImage: "11_Maengmundong",
         difficulty: .hard,
         wikiLink: "",
-        achievementId: ""),
+        achievementId: "hr5"),
     Level(
         level: 12,
         minStaircase: 300,
@@ -147,7 +147,7 @@ let levels: [Level] = [
         itemImage: "12_Gugija",
         difficulty: .hard,
         wikiLink: "",
-        achievementId: ""),
+        achievementId: "hr6"),
     Level(
         level: 13,
         minStaircase: 360,
@@ -156,7 +156,7 @@ let levels: [Level] = [
         itemImage: "13_Sansuyu",
         difficulty: .expert,
         wikiLink: "",
-        achievementId: ""),
+        achievementId: "hr8"),
     Level(
         level: 14,
         minStaircase: 480,
@@ -165,7 +165,7 @@ let levels: [Level] = [
         itemImage: "14_Chunma",
         difficulty: .expert,
         wikiLink: "",
-        achievementId: ""),
+        achievementId: "hr10"),
     Level(
         level: 15,
         minStaircase: 600,
@@ -174,7 +174,7 @@ let levels: [Level] = [
         itemImage: "15_Hwangjeong",
         difficulty: .expert,
         wikiLink: "",
-        achievementId: ""),
+        achievementId: "hr12"),
     Level(
         level: 16,
         minStaircase: 720,
@@ -183,7 +183,7 @@ let levels: [Level] = [
         itemImage: "16_Baekchul",
         difficulty: .expert,
         wikiLink: "",
-        achievementId: ""),
+        achievementId: "hr14"),
     Level(
         level: 17,
         minStaircase: 840,
@@ -192,7 +192,7 @@ let levels: [Level] = [
         itemImage: "17_Baekbongnyeong",
         difficulty: .expert,
         wikiLink: "",
-        achievementId: ""),
+        achievementId: "hr16"),
     Level(
         level: 18,
         minStaircase: 960,
@@ -201,7 +201,7 @@ let levels: [Level] = [
         itemImage: "18_Cheonmundong",
         difficulty: .impossible,
         wikiLink: "",
-        achievementId: ""),
+        achievementId: "hr20"),
     Level(
         level: 19,
         minStaircase: 1200,
@@ -210,5 +210,5 @@ let levels: [Level] = [
         itemImage: "19_Hasuo",
         difficulty: .impossible,
         wikiLink: "",
-        achievementId: ""),
+        achievementId: "hr24"),
 ]
