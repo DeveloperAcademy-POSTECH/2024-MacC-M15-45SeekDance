@@ -46,12 +46,13 @@ class HealthKitService: ObservableObject {
         
         healthStore.requestAuthorization(toShare: nil, read: readTypes) { [weak self] (success, error) in
             if let error = error {
-                //                print("HealthKit 권한 요청 오류: \(error.localizedDescription)")
+                print("HealthKit 권한 요청 오류: \(error.localizedDescription)")
                 return
             }
             
             if success {
-                //                print("HealthKit 권한 허용됨")
+                //   print("HealthKit 권한 허용됨")
+                UserDefaults.standard.set(true, forKey: "HealthKitAuthorized")
                 
                 // 권한 요청 날짜를 기록하는 로직
                 self?.storeAuthorizationDate()
@@ -63,6 +64,7 @@ class HealthKitService: ObservableObject {
                 
             } else {
                 print("HealthKit 권한 거부됨")
+                UserDefaults.standard.set(false, forKey: "HealthKitAuthorized")
             }
         }
     }
@@ -138,7 +140,7 @@ class HealthKitService: ObservableObject {
         
         healthStore.execute(query)
     }
-
+    
     
     // MARK: - 오늘 계단 오르기 수를 호출 및 앱스토리지 저장하는 함수
     func getTodayStairDataAndSave() {

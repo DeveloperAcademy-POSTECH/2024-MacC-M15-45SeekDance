@@ -27,6 +27,8 @@ struct MainViewPhase3: View {
     
     @State private var lastFetchTime: Date?
     
+    @State private var isHealthKitAuthorized: Bool = UserDefaults.standard.bool(forKey: "HealthKitAuthorized")
+    
     @Environment(\.modelContext) var context
     @Query(sort: [SortDescriptor(\StairStepModel.stairStepDate, order: .forward)]) var stairSteps: [StairStepModel]
     
@@ -35,6 +37,7 @@ struct MainViewPhase3: View {
     @Environment(\.scenePhase) private var scenePhase
     
     let gameCenterManager = GameCenterManager()
+    
     
     var currentStatus: CurrentStatus = CurrentStatus() {
         didSet {
@@ -67,9 +70,16 @@ struct MainViewPhase3: View {
                     
                     ScrollView {
                         VStack() {
-                            // TODO: - 헬스킷 연결 전엔 GetHealthKitView 이후는 LevelUpView 띄우기
-                            //GetHealthKitView
-                            LevelUpView
+                            VStack() {
+                                if isHealthKitAuthorized {
+                                    LevelUpView
+                                } else {
+                                    GetHealthKitView
+                                }
+                            } .onAppear {
+                                // 뷰가 나타날 때마다 권한 상태를 재확인하여 업데이트
+                                isHealthKitAuthorized = UserDefaults.standard.bool(forKey: "HealthKitAuthorized")
+                            }
                             
                             Divider()
                                 .padding(.horizontal, 16)
@@ -189,7 +199,7 @@ struct MainViewPhase3: View {
                 .padding(.top, 38)
             
             Button {
-                // TODO: - 헬스 정보 연결
+                service.configure()
             } label: {
                 Text("계단 정보 연결하기")
                     .padding(.vertical, 14)
@@ -527,6 +537,10 @@ struct MainViewPhase3: View {
         print("현재 단계: \(currentStatus.currentProgress)")
         print("현재 단계 이미지: \(currentStatus.progressImage)")
         print("사용자에게 보여준 마지막 달성 레벨: \(completedLevels.lastUpdatedLevel)")
+    }
+    
+    func setup() {
+        service.configure()
     }
 }
 
