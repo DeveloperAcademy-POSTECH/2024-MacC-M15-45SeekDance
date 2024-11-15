@@ -368,7 +368,7 @@ struct MainViewPhase3: View {
         currentStatus.updateStaircase(Int(service.TotalFlightsClimbedSinceAuthorization))
         saveCurrentStatus()
         compareCurrentLevelAndUpdate()
-        printAll()
+    //    printAll()
     }
     
     // MARK: - 타이머

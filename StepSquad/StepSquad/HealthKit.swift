@@ -84,7 +84,7 @@ class HealthKitService: ObservableObject {
         } else {
             // 이미 날짜가 저장된 경우, 기존 날짜를 사용
             if let savedDate = UserDefaults.standard.object(forKey: authorizationDateKey) as? Date {
-                print("이전에 저장된 HealthKit 권한 허용 날짜: \(savedDate)")
+                //                print("이전에 저장된 HealthKit 권한 허용 날짜: \(savedDate)")
             }
         }
     }
@@ -135,8 +135,7 @@ class HealthKitService: ObservableObject {
             appGroupDefaults?.set(formattedFetchTime, forKey: "LastFetchTime") // 포맷된 패치 시각 저장
             
             // 패치 결과를 콘솔에 출력
-            print("총 계단 오르기 수 \(totalFlightsClimbed)를 App Group UserDefaults에 저장했습니다.")
-            print("총 계단 오르기 수 \(totalFlightsClimbed)를 저장했습니다. (패치 시각: \(formattedFetchTime))")
+            //            print("총 계단 오르기 수 \(totalFlightsClimbed)를 저장했습니다. (패치 시각: \(formattedFetchTime))")
         }
         
         healthStore.execute(query)
