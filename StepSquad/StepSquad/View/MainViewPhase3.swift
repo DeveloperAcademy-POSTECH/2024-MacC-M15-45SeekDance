@@ -234,13 +234,13 @@ struct MainViewPhase3: View {
                     .font(.system(size: 12))
                     .foregroundStyle(Color.white)
                     .padding(4)
-                    .background(Color(hex: 0x4C6D38), in: RoundedRectangle(cornerRadius: 4))
+                    .background(getDifficultyColor(difficulty: currentStatus.currentLevel.difficulty), in: RoundedRectangle(cornerRadius: 4))
                 
                 Text("레벨 \(currentStatus.currentLevel.level)")
                     .font(.system(size: 12))
-                    .foregroundStyle(Color(hex: 0x3A542B))
+                    .foregroundStyle(getDifficultyColor(difficulty: currentStatus.currentLevel.difficulty))
                     .padding(4)
-                    .background(Color(hex: 0xF3F9F0), in: RoundedRectangle(cornerRadius: 4))
+                    .background(getDifficultyPaleColor(difficulty: currentStatus.currentLevel.difficulty), in: RoundedRectangle(cornerRadius: 4))
             }
             .padding(.top, 23)
             
@@ -483,6 +483,28 @@ struct MainViewPhase3: View {
                 completedLevels.upgradeLevel(level: i, completedDate: Date.now)
                 gameCenterManager.reportCompletedAchievement(achievementId: levels[i - 1].achievementId) // 해당 레벨의 성취 달성
             }
+        }
+    }
+    
+    // MARK: 난이도 관련 진한 색 반환
+    func getDifficultyColor(difficulty: Difficulty) -> Color {
+        switch difficulty {
+        case .easy: return .easy
+        case .normal: return .normal
+        case .hard: return .hard
+        case .expert: return .expert
+        case .impossible: return .impossible
+        }
+    }
+    
+    // MARK: 난이도 관련 연한 색 반환
+    func getDifficultyPaleColor(difficulty: Difficulty) -> Color {
+        switch difficulty {
+        case .easy: return .easyPale
+        case .normal: return .normalPale
+        case .hard: return .hardPale
+        case .expert: return .expertPale
+        case .impossible: return .impossiblePale
         }
     }
     
