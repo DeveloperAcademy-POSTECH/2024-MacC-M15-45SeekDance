@@ -12,7 +12,6 @@ struct MaterialsView: View {
     @Binding var isShowingNewItem: Bool
     var completedLevels: CompletedLevels
     
-    let materials = ["황기", "도라지", "생강", "대추", "감초"]
     var body: some View {
         NavigationView {
             List {

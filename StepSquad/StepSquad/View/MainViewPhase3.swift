@@ -208,7 +208,7 @@ struct MainViewPhase3: View {
                                 .scaledToFit()
                                 .frame(width: 48, height: 60.5)
 
-                            Image("GamCho")
+                            Image(currentStatus.currentLevel.itemImage)
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 30, height: 30)
@@ -220,7 +220,7 @@ struct MainViewPhase3: View {
                 VStack() {
                     Spacer()
 
-                    Image("Easy5")
+                    Image(currentStatus.progressImage)
                         .resizable()
                         .scaledToFit()
                         .frame(width: 220, height: 256)
@@ -230,13 +230,13 @@ struct MainViewPhase3: View {
             .padding(.top, 33)
 
             HStack(spacing: 4) {
-                Text("Easy")
+                Text(currentStatus.currentLevel.difficulty.rawValue)
                     .font(.system(size: 12))
                     .foregroundStyle(Color.white)
                     .padding(4)
                     .background(Color(hex: 0x4C6D38), in: RoundedRectangle(cornerRadius: 4))
                 
-                Text("레벨 1")
+                Text("레벨 \(currentStatus.currentLevel.level)")
                     .font(.system(size: 12))
                     .foregroundStyle(Color(hex: 0x3A542B))
                     .padding(4)
@@ -244,7 +244,7 @@ struct MainViewPhase3: View {
             }
             .padding(.top, 23)
             
-            Text("5층 올라가기")
+            Text("\(currentStatus.currentLevel.maxStaircase + 1)층 올라가기")
                 .font(.system(size: 20, weight: .semibold))
                 .padding(.top, 8)
             Text("\(service.TotalFlightsClimbedSinceAuthorization, specifier: "%.0f") 층 올라가는 중")
@@ -356,17 +356,11 @@ struct MainViewPhase3: View {
         // TODO: - 테스트 이후 정리하기
         // MARK: 사용자 게임 센터 인증
         gameCenterManager.authenticateUser()
-        print("------------before load------------")
-        printAll()
         // MARK: 저장된 레벨 정보 불러오고 헬스킷 정보로 업데이트하기
         currentStatus = loadCurrentStatus()
-        if currentStatus.getTotalStaircase() != Int(service.weeklyFlightsClimbed) {
-            currentStatus.updateStaircase(Int(service.weeklyFlightsClimbed))
-        }
+        currentStatus.updateStaircase(Int(service.weeklyFlightsClimbed))
         compareCurrentLevelAndUpdate()
-        print("------------after load------------")
         printAll()
-        
     }
     
     // MARK: - 타이머
@@ -499,7 +493,6 @@ struct MainViewPhase3: View {
         print("현재 레벨 난이도: \(currentStatus.currentLevel.difficulty.rawValue)")
         print("목적지 약재: \(currentStatus.currentLevel.item)")
         print("목적지 약재 이미지: \(currentStatus.currentLevel.itemImage)")
-        print("목적지 약재 위키링크: \(currentStatus.currentLevel.wikiLink)")
         print("현재 단계: \(currentStatus.currentProgress)")
         print("현재 단계 이미지: \(currentStatus.progressImage)")
         print("사용자에게 보여준 마지막 달성 레벨: \(completedLevels.lastUpdatedLevel)")
