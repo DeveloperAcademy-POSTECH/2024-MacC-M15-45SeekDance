@@ -62,7 +62,6 @@ class HealthKitService: ObservableObject {
                 self?.getWeeklyStairDataAndSave()
                 self?.fetchAndSaveFlightsClimbedSinceAuthorization()
                 
-                
             } else {
                 print("HealthKit 권한 거부됨")
                 UserDefaults.standard.set(false, forKey: "HealthKitAuthorized")
