@@ -22,11 +22,6 @@ struct MainViewPhase3: View {
     @State private var nfcCount: Int = 0
     @State private var nfcMessage: String = ""
     
-    @State private var lastFetchDate: Date = Date()
-    @State private var currentTime: Date = Date()
-    
-    @State private var lastFetchTime: Date?
-    
     @State private var isHealthKitAuthorized: Bool = UserDefaults.standard.bool(forKey: "HealthKitAuthorized")
     
     @Environment(\.modelContext) var context
