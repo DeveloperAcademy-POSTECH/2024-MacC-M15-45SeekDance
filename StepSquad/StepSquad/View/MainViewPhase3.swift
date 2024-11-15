@@ -31,6 +31,14 @@ struct MainViewPhase3: View {
     
     let gameCenterManager = GameCenterManager()
     
+    var currentStatus: CurrentStatus = CurrentStatus() {
+        didSet {
+            saveCurrentStatus()
+        }
+    }
+    @State private var completedLevels = CompletedLevels()
+    @State private var isShowingNewItem = false
+    
     var body: some View {
         if isLaunching {
             SplashView()
@@ -136,8 +144,11 @@ struct MainViewPhase3: View {
                         // TODO: - refresh 했을 때 헬스 킷에서 데이터 최신으로 업데이트
                         service.getWeeklyStairDataAndSave()
                         service.fetchAndSaveFlightsClimbedSinceAuthorization()
-                        // TODO: - 레벨 성취 업데이트 추가
+                        currentStatus.updateStaircase(Int(service.TotalFlightsClimbedSinceAuthorization))
+                        saveCurrentStatus()
+                        compareCurrentLevelAndUpdate()
                         updateLeaderboard()
+                        printAll()
                     }
                     .scrollIndicators(ScrollIndicatorVisibility.hidden)
                 }
@@ -148,8 +159,11 @@ struct MainViewPhase3: View {
                 if scenePhase == .active {
                     service.getWeeklyStairDataAndSave()
                     service.fetchAndSaveFlightsClimbedSinceAuthorization()
-                    // TODO: - 레벨 성취 업데이트 추가
+                    currentStatus.updateStaircase(Int(service.TotalFlightsClimbedSinceAuthorization))
+                    saveCurrentStatus()
+                    compareCurrentLevelAndUpdate()
                     updateLeaderboard()
+                    printAll()
                 }
             }
         }
@@ -196,7 +210,7 @@ struct MainViewPhase3: View {
                                 .scaledToFit()
                                 .frame(width: 48, height: 60.5)
 
-                            Image("GamCho")
+                            Image(currentStatus.currentLevel.itemImage)
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 30, height: 30)
@@ -208,7 +222,7 @@ struct MainViewPhase3: View {
                 VStack() {
                     Spacer()
 
-                    Image("Easy5")
+                    Image(currentStatus.progressImage)
                         .resizable()
                         .scaledToFit()
                         .frame(width: 220, height: 256)
@@ -218,21 +232,21 @@ struct MainViewPhase3: View {
             .padding(.top, 33)
 
             HStack(spacing: 4) {
-                Text("Easy")
+                Text(currentStatus.currentLevel.difficulty.rawValue)
                     .font(.system(size: 12))
                     .foregroundStyle(Color.white)
                     .padding(4)
-                    .background(Color(hex: 0x4C6D38), in: RoundedRectangle(cornerRadius: 4))
+                    .background(getDifficultyColor(difficulty: currentStatus.currentLevel.difficulty), in: RoundedRectangle(cornerRadius: 4))
                 
-                Text("레벨 1")
+                Text("레벨 \(currentStatus.currentLevel.level)")
                     .font(.system(size: 12))
-                    .foregroundStyle(Color(hex: 0x3A542B))
+                    .foregroundStyle(getDifficultyColor(difficulty: currentStatus.currentLevel.difficulty))
                     .padding(4)
-                    .background(Color(hex: 0xF3F9F0), in: RoundedRectangle(cornerRadius: 4))
+                    .background(getDifficultyPaleColor(difficulty: currentStatus.currentLevel.difficulty), in: RoundedRectangle(cornerRadius: 4))
             }
             .padding(.top, 23)
             
-            Text("5층 올라가기")
+            Text("\(currentStatus.currentLevel.maxStaircase + 1)층 올라가기")
                 .font(.system(size: 20, weight: .semibold))
                 .padding(.top, 8)
             Text("\(service.TotalFlightsClimbedSinceAuthorization, specifier: "%.0f") 층 올라가는 중")
@@ -246,6 +260,9 @@ struct MainViewPhase3: View {
                 HStack() {
                     Image(systemName: "leaf.fill")
                     Text("획득 재료보기")
+                    if isShowingNewItem { // 새로 획득한 약재가 있다면,
+                        NewItemView()
+                    }
                 }
                 .padding(.vertical, 7)
                 .padding(.horizontal, 14)
@@ -253,9 +270,9 @@ struct MainViewPhase3: View {
                 .background(Color.secondaryColor, in: RoundedRectangle(cornerRadius: 30))
             }
             .padding(.top, 16)
-            .padding(.bottom, 30)
+            .padding(.bottom, 28)
             .sheet(isPresented: $isMaterialSheetPresented) {
-                MaterialsView(isMaterialSheetPresented: $isMaterialSheetPresented)
+                MaterialsView(isMaterialSheetPresented: $isMaterialSheetPresented, isShowingNewItem: $isShowingNewItem, completedLevels: completedLevels)
             }
         }
     }
@@ -296,7 +313,7 @@ struct MainViewPhase3: View {
                             }
                             isResultViewPresented.toggle()
                             // MARK: - 순위표, 성취 업데이트 하기
-                            gameCenterManager.reportNfcAchievement(serialNumber: serialNumber)
+                            gameCenterManager.reportCompletedAchievement(achievementId: serialNumber)
                             updateLeaderboard()
                         } else {
                             isShowingNFCAlert.toggle()
@@ -336,9 +353,17 @@ struct MainViewPhase3: View {
         }
     }
     
+    // MARK: - 생성자
     init() {
+        // TODO: - 테스트 이후 정리하기
         // MARK: 사용자 게임 센터 인증
         gameCenterManager.authenticateUser()
+        // MARK: 저장된 레벨 정보 불러오고 헬스킷 정보로 업데이트하기
+        currentStatus = loadCurrentStatus()
+        currentStatus.updateStaircase(Int(service.TotalFlightsClimbedSinceAuthorization))
+        saveCurrentStatus()
+        compareCurrentLevelAndUpdate()
+        printAll()
     }
     
     // MARK: - 타이머
@@ -424,14 +449,81 @@ struct MainViewPhase3: View {
         return totalScore
     }
     
-    // MARK: - 총 점수 계산 후 순위표 업데이트하기
+    // MARK: - 이번주 총 점수 계산 후 순위표 업데이트하기
     func updateLeaderboard() {
         let weeklyNfcPoint = weeklyScore(from: stairSteps)
         service.getWeeklyStairDataAndSave()
         let weeklyStairPoint = service.weeklyFlightsClimbed * 16
-//        print("이번주 걸은 층계 * 16: \(weeklyStairPoint), nfc 점수: \(weeklyNfcPoint)")
+        //        print("이번주 걸은 층계 * 16: \(weeklyStairPoint), nfc 점수: \(weeklyNfcPoint)")
         Task {
             await gameCenterManager.submitPoint(point: Int(weeklyNfcPoint) + Int(weeklyStairPoint))
         }
     }
+    
+    // MARK: UserDefaults에 currentStatus 저장하기
+    func saveCurrentStatus() {
+        if let encodedData = try? JSONEncoder().encode(currentStatus) {
+            UserDefaults.standard.setValue(encodedData, forKey: "currentStatus")
+        }
+    }
+    
+    // MARK: UserDefaults에 저장한 currentStatus 반환하기
+    func loadCurrentStatus() -> CurrentStatus {
+        if let loadedData = UserDefaults.standard.data(forKey: "currentStatus") {
+            if let decodedData = try? JSONDecoder().decode(CurrentStatus.self, from: loadedData) {
+                return decodedData
+            }
+        }
+        print("Error: UserDefaults에서 이전 currentStatus 불러오기 실패.")
+        return CurrentStatus()
+    }
+    
+    // MARK: 뷰에 접근했을 때 현재 레벨과 lastCompletedLevels와 비교해서 완료한 레벨 날짜를 기록하고 성취 전달
+    func compareCurrentLevelAndUpdate() {
+        if currentStatus.currentLevel.level - (completedLevels.lastUpdatedLevel) > 1 { // 만약 업데이트 되지 않은 레벨이 있다면,
+            isShowingNewItem = true
+            for i in (completedLevels.lastUpdatedLevel + 1)..<currentStatus.currentLevel.level { // 업데이트 되지 않은 레벨부터 현재 전의 레벨까지 업데이트
+                completedLevels.upgradeLevel(level: i, completedDate: Date.now)
+                gameCenterManager.reportCompletedAchievement(achievementId: levels[i - 1].achievementId) // 해당 레벨의 성취 달성
+            }
+        }
+    }
+    
+    // MARK: 난이도 관련 진한 색 반환
+    func getDifficultyColor(difficulty: Difficulty) -> Color {
+        switch difficulty {
+        case .easy: return .easy
+        case .normal: return .normal
+        case .hard: return .hard
+        case .expert: return .expert
+        case .impossible: return .impossible
+        }
+    }
+    
+    // MARK: 난이도 관련 연한 색 반환
+    func getDifficultyPaleColor(difficulty: Difficulty) -> Color {
+        switch difficulty {
+        case .easy: return .easyPale
+        case .normal: return .normalPale
+        case .hard: return .hardPale
+        case .expert: return .expertPale
+        case .impossible: return .impossiblePale
+        }
+    }
+    
+    // MARK: Level 관련 테스트 프린트문
+    func printAll() {
+        print("누적 층계: \(currentStatus.getTotalStaircase())")
+        print("현재 레벨: \(currentStatus.currentLevel.level)")
+        print("현재 레벨 난이도: \(currentStatus.currentLevel.difficulty.rawValue)")
+        print("목적지 약재: \(currentStatus.currentLevel.item)")
+        print("목적지 약재 이미지: \(currentStatus.currentLevel.itemImage)")
+        print("현재 단계: \(currentStatus.currentProgress)")
+        print("현재 단계 이미지: \(currentStatus.progressImage)")
+        print("사용자에게 보여준 마지막 달성 레벨: \(completedLevels.lastUpdatedLevel)")
+    }
+}
+
+#Preview {
+    MainViewPhase3()
 }

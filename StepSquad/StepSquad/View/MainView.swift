@@ -42,19 +42,19 @@ struct MainView: View {
                     }
                     .buttonStyle(.borderedProminent)
                     Button("78 first") {
-                        gameCenterManager.reportNfcAchievement(serialNumber: "first78staircase")
+//                        gameCenterManager.reportNfcAchievement(serialNumber: "first78staircase")
                     }
                     .buttonStyle(.borderedProminent)
                     Button("78") {
-                        gameCenterManager.reportNfcAchievement(serialNumber: "04d1c489230289")
+//                        gameCenterManager.reportNfcAchievement(serialNumber: "04d1c489230289")
                     }
                     .buttonStyle(.bordered)
                     Button("25") {
-                        gameCenterManager.reportNfcAchievement(serialNumber: "0443a4eb210289")
+//                        gameCenterManager.reportNfcAchievement(serialNumber: "0443a4eb210289")
                     }
                     .buttonStyle(.bordered)
                     Button("114") {
-                        gameCenterManager.reportNfcAchievement(serialNumber: "0463e4e1200289")
+//                        gameCenterManager.reportNfcAchievement(serialNumber: "0463e4e1200289")
                     }
                     .buttonStyle(.bordered)
                 }
@@ -64,7 +64,8 @@ struct MainView: View {
                     }
                 })
                 Button("오른 층계 바탕으로 성취 업데이트") {
-                    gameCenterManager.reportLifeAchievement(stairCount: stairCount)
+                    // TODO: - View 삭제
+//                    gameCenterManager.reportLifeAchievement(stairCount: stairCount)
                 }
                 .buttonStyle(.bordered)
                 HStack {
@@ -148,7 +149,7 @@ struct MainView: View {
                                         isResultViewPresented.toggle()
                                         // TODO: - 순위표, 수명 연장과 NFC 성취 업데이트 하기
                                         Task {
-                                            gameCenterManager.reportNfcAchievement(serialNumber: serialNumber)
+//                                            gameCenterManager.reportNfcAchievement(serialNumber: serialNumber)
                                             updateLeaderboard()
                                         }
                                     } else {
