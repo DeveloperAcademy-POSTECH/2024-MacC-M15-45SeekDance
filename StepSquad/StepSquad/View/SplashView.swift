@@ -10,7 +10,7 @@ import SwiftUI
 struct SplashView: View {
     var body: some View {
         ZStack {
-            Color.backgroundColor
+            Color(hex: 0xF3F9F0)
 
             VStack(spacing: 0) {
                 Image("SplashIMG")

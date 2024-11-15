@@ -10,16 +10,16 @@ import Messages
 
 class MessagesViewController: MSMessagesAppViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
-    var gariStairs: [StairModel] = []
-    var stickers: [String] = []
+    //var gariStairs: [StairModel] = []
+    var stickers: [String] = ["DefaultSticker"]
 
     var collectionView: UICollectionView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        loadInitalData()
-        updateStickers()
+        //loadInitalData()
+        //updateStickers()
 
         // MARK: UICollectionViewFlowLayout 설정
         let layout = UICollectionViewFlowLayout()
@@ -96,20 +96,21 @@ class MessagesViewController: MSMessagesAppViewController, UICollectionViewDataS
         return nil
     }
 
-    func loadInitalData() {
-        if let loadedStairs = loadGariStairsFromUserDefaults() {
-            gariStairs = loadedStairs
-        } else {
-            print("no data")
-        }
-    }
-
-    func updateStickers() {
-        stickers = gariStairs
-            .filter { $0.isVisited }
-            .compactMap { $0.stickerName }
-        stickers
-            .append("bearSticker")
-    }
+    // TODO: - 스티커 업데이트 함수
+//    func loadInitalData() {
+//        if let loadedStairs = loadGariStairsFromUserDefaults() {
+//            gariStairs = loadedStairs
+//        } else {
+//            print("no data")
+//        }
+//    }
+//
+//    func updateStickers() {
+//        stickers = gariStairs
+//            .filter { $0.isVisited }
+//            .compactMap { $0.stickerName }
+//        stickers
+//            .append("bearSticker")
+//    }
 
 }
