@@ -45,12 +45,12 @@ class HealthKitService: ObservableObject {
         
         healthStore.requestAuthorization(toShare: nil, read: readTypes) { [weak self] (success, error) in
             if let error = error {
-//                print("HealthKit 권한 요청 오류: \(error.localizedDescription)")
+                //                print("HealthKit 권한 요청 오류: \(error.localizedDescription)")
                 return
             }
             
             if success {
-//                print("HealthKit 권한 허용됨")
+                //                print("HealthKit 권한 허용됨")
                 
                 // 권한 요청 날짜를 기록하는 로직
                 self?.storeAuthorizationDate()
@@ -87,6 +87,7 @@ class HealthKitService: ObservableObject {
     
     
     
+    // MARK: - 헬스킷 권한을 받은 당일 부터의 계단 오르기 데이터를 가져오는 기능
     func fetchAndSaveFlightsClimbedSinceAuthorization() {
         guard let authorizationDate = UserDefaults.standard.object(forKey: "HealthKitAuthorizationDate") as? Date else {
             print("권한 허용 날짜가 설정되지 않았습니다.")
@@ -114,11 +115,11 @@ class HealthKitService: ObservableObject {
             }
             
             let totalFlightsClimbed = result?.sumQuantity()?.doubleValue(for: HKUnit.count()) ?? 0.0
-//            print("권한 허용 날짜 이후부터 지금까지 오른 총 계단 수: \(totalFlightsClimbed)")
             
-            // UserDefaults에 저장
+            // UserDefaults에 계단 데이터와 함께 패치 시각 저장
             let appGroupDefaults = UserDefaults(suiteName: "group.macmac.pratice.carot")
             appGroupDefaults?.set(totalFlightsClimbed, forKey: "TotalFlightsClimbedSinceAuthorization")
+            appGroupDefaults?.set(Date(), forKey: "LastFetchTime") // 패치 시각 저장
             
             print("총 계단 오르기 수 \(totalFlightsClimbed)를 App Group UserDefaults에 저장했습니다.")
         }
@@ -159,7 +160,7 @@ class HealthKitService: ObservableObject {
                 if let userDefaults = UserDefaults(suiteName: "group.macmac.pratice.carot") {
                     userDefaults.set(totalFlightsClimbed, forKey: "TodayFlightsClimbed")
                     print("오늘 오른 계단 수 \(totalFlightsClimbed)를 App Group UserDefaults에 저장했습니다.")
-                   
+                    
                     DispatchQueue.main.async {
                         self.TodayFlightsClimbed = totalFlightsClimbed
                     }
@@ -229,7 +230,7 @@ class HealthKitService: ObservableObject {
                 DispatchQueue.main.async {
                     self.weeklyFlightsClimbed = totalFlightsClimbed
                 }
-//                print("주간 계단 수 (토-금): \(totalFlightsClimbed)를 UserDefaults에 저장했습니다.")
+                //                print("주간 계단 수 (토-금): \(totalFlightsClimbed)를 UserDefaults에 저장했습니다.")
             }
             healthStore.execute(query)
         }

@@ -22,6 +22,9 @@ struct MainViewPhase3: View {
     @State private var nfcCount: Int = 0
     @State private var nfcMessage: String = ""
     
+    @State private var lastFetchDate: Date = Date()
+    @State private var currentTime: Date = Date()
+    
     @Environment(\.modelContext) var context
     @Query(sort: [SortDescriptor(\StairStepModel.stairStepDate, order: .forward)]) var stairSteps: [StairStepModel]
     
@@ -52,12 +55,13 @@ struct MainViewPhase3: View {
                 Color.backgroundColor
                 
                 VStack() {
-                    Text("당겨서 계단 정보 불러오기\n계단 업데이트: 방금")
+                    Text("당겨서 계단 정보 불러오기\n계단 업데이트: \(getFormattedFetchTime())")
                         .font(.footnote)
                         .foregroundColor(Color(hex: 0x808080))
                         .multilineTextAlignment(.center)
                         .padding(.top, 68)
                         .padding(.bottom, 15)
+                    
                     
                     ScrollView {
                         VStack() {
@@ -203,13 +207,13 @@ struct MainViewPhase3: View {
                 VStack(spacing: 0) {
                     HStack() {
                         Spacer()
-
+                        
                         ZStack() {
                             Image("Union")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 48, height: 60.5)
-
+                            
                             Image(currentStatus.currentLevel.itemImage)
                                 .resizable()
                                 .scaledToFit()
@@ -218,10 +222,10 @@ struct MainViewPhase3: View {
                     }
                     Spacer()
                 }
-
+                
                 VStack() {
                     Spacer()
-
+                    
                     Image(currentStatus.progressImage)
                         .resizable()
                         .scaledToFit()
@@ -230,7 +234,7 @@ struct MainViewPhase3: View {
             }
             .frame(width: 220, height: 276)
             .padding(.top, 33)
-
+            
             HStack(spacing: 4) {
                 Text(currentStatus.currentLevel.difficulty.rawValue)
                     .font(.system(size: 12))
@@ -293,9 +297,9 @@ struct MainViewPhase3: View {
                     .font(.system(size: 15))
                     .fontWeight(.semibold)
             }
-
+            
             Spacer()
-
+            
             Button {
                 nfcReader = NFCReader { result in
                     switch result {
@@ -522,8 +526,39 @@ struct MainViewPhase3: View {
         print("현재 단계 이미지: \(currentStatus.progressImage)")
         print("사용자에게 보여준 마지막 달성 레벨: \(completedLevels.lastUpdatedLevel)")
     }
+    
+    // MARK: 시간 포메터
+    func getFormattedFetchTime() -> String {
+        let appGroupDefaults = UserDefaults(suiteName: "group.macmac.pratice.carot")
+        guard let lastFetchTime = appGroupDefaults?.object(forKey: "LastFetchTime") as? Date else {
+            return "데이터 없음"
+        }
+        
+        let currentDate = Date()
+        let calendar = Calendar.current
+        
+//         현재 시각과 비교하여 분 단위로 같으면 "방금" 반환
+        if calendar.isDate(currentDate, equalTo: lastFetchTime, toGranularity: .minute) {
+            return "방금"
+        }
+        
+        // 시각 포맷 설정
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.dateFormat = "a hh:mm, yyyy/MM/dd" // "오후 11:29, 2024/11/10" 형식
+        
+        return formatter.string(from: lastFetchTime)
+    }
 }
+
+
+
+
+
+
 
 #Preview {
     MainViewPhase3()
 }
+
+
