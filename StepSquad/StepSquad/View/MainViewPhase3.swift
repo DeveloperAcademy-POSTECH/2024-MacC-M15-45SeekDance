@@ -458,6 +458,7 @@ struct MainViewPhase3: View {
         print("현재 레벨 난이도: \(currentStatus.currentLevel.difficulty.rawValue)")
         print("목적지 약재: \(currentStatus.currentLevel.item)")
         print("목적지 약재 이미지: \(currentStatus.currentLevel.itemImage)")
+        print("목적지 약재 위키링크: \(currentStatus.currentLevel.wikiLink)")
         print("현재 단계: \(currentStatus.currentProgress)")
         print("현재 단계 이미지: \(currentStatus.progressImage)")
         print("사용자에게 보여준 마지막 달성 레벨: \(completedLevels.lastUpdatedLevel)")
