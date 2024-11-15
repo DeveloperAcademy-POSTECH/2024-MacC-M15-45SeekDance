@@ -65,16 +65,10 @@ struct MainViewPhase3: View {
                     
                     ScrollView {
                         VStack() {
-                            VStack() {
-                                if isHealthKitAuthorized {
-                                    LevelUpView
-                                } else {
-                                    GetHealthKitView
-                                }
-                            } .onAppear {
-                                // 뷰가 나타날 때마다 권한 상태를 재확인하여 업데이트
-                                isHealthKitAuthorized = UserDefaults.standard.bool(forKey: "HealthKitAuthorized")
-                            }
+                            
+                            LevelUpView
+                            //        GetHealthKitView
+                            
                             
                             Divider()
                                 .padding(.horizontal, 16)
@@ -534,6 +528,7 @@ struct MainViewPhase3: View {
         print("사용자에게 보여준 마지막 달성 레벨: \(completedLevels.lastUpdatedLevel)")
     }
     
+    // MARK: 헬스킷 권한 받는 함수
     func setup() {
         service.configure()
     }
