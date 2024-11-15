@@ -20,7 +20,7 @@ class CurrentStatus: Codable {
     var currentProgress: Int { // 현재 레벨의 현재 단계
         let gap = (currentLevel.maxStaircase + 1) - currentLevel.minStaircase
         let rest = totalStaircase - currentLevel.minStaircase
-        return Int(floor(Double(rest / gap) * 5 + 1))
+        return Int(Double(rest) / Double(gap) * 5 + 1)
     }
     var progressImage: String { // 현재 단계 이미지
         return "\(currentLevel.difficulty.rawValue)\(currentProgress)"
