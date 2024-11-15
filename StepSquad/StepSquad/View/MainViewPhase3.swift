@@ -144,7 +144,8 @@ struct MainViewPhase3: View {
                         // TODO: - refresh 했을 때 헬스 킷에서 데이터 최신으로 업데이트
                         service.getWeeklyStairDataAndSave()
                         service.fetchAndSaveFlightsClimbedSinceAuthorization()
-                        currentStatus.updateStaircase(Int(service.weeklyFlightsClimbed))
+                        currentStatus.updateStaircase(Int(service.TotalFlightsClimbedSinceAuthorization))
+                        saveCurrentStatus()
                         compareCurrentLevelAndUpdate()
                         updateLeaderboard()
                         printAll()
@@ -158,7 +159,8 @@ struct MainViewPhase3: View {
                 if scenePhase == .active {
                     service.getWeeklyStairDataAndSave()
                     service.fetchAndSaveFlightsClimbedSinceAuthorization()
-                    currentStatus.updateStaircase(Int(service.weeklyFlightsClimbed))
+                    currentStatus.updateStaircase(Int(service.TotalFlightsClimbedSinceAuthorization))
+                    saveCurrentStatus()
                     compareCurrentLevelAndUpdate()
                     updateLeaderboard()
                     printAll()
@@ -358,7 +360,8 @@ struct MainViewPhase3: View {
         gameCenterManager.authenticateUser()
         // MARK: 저장된 레벨 정보 불러오고 헬스킷 정보로 업데이트하기
         currentStatus = loadCurrentStatus()
-        currentStatus.updateStaircase(Int(service.weeklyFlightsClimbed))
+        currentStatus.updateStaircase(Int(service.TotalFlightsClimbedSinceAuthorization))
+        saveCurrentStatus()
         compareCurrentLevelAndUpdate()
         printAll()
     }
