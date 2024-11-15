@@ -24,6 +24,7 @@ struct ResultView: View {
                 Text("재료 획득")
                     .font(.system(size: 28, weight: .bold))
                     .foregroundStyle(Color(hex: 0x7EB55D))
+                    .padding(.top, 90)
 
                 Image("ResultIMG")
                     .resizable()
@@ -36,8 +37,7 @@ struct ResultView: View {
 
                 Text("\(stairName)의 \(stairCount)칸을 걸었어요!")
                     .font(.system(size: 17))
-                    .foregroundStyle(Color(hex: 0x3C3C4399))
-                    .opacity(0.6)
+                    .foregroundStyle(Color(hex: 0x638D48))
 
                 VStack(spacing: 8) {
                     Text("특별 점수")
@@ -68,15 +68,6 @@ struct ResultView: View {
                 .padding(.top, 40)
 
                 Spacer()
-
-                Button {
-                    // TODO: - 리더보드 연결
-                } label: {
-                    Text("나의 순위")
-                        .font(.system(size: 17))
-                        .foregroundStyle(Color(hex: 0x5B3833))
-                }
-                .padding(14)
 
                 Button(action: {
                     isResultViewPresented.toggle()

@@ -26,9 +26,9 @@ struct MaterialsView: View {
                                         .resizable()
                                         .aspectRatio(1, contentMode: .fit)
                                         .frame(width: 42, height: 42)
-                                        .padding(.trailing, 8)
+                                        .padding(.trailing, 0)
 
-                                    Text(levels[level - 1].item)
+                                    Text(" \(levels[level - 1].item)")
                                         .font(.system(size: 17))
 
                                     Spacer()
@@ -38,7 +38,7 @@ struct MaterialsView: View {
                                         .foregroundStyle(Color(hex: 0x3C3C43))
                                         .opacity(0.6)
                                 }
-                                .padding(.horizontal, 16)
+                                .padding(.horizontal, 4)
                             }
                         }
                     }
