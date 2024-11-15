@@ -24,7 +24,6 @@ struct ResultView: View {
                 Text("재료 획득")
                     .font(.system(size: 28, weight: .bold))
                     .foregroundStyle(Color(hex: 0x7EB55D))
-                    .padding(.top, 90)
 
                 Image("ResultIMG")
                     .resizable()
@@ -83,7 +82,7 @@ struct ResultView: View {
                 .padding(.top, 4)
             }
             .padding(.horizontal, 40)
-            .padding(.top, 80)
+            .padding(.top, 104)
             .padding(.bottom, 70)
         }
         .ignoresSafeArea()

@@ -66,8 +66,8 @@ struct MainViewPhase3: View {
                     ScrollView {
                         VStack(spacing: 0) {
 
-                            LevelUpView
-                            //        GetHealthKitView
+                            //LevelUpView
+                            GetHealthKitView
 
 
                             Divider()
@@ -186,10 +186,32 @@ struct MainViewPhase3: View {
 
     private var GetHealthKitView: some View {
         VStack(spacing: 0) {
-            Text("계단을 오를수록\n몸에 좋은 약재를 얻어요!")
+            ZStack() {
+                VStack(spacing: 0) {
+                    HStack(alignment: .top) {
+                        Spacer()
+                        Image("GetHealthKitImage")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 48, height: 62)
+                            .offset(x: 80, y: 20)
+                        Spacer()
+                    }
+
+                    Text("계단을 오를수록")
+                        .font(.system(size: 20, weight: .semibold))
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.black)
+                }
+                Spacer()
+            }
+
+            Text("몸에 좋은 약재를 얻어요!")
                 .font(.system(size: 20, weight: .semibold))
                 .multilineTextAlignment(.center)
                 .foregroundColor(.black)
+
+
 
             Text("오늘 오른 계단 정보부터\n헬스 데이터에서 가져옵니다.")
                 .font(.system(size: 15))
@@ -208,7 +230,10 @@ struct MainViewPhase3: View {
                         in: RoundedRectangle(cornerRadius: 12))
             .padding(.top, 62)
             .padding(.bottom, 55)
+
+            Spacer()
         }
+        .padding(.top, 96)
     }
 
     private var LevelUpView: some View {
