@@ -226,29 +226,25 @@ struct MainViewPhase3: View {
                 .foregroundStyle(Color(hex: 0x3C3C43))
                 .padding(.top, 4)
             
-            ZStack(alignment: .trailing) {
-                Button {
-                    isMaterialSheetPresented.toggle()
-                } label: {
-                    HStack() {
-                        Image(systemName: "leaf.fill")
-                        Text("획득 재료보기")
+            Button {
+                isMaterialSheetPresented.toggle()
+            } label: {
+                HStack() {
+                    Image(systemName: "leaf.fill")
+                    Text("획득 재료보기")
+                    if isShowingNewItem { // 새로 획득한 약재가 있다면,
+                        NewItemView()
                     }
-                    .padding(.vertical, 7)
-                    .padding(.horizontal, 14)
-                    .foregroundStyle(Color.white)
-                    .background(Color.secondaryColor, in: RoundedRectangle(cornerRadius: 30))
                 }
-                .padding(.top, 16)
-                .padding(.bottom, 28)
-                .sheet(isPresented: $isMaterialSheetPresented) {
-                    MaterialsView(isMaterialSheetPresented: $isMaterialSheetPresented, isShowingNewItem: $isShowingNewItem)
-                }
-                if isShowingNewItem {
-                    // TODO: - 크기, 색 변경하기
-                    NewItemView()
-                        .offset(y: -20)
-                }
+                .padding(.vertical, 7)
+                .padding(.horizontal, 14)
+                .foregroundStyle(Color.white)
+                .background(Color.secondaryColor, in: RoundedRectangle(cornerRadius: 30))
+            }
+            .padding(.top, 16)
+            .padding(.bottom, 28)
+            .sheet(isPresented: $isMaterialSheetPresented) {
+                MaterialsView(isMaterialSheetPresented: $isMaterialSheetPresented, isShowingNewItem: $isShowingNewItem)
             }
         }
     }
@@ -466,4 +462,8 @@ struct MainViewPhase3: View {
         print("현재 단계 이미지: \(currentStatus.progressImage)")
         print("사용자에게 보여준 마지막 달성 레벨: \(completedLevels.lastUpdatedLevel)")
     }
+}
+
+#Preview {
+    MainViewPhase3()
 }
