@@ -31,7 +31,7 @@ struct ResultView: View {
                     .frame(maxHeight: 223)
 
                 Text("\(materialName)")
-                    .font(.system(size: 60))
+                    .font(.chosunFont)
                     .foregroundStyle(Color(hex: 0x3A542B))
 
                 Text("\(stairName)의 \(stairCount)칸을 걸었어요!")
@@ -52,7 +52,8 @@ struct ResultView: View {
                     .foregroundStyle(Color(hex: 0x3A542B))
                 }
                 .padding(16)
-                .background(Color.white)
+                .background(Color.white,
+                            in: RoundedRectangle(cornerRadius: 12))
                 .overlay(
                     RoundedRectangle(cornerRadius: 12)
                         .inset(by: 1)

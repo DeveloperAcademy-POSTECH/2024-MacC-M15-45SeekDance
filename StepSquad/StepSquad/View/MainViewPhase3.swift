@@ -61,8 +61,6 @@ struct MainViewPhase3: View {
                     
                     ScrollView {
                         VStack() {
-                            Spacer()
-                            
                             // TODO: - 헬스킷 연결 전엔 GetHealthKitView 이후는 LevelUpView 띄우기
                             //GetHealthKitView
                             LevelUpView
@@ -86,7 +84,7 @@ struct MainViewPhase3: View {
                                           dismissButton: .default(Text("확인")))
                                 }
                         }
-                        .frame(width: 321, height: 532)
+                        .frame(width: 321, height: 560)
                         .background(Color.white)
                         .cornerRadius(16)
                         
@@ -99,8 +97,7 @@ struct MainViewPhase3: View {
                                     Image(systemName: "rectangle.portrait.on.rectangle.portrait.fill")
                                     Text("달성 뱃지")
                                 }
-                                .padding(.vertical, 14)
-                                .padding(.horizontal, 20)
+                                .frame(width: 152, height: 50)
                                 .font(.system(size: 17))
                                 .foregroundColor(Color.white)
                                 .background(Color.primaryColor,
@@ -117,8 +114,7 @@ struct MainViewPhase3: View {
                                     Image(systemName: "figure.stairs")
                                     Text("나의 순위")
                                 }
-                                .padding(.vertical, 14)
-                                .padding(.horizontal, 20)
+                                .frame(width: 152, height: 50)
                                 .font(.system(size: 17))
                                 .foregroundColor(Color.white)
                                 .background(Color.primaryColor,
@@ -201,8 +197,38 @@ struct MainViewPhase3: View {
     
     private var LevelUpView: some View {
         VStack(spacing: 0) {
-            Image("Easy1")
-            
+            ZStack() {
+                VStack(spacing: 0) {
+                    HStack() {
+                        Spacer()
+
+                        ZStack() {
+                            Image("Union")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 48, height: 60.5)
+
+                            Image("GamCho")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 30, height: 30)
+                        }
+                    }
+                    Spacer()
+                }
+
+                VStack() {
+                    Spacer()
+
+                    Image("Easy5")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 220, height: 256)
+                }
+            }
+            .frame(width: 220, height: 276)
+            .padding(.top, 33)
+
             HStack(spacing: 4) {
                 Text("Easy")
                     .font(.system(size: 12))
@@ -216,7 +242,7 @@ struct MainViewPhase3: View {
                     .padding(4)
                     .background(Color(hex: 0xF3F9F0), in: RoundedRectangle(cornerRadius: 4))
             }
-            .padding(.top, 50)
+            .padding(.top, 23)
             
             Text("5층 올라가기")
                 .font(.system(size: 20, weight: .semibold))
@@ -254,18 +280,20 @@ struct MainViewPhase3: View {
             Circle()
                 .foregroundColor(Color(hex: 0xD9D9D9))
                 .frame(width: 36, height: 36)
+                .padding(.leading, 16)
                 .padding(.trailing, 9)
             
             VStack(alignment: .leading, spacing: 0) {
-                Text("특별 재료를 찾고 추가 점수 받자!")
+                Text("5분마다 획득할 수 있어요!")
                     .font(.system(size: 13))
                     .foregroundStyle(Color(hex: 0x3C3C43))
-                Text("NFC 태깅하기")
+                Text("NFC로 특별 재료 얻기")
                     .font(.system(size: 15))
                     .fontWeight(.semibold)
             }
-            .padding(.trailing, 20)
-            
+
+            Spacer()
+
             Button {
                 nfcReader = NFCReader { result in
                     switch result {
@@ -295,14 +323,27 @@ struct MainViewPhase3: View {
                 }
                 nfcReader?.beginScanning()
             } label: {
-                Text("열기")
-                    .font(.system(size: 13))
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 8)
-                    .foregroundColor(Color(hex: 0x3A542B))
-                    .background(Color(hex: 0xCAE5B9),
-                                in: RoundedRectangle(cornerRadius: 4))
+                if isButtonEnabled {
+                    Text("열기")
+                        .font(.system(size: 13))
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 8)
+                        .foregroundColor(Color(hex: 0x3A542B))
+                        .background(Color(hex: 0xCAE5B9),
+                                    in: RoundedRectangle(cornerRadius: 4))
+                } else {
+                    Text("\(buttonCountMessage)")
+                        .font(.system(size: 13))
+                        .foregroundColor(.black)
+                        .font(.body)
+                        .fontWeight(.regular)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 8)
+                        .background(Color(hex: 0xD9D9D9))
+                        .cornerRadius(4)
+                }
             }
+            .padding(.trailing, 16)
             .disabled(!isButtonEnabled)
             .onAppear {
                 startTimer()
@@ -346,7 +387,7 @@ struct MainViewPhase3: View {
                 isButtonEnabled = false
                 let minutes = Int(remainingTime) / 60
                 let seconds = Int(remainingTime) % 60
-                buttonCountMessage = String(format: "%02d분 %02d초 뒤 태깅 가능", minutes, seconds)
+                buttonCountMessage = String(format: "%02d분 %02d초", minutes, seconds)
             }
         } else {
             isButtonEnabled = true
