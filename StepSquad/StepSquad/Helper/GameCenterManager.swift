@@ -17,8 +17,8 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
                 print(error?.localizedDescription ?? "")
                 return
             }
+            print("game center: authenticated user")
         }
-        print("game center: authenticated user")
     }
     
     // MARK: 기존 순위표의 점수 가져오기
@@ -64,23 +64,25 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
         } else {
             GKLeaderboard.submitScore(formerPoint + Int(point), context: 0, player: GKLocalPlayer.local,
                                       leaderboardIDs: [leaderboardID]) { error in
-                if error != nil {
-                    print("Error: \(error!.localizedDescription).")
+                guard error == nil else {
+                    print(error?.localizedDescription ?? "")
+                    return
                 }
+                print("game center: updated leaderboard")
             }
         }
-        print("game center: updated leaderboard")
     }
     
     // MARK: 특정 값으로 순위표 점수 업데이트 하기
     func submitPoint(point: Int) async {
         GKLeaderboard.submitScore(Int(point), context: 0, player: GKLocalPlayer.local,
                                   leaderboardIDs: [leaderboardID]) { error in
-            if error != nil {
-                print("Error: \(error!.localizedDescription).")
+            guard error == nil else {
+                print(error?.localizedDescription ?? "")
+                return
             }
+            print("game center: updated leaderboard")
         }
-        print("game center: updated leaderboard")
     }
         
     // MARK: 성취 달성 여부 확인 후 성취 업데이트하기
@@ -90,22 +92,24 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
             achievement.percentComplete = 100.0
             achievement.showsCompletionBanner = true
             GKAchievement.report([achievement], withCompletionHandler: {(error: Error?) in
-                if error != nil {
+                guard error == nil else {
                     print("Error: \(String(describing: error))")
+                    return
                 }
+                print("game center: \(achievement.identifier) achievement completed.")
             })
-            print("game center: \(achievement.identifier) achievement completed.")
         }
     }
     
     // MARK: 성취 리셋하기
     func resetAchievements() {
         GKAchievement.resetAchievements(completionHandler: {(error: Error?) in
-            if error != nil {
+            guard error == nil else {
                 print("Error: \(String(describing: error))")
+                return
             }
+            print("game center: reset achievements.")
         })
-        print("game center: reset achievements.")
     }
     
     
