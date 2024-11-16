@@ -238,13 +238,20 @@ class HealthKitService: ObservableObject {
                     return
                 }
                 
-                let totalFlightsClimbed = result?.sumQuantity()?.doubleValue(for: HKUnit.count()) ?? 0.0
+                var totalFlightsClimbed = result?.sumQuantity()?.doubleValue(for: HKUnit.count()) ?? 0.0
+                
+                // 데이터가 없으면 0을 반환
+                if totalFlightsClimbed == 0.0 {
+                    totalFlightsClimbed = 0.0
+                    print("이번 주 계단 데이터가 없습니다. 0을 반환합니다.")
+                }
+                
                 UserDefaults(suiteName: "group.macmac.pratice.carot")?.set(totalFlightsClimbed, forKey: "WeeklyFlightsClimbed")
-                // 이 부분에서 바로 @AppStorage의 값을 업데이트합니다.
+                // 이 부분에서 바로 @AppStorage의 값을 업데이트
                 DispatchQueue.main.async {
                     self.weeklyFlightsClimbed = totalFlightsClimbed
                 }
-                //                print("주간 계단 수 (토-금): \(totalFlightsClimbed)를 UserDefaults에 저장했습니다.")
+                print("주간 계단 수 (토-금): \(totalFlightsClimbed)를 UserDefaults에 저장했습니다.")
             }
             healthStore.execute(query)
         }
