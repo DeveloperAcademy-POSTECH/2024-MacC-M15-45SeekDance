@@ -164,11 +164,7 @@ struct MainViewPhase3: View {
                     .refreshable {
                         service.getWeeklyStairDataAndSave()
                         service.fetchAndSaveFlightsClimbedSinceAuthorization()
-                        currentStatus.updateStaircase(Int(service.TotalFlightsClimbedSinceAuthorization))
-                        saveCurrentStatus()
-                        compareCurrentLevelAndUpdate()
-                        updateLeaderboard()
-                        printAll()
+                        updateLevelsAndGameCenter()
                     }
                     .scrollIndicators(ScrollIndicatorVisibility.hidden)
                 }
@@ -179,11 +175,7 @@ struct MainViewPhase3: View {
                 if scenePhase == .active {
                     service.getWeeklyStairDataAndSave()
                     service.fetchAndSaveFlightsClimbedSinceAuthorization()
-                    currentStatus.updateStaircase(Int(service.TotalFlightsClimbedSinceAuthorization))
-                    saveCurrentStatus()
-                    compareCurrentLevelAndUpdate()
-                    updateLeaderboard()
-                    printAll()
+                    updateLevelsAndGameCenter()
                 }
             }
         }
@@ -319,16 +311,13 @@ struct MainViewPhase3: View {
             .sheet(isPresented: $isMaterialSheetPresented) {
                 MaterialsView(isMaterialSheetPresented: $isMaterialSheetPresented, isShowingNewItem: $isShowingNewItem, completedLevels: completedLevels)
             }
-        }.onAppear {
+        }
+        .onAppear {
             // MARK: 일단 임시로 onAppear 사용해서 권한 받자마자 뷰를 그릴 수 있도록 임시조치함. 단, onAppear를 사용하면 뷰에 접속 할때마다 갱신되므로 사실 상, pulltoRefreash가 의미 없어짐.
             gameCenterManager.authenticateUser()
             service.getWeeklyStairDataAndSave()
             service.fetchAndSaveFlightsClimbedSinceAuthorization()
-            currentStatus.updateStaircase(Int(service.TotalFlightsClimbedSinceAuthorization))
-            saveCurrentStatus()
-            compareCurrentLevelAndUpdate()
-            updateLeaderboard()
-            printAll()
+            updateLevelsAndGameCenter()
         }
     }
     
@@ -458,10 +447,6 @@ struct MainViewPhase3: View {
         gameCenterManager.authenticateUser()
         // MARK: 저장된 레벨 정보 불러오고 헬스킷 정보로 업데이트하기
         currentStatus = loadCurrentStatus()
-        currentStatus.updateStaircase(Int(service.TotalFlightsClimbedSinceAuthorization))
-        saveCurrentStatus()
-        compareCurrentLevelAndUpdate()
-        //    printAll()
     }
     
     // MARK: - 타이머
@@ -585,6 +570,14 @@ struct MainViewPhase3: View {
                 gameCenterManager.reportCompletedAchievement(achievementId: levels[i - 1].achievementId) // 해당 레벨의 성취 달성
             }
         }
+    }
+    
+    // MARK: 헬스킷 업데이트 주기마다 레벨 관련 변경하고, 게임센터 업데이트하는 것 모두 모은 함수
+    func updateLevelsAndGameCenter() {
+        currentStatus.updateStaircase(Int(service.TotalFlightsClimbedSinceAuthorization))
+        saveCurrentStatus()
+        compareCurrentLevelAndUpdate()
+        updateLeaderboard()
     }
     
     // MARK: 난이도 관련 진한 색 반환
