@@ -580,29 +580,7 @@ struct MainViewPhase3: View {
         compareCurrentLevelAndUpdate()
         updateLeaderboard()
     }
-    
-    // MARK: 난이도 관련 진한 색 반환
-    func getDifficultyColor(difficulty: Difficulty) -> Color {
-        switch difficulty {
-        case .easy: return .easy
-        case .normal: return .normal
-        case .hard: return .hard
-        case .expert: return .expert
-        case .impossible: return .impossible
-        }
-    }
-    
-    // MARK: 난이도 관련 연한 색 반환
-    func getDifficultyPaleColor(difficulty: Difficulty) -> Color {
-        switch difficulty {
-        case .easy: return .easyPale
-        case .normal: return .normalPale
-        case .hard: return .hardPale
-        case .expert: return .expertPale
-        case .impossible: return .impossiblePale
-        }
-    }
-    
+        
     // MARK: Level 관련 테스트 프린트문
     func printAll() {
         print("누적 층계: \(currentStatus.getTotalStaircase())")
