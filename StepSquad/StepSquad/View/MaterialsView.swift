@@ -22,7 +22,7 @@ struct MaterialsView: View {
                         if completedLevels.lastUpdatedLevel > 0 { // 획득한 약재가 있을 때
                             ForEach(1...completedLevels.lastUpdatedLevel, id: \.self) { level in
                                 HStack(spacing: 0) {
-                                    Image(levels[level - 1].itemImage) // 약재 이미지
+                                    Image(levels[level]!.itemImage) // 약재 이미지
                                         .resizable()
                                         .aspectRatio(1, contentMode: .fit)
                                         .frame(width: 42, height: 42)
@@ -30,12 +30,12 @@ struct MaterialsView: View {
                                     
                                     Text("레벨 \(level)") // 레벨 표시
                                         .font(.system(size: 12))
-                                        .foregroundStyle(getDifficultyColor(difficulty: levels[level - 1].difficulty))
+                                        .foregroundStyle(getDifficultyColor(difficulty: levels[level]!.difficulty))
                                         .padding(4)
-                                        .background(getDifficultyPaleColor(difficulty: levels[level - 1].difficulty), in: RoundedRectangle(cornerRadius: 4))
+                                        .background(getDifficultyPaleColor(difficulty: levels[level]!.difficulty), in: RoundedRectangle(cornerRadius: 4))
                                         .padding(.horizontal, 8)
 
-                                    Text(" \(levels[level - 1].item)") // 약재 이름
+                                    Text(" \(levels[level]!.item)") // 약재 이름
                                         .font(.system(size: 17))
 
                                     Spacer()

@@ -39,8 +39,8 @@ class Level: Codable {
 }
 
 // MARK: 레벨 1 ~ 19 저장, 인덱스는 레벨 -1로 활용
-let levels: [Level] = [
-    Level(
+let levels: [Int: Level] = [
+    1 : Level(
         level: 1,
         minStaircase: 0,
         maxStaircase: 4,
@@ -49,7 +49,7 @@ let levels: [Level] = [
         difficulty: .easy,
         wikiLink: "",
         achievementId: "min5"),
-    Level(
+    2: Level(
         level: 2,
         minStaircase: 5,
         maxStaircase: 9,
@@ -58,7 +58,7 @@ let levels: [Level] = [
         difficulty: .easy,
         wikiLink: "",
         achievementId: "min10"),
-    Level(
+    3: Level(
         level: 3,
         minStaircase: 10,
         maxStaircase: 14,
@@ -67,7 +67,7 @@ let levels: [Level] = [
         difficulty: .easy,
         wikiLink: "",
         achievementId: "min15"),
-    Level(
+    4: Level(
         level: 4,
         minStaircase: 15,
         maxStaircase: 29,
@@ -76,7 +76,7 @@ let levels: [Level] = [
         difficulty: .easy,
         wikiLink: "",
         achievementId: "min30"),
-    Level(
+    5: Level(
         level: 5,
         minStaircase: 30,
         maxStaircase: 59,
@@ -85,7 +85,7 @@ let levels: [Level] = [
         difficulty: .normal,
         wikiLink: "",
         achievementId: "hr1"),
-    Level(
+    6: Level(
         level: 6,
         minStaircase: 60,
         maxStaircase: 89,
@@ -94,7 +94,7 @@ let levels: [Level] = [
         difficulty: .normal,
         wikiLink: "",
         achievementId: "hr1min30"),
-    Level(
+    7: Level(
         level: 7,
         minStaircase: 90,
         maxStaircase: 119,
@@ -103,7 +103,7 @@ let levels: [Level] = [
         difficulty: .normal,
         wikiLink: "",
         achievementId: "hr2"),
-    Level(
+    8: Level(
         level: 8,
         minStaircase: 120,
         maxStaircase: 149,
@@ -112,7 +112,7 @@ let levels: [Level] = [
         difficulty: .normal,
         wikiLink: "",
         achievementId: "hr2min30"),
-    Level(
+    9: Level(
         level: 9,
         minStaircase: 150,
         maxStaircase: 179,
@@ -121,7 +121,7 @@ let levels: [Level] = [
         difficulty: .normal,
         wikiLink: "",
         achievementId: "hr3"),
-    Level(
+    10: Level(
         level: 10,
         minStaircase: 180,
         maxStaircase: 239,
@@ -130,7 +130,7 @@ let levels: [Level] = [
         difficulty: .hard,
         wikiLink: "",
         achievementId: "hr4"),
-    Level(
+    11: Level(
         level: 11,
         minStaircase: 240,
         maxStaircase: 299,
@@ -139,7 +139,7 @@ let levels: [Level] = [
         difficulty: .hard,
         wikiLink: "",
         achievementId: "hr5"),
-    Level(
+    12: Level(
         level: 12,
         minStaircase: 300,
         maxStaircase: 359,
@@ -148,7 +148,7 @@ let levels: [Level] = [
         difficulty: .hard,
         wikiLink: "",
         achievementId: "hr6"),
-    Level(
+    13: Level(
         level: 13,
         minStaircase: 360,
         maxStaircase: 479,
@@ -157,7 +157,7 @@ let levels: [Level] = [
         difficulty: .expert,
         wikiLink: "",
         achievementId: "hr8"),
-    Level(
+    14: Level(
         level: 14,
         minStaircase: 480,
         maxStaircase: 599,
@@ -166,7 +166,7 @@ let levels: [Level] = [
         difficulty: .expert,
         wikiLink: "",
         achievementId: "hr10"),
-    Level(
+    15: Level(
         level: 15,
         minStaircase: 600,
         maxStaircase: 719,
@@ -175,7 +175,7 @@ let levels: [Level] = [
         difficulty: .expert,
         wikiLink: "",
         achievementId: "hr12"),
-    Level(
+    16: Level(
         level: 16,
         minStaircase: 720,
         maxStaircase: 839,
@@ -184,7 +184,7 @@ let levels: [Level] = [
         difficulty: .expert,
         wikiLink: "",
         achievementId: "hr14"),
-    Level(
+    17: Level(
         level: 17,
         minStaircase: 840,
         maxStaircase: 959,
@@ -193,7 +193,7 @@ let levels: [Level] = [
         difficulty: .expert,
         wikiLink: "",
         achievementId: "hr16"),
-    Level(
+    18: Level(
         level: 18,
         minStaircase: 960,
         maxStaircase: 1199,
@@ -202,7 +202,7 @@ let levels: [Level] = [
         difficulty: .impossible,
         wikiLink: "",
         achievementId: "hr20"),
-    Level(
+    19: Level(
         level: 19,
         minStaircase: 1200,
         maxStaircase: 1439,

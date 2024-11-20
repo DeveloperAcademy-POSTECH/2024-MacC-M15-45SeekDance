@@ -568,7 +568,7 @@ struct MainViewPhase3: View {
             isShowingNewItem = true
             for i in (completedLevels.lastUpdatedLevel + 1)..<currentStatus.currentLevel.level { // 업데이트 되지 않은 레벨부터 현재 전의 레벨까지 업데이트
                 completedLevels.upgradeLevel(level: i, completedDate: Date.now)
-                gameCenterManager.reportCompletedAchievement(achievementId: levels[i - 1].achievementId) // 해당 레벨의 성취 달성
+                gameCenterManager.reportCompletedAchievement(achievementId: levels[i]!.achievementId) // 해당 레벨의 성취 달성
             }
         }
     }
