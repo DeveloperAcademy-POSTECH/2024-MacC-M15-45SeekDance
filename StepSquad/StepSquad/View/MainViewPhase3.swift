@@ -358,6 +358,7 @@ struct MainViewPhase3: View {
                             isResultViewPresented.toggle()
                             // MARK: - 순위표, 성취 업데이트 하기
                             gameCenterManager.reportCompletedAchievement(achievementId: serialNumber)
+                            gameCenterManager.reportCompletedAchievement(achievementId: "infiniteTime")
                             updateLeaderboard()
                         } else {
                             isShowingNFCAlert.toggle()
