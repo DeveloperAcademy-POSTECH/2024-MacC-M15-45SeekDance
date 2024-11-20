@@ -406,7 +406,7 @@ struct MainViewPhase3: View {
         }) {
             HStack(spacing: 0) {
                 VStack(alignment: .leading, spacing: 0) {
-                    Text("11/18~11/25")
+                    Text("11/23~12/1")
                         .font(.system(size: 11))
                         .foregroundStyle(Color(hex: 0x638D48))
                         .padding(.horizontal, 4)
