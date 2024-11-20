@@ -214,7 +214,12 @@ class HealthKitService: ObservableObject {
                 startOfWeek = calendar.startOfDay(for: today)
             } else {
                 // 오늘이 토요일이 아닌 경우, 지난 토요일을 시작일로 설정
-                startOfWeek = calendar.nextDate(after: today, matching: DateComponents(weekday: 7), matchingPolicy: .nextTime, direction: .backward)
+                startOfWeek = calendar.nextDate(
+                    after: today,
+                    matching: DateComponents(weekday: 7),
+                    matchingPolicy: .nextTime,
+                    direction: .backward
+                )
             }
             
             guard let startOfWeekDate = startOfWeek else {
@@ -222,10 +227,19 @@ class HealthKitService: ObservableObject {
                 return
             }
             
-            //  종료일을 다음 금요일로 설정
+            // 권한을 받은 날짜 가져오기
+            guard let authorizationDate = UserDefaults.standard.object(forKey: "HealthKitAuthorizationDate") as? Date else {
+                print("권한 허용 날짜가 설정되지 않았습니다.")
+                return
+            }
+            
+            // 권한을 받은 날짜와 주간 시작일 중 더 나중의 날짜를 사용
+            let adjustedStartDate = max(startOfWeekDate, calendar.startOfDay(for: authorizationDate))
+            
+            // 종료일을 다음 금요일로 설정
             let endOfWeekDate = calendar.date(byAdding: .day, value: 6, to: startOfWeekDate) ?? today
             
-            let predicate = HKQuery.predicateForSamples(withStart: startOfWeekDate, end: endOfWeekDate, options: [])
+            let predicate = HKQuery.predicateForSamples(withStart: adjustedStartDate, end: endOfWeekDate, options: [])
             
             // 데이터 소스 필터링을 위한 추가 조건
             let devicePredicate = HKQuery.predicateForObjects(from: [HKDevice.local()]) // 로컬 기기 데이터만 선택
@@ -246,6 +260,7 @@ class HealthKitService: ObservableObject {
                 }
                 
                 UserDefaults(suiteName: "group.macmac.pratice.carot")?.set(totalFlightsClimbed, forKey: "WeeklyFlightsClimbed")
+                
                 // 이 부분에서 바로 @AppStorage의 값을 업데이트
                 DispatchQueue.main.async {
                     self.weeklyFlightsClimbed = totalFlightsClimbed
