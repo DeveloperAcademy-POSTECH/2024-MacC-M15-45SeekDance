@@ -358,7 +358,12 @@ struct MainViewPhase3: View {
                             isResultViewPresented.toggle()
                             // MARK: - 순위표, 성취 업데이트 하기
                             gameCenterManager.reportCompletedAchievement(achievementId: serialNumber)
+                            gameCenterManager.reportCompletedAchievement(achievementId: "infiniteTime")
                             updateLeaderboard()
+                            if !completedLevels.isCompleted(level: 0) { // 불로초를 처음 획득한다면
+                                completedLevels.upgradeLevel(level: 0, completedDate: Date.now)
+                                isShowingNewItem = true
+                            }
                         } else {
                             isShowingNFCAlert.toggle()
                         }
@@ -406,7 +411,7 @@ struct MainViewPhase3: View {
         }) {
             HStack(spacing: 0) {
                 VStack(alignment: .leading, spacing: 0) {
-                    Text("11/18~11/25")
+                    Text("11/23~12/1")
                         .font(.system(size: 11))
                         .foregroundStyle(Color(hex: 0x638D48))
                         .padding(.horizontal, 4)
@@ -567,7 +572,7 @@ struct MainViewPhase3: View {
             isShowingNewItem = true
             for i in (completedLevels.lastUpdatedLevel + 1)..<currentStatus.currentLevel.level { // 업데이트 되지 않은 레벨부터 현재 전의 레벨까지 업데이트
                 completedLevels.upgradeLevel(level: i, completedDate: Date.now)
-                gameCenterManager.reportCompletedAchievement(achievementId: levels[i - 1].achievementId) // 해당 레벨의 성취 달성
+                gameCenterManager.reportCompletedAchievement(achievementId: levels[i]!.achievementId) // 해당 레벨의 성취 달성
             }
         }
     }
@@ -579,29 +584,7 @@ struct MainViewPhase3: View {
         compareCurrentLevelAndUpdate()
         updateLeaderboard()
     }
-    
-    // MARK: 난이도 관련 진한 색 반환
-    func getDifficultyColor(difficulty: Difficulty) -> Color {
-        switch difficulty {
-        case .easy: return .easy
-        case .normal: return .normal
-        case .hard: return .hard
-        case .expert: return .expert
-        case .impossible: return .impossible
-        }
-    }
-    
-    // MARK: 난이도 관련 연한 색 반환
-    func getDifficultyPaleColor(difficulty: Difficulty) -> Color {
-        switch difficulty {
-        case .easy: return .easyPale
-        case .normal: return .normalPale
-        case .hard: return .hardPale
-        case .expert: return .expertPale
-        case .impossible: return .impossiblePale
-        }
-    }
-    
+        
     // MARK: Level 관련 테스트 프린트문
     func printAll() {
         print("누적 층계: \(currentStatus.getTotalStaircase())")

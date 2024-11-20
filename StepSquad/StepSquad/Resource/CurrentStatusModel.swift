@@ -10,12 +10,12 @@ import Foundation
 class CurrentStatus: Codable {
     private var totalStaircase: Int // 누적 오른 층계
     var currentLevel: Level { // 현재 레벨
-        for level in levels {
-            if level.minStaircase <= totalStaircase && totalStaircase <= level.maxStaircase {
-                return level
+        for i in 1...19 {
+            if levels[i]!.minStaircase <= totalStaircase && totalStaircase <= levels[i]!.maxStaircase {
+                return levels[i]!
             }
         }
-        return levels.first! // 에러 발생시 레벨 1으로 설정
+        return levels[1]! // 에러 발생시 레벨 1으로 설정
     }
     var currentProgress: Int { // 현재 레벨의 현재 단계
         let gap = (currentLevel.maxStaircase + 1) - currentLevel.minStaircase

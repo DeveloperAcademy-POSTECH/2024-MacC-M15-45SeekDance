@@ -12,7 +12,7 @@ class CompletedLevels: Codable {
     private var levels: [Int: Date]
     private let savePath = URL.documentsDirectory.appending(path: "CompletedLevels")
     var lastUpdatedLevel: Int {
-        return levels.keys.max() ?? 0
+        return levels.keys.max() ?? -1
     }
     
     init() {
@@ -44,5 +44,9 @@ class CompletedLevels: Codable {
             return levels[level]?.formatted(date: .numeric, time: .omitted) ?? "Error: 달성하지 않은 레벨"
         }
         return "Error: 달성하지 않은 레벨"
+    }
+    
+    func isCompleted(level: Int) -> Bool {
+        return levels.keys.contains(level)
     }
 }
