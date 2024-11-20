@@ -247,7 +247,7 @@ struct MainViewPhase3: View {
                                 .scaledToFit()
                                 .frame(width: 48, height: 60)
                             
-                            Image(currentStatus.currentLevel.itemImage)
+                            Image(currentStatus.currentLevel.itemImage+"_TextImage")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 23, height: 23)

@@ -12,7 +12,7 @@ class CompletedLevels: Codable {
     private var levels: [Int: Date]
     private let savePath = URL.documentsDirectory.appending(path: "CompletedLevels")
     var lastUpdatedLevel: Int {
-        return levels.keys.max() ?? -1
+        return levels.keys.max() ?? 0
     }
     
     init() {
