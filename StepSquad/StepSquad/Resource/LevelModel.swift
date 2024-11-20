@@ -13,6 +13,7 @@ enum Difficulty: String, Codable {
     case hard = "Hard"
     case expert = "Expert"
     case impossible = "Impossible"
+    case nfc = "NFC"
 }
 
 class Level: Codable {
@@ -40,6 +41,15 @@ class Level: Codable {
 
 // MARK: 레벨 1 ~ 19 저장, 인덱스는 레벨 -1로 활용
 let levels: [Int: Level] = [
+    0: Level(
+        level: 0,
+        minStaircase: -1,
+        maxStaircase: -1,
+        item: "불로초",
+        itemImage: "Bullocho",
+        difficulty: .nfc,
+        wikiLink: "",
+        achievementId: "infiniteTime"),
     1 : Level(
         level: 1,
         minStaircase: 0,

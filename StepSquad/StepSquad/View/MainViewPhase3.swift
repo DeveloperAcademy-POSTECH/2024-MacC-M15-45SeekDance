@@ -360,6 +360,10 @@ struct MainViewPhase3: View {
                             gameCenterManager.reportCompletedAchievement(achievementId: serialNumber)
                             gameCenterManager.reportCompletedAchievement(achievementId: "infiniteTime")
                             updateLeaderboard()
+                            if !completedLevels.isCompleted(level: 0) { // 불로초를 처음 획득한다면
+                                completedLevels.upgradeLevel(level: 0, completedDate: Date.now)
+                                isShowingNewItem = true
+                            }
                         } else {
                             isShowingNFCAlert.toggle()
                         }
