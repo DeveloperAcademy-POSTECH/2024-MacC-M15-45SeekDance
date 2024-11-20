@@ -45,6 +45,15 @@ struct ExplainView: View {
                                                        bottom: 24,
                                                        trailing: 8))
                         })
+                        
+                        DisclosureGroup("나의 순위는 어떻게 결정되나요?", content: {
+                            VStack(spacing: 0) {
+                                Text("• 나의 순위 (칸) = 헬스킷의 권한을 허용한 이후부터 오른 층계(Flights Climbed) x 16 + NFC 태깅으로 얻은 특별 점수\n• 태깅할 수 있는 NFC는 총 세 개로 포스텍 78계단의 가운데, C5 1-5층 계단의 사이에, 5-6층 계단 사이 난간에 부착되어 있습니다.")
+                            }.listRowInsets(EdgeInsets(top: 11,
+                                                       leading: 8,
+                                                       bottom: 24,
+                                                       trailing: 8))
+                        })
                     }
                     .scrollContentBackground(.hidden)
                     .background(.clear)
