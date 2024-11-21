@@ -18,7 +18,7 @@ struct NotificationView: View {
             .background(Color.green)
             .foregroundColor(.white)
             .cornerRadius(10)
-
+            
             // 특정 시간 노티 설정 버튼
             Button("특정 시간에 노티피케이션 설정") {
                 NotificationManager.instance.scheduleNotification()
@@ -27,7 +27,7 @@ struct NotificationView: View {
             .background(Color.blue)
             .foregroundColor(.white)
             .cornerRadius(10)
-
+            
             // 노티피케이션 취소 버튼
             Button("노티피케이션 취소하기") {
                 NotificationManager.instance.cancelNotification()

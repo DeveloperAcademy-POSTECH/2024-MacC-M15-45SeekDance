@@ -73,16 +73,16 @@ import SwiftUI
 import UserNotifications
 
 class NotificationManager {
-
+    
     static let instance = NotificationManager() // 인스턴스 생성
-
+    
     // MARK: - 사용자에게 노티피케이션 권한 요청
     func requestAuthorization() {
-
+        
         // 노티피케이션 옵션들
         // To request provisional authorization, add the provisional option when requesting permission to send notifications.
         let option: UNAuthorizationOptions = [.alert, .sound, .badge, .provisional]
-
+        
         // UserNotification 접근
         UNUserNotificationCenter.current().requestAuthorization(options: option) { (success, error) in
             if let error = error {
@@ -92,17 +92,17 @@ class NotificationManager {
             }
         }
     }
-
+    
     // MARK: - 특정 시간에 노티를 주는 함수
     func scheduleNotification() {
-
+        
         // notification 내용 설정
         let content = UNMutableNotificationContent()
         content.title = "78계단"
         content.subtitle = "앱 알람 테스트 중 입니다"
         content.sound = .default
-
-
+        
+        
         // 배지 값 증가 설정
         //          UNUserNotificationCenter.current().getNotificationSettings { settings in
         //              if settings.authorizationStatus == .authorized {
@@ -118,54 +118,54 @@ class NotificationManager {
         //
         content.badge = NSNumber(value: UIApplication.shared.applicationIconBadgeNumber + 1)
         //        content.badge = 1
-
+        
         // MARK: - 시간 기준 : Interval - 몇 초 뒤에 울릴것인지 딜레이 설정 repeats 반복 여부 설정 (최소 1분이여지 반복이 돔)
         let timeTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 60.0, repeats: false)
-
-
+        
+        
         // MARK: - 특정 시간에 노티를 주는 함수, 날짜 기준 : DateMating 은 DateComponent 기준맞는 알림
         var dateComponents = DateComponents()
         dateComponents.hour = 2 // hour 를 24시간 기준
         dateComponents.minute = 00
         dateComponents.weekday = 2 // 1은 일요일이 되고, 6은 금요일이 됨
-
+        
         let calendarTigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-
-
+        
+        
         // 설정한 값을 NotificationCenter 에 요청하기
         let request = UNNotificationRequest(
             identifier: UUID().uuidString, // 각각의 request ID 값 String 을 uuid 값으로 설정
             content: content,
             trigger: timeTrigger)
         UNUserNotificationCenter.current().add(request)
-
+        
         print("노티 설정 완료")
     }
-
+    
     // MARK: - 생성된 Notification Cancel 하는 함수
     func cancelNotification() {
-
+        
         // peding notification 은 tigger 상에서 만족된 조건이 되어도 더이상 notification 되지 않게 하기
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         print("노티 취소.")
-
+        
         // 아이폰 상태바를 내렸을때 남아있는 notification 없애기
         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
         print("노티 취소.")
     }
-
-
+    
+    
 }
 
 
 // MARK: - 예시 뷰
 struct LocalNotificationInter: View {
-
+    
     @Environment(\.scenePhase) var scenePhase
-
+    
     var body: some View {
         VStack (spacing: 40) {
-
+            
             // MARK: - 사용자에게 노티피케이션 권한 요청
             Button {
                 NotificationManager.instance.requestAuthorization()
@@ -178,7 +178,7 @@ struct LocalNotificationInter: View {
                     .background(Color.green)
                     .cornerRadius(10)
             }
-
+            
             // MARK: - 특정 시간에 노티를 주는 함수(구간 반복)
             Button {
                 NotificationManager.instance.scheduleNotification()
@@ -191,7 +191,7 @@ struct LocalNotificationInter: View {
                     .background(Color.green)
                     .cornerRadius(10)
             }
-
+            
             // MARK: - 특정 시간에 노티를 주는 함수
             Button {
                 NotificationManager.instance.scheduleNotification()
@@ -204,7 +204,7 @@ struct LocalNotificationInter: View {
                     .background(Color.green)
                     .cornerRadius(10)
             }
-
+            
             // MARK: - 노티 취소 함수
             Button {
                 NotificationManager.instance.cancelNotification()
@@ -217,18 +217,18 @@ struct LocalNotificationInter: View {
                     .background(Color.green)
                     .cornerRadius(10)
             }
-
+            
         } //: VSTACK
         // schne 이 나타 날때 Badge 0 으로 초기화 하기
         // Badge 초기화
-
-                .onChange(of: scenePhase) { newValue in
-                    if newValue == .active {
-                        UIApplication.shared.applicationIconBadgeNumber = 0
-                    }
-                }
+        
+        .onChange(of: scenePhase) { newValue in
+            if newValue == .active {
+                UIApplication.shared.applicationIconBadgeNumber = 0
             }
         }
+    }
+}
 
 //        .onChange(of: scenePhase) { _, _ in
 //            if scenePhase == .active {
