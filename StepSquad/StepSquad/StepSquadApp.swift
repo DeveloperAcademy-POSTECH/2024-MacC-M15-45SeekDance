@@ -10,10 +10,9 @@ import SwiftData
 
 @main
 struct StepSquadApp: App {
-    
     // Healthkit 인증 코드가 있는 객체를 선언
     let service = HealthKitService()
-    
+
     var stairStepContainer: ModelContainer = {
         let schema = Schema([StairStepModel.self])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
@@ -28,6 +27,9 @@ struct StepSquadApp: App {
     var body: some Scene {
         WindowGroup {
             MainViewPhase3()
+                .onOpenURL { url in
+                    print("App opened via URL Scheme: \(url.absoluteString)")
+                }
         }
         .modelContainer(stairStepContainer)
     }
@@ -40,6 +42,7 @@ struct StepSquadApp: App {
         service.fetchAndSaveFlightsClimbedSinceAuthorization()
         
     }
+
     func setup() {
         service.configure()
     }
