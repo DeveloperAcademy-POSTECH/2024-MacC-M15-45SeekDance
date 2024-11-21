@@ -33,11 +33,11 @@ struct StepSquadApp: App {
     }
     // MARK: - HealthKit 사용 권한을 요청하는 메서드
     init() {
-//        setup()
+        //        setup()
         
         // MARK: - 앱 진입 시, 바로 실행
-//        service.getWeeklyStairDataAndSave()
-//        service.fetchAndSaveFlightsClimbedSinceAuthorization()
+        //        service.getWeeklyStairDataAndSave()
+        //        service.fetchAndSaveFlightsClimbedSinceAuthorization()
         
     }
     func setup() {
