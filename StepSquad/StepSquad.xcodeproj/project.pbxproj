@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		51C83F072CEF4B7C008E38E7 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C83F062CEF4B7C008E38E7 /* NotificationManager.swift */; };
+		51C83F092CEF4C95008E38E7 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C83F082CEF4C95008E38E7 /* NotificationView.swift */; };
 		BDD934652CDCB12300859EA4 /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDD934642CDCB12300859EA4 /* Messages.framework */; };
 		BDD934712CDCB12400859EA4 /* StepSquadStickers.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = BDD934632CDCB12300859EA4 /* StepSquadStickers.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -37,6 +39,11 @@
 
 /* Begin PBXFileReference section */
 		1B997D832CD1B5F700F7CDC5 /* StepSquad.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StepSquad.entitlements; sourceTree = "<group>"; };
+		51C83EB22CED7437008E38E7 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		51C83EB42CED7437008E38E7 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		51C83EC92CED7444008E38E7 /* StepSquadWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StepSquadWidgetExtension.entitlements; sourceTree = "<group>"; };
+		51C83F062CEF4B7C008E38E7 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		51C83F082CEF4C95008E38E7 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		BDD309C22CBA62C3003EDC28 /* StepSquad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StepSquad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDD934632CDCB12300859EA4 /* StepSquadStickers.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = StepSquadStickers.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDD934642CDCB12300859EA4 /* Messages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Messages.framework; path = System/Library/Frameworks/Messages.framework; sourceTree = SDKROOT; };
@@ -54,6 +61,11 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		51C83EB62CED7437008E38E7 /* StepSquadWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = StepSquadWidget;
+			sourceTree = "<group>";
+		};
 		BDD309C42CBA62C3003EDC28 /* StepSquad */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = StepSquad;
@@ -91,10 +103,14 @@
 		BDD309B92CBA62C3003EDC28 = {
 			isa = PBXGroup;
 			children = (
+				51C83F062CEF4B7C008E38E7 /* NotificationManager.swift */,
+				51C83F082CEF4C95008E38E7 /* NotificationView.swift */,
+				51C83EC92CED7444008E38E7 /* StepSquadWidgetExtension.entitlements */,
 				BDECE49C2CD35A8700AD6229 /* StepSquad-Info.plist */,
 				1B997D832CD1B5F700F7CDC5 /* StepSquad.entitlements */,
 				BDD309C42CBA62C3003EDC28 /* StepSquad */,
 				BDD934662CDCB12300859EA4 /* StepSquadStickers */,
+				51C83EB62CED7437008E38E7 /* StepSquadWidget */,
 				BDD30A092CBA6387003EDC28 /* Frameworks */,
 				BDD309C32CBA62C3003EDC28 /* Products */,
 			);
@@ -113,6 +129,8 @@
 			isa = PBXGroup;
 			children = (
 				BDD934642CDCB12300859EA4 /* Messages.framework */,
+				51C83EB22CED7437008E38E7 /* WidgetKit.framework */,
+				51C83EB42CED7437008E38E7 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -173,8 +191,8 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1600;
-				LastUpgradeCheck = 1600;
+				LastSwiftUpdateCheck = 1610;
+				LastUpgradeCheck = 1610;
 				TargetAttributes = {
 					BDD309C12CBA62C3003EDC28 = {
 						CreatedOnToolsVersion = 16.0;
@@ -227,6 +245,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51C83F072CEF4B7C008E38E7 /* NotificationManager.swift in Sources */,
+				51C83F092CEF4C95008E38E7 /* NotificationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,6 +273,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -316,6 +337,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -402,7 +424,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = kr.45SeekDance.2024;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = stapSquadApp;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = stepSquadApp;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -448,7 +470,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = kr.45SeekDance.2024;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = stapSquadApp;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = stepSquadApp;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
