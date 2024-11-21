@@ -36,8 +36,8 @@ struct StepSquadApp: App {
 //        setup()
         
         // MARK: - 앱 진입 시, 바로 실행
-        service.getWeeklyStairDataAndSave()
-        service.fetchAndSaveFlightsClimbedSinceAuthorization()
+//        service.getWeeklyStairDataAndSave()
+//        service.fetchAndSaveFlightsClimbedSinceAuthorization()
         
     }
     func setup() {

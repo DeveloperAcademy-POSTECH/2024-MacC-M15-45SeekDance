@@ -259,7 +259,13 @@ class HealthKitService: ObservableObject {
                     print("이번 주 계단 데이터가 없습니다. 0을 반환합니다.")
                 }
                 
-                UserDefaults(suiteName: "group.macmac.pratice.carot")?.set(totalFlightsClimbed, forKey: "WeeklyFlightsClimbed")
+//                UserDefaults(suiteName: "group.macmac.pratice.carot")?.set(totalFlightsClimbed, forKey: "WeeklyFlightsClimbed")
+//                 // App Group에 저장
+                let sharedDefaults = UserDefaults(suiteName: "group.macmac.pratice.carot")
+                sharedDefaults?.set(totalFlightsClimbed, forKey: "WeeklyFlightsClimbed")
+                
+                // 위젯 강제 업데이트
+                            WidgetCenter.shared.reloadAllTimelines()
                 
                 // 이 부분에서 바로 @AppStorage의 값을 업데이트
                 DispatchQueue.main.async {
