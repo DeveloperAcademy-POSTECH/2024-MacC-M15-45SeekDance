@@ -69,6 +69,10 @@ struct MainViewPhase3: View {
                     
                     ScrollView {
                         VStack(spacing: 0) {
+                            Button("Test") {
+                                gameCenterManager.addFriends()
+                            }
+                            .buttonStyle(.borderedProminent)
                             VStack {
                                 if isHealthKitAuthorized {
                                     LevelUpView

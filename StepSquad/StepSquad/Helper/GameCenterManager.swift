@@ -112,6 +112,23 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
         })
     }
     
+    // MARK: 친구 추가하기
+    func addFriends() {
+        let viewController = GKGameCenterViewController(state: .localPlayerFriendsList)
+        viewController.gameCenterDelegate = self
+        
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+            if let window = windowScene.windows.first {
+                window.rootViewController?.present(viewController, animated: true, completion: nil)
+                do {
+                    try GKLocalPlayer.local.presentFriendRequestCreator(from: window.rootViewController!)
+                    print("친구 추가")
+                } catch {
+                    print("Error: \(error.localizedDescription).")
+                }
+            }
+        }
+    }
     
     // MARK: 순위표 보기
     func showLeaderboard() {
