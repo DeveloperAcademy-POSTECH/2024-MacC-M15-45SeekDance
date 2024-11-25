@@ -41,7 +41,7 @@ struct MainViewPhase3: View {
         }
     }
     @State private var completedLevels = CompletedLevels()
-    @State private var isShowingNewItem = false
+    @AppStorage("isShowingNewItem") private var isShowingNewItem = false
     
     var body: some View {
         if isLaunching {
