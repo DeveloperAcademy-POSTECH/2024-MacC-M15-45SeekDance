@@ -9,6 +9,7 @@ import GameKit
 
 class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObject {
     let leaderboardID: String = "leaderboardPhase2"
+    private var isGameCenterLoggedIn: Bool = false
     
     // MARK: 게임 센터 계정 인증하기
     func authenticateUser() {
@@ -17,6 +18,7 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
                 print(error?.localizedDescription ?? "")
                 return
             }
+            self.isGameCenterLoggedIn = true
             print("game center: authenticated user")
         }
     }
@@ -46,6 +48,10 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
     
     // MARK: 리더보드에서 모든 사용자의 entry 읽기
     func loadAllPoint() async {
+        guard isGameCenterLoggedIn else {
+            print("Error: user is not logged in to Game Center.")
+            return
+        }
         let leaderboards = try? await GKLeaderboard.loadLeaderboards(IDs: [leaderboardID])
         guard let leaderboard = leaderboards?.first else { return }
         let entries = try? await leaderboard.loadEntries(for: GKLeaderboard.PlayerScope.global,
@@ -58,6 +64,10 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
     
     // MARK: 순위표 점수를 이전 점수에 더해 업데이트 하기
     func submitPointWithFormerPoint(point: Int) async {
+        guard isGameCenterLoggedIn else {
+            print("Error: user is not logged in to Game Center.")
+            return
+        }
         let formerPoint = await loadFormerPoint()
         if formerPoint == -1 {
             return
@@ -75,6 +85,10 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
     
     // MARK: 특정 값으로 순위표 점수 업데이트 하기
     func submitPoint(point: Int) async {
+        guard isGameCenterLoggedIn else {
+            print("Error: user is not logged in to Game Center.")
+            return
+        }
         GKLeaderboard.submitScore(Int(point), context: 0, player: GKLocalPlayer.local,
                                   leaderboardIDs: [leaderboardID]) { error in
             guard error == nil else {
@@ -87,6 +101,10 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
         
     // MARK: 성취 달성 여부 확인 후 성취 업데이트하기
     func reportCompletedAchievement(achievementId: String) {
+        guard isGameCenterLoggedIn else {
+            print("Error: user is not logged in to Game Center.")
+            return
+        }
         let achievement = GKAchievement(identifier: achievementId)
         if !achievement.isCompleted {
             achievement.percentComplete = 100.0
@@ -103,6 +121,10 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
     
     // MARK: 성취 리셋하기
     func resetAchievements() {
+        guard isGameCenterLoggedIn else {
+            print("Error: user is not logged in to Game Center.")
+            return
+        }
         GKAchievement.resetAchievements(completionHandler: {(error: Error?) in
             guard error == nil else {
                 print("Error: \(String(describing: error))")
