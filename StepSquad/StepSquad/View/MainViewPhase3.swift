@@ -33,7 +33,6 @@ struct MainViewPhase3: View {
     @AppStorage("HealthKitAuthorized") private var isHealthKitAuthorized = false
     
     let gameCenterManager = GameCenterManager()
-    @State private var userProfileImage = Image("ResultIMG")
     
     var currentStatus: CurrentStatus = CurrentStatus() {
         didSet {
@@ -68,10 +67,6 @@ struct MainViewPhase3: View {
                     
                     
                     ScrollView {
-                        userProfileImage
-                            .resizable()
-                            .clipShape(.circle)
-                            .frame(width: 100, height: 100)
                         VStack(spacing: 0) {
                             VStack {
                                 if isHealthKitAuthorized {
@@ -174,11 +169,6 @@ struct MainViewPhase3: View {
                         updateLevelsAndGameCenter()
                     }
                     .scrollIndicators(ScrollIndicatorVisibility.hidden)
-                    .onAppear {
-                        Task {
-                            userProfileImage = await gameCenterManager.loadLocalPlayerImage() ?? Image("ResultIMG")
-                        }
-                    }
                 }
             }
             .ignoresSafeArea()

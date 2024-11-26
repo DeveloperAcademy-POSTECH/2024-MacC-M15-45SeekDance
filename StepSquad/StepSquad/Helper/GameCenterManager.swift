@@ -24,7 +24,7 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
         }
     }
     
-    // MARK: 사용자의 game center 프로필 이미지 가져와 localPlayerImage에 저장하기
+    // MARK: 사용자의 game center 프로필 이미지 가져오기
     func loadLocalPlayerImage() async -> Image? {
         guard isGameCenterLoggedIn else {
             print("Error: user is not logged in to Game Center.")
