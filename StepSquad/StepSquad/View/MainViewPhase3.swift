@@ -33,7 +33,7 @@ struct MainViewPhase3: View {
     @AppStorage("HealthKitAuthorized") private var isHealthKitAuthorized = false
     
     let gameCenterManager = GameCenterManager()
-    
+    @State private var userProfileImage = Image("ResultIMG")
     
     var currentStatus: CurrentStatus = CurrentStatus() {
         didSet {
@@ -68,7 +68,7 @@ struct MainViewPhase3: View {
                     
                     
                     ScrollView {
-                        gameCenterManager.localPlayerImage
+                        userProfileImage
                             .resizable()
                             .clipShape(.circle)
                             .frame(width: 100, height: 100)
@@ -176,7 +176,7 @@ struct MainViewPhase3: View {
                     .scrollIndicators(ScrollIndicatorVisibility.hidden)
                     .onAppear {
                         Task {
-                            await gameCenterManager.loadLocalPlayerImage()
+                            userProfileImage = await gameCenterManager.loadLocalPlayerImage() ?? Image("ResultIMG")
                         }
                     }
                 }

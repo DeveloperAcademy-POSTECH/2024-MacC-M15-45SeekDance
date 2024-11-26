@@ -11,7 +11,6 @@ import SwiftUI
 class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObject {
     private let leaderboardID: String = "leaderboardPhase2"
     private var isGameCenterLoggedIn: Bool = false
-    var localPlayerImage: Image = Image("ResultIMG") // TODO: - 기본 이미지 변경
     
     // MARK: 게임 센터 계정 인증하기
     func authenticateUser() {
@@ -26,15 +25,15 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
     }
     
     // MARK: 사용자의 game center 프로필 이미지 가져와 localPlayerImage에 저장하기
-    func loadLocalPlayerImage() async {
+    func loadLocalPlayerImage() async -> Image? {
         guard isGameCenterLoggedIn else {
             print("Error: user is not logged in to Game Center.")
-            return
+            return nil
         }
         if let loadedImage = try? await GKLocalPlayer.local.loadPhoto(for: .normal) {
-            self.localPlayerImage = Image(uiImage: loadedImage)
-            return
+            return Image(uiImage: loadedImage)
         }
+        return nil
     }
     
     // MARK: 기존 순위표의 점수 가져오기
