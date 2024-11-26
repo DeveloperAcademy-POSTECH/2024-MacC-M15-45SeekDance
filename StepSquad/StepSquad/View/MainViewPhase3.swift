@@ -355,11 +355,10 @@ struct MainViewPhase3: View {
                         
                         if nfcCount != 0 {
                             context.insert(StairStepModel(stairType: message, stairStepDate: Date(), stairNum: nfcCount))
-                            saveGariStairsToUserDefaults()
                             do {
                                 try context.save()
                             } catch {
-                                print("Data error")
+                                print("SwiftData error")
                             }
                             isResultViewPresented.toggle()
                             // MARK: - 순위표, 성취 업데이트 하기
@@ -516,14 +515,6 @@ struct MainViewPhase3: View {
         return stairSteps.filter { stairStep in
             stairStep.stairStepDate >= startOfMonth && stairStep.stairStepDate < startOfNextMonth
         }.count
-    }
-    
-    // MARK: - UserDefaults에 데이터를 저장하는 함수
-    func saveGariStairsToUserDefaults() {
-        if let data = try? JSONEncoder().encode(gariStairs) {
-            let defaults = UserDefaults(suiteName: "group.com.stepSquad")
-            defaults?.set(data, forKey: "gariStairs")
-        }
     }
     
     // MARK: - NFC 주간 점수 계산
