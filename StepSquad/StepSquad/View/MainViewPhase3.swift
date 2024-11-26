@@ -51,6 +51,7 @@ struct MainViewPhase3: View {
                         isLaunching = false
                     }
                 }
+            
         } else {
             ZStack() {
                 Color.backgroundColor

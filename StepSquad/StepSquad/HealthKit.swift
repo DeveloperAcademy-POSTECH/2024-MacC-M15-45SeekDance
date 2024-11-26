@@ -7,7 +7,6 @@
 
 import HealthKit
 import WidgetKit
-import Foundation
 import SwiftUI
 
 
@@ -72,18 +71,23 @@ class HealthKitService: ObservableObject {
     // 권한 허용 날짜를 UserDefaults에 저장하는 함수
     private func storeAuthorizationDate() {
         let authorizationDateKey = "HealthKitAuthorizationDate"
-        
+
+        let sharedDefaults = UserDefaults(suiteName: "group.com.stepSquad.widget")
+
         // UserDefaults에 날짜가 저장되어 있는지 확인
         if UserDefaults.standard.object(forKey: authorizationDateKey) == nil {
             let currentDate = Date()
             
             // 권한 허용 날짜 저장
             UserDefaults.standard.set(currentDate, forKey: authorizationDateKey)
+            sharedDefaults?.set(currentDate, forKey: authorizationDateKey)
+
             print("HealthKit 권한 허용 날짜를 \(currentDate)로 저장했습니다.")
         } else {
             // 이미 날짜가 저장된 경우, 기존 날짜를 사용
             if let savedDate = UserDefaults.standard.object(forKey: authorizationDateKey) as? Date {
-                //                print("이전에 저장된 HealthKit 권한 허용 날짜: \(savedDate)")
+                print("이전에 저장된 HealthKit 권한 허용 날짜: \(savedDate)")
+                sharedDefaults?.set(savedDate, forKey: authorizationDateKey)
             }
         }
     }
@@ -271,4 +275,3 @@ class HealthKitService: ObservableObject {
         }
     }
 }
-

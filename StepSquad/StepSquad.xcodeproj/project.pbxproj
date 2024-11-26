@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		BDD934652CDCB12300859EA4 /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDD934642CDCB12300859EA4 /* Messages.framework */; };
 		BDD934712CDCB12400859EA4 /* StepSquadStickers.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = BDD934632CDCB12300859EA4 /* StepSquadStickers.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		BDEA6A932CF4663500E135BC /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDEA6A7B2CF465DB00E135BC /* WidgetKit.framework */; };
+		BDEA6A942CF4663500E135BC /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDEA6A7D2CF465DB00E135BC /* SwiftUI.framework */; };
+		BDEA6A9F2CF4663600E135BC /* StepSquadWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = BDEA6A922CF4663500E135BC /* StepSquadWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -18,6 +21,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = BDD934622CDCB12300859EA4;
 			remoteInfo = StepSquadStickers;
+		};
+		BDEA6A9D2CF4663600E135BC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BDD309BA2CBA62C3003EDC28 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BDEA6A912CF4663500E135BC;
+			remoteInfo = StepSquadWidgetExtension;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -29,6 +39,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				BDD934712CDCB12400859EA4 /* StepSquadStickers.appex in Embed Foundation Extensions */,
+				BDEA6A9F2CF4663600E135BC /* StepSquadWidgetExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -40,6 +51,10 @@
 		BDD309C22CBA62C3003EDC28 /* StepSquad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StepSquad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDD934632CDCB12300859EA4 /* StepSquadStickers.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = StepSquadStickers.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDD934642CDCB12300859EA4 /* Messages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Messages.framework; path = System/Library/Frameworks/Messages.framework; sourceTree = SDKROOT; };
+		BDEA6A7B2CF465DB00E135BC /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		BDEA6A7D2CF465DB00E135BC /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		BDEA6A922CF4663500E135BC /* StepSquadWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = StepSquadWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		BDEA6AF12CF4979400E135BC /* StepSquadWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StepSquadWidgetExtension.entitlements; sourceTree = "<group>"; };
 		BDECE49C2CD35A8700AD6229 /* StepSquad-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "StepSquad-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -50,6 +65,13 @@
 				Info.plist,
 			);
 			target = BDD934622CDCB12300859EA4 /* StepSquadStickers */;
+		};
+		BDEA6AA02CF4663600E135BC /* Exceptions for "StepSquadWidget" folder in "StepSquadWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = BDEA6A912CF4663500E135BC /* StepSquadWidgetExtension */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -65,6 +87,14 @@
 				BDD934742CDCB12400859EA4 /* Exceptions for "StepSquadStickers" folder in "StepSquadStickers" target */,
 			);
 			path = StepSquadStickers;
+			sourceTree = "<group>";
+		};
+		BDEA6A952CF4663500E135BC /* StepSquadWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				BDEA6AA02CF4663600E135BC /* Exceptions for "StepSquadWidget" folder in "StepSquadWidgetExtension" target */,
+			);
+			path = StepSquadWidget;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -85,16 +115,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BDEA6A8F2CF4663500E135BC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BDEA6A942CF4663500E135BC /* SwiftUI.framework in Frameworks */,
+				BDEA6A932CF4663500E135BC /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		BDD309B92CBA62C3003EDC28 = {
 			isa = PBXGroup;
 			children = (
+				BDEA6AF12CF4979400E135BC /* StepSquadWidgetExtension.entitlements */,
 				BDECE49C2CD35A8700AD6229 /* StepSquad-Info.plist */,
 				1B997D832CD1B5F700F7CDC5 /* StepSquad.entitlements */,
 				BDD309C42CBA62C3003EDC28 /* StepSquad */,
 				BDD934662CDCB12300859EA4 /* StepSquadStickers */,
+				BDEA6A952CF4663500E135BC /* StepSquadWidget */,
 				BDD30A092CBA6387003EDC28 /* Frameworks */,
 				BDD309C32CBA62C3003EDC28 /* Products */,
 			);
@@ -105,6 +146,7 @@
 			children = (
 				BDD309C22CBA62C3003EDC28 /* StepSquad.app */,
 				BDD934632CDCB12300859EA4 /* StepSquadStickers.appex */,
+				BDEA6A922CF4663500E135BC /* StepSquadWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -113,6 +155,8 @@
 			isa = PBXGroup;
 			children = (
 				BDD934642CDCB12300859EA4 /* Messages.framework */,
+				BDEA6A7B2CF465DB00E135BC /* WidgetKit.framework */,
+				BDEA6A7D2CF465DB00E135BC /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -133,6 +177,7 @@
 			);
 			dependencies = (
 				BDD934702CDCB12400859EA4 /* PBXTargetDependency */,
+				BDEA6A9E2CF4663600E135BC /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				BDD309C42CBA62C3003EDC28 /* StepSquad */,
@@ -166,6 +211,28 @@
 			productReference = BDD934632CDCB12300859EA4 /* StepSquadStickers.appex */;
 			productType = "com.apple.product-type.app-extension.messages";
 		};
+		BDEA6A912CF4663500E135BC /* StepSquadWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BDEA6AA12CF4663600E135BC /* Build configuration list for PBXNativeTarget "StepSquadWidgetExtension" */;
+			buildPhases = (
+				BDEA6A8E2CF4663500E135BC /* Sources */,
+				BDEA6A8F2CF4663500E135BC /* Frameworks */,
+				BDEA6A902CF4663500E135BC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				BDEA6A952CF4663500E135BC /* StepSquadWidget */,
+			);
+			name = StepSquadWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = StepSquadWidgetExtension;
+			productReference = BDEA6A922CF4663500E135BC /* StepSquadWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -180,6 +247,9 @@
 						CreatedOnToolsVersion = 16.0;
 					};
 					BDD934622CDCB12300859EA4 = {
+						CreatedOnToolsVersion = 16.0;
+					};
+					BDEA6A912CF4663500E135BC = {
 						CreatedOnToolsVersion = 16.0;
 					};
 				};
@@ -201,6 +271,7 @@
 			targets = (
 				BDD309C12CBA62C3003EDC28 /* StepSquad */,
 				BDD934622CDCB12300859EA4 /* StepSquadStickers */,
+				BDEA6A912CF4663500E135BC /* StepSquadWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -214,6 +285,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		BDD934612CDCB12300859EA4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BDEA6A902CF4663500E135BC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -237,6 +315,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BDEA6A8E2CF4663500E135BC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -244,6 +329,11 @@
 			isa = PBXTargetDependency;
 			target = BDD934622CDCB12300859EA4 /* StepSquadStickers */;
 			targetProxy = BDD9346F2CDCB12400859EA4 /* PBXContainerItemProxy */;
+		};
+		BDEA6A9E2CF4663600E135BC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BDEA6A912CF4663500E135BC /* StepSquadWidgetExtension */;
+			targetProxy = BDEA6A9D2CF4663600E135BC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -374,12 +464,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = StepSquad.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2.0.2;
 				DEVELOPMENT_ASSET_PATHS = "\"StepSquad/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = AZ7B294WMJ;
+				DEVELOPMENT_TEAM = AZ7B294WMJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "StepSquad-Info.plist";
@@ -402,7 +490,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = kr.45SeekDance.2024;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = stepSquadApp;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -420,12 +507,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = StepSquad.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2.0.2;
 				DEVELOPMENT_ASSET_PATHS = "\"StepSquad/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = AZ7B294WMJ;
+				DEVELOPMENT_TEAM = AZ7B294WMJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "StepSquad-Info.plist";
@@ -448,7 +533,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = kr.45SeekDance.2024;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = stepSquadApp;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -465,11 +549,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
 				CODE_SIGN_ENTITLEMENTS = StepSquadStickers/StepSquadStickers.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2.0.2;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = AZ7B294WMJ;
+				DEVELOPMENT_TEAM = AZ7B294WMJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = StepSquadStickers/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = StepSquadStickers;
@@ -484,7 +566,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = kr.45SeekDance.2024.StepSquadStickers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = imessageStickerExtension;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -502,11 +583,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
 				CODE_SIGN_ENTITLEMENTS = StepSquadStickers/StepSquadStickers.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2.0.2;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = AZ7B294WMJ;
+				DEVELOPMENT_TEAM = AZ7B294WMJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = StepSquadStickers/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = StepSquadStickers;
@@ -521,7 +600,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = kr.45SeekDance.2024.StepSquadStickers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = imessageStickerExtension;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -530,6 +608,68 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		BDEA6AA22CF4663600E135BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = StepSquadWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = AZ7B294WMJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StepSquadWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = StepSquadWidget;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "앱에서 사용자의 건강 데이터를 표시하기 위해 사용됩니다.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.45SeekDance.2024.StepSquadWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BDEA6AA32CF4663600E135BC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = StepSquadWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = AZ7B294WMJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StepSquadWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = StepSquadWidget;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "앱에서 사용자의 건강 데이터를 표시하기 위해 사용됩니다.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.45SeekDance.2024.StepSquadWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -559,6 +699,15 @@
 			buildConfigurations = (
 				BDD934722CDCB12400859EA4 /* Debug */,
 				BDD934732CDCB12400859EA4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BDEA6AA12CF4663600E135BC /* Build configuration list for PBXNativeTarget "StepSquadWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BDEA6AA22CF4663600E135BC /* Debug */,
+				BDEA6AA32CF4663600E135BC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
