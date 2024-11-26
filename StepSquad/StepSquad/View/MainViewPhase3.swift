@@ -323,6 +323,7 @@ struct MainViewPhase3: View {
             gameCenterManager.authenticateUser()
             service.getWeeklyStairDataAndSave()
             service.fetchAndSaveFlightsClimbedSinceAuthorization()
+            updateLeaderboard()
             updateLevelsAndGameCenter()
         }
     }

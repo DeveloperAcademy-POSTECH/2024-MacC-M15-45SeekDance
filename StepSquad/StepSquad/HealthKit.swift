@@ -69,7 +69,7 @@ class HealthKitService: ObservableObject {
         }
     }
     
-    // 권한 허용 날짜를 UserDefaults에 저장하는 함수
+    // MARK: - 권한 허용 날짜를 UserDefaults에 저장하는 함수(한국 시간대로)
     private func storeAuthorizationDate() {
         let authorizationDateKey = "HealthKitAuthorizationDate"
         
@@ -77,23 +77,39 @@ class HealthKitService: ObservableObject {
         if UserDefaults.standard.object(forKey: authorizationDateKey) == nil {
             let currentDate = Date()
             
+            // 한국 시간대로 포맷팅
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            formatter.timeZone = TimeZone(identifier: "Asia/Seoul") // 한국 시간대 설정
+            let koreanDateString = formatter.string(from: currentDate)
+            
             // 권한 허용 날짜 저장
-            UserDefaults.standard.set(currentDate, forKey: authorizationDateKey)
-            print("HealthKit 권한 허용 날짜를 \(currentDate)로 저장했습니다.")
+            UserDefaults.standard.set(koreanDateString, forKey: authorizationDateKey)
+            print("HealthKit 권한 허용 날짜를 \(koreanDateString)로 저장했습니다.")
         } else {
             // 이미 날짜가 저장된 경우, 기존 날짜를 사용
-            if let savedDate = UserDefaults.standard.object(forKey: authorizationDateKey) as? Date {
-                //                print("이전에 저장된 HealthKit 권한 허용 날짜: \(savedDate)")
+            if let savedDateString = UserDefaults.standard.string(forKey: authorizationDateKey) {
+                print("이전에 저장된 HealthKit 권한 허용 날짜: \(savedDateString)")
             }
         }
     }
     
     
     
+    
     // MARK: - 헬스킷 권한을 받은 당일 부터의 계단 오르기 데이터를 가져오는 기능
     func fetchAndSaveFlightsClimbedSinceAuthorization() {
-        guard let authorizationDate = UserDefaults.standard.object(forKey: "HealthKitAuthorizationDate") as? Date else {
-            print("권한 허용 날짜가 설정되지 않았습니다.")
+        let authorizationDateKey = "HealthKitAuthorizationDate"
+        
+        // 한국 시간대로 변환하기 위한 DateFormatter 설정
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        formatter.timeZone = TimeZone(identifier: "Asia/Seoul") // 한국 시간대 설정
+        
+        // 권한 허용 날짜를 불러오기
+        guard let savedAuthorizationDateString = UserDefaults.standard.string(forKey: authorizationDateKey),
+              let authorizationDate = formatter.date(from: savedAuthorizationDateString) else {
+            print("권한 허용 날짜가 설정되지 않았습니다.1")
             return
         }
         
@@ -134,11 +150,12 @@ class HealthKitService: ObservableObject {
             appGroupDefaults?.set(formattedFetchTime, forKey: "LastFetchTime") // 포맷된 패치 시각 저장
             
             // 패치 결과를 콘솔에 출력
-            //            print("총 계단 오르기 수 \(totalFlightsClimbed)를 저장했습니다. (패치 시각: \(formattedFetchTime))")
+            print("총 계단 오르기 수 \(totalFlightsClimbed)를 저장했습니다. (패치 시각: \(formattedFetchTime))")
         }
         
         healthStore.execute(query)
     }
+    
     
     
     // MARK: - 오늘 계단 오르기 수를 호출 및 앱스토리지 저장하는 함수
@@ -228,7 +245,15 @@ class HealthKitService: ObservableObject {
             }
             
             // 권한을 받은 날짜 가져오기
-            guard let authorizationDate = UserDefaults.standard.object(forKey: "HealthKitAuthorizationDate") as? Date else {
+            let authorizationDateKey = "HealthKitAuthorizationDate"
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            formatter.timeZone = TimeZone(identifier: "Asia/Seoul") // 한국 시간대 설정
+            
+            
+            // 권한을 받은 날짜 가져오기
+            guard let dateString = UserDefaults.standard.string(forKey: "HealthKitAuthorizationDate"),
+                  let authorizationDate = formatter.date(from: dateString) else {
                 print("권한 허용 날짜가 설정되지 않았습니다.")
                 return
             }
