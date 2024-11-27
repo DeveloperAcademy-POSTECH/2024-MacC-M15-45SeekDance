@@ -29,7 +29,7 @@ class CollectedItems: Codable {
     
     func save() {
         do {
-            let data = try JSONEncoder().encode(levels)
+            let data = try JSONEncoder().encode(items)
             try data.write(to: savePath, options: [.atomic, .completeFileProtection])
         } catch {
             print("Unable to save collected items.")
