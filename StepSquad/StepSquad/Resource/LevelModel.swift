@@ -13,7 +13,6 @@ enum Difficulty: String, Codable {
     case hard = "Hard"
     case expert = "Expert"
     case impossible = "Impossible"
-    case nfc = "NFC"
 }
 
 class Level: Codable {

@@ -17,7 +17,6 @@ extension View {
         case .hard: return .hard
         case .expert: return .expert
         case .impossible: return .impossible
-        case .nfc: return .nfc
         }
     }
     
@@ -29,7 +28,6 @@ extension View {
         case .hard: return .hardPale
         case .expert: return .expertPale
         case .impossible: return .impossiblePale
-        case .nfc: return .nfc
         }
     }
 }
