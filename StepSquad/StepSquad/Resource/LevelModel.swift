@@ -17,14 +17,14 @@ enum Difficulty: String, Codable {
 }
 
 class Level: Codable {
-    var level: Int
-    var minStaircase: Int
-    var maxStaircase: Int
-    var item: String
-    var itemImage: String
-    var difficulty: Difficulty
-    var wikiLink: String
-    var achievementId: String
+    let level: Int
+    let minStaircase: Int
+    let maxStaircase: Int
+    let item: String
+    let itemImage: String
+    let difficulty: Difficulty
+    let wikiLink: String
+    let achievementId: String
     
     // TODO: - UserDefaults에서 불러올 경우 수정하기
     init(level: Int, minStaircase: Int, maxStaircase: Int, item: String, itemImage: String, difficulty: Difficulty, wikiLink: String, achievementId: String) {
