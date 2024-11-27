@@ -11,7 +11,9 @@ struct EmptyItemView: View {
     var body: some View {
         VStack {
             Spacer()
-            Image("BoredBird")
+            Image("LazyBird")
+                .resizable()
+                .frame(width: 222, height: 222)
             VStack(spacing: 8) {
                 Text("계단을 올라야 재료를 모을 수 있어요!")
                     .font(.system(size: 20))
