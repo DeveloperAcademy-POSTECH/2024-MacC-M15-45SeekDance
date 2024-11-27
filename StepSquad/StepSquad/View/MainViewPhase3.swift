@@ -40,6 +40,7 @@ struct MainViewPhase3: View {
         }
     }
     @State private var completedLevels = CompletedLevels()
+    @State private var collectedItems = CollectedItems()
     @AppStorage("isShowingNewItem") private var isShowingNewItem = false
     
     var body: some View {
@@ -314,7 +315,7 @@ struct MainViewPhase3: View {
             .padding(.top, 16)
             .padding(.bottom, 28)
             .sheet(isPresented: $isMaterialSheetPresented) {
-                MaterialsView(isMaterialSheetPresented: $isMaterialSheetPresented, isShowingNewItem: $isShowingNewItem, completedLevels: completedLevels)
+                MaterialsView(isMaterialSheetPresented: $isMaterialSheetPresented, isShowingNewItem: $isShowingNewItem, completedLevels: completedLevels, collectedItems: collectedItems)
             }
         }
         .onAppear {
@@ -538,8 +539,10 @@ struct MainViewPhase3: View {
         service.getWeeklyStairDataAndSave()
         let weeklyStairPoint = service.weeklyFlightsClimbed * 16
         //        print("이번주 걸은 층계 * 16: \(weeklyStairPoint), nfc 점수: \(weeklyNfcPoint)")
+        // TODO: - 에러 이후 변경
         Task {
-            await gameCenterManager.submitPoint(point: Int(weeklyNfcPoint) + Int(weeklyStairPoint))
+//            await gameCenterManager.submitPoint(point: Int(weeklyNfcPoint) + Int(weeklyStairPoint))
+            await gameCenterManager.submitPoint(point: 1840)
         }
     }
     

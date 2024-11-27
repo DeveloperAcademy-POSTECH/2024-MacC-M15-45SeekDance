@@ -11,6 +11,7 @@ struct MaterialsView: View {
     @Binding var isMaterialSheetPresented: Bool
     @Binding var isShowingNewItem: Bool
     var completedLevels: CompletedLevels
+    var collectedItems: CollectedItems
     var isEmpty = false
     
     var body: some View {
