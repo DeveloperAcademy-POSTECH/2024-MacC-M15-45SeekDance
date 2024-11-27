@@ -1,0 +1,38 @@
+{
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "grid-size" : "regular"
+  },
+  "stickers" : [
+    {
+      "filename" : "Win@2x.sticker"
+    },
+    {
+      "filename" : "Invitation@2x.sticker"
+    },
+    {
+      "filename" : "Healthy@2x.sticker"
+    },
+    {
+      "filename" : "Default@2x.sticker"
+    },
+    {
+      "filename" : "Lazy@2x.sticker"
+    },
+    {
+      "filename" : "Heehee@2x.sticker"
+    },
+    {
+      "filename" : "Precious@2x.sticker"
+    },
+    {
+      "filename" : "Shake@2x.sticker"
+    },
+    {
+      "filename" : "Tada@2x.sticker"
+    }
+  ]
+}

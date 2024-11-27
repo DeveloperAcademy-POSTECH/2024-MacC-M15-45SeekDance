@@ -7,16 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BDD934652CDCB12300859EA4 /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDD934642CDCB12300859EA4 /* Messages.framework */; };
-		BDD934712CDCB12400859EA4 /* StepSquadStickers.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = BDD934632CDCB12300859EA4 /* StepSquadStickers.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		BDC8DCA52CF5E44900C74796 /* StepSquadStickers.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = BDC8DC9E2CF5E44800C74796 /* StepSquadStickers.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		BDD9346F2CDCB12400859EA4 /* PBXContainerItemProxy */ = {
+		BDC8DCA32CF5E44900C74796 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BDD309BA2CBA62C3003EDC28 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = BDD934622CDCB12300859EA4;
+			remoteGlobalIDString = BDC8DC9D2CF5E44800C74796;
 			remoteInfo = StepSquadStickers;
 		};
 /* End PBXContainerItemProxy section */
@@ -28,7 +27,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				BDD934712CDCB12400859EA4 /* StepSquadStickers.appex in Embed Foundation Extensions */,
+				BDC8DCA52CF5E44900C74796 /* StepSquadStickers.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -37,34 +36,34 @@
 
 /* Begin PBXFileReference section */
 		1B997D832CD1B5F700F7CDC5 /* StepSquad.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StepSquad.entitlements; sourceTree = "<group>"; };
+		BDC8DC9E2CF5E44800C74796 /* StepSquadStickers.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = StepSquadStickers.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDD309C22CBA62C3003EDC28 /* StepSquad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StepSquad.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		BDD934632CDCB12300859EA4 /* StepSquadStickers.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = StepSquadStickers.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDD934642CDCB12300859EA4 /* Messages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Messages.framework; path = System/Library/Frameworks/Messages.framework; sourceTree = SDKROOT; };
 		BDECE49C2CD35A8700AD6229 /* StepSquad-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "StepSquad-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		BDD934742CDCB12400859EA4 /* Exceptions for "StepSquadStickers" folder in "StepSquadStickers" target */ = {
+		BDC8DCA62CF5E44900C74796 /* Exceptions for "StepSquadStickers" folder in "StepSquadStickers" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = BDD934622CDCB12300859EA4 /* StepSquadStickers */;
+			target = BDC8DC9D2CF5E44800C74796 /* StepSquadStickers */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		BDC8DC9F2CF5E44800C74796 /* StepSquadStickers */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				BDC8DCA62CF5E44900C74796 /* Exceptions for "StepSquadStickers" folder in "StepSquadStickers" target */,
+			);
+			path = StepSquadStickers;
+			sourceTree = "<group>";
+		};
 		BDD309C42CBA62C3003EDC28 /* StepSquad */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = StepSquad;
-			sourceTree = "<group>";
-		};
-		BDD934662CDCB12300859EA4 /* StepSquadStickers */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				BDD934742CDCB12400859EA4 /* Exceptions for "StepSquadStickers" folder in "StepSquadStickers" target */,
-			);
-			path = StepSquadStickers;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -77,14 +76,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BDD934602CDCB12300859EA4 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BDD934652CDCB12300859EA4 /* Messages.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -94,7 +85,7 @@
 				BDECE49C2CD35A8700AD6229 /* StepSquad-Info.plist */,
 				1B997D832CD1B5F700F7CDC5 /* StepSquad.entitlements */,
 				BDD309C42CBA62C3003EDC28 /* StepSquad */,
-				BDD934662CDCB12300859EA4 /* StepSquadStickers */,
+				BDC8DC9F2CF5E44800C74796 /* StepSquadStickers */,
 				BDD30A092CBA6387003EDC28 /* Frameworks */,
 				BDD309C32CBA62C3003EDC28 /* Products */,
 			);
@@ -104,7 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				BDD309C22CBA62C3003EDC28 /* StepSquad.app */,
-				BDD934632CDCB12300859EA4 /* StepSquadStickers.appex */,
+				BDC8DC9E2CF5E44800C74796 /* StepSquadStickers.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -120,6 +111,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		BDC8DC9D2CF5E44800C74796 /* StepSquadStickers */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BDC8DCA72CF5E44900C74796 /* Build configuration list for PBXNativeTarget "StepSquadStickers" */;
+			buildPhases = (
+				BDC8DC9C2CF5E44800C74796 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				BDC8DC9F2CF5E44800C74796 /* StepSquadStickers */,
+			);
+			name = StepSquadStickers;
+			packageProductDependencies = (
+			);
+			productName = StepSquadStickers;
+			productReference = BDC8DC9E2CF5E44800C74796 /* StepSquadStickers.appex */;
+			productType = "com.apple.product-type.app-extension.messages-sticker-pack";
+		};
 		BDD309C12CBA62C3003EDC28 /* StepSquad */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BDD309D02CBA62C5003EDC28 /* Build configuration list for PBXNativeTarget "StepSquad" */;
@@ -132,7 +143,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				BDD934702CDCB12400859EA4 /* PBXTargetDependency */,
+				BDC8DCA42CF5E44900C74796 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				BDD309C42CBA62C3003EDC28 /* StepSquad */,
@@ -144,28 +155,6 @@
 			productReference = BDD309C22CBA62C3003EDC28 /* StepSquad.app */;
 			productType = "com.apple.product-type.application";
 		};
-		BDD934622CDCB12300859EA4 /* StepSquadStickers */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = BDD934752CDCB12400859EA4 /* Build configuration list for PBXNativeTarget "StepSquadStickers" */;
-			buildPhases = (
-				BDD9345F2CDCB12300859EA4 /* Sources */,
-				BDD934602CDCB12300859EA4 /* Frameworks */,
-				BDD934612CDCB12300859EA4 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				BDD934662CDCB12300859EA4 /* StepSquadStickers */,
-			);
-			name = StepSquadStickers;
-			packageProductDependencies = (
-			);
-			productName = StepSquadStickers;
-			productReference = BDD934632CDCB12300859EA4 /* StepSquadStickers.appex */;
-			productType = "com.apple.product-type.app-extension.messages";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -176,10 +165,10 @@
 				LastSwiftUpdateCheck = 1600;
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
-					BDD309C12CBA62C3003EDC28 = {
+					BDC8DC9D2CF5E44800C74796 = {
 						CreatedOnToolsVersion = 16.0;
 					};
-					BDD934622CDCB12300859EA4 = {
+					BDD309C12CBA62C3003EDC28 = {
 						CreatedOnToolsVersion = 16.0;
 					};
 				};
@@ -200,20 +189,20 @@
 			projectRoot = "";
 			targets = (
 				BDD309C12CBA62C3003EDC28 /* StepSquad */,
-				BDD934622CDCB12300859EA4 /* StepSquadStickers */,
+				BDC8DC9D2CF5E44800C74796 /* StepSquadStickers */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		BDD309C02CBA62C3003EDC28 /* Resources */ = {
+		BDC8DC9C2CF5E44800C74796 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BDD934612CDCB12300859EA4 /* Resources */ = {
+		BDD309C02CBA62C3003EDC28 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -230,24 +219,67 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BDD9345F2CDCB12300859EA4 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		BDD934702CDCB12400859EA4 /* PBXTargetDependency */ = {
+		BDC8DCA42CF5E44900C74796 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = BDD934622CDCB12300859EA4 /* StepSquadStickers */;
-			targetProxy = BDD9346F2CDCB12400859EA4 /* PBXContainerItemProxy */;
+			target = BDC8DC9D2CF5E44800C74796 /* StepSquadStickers */;
+			targetProxy = BDC8DCA32CF5E44900C74796 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		BDC8DCA82CF5E44900C74796 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = AZ7B294WMJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StepSquadStickers/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = StepSquadStickers;
+				INFOPLIST_KEY_NSStickerSharingLevel = OS;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.45SeekDance.2024.StepSquadStickers;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = imessageStickerExtension;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BDC8DCA92CF5E44900C74796 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = AZ7B294WMJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StepSquadStickers/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = StepSquadStickers;
+				INFOPLIST_KEY_NSStickerSharingLevel = OS;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.45SeekDance.2024.StepSquadStickers;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = imessageStickerExtension;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		BDD309CE2CBA62C5003EDC28 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -459,83 +491,18 @@
 			};
 			name = Release;
 		};
-		BDD934722CDCB12400859EA4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
-				CODE_SIGN_ENTITLEMENTS = StepSquadStickers/StepSquadStickers.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2.0.2;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = AZ7B294WMJ;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = StepSquadStickers/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = StepSquadStickers;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 17;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 2.0.2;
-				PRODUCT_BUNDLE_IDENTIFIER = kr.45SeekDance.2024.StepSquadStickers;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = imessageStickerExtension;
-				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Debug;
-		};
-		BDD934732CDCB12400859EA4 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
-				CODE_SIGN_ENTITLEMENTS = StepSquadStickers/StepSquadStickers.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2.0.2;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = AZ7B294WMJ;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = StepSquadStickers/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = StepSquadStickers;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 17;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 2.0.2;
-				PRODUCT_BUNDLE_IDENTIFIER = kr.45SeekDance.2024.StepSquadStickers;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = imessageStickerExtension;
-				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		BDC8DCA72CF5E44900C74796 /* Build configuration list for PBXNativeTarget "StepSquadStickers" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BDC8DCA82CF5E44900C74796 /* Debug */,
+				BDC8DCA92CF5E44900C74796 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		BDD309BD2CBA62C3003EDC28 /* Build configuration list for PBXProject "StepSquad" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -550,15 +517,6 @@
 			buildConfigurations = (
 				BDD309D12CBA62C5003EDC28 /* Debug */,
 				BDD309D22CBA62C5003EDC28 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		BDD934752CDCB12400859EA4 /* Build configuration list for PBXNativeTarget "StepSquadStickers" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				BDD934722CDCB12400859EA4 /* Debug */,
-				BDD934732CDCB12400859EA4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
