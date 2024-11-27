@@ -12,7 +12,9 @@ struct MaterialsView: View {
     @Binding var isShowingNewItem: Bool
     var completedLevels: CompletedLevels
     var collectedItems: CollectedItems
-    var isEmpty = false
+    var isEmpty: Bool {
+        return completedLevels.lastUpdatedLevel == 0 && collectedItems.isEmpty()
+    }
     
     var body: some View {
         NavigationView {

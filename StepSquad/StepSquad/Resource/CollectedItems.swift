@@ -42,4 +42,12 @@ class CollectedItems: Codable {
         }
         return "Error: 달성하지 않은 레벨"
     }
+    
+    func isCollected(item: String) -> Bool {
+        return items.contains(where: { $0.key == item })
+    }
+    
+    func isEmpty() -> Bool {
+        return items.isEmpty
+    }
 }
