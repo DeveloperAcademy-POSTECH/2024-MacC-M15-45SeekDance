@@ -23,5 +23,9 @@ class Item: Codable {
 
 let hiddenItems: [String: Item] = [
     // TODO: - 불로초 성취 이름 변경
-    "Bullocho": Item(item: "불로초", itemImage: "Bullocho", itemColor: 0x03787B, achievementId: "infiniteTime"),
+    "Bullocho": Item(
+        item: "불로초",
+        itemImage: "Bullocho",
+        itemColor: 0x03787B,
+        achievementId: "infiniteTime"),
 ]
