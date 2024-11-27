@@ -60,7 +60,7 @@ struct MaterialsView: View {
                             }
                             if completedLevels.lastUpdatedLevel >= 1 { // 획득한 약재가 있을 때
                                 Section("레벨 재료") {
-                                    ForEach(0...completedLevels.lastUpdatedLevel, id: \.self) { level in
+                                    ForEach(1...completedLevels.lastUpdatedLevel, id: \.self) { level in
                                         HStack(spacing: 0) {
                                             Image(levels[level]!.itemImage) // 약재 이미지
                                                 .resizable()
