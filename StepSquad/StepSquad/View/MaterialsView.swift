@@ -26,9 +26,41 @@ struct MaterialsView: View {
                         EmptyItemView()
                     } else {
                         List {
+                            if !collectedItems.isEmpty() { // 획득한 깜짝 재료가 있을 때
+                                Section("깜짝 재료") {
+                                    ForEach(collectedItems.getItemsKeys(), id: \.self) { item in
+                                        HStack(spacing: 0) {
+                                            Image(hiddenItems[item]!.itemImage) // 약재 이미지
+                                                .resizable()
+                                                .aspectRatio(1, contentMode: .fit)
+                                                .frame(width: 42, height: 42)
+                                                .padding(.trailing, 0)
+                                            
+                                            Text(hiddenItems[item]!.keyword) // 레벨 표시
+                                                .font(.system(size: 12))
+                                                .foregroundStyle(.white)
+                                                .padding(4)
+                                                .background(Color(hex: hiddenItems[item]!.itemColor), in: RoundedRectangle(cornerRadius: 4))
+                                                .padding(.horizontal, 8)
+                                            
+                                            Text(" \(hiddenItems[item]!.item)") // 약재 이름
+                                                .font(.system(size: 17))
+                                            
+                                            Spacer()
+                                            
+                                            Text(collectedItems.getCollectedDateString(item: item)) // 레벨 달성 날짜
+                                                .font(.system(size: 15))
+                                                .foregroundStyle(Color(hex: 0x3C3C43))
+                                                .opacity(0.6)
+                                        }
+                                        .padding(.horizontal, 4)
+                                        
+                                    }
+                                }
+                            }
                             if completedLevels.lastUpdatedLevel >= 1 { // 획득한 약재가 있을 때
-                                ForEach(0...completedLevels.lastUpdatedLevel, id: \.self) { level in
-                                    if level > 0 {
+                                Section("레벨 재료") {
+                                    ForEach(0...completedLevels.lastUpdatedLevel, id: \.self) { level in
                                         HStack(spacing: 0) {
                                             Image(levels[level]!.itemImage) // 약재 이미지
                                                 .resizable()

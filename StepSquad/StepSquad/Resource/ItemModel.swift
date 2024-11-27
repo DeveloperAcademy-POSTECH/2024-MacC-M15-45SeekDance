@@ -12,12 +12,14 @@ class Item: Codable {
     let itemImage: String
     let itemColor: UInt
     let achievementId: String
+    let keyword: String
     
-    init(item: String, itemImage: String, itemColor: UInt, achievementId: String) {
+    init(item: String, itemImage: String, itemColor: UInt, achievementId: String, keyword: String) {
         self.item = item
         self.itemImage = itemImage
         self.itemColor = itemColor
         self.achievementId = achievementId
+        self.keyword = keyword
     }
 }
 
@@ -27,5 +29,6 @@ let hiddenItems: [String: Item] = [
         item: "불로초",
         itemImage: "Bullocho",
         itemColor: 0x03787B,
-        achievementId: "infiniteTime"),
+        achievementId: "infiniteTime",
+        keyword: "NFC"),
 ]

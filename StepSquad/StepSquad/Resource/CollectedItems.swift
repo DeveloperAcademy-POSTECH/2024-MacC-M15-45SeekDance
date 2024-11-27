@@ -50,4 +50,8 @@ class CollectedItems: Codable {
     func isEmpty() -> Bool {
         return items.isEmpty
     }
+    
+    func getItemsKeys() -> [String] {
+        return items.keys.map(\.self)
+    }
 }
