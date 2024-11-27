@@ -34,14 +34,13 @@ struct MainViewPhase3: View {
     
     let gameCenterManager = GameCenterManager()
     
-    
     var currentStatus: CurrentStatus = CurrentStatus() {
         didSet {
             saveCurrentStatus()
         }
     }
     @State private var completedLevels = CompletedLevels()
-    @State private var isShowingNewItem = false
+    @AppStorage("isShowingNewItem") private var isShowingNewItem = false
     
     var body: some View {
         if isLaunching {
@@ -453,7 +452,6 @@ struct MainViewPhase3: View {
     
     // MARK: - 생성자
     init() {
-        // TODO: - 테스트 이후 정리하기
         // MARK: 사용자 게임 센터 인증
         gameCenterManager.authenticateUser()
         // MARK: 저장된 레벨 정보 불러오고 헬스킷 정보로 업데이트하기

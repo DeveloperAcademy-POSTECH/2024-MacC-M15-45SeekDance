@@ -118,7 +118,7 @@ let levels: [Int: Level] = [
         minStaircase: 120,
         maxStaircase: 149,
         item: "칡",
-        itemImage: "8_ Chik",
+        itemImage: "8_Chik",
         difficulty: .normal,
         wikiLink: "",
         achievementId: "hr2min30"),
