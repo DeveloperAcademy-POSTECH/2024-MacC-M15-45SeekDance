@@ -42,8 +42,4 @@ class CollectedItems: Codable {
         }
         return "Error: 달성하지 않은 레벨"
     }
-    
-    func isCompleted(level: Int) -> Bool {
-        return levels.keys.contains(level)
-    }
 }
