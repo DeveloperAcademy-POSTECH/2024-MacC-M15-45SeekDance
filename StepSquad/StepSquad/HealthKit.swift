@@ -53,6 +53,8 @@ class HealthKitService: ObservableObject {
             
             if success {
                 //   print("HealthKit 권한 허용됨")
+                
+                // 권한 되었는지 아닌지, 여부를 화면 뷰 그릴 때 true여부.
                 UserDefaults.standard.set(true, forKey: "HealthKitAuthorized")
                 
                 // 권한 요청 날짜를 기록하는 로직
@@ -63,13 +65,15 @@ class HealthKitService: ObservableObject {
                 self?.fetchAndSaveFlightsClimbedSinceAuthorization()
                 
             } else {
+                
+                // 권한 되었는지 아닌지, 여부를 화면 뷰 그릴 때 false로.
                 print("HealthKit 권한 거부됨")
                 UserDefaults.standard.set(false, forKey: "HealthKitAuthorized")
             }
         }
     }
     
-    // 권한 허용 날짜를 UserDefaults에 저장하는 함수
+    // MARK: - 권한 허용 날짜를 UserDefaults에 저장하는 함수(한국 시간대로)
     private func storeAuthorizationDate() {
         let authorizationDateKey = "HealthKitAuthorizationDate"
         
@@ -77,23 +81,39 @@ class HealthKitService: ObservableObject {
         if UserDefaults.standard.object(forKey: authorizationDateKey) == nil {
             let currentDate = Date()
             
+            // 한국 시간대로 포맷팅
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            formatter.timeZone = TimeZone(identifier: "Asia/Seoul") // 한국 시간대 설정
+            let koreanDateString = formatter.string(from: currentDate)
+            
             // 권한 허용 날짜 저장
-            UserDefaults.standard.set(currentDate, forKey: authorizationDateKey)
-            print("HealthKit 권한 허용 날짜를 \(currentDate)로 저장했습니다.")
+            UserDefaults.standard.set(koreanDateString, forKey: authorizationDateKey)
+            print("HealthKit 권한 허용 날짜를 \(koreanDateString)로 저장했습니다.")
         } else {
             // 이미 날짜가 저장된 경우, 기존 날짜를 사용
-            if let savedDate = UserDefaults.standard.object(forKey: authorizationDateKey) as? Date {
-                //                print("이전에 저장된 HealthKit 권한 허용 날짜: \(savedDate)")
+            if let savedDateString = UserDefaults.standard.string(forKey: authorizationDateKey) {
+                print("이전에 저장된 HealthKit 권한 허용 날짜: \(savedDateString)")
             }
         }
     }
     
     
     
+    
     // MARK: - 헬스킷 권한을 받은 당일 부터의 계단 오르기 데이터를 가져오는 기능
     func fetchAndSaveFlightsClimbedSinceAuthorization() {
-        guard let authorizationDate = UserDefaults.standard.object(forKey: "HealthKitAuthorizationDate") as? Date else {
-            print("권한 허용 날짜가 설정되지 않았습니다.")
+        let authorizationDateKey = "HealthKitAuthorizationDate"
+        
+        // 한국 시간대로 변환하기 위한 DateFormatter 설정
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        formatter.timeZone = TimeZone(identifier: "Asia/Seoul") // 한국 시간대 설정
+        
+        // 권한 허용 날짜를 불러오기
+        guard let savedAuthorizationDateString = UserDefaults.standard.string(forKey: authorizationDateKey),
+              let authorizationDate = formatter.date(from: savedAuthorizationDateString) else {
+            print("권한 허용 날짜가 설정되지 않았습니다.1")
             return
         }
         
@@ -107,11 +127,12 @@ class HealthKitService: ObservableObject {
         let startOfAuthorizationDate = calendar.startOfDay(for: authorizationDate)
         let predicate = HKQuery.predicateForSamples(withStart: startOfAuthorizationDate, end: Date(), options: [])
         
-        // 데이터 소스 필터링을 위한 추가 조건
-        let devicePredicate = HKQuery.predicateForObjects(from: [HKDevice.local()]) // 로컬 기기 데이터만 선택
-        let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, devicePredicate])
+        // 사용자가 데이터를 주작했는지 아닌지 파악하는 부분 NSPredicate -> 메타 데이터 쿼리 조건, yes가 아닌 데이터만 가져 오겠다는 것.
+        let userEnteredPredicate = NSPredicate(format: "metadata.%K != YES", HKMetadataKeyWasUserEntered)
+        let combinedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, userEnteredPredicate])
         
-        let query = HKStatisticsQuery(quantityType: flightsClimbedType, quantitySamplePredicate: compoundPredicate, options: .cumulativeSum) { _, result, error in
+        
+        let query = HKStatisticsQuery(quantityType: flightsClimbedType, quantitySamplePredicate: combinedPredicate, options: .cumulativeSum) { _, result, error in
             if let error = error {
                 print("계단 오르기 데이터 가져오기 오류: \(error.localizedDescription)")
                 return
@@ -134,11 +155,12 @@ class HealthKitService: ObservableObject {
             appGroupDefaults?.set(formattedFetchTime, forKey: "LastFetchTime") // 포맷된 패치 시각 저장
             
             // 패치 결과를 콘솔에 출력
-            //            print("총 계단 오르기 수 \(totalFlightsClimbed)를 저장했습니다. (패치 시각: \(formattedFetchTime))")
+            print("총 계단 오르기 수 \(totalFlightsClimbed)를 저장했습니다. (패치 시각: \(formattedFetchTime))")
         }
         
         healthStore.execute(query)
     }
+    
     
     
     // MARK: - 오늘 계단 오르기 수를 호출 및 앱스토리지 저장하는 함수
@@ -228,8 +250,16 @@ class HealthKitService: ObservableObject {
             }
             
             // 권한을 받은 날짜 가져오기
-            guard let authorizationDate = UserDefaults.standard.object(forKey: "HealthKitAuthorizationDate") as? Date else {
-                print("권한 허용 날짜가 설정되지 않았습니다.")
+            let authorizationDateKey = "HealthKitAuthorizationDate"
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            formatter.timeZone = TimeZone(identifier: "Asia/Seoul") // 한국 시간대 설정
+            
+            
+            // 권한을 받은 날짜 가져오기
+            guard let dateString = UserDefaults.standard.string(forKey: "HealthKitAuthorizationDate"),
+                  let authorizationDate = formatter.date(from: dateString) else {
+                print("권한 허용 날짜가 설정되지 않았습니다.2")
                 return
             }
             
@@ -241,15 +271,20 @@ class HealthKitService: ObservableObject {
             
             let predicate = HKQuery.predicateForSamples(withStart: adjustedStartDate, end: endOfWeekDate, options: [])
             
-            // 데이터 소스 필터링을 위한 추가 조건
-            let devicePredicate = HKQuery.predicateForObjects(from: [HKDevice.local()]) // 로컬 기기 데이터만 선택
-            let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, devicePredicate])
+            // 사용자가 데이터를 주작했는지 아닌지 파악하는 부분 NSPredicate -> 메타 데이터 쿼리 조건, yes가 아닌 데이터만 가져 오겠다는 것.
+            let userEnteredPredicate = NSPredicate(format: "metadata.%K != YES", HKMetadataKeyWasUserEntered)
+            let combinedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, userEnteredPredicate])
             
-            let query = HKStatisticsQuery(quantityType: stairType, quantitySamplePredicate: compoundPredicate, options: .cumulativeSum) { _, result, error in
+            
+            // 데이터 소스 필터링을 위한 추가 조건
+            // 데이터 범위와 조건 정의 (모든 소스 데이터)
+            
+            let query = HKStatisticsQuery(quantityType: stairType, quantitySamplePredicate: combinedPredicate, options: .cumulativeSum) { _, result, error in
                 guard error == nil else {
                     print("주간 계단 데이터 가져오기 오류: \(error!.localizedDescription)")
                     return
                 }
+                
                 
                 var totalFlightsClimbed = result?.sumQuantity()?.doubleValue(for: HKUnit.count()) ?? 0.0
                 
