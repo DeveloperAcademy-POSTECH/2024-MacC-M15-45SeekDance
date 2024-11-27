@@ -7,7 +7,7 @@
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.message-payload-provider</string>
 		<key>NSExtensionPrincipalClass</key>
-		<string>StepSquadStickers.StickerBrowserViewController</string>
+		<string>StickerBrowserViewController</string>
 	</dict>
 </dict>
 </plist>
