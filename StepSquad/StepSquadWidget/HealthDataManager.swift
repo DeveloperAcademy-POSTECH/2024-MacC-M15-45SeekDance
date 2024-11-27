@@ -12,7 +12,7 @@ class HealthDataManager {
     private let appGroupID = "group.com.stepSquad.widget"
     private let authorizationDateKey = "HealthKitAuthorizationDate"
 
-    // 권한 요청 함수
+    // MARK: - 권한 요청 함수
     func requestAuthorization(completion: @escaping (Bool, Error?) -> Void) {
         guard HKHealthStore.isHealthDataAvailable() else {
             completion(false, nil)
@@ -30,11 +30,14 @@ class HealthDataManager {
         }
     }
 
-    // HealthKit에서 계단 오른 수 가져오기
+    // MARK: - HealthKit에서 계단 오른 수 가져오기
     func fetchFlightsClimbed(completion: @escaping (Double?, Error?) -> Void) {
-        // App Group UserDefaults에서 저장된 시작 날짜 가져오기
+        // MARK: - App Group UserDefaults에서 저장된 시작 날짜 가져오기
         let sharedDefaults = UserDefaults(suiteName: appGroupID)
-        let startDate = sharedDefaults?.object(forKey: authorizationDateKey) as? Date ?? Date.distantPast
+        let authorizationDate = sharedDefaults?.object(forKey: authorizationDateKey) as? Date ?? Date.distantPast
+
+        let calendar = Calendar.current
+           let startDate = calendar.startOfDay(for: authorizationDate)
 
         guard let flightsClimbedType = HKQuantityType.quantityType(forIdentifier: .flightsClimbed) else {
             completion(nil, nil)
@@ -42,7 +45,12 @@ class HealthDataManager {
         }
 
         let predicate = HKQuery.predicateForSamples(withStart: startDate, end: Date(), options: .strictStartDate)
-        let query = HKStatisticsQuery(quantityType: flightsClimbedType, quantitySamplePredicate: predicate, options: .cumulativeSum) { _, result, error in
+
+        let userEnteredPredicate = NSPredicate(format: "metadata.%K != YES", HKMetadataKeyWasUserEntered)
+
+        let combinedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, userEnteredPredicate])
+
+        let query = HKStatisticsQuery(quantityType: flightsClimbedType, quantitySamplePredicate: combinedPredicate, options: .cumulativeSum) { _, result, error in
             if let sum = result?.sumQuantity() {
                 let flightsClimbed = sum.doubleValue(for: HKUnit.count())
                 completion(flightsClimbed, nil)
@@ -50,10 +58,12 @@ class HealthDataManager {
                 completion(nil, error)
             }
         }
+
         healthStore.execute(query)
     }
 
-    // 권한 승인 날짜를 App Group UserDefaults에 저장
+
+    // MARK: - 권한 승인 날짜를 App Group UserDefaults에 저장
     private func storeAuthorizationDateIfNeeded() {
         let sharedDefaults = UserDefaults(suiteName: appGroupID)
         if sharedDefaults?.object(forKey: authorizationDateKey) == nil {

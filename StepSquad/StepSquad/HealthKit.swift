@@ -274,4 +274,15 @@ class HealthKitService: ObservableObject {
             healthStore.execute(query)
         }
     }
+
+    func saveWidgetAppGroup() {
+        let sharedDefaults = UserDefaults(suiteName: "group.com.stepSquad.widget")
+
+        if let authorizationDate = UserDefaults.standard.object(forKey: "HealthKitAuthorizationDate") as? Date {
+            sharedDefaults?.set(authorizationDate, forKey: "HealthKitAuthorizationDate")
+            print("Widget App Group에 권한 허용 날짜 \(authorizationDate) 저장 완료.")
+        } else {
+            print("권한 허용 날짜를 찾을 수 없어 저장하지 못했습니다.")
+        }
+    }
 }

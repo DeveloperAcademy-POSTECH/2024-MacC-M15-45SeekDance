@@ -325,6 +325,7 @@ struct MainViewPhase3: View {
             service.getWeeklyStairDataAndSave()
             service.fetchAndSaveFlightsClimbedSinceAuthorization()
             updateLevelsAndGameCenter()
+            service.saveWidgetAppGroup()
         }
     }
     
