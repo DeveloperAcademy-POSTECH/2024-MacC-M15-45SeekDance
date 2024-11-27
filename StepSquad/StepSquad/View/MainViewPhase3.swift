@@ -108,6 +108,7 @@ struct MainViewPhase3: View {
                         HStack {
                             Button {
                                 // MARK: 성취로 이동
+                                reportMissedAchievement()
                                 gameCenterManager.showAchievements()
                             } label: {
                                 HStack() {
@@ -571,6 +572,15 @@ struct MainViewPhase3: View {
             for i in (completedLevels.lastUpdatedLevel + 1)..<currentStatus.currentLevel.level { // 업데이트 되지 않은 레벨부터 현재 전의 레벨까지 업데이트
                 completedLevels.upgradeLevel(level: i, completedDate: Date.now)
                 gameCenterManager.reportCompletedAchievement(achievementId: levels[i]!.achievementId) // 해당 레벨의 성취 달성
+            }
+        }
+    }
+    
+    // MARK: 오프라인 환경에서 받지 못한 레벨 성취 다시 주기
+    func reportMissedAchievement() {
+        if completedLevels.lastUpdatedLevel >= 1 {
+            for level in 1...completedLevels.lastUpdatedLevel {
+                gameCenterManager.reportCompletedAchievement(achievementId: levels[level]!.achievementId)
             }
         }
     }
