@@ -184,6 +184,7 @@ struct MainViewPhase3: View {
                     }
                 }
             }
+            .tint(Color(hex: 0x8BC766))
         }
     }
     
