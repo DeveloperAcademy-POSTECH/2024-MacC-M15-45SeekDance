@@ -497,7 +497,7 @@ struct MainViewPhase3: View {
         // TODO: - 에러 이후 변경
         Task {
 //                        await gameCenterManager.submitPoint(point: Int(weeklyNfcPoint) + Int(weeklyStairPoint))
-            await gameCenterManager.submitPoint(point: 2128)
+            await gameCenterManager.submitPoint(point: 2682)
         }
     }
     
