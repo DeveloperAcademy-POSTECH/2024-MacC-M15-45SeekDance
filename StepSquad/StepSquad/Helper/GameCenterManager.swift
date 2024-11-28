@@ -36,8 +36,16 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
         return nil
     }
     
+    // MARK: 사용자의 game center 닉네임 가져오기
+    func loadLocalPlayerName() -> String? {
+        guard isGameCenterLoggedIn else {
+            print("Error: user is not logged in to Game Center.")
+            return nil
+        }
+        return GKLocalPlayer.local.displayName
+    }
+    
     // MARK: 기존 순위표의 점수 가져오기
-    // TODO: 로컬 정보 이용할 경우 submitPoint와 분리하기
     func loadFormerPoint() async -> Int {
         do {
             let leaderboards = try await GKLeaderboard.loadLeaderboards(IDs: [leaderboardID])
