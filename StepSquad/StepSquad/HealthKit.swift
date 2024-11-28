@@ -108,10 +108,12 @@ class HealthKitService: ObservableObject {
         let predicate = HKQuery.predicateForSamples(withStart: startOfAuthorizationDate, end: Date(), options: [])
         
         // 데이터 소스 필터링을 위한 추가 조건
-        let devicePredicate = HKQuery.predicateForObjects(from: [HKDevice.local()]) // 로컬 기기 데이터만 선택
-        let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, devicePredicate])
+        // 사용자가 데이터를 주작했는지 아닌지 파악하는 부분 NSPredicate -> 메타 데이터 쿼리 조건, yes가 아닌 데이터만 가져 오겠다는 것.
+        let userEnteredPredicate = NSPredicate(format: "metadata.%K != YES", HKMetadataKeyWasUserEntered)
+        let combinedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, userEnteredPredicate])
         
-        let query = HKStatisticsQuery(quantityType: flightsClimbedType, quantitySamplePredicate: compoundPredicate, options: .cumulativeSum) { _, result, error in
+        
+        let query = HKStatisticsQuery(quantityType: flightsClimbedType, quantitySamplePredicate: combinedPredicate, options: .cumulativeSum) { _, result, error in
             if let error = error {
                 print("계단 오르기 데이터 가져오기 오류: \(error.localizedDescription)")
                 return
@@ -241,11 +243,12 @@ class HealthKitService: ObservableObject {
             
             let predicate = HKQuery.predicateForSamples(withStart: adjustedStartDate, end: endOfWeekDate, options: [])
             
-            // 데이터 소스 필터링을 위한 추가 조건
-            let devicePredicate = HKQuery.predicateForObjects(from: [HKDevice.local()]) // 로컬 기기 데이터만 선택
-            let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, devicePredicate])
+            // 사용자가 데이터를 주작했는지 아닌지 파악하는 부분 NSPredicate -> 메타 데이터 쿼리 조건, yes가 아닌 데이터만 가져 오겠다는 것.
+            let userEnteredPredicate = NSPredicate(format: "metadata.%K != YES", HKMetadataKeyWasUserEntered)
+            let combinedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, userEnteredPredicate])
             
-            let query = HKStatisticsQuery(quantityType: stairType, quantitySamplePredicate: compoundPredicate, options: .cumulativeSum) { _, result, error in
+            
+            let query = HKStatisticsQuery(quantityType: stairType, quantitySamplePredicate: combinedPredicate, options: .cumulativeSum) { _, result, error in
                 guard error == nil else {
                     print("주간 계단 데이터 가져오기 오류: \(error!.localizedDescription)")
                     return
