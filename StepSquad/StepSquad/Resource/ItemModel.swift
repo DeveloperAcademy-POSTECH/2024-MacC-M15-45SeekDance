@@ -29,7 +29,7 @@ let hiddenItems: [String: Item] = [
         item: "불로초",
         itemImage: "Bullocho",
         itemColor: 0x03787B,
-        achievementId: "infiniteTime",
+        achievementId: "bullocho",
         keyword: "NFC"),
     "Clover": Item(
         item: "네잎 클로버",

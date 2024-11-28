@@ -352,7 +352,7 @@ struct MainViewPhase3: View {
                             isResultViewPresented.toggle()
                             // MARK: - 순위표, 성취 업데이트 하기
                             gameCenterManager.reportCompletedAchievement(achievementId: serialNumber)
-                            gameCenterManager.reportCompletedAchievement(achievementId: "infiniteTime")
+                            gameCenterManager.reportCompletedAchievement(achievementId: "bullocho")
                             updateLeaderboard()
                             if !collectedItems.isCollected(item: "Bullocho") { // 불로초를 처음 획득한다면
                                 collectedItems.collectItem(item: "Bullocho", collectedDate: Date.now)
