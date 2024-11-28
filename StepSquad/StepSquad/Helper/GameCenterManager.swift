@@ -10,7 +10,7 @@ import SwiftUI
 
 class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObject {
     private let leaderboardID: String = "leaderboardPhase2"
-    private var isGameCenterLoggedIn: Bool = false
+    var isGameCenterLoggedIn: Bool = false
     
     // MARK: 게임 센터 계정 인증하기
     func authenticateUser() {
