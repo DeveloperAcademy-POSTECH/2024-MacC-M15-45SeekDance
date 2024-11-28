@@ -25,7 +25,7 @@ class NFCReader: NSObject, NFCTagReaderSessionDelegate {
             return
         }
         session = NFCTagReaderSession(pollingOption: .iso14443, delegate: self, queue: nil)
-        session?.alertMessage = "계단 사랑단 마크를 스캔하세요."
+        session?.alertMessage = "휴대폰 상단부를 태그에 가까이 대주세요"
         session?.begin()
     }
 

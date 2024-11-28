@@ -11,27 +11,27 @@ import CoreNFC
 
 struct MainViewPhase3: View {
     @State var isMaterialSheetPresented: Bool = false
-    @State var isExplainSheetPresented: Bool = false
     @State private var nfcReader: NFCReader?
     @State private var isButtonEnabled: Bool = true
     @State var isResultViewPresented: Bool = false
     @State var isShowingNFCAlert: Bool = false
     @State var buttonCountMessage: String = ""
     @State var isLaunching: Bool = true
-    
+    @State private var completedLevels = CompletedLevels()
+
     @State private var nfcCount: Int = 0
     @State private var nfcMessage: String = ""
-    
-    
+
+    @Environment(\.scenePhase) private var scenePhase
     @Environment(\.modelContext) var context
+
     @Query(sort: [SortDescriptor(\StairStepModel.stairStepDate, order: .forward)]) var stairSteps: [StairStepModel]
     
     @ObservedObject var service = HealthKitService()
     
-    @Environment(\.scenePhase) private var scenePhase
-    
     @AppStorage("HealthKitAuthorized") private var isHealthKitAuthorized = false
-    
+    @AppStorage("isShowingNewItem") private var isShowingNewItem = false
+
     let gameCenterManager = GameCenterManager()
     
     var currentStatus: CurrentStatus = CurrentStatus() {
@@ -52,193 +52,180 @@ struct MainViewPhase3: View {
                     }
                 }
         } else {
-            ZStack() {
-                Color.backgroundColor
-                
-                VStack(spacing: 0) {
-                    Text(service.LastFetchTime.isEmpty == false
-                         ? "당겨서 계단 정보 불러오기\n계단 업데이트: \(service.LastFetchTime)"
-                         : "아직 계단을 안 오르셨군요!\n계단을 오르고 10분 뒤 다시 당겨보세요!")
-                    
-                    .font(.footnote)
-                    .foregroundColor(Color(hex: 0x808080))
-                    .multilineTextAlignment(.center)
-                    .padding(.top, 68)
-                    .padding(.bottom, 8)
-                    
-                    
-                    ScrollView {
-                        Button("clover") {
-                            gameCenterManager.reportCompletedAchievement(achievementId: "clover")
-                        }
-                        VStack(spacing: 0) {
-                            VStack {
-                                if isHealthKitAuthorized {
-                                    LevelUpView
-                                } else {
-                                    GetHealthKitView
-                                }
-                            }.onAppear() {
-                                checkAuthorizationStatus()
-                            }
-                            
-                            Divider()
-                                .background(Color(hex: 0xCAE5B9))
-                                .padding(.horizontal, 16)
-                            
-                            NFCReadingView
-                                .padding(.top, 17)
-                                .padding(.bottom, 17)
-                                .fullScreenCover(isPresented: $isResultViewPresented) {
-                                    ResultView(isResultViewPresented: $isResultViewPresented,
-                                               stairName: nfcMessage,
-                                               stairCount: nfcCount,
-                                               gameCenterManager: gameCenterManager)
-                                }
-                                .onChange(of: isResultViewPresented) {
-                                    startTimer()
-                                }
-                                .alert(isPresented: $isShowingNFCAlert) {
-                                    Alert(title: Text("지원하지 않는 NFC입니다."),
-                                          message: Text("계단에 위치한 NFC를 태그해주세요."),
-                                          dismissButton: .default(Text("확인")))
-                                }
-                        }
-                        .frame(width: 321, height: 524)
-                        .background(Color.white)
-                        .cornerRadius(16)
-                        
-                        HStack {
-                            Button {
-                                // MARK: 성취로 이동
-                                reportMissedAchievement()
-                                gameCenterManager.showAchievements()
-                            } label: {
-                                HStack() {
-                                    Image(systemName: "rectangle.portrait.on.rectangle.portrait.fill")
-                                    Text("달성 뱃지")
-                                }
-                                .padding(.horizontal, 20)
-                                .padding(.vertical, 14)
-                                .frame(width: 156)
-                                .font(.system(size: 17))
-                                .foregroundColor(Color.white)
-                                .background(Color.primaryColor,
-                                            in: RoundedRectangle(cornerRadius: 12))
-                            }
-                            
+            NavigationStack {
+                ZStack() {
+                    Color.backgroundColor
+
+                    VStack(spacing: 0) {
+                        HStack(spacing: 0) {
                             Spacer()
-                            
-                            Button {
-                                // MARK: 순위표로 이동
-                                gameCenterManager.showLeaderboard()
-                            } label: {
-                                HStack() {
-                                    Image(systemName: "figure.stairs")
-                                    Text("나의 순위")
-                                }
-                                .padding(.horizontal, 20)
-                                .padding(.vertical, 14)
-                                .frame(width: 156)
-                                .font(.system(size: 17))
-                                .foregroundColor(Color.white)
-                                .background(Color.primaryColor,
-                                            in: RoundedRectangle(cornerRadius: 12))
+
+                            Text(service.LastFetchTime.isEmpty == false
+                                 ? "당겨서 계단 정보 불러오기\n계단 업데이트: \(service.LastFetchTime)"
+                                 : "아직 계단을 안 오르셨군요!\n계단을 오르고 10분 뒤 다시 당겨보세요!")
+                            .font(.footnote)
+                            .foregroundColor(Color(hex: 0x808080))
+                            .multilineTextAlignment(.center)
+
+                            // TODO: - 헬스킷 권한 허용 여부에 따라 뜨게 하기
+                            Spacer()
+
+                            NavigationLink(destination: ExplainView()) {
+                                Image(systemName: "gear")
+                                    .resizable()
+                                    .frame(width: 22, height: 22)
+                                    .foregroundStyle(Color(hex: 0x6F6F6F))
+                                    .padding(5)
+                                    .background(Color(hex: 0xE1E1E1), in: Circle.circle)
                             }
+
                         }
-                        .padding(.top, 4)
+                        .padding(.top, 68)
+                        .padding(.bottom, 8)
                         .padding(.horizontal, 36)
-                        
-                        EventButtonView
-                            .padding(.top, 4)
-                        
-                        Button {
-                            isExplainSheetPresented.toggle()
-                        } label: {
-                            Image(systemName: "info.circle")
-                                .imageScale(.small)
-                            Text("도움이 필요하신가요?")
-                                .font(.system(size: 12))
+
+                        ScrollView {
+                            VStack(spacing: 0) {
+                                VStack {
+                                    if isHealthKitAuthorized {
+                                        LevelUpView
+                                    } else {
+                                        GetHealthKitView
+                                    }
+                                }.onAppear() {
+                                    checkAuthorizationStatus()
+                                }
+
+                                Divider()
+                                    .background(Color(hex: 0xCAE5B9))
+                                    .padding(.horizontal, 16)
+
+                                NFCReadingView
+                                    .padding(.top, 17)
+                                    .padding(.bottom, 17)
+                                    .fullScreenCover(isPresented: $isResultViewPresented) {
+                                        ResultView(isResultViewPresented: $isResultViewPresented,
+                                                   stairName: nfcMessage,
+                                                   stairCount: nfcCount,
+                                                   gameCenterManager: gameCenterManager)
+                                    }
+                                    .onChange(of: isResultViewPresented) {
+                                        startTimer()
+                                    }
+                                    .alert(isPresented: $isShowingNFCAlert) {
+                                        Alert(title: Text("지원하지 않는 NFC입니다."),
+                                              message: Text("계단에 위치한 NFC를 태그해주세요."),
+                                              dismissButton: .default(Text("확인")))
+                                    }
+                            }
+                            .frame(width: 321, height: 524)
+                            .background(Color.white)
+                            .cornerRadius(16)
+
+                            HStack {
+                                Button {
+                                    // MARK: 성취로 이동
+                                    gameCenterManager.showAchievements()
+                                } label: {
+                                    HStack() {
+                                        Image(systemName: "rectangle.portrait.on.rectangle.portrait.fill")
+                                        Text("달성 뱃지")
+                                    }
+                                    .padding(.horizontal, 20)
+                                    .padding(.vertical, 14)
+                                    .frame(width: 156)
+                                    .font(.system(size: 17))
+                                    .foregroundColor(Color.white)
+                                    .background(Color.primaryColor,
+                                                in: RoundedRectangle(cornerRadius: 12))
+                                }
+
+                                Spacer()
+
+                                Button {
+                                    // MARK: 순위표로 이동
+                                    gameCenterManager.showLeaderboard()
+                                } label: {
+                                    HStack() {
+                                        Image(systemName: "figure.stairs")
+                                        Text("나의 순위")
+                                    }
+                                    .padding(.horizontal, 20)
+                                    .padding(.vertical, 14)
+                                    .frame(width: 156)
+                                    .font(.system(size: 17))
+                                    .foregroundColor(Color.white)
+                                    .background(Color.primaryColor,
+                                                in: RoundedRectangle(cornerRadius: 12))
+                                }
+                            }
+                            .padding(.top, 8)
+                            .padding(.horizontal, 36)
+
+                            // TODO: - 헬스킷 권한 허용 여부에 따라 뜨게 하기
+                            EntryCertificateView
+                                .padding(.top, 24)
+
+                            Spacer()
+                                .frame(minHeight: 100)
                         }
-                        .foregroundColor(Color(hex: 0x0F5E3D))
-                        .padding(.top, 4)
-                        .sheet(isPresented: $isExplainSheetPresented) {
-                            ExplainView()
-                                .presentationDragIndicator(.visible)
-                                .presentationDetents([.large])
+                        .refreshable {
+                            service.getWeeklyStairDataAndSave()
+                            service.fetchAndSaveFlightsClimbedSinceAuthorization()
+                            updateLevelsAndGameCenter()
                         }
+                        .scrollIndicators(ScrollIndicatorVisibility.hidden)
                     }
-                    .refreshable {
+                }
+                .ignoresSafeArea()
+                // MARK: - scenePhase 연결
+                .onChange(of: scenePhase) {
+                    if scenePhase == .active {
                         service.getWeeklyStairDataAndSave()
                         service.fetchAndSaveFlightsClimbedSinceAuthorization()
                         updateLevelsAndGameCenter()
                     }
-                    .scrollIndicators(ScrollIndicatorVisibility.hidden)
                 }
             }
-            .ignoresSafeArea()
-            // MARK: - scenePhase 연결
-            .onChange(of: scenePhase) {
-                if scenePhase == .active {
-                    service.getWeeklyStairDataAndSave()
-                    service.fetchAndSaveFlightsClimbedSinceAuthorization()
-                    updateLevelsAndGameCenter()
-                }
-            }
+            .tint(Color(hex: 0x8BC766))
         }
     }
     
     
     private var GetHealthKitView: some View {
         VStack(spacing: 0) {
-            ZStack() {
-                VStack(spacing: 0) {
-                    HStack(alignment: .top) {
-                        Spacer()
-                        Image("GetHealthKitImage")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 48, height: 62)
-                            .offset(x: 80, y: 20)
-                        Spacer()
-                    }
-                    
-                    Text("계단을 오를수록")
-                        .font(.system(size: 20, weight: .semibold))
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(.black)
-                }
-                Spacer()
-            }
-            
-            Text("몸에 좋은 약재를 얻어요!")
-                .font(.system(size: 20, weight: .semibold))
+            Image("GetHealthKitImage")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 133, height: 133)
+                .padding(.top, 82)
+
+            Text("계단사랑단에 입단하세요!")
+                .font(.system(size: 20, weight: .bold))
                 .multilineTextAlignment(.center)
                 .foregroundColor(.black)
-            
-            
-            
-            Text("오늘 오른 계단 정보부터\n헬스 데이터에서 가져옵니다.")
+                .padding(.top, 20)
+
+            Text("오늘부터 오른 층수 데이터를 추가하면\n진정한 계단사랑단원이 될 수 있어요!")
                 .font(.system(size: 15))
                 .multilineTextAlignment(.center)
-                .padding(.top, 38)
-            
+                .foregroundStyle(Color(red: 0.44, green: 0.44, blue: 0.44))
+                .padding(.top, 8)
+
             Button {
                 service.configure()
             } label: {
-                Text("계단 정보 연결하기")
-                    .padding(.vertical, 14)
-                    .padding(.horizontal, 20)
+                Text("오른 층수 추가하기")
+                    .padding(.vertical, 12)
+                    .padding(.horizontal, 16)
                     .foregroundColor(Color.white)
             }
             .background(Color.secondaryColor,
                         in: RoundedRectangle(cornerRadius: 12))
-            .padding(.top, 62)
-            .padding(.bottom, 55)
-            
-            Spacer()
+            .padding(.top, 40)
+            .padding(.bottom, 60)
         }
-        .padding(.top, 96)
+
     }
     
     private var LevelUpView: some View {
@@ -410,50 +397,15 @@ struct MainViewPhase3: View {
             }
         }
     }
-    
-    private var EventButtonView: some View {
-        Button(action: {
-            if let url = URL(string: "https://docs.google.com/forms/d/e/1FAIpQLSdxLIvw2yrf-ldDe4C4JxBt1lylA1NP6ZX_aK70d5LdslKojw/viewform") {
-                UIApplication.shared.open(url)
-            }
+
+    private var EntryCertificateView: some View {
+        HStack() {
             
-        }) {
-            HStack(spacing: 0) {
-                VStack(alignment: .leading, spacing: 0) {
-                    Text("11/23~12/1")
-                        .font(.system(size: 11))
-                        .foregroundStyle(Color(hex: 0x638D48))
-                        .padding(.horizontal, 4)
-                        .padding(.vertical, 2)
-                        .background(Color(hex: 0xCAE5B9), in: RoundedRectangle(cornerRadius: 8))
-                        .padding(.bottom, 4)
-                    Text("계단 사랑단 개발자를 이기자!")
-                        .font(.system(size: 13, weight: .bold))
-                        .foregroundStyle(Color(hex: 0x3A542B))
-                    Text("순위에서 개발자들을 이기면 선물이 팡팡")
-                        .font(.system(size: 11))
-                        .foregroundStyle(Color(hex: 0x638D48))
-                }
-                
-                Spacer()
-                
-                Image(systemName: "gift.fill")
-                    .resizable()
-                    .frame(width: 29, height: 29)
-                    .foregroundStyle(Color(hex: 0x4C6D38))
-                    .padding(12)
-                    .background(Color(hex: 0xF3F9F0),
-                                in: Circle.circle)
-                
-            }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 12)
-            .background(Color(hex: 0xDBEED0),
-                        in: RoundedRectangle(cornerRadius: 12))
         }
-        .padding(.horizontal, 36)
+        .frame(width: 321, height: 524)
+        .background(Color(hex: 0xB1D998), in: RoundedRectangle(cornerRadius: 24))
     }
-    
+
     // MARK: - 생성자
     init() {
         // MARK: 사용자 게임 센터 인증

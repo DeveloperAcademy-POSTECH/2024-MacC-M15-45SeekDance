@@ -1,19 +1,8 @@
 {
   "images" : [
     {
-      "filename" : "Main.png",
-      "idiom" : "universal",
-      "scale" : "1x"
-    },
-    {
-      "filename" : "Result.png",
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "filename" : "Result 1.png",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "filename" : "ResultTum.png",
+      "idiom" : "universal"
     }
   ],
   "info" : {
