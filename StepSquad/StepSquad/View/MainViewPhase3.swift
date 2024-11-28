@@ -40,6 +40,7 @@ struct MainViewPhase3: View {
             saveCurrentStatus()
         }
     }
+    let electricBirdAchievementCount = UserDefaults.standard.integer(forKey: "electricBirdAchievementCount")
     
     var body: some View {
         if isLaunching {
@@ -526,6 +527,11 @@ struct MainViewPhase3: View {
                 completedLevels.upgradeLevel(level: i, completedDate: Date.now)
                 gameCenterManager.reportCompletedAchievement(achievementId: levels[i]!.achievementId) // 해당 레벨의 성취 달성
             }
+        }
+        if (currentStatus.getTotalStaircase() / 40) > electricBirdAchievementCount { // 누적 오른 층계가
+            print("It's \(currentStatus.getTotalStaircase() / 40) time electric bird achievement!")
+            gameCenterManager.reportCompletedAchievement(achievementId: "electricBird")
+            UserDefaults.standard.setValue(currentStatus.getTotalStaircase() / 40, forKey: "electricBirdAchievementCount")
         }
     }
     
