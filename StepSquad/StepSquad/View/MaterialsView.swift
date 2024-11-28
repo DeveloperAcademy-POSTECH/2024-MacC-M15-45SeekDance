@@ -59,7 +59,7 @@ struct MaterialsView: View {
                                 }
                             }
                             if completedLevels.lastUpdatedLevel >= 1 { // 획득한 약재가 있을 때
-                                Section("레벨 재료") {
+                                Section(header: Text("일반 재료"), footer: Text("일반 재료는 계단 오르기만을 통해서만 얻을 수 있습니다.")) {
                                     ForEach(1...completedLevels.lastUpdatedLevel, id: \.self) { level in
                                         HStack(spacing: 0) {
                                             Image(levels[level]!.itemImage) // 약재 이미지
