@@ -68,6 +68,9 @@ struct MainViewPhase3: View {
                     
                     
                     ScrollView {
+                        Button("clover") {
+                            gameCenterManager.reportCompletedAchievement(achievementId: "clover")
+                        }
                         VStack(spacing: 0) {
                             VStack {
                                 if isHealthKitAuthorized {
@@ -603,7 +606,7 @@ struct MainViewPhase3: View {
         print("현재 단계: \(currentStatus.currentProgress)")
         print("현재 단계 이미지: \(currentStatus.progressImage)")
         print("사용자에게 보여준 마지막 달성 레벨: \(completedLevels.lastUpdatedLevel)")
-        print("collected items: \(collectedItems.getItemsKeys())")
+        print("collected items: \(collectedItems.getSortedItemsNameList())")
     }
     
     // MARK: 헬스킷 권한 받는 함수

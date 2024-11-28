@@ -51,7 +51,7 @@ class CollectedItems: Codable {
         return items.isEmpty
     }
     
-    func getItemsKeys() -> [String] {
-        return items.keys.map(\.self)
+    func getSortedItemsNameList() -> [String] {
+        return items.sorted { (first, second) in return first.value > second.value}.map(\.key)
     }
 }

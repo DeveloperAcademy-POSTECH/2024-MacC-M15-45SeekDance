@@ -27,8 +27,8 @@ struct MaterialsView: View {
                     } else {
                         List {
                             if !collectedItems.isEmpty() { // 획득한 깜짝 재료가 있을 때
-                                Section("깜짝 재료") {
-                                    ForEach(collectedItems.getItemsKeys(), id: \.self) { item in
+                                Section(header: Text("깜짝 재료").bold()) {
+                                    ForEach(collectedItems.getSortedItemsNameList(), id: \.self) { item in
                                         HStack(spacing: 0) {
                                             Image(hiddenItems[item]!.itemImage) // 약재 이미지
                                                 .resizable()
@@ -59,8 +59,8 @@ struct MaterialsView: View {
                                 }
                             }
                             if completedLevels.lastUpdatedLevel >= 1 { // 획득한 약재가 있을 때
-                                Section(header: Text("일반 재료"), footer: Text("일반 재료는 계단 오르기만을 통해서만 얻을 수 있습니다.")) {
-                                    ForEach(1...completedLevels.lastUpdatedLevel, id: \.self) { level in
+                                Section(header: Text("일반 재료").bold(), footer: Text("일반 재료는 계단 오르기만을 통해서만 얻을 수 있습니다.")) {
+                                    ForEach((1...completedLevels.lastUpdatedLevel).reversed(), id: \.self) { level in
                                         HStack(spacing: 0) {
                                             Image(levels[level]!.itemImage) // 약재 이미지
                                                 .resizable()
