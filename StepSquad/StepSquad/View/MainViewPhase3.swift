@@ -18,6 +18,7 @@ struct MainViewPhase3: View {
     @State var buttonCountMessage: String = ""
     @State var isLaunching: Bool = true
     @State private var completedLevels = CompletedLevels()
+    @State private var collectedItems = CollectedItems()
 
     @State private var nfcCount: Int = 0
     @State private var nfcMessage: String = ""
@@ -39,9 +40,6 @@ struct MainViewPhase3: View {
             saveCurrentStatus()
         }
     }
-    @State private var completedLevels = CompletedLevels()
-    @State private var collectedItems = CollectedItems()
-    @AppStorage("isShowingNewItem") private var isShowingNewItem = false
     
     var body: some View {
         if isLaunching {
