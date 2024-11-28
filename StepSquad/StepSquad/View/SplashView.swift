@@ -8,22 +8,34 @@
 import SwiftUI
 
 struct SplashView: View {
+    @State var randomSplashText: String = ""
+    let splashText: [String] = [
+        "계단사랑단 심마니가 되어\n‘한약 재료'를 찾자!",
+        "친구를 추가하면 친구를 이긴뒤\n자랑할 수 있어요!",
+        "엘리베이터 대신 계단을 사용하면\n전기를 절약할 수 있다는 사실!",
+        "계단 한 칸당 건강 수명 4초가\n늘어난다는 소문이 있어요",
+        "앱을 쓰면 개발자 한서영이\n행복해진다는 사실을 아시나요?",
+        "앱을 쓰면 개발자 박수진이\n춤을 춘다는 사실을 아시나요?",
+        "앱을 쓰면 개발자 이그루가\n이얏호를 외친다는 걸 아시나요?",
+        "앱을 쓰면 개발자 정소희가\n노래를 부른다는 사실을 아시나요?",
+    ]
+    
     var body: some View {
         ZStack {
-            Color(hex: 0xF3F9F0)
+            Color(red: 0.95, green: 0.98, blue: 0.94)
 
             VStack(spacing: 0) {
                 Image("SplashIMG")
                     .resizable()
-                    .aspectRatio(1, contentMode: .fit)
-                    .padding(.bottom, 40)
+                    .scaledToFit()
+                    .padding(.bottom, 35)
 
-                Text("심마니가 되어 나와 지구의 수명을 \n연장할 ‘한약 재료'를 찾자!")
-                    .font(Font.custom("SF Pro", size: 15))
+                Text("\(splashText.randomElement() ?? "계단사랑단 심마니가 되어\n‘한약 재료'를 찾자!")")
+                    .font(.system(size: 17, weight: .bold))
                     .multilineTextAlignment(.center)
-                    .foregroundStyle(Color(hex: 0x3A542B))
+                    .foregroundStyle(Color(red: 0.3, green: 0.43, blue: 0.22))
             }
-            .padding(.horizontal, 82)
+            .padding(.horizontal, 60)
         }
         .ignoresSafeArea()
     }
