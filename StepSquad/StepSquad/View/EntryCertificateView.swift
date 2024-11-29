@@ -10,6 +10,8 @@ import SwiftUI
 struct EntryCertificateView: View {
     @State private var formattedDate: String = "입단하세요"
     @State private var dDay: Int = 0
+    @State private var isSharing: Bool = false
+    @State private var sharedImage: UIImage?
 
     var nickName: String?
     var userPlayerImage: Image?
@@ -90,7 +92,7 @@ struct EntryCertificateView: View {
 
                 Button {
                     // TODO: 이미지 익스포팅
-
+                    captureAndShare()
                 } label: {
                     Label("공유하기", systemImage: "square.and.arrow.up")
                         .font(.system(size: 13))
@@ -98,10 +100,10 @@ struct EntryCertificateView: View {
                         .padding(.vertical, 4)
                         .padding(.horizontal, 8)
                 }
-                .background(Color(hex: 0xDBEED0), in: RoundedRectangle(cornerRadius: 8))
+                .background(Color(hex: 0xDBEED0),
+                            in: RoundedRectangle(cornerRadius: 8))
 
             }
-
             .padding(.bottom, 23)
 
         }
@@ -111,6 +113,11 @@ struct EntryCertificateView: View {
                     in: RoundedRectangle(cornerRadius: 12))
         .onAppear {
             loadHealthKitAuthorizationDate()
+        }
+        .sheet(isPresented: $isSharing) {
+            if let sharedImage = sharedImage {
+                ShareSheet(activityItems: [sharedImage])
+            }
         }
     }
 
@@ -146,6 +153,19 @@ struct EntryCertificateView: View {
             dDay = daysPassed + 1
         } else {
             dDay = 0
+        }
+    }
+
+    func captureAndShare() {
+        let renderer = ImageRenderer(content: self)
+
+        // 원하는 해상도로 크기 조정
+        _ = CGSize(width: 321 * 3, height: 560 * 3) // 3배 스케일
+        renderer.scale = 3.0 // 디스플레이의 배율에 따라 조정
+
+        if let uiImage = renderer.uiImage {
+            sharedImage = uiImage
+            isSharing = true
         }
     }
 }
