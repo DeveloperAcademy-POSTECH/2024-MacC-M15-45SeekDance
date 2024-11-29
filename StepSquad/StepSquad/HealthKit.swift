@@ -28,7 +28,6 @@ class HealthKitService: ObservableObject {
     // MARK: - HealthKit 사용 권한을 요청하는 메서드
     // 권한을 요청하고 받은 날짜를 기록하는 메서드
     func configure() {
-        print("1")
         guard HKHealthStore.isHealthDataAvailable() else {
             print("HealthKit 데이터 사용 불가")
             return
@@ -49,18 +48,15 @@ class HealthKitService: ObservableObject {
                 self?.fetchAllFlightsClimbedData()
                 // 권한 요청 날짜를 기록하는 로직
                 self?.storeAuthorizationDate()
-                print("2")
 
                 // 권한 허용 후에만 데이터를 가져오는 로직 실행
                 self?.getWeeklyStairDataAndSave()
                 self?.fetchAndSaveFlightsClimbedSinceAuthorization()
-                print("3")
 
             } else {
                 self?.isHealthKitAuthorized = false
                 //                self?.isHealthKitAuthorized = false
                 print("HealthKit 권한 거부됨")
-                print("4")
                 //                UserDefaults.standard.set(false, forKey: "HealthKitAuthorized")
             }
         }
