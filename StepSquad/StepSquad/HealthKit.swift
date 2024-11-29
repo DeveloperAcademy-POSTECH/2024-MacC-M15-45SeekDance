@@ -22,7 +22,7 @@ class HealthKitService: ObservableObject {
     @AppStorage("TotalFlightsClimbedSinceAuthorization", store: UserDefaults(suiteName: "group.macmac.pratice.carot")) var TotalFlightsClimbedSinceAuthorization: Double = 0.0
     @AppStorage("LastFetchTime", store: UserDefaults(suiteName: "group.macmac.pratice.carot")) var LastFetchTime: String = ""
     @AppStorage("authorizationDateKey", store: UserDefaults(suiteName: "group.macmac.pratice.carot")) var authorizationDateKey: String = ""
-    
+
     
     // MARK: - HealthKit 사용 권한을 요청하는 메서드
     // 권한을 요청하고 받은 날짜를 기록하는 메서드
@@ -131,7 +131,7 @@ class HealthKitService: ObservableObject {
         healthStore.execute(query)
     }
     
-    
+   
     // MARK: - UserDefaults에 토-다음 금요일을 한주로 일주일 치 계단 오르기 수를 호출 및 앱스토리지에 저장하는 함수
     func getWeeklyStairDataAndSave() {
         if let stairType = HKObjectType.quantityType(forIdentifier: .flightsClimbed) {

@@ -190,6 +190,7 @@ struct QuestionsView: View {
             }
             .padding(.top)
         }
+        .tint(Color(hex: 0x3C3C43).opacity(0.3))
     }
 
     func QuestionText(_ text: String) -> some View {
