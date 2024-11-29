@@ -13,20 +13,18 @@ enum Difficulty: String, Codable {
     case hard = "Hard"
     case expert = "Expert"
     case impossible = "Impossible"
-    case nfc = "NFC"
 }
 
 class Level: Codable {
-    var level: Int
-    var minStaircase: Int
-    var maxStaircase: Int
-    var item: String
-    var itemImage: String
-    var difficulty: Difficulty
-    var wikiLink: String
-    var achievementId: String
+    let level: Int
+    let minStaircase: Int
+    let maxStaircase: Int
+    let item: String
+    let itemImage: String
+    let difficulty: Difficulty
+    let wikiLink: String
+    let achievementId: String
     
-    // TODO: - UserDefaults에서 불러올 경우 수정하기
     init(level: Int, minStaircase: Int, maxStaircase: Int, item: String, itemImage: String, difficulty: Difficulty, wikiLink: String, achievementId: String) {
         self.level = level
         self.minStaircase = minStaircase
@@ -41,15 +39,6 @@ class Level: Codable {
 
 // MARK: 레벨 1 ~ 19 저장, 인덱스는 레벨 -1로 활용
 let levels: [Int: Level] = [
-    0: Level(
-        level: 0,
-        minStaircase: -1,
-        maxStaircase: -1,
-        item: "불로초",
-        itemImage: "Bullocho",
-        difficulty: .nfc,
-        wikiLink: "",
-        achievementId: "infiniteTime"),
     1 : Level(
         level: 1,
         minStaircase: 0,
@@ -216,8 +205,8 @@ let levels: [Int: Level] = [
         level: 19,
         minStaircase: 1200,
         maxStaircase: 1439,
-        item: "하수오",
-        itemImage: "19_Hasuo",
+        item: "산삼",
+        itemImage: "19_Sansam",
         difficulty: .impossible,
         wikiLink: "",
         achievementId: "hr24"),
