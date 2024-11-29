@@ -10,11 +10,10 @@ import SwiftUI
 
 struct ResultView: View {
     @Binding var isResultViewPresented: Bool
+    
     var stairName: String = "포스텍 78 계단"
     var stairCount: Int = 78
     var materialName: String = "불로초"
-    
-    var gameCenterManager: GameCenterManager
 
     var body: some View {
         ZStack {
