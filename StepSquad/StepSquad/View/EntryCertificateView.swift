@@ -14,8 +14,8 @@ struct EntryCertificateView: View {
     @State private var sharedImage: UIImage?
     @State private var isButtonClicked: Bool = false
 
-    var nickName: String?
     var userPlayerImage: Image?
+    var nickName: String?
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {

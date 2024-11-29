@@ -170,7 +170,7 @@ struct MainViewPhase3: View {
                                     .padding(.horizontal, 35)
                                     .padding(.vertical, 28)
 
-                                EntryCertificateView(nickName: gameCenterManager.loadLocalPlayerName(), userPlayerImage: userProfileImage)
+                                EntryCertificateView(userPlayerImage: userProfileImage, nickName: gameCenterManager.loadLocalPlayerName())
 
                                 Button {
                                     gameCenterManager.showFriendsList()
