@@ -68,8 +68,7 @@ struct MainViewPhase3: View {
                             .font(.footnote)
                             .foregroundColor(Color(hex: 0x808080))
                             .multilineTextAlignment(.center)
-                            
-                            // TODO: - 헬스킷 권한 허용 여부에 따라 뜨게 하기
+
                             Spacer()
                             
                             NavigationLink(destination: ExplainView()) {
@@ -165,36 +164,37 @@ struct MainViewPhase3: View {
                             .padding(.top, 16)
                             .padding(.horizontal, 36)
                             
-                            // TODO: - 헬스킷 권한 허용 여부에 따라 뜨게 하기
-                            Divider()
-                                .background(Color(hex: 0xCDD3C5))
-                                .padding(.horizontal, 35)
-                                .padding(.vertical, 28)
-                            
-                            EntryCertificateView(nickName: gameCenterManager.loadLocalPlayerName(), userPlayerImage: userProfileImage)
-                            
-                            Button {
-                                gameCenterManager.showFriendsList()
-                                gameCenterManager.reportCompletedAchievement(achievementId: "clover")
-                                if !collectedItems.isCollected(item: "Clover") { // 클로버를 처음 획득한다면
-                                    collectedItems.collectItem(item: "Clover", collectedDate: Date.now)
-                                    isShowingNewItem = true
+                            if isHealthKitAuthorized {
+                                Divider()
+                                    .background(Color(hex: 0xCDD3C5))
+                                    .padding(.horizontal, 35)
+                                    .padding(.vertical, 28)
+
+                                EntryCertificateView(userPlayerImage: userProfileImage, nickName: gameCenterManager.loadLocalPlayerName())
+
+                                Button {
+                                    gameCenterManager.showFriendsList()
+                                    gameCenterManager.reportCompletedAchievement(achievementId: "clover")
+                                    if !collectedItems.isCollected(item: "Clover") { // 클로버를 처음 획득한다면
+                                        collectedItems.collectItem(item: "Clover", collectedDate: Date.now)
+                                        isShowingNewItem = true
+                                    }
+                                } label: {
+                                    HStack() {
+                                        Spacer()
+                                        Label("계단사랑단인 친구 찾기", systemImage: "figure.socialdance")
+                                            .font(Font.custom("SF Pro", size: 17))
+                                            .foregroundColor(Color.white)
+                                        Spacer()
+                                    }
+                                    .padding(.vertical, 14)
                                 }
-                            } label: {
-                                HStack() {
-                                    Spacer()
-                                    Label("계단사랑단 단원 보기", image: "custom.figure.stairs.badge.plus")
-                                        .font(Font.custom("SF Pro", size: 17))
-                                        .foregroundColor(Color.white)
-                                    Spacer()
-                                }
-                                .padding(.vertical, 14)
+                                .background(Color(hex: 0x4C6D38), in: RoundedRectangle(cornerRadius: 12))
+                                .padding(.top, 16)
+                                .padding(.bottom, 51)
+                                .padding(.horizontal, 36)
                             }
-                            .background(Color(hex: 0x4C6D38), in: RoundedRectangle(cornerRadius: 12))
-                            .padding(.top, 16)
-                            .padding(.bottom, 51)
-                            .padding(.horizontal, 36)
-                            
+
                         }
                         .refreshable {
                             service.getWeeklyStairDataAndSave()
@@ -248,7 +248,9 @@ struct MainViewPhase3: View {
             Button {
                 service.configure()
             } label: {
-                Text("오른 층수 추가하기")
+                Label("오른 층수 추가하기",
+                      image: "custom.figure.stairs.badge.plus")
+                //Text("오른 층수 추가하기")
                     .padding(.vertical, 12)
                     .padding(.horizontal, 16)
                     .foregroundColor(Color.white)
@@ -588,11 +590,6 @@ struct MainViewPhase3: View {
         print("현재 단계 이미지: \(currentStatus.progressImage)")
         print("사용자에게 보여준 마지막 달성 레벨: \(completedLevels.lastUpdatedLevel)")
         print("collected items: \(collectedItems.getSortedItemsNameList())")
-    }
-    
-    // MARK: 헬스킷 권한 받는 함수
-    func setup() {
-        service.configure()
     }
 }
 

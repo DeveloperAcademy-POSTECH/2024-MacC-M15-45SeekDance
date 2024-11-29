@@ -10,9 +10,12 @@ import SwiftUI
 struct EntryCertificateView: View {
     @State private var formattedDate: String = "입단하세요"
     @State private var dDay: Int = 0
+    @State private var isSharing: Bool = false
+    @State private var sharedImage: UIImage?
+    @State private var isButtonClicked: Bool = false
 
-    var nickName: String?
     var userPlayerImage: Image?
+    var nickName: String?
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -61,7 +64,6 @@ struct EntryCertificateView: View {
                 }
                 .padding(.top, 24)
                 .padding(.leading, 20)
-
             }
             .padding(.top, 12)
 
@@ -76,7 +78,8 @@ struct EntryCertificateView: View {
 
             Spacer()
 
-            HStack(spacing: 0) {
+
+            HStack(alignment: .bottom, spacing: 0) {
                 Text("계단사랑단")
                     .font(Font.custom("ChosunCentennial", size: 15))
                     .foregroundStyle(Color(hex: 0x3A542B))
@@ -88,20 +91,24 @@ struct EntryCertificateView: View {
 
                 Spacer()
 
-                Button {
-                    // TODO: 이미지 익스포팅
-
-                } label: {
-                    Label("공유하기", systemImage: "square.and.arrow.up")
-                        .font(.system(size: 13))
-                        .foregroundStyle(Color(hex: 0x4C6D38))
-                        .padding(.vertical, 4)
-                        .padding(.horizontal, 8)
+                if !isButtonClicked {
+                    Button {
+                        isButtonClicked = true
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            captureAndShare()
+                            isButtonClicked = false
+                        }
+                    } label: {
+                        Label("공유하기", systemImage: "square.and.arrow.up")
+                            .font(.system(size: 13))
+                            .foregroundStyle(Color(hex: 0x4C6D38))
+                            .padding(.vertical, 4)
+                            .padding(.horizontal, 8)
+                    }
+                    .background(Color(hex: 0xDBEED0),
+                                in: RoundedRectangle(cornerRadius: 8))
                 }
-                .background(Color(hex: 0xDBEED0), in: RoundedRectangle(cornerRadius: 8))
-
             }
-
             .padding(.bottom, 23)
 
         }
@@ -112,6 +119,11 @@ struct EntryCertificateView: View {
         .onAppear {
             loadHealthKitAuthorizationDate()
         }
+        .sheet(isPresented: $isSharing) {
+            if let sharedImage = sharedImage {
+                ShareSheet(activityItems: [sharedImage])
+            }
+        }
     }
 
     // MARK: - 유저디폴트에 저장된 날짜 가져오기
@@ -119,8 +131,8 @@ struct EntryCertificateView: View {
         let userDefaults = UserDefaults.standard
 
         if let storedDate = userDefaults.object(forKey: "HealthKitAuthorizationDate") as? Date {
-            // 날짜 형식화
             let formatter = DateFormatter()
+
             formatter.dateFormat = "yyyy년 MM월 dd일"
             formatter.locale = Locale(identifier: "ko_KR")
             formatter.timeZone = TimeZone(identifier: "Asia/Seoul")
@@ -146,6 +158,19 @@ struct EntryCertificateView: View {
             dDay = daysPassed + 1
         } else {
             dDay = 0
+        }
+    }
+
+    func captureAndShare() {
+        let renderer = ImageRenderer(content: self)
+
+        // 원하는 해상도로 크기 조정
+        _ = CGSize(width: 321 * 3, height: 560 * 3) // 3배 스케일
+        renderer.scale = 3.0 // 디스플레이의 배율에 따라 조정
+
+        if let uiImage = renderer.uiImage {
+            sharedImage = uiImage
+            isSharing = true
         }
     }
 }

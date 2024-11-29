@@ -48,13 +48,13 @@ class HealthKitService: ObservableObject {
                 self?.fetchAllFlightsClimbedData()
                 // 권한 요청 날짜를 기록하는 로직
                 self?.storeAuthorizationDate()
-                
+
                 // 권한 허용 후에만 데이터를 가져오는 로직 실행
                 self?.getWeeklyStairDataAndSave()
                 self?.fetchAndSaveFlightsClimbedSinceAuthorization()
-                print("계단 사랑해")
-                
+
             } else {
+                self?.isHealthKitAuthorized = false
                 //                self?.isHealthKitAuthorized = false
                 print("HealthKit 권한 거부됨")
                 //                UserDefaults.standard.set(false, forKey: "HealthKitAuthorized")
