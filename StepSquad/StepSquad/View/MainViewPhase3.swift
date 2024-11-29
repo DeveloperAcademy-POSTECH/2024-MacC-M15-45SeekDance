@@ -105,8 +105,7 @@ struct MainViewPhase3: View {
                                     .fullScreenCover(isPresented: $isResultViewPresented) {
                                         ResultView(isResultViewPresented: $isResultViewPresented,
                                                    stairName: nfcMessage,
-                                                   stairCount: nfcCount,
-                                                   gameCenterManager: gameCenterManager)
+                                                   stairCount: nfcCount)
                                     }
                                     .onChange(of: isResultViewPresented) {
                                         startTimer()

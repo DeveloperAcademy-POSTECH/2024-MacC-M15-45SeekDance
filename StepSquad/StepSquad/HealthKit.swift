@@ -178,7 +178,6 @@ class HealthKitService: ObservableObject {
                         self.TodayFlightsClimbed = totalFlightsClimbed
                     }
                     
-                    WidgetCenter.shared.reloadAllTimelines()
                 } else {
                     print("UserDefaults에 접근하는 데 실패했습니다.")
                 }
