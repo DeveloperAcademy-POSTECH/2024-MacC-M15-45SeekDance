@@ -11,22 +11,11 @@ import Foundation
 import SwiftUI
 
 
-// 계단 오름 샘플 데이터를 저장할 구조체
-struct StairClimbSample: Identifiable {
-    let id = UUID()
-    let flightsClimbed: Double // 오른 층 수
-    let startDate: Date // 계단 오름 시작 시각
-    let endDate: Date // 계단 오름 종료 시각
-    let source: String // 데이터 수집 장비 이름 (iPhone, Apple Watch 등)
-}
 
 // HealthKitService 클래스 내에 추가
 class HealthKitService: ObservableObject {
     
     let healthStore = HKHealthStore()
-    
-    // 계단 오름 샘플 데이터를 저장할 배열
-    @Published var stairClimbData = [StairClimbSample]()
     
     @AppStorage("TodayFlightsClimbed", store: UserDefaults(suiteName: "group.macmac.pratice.carot")) var TodayFlightsClimbed: Double = 0.0
     @AppStorage("WeeklyFlightsClimbed", store: UserDefaults(suiteName: "group.macmac.pratice.carot")) var weeklyFlightsClimbed: Double = 0.0
@@ -140,66 +129,6 @@ class HealthKitService: ObservableObject {
         }
         
         healthStore.execute(query)
-    }
-    
-    
-    // MARK: - 오늘 계단 오르기 수를 호출 및 앱스토리지 저장하는 함수
-    func getTodayStairDataAndSave() {
-        if let stairType = HKObjectType.quantityType(forIdentifier: .flightsClimbed) {
-            let calendar = Calendar.current
-            let endDate = Date()
-            let startDate = calendar.startOfDay(for: endDate)
-            let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: [])
-            let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
-            
-            let query = HKSampleQuery(sampleType: stairType, predicate: predicate, limit: 100, sortDescriptors: [sortDescriptor]) { (query, result, error) in
-                if let error = error {
-                    print("오늘의 계단 오르기 데이터 가져오기 오류: \(error.localizedDescription)")
-                    return
-                }
-                
-                guard let result = result, !result.isEmpty else {
-                    print("오늘의 계단 오르기 데이터가 없습니다.")
-                    return
-                }
-                
-                var totalFlightsClimbed: Double = 0.0
-                
-                for item in result {
-                    if let sample = item as? HKQuantitySample {
-                        let flights = sample.quantity.doubleValue(for: HKUnit.count())
-                        totalFlightsClimbed += flights
-                    }
-                }
-                
-                if let userDefaults = UserDefaults(suiteName: "group.macmac.pratice.carot") {
-                    userDefaults.set(totalFlightsClimbed, forKey: "TodayFlightsClimbed")
-                    print("오늘 오른 계단 수 \(totalFlightsClimbed)를 App Group UserDefaults에 저장했습니다.")
-                    
-                    DispatchQueue.main.async {
-                        self.TodayFlightsClimbed = totalFlightsClimbed
-                    }
-                    
-                    WidgetCenter.shared.reloadAllTimelines()
-                } else {
-                    print("UserDefaults에 접근하는 데 실패했습니다.")
-                }
-                
-                DispatchQueue.main.async {
-                    self.stairClimbData = result.compactMap { item in
-                        guard let sample = item as? HKQuantitySample else { return nil }
-                        let flights = sample.quantity.doubleValue(for: HKUnit.count())
-                        let startDate = sample.startDate
-                        let endDate = sample.endDate
-                        let sourceName = sample.sourceRevision.source.name
-                        return StairClimbSample(flightsClimbed: flights, startDate: startDate, endDate: endDate, source: sourceName)
-                    }
-                }
-            }
-            healthStore.execute(query)
-        } else {
-            print("계단 오르기 데이터 타입을 찾을 수 없습니다.")
-        }
     }
     
     
