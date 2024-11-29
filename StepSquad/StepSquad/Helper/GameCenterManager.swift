@@ -156,7 +156,7 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
     }
     
     // MARK: 친구 목록 보기
-    func addFriends() {
+    func showFriendsList() {
         let viewController = GKGameCenterViewController(state: .localPlayerFriendsList)
         viewController.gameCenterDelegate = self
         

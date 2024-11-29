@@ -173,7 +173,7 @@ struct MainViewPhase3: View {
                             EntryCertificateView(nickName: gameCenterManager.loadLocalPlayerName(), userPlayerImage: userProfileImage)
 
                             Button {
-                                //
+                                gameCenterManager.showFriendsList()
                             } label: {
                                 HStack() {
                                     Spacer()
