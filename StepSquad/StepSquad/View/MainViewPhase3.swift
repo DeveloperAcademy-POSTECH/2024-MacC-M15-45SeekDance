@@ -20,6 +20,8 @@ struct MainViewPhase3: View {
     @State private var completedLevels = CompletedLevels()
     @State private var collectedItems = CollectedItems()
     
+    @State var userProfileImage: Image?
+
     @State private var nfcCount: Int = 0
     @State private var nfcMessage: String = ""
     
@@ -79,8 +81,8 @@ struct MainViewPhase3: View {
                             }
                             
                         }
-                        .padding(.top, 68)
-                        .padding(.bottom, 8)
+                        .padding(.top, 72)
+                        .padding(.bottom, 4)
                         .padding(.horizontal, 36)
                         
                         ScrollView {
@@ -91,7 +93,8 @@ struct MainViewPhase3: View {
                                     } else {
                                         GetHealthKitView
                                     }
-                                }.onAppear() {
+                                }
+                                .onAppear() {
                                     checkAuthorizationStatus()
                                 }
                                 
@@ -105,8 +108,7 @@ struct MainViewPhase3: View {
                                     .fullScreenCover(isPresented: $isResultViewPresented) {
                                         ResultView(isResultViewPresented: $isResultViewPresented,
                                                    stairName: nfcMessage,
-                                                   stairCount: nfcCount,
-                                                   gameCenterManager: gameCenterManager)
+                                                   stairCount: nfcCount)
                                     }
                                     .onChange(of: isResultViewPresented) {
                                         startTimer()
@@ -120,7 +122,8 @@ struct MainViewPhase3: View {
                             .frame(width: 321, height: 524)
                             .background(Color.white)
                             .cornerRadius(16)
-                            
+                            .padding(.top, 20)
+
                             HStack {
                                 Button {
                                     // MARK: 성취로 이동
@@ -135,7 +138,7 @@ struct MainViewPhase3: View {
                                     .frame(width: 156)
                                     .font(.system(size: 17))
                                     .foregroundColor(Color.white)
-                                    .background(Color.primaryColor,
+                                    .background(Color(hex: 0x4C6D38),
                                                 in: RoundedRectangle(cornerRadius: 12))
                                 }
                                 
@@ -154,19 +157,38 @@ struct MainViewPhase3: View {
                                     .frame(width: 156)
                                     .font(.system(size: 17))
                                     .foregroundColor(Color.white)
-                                    .background(Color.primaryColor,
+                                    .background(Color(hex: 0x4C6D38),
                                                 in: RoundedRectangle(cornerRadius: 12))
                                 }
                             }
-                            .padding(.top, 8)
+                            .padding(.top, 16)
                             .padding(.horizontal, 36)
                             
                             // TODO: - 헬스킷 권한 허용 여부에 따라 뜨게 하기
-                            EntryCertificateView
-                                .padding(.top, 24)
-                            
-                            Spacer()
-                                .frame(minHeight: 100)
+                            Divider()
+                                .background(Color(hex: 0xCDD3C5))
+                                .padding(.horizontal, 35)
+                                .padding(.vertical, 28)
+
+                            EntryCertificateView(nickName: gameCenterManager.loadLocalPlayerName(), userPlayerImage: userProfileImage)
+
+                            Button {
+                                //
+                            } label: {
+                                HStack() {
+                                    Spacer()
+                                    Label("계단사랑단 단원 보기", image: "custom.figure.stairs.badge.plus")
+                                        .font(Font.custom("SF Pro", size: 17))
+                                        .foregroundColor(Color.white)
+                                    Spacer()
+                                }
+                                .padding(.vertical, 14)
+                            }
+                            .background(Color(hex: 0x4C6D38), in: RoundedRectangle(cornerRadius: 12))
+                            .padding(.top, 16)
+                            .padding(.bottom, 51)
+                            .padding(.horizontal, 36)
+
                         }
                         .refreshable {
                             service.getWeeklyStairDataAndSave()
@@ -174,6 +196,12 @@ struct MainViewPhase3: View {
                             updateLevelsAndGameCenter()
                         }
                         .scrollIndicators(ScrollIndicatorVisibility.hidden)
+                        .onAppear {
+                            Task {
+                                await gameCenterManager.loadLocalPlayerImage()
+                                userProfileImage = await gameCenterManager.loadLocalPlayerImage()
+                            }
+                        }
                     }
                 }
                 .ignoresSafeArea()
@@ -300,7 +328,7 @@ struct MainViewPhase3: View {
                 .padding(.vertical, 7)
                 .padding(.horizontal, 14)
                 .foregroundStyle(Color.white)
-                .background(Color.secondaryColor, in: RoundedRectangle(cornerRadius: 30))
+                .background(Color(hex: 0x864035), in: RoundedRectangle(cornerRadius: 30))
             }
             .padding(.top, 16)
             .padding(.bottom, 28)
@@ -396,15 +424,7 @@ struct MainViewPhase3: View {
             }
         }
     }
-    
-    private var EntryCertificateView: some View {
-        HStack() {
-            
-        }
-        .frame(width: 321, height: 524)
-        .background(Color(hex: 0xB1D998), in: RoundedRectangle(cornerRadius: 24))
-    }
-    
+
     // MARK: - 생성자
     init() {
         // MARK: 사용자 게임 센터 인증

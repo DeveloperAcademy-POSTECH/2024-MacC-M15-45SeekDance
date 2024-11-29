@@ -6,8 +6,6 @@
 //
 
 import HealthKit
-import WidgetKit
-import Foundation
 import SwiftUI
 
 
@@ -27,13 +25,13 @@ class HealthKitService: ObservableObject {
     
     // 계단 오름 샘플 데이터를 저장할 배열
     @Published var stairClimbData = [StairClimbSample]()
-    
+
     @AppStorage("TodayFlightsClimbed", store: UserDefaults(suiteName: "group.macmac.pratice.carot")) var TodayFlightsClimbed: Double = 0.0
     @AppStorage("WeeklyFlightsClimbed", store: UserDefaults(suiteName: "group.macmac.pratice.carot")) var weeklyFlightsClimbed: Double = 0.0
     @AppStorage("TotalFlightsClimbedSinceAuthorization", store: UserDefaults(suiteName: "group.macmac.pratice.carot")) var TotalFlightsClimbedSinceAuthorization: Double = 0.0
     @AppStorage("LastFetchTime", store: UserDefaults(suiteName: "group.macmac.pratice.carot")) var LastFetchTime: String = ""
     @AppStorage("authorizationDateKey", store: UserDefaults(suiteName: "group.macmac.pratice.carot")) var authorizationDateKey: String = ""
-    
+
     
     // MARK: - HealthKit 사용 권한을 요청하는 메서드
     // 권한을 요청하고 받은 날짜를 기록하는 메서드
@@ -180,7 +178,6 @@ class HealthKitService: ObservableObject {
                         self.TodayFlightsClimbed = totalFlightsClimbed
                     }
                     
-                    WidgetCenter.shared.reloadAllTimelines()
                 } else {
                     print("UserDefaults에 접근하는 데 실패했습니다.")
                 }
