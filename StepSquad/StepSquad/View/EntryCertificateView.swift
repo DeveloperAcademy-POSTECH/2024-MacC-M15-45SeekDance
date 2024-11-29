@@ -12,7 +12,7 @@ struct EntryCertificateView: View {
     @State private var dDay: Int = 0
     @State private var isSharing: Bool = false
     @State private var sharedImage: UIImage?
-    @State private var isButtonClicked: Bool = false // 버튼 숨김 상태 관리
+    @State private var isButtonClicked: Bool = false
 
     var nickName: String?
     var userPlayerImage: Image?
@@ -79,7 +79,7 @@ struct EntryCertificateView: View {
             Spacer()
 
 
-            HStack(spacing: 0) {
+            HStack(alignment: .bottom, spacing: 0) {
                 Text("계단사랑단")
                     .font(Font.custom("ChosunCentennial", size: 15))
                     .foregroundStyle(Color(hex: 0x3A542B))
@@ -93,11 +93,10 @@ struct EntryCertificateView: View {
 
                 if !isButtonClicked {
                     Button {
-                        // 버튼 숨김 -> 캡처 수행
                         isButtonClicked = true
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                             captureAndShare()
-                            isButtonClicked = false // 캡처 후 버튼 복원
+                            isButtonClicked = false
                         }
                     } label: {
                         Label("공유하기", systemImage: "square.and.arrow.up")
@@ -132,8 +131,8 @@ struct EntryCertificateView: View {
         let userDefaults = UserDefaults.standard
 
         if let storedDate = userDefaults.object(forKey: "HealthKitAuthorizationDate") as? Date {
-            // 날짜 형식화
             let formatter = DateFormatter()
+
             formatter.dateFormat = "yyyy년 MM월 dd일"
             formatter.locale = Locale(identifier: "ko_KR")
             formatter.timeZone = TimeZone(identifier: "Asia/Seoul")
