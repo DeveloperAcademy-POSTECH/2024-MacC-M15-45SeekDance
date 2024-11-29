@@ -18,6 +18,8 @@ struct MainViewPhase3: View {
     @State var buttonCountMessage: String = ""
     @State var isLaunching: Bool = true
     @State private var completedLevels = CompletedLevels()
+    @State private var collectedItems = CollectedItems()
+    
     @State var userProfileImage: Image?
     
     @State private var nfcCount: Int = 0
@@ -41,6 +43,7 @@ struct MainViewPhase3: View {
             saveCurrentStatus()
         }
     }
+    let electricBirdAchievementCount = UserDefaults.standard.integer(forKey: "electricBirdAchievementCount")
     
     var body: some View {
         if isLaunching {
@@ -171,7 +174,12 @@ struct MainViewPhase3: View {
                             EntryCertificateView(nickName: gameCenterManager.loadLocalPlayerName(), userPlayerImage: userProfileImage)
                             
                             Button {
-                                //
+                                gameCenterManager.showFriendsList()
+                                gameCenterManager.reportCompletedAchievement(achievementId: "clover")
+                                if !collectedItems.isCollected(item: "Clover") { // 클로버를 처음 획득한다면
+                                    collectedItems.collectItem(item: "Clover", collectedDate: Date.now)
+                                    isShowingNewItem = true
+                                }
                             } label: {
                                 HStack() {
                                     Spacer()
@@ -308,7 +316,7 @@ struct MainViewPhase3: View {
             Text("\(currentStatus.currentLevel.maxStaircase + 1)층 올라가기")
                 .font(.system(size: 20, weight: .semibold))
                 .padding(.top, 8)
-            Text("\(service.TotalFlightsClimbedSinceAuthorization, specifier: "%.0f") 층 올라가는 중")
+            Text("\(currentStatus.getTotalStaircase())층 올라가는 중")
                 .font(.system(size: 12))
                 .foregroundStyle(Color(hex: 0x3C3C43))
                 .padding(.top, 4)
@@ -331,7 +339,7 @@ struct MainViewPhase3: View {
             .padding(.top, 16)
             .padding(.bottom, 28)
             .sheet(isPresented: $isMaterialSheetPresented) {
-                MaterialsView(isMaterialSheetPresented: $isMaterialSheetPresented, isShowingNewItem: $isShowingNewItem, completedLevels: completedLevels)
+                MaterialsView(isMaterialSheetPresented: $isMaterialSheetPresented, isShowingNewItem: $isShowingNewItem, completedLevels: completedLevels, collectedItems: collectedItems)
             }
         }
         .onAppear {
@@ -380,10 +388,10 @@ struct MainViewPhase3: View {
                             isResultViewPresented.toggle()
                             // MARK: - 순위표, 성취 업데이트 하기
                             gameCenterManager.reportCompletedAchievement(achievementId: serialNumber)
-                            gameCenterManager.reportCompletedAchievement(achievementId: "infiniteTime")
+                            gameCenterManager.reportCompletedAchievement(achievementId: "bullocho")
                             updateLeaderboard()
-                            if !completedLevels.isCompleted(level: 0) { // 불로초를 처음 획득한다면
-                                completedLevels.upgradeLevel(level: 0, completedDate: Date.now)
+                            if !collectedItems.isCollected(item: "Bullocho") { // 불로초를 처음 획득한다면
+                                collectedItems.collectItem(item: "Bullocho", collectedDate: Date.now)
                                 isShowingNewItem = true
                             }
                         } else {
@@ -512,7 +520,7 @@ struct MainViewPhase3: View {
         let weeklyNfcPoint = weeklyScore(from: stairSteps)
         service.getWeeklyStairDataAndSave()
         let weeklyStairPoint = service.weeklyFlightsClimbed * 16
-        //        print("이번주 걸은 층계 * 16: \(weeklyStairPoint), nfc 점수: \(weeklyNfcPoint)")
+        //                print("이번주 걸은 층계 * 16: \(weeklyStairPoint), nfc 점수: \(weeklyNfcPoint)")
         Task {
             await gameCenterManager.submitPoint(point: Int(weeklyNfcPoint) + Int(weeklyStairPoint))
         }
@@ -545,6 +553,20 @@ struct MainViewPhase3: View {
                 gameCenterManager.reportCompletedAchievement(achievementId: levels[i]!.achievementId) // 해당 레벨의 성취 달성
             }
         }
+        if (currentStatus.getTotalStaircase() / 40) > electricBirdAchievementCount { // 누적 오른 층계가
+            print("It's \(currentStatus.getTotalStaircase() / 40) time electric bird achievement!")
+            gameCenterManager.reportCompletedAchievement(achievementId: "electricBird")
+            UserDefaults.standard.setValue(currentStatus.getTotalStaircase() / 40, forKey: "electricBirdAchievementCount")
+        }
+    }
+    
+    // MARK: 오프라인 환경에서 받지 못한 레벨 성취 다시 주기
+    func reportMissedAchievement() {
+        if completedLevels.lastUpdatedLevel >= 1 {
+            for level in 1...completedLevels.lastUpdatedLevel {
+                gameCenterManager.reportCompletedAchievement(achievementId: levels[level]!.achievementId)
+            }
+        }
     }
     
     // MARK: 헬스킷 업데이트 주기마다 레벨 관련 변경하고, 게임센터 업데이트하는 것 모두 모은 함수
@@ -565,6 +587,7 @@ struct MainViewPhase3: View {
         print("현재 단계: \(currentStatus.currentProgress)")
         print("현재 단계 이미지: \(currentStatus.progressImage)")
         print("사용자에게 보여준 마지막 달성 레벨: \(completedLevels.lastUpdatedLevel)")
+        print("collected items: \(collectedItems.getSortedItemsNameList())")
     }
     
     // MARK: 헬스킷 권한 받는 함수

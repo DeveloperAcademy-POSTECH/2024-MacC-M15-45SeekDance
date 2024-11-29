@@ -35,7 +35,7 @@ class CompletedLevels: Codable {
             let data = try JSONEncoder().encode(levels)
             try data.write(to: savePath, options: [.atomic, .completeFileProtection])
         } catch {
-            print("Unable to save data.")
+            print("Unable to save completed levels.")
         }
     }
     
