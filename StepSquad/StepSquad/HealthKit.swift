@@ -6,32 +6,24 @@
 //
 
 import HealthKit
+import WidgetKit
+import Foundation
 import SwiftUI
 
 
-// 계단 오름 샘플 데이터를 저장할 구조체
-struct StairClimbSample: Identifiable {
-    let id = UUID()
-    let flightsClimbed: Double // 오른 층 수
-    let startDate: Date // 계단 오름 시작 시각
-    let endDate: Date // 계단 오름 종료 시각
-    let source: String // 데이터 수집 장비 이름 (iPhone, Apple Watch 등)
-}
 
 // HealthKitService 클래스 내에 추가
 class HealthKitService: ObservableObject {
     
     let healthStore = HKHealthStore()
     
-    // 계단 오름 샘플 데이터를 저장할 배열
-    @Published var stairClimbData = [StairClimbSample]()
-
     @AppStorage("TodayFlightsClimbed", store: UserDefaults(suiteName: "group.macmac.pratice.carot")) var TodayFlightsClimbed: Double = 0.0
     @AppStorage("WeeklyFlightsClimbed", store: UserDefaults(suiteName: "group.macmac.pratice.carot")) var weeklyFlightsClimbed: Double = 0.0
     @AppStorage("TotalFlightsClimbedSinceAuthorization", store: UserDefaults(suiteName: "group.macmac.pratice.carot")) var TotalFlightsClimbedSinceAuthorization: Double = 0.0
     @AppStorage("LastFetchTime", store: UserDefaults(suiteName: "group.macmac.pratice.carot")) var LastFetchTime: String = ""
     @AppStorage("authorizationDateKey", store: UserDefaults(suiteName: "group.macmac.pratice.carot")) var authorizationDateKey: String = ""
-
+    @AppStorage("HealthKitAuthorized") var isHealthKitAuthorized: Bool = false // AppStorage로 데이터 관리
+    
     
     // MARK: - HealthKit 사용 권한을 요청하는 메서드
     // 권한을 요청하고 받은 날짜를 기록하는 메서드
@@ -51,18 +43,21 @@ class HealthKitService: ObservableObject {
             
             if success {
                 //   print("HealthKit 권한 허용됨")
-                UserDefaults.standard.set(true, forKey: "HealthKitAuthorized")
-                
+                //                self?.isHealthKitAuthorized = true
+                //                UserDefaults.standard.set(true, forKey: "HealthKitAuthorized")
+                self?.fetchAllFlightsClimbedData()
                 // 권한 요청 날짜를 기록하는 로직
                 self?.storeAuthorizationDate()
                 
                 // 권한 허용 후에만 데이터를 가져오는 로직 실행
                 self?.getWeeklyStairDataAndSave()
                 self?.fetchAndSaveFlightsClimbedSinceAuthorization()
+                print("계단 사랑해")
                 
             } else {
+                //                self?.isHealthKitAuthorized = false
                 print("HealthKit 권한 거부됨")
-                UserDefaults.standard.set(false, forKey: "HealthKitAuthorized")
+                //                UserDefaults.standard.set(false, forKey: "HealthKitAuthorized")
             }
         }
     }
@@ -140,64 +135,45 @@ class HealthKitService: ObservableObject {
         healthStore.execute(query)
     }
     
-    
-    // MARK: - 오늘 계단 오르기 수를 호출 및 앱스토리지 저장하는 함수
-    func getTodayStairDataAndSave() {
-        if let stairType = HKObjectType.quantityType(forIdentifier: .flightsClimbed) {
-            let calendar = Calendar.current
-            let endDate = Date()
-            let startDate = calendar.startOfDay(for: endDate)
-            let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: [])
-            let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
-            
-            let query = HKSampleQuery(sampleType: stairType, predicate: predicate, limit: 100, sortDescriptors: [sortDescriptor]) { (query, result, error) in
-                if let error = error {
-                    print("오늘의 계단 오르기 데이터 가져오기 오류: \(error.localizedDescription)")
-                    return
-                }
-                
-                guard let result = result, !result.isEmpty else {
-                    print("오늘의 계단 오르기 데이터가 없습니다.")
-                    return
-                }
-                
-                var totalFlightsClimbed: Double = 0.0
-                
-                for item in result {
-                    if let sample = item as? HKQuantitySample {
-                        let flights = sample.quantity.doubleValue(for: HKUnit.count())
-                        totalFlightsClimbed += flights
-                    }
-                }
-                
-                if let userDefaults = UserDefaults(suiteName: "group.macmac.pratice.carot") {
-                    userDefaults.set(totalFlightsClimbed, forKey: "TodayFlightsClimbed")
-                    print("오늘 오른 계단 수 \(totalFlightsClimbed)를 App Group UserDefaults에 저장했습니다.")
-                    
-                    DispatchQueue.main.async {
-                        self.TodayFlightsClimbed = totalFlightsClimbed
-                    }
-                    
-                } else {
-                    print("UserDefaults에 접근하는 데 실패했습니다.")
-                }
-                
-                DispatchQueue.main.async {
-                    self.stairClimbData = result.compactMap { item in
-                        guard let sample = item as? HKQuantitySample else { return nil }
-                        let flights = sample.quantity.doubleValue(for: HKUnit.count())
-                        let startDate = sample.startDate
-                        let endDate = sample.endDate
-                        let sourceName = sample.sourceRevision.source.name
-                        return StairClimbSample(flightsClimbed: flights, startDate: startDate, endDate: endDate, source: sourceName)
-                    }
-                }
-            }
-            healthStore.execute(query)
-        } else {
+    func fetchAllFlightsClimbedData() {
+        guard let flightsClimbedType = HKObjectType.quantityType(forIdentifier: .flightsClimbed) else {
             print("계단 오르기 데이터 타입을 찾을 수 없습니다.")
+            return
         }
+        
+        // 전체 데이터를 가져오기 위해 시작일과 종료일을 nil로 설정
+        let predicate = HKQuery.predicateForSamples(withStart: nil, end: nil, options: [])
+        
+        // 사용자가 입력한 데이터 제외 조건 추가 (선택 사항)
+        let userEnteredPredicate = NSPredicate(format: "metadata.%K != YES", HKMetadataKeyWasUserEntered)
+        let combinedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, userEnteredPredicate])
+        
+        let query = HKStatisticsQuery(quantityType: flightsClimbedType, quantitySamplePredicate: combinedPredicate, options: .cumulativeSum) { [weak self] _, result, error in
+            if let error = error {
+                print("전체 계단 오르기 데이터 가져오기 오류: \(error.localizedDescription)")
+                DispatchQueue.main.async {
+                    self?.isHealthKitAuthorized = false
+                }
+                return
+            }
+            
+            let totalFlightsClimbed = result?.sumQuantity()?.doubleValue(for: HKUnit.count()) ?? 0.0
+            
+            DispatchQueue.main.async {
+                // 데이터 값에 따라 isHealthKitAuthorized 업데이트
+                if totalFlightsClimbed > 0 {
+                    self?.isHealthKitAuthorized = true
+                } else {
+                    self?.isHealthKitAuthorized = false
+                }
+                
+                print("전체 계단 오르기 데이터: \(totalFlightsClimbed)")
+            }
+        }
+        
+        healthStore.execute(query)
     }
+    
     
     
     // MARK: - UserDefaults에 토-다음 금요일을 한주로 일주일 치 계단 오르기 수를 호출 및 앱스토리지에 저장하는 함수

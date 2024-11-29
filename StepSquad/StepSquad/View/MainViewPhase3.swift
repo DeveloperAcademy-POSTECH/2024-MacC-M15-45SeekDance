@@ -32,7 +32,8 @@ struct MainViewPhase3: View {
     
     @ObservedObject var service = HealthKitService()
     
-    @AppStorage("HealthKitAuthorized") private var isHealthKitAuthorized = false
+    @AppStorage("HealthKitAuthorized") var isHealthKitAuthorized: Bool = false
+    
     @AppStorage("isShowingNewItem") private var isShowingNewItem = false
     
     let gameCenterManager = GameCenterManager()
@@ -95,7 +96,7 @@ struct MainViewPhase3: View {
                                     }
                                 }
                                 .onAppear() {
-                                    checkAuthorizationStatus()
+                                    service.fetchAllFlightsClimbedData()
                                 }
                                 
                                 Divider()
@@ -347,6 +348,7 @@ struct MainViewPhase3: View {
             service.getWeeklyStairDataAndSave()
             service.fetchAndSaveFlightsClimbedSinceAuthorization()
             updateLevelsAndGameCenter()
+            service.fetchAllFlightsClimbedData()
         }
     }
     
@@ -591,15 +593,6 @@ struct MainViewPhase3: View {
     // MARK: 헬스킷 권한 받는 함수
     func setup() {
         service.configure()
-    }
-    
-    // MARK: 헬스킷 권한 확인하고 조건부로 뷰를 빌드하는 함수
-    private func checkAuthorizationStatus() {
-        if service.authorizationDateKey.isEmpty {
-            print("1")
-        } else {
-            print("2")
-        }
     }
 }
 
