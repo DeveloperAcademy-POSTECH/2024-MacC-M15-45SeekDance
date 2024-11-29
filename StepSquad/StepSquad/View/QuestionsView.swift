@@ -9,16 +9,7 @@
 import SwiftUI
 
 struct QuestionsView: View {
-    @State private var expandedGroup: Int? = nil {
-        didSet {
-            if expandedGroup == 13 {
-                gameCenterManager.reportCompletedAchievement(achievementId: "clover")
-            }
-        }
-    }
-    
-    // TODO: - 어떻게 하면 좋을까?
-    let gameCenterManager = GameCenterManager()
+    @State private var expandedGroup: Int? = nil
 
     var body: some View {
         ZStack(alignment: .topTrailing) {

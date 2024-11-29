@@ -174,6 +174,9 @@ struct MainViewPhase3: View {
 
                             Button {
                                 gameCenterManager.showFriendsList()
+                                gameCenterManager.reportCompletedAchievement(achievementId: "clover")
+                                collectedItems.collectItem(item: "Clover", collectedDate: Date.now)
+                                isShowingNewItem = true
                             } label: {
                                 HStack() {
                                     Spacer()
