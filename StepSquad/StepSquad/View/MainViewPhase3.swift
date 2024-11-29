@@ -21,7 +21,7 @@ struct MainViewPhase3: View {
     @State private var collectedItems = CollectedItems()
     
     @State var userProfileImage: Image?
-
+    
     @State private var nfcCount: Int = 0
     @State private var nfcMessage: String = ""
     
@@ -123,7 +123,7 @@ struct MainViewPhase3: View {
                             .background(Color.white)
                             .cornerRadius(16)
                             .padding(.top, 20)
-
+                            
                             HStack {
                                 Button {
                                     // MARK: 성취로 이동
@@ -169,9 +169,9 @@ struct MainViewPhase3: View {
                                 .background(Color(hex: 0xCDD3C5))
                                 .padding(.horizontal, 35)
                                 .padding(.vertical, 28)
-
+                            
                             EntryCertificateView(nickName: gameCenterManager.loadLocalPlayerName(), userPlayerImage: userProfileImage)
-
+                            
                             Button {
                                 gameCenterManager.showFriendsList()
                                 gameCenterManager.reportCompletedAchievement(achievementId: "clover")
@@ -191,7 +191,7 @@ struct MainViewPhase3: View {
                             .padding(.top, 16)
                             .padding(.bottom, 51)
                             .padding(.horizontal, 36)
-
+                            
                         }
                         .refreshable {
                             service.getWeeklyStairDataAndSave()
@@ -427,7 +427,7 @@ struct MainViewPhase3: View {
             }
         }
     }
-
+    
     // MARK: - 생성자
     init() {
         // MARK: 사용자 게임 센터 인증
@@ -519,8 +519,7 @@ struct MainViewPhase3: View {
         //                print("이번주 걸은 층계 * 16: \(weeklyStairPoint), nfc 점수: \(weeklyNfcPoint)")
         // TODO: - 에러 이후 변경
         Task {
-            //                        await gameCenterManager.submitPoint(point: Int(weeklyNfcPoint) + Int(weeklyStairPoint))
-            await gameCenterManager.submitPoint(point: 2682)
+            await gameCenterManager.submitPoint(point: Int(weeklyNfcPoint) + Int(weeklyStairPoint))
         }
     }
     
