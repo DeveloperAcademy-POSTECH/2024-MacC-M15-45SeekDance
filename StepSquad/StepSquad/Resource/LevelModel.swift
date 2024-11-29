@@ -25,7 +25,6 @@ class Level: Codable {
     let wikiLink: String
     let achievementId: String
     
-    // TODO: - UserDefaults에서 불러올 경우 수정하기
     init(level: Int, minStaircase: Int, maxStaircase: Int, item: String, itemImage: String, difficulty: Difficulty, wikiLink: String, achievementId: String) {
         self.level = level
         self.minStaircase = minStaircase
