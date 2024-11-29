@@ -68,7 +68,7 @@ struct MainViewPhase3: View {
                             .font(.footnote)
                             .foregroundColor(Color(hex: 0x808080))
                             .multilineTextAlignment(.center)
-
+                            
                             Spacer()
                             
                             NavigationLink(destination: ExplainView()) {
@@ -169,9 +169,9 @@ struct MainViewPhase3: View {
                                     .background(Color(hex: 0xCDD3C5))
                                     .padding(.horizontal, 35)
                                     .padding(.vertical, 28)
-
+                                
                                 EntryCertificateView(userPlayerImage: userProfileImage, nickName: gameCenterManager.loadLocalPlayerName())
-
+                                
                                 Button {
                                     gameCenterManager.showFriendsList()
                                     gameCenterManager.reportCompletedAchievement(achievementId: "clover")
@@ -194,7 +194,7 @@ struct MainViewPhase3: View {
                                 .padding(.bottom, 51)
                                 .padding(.horizontal, 36)
                             }
-
+                            
                         }
                         .refreshable {
                             service.getWeeklyStairDataAndSave()
@@ -251,9 +251,9 @@ struct MainViewPhase3: View {
                 Label("오른 층수 추가하기",
                       image: "custom.figure.stairs.badge.plus")
                 //Text("오른 층수 추가하기")
-                    .padding(.vertical, 12)
-                    .padding(.horizontal, 16)
-                    .foregroundColor(Color.white)
+                .padding(.vertical, 12)
+                .padding(.horizontal, 16)
+                .foregroundColor(Color.white)
             }
             .background(Color.secondaryColor,
                         in: RoundedRectangle(cornerRadius: 12))
@@ -522,7 +522,7 @@ struct MainViewPhase3: View {
         let weeklyNfcPoint = weeklyScore(from: stairSteps)
         service.getWeeklyStairDataAndSave()
         let weeklyStairPoint = service.weeklyFlightsClimbed * 16
-        //                print("이번주 걸은 층계 * 16: \(weeklyStairPoint), nfc 점수: \(weeklyNfcPoint)")
+        //        print("이번주 걸은 층계 * 16: \(weeklyStairPoint), nfc 점수: \(weeklyNfcPoint)")
         Task {
             await gameCenterManager.submitPoint(point: Int(weeklyNfcPoint) + Int(weeklyStairPoint))
         }
