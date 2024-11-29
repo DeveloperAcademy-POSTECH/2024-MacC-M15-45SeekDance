@@ -12,6 +12,7 @@ struct EntryCertificateView: View {
     @State private var dDay: Int = 0
     @State private var isSharing: Bool = false
     @State private var sharedImage: UIImage?
+    @State private var isButtonClicked: Bool = false // 버튼 숨김 상태 관리
 
     var nickName: String?
     var userPlayerImage: Image?
@@ -63,7 +64,6 @@ struct EntryCertificateView: View {
                 }
                 .padding(.top, 24)
                 .padding(.leading, 20)
-
             }
             .padding(.top, 12)
 
@@ -78,6 +78,7 @@ struct EntryCertificateView: View {
 
             Spacer()
 
+
             HStack(spacing: 0) {
                 Text("계단사랑단")
                     .font(Font.custom("ChosunCentennial", size: 15))
@@ -90,19 +91,24 @@ struct EntryCertificateView: View {
 
                 Spacer()
 
-                Button {
-                    // TODO: 이미지 익스포팅
-                    captureAndShare()
-                } label: {
-                    Label("공유하기", systemImage: "square.and.arrow.up")
-                        .font(.system(size: 13))
-                        .foregroundStyle(Color(hex: 0x4C6D38))
-                        .padding(.vertical, 4)
-                        .padding(.horizontal, 8)
+                if !isButtonClicked {
+                    Button {
+                        // 버튼 숨김 -> 캡처 수행
+                        isButtonClicked = true
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            captureAndShare()
+                            isButtonClicked = false // 캡처 후 버튼 복원
+                        }
+                    } label: {
+                        Label("공유하기", systemImage: "square.and.arrow.up")
+                            .font(.system(size: 13))
+                            .foregroundStyle(Color(hex: 0x4C6D38))
+                            .padding(.vertical, 4)
+                            .padding(.horizontal, 8)
+                    }
+                    .background(Color(hex: 0xDBEED0),
+                                in: RoundedRectangle(cornerRadius: 8))
                 }
-                .background(Color(hex: 0xDBEED0),
-                            in: RoundedRectangle(cornerRadius: 8))
-
             }
             .padding(.bottom, 23)
 
