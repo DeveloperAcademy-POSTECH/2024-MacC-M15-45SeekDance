@@ -175,8 +175,10 @@ struct MainViewPhase3: View {
                             Button {
                                 gameCenterManager.showFriendsList()
                                 gameCenterManager.reportCompletedAchievement(achievementId: "clover")
-                                collectedItems.collectItem(item: "Clover", collectedDate: Date.now)
-                                isShowingNewItem = true
+                                if !collectedItems.isCollected(item: "Clover") { // 클로버를 처음 획득한다면
+                                    collectedItems.collectItem(item: "Clover", collectedDate: Date.now)
+                                    isShowingNewItem = true
+                                }
                             } label: {
                                 HStack() {
                                     Spacer()
