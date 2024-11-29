@@ -19,20 +19,21 @@ struct MainViewPhase3: View {
     @State var isLaunching: Bool = true
     @State private var completedLevels = CompletedLevels()
     @State var userProfileImage: Image?
-
+    
     @State private var nfcCount: Int = 0
     @State private var nfcMessage: String = ""
-
+    
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.modelContext) var context
-
+    
     @Query(sort: [SortDescriptor(\StairStepModel.stairStepDate, order: .forward)]) var stairSteps: [StairStepModel]
     
     @ObservedObject var service = HealthKitService()
     
-    @AppStorage("HealthKitAuthorized") private var isHealthKitAuthorized = false
+    @AppStorage("HealthKitAuthorized") var isHealthKitAuthorized: Bool = false
+    
     @AppStorage("isShowingNewItem") private var isShowingNewItem = false
-
+    
     let gameCenterManager = GameCenterManager()
     
     var currentStatus: CurrentStatus = CurrentStatus() {
@@ -53,21 +54,21 @@ struct MainViewPhase3: View {
             NavigationStack {
                 ZStack() {
                     Color.backgroundColor
-
+                    
                     VStack(spacing: 0) {
                         HStack(spacing: 0) {
                             Spacer()
-
+                            
                             Text(service.LastFetchTime.isEmpty == false
                                  ? "당겨서 계단 정보 불러오기\n계단 업데이트: \(service.LastFetchTime)"
                                  : "아직 계단을 안 오르셨군요!\n계단을 오르고 10분 뒤 다시 당겨보세요!")
                             .font(.footnote)
                             .foregroundColor(Color(hex: 0x808080))
                             .multilineTextAlignment(.center)
-
+                            
                             // TODO: - 헬스킷 권한 허용 여부에 따라 뜨게 하기
                             Spacer()
-
+                            
                             NavigationLink(destination: ExplainView()) {
                                 Image(systemName: "gear")
                                     .resizable()
@@ -76,12 +77,12 @@ struct MainViewPhase3: View {
                                     .padding(5)
                                     .background(Color(hex: 0xE1E1E1), in: Circle.circle)
                             }
-
+                            
                         }
                         .padding(.top, 72)
                         .padding(.bottom, 4)
                         .padding(.horizontal, 36)
-
+                        
                         ScrollView {
                             VStack(spacing: 0) {
                                 VStack {
@@ -92,13 +93,13 @@ struct MainViewPhase3: View {
                                     }
                                 }
                                 .onAppear() {
-                                    checkAuthorizationStatus()
+                                    service.fetchAllFlightsClimbedData()
                                 }
-
+                                
                                 Divider()
                                     .background(Color(hex: 0xCAE5B9))
                                     .padding(.horizontal, 16)
-
+                                
                                 NFCReadingView
                                     .padding(.top, 17)
                                     .padding(.bottom, 17)
@@ -120,7 +121,7 @@ struct MainViewPhase3: View {
                             .background(Color.white)
                             .cornerRadius(16)
                             .padding(.top, 20)
-
+                            
                             HStack {
                                 Button {
                                     // MARK: 성취로 이동
@@ -138,9 +139,9 @@ struct MainViewPhase3: View {
                                     .background(Color(hex: 0x4C6D38),
                                                 in: RoundedRectangle(cornerRadius: 12))
                                 }
-
+                                
                                 Spacer()
-
+                                
                                 Button {
                                     // MARK: 순위표로 이동
                                     gameCenterManager.showLeaderboard()
@@ -160,15 +161,15 @@ struct MainViewPhase3: View {
                             }
                             .padding(.top, 16)
                             .padding(.horizontal, 36)
-
+                            
                             // TODO: - 헬스킷 권한 허용 여부에 따라 뜨게 하기
                             Divider()
                                 .background(Color(hex: 0xCDD3C5))
                                 .padding(.horizontal, 35)
                                 .padding(.vertical, 28)
-
+                            
                             EntryCertificateView(nickName: gameCenterManager.loadLocalPlayerName(), userPlayerImage: userProfileImage)
-
+                            
                             Button {
                                 //
                             } label: {
@@ -185,7 +186,7 @@ struct MainViewPhase3: View {
                             .padding(.top, 16)
                             .padding(.bottom, 51)
                             .padding(.horizontal, 36)
-
+                            
                         }
                         .refreshable {
                             service.getWeeklyStairDataAndSave()
@@ -223,19 +224,19 @@ struct MainViewPhase3: View {
                 .scaledToFit()
                 .frame(width: 133, height: 133)
                 .padding(.top, 82)
-
+            
             Text("계단사랑단에 입단하세요!")
                 .font(.system(size: 20, weight: .bold))
                 .multilineTextAlignment(.center)
                 .foregroundColor(.black)
                 .padding(.top, 20)
-
+            
             Text("오늘부터 오른 층수 데이터를 추가하면\n진정한 계단사랑단원이 될 수 있어요!")
                 .font(.system(size: 15))
                 .multilineTextAlignment(.center)
                 .foregroundStyle(Color(red: 0.44, green: 0.44, blue: 0.44))
                 .padding(.top, 8)
-
+            
             Button {
                 service.configure()
             } label: {
@@ -249,7 +250,7 @@ struct MainViewPhase3: View {
             .padding(.top, 40)
             .padding(.bottom, 60)
         }
-
+        
     }
     
     private var LevelUpView: some View {
@@ -339,6 +340,7 @@ struct MainViewPhase3: View {
             service.getWeeklyStairDataAndSave()
             service.fetchAndSaveFlightsClimbedSinceAuthorization()
             updateLevelsAndGameCenter()
+            service.fetchAllFlightsClimbedData()
         }
     }
     
@@ -421,7 +423,7 @@ struct MainViewPhase3: View {
             }
         }
     }
-
+    
     // MARK: - 생성자
     init() {
         // MARK: 사용자 게임 센터 인증
@@ -568,15 +570,6 @@ struct MainViewPhase3: View {
     // MARK: 헬스킷 권한 받는 함수
     func setup() {
         service.configure()
-    }
-    
-    // MARK: 헬스킷 권한 확인하고 조건부로 뷰를 빌드하는 함수
-    private func checkAuthorizationStatus() {
-        if service.authorizationDateKey.isEmpty {
-            print("1")
-        } else {
-            print("2")
-        }
     }
 }
 

@@ -12,7 +12,7 @@ import SwiftData
 struct StepSquadApp: App {
     // Healthkit 인증 코드가 있는 객체를 선언
     let service = HealthKitService()
-
+    
     var stairStepContainer: ModelContainer = {
         let schema = Schema([StairStepModel.self])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
@@ -35,7 +35,7 @@ struct StepSquadApp: App {
     }
     // MARK: - HealthKit 사용 권한을 요청하는 메서드
     init() {
-        service.configure()
+        //service.configure()
         
         // MARK: - 앱 진입 시, 바로 실행
         service.getWeeklyStairDataAndSave()
