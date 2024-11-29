@@ -19,20 +19,20 @@ struct MainViewPhase3: View {
     @State var isLaunching: Bool = true
     @State private var completedLevels = CompletedLevels()
     @State private var collectedItems = CollectedItems()
-
+    
     @State private var nfcCount: Int = 0
     @State private var nfcMessage: String = ""
-
+    
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.modelContext) var context
-
+    
     @Query(sort: [SortDescriptor(\StairStepModel.stairStepDate, order: .forward)]) var stairSteps: [StairStepModel]
     
     @ObservedObject var service = HealthKitService()
     
     @AppStorage("HealthKitAuthorized") private var isHealthKitAuthorized = false
     @AppStorage("isShowingNewItem") private var isShowingNewItem = false
-
+    
     let gameCenterManager = GameCenterManager()
     
     var currentStatus: CurrentStatus = CurrentStatus() {
@@ -54,21 +54,21 @@ struct MainViewPhase3: View {
             NavigationStack {
                 ZStack() {
                     Color.backgroundColor
-
+                    
                     VStack(spacing: 0) {
                         HStack(spacing: 0) {
                             Spacer()
-
+                            
                             Text(service.LastFetchTime.isEmpty == false
                                  ? "당겨서 계단 정보 불러오기\n계단 업데이트: \(service.LastFetchTime)"
                                  : "아직 계단을 안 오르셨군요!\n계단을 오르고 10분 뒤 다시 당겨보세요!")
                             .font(.footnote)
                             .foregroundColor(Color(hex: 0x808080))
                             .multilineTextAlignment(.center)
-
+                            
                             // TODO: - 헬스킷 권한 허용 여부에 따라 뜨게 하기
                             Spacer()
-
+                            
                             NavigationLink(destination: ExplainView()) {
                                 Image(systemName: "gear")
                                     .resizable()
@@ -77,12 +77,12 @@ struct MainViewPhase3: View {
                                     .padding(5)
                                     .background(Color(hex: 0xE1E1E1), in: Circle.circle)
                             }
-
+                            
                         }
                         .padding(.top, 68)
                         .padding(.bottom, 8)
                         .padding(.horizontal, 36)
-
+                        
                         ScrollView {
                             VStack(spacing: 0) {
                                 VStack {
@@ -94,11 +94,11 @@ struct MainViewPhase3: View {
                                 }.onAppear() {
                                     checkAuthorizationStatus()
                                 }
-
+                                
                                 Divider()
                                     .background(Color(hex: 0xCAE5B9))
                                     .padding(.horizontal, 16)
-
+                                
                                 NFCReadingView
                                     .padding(.top, 17)
                                     .padding(.bottom, 17)
@@ -120,7 +120,7 @@ struct MainViewPhase3: View {
                             .frame(width: 321, height: 524)
                             .background(Color.white)
                             .cornerRadius(16)
-
+                            
                             HStack {
                                 Button {
                                     // MARK: 성취로 이동
@@ -138,9 +138,9 @@ struct MainViewPhase3: View {
                                     .background(Color.primaryColor,
                                                 in: RoundedRectangle(cornerRadius: 12))
                                 }
-
+                                
                                 Spacer()
-
+                                
                                 Button {
                                     // MARK: 순위표로 이동
                                     gameCenterManager.showLeaderboard()
@@ -160,11 +160,11 @@ struct MainViewPhase3: View {
                             }
                             .padding(.top, 8)
                             .padding(.horizontal, 36)
-
+                            
                             // TODO: - 헬스킷 권한 허용 여부에 따라 뜨게 하기
                             EntryCertificateView
                                 .padding(.top, 24)
-
+                            
                             Spacer()
                                 .frame(minHeight: 100)
                         }
@@ -198,19 +198,19 @@ struct MainViewPhase3: View {
                 .scaledToFit()
                 .frame(width: 133, height: 133)
                 .padding(.top, 82)
-
+            
             Text("계단사랑단에 입단하세요!")
                 .font(.system(size: 20, weight: .bold))
                 .multilineTextAlignment(.center)
                 .foregroundColor(.black)
                 .padding(.top, 20)
-
+            
             Text("오늘부터 오른 층수 데이터를 추가하면\n진정한 계단사랑단원이 될 수 있어요!")
                 .font(.system(size: 15))
                 .multilineTextAlignment(.center)
                 .foregroundStyle(Color(red: 0.44, green: 0.44, blue: 0.44))
                 .padding(.top, 8)
-
+            
             Button {
                 service.configure()
             } label: {
@@ -224,7 +224,7 @@ struct MainViewPhase3: View {
             .padding(.top, 40)
             .padding(.bottom, 60)
         }
-
+        
     }
     
     private var LevelUpView: some View {
@@ -396,7 +396,7 @@ struct MainViewPhase3: View {
             }
         }
     }
-
+    
     private var EntryCertificateView: some View {
         HStack() {
             
@@ -404,7 +404,7 @@ struct MainViewPhase3: View {
         .frame(width: 321, height: 524)
         .background(Color(hex: 0xB1D998), in: RoundedRectangle(cornerRadius: 24))
     }
-
+    
     // MARK: - 생성자
     init() {
         // MARK: 사용자 게임 센터 인증
@@ -493,10 +493,10 @@ struct MainViewPhase3: View {
         let weeklyNfcPoint = weeklyScore(from: stairSteps)
         service.getWeeklyStairDataAndSave()
         let weeklyStairPoint = service.weeklyFlightsClimbed * 16
-//                print("이번주 걸은 층계 * 16: \(weeklyStairPoint), nfc 점수: \(weeklyNfcPoint)")
+        //                print("이번주 걸은 층계 * 16: \(weeklyStairPoint), nfc 점수: \(weeklyNfcPoint)")
         // TODO: - 에러 이후 변경
         Task {
-//                        await gameCenterManager.submitPoint(point: Int(weeklyNfcPoint) + Int(weeklyStairPoint))
+            //                        await gameCenterManager.submitPoint(point: Int(weeklyNfcPoint) + Int(weeklyStairPoint))
             await gameCenterManager.submitPoint(point: 2682)
         }
     }
