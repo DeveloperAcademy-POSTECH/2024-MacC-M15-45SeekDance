@@ -128,6 +128,7 @@ struct MainViewPhase3: View {
                                 Button {
                                     // MARK: 성취로 이동
                                     gameCenterManager.showAchievements()
+                                    reportMissedAchievement()
                                 } label: {
                                     HStack() {
                                         Image(systemName: "rectangle.portrait.on.rectangle.portrait.fill")
