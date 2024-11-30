@@ -68,7 +68,7 @@ struct MainViewPhase3: View {
                             .font(.footnote)
                             .foregroundColor(Color(hex: 0x808080))
                             .multilineTextAlignment(.center)
-
+                            
                             Spacer()
                             
                             NavigationLink(destination: ExplainView()) {
@@ -128,6 +128,7 @@ struct MainViewPhase3: View {
                                 Button {
                                     // MARK: 성취로 이동
                                     gameCenterManager.showAchievements()
+                                    reportMissedAchievement()
                                 } label: {
                                     HStack() {
                                         Image(systemName: "rectangle.portrait.on.rectangle.portrait.fill")
@@ -169,9 +170,9 @@ struct MainViewPhase3: View {
                                     .background(Color(hex: 0xCDD3C5))
                                     .padding(.horizontal, 35)
                                     .padding(.vertical, 28)
-
+                                
                                 EntryCertificateView(userPlayerImage: userProfileImage, nickName: gameCenterManager.loadLocalPlayerName())
-
+                                
                                 Button {
                                     gameCenterManager.showFriendsList()
                                     gameCenterManager.reportCompletedAchievement(achievementId: "clover")
@@ -194,7 +195,7 @@ struct MainViewPhase3: View {
                                 .padding(.bottom, 51)
                                 .padding(.horizontal, 36)
                             }
-
+                            
                         }
                         .refreshable {
                             service.getWeeklyStairDataAndSave()
@@ -206,6 +207,11 @@ struct MainViewPhase3: View {
                             Task {
                                 await gameCenterManager.loadLocalPlayerImage()
                                 userProfileImage = await gameCenterManager.loadLocalPlayerImage()
+                            }
+                        }
+                        .onChange(of: isHealthKitAuthorized) {
+                            if isHealthKitAuthorized { // 헬스킷 권한 허용 후 입단 뱃지 받기
+                                gameCenterManager.reportCompletedAchievement(achievementId: "memberOfStepSquad")
                             }
                         }
                     }
@@ -251,9 +257,9 @@ struct MainViewPhase3: View {
                 Label("오른 층수 추가하기",
                       image: "custom.figure.stairs.badge.plus")
                 //Text("오른 층수 추가하기")
-                    .padding(.vertical, 12)
-                    .padding(.horizontal, 16)
-                    .foregroundColor(Color.white)
+                .padding(.vertical, 12)
+                .padding(.horizontal, 16)
+                .foregroundColor(Color.white)
             }
             .background(Color.secondaryColor,
                         in: RoundedRectangle(cornerRadius: 12))
@@ -522,7 +528,7 @@ struct MainViewPhase3: View {
         let weeklyNfcPoint = weeklyScore(from: stairSteps)
         service.getWeeklyStairDataAndSave()
         let weeklyStairPoint = service.weeklyFlightsClimbed * 16
-        //                print("이번주 걸은 층계 * 16: \(weeklyStairPoint), nfc 점수: \(weeklyNfcPoint)")
+        //        print("이번주 걸은 층계 * 16: \(weeklyStairPoint), nfc 점수: \(weeklyNfcPoint)")
         Task {
             await gameCenterManager.submitPoint(point: Int(weeklyNfcPoint) + Int(weeklyStairPoint))
         }
@@ -555,15 +561,18 @@ struct MainViewPhase3: View {
                 gameCenterManager.reportCompletedAchievement(achievementId: levels[i]!.achievementId) // 해당 레벨의 성취 달성
             }
         }
-        if (currentStatus.getTotalStaircase() / 40) > electricBirdAchievementCount { // 누적 오른 층계가
-            print("It's \(currentStatus.getTotalStaircase() / 40) time electric bird achievement!")
+        if (currentStatus.getTotalStaircase() / 40) > electricBirdAchievementCount { // 누적 오른 층계가 40층의 배수라면,
+            print("It's \(currentStatus.getTotalStaircase() / 40)번째 틈새 전기 절약 성취")
             gameCenterManager.reportCompletedAchievement(achievementId: "electricBird")
             UserDefaults.standard.setValue(currentStatus.getTotalStaircase() / 40, forKey: "electricBirdAchievementCount")
         }
     }
     
-    // MARK: 오프라인 환경에서 받지 못한 레벨 성취 다시 주기
+    // MARK: 오프라인 환경에서 받지 못한 레벨, 입단증 성취 다시 주기
     func reportMissedAchievement() {
+        if isHealthKitAuthorized {
+            gameCenterManager.reportCompletedAchievement(achievementId: "memberOfStepSquad")
+        }
         if completedLevels.lastUpdatedLevel >= 1 {
             for level in 1...completedLevels.lastUpdatedLevel {
                 gameCenterManager.reportCompletedAchievement(achievementId: levels[level]!.achievementId)
