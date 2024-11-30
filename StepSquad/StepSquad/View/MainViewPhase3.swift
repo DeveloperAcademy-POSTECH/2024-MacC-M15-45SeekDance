@@ -32,13 +32,7 @@ struct MainViewPhase3: View {
     
     @ObservedObject var service = HealthKitService()
     
-    @AppStorage("HealthKitAuthorized") var isHealthKitAuthorized: Bool = false {
-        didSet {
-            if isHealthKitAuthorized {
-                gameCenterManager.reportCompletedAchievement(achievementId: "memberOfStepSquad")
-            }
-        }
-    }
+    @AppStorage("HealthKitAuthorized") var isHealthKitAuthorized: Bool = false
     
     @AppStorage("isShowingNewItem") private var isShowingNewItem = false
     
@@ -212,6 +206,11 @@ struct MainViewPhase3: View {
                             Task {
                                 await gameCenterManager.loadLocalPlayerImage()
                                 userProfileImage = await gameCenterManager.loadLocalPlayerImage()
+                            }
+                        }
+                        .onChange(of: isHealthKitAuthorized) {
+                            if isHealthKitAuthorized { // 헬스킷 권한 허용 후 입단 뱃지 받기
+                                gameCenterManager.reportCompletedAchievement(achievementId: "memberOfStepSquad")
                             }
                         }
                     }
@@ -561,7 +560,7 @@ struct MainViewPhase3: View {
                 gameCenterManager.reportCompletedAchievement(achievementId: levels[i]!.achievementId) // 해당 레벨의 성취 달성
             }
         }
-        if (currentStatus.getTotalStaircase() / 40) > electricBirdAchievementCount { // 누적 오른 층계가
+        if (currentStatus.getTotalStaircase() / 40) > electricBirdAchievementCount { // 누적 오른 층계가 40층의 배수라면,
             print("It's \(currentStatus.getTotalStaircase() / 40) time electric bird achievement!")
             gameCenterManager.reportCompletedAchievement(achievementId: "electricBird")
             UserDefaults.standard.setValue(currentStatus.getTotalStaircase() / 40, forKey: "electricBirdAchievementCount")
@@ -570,7 +569,9 @@ struct MainViewPhase3: View {
     
     // MARK: 오프라인 환경에서 받지 못한 레벨, 입단증 성취 다시 주기
     func reportMissedAchievement() {
-        gameCenterManager.reportCompletedAchievement(achievementId: "memberOfStepSquad")
+        if isHealthKitAuthorized {
+            gameCenterManager.reportCompletedAchievement(achievementId: "memberOfStepSquad")
+        }
         if completedLevels.lastUpdatedLevel >= 1 {
             for level in 1...completedLevels.lastUpdatedLevel {
                 gameCenterManager.reportCompletedAchievement(achievementId: levels[level]!.achievementId)
