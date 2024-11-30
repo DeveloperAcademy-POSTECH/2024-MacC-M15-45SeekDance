@@ -32,7 +32,13 @@ struct MainViewPhase3: View {
     
     @ObservedObject var service = HealthKitService()
     
-    @AppStorage("HealthKitAuthorized") var isHealthKitAuthorized: Bool = false
+    @AppStorage("HealthKitAuthorized") var isHealthKitAuthorized: Bool = false {
+        didSet {
+            if isHealthKitAuthorized {
+                gameCenterManager.reportCompletedAchievement(achievementId: "memberOfStepSquad")
+            }
+        }
+    }
     
     @AppStorage("isShowingNewItem") private var isShowingNewItem = false
     
@@ -562,8 +568,9 @@ struct MainViewPhase3: View {
         }
     }
     
-    // MARK: 오프라인 환경에서 받지 못한 레벨 성취 다시 주기
+    // MARK: 오프라인 환경에서 받지 못한 레벨, 입단증 성취 다시 주기
     func reportMissedAchievement() {
+        gameCenterManager.reportCompletedAchievement(achievementId: "memberOfStepSquad")
         if completedLevels.lastUpdatedLevel >= 1 {
             for level in 1...completedLevels.lastUpdatedLevel {
                 gameCenterManager.reportCompletedAchievement(achievementId: levels[level]!.achievementId)
