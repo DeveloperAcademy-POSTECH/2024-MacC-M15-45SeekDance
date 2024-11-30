@@ -12,6 +12,17 @@ import SwiftUI
 
 
 
+// MARK: - Calendar Extension
+extension Calendar {
+    func isDateInThisWeek(_ date: Date) -> Bool {
+        guard let startOfWeek = self.date(from: self.dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date())) else {
+            return false
+        }
+        let endOfWeek = self.date(byAdding: .day, value: 7, to: startOfWeek)!
+        return (startOfWeek...endOfWeek).contains(date)
+    }
+}
+
 // HealthKitService 클래스 내에 추가
 class HealthKitService: ObservableObject {
     
@@ -48,11 +59,11 @@ class HealthKitService: ObservableObject {
                 self?.fetchAllFlightsClimbedData()
                 // 권한 요청 날짜를 기록하는 로직
                 self?.storeAuthorizationDate()
-
+                
                 // 권한 허용 후에만 데이터를 가져오는 로직 실행
                 self?.getWeeklyStairDataAndSave()
                 self?.fetchAndSaveFlightsClimbedSinceAuthorization()
-
+                
             } else {
                 self?.isHealthKitAuthorized = false
                 //                self?.isHealthKitAuthorized = false
@@ -182,44 +193,42 @@ class HealthKitService: ObservableObject {
             let calendar = Calendar.current
             let today = Date()
             
-            // 주간 범위 설정 (이번 주 토요일부터 다음 금요일)
-            var startOfWeek: Date?
+            // 시작일 계산: 오늘이 토요일이면 오늘, 아니면 지난 토요일
+            let startOfWeekDate: Date
             if calendar.component(.weekday, from: today) == 7 {
-                // 오늘이 토요일인 경우, 오늘을 시작일로 설정
-                startOfWeek = calendar.startOfDay(for: today)
+                // 오늘이 토요일
+                startOfWeekDate = calendar.startOfDay(for: today)
             } else {
-                // 오늘이 토요일이 아닌 경우, 지난 토요일을 시작일로 설정
-                startOfWeek = calendar.nextDate(
+                // 지난 토요일 계산
+                startOfWeekDate = calendar.nextDate(
                     after: today,
                     matching: DateComponents(weekday: 7),
                     matchingPolicy: .nextTime,
                     direction: .backward
-                )
+                ) ?? today
             }
             
-            guard let startOfWeekDate = startOfWeek else {
-                print("시작 날짜를 설정할 수 없습니다.")
-                return
-            }
+            // 종료일: 현재 시간
+            let endOfWeekDate = today
             
             // 권한을 받은 날짜 가져오기
-            guard let authorizationDate = UserDefaults.standard.object(forKey: "HealthKitAuthorizationDate") as? Date else {
-                print("권한 허용 날짜가 설정되지 않았습니다.")
-                return
+            let authorizationDate = UserDefaults.standard.object(forKey: "HealthKitAuthorizationDate") as? Date
+            
+            // 시작일 계산
+            let adjustedStartDate: Date
+            if let authorizationDate = authorizationDate, calendar.isDateInThisWeek(authorizationDate) {
+                // 첫 주에는 권한 날짜와 토요일 중 더 늦은 날짜를 사용
+                adjustedStartDate = max(startOfWeekDate, calendar.startOfDay(for: authorizationDate))
+            } else {
+                // 이후 주부터는 항상 토요일을 기준으로
+                adjustedStartDate = startOfWeekDate
             }
-            
-            // 권한을 받은 날짜와 주간 시작일 중 더 나중의 날짜를 사용
-            let adjustedStartDate = max(startOfWeekDate, calendar.startOfDay(for: authorizationDate))
-            
-            // 종료일을 다음 금요일로 설정
-            let endOfWeekDate = calendar.date(byAdding: .day, value: 6, to: startOfWeekDate) ?? today
             
             let predicate = HKQuery.predicateForSamples(withStart: adjustedStartDate, end: endOfWeekDate, options: [])
             
-            // 사용자가 데이터를 주작했는지 아닌지 파악하는 부분 NSPredicate -> 메타 데이터 쿼리 조건, yes가 아닌 데이터만 가져 오겠다는 것.
+            // 사용자가 데이터를 주작했는지 확인 (메타데이터 조건 추가)
             let userEnteredPredicate = NSPredicate(format: "metadata.%K != YES", HKMetadataKeyWasUserEntered)
             let combinedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, userEnteredPredicate])
-            
             
             let query = HKStatisticsQuery(quantityType: stairType, quantitySamplePredicate: combinedPredicate, options: .cumulativeSum) { _, result, error in
                 guard error == nil else {
@@ -235,13 +244,14 @@ class HealthKitService: ObservableObject {
                     print("이번 주 계단 데이터가 없습니다. 0을 반환합니다.")
                 }
                 
+                // UserDefaults에 주간 데이터 저장 (App Group 사용)
                 UserDefaults(suiteName: "group.macmac.pratice.carot")?.set(totalFlightsClimbed, forKey: "WeeklyFlightsClimbed")
                 
-                // 이 부분에서 바로 @AppStorage의 값을 업데이트
+                // @AppStorage 값 업데이트
                 DispatchQueue.main.async {
                     self.weeklyFlightsClimbed = totalFlightsClimbed
                 }
-                print("주간 계단 수 (토-금): \(totalFlightsClimbed)를 UserDefaults에 저장했습니다.")
+                print("주간 계단 수 (토요일 시작): \(totalFlightsClimbed)를 UserDefaults에 저장했습니다.")
             }
             healthStore.execute(query)
         }
