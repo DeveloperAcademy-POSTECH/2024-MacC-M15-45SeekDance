@@ -251,6 +251,8 @@ class HealthKitService: ObservableObject {
                 DispatchQueue.main.async {
                     self.weeklyFlightsClimbed = totalFlightsClimbed
                 }
+                print("Authorization Date: \(String(describing: authorizationDate)), Start: \(adjustedStartDate), End: \(endOfWeekDate)")
+
                 print("주간 계단 수 (토요일 시작): \(totalFlightsClimbed)를 UserDefaults에 저장했습니다.")
             }
             healthStore.execute(query)
