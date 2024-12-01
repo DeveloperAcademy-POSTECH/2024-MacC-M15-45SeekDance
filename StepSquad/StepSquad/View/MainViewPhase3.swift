@@ -98,7 +98,7 @@ struct MainViewPhase3: View {
                                     .padding(.horizontal, 16)
                                     .onAppear() {
                                         service.fetchAllFlightsClimbedData()
-                                        service.migrateAuthorizationDateToSharedDefaults()
+                                        service.migrateAuthorizationDataToSharedDefaults()
                                     }
 
                                 NFCReadingView

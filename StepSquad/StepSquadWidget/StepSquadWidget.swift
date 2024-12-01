@@ -19,6 +19,7 @@ struct FlightsClimbedEntry: TimelineEntry {
 
 struct Provider: TimelineProvider {
     let healthDataManager = HealthDataManager()
+    let sharedDefaults = UserDefaults(suiteName: "group.com.stepSquad.widget") // Update with your app's group identifier
 
     func placeholder(in context: Context) -> FlightsClimbedEntry {
         FlightsClimbedEntry(date: Date(), flightsClimbed: 0, progressPercentage: 0.0, flightsToNextLevel: 5, level: nil, isHealthDataAvailable: true)
@@ -30,66 +31,70 @@ struct Provider: TimelineProvider {
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<FlightsClimbedEntry>) -> Void) {
-        healthDataManager.fetchAllFlightsClimbedData { isHealthDataAvailable in
-            healthDataManager.fetchFlightsClimbed { flightsClimbed, error in
-                guard error == nil else {
-                    let entry = FlightsClimbedEntry(
-                        date: Date(),
-                        flightsClimbed: 0,
-                        progressPercentage: 0.0,
-                        flightsToNextLevel: 0,
-                        level: 1,
-                        isHealthDataAvailable: false
-                    )
-                    let timeline = Timeline(entries: [entry], policy: .atEnd)
-                    completion(timeline)
-                    return
-                }
+        let isAuthorized = sharedDefaults?.bool(forKey: "widgetAuthorizationStatus") ?? false
 
-                let flights = Int(flightsClimbed ?? 0)
+        if !isAuthorized {
+            // 프린트문 지우면 동작 안함 이슈
+            print("33")
+            let entry = FlightsClimbedEntry(
+                date: Date(),
+                flightsClimbed: 0,
+                progressPercentage: 0.0,
+                flightsToNextLevel: 0,
+                level: 1,
+                isHealthDataAvailable: false
+            )
+            let timeline = Timeline(entries: [entry], policy: .atEnd)
+            completion(timeline)
+            return
+        }
 
-                if !isHealthDataAvailable {
-                    let entry = FlightsClimbedEntry(
-                        date: Date(),
-                        flightsClimbed: 0,
-                        progressPercentage: 0.0,
-                        flightsToNextLevel: 0,
-                        level: 1,
-                        isHealthDataAvailable: false
-                    )
-                    let timeline = Timeline(entries: [entry], policy: .atEnd)
-                    completion(timeline)
-                    return
-                }
+        healthDataManager.fetchFlightsClimbed { flightsClimbed, error in
+            guard error == nil else {
+                // 프린트문 지우면 동작 안함 이슈
+                print("1")
+                let entry = FlightsClimbedEntry(
+                    date: Date(),
+                    flightsClimbed: 0,
+                    progressPercentage: 0.0,
+                    flightsToNextLevel: 0,
+                    level: 1,
+                    isHealthDataAvailable: false
+                )
+                let timeline = Timeline(entries: [entry], policy: .atEnd)
+                completion(timeline)
+                return
+            }
 
-                if let levelData = LevelManager.calculateLevel(for: flights) {
-                    let totalGap = (levelData.maxStaircase + 1) - levelData.minStaircase
-                    let progressSteps = flights - levelData.minStaircase
-                    let progressPercentage = levelData.level < 19 ? Double(progressSteps) / Double(totalGap) : 1.0
-                    let flightsToNextLevel = (levelData.maxStaircase + 1) - flights
+            let flights = Int(flightsClimbed ?? 0)
 
-                    let entry = FlightsClimbedEntry(
-                        date: Date(),
-                        flightsClimbed: flights,
-                        progressPercentage: progressPercentage,
-                        flightsToNextLevel: max(flightsToNextLevel, 0),
-                        level: levelData.level,
-                        isHealthDataAvailable: true
-                    )
-                    let timeline = Timeline(entries: [entry], policy: .atEnd)
-                    completion(timeline)
-                } else {
-                    let entry = FlightsClimbedEntry(
-                        date: Date(),
-                        flightsClimbed: flights,
-                        progressPercentage: 0.0,
-                        flightsToNextLevel: 0,
-                        level: 1,
-                        isHealthDataAvailable: true
-                    )
-                    let timeline = Timeline(entries: [entry], policy: .atEnd)
-                    completion(timeline)
-                }
+            if let levelData = LevelManager.calculateLevel(for: flights) {
+                let totalGap = (levelData.maxStaircase + 1) - levelData.minStaircase
+                let progressSteps = flights - levelData.minStaircase
+                let progressPercentage = levelData.level < 19 ? Double(progressSteps) / Double(totalGap) : 1.0
+                let flightsToNextLevel = (levelData.maxStaircase + 1) - flights
+
+                let entry = FlightsClimbedEntry(
+                    date: Date(),
+                    flightsClimbed: flights,
+                    progressPercentage: progressPercentage,
+                    flightsToNextLevel: max(flightsToNextLevel, 0),
+                    level: levelData.level,
+                    isHealthDataAvailable: true
+                )
+                let timeline = Timeline(entries: [entry], policy: .atEnd)
+                completion(timeline)
+            } else {
+                let entry = FlightsClimbedEntry(
+                    date: Date(),
+                    flightsClimbed: flights,
+                    progressPercentage: 0.0,
+                    flightsToNextLevel: 0,
+                    level: 1,
+                    isHealthDataAvailable: true
+                )
+                let timeline = Timeline(entries: [entry], policy: .atEnd)
+                completion(timeline)
             }
         }
     }
@@ -126,7 +131,7 @@ struct FlightsClimbedWidgetEntryView: View {
                                 .kerning(0.06)
                                 .foregroundColor(Color(red: 0.3, green: 0.43, blue: 0.22))
                         } else {
-                            Text("\(entry.flightsToNextLevel)층 오르면 레벨 업")
+                            Text("\(entry.flightsToNextLevel)층 오르면 레벨 업!")
                                 .font(Font.custom("SF Pro", size: 11))
                                 .kerning(0.06)
                                 .foregroundColor(Color(red: 0.3, green: 0.43, blue: 0.22))
@@ -140,6 +145,7 @@ struct FlightsClimbedWidgetEntryView: View {
                 }
                 .padding(.vertical, 14)
                 .padding(.horizontal, 12)
+                
             } else {
                 VStack(alignment: .leading) {
                     Text("데이터 연동이\n필요해요")
