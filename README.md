@@ -1,16 +1,16 @@
+
 # 2024-MacC-M15-45SeekDance
 
 # :iphone: 계단사랑단
 
 [Logo/Cover Image]
-이미지 주세여
+이미지 주세여><
   
-
-[App statement]
-계단 사랑단 앱은...
+ **틈새 운동인 계단 오르기를 더 재미있게 할 수 있도록 돕는 앱입니다. 심마니가 되어 계단을 오르세요!**
 
   
-### 🔗 **[계단사랑단 보러가기](https://apps.apple.com/kr/app/%EA%B3%84%EB%8B%A8%EC%82%AC%EB%9E%91%EB%8B%A8/id6737301392)**
+### 🔗 **[앱스토어에서 계단사랑단 다운하기](https://apps.apple.com/kr/app/%EA%B3%84%EB%8B%A8%EC%82%AC%EB%9E%91%EB%8B%A8/id6737301392)**
+
 ## :fireworks: Screenshots
 
 <table>
@@ -19,6 +19,12 @@
     <td align="center"><img src="https://github.com/user-attachments/assets/53ccfb59-fe0b-4426-9a65-150af2bced25" width="80%" /></a></td>
     <td align="center"><img src="https://github.com/user-attachments/assets/eb70d3f7-3277-431b-81a0-f986bed24c16" width="80%" /></a></td>   
     <td align="center"><img src="https://github.com/user-attachments/assets/76e5e1cc-b858-4b5a-8a75-89ab34279656" width="80%" /></a></td>   
+  </tr>
+  <tr>
+    <td align="center">메인 뷰</td>
+    <td align="center">입단증 뷰</td>
+    <td align="center">게임센터 계단 경쟁 뷰</td>
+    <td align="center">달성 뱃지 뷰</td>
   </tr>
 </table>
   
@@ -35,15 +41,16 @@ Attach videos if you are available
 
 ## :pushpin: Features
 
-  
 
-<summary>📌 메인페이지</summary>
+<summary>📌 메인 기능 </summary>
 
-- 헬스킷,,,
+- 애플 헬스킷의 계단 오르기 데이터를 통해 내가 얼마나 계단을 많이 올랐는 지 확인하고 해당 레벨에 맞는 보상 아이템을 얻을 수 있습니다.
 
-- 게임 센터
+- 계단을 오르며 더 많은 게임 센터 뱃지 성취를 얻을 수 있습니다.
 
-- 뱃지 어치브먼트
+- 게임 센터와 연동하여 친구 및 플레이어와 주간 계단 점수 경쟁을 할 수 있습니다.
+
+
 
   
 
@@ -53,7 +60,11 @@ Attach videos if you are available
   
 ### Dev tools
 
+
 <p> 
+<img src="https://github.com/user-attachments/assets/074a9a41-89f7-442c-8b52-040677c2fadc" width="7%/>
+<img src="https://github.com/user-attachments/assets/38646e39-d55f-4352-b386-7d08e597097e"width="7%/>
+<img fill="#147EFB" src="https://github.com/user-attachments/assets/9d1d9a6c-5479-4798-a2b3-49b8c8eec49a"/>
 
 <img src="https://img.shields.io/badge/Swift-FA7343?style=flat&logo=Swift&logoColor=white"/>
 
@@ -103,4 +114,3 @@ Attach videos if you are available
   </tr>
 </table>
 
-@샘, @그루, @타냐, @레인
