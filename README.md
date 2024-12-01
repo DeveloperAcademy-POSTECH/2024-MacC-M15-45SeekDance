@@ -1,8 +1,4 @@
 
-# 2024-MacC-M15-45SeekDance
-
-<br />
-
 # :iphone: 계단사랑단
 
 
