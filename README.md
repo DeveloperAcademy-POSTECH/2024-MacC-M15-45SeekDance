@@ -15,10 +15,10 @@
 
 <table>
 <tr>
-    <td align="center"><img src="https://github.com/Boram33JO/Backend/assets/131260371/623ad72c-41d9-4d33-952c-1eb5b4f87e5a" width="80%" /></a></td>
-    <td align="center"><img src="https://github.com/Boram33JO/Backend/assets/131260371/0e563545-14cc-4280-8d7c-ad92a31cbd56" width="80%" /></a></td>
-    <td align="center"><img src="https://github.com/Boram33JO/Backend/assets/131260371/0e563545-14cc-4280-8d7c-ad92a31cbd56" width="80%" /></a></td>   
-    <td align="center"><img src="https://github.com/Boram33JO/Backend/assets/131260371/0e563545-14cc-4280-8d7c-ad92a31cbd56" width="80%" /></a></td>   
+    <td align="center"><img src="https://github.com/user-attachments/assets/7cd9ac9f-40a9-4f0f-a053-15c286178b19" width="80%" /></a></td>
+    <td align="center"><img src="https://github.com/user-attachments/assets/53ccfb59-fe0b-4426-9a65-150af2bced25" width="80%" /></a></td>
+    <td align="center"><img src="https://github.com/user-attachments/assets/eb70d3f7-3277-431b-81a0-f986bed24c16" width="80%" /></a></td>   
+    <td align="center"><img src="https://github.com/user-attachments/assets/76e5e1cc-b858-4b5a-8a75-89ab34279656" width="80%" /></a></td>   
   </tr>
 </table>
   
