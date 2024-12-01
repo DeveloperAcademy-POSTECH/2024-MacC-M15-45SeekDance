@@ -1,15 +1,20 @@
 
 # 2024-MacC-M15-45SeekDance
 
+<br />
+
 # :iphone: 계단사랑단
+
 
 [Logo/Cover Image]
 이미지 주세여><
-  
- **틈새 운동인 계단 오르기를 더 재미있게 할 수 있도록 돕는 앱입니다. 심마니가 되어 계단을 오르세요!**
 
+🔗 **[앱스토어에서 계단사랑단 다운받기](https://apps.apple.com/kr/app/%EA%B3%84%EB%8B%A8%EC%82%AC%EB%9E%91%EB%8B%A8/id6737301392)**
   
-### 🔗 **[앱스토어에서 계단사랑단 다운하기](https://apps.apple.com/kr/app/%EA%B3%84%EB%8B%A8%EC%82%AC%EB%9E%91%EB%8B%A8/id6737301392)**
+ **⛰️틈새 운동인 계단 오르기를 더 재미있게 할 수 있도록 돕는 앱입니다. 심마니가 되어 계단을 오르세요!⛰️**
+
+<br />
+
 
 ## :fireworks: Screenshots
 
@@ -28,31 +33,29 @@
   </tr>
 </table>
   
+<br />
 
 ## :framed_picture: Demo (optional)
-
-  
 
 Attach videos if you are available
 
   
 
   
+<br />
 
 ## :pushpin: Features
 
-
 <summary>📌 메인 기능 </summary>
 
-- 애플 헬스킷의 계단 오르기 데이터를 통해 내가 얼마나 계단을 많이 올랐는 지 확인하고 해당 레벨에 맞는 보상 아이템을 얻을 수 있습니다.
+- ⛰️ 애플 헬스킷의 계단 오르기 데이터를 통해 내가 얼마나 계단을 많이 올랐는 지 확인하고 해당 레벨에 맞는 보상 아이템을 얻을 수 있습니다.
 
-- 계단을 오르며 더 많은 게임 센터 뱃지 성취를 얻을 수 있습니다.
+- 🪪 계단을 오르며 더 많은 게임 센터 뱃지 성취를 얻을 수 있습니다.
 
-- 게임 센터와 연동하여 친구 및 플레이어와 주간 계단 점수 경쟁을 할 수 있습니다.
+- 🏆 게임 센터와 연동하여 친구 및 플레이어와 주간 계단 점수 경쟁을 할 수 있습니다.
 
 
-
-  
+<br />
 
 
 ## :sparkles: Skills & Tech Stack
@@ -62,49 +65,42 @@ Attach videos if you are available
 
 
 <p> 
-<img src="https://github.com/user-attachments/assets/074a9a41-89f7-442c-8b52-040677c2fadc" width="7%/>
-<img src="https://github.com/user-attachments/assets/38646e39-d55f-4352-b386-7d08e597097e"width="7%/>
-<img fill="#147EFB" src="https://github.com/user-attachments/assets/9d1d9a6c-5479-4798-a2b3-49b8c8eec49a"/>
+<img src="https://github.com/user-attachments/assets/074a9a41-89f7-442c-8b52-040677c2fadc" width= 7%/>
 
-<img src="https://img.shields.io/badge/Swift-FA7343?style=flat&logo=Swift&logoColor=white"/>
+<img src="https://github.com/user-attachments/assets/04db964e-cb4f-4df3-aeb2-afc4abda9500" width=7%/>
 
-  <img src="https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white">
+<img src="https://img.shields.io/badge/Swift-FA7343?style=flat&logo=Swift&logoColor=white" width=8%/>
 
-  <img src="https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white">
+<img src="https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white">
 
-  <img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white">
+<img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white">
 
 </p>
 
-  
+<br />
 
 ### Design tools
 
   
 <p>
-
-  <img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=Figma&logoColor=white"/>
-
-  <img src="https://img.shields.io/badge/Adobe Illustrator-FF9A00?style=for-the-badge&logo=Adobe Illustrator&logoColor=white"/>
-
-  <img src="https://img.shields.io/badge/Adobe Photoshop-31A8FF?style=for-the-badge&logo=Adobe Photoshop&logoColor=white"/>
-
+<img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=Figma&logoColor=white"/>
+<img src="https://img.shields.io/badge/Adobe Illustrator-FF9A00?style=for-the-badge&logo=Adobe Illustrator&logoColor=white"/>
+<img src="https://img.shields.io/badge/Adobe Photoshop-31A8FF?style=for-the-badge&logo=Adobe Photoshop&logoColor=white"/>
 </p>
 
   
-
-  
+<br />
 
 ## :people_hugging: Authors
 
  <table>
   <tr>
-    <td align="center"><a href="https://github.com/Aurora-in-Wonderland"><img src="이미지" width="100px" /></a></td>
+    <td align="center"><a href="https://github.com/Aurora-in-Wonderland"><img src="이미지" width="140px" /></a></td>
     <td align="center"><a href="https://github.com/ownage2"><img src="이미지" 
-    width="100px" /></a></td>
-    <td align="center"><a href="https://github.com/heexohee"><img src="https://user-images.githubusercontent.com/90495580/169259379-a913dd30-fa7f-4309-af30-9bd94c9608a6.png" width="100px" /></a></td>
+    width="140px" /></a></td>
+    <td align="center"><a href="https://github.com/heexohee"><img src="https://user-images.githubusercontent.com/90495580/169259379-a913dd30-fa7f-4309-af30-9bd94c9608a6.png" width="140px" /></a></td>
      <td align="center"><a href="https://github.com/ownage2"><img src="이미지" 
-    width="100px" /></a></td>
+    width="140px" /></a></td>
   </tr>
    <tr>
     <td align="center"><b><a href="https://github.com/Aurora-in-Wonderland">타냐</a></b></td>
