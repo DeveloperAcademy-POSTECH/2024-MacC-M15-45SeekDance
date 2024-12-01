@@ -91,13 +91,13 @@ Attach videos if you are available
  <table>
   <tr>
     <td align="center"><a href="https://github.com/"><img src="https://user-images.githubusercontent.com/90495580/169259379-a913dd30-fa7f-4309-af30-9bd94c9608a6.png" width="140px" /></a></td>
-    <td align="center"><a href="https://github.com/"><img src="https://user-images.githubusercontent.com/90495580/169259379-a913dd30-fa7f-4309-af30-9bd94c9608a6.png" width="140px" /></a></td>
+    <td align="center"><a href="https://github.com/grootwo"><img src="https://user-images.githubusercontent.com/90495580/169259379-a913dd30-fa7f-4309-af30-9bd94c9608a6.png" width="140px" /></a></td>
     <td align="center"><a href="https://github.com/heexohee"><img src="https://user-images.githubusercontent.com/90495580/169259379-a913dd30-fa7f-4309-af30-9bd94c9608a6.png" width="140px" /></a></td>
      <td align="center"><a href="https://github.com/"><img src="https://user-images.githubusercontent.com/90495580/169259379-a913dd30-fa7f-4309-af30-9bd94c9608a6.png" width="140px" /></a></td>
   </tr>
    <tr>
     <td align="center"><b><a href="https://github.com/">타냐</a></b></td>
-    <td align="center"><b><a href="https://github.com/">그루</a></b></td>
+    <td align="center"><b><a href="https://github.com/grootwo">그루</a></b></td>
     <td align="center"><b><a href="https://github.com/heexohee">레인</a></b></td>
     <td align="center"><b><a href="https://">샘</a></b></td>
   </tr>
