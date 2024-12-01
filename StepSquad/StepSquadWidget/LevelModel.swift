@@ -56,7 +56,7 @@ struct LevelManager {
         Level(level: 16, minStaircase: 720, maxStaircase: 839),
         Level(level: 17, minStaircase: 840, maxStaircase: 959),
         Level(level: 18, minStaircase: 960, maxStaircase: 1199),
-        Level(level: 19, minStaircase: 1200, maxStaircase: Int.max),
+        Level(level: 19, minStaircase: 1200, maxStaircase: Int.max - 1),
     ]
 
     static func calculateLevel(for flightsClimbed: Int) -> Level? {

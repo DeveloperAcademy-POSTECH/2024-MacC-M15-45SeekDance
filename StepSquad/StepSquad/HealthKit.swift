@@ -247,7 +247,7 @@ class HealthKitService: ObservableObject {
         }
     }
 
-    //위젯 관련함수
+    // MARK: - 위젯 관련함수
     func migrateAuthorizationDateToSharedDefaults() {
         let authorizationDateKey = "HealthKitAuthorizationDate"
         let sharedDefaults = UserDefaults(suiteName: "group.com.stepSquad.widget")
@@ -256,7 +256,7 @@ class HealthKitService: ObservableObject {
         if let savedDate = UserDefaults.standard.object(forKey: authorizationDateKey) as? Date {
             // Shared UserDefaults로 값 저장
             sharedDefaults?.set(savedDate, forKey: "widgetData")
-            print("기존 HealthKit 권한 허용 날짜 \(savedDate)를 Shared Defaults로 옮겼습니다.")
+            //print("기존 HealthKit 권한 허용 날짜 \(savedDate)를 Shared Defaults로 옮겼습니다.")
         } else {
             print("기본 UserDefaults에 저장된 HealthKit 권한 허용 날짜가 없습니다.")
         }

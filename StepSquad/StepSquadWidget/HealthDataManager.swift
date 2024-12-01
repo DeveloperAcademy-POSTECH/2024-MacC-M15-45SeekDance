@@ -44,4 +44,25 @@ class HealthDataManager {
         healthStore.execute(query)
     }
 
+    func fetchAllFlightsClimbedData(completion: @escaping (Bool) -> Void) {
+            guard let flightsClimbedType = HKObjectType.quantityType(forIdentifier: .flightsClimbed) else {
+                completion(false)
+                return
+            }
+
+            let predicate = HKQuery.predicateForSamples(withStart: nil, end: nil, options: [])
+            let query = HKStatisticsQuery(quantityType: flightsClimbedType, quantitySamplePredicate: predicate, options: .cumulativeSum) { _, result, error in
+                if let error = error {
+                    print("전체 계단 오르기 데이터 가져오기 오류: \(error.localizedDescription)")
+                    completion(false)
+                    return
+                }
+
+                let totalFlightsClimbed = result?.sumQuantity()?.doubleValue(for: HKUnit.count()) ?? 0.0
+                completion(totalFlightsClimbed > 0)
+            }
+
+            healthStore.execute(query)
+        }
+
 }
