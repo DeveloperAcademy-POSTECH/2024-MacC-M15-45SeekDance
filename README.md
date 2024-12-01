@@ -86,7 +86,7 @@ Attach videos if you are available
   
 <br />
 
-## :people_hugging: Authors
+## 😎 Authors
 
  <table>
   <tr>
@@ -102,10 +102,10 @@ Attach videos if you are available
     <td align="center"><b><a href="https://">샘</a></b></td>
   </tr>
      <tr>
-    <td TECH </td>
-    <td align="center"><b><a href="https://github.com/ownage2">그루</a></b></td>
-    <td align="center"><b><a href="https://github.com/heexohee">레인</a></b></td>
-    <td align="center"><b><a href="https://github.com/ownage2">샘</a></b></td>
+    <td align="center">TECH </td>
+    <td align="center">TECH </td>
+    <td align="center">TECH </td>
+    <td align="center">DESIGN </td>
   </tr>
 </table>
 
