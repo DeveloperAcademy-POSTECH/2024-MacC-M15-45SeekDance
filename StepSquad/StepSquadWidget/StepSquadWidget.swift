@@ -11,7 +11,8 @@ import SwiftUI
 struct FlightsClimbedEntry: TimelineEntry {
     let date: Date
     let flightsClimbed: Int
-    let progressImage: String
+    let progressPercentage: Double
+    let flightsToNextLevel: Int
     let level: Int?
 }
 
@@ -19,11 +20,11 @@ struct Provider: TimelineProvider {
     let healthDataManager = HealthDataManager()
 
     func placeholder(in context: Context) -> FlightsClimbedEntry {
-        FlightsClimbedEntry(date: Date(), flightsClimbed: 0, progressImage: "Easy1", level: 1)
+        FlightsClimbedEntry(date: Date(), flightsClimbed: 0, progressPercentage: 0.0, flightsToNextLevel: 5, level: 1)
     }
 
     func getSnapshot(in context: Context, completion: @escaping (FlightsClimbedEntry) -> Void) {
-        let entry = FlightsClimbedEntry(date: Date(), flightsClimbed: 0, progressImage: "Easy1", level: 1)
+        let entry = FlightsClimbedEntry(date: Date(), flightsClimbed: 221, progressPercentage: 0.7, flightsToNextLevel: 10, level: 9)
         completion(entry)
     }
 
@@ -31,27 +32,32 @@ struct Provider: TimelineProvider {
         healthDataManager.fetchFlightsClimbed { flightsClimbed, _ in
             let flights = Int(flightsClimbed ?? 0)
 
-            if let result = calculateLevel(for: flights) {
-                let gap = (result.level.maxStaircase + 1) - result.level.minStaircase
-                let rest = flights - result.level.minStaircase
-                let currentProgress = Int(Double(rest) / Double(gap) * 5 + 1)
-                let progressImage = "\(result.level.difficulty.rawValue)\(currentProgress)"
+            if let levelData = LevelManager.calculateLevel(for: flights) {
+                let totalGap = (levelData.maxStaircase + 1) - levelData.minStaircase
+                let progressSteps = flights - levelData.minStaircase
+                var progressPercentage = 0.0
+                if levelData.level < 19 {
+                    progressPercentage = Double(progressSteps) / Double(totalGap)
+                } else {
+                    progressPercentage = 1.0
+                }
+                let flightsToNextLevel = (levelData.maxStaircase + 1) - flights
 
-                // 엔트리 생성
                 let entry = FlightsClimbedEntry(
                     date: Date(),
                     flightsClimbed: flights,
-                    progressImage: progressImage,
-                    level: result.level.level
+                    progressPercentage: progressPercentage,
+                    flightsToNextLevel: max(flightsToNextLevel, 0),
+                    level: levelData.level
                 )
                 let timeline = Timeline(entries: [entry], policy: .atEnd)
                 completion(timeline)
             } else {
-                // 기본값
                 let entry = FlightsClimbedEntry(
                     date: Date(),
                     flightsClimbed: flights,
-                    progressImage: "Easy1",
+                    progressPercentage: 0.0,
+                    flightsToNextLevel: 0,
                     level: nil
                 )
                 let timeline = Timeline(entries: [entry], policy: .atEnd)
@@ -59,42 +65,50 @@ struct Provider: TimelineProvider {
             }
         }
     }
-
-
 }
 
 struct FlightsClimbedWidgetEntryView: View {
-    @State private var progress = 0.5
-
     var entry: Provider.Entry
 
     var body: some View {
         ZStack {
-            VStack(spacing: 0) {
-                // 진행 단계 이미지
+            VStack(alignment: .leading, spacing: 0) {
                 Text("총 오른 층수")
                     .font(.system(size: 13, weight: .bold))
-                    .foregroundStyle(Color(red: 0.3, green: 0.43, blue: 0.22))
+                    .foregroundColor(Color(red: 0.3, green: 0.43, blue: 0.22))
 
-                // 오른 층수
                 Text("\(entry.flightsClimbed)")
                     .font(.system(size: 40, weight: .bold))
                     .foregroundColor(Color(red: 0.95, green: 0.98, blue: 0.94))
                     .padding(.bottom, 9)
 
-                // 난이도와 레벨
                 if let level = entry.level {
                     Text("레벨 \(level)")
-                        .font(.title2)
-                        .bold()
-                        .foregroundColor(.white)
-
-                    ProgressView(value: progress)
-
-                    Text("19층 오르면 레벨 업!")
-                        .font(Font.custom("SF Pro", size: 11))
-                        .kerning(0.06)
+                        .font(Font.custom("SF Pro", size: 12))
                         .foregroundColor(Color(red: 0.3, green: 0.43, blue: 0.22))
+
+                    ProgressView(value: entry.progressPercentage)
+                        .tint(Color(red: 0.3, green: 0.43, blue: 0.22))
+                        .padding(.vertical, 8)
+
+                    if entry.flightsToNextLevel > 0 {
+                        if level < 19 {
+                            Text("\(entry.flightsToNextLevel)층 오르면 레벨 업!")
+                                .font(Font.custom("SF Pro", size: 11))
+                                .kerning(0.06)
+                                .foregroundColor(Color(red: 0.3, green: 0.43, blue: 0.22))
+                        } else {
+                            Text("계단걷기 마스터!")
+                                .font(Font.custom("SF Pro", size: 11))
+                                .kerning(0.06)
+                                .foregroundColor(Color(red: 0.3, green: 0.43, blue: 0.22))
+                        }
+                    } else {
+                        Text("오늘 시간 괜찮으면\n계단 오르실래요?")
+                            .font(Font.custom("SF Pro", size: 11))
+                            .kerning(0.06)
+                            .foregroundColor(Color(red: 0.3, green: 0.43, blue: 0.22))
+                    }
                 } else {
                     Text("레벨 없음")
                         .font(.title3)
@@ -102,31 +116,12 @@ struct FlightsClimbedWidgetEntryView: View {
                         .foregroundColor(.white)
                 }
             }
-            .padding(14)
+            .padding(.vertical, 14)
+            .padding(.horizontal, 12)
         }
-        .containerBackground(Color(red: 0.55, green: 0.78, blue: 0.4), for: .widget)
-    }
-
-    // 난이도 계산 함수
-    func currentDifficulty(for count: Int) -> String {
-        switch count {
-        case 0...29:
-            return "Easy"
-        case 30...179:
-            return "Normal"
-        case 180...359:
-            return "Hard"
-        case 360...959:
-            return "Expert"
-        case 960...:
-            return "Impossible"
-        default:
-            return "Unknown"
-        }
+        .widgetBackground(Color(red: 0.55, green: 0.78, blue: 0.4))
     }
 }
-
-
 
 struct FlightsClimbedWidget: Widget {
     let kind: String = "FlightsClimbedWidget"
@@ -141,15 +136,14 @@ struct FlightsClimbedWidget: Widget {
     }
 }
 
-
 extension View {
-    func widgetBackground(_ backgroundView: some View) -> some View {
+    func widgetBackground(_ color: Color) -> some View {
         if #available(iOSApplicationExtension 17.0, *) {
             return containerBackground(for: .widget) {
-                backgroundView
+                color
             }
         } else {
-            return background(backgroundView)
+            return background(color)
         }
     }
 }
