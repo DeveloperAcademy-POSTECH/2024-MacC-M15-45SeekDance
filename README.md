@@ -1,5 +1,5 @@
 
-# :iphone: 계단사랑단
+# ⛰️계단사랑단⛰️
 
 
 [Logo/Cover Image]
@@ -42,13 +42,13 @@ Attach videos if you are available
 
 ## :pushpin: Features
 
-<summary>📌 메인 기능 </summary>
+<summary>📌 핵심 기능 </summary>
 
-- ⛰️ 애플 헬스킷의 계단 오르기 데이터를 통해 내가 얼마나 계단을 많이 올랐는 지 확인하고 해당 레벨에 맞는 보상 아이템을 얻을 수 있습니다.
+1. ⛰️ 애플 헬스킷의 계단 오르기 데이터를 통해 내가 얼마나 계단을 많이 올랐는 지 확인하고 해당 레벨에 맞는 보상 아이템을 얻을 수 있습니다.
 
-- 🪪 계단을 오르며 더 많은 게임 센터 뱃지 성취를 얻을 수 있습니다.
+2. 🪪 계단을 오르며 더 많은 게임 센터 뱃지 성취를 얻을 수 있습니다.
 
-- 🏆 게임 센터와 연동하여 친구 및 플레이어와 주간 계단 점수 경쟁을 할 수 있습니다.
+3. 🏆 게임 센터와 연동하여 친구 및 플레이어와 주간 계단 점수 경쟁을 할 수 있습니다.
 
 
 <br />
@@ -57,7 +57,7 @@ Attach videos if you are available
 ## :sparkles: Skills & Tech Stack
 
   
-### Dev tools
+#### Dev tools
 
 
 <p> 
@@ -75,9 +75,8 @@ Attach videos if you are available
 
 <br />
 
-### Design tools
+#### Design tools
 
-  
 <p>
 <img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=Figma&logoColor=white"/>
 <img src="https://img.shields.io/badge/Adobe Illustrator-FF9A00?style=for-the-badge&logo=Adobe Illustrator&logoColor=white"/>
@@ -91,15 +90,19 @@ Attach videos if you are available
 
  <table>
   <tr>
-    <td align="center"><a href="https://github.com/Aurora-in-Wonderland"><img src="이미지" width="140px" /></a></td>
-    <td align="center"><a href="https://github.com/ownage2"><img src="이미지" 
-    width="140px" /></a></td>
+    <td align="center"><a href="https://github.com/"><img src="https://user-images.githubusercontent.com/90495580/169259379-a913dd30-fa7f-4309-af30-9bd94c9608a6.png" width="140px" /></a></td>
+    <td align="center"><a href="https://github.com/"><img src="https://user-images.githubusercontent.com/90495580/169259379-a913dd30-fa7f-4309-af30-9bd94c9608a6.png" width="140px" /></a></td>
     <td align="center"><a href="https://github.com/heexohee"><img src="https://user-images.githubusercontent.com/90495580/169259379-a913dd30-fa7f-4309-af30-9bd94c9608a6.png" width="140px" /></a></td>
-     <td align="center"><a href="https://github.com/ownage2"><img src="이미지" 
-    width="140px" /></a></td>
+     <td align="center"><a href="https://github.com/"><img src="https://user-images.githubusercontent.com/90495580/169259379-a913dd30-fa7f-4309-af30-9bd94c9608a6.png" width="140px" /></a></td>
   </tr>
    <tr>
-    <td align="center"><b><a href="https://github.com/Aurora-in-Wonderland">타냐</a></b></td>
+    <td align="center"><b><a href="https://github.com/">타냐</a></b></td>
+    <td align="center"><b><a href="https://github.com/">그루</a></b></td>
+    <td align="center"><b><a href="https://github.com/heexohee">레인</a></b></td>
+    <td align="center"><b><a href="https://">샘</a></b></td>
+  </tr>
+     <tr>
+    <td TECH </td>
     <td align="center"><b><a href="https://github.com/ownage2">그루</a></b></td>
     <td align="center"><b><a href="https://github.com/heexohee">레인</a></b></td>
     <td align="center"><b><a href="https://github.com/ownage2">샘</a></b></td>
