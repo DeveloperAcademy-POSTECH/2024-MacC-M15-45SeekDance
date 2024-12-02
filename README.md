@@ -35,15 +35,15 @@
 
 <table>
   <tr>
-    <td><img src="https://github.com/user-attachments/assets/b91a3b6e-33aa-431d-bf99-565f39bf2d19" width="300px"></td>
+    <td><img src="https://github.com/user-attachments/assets/b91a3b6e-33aa-431d-bf99-565f39bf2d19" width="260px"></td>
     <td align="center"><b>입단하기 -> 헬스킷 권한받기 -> 입단증</b><br> 사용자가 권한을 획득하고 입단을 완료한 뒤 발급되는 입단증을 보여줍니다.</td>
   </tr>
   <tr>
-    <td ><img src="https://github.com/user-attachments/assets/5cd8539a-16ef-4828-b14e-9d439c701bab" width="300px"></td>
+    <td ><img src="https://github.com/user-attachments/assets/5cd8539a-16ef-4828-b14e-9d439c701bab" width="260px"></td>
     <td align="center"><b>레벨 달성 시 성취 아이템</b><br> 특정 레벨에 도달하면 성취와 함께 보상 뱃지와 약재 아이템을 제공합니다.</td>
   </tr>
   <tr>
-    <td><img src="https://github.com/user-attachments/assets/5cd8539a-16ef-4828-b14e-9d439c701bab" width="300px"></td>
+    <td><img src="https://github.com/user-attachments/assets/5cd8539a-16ef-4828-b14e-9d439c701bab" width="260px"></td>
     <td align="center"><b>게임센터 계단 경쟁 뷰</b><br> NFC 태깅을 통해 특별 점수가 부여됩니다.</td>
   </tr>
 </table>
