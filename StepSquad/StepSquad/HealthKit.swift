@@ -249,4 +249,36 @@ class HealthKitService: ObservableObject {
             healthStore.execute(query)
         }
     }
+    
+    // MARK: - 위젯 관련함수
+    func migrateAuthorizationDataToSharedDefaults() {
+        let authorizationDateKey = "HealthKitAuthorizationDate"
+        let authorizationStatusKey = "HealthKitAuthorized"
+        
+        // 기본 UserDefaults에서 날짜 확인
+        if let savedDate = UserDefaults.standard.object(forKey: authorizationDateKey) as? Date {
+            // Shared UserDefaults로 날짜 저장
+            UserDefaults.shared.set(savedDate, forKey: "widgetAuthorizationDate")
+            //print("기존 HealthKit 권한 허용 날짜 \(savedDate)를 Shared Defaults로 옮겼습니다.")
+        } else {
+            //print("기본 UserDefaults에 저장된 HealthKit 권한 허용 날짜가 없습니다.")
+        }
+        
+        // 기본 UserDefaults에서 권한 상태 확인
+        if let isAuthorized = UserDefaults.standard.object(forKey: authorizationStatusKey) as? Bool {
+            // Shared UserDefaults로 권한 상태 저장
+            UserDefaults.shared.set(isAuthorized, forKey: "widgetAuthorizationStatus")
+            //print("기존 HealthKit 권한 상태 \(isAuthorized)를 Shared Defaults로 옮겼습니다.")
+        } else {
+            //print("기본 UserDefaults에 저장된 HealthKit 권한 상태가 없습니다.")
+        }
+    }
+}
+
+
+extension UserDefaults {
+    static var shared: UserDefaults {
+        let appGroupId = "group.com.stepSquad.widget"
+        return UserDefaults(suiteName: appGroupId)!
+    }
 }

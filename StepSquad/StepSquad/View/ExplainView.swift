@@ -25,7 +25,7 @@ struct ExplainView: View {
                             }
 
                             URLButton(text: "NFC 설치 문의",
-                                      url: "")
+                                      url: "https://forms.gle/yaeE8wyvDGDGqq4F8")
 
                             URLButton(text: "오류 문의",
                                       url: "https://docs.google.com/forms/d/e/1FAIpQLScvUDBnW2y7YfmcOeIzlA9KvzSUcIYix6-wkENPDCiDRaf04Q/viewform")
@@ -46,19 +46,21 @@ struct ExplainView: View {
                                     .opacity(0.6)
                             }
 
-                            URLButton(text: "Apple 건강 앱 동기화",
-                                      url: "")
-
                             URLButton(text: "개인정보 처리 방침",
-                                      url: "")
+                                      url: "https://smiling-taxicab-536.notion.site/9e06de4af50e47d584c7c6ed5ccea414")
                         }
 
                         Section(header: Text("계단사랑단의 이야기")) {
                             URLButton(text: "개발 스토리",
-                                      url: "")
+                                      url: "https://github.com/DeveloperAcademy-POSTECH/2024-MacC-M15-45SeekDance")
 
-                            URLButton(text: "팀 45식단 소개",
-                                      url: "")
+                            NavigationLink {
+                                DeveloperInfoView()
+                            } label: {
+                                Text("팀 45식단 소개")
+                            }
+
+
                         }
                     }
 
