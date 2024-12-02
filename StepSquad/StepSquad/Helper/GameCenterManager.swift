@@ -121,10 +121,12 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
     }
         
     // MARK: 성취 달성 여부 확인 후 성취 업데이트하기
-    func reportCompletedAchievement(achievementId: String) {
+    func reportCompletedAchievement(achievementId: String) -> Bool {
+        var isReported = false
         guard isGameCenterLoggedIn else {
             print("Error: user is not logged in to Game Center.")
-            return
+//            print("login isReported: \(isReported)")
+            return isReported
         }
         let achievement = GKAchievement(identifier: achievementId)
         if !achievement.isCompleted {
@@ -136,8 +138,13 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
                     return
                 }
                 print("game center: \(achievement.identifier) achievement completed.")
+                isReported = true
             })
+//            print("after report isReported: \(isReported)")
+            return isReported
         }
+//        print("login isReported: \(isReported)")
+        return isReported
     }
     
     // MARK: 성취 리셋하기
