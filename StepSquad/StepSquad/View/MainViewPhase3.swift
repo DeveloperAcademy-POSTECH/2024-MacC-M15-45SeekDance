@@ -204,7 +204,6 @@ struct MainViewPhase3: View {
                         .scrollIndicators(ScrollIndicatorVisibility.hidden)
                         .onAppear {
                             Task {
-                                await gameCenterManager.loadLocalPlayerImage()
                                 userProfileImage = await gameCenterManager.loadLocalPlayerImage()
                             }
                         }
@@ -527,7 +526,7 @@ struct MainViewPhase3: View {
         let weeklyNfcPoint = weeklyScore(from: stairSteps)
         service.getWeeklyStairDataAndSave()
         let weeklyStairPoint = service.weeklyFlightsClimbed * 16
-        //        print("이번주 걸은 층계 * 16: \(weeklyStairPoint), nfc 점수: \(weeklyNfcPoint)")
+                print("이번주 걸은 층계 * 16: \(weeklyStairPoint), nfc 점수: \(weeklyNfcPoint)")
         Task {
             await gameCenterManager.submitPoint(point: Int(weeklyNfcPoint) + Int(weeklyStairPoint))
         }
@@ -561,9 +560,10 @@ struct MainViewPhase3: View {
             }
         }
         if (currentStatus.getTotalStaircase() / 40) > electricBirdAchievementCount { // 누적 오른 층계가 40층의 배수라면,
-            print("It's \(currentStatus.getTotalStaircase() / 40)번째 틈새 전기 절약 성취")
-            gameCenterManager.reportCompletedAchievement(achievementId: "electricBird")
-            UserDefaults.standard.setValue(currentStatus.getTotalStaircase() / 40, forKey: "electricBirdAchievementCount")
+//            print("It's \(currentStatus.getTotalStaircase() / 40)번째 틈새 전기 절약 성취")
+            if gameCenterManager.reportCompletedAchievement(achievementId: "electricBird") { // 성취를 정상적으로 받는다면,
+                UserDefaults.standard.setValue(currentStatus.getTotalStaircase() / 40, forKey: "electricBirdAchievementCount")
+            }
         }
     }
 
