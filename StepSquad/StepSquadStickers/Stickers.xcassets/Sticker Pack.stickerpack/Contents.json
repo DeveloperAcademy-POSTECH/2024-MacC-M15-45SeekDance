@@ -8,31 +8,31 @@
   },
   "stickers" : [
     {
-      "filename" : "Win@2x.sticker"
+      "filename" : "Default.sticker"
     },
     {
-      "filename" : "Invitation@2x.sticker"
+      "filename" : "Healthy.sticker"
     },
     {
-      "filename" : "Healthy@2x.sticker"
+      "filename" : "Heehee.sticker"
     },
     {
-      "filename" : "Default@2x.sticker"
+      "filename" : "Invitation.sticker"
     },
     {
-      "filename" : "Lazy@2x.sticker"
+      "filename" : "Lazy.sticker"
     },
     {
-      "filename" : "Heehee@2x.sticker"
+      "filename" : "Precious.sticker"
     },
     {
-      "filename" : "Precious@2x.sticker"
+      "filename" : "Shake.sticker"
     },
     {
-      "filename" : "Shake@2x.sticker"
+      "filename" : "Tada.sticker"
     },
     {
-      "filename" : "Tada@2x.sticker"
+      "filename" : "Win.sticker"
     }
   ]
 }
