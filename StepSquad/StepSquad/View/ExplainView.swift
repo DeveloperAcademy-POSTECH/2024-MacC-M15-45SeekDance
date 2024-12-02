@@ -57,8 +57,15 @@ struct ExplainView: View {
                             URLButton(text: "개발 스토리",
                                       url: "")
 
-                            URLButton(text: "팀 45식단 소개",
-                                      url: "")
+//                            URLButton(text: "팀 45식단 소개",
+//                                      url: "")
+                            NavigationLink {
+                                DeveloperInfoView()
+                            } label: {
+                                Text("팀 45식단 소개")
+                            }
+
+
                         }
                     }
 
