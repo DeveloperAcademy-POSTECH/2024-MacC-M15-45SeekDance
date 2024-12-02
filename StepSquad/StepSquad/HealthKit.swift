@@ -222,8 +222,8 @@ class HealthKitService: ObservableObject {
             }
             
             // HealthKit 쿼리 실행
-            let adjustedStartDateMinusOneDay = Calendar.current.date(byAdding: .day, value: -1, to: adjustedStartDate)!
-            let predicate = HKQuery.predicateForSamples(withStart: adjustedStartDateMinusOneDay, end: endOfWeekDate, options: [])
+//            let adjustedStartDateMinusOneDay = Calendar.current.date(byAdding: .day, value: -1, to: adjustedStartDate)!
+            let predicate = HKQuery.predicateForSamples(withStart: adjustedStartDate, end: endOfWeekDate, options: [])
 
             let userEnteredPredicate = NSPredicate(format: "metadata.%K != YES", HKMetadataKeyWasUserEntered)
             let combinedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, userEnteredPredicate])
