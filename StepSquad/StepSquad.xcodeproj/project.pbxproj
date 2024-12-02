@@ -242,7 +242,7 @@
 				};
 			};
 			buildConfigurationList = BDD309BD2CBA62C3003EDC28 /* Build configuration list for PBXProject "StepSquad" */;
-			developmentRegion = en;
+			developmentRegion = ko;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -591,6 +591,7 @@
 				INFOPLIST_FILE = StepSquadWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = StepSquadWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 17;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -625,6 +626,7 @@
 				INFOPLIST_FILE = StepSquadWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = StepSquadWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 17;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
