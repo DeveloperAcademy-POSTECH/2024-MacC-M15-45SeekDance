@@ -35,7 +35,9 @@
 
 Attach videos if you are available
 
-  
+  // 영상 딸거면 20초 내외로 코어 기능? -> 
+  // 여러개 -> gif
+  // png -> 배경 뚫린채로 들어간다
 
   
 <br />
