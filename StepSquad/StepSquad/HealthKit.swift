@@ -6,7 +6,6 @@
 //
 
 import HealthKit
-import WidgetKit
 import Foundation
 import SwiftUI
 
@@ -75,7 +74,7 @@ class HealthKitService: ObservableObject {
             print("HealthKit 권한 허용 날짜를 \(currentDate)로 저장했습니다.")
         } else {
             // 이미 날짜가 저장된 경우, 기존 날짜를 사용
-            if let savedDate = UserDefaults.standard.object(forKey: authorizationDateKey) as? Date {
+            if UserDefaults.standard.object(forKey: authorizationDateKey) is Date {
                 //                print("이전에 저장된 HealthKit 권한 허용 날짜: \(savedDate)")
             }
         }
@@ -182,74 +181,69 @@ class HealthKitService: ObservableObject {
             let calendar = Calendar.current
             let today = Date()
             
-            // 주간 범위 설정 (이번 주 토요일부터 다음 금요일)
+            // 주간 시작일 설정
             var startOfWeek: Date?
             if calendar.component(.weekday, from: today) == 7 {
-                // 오늘이 토요일인 경우, 오늘을 시작일로 설정
                 startOfWeek = calendar.startOfDay(for: today)
             } else {
-                // 오늘이 토요일이 아닌 경우, 지난 토요일을 시작일로 설정
                 startOfWeek = calendar.nextDate(
                     after: today,
                     matching: DateComponents(weekday: 7),
-                    matchingPolicy: .nextTime,
+                    matchingPolicy: .strict,
                     direction: .backward
                 )
-                
-                print("!!\(String(describing: startOfWeek))")
             }
             
-            // 권한을 받은 날짜 가져오기
-            guard let authorizationDate = UserDefaults.standard.object(forKey: "HealthKitAuthorizationDate") as? Date
-            else {
+            guard let startOfWeekDate = startOfWeek else {
+                       print("주간 시작일 계산 실패")
+                       return
+                   }
+            
+            // 권한 허용 날짜 가져오기
+            guard let authorizationDate = UserDefaults.standard.object(forKey: "HealthKitAuthorizationDate") as? Date else {
                 print("권한 허용 날짜가 설정되지 않았습니다.")
                 return
             }
-            let startOfWeekDate = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: today))!
             
-            // 권한을 받은 날짜와 주간 시작일 중 더 나중의 날짜를 사용
-            let adjustedStartDate = max(startOfWeekDate, calendar.startOfDay(for: authorizationDate))
+            // 시작일 조정
+            let adjustedStartDate = max(
+                calendar.startOfDay(for: startOfWeekDate),
+                calendar.startOfDay(for: authorizationDate)
+            )
             
-            // 종료일을 다음 금요일로 설정
-            let endOfWeekDate = calendar.date(byAdding: .day, value: 6, to: startOfWeekDate) ?? today
+            // 종료일 설정 (하루의 마지막 순간으로 설정)
+            let rawEndOfWeekDate = calendar.date(byAdding: .day, value: 6, to: startOfWeekDate)!
+            let endOfWeekDate = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: rawEndOfWeekDate)!
             
-            let predicate = HKQuery.predicateForSamples(withStart: adjustedStartDate, end: endOfWeekDate, options: [])
+            // 권한 허용일이 주간 범위를 벗어난 경우 처리
+            if adjustedStartDate > endOfWeekDate {
+                print("권한 허용일이 주간 범위에 포함되지 않습니다.")
+                return
+            }
             
-            // 사용자가 데이터를 주작했는지 아닌지 파악하는 부분 NSPredicate -> 메타 데이터 쿼리 조건, yes가 아닌 데이터만 가져 오겠다는 것.
+            // HealthKit 쿼리 실행
+            let adjustedStartDateMinusOneDay = Calendar.current.date(byAdding: .day, value: -1, to: adjustedStartDate)!
+            let predicate = HKQuery.predicateForSamples(withStart: adjustedStartDateMinusOneDay, end: endOfWeekDate, options: [])
+
             let userEnteredPredicate = NSPredicate(format: "metadata.%K != YES", HKMetadataKeyWasUserEntered)
             let combinedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, userEnteredPredicate])
-            
             
             let query = HKStatisticsQuery(quantityType: stairType, quantitySamplePredicate: combinedPredicate, options: .cumulativeSum) { _, result, error in
                 guard error == nil else {
                     print("주간 계단 데이터 가져오기 오류: \(error!.localizedDescription)")
-                    
-                    print("Authorization Date: \(String(describing: authorizationDate)), Start: \(adjustedStartDate), End: \(endOfWeekDate)")
-                    
                     DispatchQueue.main.async {
                         self.weeklyFlightsClimbed = 0.0
-                        
-                        print("오류 일때, 0 대입\(self.weeklyFlightsClimbed)")
                     }
                     return
                 }
                 
-                var totalFlightsClimbed = result?.sumQuantity()?.doubleValue(for: HKUnit.count()) ?? 0.0
-                
-                // 데이터가 없으면 0을 반환
-                if totalFlightsClimbed == 0 || totalFlightsClimbed == 0.0 {
-                    totalFlightsClimbed = 0.0
-                    print("이번 주 계단 데이터가 없습니다. 0을 반환합니다.")
-                }
-                
+                let totalFlightsClimbed = result?.sumQuantity()?.doubleValue(for: HKUnit.count()) ?? 0.0
                 UserDefaults(suiteName: "group.macmac.pratice.carot")?.set(totalFlightsClimbed, forKey: "WeeklyFlightsClimbed")
                 
-                // 이 부분에서 바로 @AppStorage의 값을 업데이트
                 DispatchQueue.main.async {
                     self.weeklyFlightsClimbed = totalFlightsClimbed
                 }
                 print("주간 계단 수 (토-금): \(totalFlightsClimbed)를 UserDefaults에 저장했습니다.")
-                
                 print("Authorization Date: \(String(describing: authorizationDate)), Start: \(adjustedStartDate), End: \(endOfWeekDate)")
             }
             healthStore.execute(query)
