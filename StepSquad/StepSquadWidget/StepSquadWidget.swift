@@ -100,6 +100,7 @@ struct Provider: TimelineProvider {
     }
 }
 
+
 struct FlightsClimbedWidgetEntryView: View {
     var entry: Provider.Entry
 
