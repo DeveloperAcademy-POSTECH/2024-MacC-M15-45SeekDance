@@ -149,7 +149,7 @@ struct FlightsClimbedWidgetEntryView: View {
                 
             } else {
                 VStack(alignment: .leading) {
-                    Text("데이터 연동이\n필요해요")
+                    Text("계단 사랑하기로\n했잖아요… 돌아와요…")
                         .font(.system(size: 13, weight: .bold))
                         .foregroundColor(Color(red: 0.3, green: 0.43, blue: 0.22))
 
