@@ -26,7 +26,7 @@ struct QuestionsView: View {
                             ),
                             content: {
                                 QuestionText("앱에서 NFC 태깅을 통해 특별 재료와 추가 점수를 제공합니다. 공식 NFC 설치 장소에서만 이용 가능합니다.")
-                                QuestionURLButton(text: "계단사랑단 NFC 더 알아보기", url: "")
+                                QuestionURLButton(text: "계단사랑단 NFC 더 알아보기", url: "https://smiling-taxicab-536.notion.site/NFC-2900b764680b4dbc8fff8b82b6760b89?pvs=4")
                             },
                             label: { Text("NFC 어떻게 사용하나요?") }
                         )
@@ -49,8 +49,8 @@ struct QuestionsView: View {
                             ),
                             content: {
                                 QuestionText("NFC 설치 위치는 이벤트마다 달라집니다.")
-                                QuestionURLButton(text: "위치 확인", url: "")
-                                QuestionURLButton(text: "설치 문의", url: "")
+                                QuestionURLButton(text: "위치 확인", url: "https://smiling-taxicab-536.notion.site/NFC-24-12-02-39808c1784fe41a29681ab553dc114ae?pvs=4")
+                                QuestionURLButton(text: "설치 문의", url: "https://forms.gle/yaeE8wyvDGDGqq4F8")
                             },
                             label: { Text("NFC는 어디에 있나요?") }
                         )
