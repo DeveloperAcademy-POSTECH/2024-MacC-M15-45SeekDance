@@ -97,10 +97,10 @@ Attach videos if you are available
 
  <table>
   <tr>
-    <td align="center"><a href="https://github.com/seoyounghan"><img src="https://user-images.githubusercontent.com/90495580/169259379-a913dd30-fa7f-4309-af30-9bd94c9608a6.png" width="140px" /></a></td>
-    <td align="center"><a href="https://github.com/grootwo"><img src="https://user-images.githubusercontent.com/90495580/169259379-a913dd30-fa7f-4309-af30-9bd94c9608a6.png" width="140px" /></a></td>
-    <td align="center"><a href="https://github.com/heexohee"><img src="https://user-images.githubusercontent.com/90495580/169259379-a913dd30-fa7f-4309-af30-9bd94c9608a6.png" width="140px" /></a></td>
-     <td align="center"><a href="https://github.com/"><img src="https://user-images.githubusercontent.com/90495580/169259379-a913dd30-fa7f-4309-af30-9bd94c9608a6.png" width="140px" /></a></td>
+    <td align="center"><a href="https://github.com/seoyounghan"><img src="https://user-images.githubusercontent.com/90495580/169259379-a913dd30-fa7f-4309-af30-9bd94c9608a6.png" width="150px" /></a></td>
+    <td align="center"><a href="https://github.com/grootwo"><img src="https://user-images.githubusercontent.com/90495580/169259379-a913dd30-fa7f-4309-af30-9bd94c9608a6.png" width="150px" /></a></td>
+    <td align="center"><a href="https://github.com/heexohee"><img src="https://user-images.githubusercontent.com/90495580/169259379-a913dd30-fa7f-4309-af30-9bd94c9608a6.png" width="150px" /></a></td>
+     <td align="center"><a href="https://github.com/"><img src="https://www.linkedin.com/in/sujinpdesign/" width="150px" /></a></td>
   </tr>
    <tr>
     <td align="center"><b><a href="https://github.com/seoyounghan">타냐</a></b></td>
