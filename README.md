@@ -43,7 +43,20 @@ Attach videos if you are available
 // 1.  입단하기 -> 권한받기 -> 뷰전화되서 메인뷰 가고 -> 다운하면 입단증까지 보여주는 것.
 // 2. 레벨업하기 -> 뷰 변환오는 것 받고, 성취 뜨는 것으로 이동 (그루)
 // 3.  NFC 태깅 -> 뷰전환 (레인)
- 
+
+
+<table>
+<tr>
+    <td align="center"><img src="[https://github.com/user-attachments/assets/7cd9ac9f-40a9-4f0f-a053-15c286178b19](https://github.com/user-attachments/assets/b91a3b6e-33aa-431d-bf99-565f39bf2d19)" width="80%" /></a></td>
+    <td align="center"><img src="[https://github.com/user-attachments/assets/53ccfb59-fe0b-4426-9a65-150af2bced25](https://github.com/user-attachments/assets/5cd8539a-16ef-4828-b14e-9d439c701bab)" width="80%" /></a></td>
+    <td align="center"><img src="https://github.com/user-attachments/assets/eb70d3f7-3277-431b-81a0-f986bed24c16" width="80%" /></a></td>   
+  </tr>
+  <tr>
+    <td align="center">입단하기 -> 권한받기 -> 입단증</td>
+    <td align="center">레벨 달성 시 성취 아이템</td>
+    <td align="center">게임센터 계단 경쟁 뷰</td>
+  </tr>
+</table>
 
 
   
