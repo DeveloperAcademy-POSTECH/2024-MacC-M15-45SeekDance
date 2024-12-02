@@ -48,11 +48,11 @@ class HealthKitService: ObservableObject {
                 self?.fetchAllFlightsClimbedData()
                 // 권한 요청 날짜를 기록하는 로직
                 self?.storeAuthorizationDate()
-
+                
                 // 권한 허용 후에만 데이터를 가져오는 로직 실행
                 self?.getWeeklyStairDataAndSave()
                 self?.fetchAndSaveFlightsClimbedSinceAuthorization()
-
+                
             } else {
                 self?.isHealthKitAuthorized = false
                 //                self?.isHealthKitAuthorized = false
@@ -195,18 +195,17 @@ class HealthKitService: ObservableObject {
                     matchingPolicy: .nextTime,
                     direction: .backward
                 )
-            }
-            
-            guard let startOfWeekDate = startOfWeek else {
-                print("시작 날짜를 설정할 수 없습니다.")
-                return
+                
+                print("!!\(String(describing: startOfWeek))")
             }
             
             // 권한을 받은 날짜 가져오기
-            guard let authorizationDate = UserDefaults.standard.object(forKey: "HealthKitAuthorizationDate") as? Date else {
+            guard let authorizationDate = UserDefaults.standard.object(forKey: "HealthKitAuthorizationDate") as? Date
+            else {
                 print("권한 허용 날짜가 설정되지 않았습니다.")
                 return
             }
+            let startOfWeekDate = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: today))!
             
             // 권한을 받은 날짜와 주간 시작일 중 더 나중의 날짜를 사용
             let adjustedStartDate = max(startOfWeekDate, calendar.startOfDay(for: authorizationDate))
@@ -224,13 +223,21 @@ class HealthKitService: ObservableObject {
             let query = HKStatisticsQuery(quantityType: stairType, quantitySamplePredicate: combinedPredicate, options: .cumulativeSum) { _, result, error in
                 guard error == nil else {
                     print("주간 계단 데이터 가져오기 오류: \(error!.localizedDescription)")
+                    
+                    print("Authorization Date: \(String(describing: authorizationDate)), Start: \(adjustedStartDate), End: \(endOfWeekDate)")
+                    
+                    DispatchQueue.main.async {
+                        self.weeklyFlightsClimbed = 0.0
+                        
+                        print("오류 일때, 0 대입\(self.weeklyFlightsClimbed)")
+                    }
                     return
                 }
                 
                 var totalFlightsClimbed = result?.sumQuantity()?.doubleValue(for: HKUnit.count()) ?? 0.0
                 
                 // 데이터가 없으면 0을 반환
-                if totalFlightsClimbed == 0.0 {
+                if totalFlightsClimbed == 0 || totalFlightsClimbed == 0.0 {
                     totalFlightsClimbed = 0.0
                     print("이번 주 계단 데이터가 없습니다. 0을 반환합니다.")
                 }
@@ -242,9 +249,10 @@ class HealthKitService: ObservableObject {
                     self.weeklyFlightsClimbed = totalFlightsClimbed
                 }
                 print("주간 계단 수 (토-금): \(totalFlightsClimbed)를 UserDefaults에 저장했습니다.")
+                
+                print("Authorization Date: \(String(describing: authorizationDate)), Start: \(adjustedStartDate), End: \(endOfWeekDate)")
             }
             healthStore.execute(query)
         }
     }
 }
-
