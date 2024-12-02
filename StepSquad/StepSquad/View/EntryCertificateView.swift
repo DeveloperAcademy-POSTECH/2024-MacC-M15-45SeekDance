@@ -48,7 +48,7 @@ struct EntryCertificateView: View {
                         .font(.system(size: 22))
                         .foregroundStyle(Color(hex: 0x4C6D38))
 
-                    Text("\(dDay)일")
+                    Text("\(dDay)일 차")
                         .font(.system(size: 34, weight: .bold))
                         .foregroundStyle(Color(hex: 0x3A542B))
 
