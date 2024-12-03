@@ -33,9 +33,10 @@
 
 ## :framed_picture: Demo
 
+
 <table>
   <tr>
-    <td><img src="https://github.com/user-attachments/assets/b91a3b6e-33aa-431d-bf99-565f39bf2d19" width="260px"></td>
+    <td><img src="https://github.com/user-attachments/assets/61f228d4-e34e-4103-91a6-0f0340712129" width="260px"></td>
     <td align="center"><b>입단하기 -> 헬스킷 권한받기 -> 입단증</b><br> 사용자가 권한을 획득하고 입단을 완료한 뒤 발급되는 입단증을 보여줍니다.</td>
   </tr>
   <tr>
