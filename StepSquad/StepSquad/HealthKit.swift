@@ -105,7 +105,7 @@ class HealthKitService: ObservableObject {
         let combinedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, userEnteredPredicate])
         
         
-        let query = HKStatisticsQuery(quantityType: flightsClimbedType, quantitySamplePredicate: combinedPredicate, options: .cumulativeSum) { _, result, error in
+        let query = HKStatisticsQuery(quantityType: flightsClimbedType, quantitySamplePredicate: predicate, options: .cumulativeSum) { _, result, error in
             if let error = error {
                 print("계단 오르기 데이터 가져오기 오류: \(error.localizedDescription)")
                 return
