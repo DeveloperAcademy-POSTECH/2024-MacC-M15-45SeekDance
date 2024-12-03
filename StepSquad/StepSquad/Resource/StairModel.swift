@@ -42,4 +42,5 @@ let gariStairs: [StairModel] = [
     StairModel(name: "45식단 쇼케이스 부스", numberOfStairs: 100, serialNumber: "0403e11b220289", stickerName: ""),
     StairModel(name: "45식단 쇼케이스 부스", numberOfStairs: 100, serialNumber: "0453e1e9200289", stickerName: ""),
     StairModel(name: "45식단 쇼케이스 부스", numberOfStairs: 100, serialNumber: "0453bd28220289", stickerName: ""),
+    StairModel(name: "포스텍 108계단", numberOfStairs: 108, serialNumber: "04a34113220289", stickerName: ""),
 ]
