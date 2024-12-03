@@ -102,14 +102,14 @@
   <tr>
     <td align="center"><a href="https://github.com/seoyounghan"><img src="https://github.com/user-attachments/assets/c480b094-96bf-4d79-bd68-b8c282e754a1" width="150px" /></a></td>
     <td align="center"><a href="https://github.com/grootwo"><img src="https://github.com/user-attachments/assets/22d8c460-e5f8-49b2-904d-f14eebad196e" width="150px" /></a></td>
-    <td align="center"><a href="https://github.com/heexohee"><img src="https://github.com/user-attachments/assets/da038640-a913-41f4-ba1e-00465d533f45" width="120px" /></a></td>
-     <td align="center"><a href="https://github.com/"><img src="https://user-images.githubusercontent.com/90495580/169259379-a913dd30-fa7f-4309-af30-9bd94c9608a6.png" width="150px"/></a></td>
+    <td align="center"><a href="https://github.com/heexohee"><img src="https://github.com/user-attachments/assets/da038640-a913-41f4-ba1e-00465d533f45" width="150px" /></a></td>
+     <td align="center"><a href="https://github.com/"><img src="https://github.com/user-attachments/assets/6ec323b0-ab5e-4e16-af6f-2cabbf1bc61e" width="150px"/></a></td>
   </tr>
    <tr>
     <td align="center"><b><a href="https://github.com/seoyounghan">타냐</a></b></td>
     <td align="center"><b><a href="https://github.com/grootwo">그루</a></b></td>
-    <td align="center"><b><a href="https://www.linkedin.com/in/sujinpdesign">레인</a></b></td>
-    <td align="center"><b><a href="https://">샘</a></b></td>
+    <td align="center"><b><a href="https://github.com/heexohee">레인</a></b></td>
+    <td align="center"><b><a href="https://www.linkedin.com/in/sujinpdesign">샘</a></b></td>
   </tr>
      <tr>
     <td align="center">TECH </td>
@@ -118,8 +118,6 @@
     <td align="center">DESIGN </td>
   </tr>
 </table>
-
-
 
 
 
