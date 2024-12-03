@@ -41,11 +41,11 @@
   </tr>
   <tr>
     <td ><img src="https://github.com/user-attachments/assets/5cd8539a-16ef-4828-b14e-9d439c701bab" width="260px"></td>
-    <td align="center"><b>레벨 달성 시 성취 아이템</b><br> 특정 레벨에 도달하면 성취와 함께 보상 뱃지와 약재 아이템을 제공합니다.</td>
+    <td align="center"><b>레벨 달성 시 성취 아이템 보상</b><br> 특정 레벨에 도달하면 성취와 함께 보상 뱃지와 약재 아이템을 제공합니다.</td>
   </tr>
   <tr>
-    <td><img src="https://github.com/user-attachments/assets/5cd8539a-16ef-4828-b14e-9d439c701bab" width="260px"></td>
-    <td align="center"><b>게임센터 계단 경쟁 뷰</b><br> NFC 태깅을 통해 특별 점수가 부여됩니다.</td>
+    <td><img src="https://github.com/user-attachments/assets/d6bd20a2-675c-413b-8a08-b1208fad3710" width="260px"></td>
+    <td align="center"><b>NFC 점수 태깅 기능</b><br> NFC 태깅을 통해 특별 점수가 부여됩니다.</td>
   </tr>
 </table>
 
