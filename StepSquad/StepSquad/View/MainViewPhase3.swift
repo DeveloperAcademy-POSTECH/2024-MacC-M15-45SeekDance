@@ -456,7 +456,7 @@ struct MainViewPhase3: View {
     func updateButtonState() {
         if let lastStep = stairSteps.last {
             let elapsedTime = Date().timeIntervalSince(lastStep.stairStepDate)
-            let remainingTime = max(0, 300 - elapsedTime)
+            let remainingTime = max(0, 0 - elapsedTime)
 
             if remainingTime <= 0 {
                 isButtonEnabled = true
