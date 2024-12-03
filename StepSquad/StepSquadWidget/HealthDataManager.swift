@@ -33,7 +33,7 @@ class HealthDataManager {
 
         let combinedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, userEnteredPredicate])
 
-        let query = HKStatisticsQuery(quantityType: flightsClimbedType, quantitySamplePredicate: combinedPredicate, options: .cumulativeSum) { _, result, error in
+        let query = HKStatisticsQuery(quantityType: flightsClimbedType, quantitySamplePredicate: predicate, options: .cumulativeSum) { _, result, error in
             if let sum = result?.sumQuantity() {
                 let flightsClimbed = sum.doubleValue(for: HKUnit.count())
                 completion(flightsClimbed, nil)
