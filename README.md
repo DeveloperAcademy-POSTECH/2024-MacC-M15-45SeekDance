@@ -1,5 +1,8 @@
 
 # ⛰️계단사랑단⛰️
+<img src="https://github.com/user-attachments/assets/f6236e10-083c-400e-8860-07bb9ada0c6e">
+
+<br />
 
 🔗 **[앱스토어에서 계단사랑단 다운받기](https://apps.apple.com/kr/app/%EA%B3%84%EB%8B%A8%EC%82%AC%EB%9E%91%EB%8B%A8/id6737301392)**
   
