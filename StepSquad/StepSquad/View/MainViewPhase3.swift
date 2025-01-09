@@ -586,6 +586,15 @@ struct MainViewPhase3: View {
         compareCurrentLevelAndUpdate()
         updateLeaderboard()
     }
+    
+    // MARK: 만렙 이후 리셋하기
+    func resetLevel() {
+        currentStatus.updateStaircase(0)
+        gameCenterManager.resetAchievements()
+        completedLevels.resetLevels()
+        // TODO: 오른 층계 데이터 패칭 시점 현재로 변경
+        // TODO: saveCurrentStatus() 작동 확인
+    }
 
     // MARK: Level 관련 테스트 프린트문
     func printAll() {

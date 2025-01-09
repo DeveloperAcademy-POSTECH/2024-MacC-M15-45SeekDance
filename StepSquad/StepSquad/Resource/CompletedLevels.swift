@@ -49,4 +49,9 @@ class CompletedLevels: Codable {
     func isCompleted(level: Int) -> Bool {
         return levels.keys.contains(level)
     }
+    
+    func resetLevels() {
+        levels = [Int: Date]()
+        save()
+    }
 }
