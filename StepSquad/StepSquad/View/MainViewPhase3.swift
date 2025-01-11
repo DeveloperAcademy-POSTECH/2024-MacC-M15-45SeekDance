@@ -86,6 +86,10 @@ struct MainViewPhase3: View {
                         .padding(.horizontal, 36)
 
                         ScrollView {
+                            Button("Reset") {
+                                print("reset")
+                                resetLevel()
+                            }
                             VStack(spacing: 0) {
                                 if isHealthKitAuthorized {
                                     LevelUpView
@@ -444,6 +448,7 @@ struct MainViewPhase3: View {
         gameCenterManager.authenticateUser()
         // MARK: 저장된 레벨 정보 불러오고 헬스킷 정보로 업데이트하기
         currentStatus = loadCurrentStatus()
+        printAll()
     }
 
     // MARK: - 타이머
@@ -590,10 +595,12 @@ struct MainViewPhase3: View {
     // MARK: 만렙 이후 리셋하기
     func resetLevel() {
         currentStatus.updateStaircase(0)
+        saveCurrentStatus()
         gameCenterManager.resetAchievements()
         completedLevels.resetLevels()
         // TODO: 오른 층계 데이터 패칭 시점 현재로 변경
         // TODO: saveCurrentStatus() 작동 확인
+        printAll()
     }
 
     // MARK: Level 관련 테스트 프린트문
