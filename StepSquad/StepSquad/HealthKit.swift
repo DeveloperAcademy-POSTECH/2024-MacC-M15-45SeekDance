@@ -21,7 +21,7 @@ class HealthKitService: ObservableObject {
     @AppStorage("TotalFlightsClimbedSinceAuthorization", store: UserDefaults(suiteName: "group.macmac.pratice.carot")) var TotalFlightsClimbedSinceAuthorization: Double = 0.0
     @AppStorage("LastFetchTime", store: UserDefaults(suiteName: "group.macmac.pratice.carot")) var LastFetchTime: String = ""
     @AppStorage("authorizationDateKey", store: UserDefaults(suiteName: "group.macmac.pratice.carot")) var authorizationDateKey: String = ""
-    @AppStorage("HealthKitAuthorized") var isHealthKitAuthorized: Bool = false // AppStorage로 데이터 관리
+    @AppStorage("HealthKitAuthorized") var isHealthKitAuthorized: Bool = false
     
     
     // MARK: - HealthKit 사용 권한을 요청하는 메서드
@@ -134,6 +134,7 @@ class HealthKitService: ObservableObject {
         healthStore.execute(query)
     }
     
+    // MARK: - 헬스킷 권한을 받았는지 아닌지를 확인하기 위해 전체 계단오르기 데이터를 호출해서 isHealthKitAuthorized를 업데이트하는 함수
     func fetchAllFlightsClimbedData() {
         guard let flightsClimbedType = HKObjectType.quantityType(forIdentifier: .flightsClimbed) else {
             print("계단 오르기 데이터 타입을 찾을 수 없습니다.")
