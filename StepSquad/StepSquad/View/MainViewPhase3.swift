@@ -86,10 +86,6 @@ struct MainViewPhase3: View {
                         .padding(.horizontal, 36)
                         
                         ScrollView {
-                            Button("Reset") {
-                                print("reset")
-                                resetLevel()
-                            }
                             VStack(spacing: 0) {
                                 if isHealthKitAuthorized {
                                     LevelUpView
@@ -354,7 +350,7 @@ struct MainViewPhase3: View {
             }
             // MARK: 임시 리셋 버튼
             Button {
-                service.fetchAndSaveFlightsClimbedSinceButtonPress()
+                resetLevel()
             } label: {
                 HStack() {
                     Image(systemName: "leaf.fill")
@@ -618,7 +614,7 @@ struct MainViewPhase3: View {
         gameCenterManager.resetAchievements()
         completedLevels.resetLevels()
         collectedItems.resetItems()
-        // TODO: 오른 층계 데이터 패칭 시점 현재로 변경
+        service.fetchAndSaveFlightsClimbedSinceButtonPress()
         printAll()
     }
 
