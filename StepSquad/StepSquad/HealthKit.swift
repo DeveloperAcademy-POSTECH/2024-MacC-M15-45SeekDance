@@ -22,6 +22,8 @@ class HealthKitService: ObservableObject {
     @AppStorage("LastFetchTime", store: UserDefaults(suiteName: "group.macmac.pratice.carot")) var LastFetchTime: String = ""
     @AppStorage("authorizationDateKey", store: UserDefaults(suiteName: "group.macmac.pratice.carot")) var authorizationDateKey: String = ""
     @AppStorage("HealthKitAuthorized") var isHealthKitAuthorized: Bool = false
+    @AppStorage("ReserButtonPressed") var reserButtonPressed: Bool = false
+    
     
     
     // MARK: - HealthKit 사용 권한을 요청하는 메서드
@@ -51,7 +53,7 @@ class HealthKitService: ObservableObject {
                 // 권한 허용 후에만 데이터를 가져오는 로직 실행
                 self?.getWeeklyStairDataAndSave()
                 self?.fetchAndSaveFlightsClimbedSinceAuthorization()
-                
+                self?.fetchAndSaveFlightsClimbedSinceButtonPress()
             } else {
                 self?.isHealthKitAuthorized = false
                 //                self?.isHealthKitAuthorized = false
@@ -101,7 +103,7 @@ class HealthKitService: ObservableObject {
         
         // 데이터 소스 필터링을 위한 추가 조건
         // 사용자가 데이터를 주작했는지 아닌지 파악하는 부분 NSPredicate -> 메타 데이터 쿼리 조건, yes가 아닌 데이터만 가져 오겠다는 것.
-        let userEnteredPredicate = NSPredicate(format: "metadata.%K != YES", HKMetadataKeyWasUserEntered)
+        let userEnteredPredicate = NSPredicate(format: "metadata.%K != NO", HKMetadataKeyWasUserEntered)
         let combinedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, userEnteredPredicate])
         
         
@@ -128,7 +130,7 @@ class HealthKitService: ObservableObject {
             appGroupDefaults?.set(formattedFetchTime, forKey: "LastFetchTime") // 포맷된 패치 시각 저장
             
             // 패치 결과를 콘솔에 출력
-            //            print("총 계단 오르기 수 \(totalFlightsClimbed)를 저장했습니다. (패치 시각: \(formattedFetchTime))")
+            print("총 계단 오르기 수 \(totalFlightsClimbed)를 저장했습니다. (패치 시각: \(formattedFetchTime))")
         }
         
         healthStore.execute(query)
@@ -196,9 +198,9 @@ class HealthKitService: ObservableObject {
             }
             
             guard let startOfWeekDate = startOfWeek else {
-                       print("주간 시작일 계산 실패")
-                       return
-                   }
+                print("주간 시작일 계산 실패")
+                return
+            }
             
             // 권한 허용 날짜 가져오기
             guard let authorizationDate = UserDefaults.standard.object(forKey: "HealthKitAuthorizationDate") as? Date else {
@@ -223,10 +225,10 @@ class HealthKitService: ObservableObject {
             }
             
             // HealthKit 쿼리 실행
-//            let adjustedStartDateMinusOneDay = Calendar.current.date(byAdding: .day, value: -1, to: adjustedStartDate)!
+            //            let adjustedStartDateMinusOneDay = Calendar.current.date(byAdding: .day, value: -1, to: adjustedStartDate)!
             let predicate = HKQuery.predicateForSamples(withStart: adjustedStartDate, end: endOfWeekDate, options: [])
-
-            let userEnteredPredicate = NSPredicate(format: "metadata.%K != YES", HKMetadataKeyWasUserEntered)
+            
+            let userEnteredPredicate = NSPredicate(format: "metadata.%K != NO", HKMetadataKeyWasUserEntered)
             let combinedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, userEnteredPredicate])
             
             let query = HKStatisticsQuery(quantityType: stairType, quantitySamplePredicate: combinedPredicate, options: .cumulativeSum) { _, result, error in
@@ -250,6 +252,19 @@ class HealthKitService: ObservableObject {
             healthStore.execute(query)
         }
     }
+    
+    // MARK: - 리셋 버튼을 누르면 현재 시간을 권한 허용 날짜로 대신하여 오늘 0시 부터의 데이터 패치 됨.
+    func fetchAndSaveFlightsClimbedSinceButtonPress() {
+        
+        // 현재 시각을 버튼 누른 시각으로 저장 (HealthKitAuthorizationDate로 사용)
+        let now = Date()
+        UserDefaults.standard.set(now, forKey: "HealthKitAuthorizationDate")
+        
+        fetchAndSaveFlightsClimbedSinceAuthorization()
+        
+    }
+    
+    
     
     // MARK: - 위젯 관련함수
     func migrateAuthorizationDataToSharedDefaults() {
