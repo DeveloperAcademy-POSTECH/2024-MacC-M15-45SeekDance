@@ -204,6 +204,7 @@ struct MainViewPhase3: View {
                             service.getWeeklyStairDataAndSave()
                             service.fetchAndSaveFlightsClimbedSinceAuthorization()
                             updateLevelsAndGameCenter()
+                            printAll()
                         }
                         .scrollIndicators(ScrollIndicatorVisibility.hidden)
                         .onAppear {
@@ -596,10 +597,15 @@ struct MainViewPhase3: View {
     func resetLevel() {
         currentStatus.updateStaircase(0)
         saveCurrentStatus()
+        do {
+            try context.delete(model: StairStepModel.self)
+        } catch {
+            print("error: Failed to clear all StairStepModel data.")
+        }
         gameCenterManager.resetAchievements()
         completedLevels.resetLevels()
+        collectedItems.resetItems()
         // TODO: 오른 층계 데이터 패칭 시점 현재로 변경
-        // TODO: saveCurrentStatus() 작동 확인
         printAll()
     }
 
@@ -614,6 +620,7 @@ struct MainViewPhase3: View {
         print("현재 단계 이미지: \(currentStatus.progressImage)")
         print("사용자에게 보여준 마지막 달성 레벨: \(completedLevels.lastUpdatedLevel)")
         print("collected items: \(collectedItems.getSortedItemsNameList())")
+        print("nfc 태깅 횟수: \(stairSteps.count)")
     }
 }
 
