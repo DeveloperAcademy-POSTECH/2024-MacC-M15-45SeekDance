@@ -214,7 +214,7 @@ let levels: [Int: Level] = [
     20: Level(
         level: 20,
         minStaircase: 1440,
-        maxStaircase: Int.max,
+        maxStaircase: Int.max - 1,
         item: "",
         itemImage: "",
         difficulty: .impossible,
