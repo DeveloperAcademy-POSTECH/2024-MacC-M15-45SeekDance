@@ -113,6 +113,15 @@ class HealthKitService: ObservableObject {
             
             let totalFlightsClimbed = result?.sumQuantity()?.doubleValue(for: HKUnit.count()) ?? 0.0
             
+            // 새로운 권한 날짜 이후 데이터가 없을 경우 처리
+            if totalFlightsClimbed == 0.0 {
+                // App Group UserDefaults 초기화
+                appGroupDefaults.set(0.0, forKey: "TotalFlightsClimbedSinceAuthorization")
+                appGroupDefaults.set(nil, forKey: "LastFetchTime")
+                print("새로운 권한 날짜 이후 데이터가 없으므로 계단 수를 0으로 초기화했습니다.")
+                return
+            }
+            
             // 날짜 포맷 설정
             let formatter = DateFormatter()
             formatter.locale = Locale(identifier: "ko_KR")
@@ -176,7 +185,6 @@ class HealthKitService: ObservableObject {
     
     
     
-    // MARK: - UserDefaults에 토-다음 금요일을 한주로 일주일 치 계단 오르기 수를 호출 및 앱스토리지에 저장하는 함수
     // MARK: - UserDefaults에 토-다음 금요일을 한주로 일주일 치 계단 오르기 수를 호출 및 앱스토리지에 저장하는 함수
     func getWeeklyStairDataAndSave() {
         if let stairType = HKObjectType.quantityType(forIdentifier: .flightsClimbed) {
