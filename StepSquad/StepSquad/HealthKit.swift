@@ -107,7 +107,8 @@ class HealthKitService: ObservableObject {
         
         let query = HKStatisticsQuery(quantityType: flightsClimbedType, quantitySamplePredicate: combinedPredicate, options: .cumulativeSum) { _, result, error in
             if let error = error {
-                print("계단 오르기 데이터 가져오기 오류: \(error.localizedDescription)")
+                print("계단 오르기 데이터 가져오기 오류: \(error.localizedDescription) 혹은 데이터가 0입니다.")
+                print("Authorization Date: \(String(describing: authorizationDate))")
                 return
             }
             
@@ -119,6 +120,7 @@ class HealthKitService: ObservableObject {
                 appGroupDefaults.set(0.0, forKey: "TotalFlightsClimbedSinceAuthorization")
                 appGroupDefaults.set(nil, forKey: "LastFetchTime")
                 print("새로운 권한 날짜 이후 데이터가 없으므로 계단 수를 0으로 초기화했습니다.")
+                
                 return
             }
             
@@ -245,7 +247,7 @@ class HealthKitService: ObservableObject {
             
             let query = HKStatisticsQuery(quantityType: stairType, quantitySamplePredicate: combinedPredicate, options: .cumulativeSum) { _, result, error in
                 guard error == nil else {
-                    print("주간 계단 데이터 가져오기 오류: \(error!.localizedDescription)")
+                    print("주간 계단 데이터 가져오기 오류: \(error!.localizedDescription) 혹은 주간 계단 데이터가 0입니다.")
                     DispatchQueue.main.async {
                         self.weeklyFlightsClimbed = 0.0
                     }
