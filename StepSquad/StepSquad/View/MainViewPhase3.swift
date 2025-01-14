@@ -45,6 +45,10 @@ struct MainViewPhase3: View {
     }
     let electricBirdAchievementCount = UserDefaults.standard.integer(forKey: "electricBirdAchievementCount")
     
+    var isHighestLevel: Bool {
+        return currentStatus.currentLevel.level == 20
+    }
+    
     var body: some View {
         if isLaunching {
             SplashView()
@@ -349,17 +353,19 @@ struct MainViewPhase3: View {
                 MaterialsView(isMaterialSheetPresented: $isMaterialSheetPresented, isShowingNewItem: $isShowingNewItem, completedLevels: completedLevels, collectedItems: collectedItems)
             }
             // MARK: 임시 리셋 버튼
-            Button {
-                resetLevel()
-            } label: {
-                HStack() {
-                    Image(systemName: "leaf.fill")
-                    Text("리셋하기")
+            if isHighestLevel {
+                Button {
+                    resetLevel()
+                } label: {
+                    HStack() {
+                        Image(systemName: "leaf.fill")
+                        Text("리셋하기")
+                    }
+                    .padding(.vertical, 7)
+                    .padding(.horizontal, 14)
+                    .foregroundStyle(Color.white)
+                    .background(Color(hex: 0x864035), in: RoundedRectangle(cornerRadius: 30))
                 }
-                .padding(.vertical, 7)
-                .padding(.horizontal, 14)
-                .foregroundStyle(Color.white)
-                .background(Color(hex: 0x864035), in: RoundedRectangle(cornerRadius: 30))
             }
         }
         .onAppear {
