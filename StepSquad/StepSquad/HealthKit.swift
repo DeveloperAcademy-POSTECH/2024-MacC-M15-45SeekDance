@@ -304,16 +304,3 @@ extension UserDefaults {
         return UserDefaults(suiteName: appGroupId)!
     }
 }
-        } else {
-            //print("기본 UserDefaults에 저장된 HealthKit 권한 상태가 없습니다.")
-        }
-    }
-}
-
-
-extension UserDefaults {
-    static var shared: UserDefaults {
-        let appGroupId = "group.com.stepSquad.widget"
-        return UserDefaults(suiteName: appGroupId)!
-    }
-}
