@@ -128,18 +128,17 @@ struct EntryCertificateView: View {
 
     // MARK: - 유저디폴트에 저장된 날짜 가져오기
     func loadHealthKitAuthorizationDate() {
-        // App Group 저장소 사용으로 수정
-        let appGroupDefaults = UserDefaults(suiteName: "group.macmac.pratice.carot")
+        let userDefaults = UserDefaults.standard
 
-        if let storedDate = appGroupDefaults?.object(forKey: "HealthKitAuthorizationDate") as? Date {
+        if let storedDate = userDefaults.object(forKey: "HealthKitAuthorizationDate") as? Date {
             let formatter = DateFormatter()
-            
+
             formatter.dateFormat = "yyyy년 MM월 dd일"
             formatter.locale = Locale(identifier: "ko_KR")
             formatter.timeZone = TimeZone(identifier: "Asia/Seoul")
-            
+
             formattedDate = formatter.string(from: storedDate)
-            
+
             calculateDDay(from: storedDate)
         } else {
             formattedDate = "날짜 없음"
