@@ -19,6 +19,7 @@ struct MainViewPhase3: View {
     @State var isLaunching: Bool = true
     @State private var completedLevels = CompletedLevels()
     @State private var collectedItems = CollectedItems()
+    @State private var isResetViewPresented = false
     
     @State var userProfileImage: Image?
     
@@ -224,6 +225,7 @@ struct MainViewPhase3: View {
                     }
                 }
             }
+            .navigationBarBackButtonHidden(true)
             .tint(Color(hex: 0x8BC766))
         }
     }
@@ -349,7 +351,8 @@ struct MainViewPhase3: View {
             }
             // MARK: 임시 리셋 버튼
             Button {
-                service.fetchAndSaveFlightsClimbedSinceButtonPress()
+                //    service.fetchAndSaveFlightsClimbedSinceButtonPress()
+                isResetViewPresented = true
             } label: {
                 HStack() {
                     Image(systemName: "leaf.fill")
@@ -359,6 +362,9 @@ struct MainViewPhase3: View {
                 .padding(.horizontal, 14)
                 .foregroundStyle(Color.white)
                 .background(Color(hex: 0x864035), in: RoundedRectangle(cornerRadius: 30))
+            }
+            .fullScreenCover(isPresented: $isResetViewPresented) {
+                ResetNavigationView(isResetViewPresented: $isResetViewPresented)
             }
         }
         .onAppear {
@@ -614,6 +620,114 @@ struct MainViewPhase3: View {
     }
 }
 
+struct ResetNavigationView: View {
+    @Binding var isResetViewPresented: Bool // FullScreen 상태를 상위 뷰와 공유
+    
+    var body: some View {
+        NavigationStack {
+            VStack {
+                Text("틈새 하산..")
+                    .font(.largeTitle)
+                    .padding()
+                
+                Spacer()
+                
+                NavigationLink(destination: DetailView(isResetViewPresented: $isResetViewPresented)) {
+                    Text("다음 페이지로 이동")
+                        .padding()
+                        .background(Color.primaryColor)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                
+                
+                
+                
+                //                .navigationTitle("틈새 하산")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button(action: {
+                            isResetViewPresented = false // 닫기 버튼으로 Sheet 해제
+                        }) {
+                            Image(systemName: "xmark") // 시스템 이미지 닫기 버튼
+                                .foregroundColor(.primary)
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+struct DetailView: View {
+    @Binding var isResetViewPresented: Bool
+    
+    var body: some View {
+        VStack {
+            Text("Detail Page")
+                .font(.largeTitle)
+                .padding()
+            
+            Spacer()
+            
+            NavigationLink(destination: DetailView2(isResetViewPresented: $isResetViewPresented)) {
+                Text("다음 페이지로 이동")
+                    .padding()
+                    .background(Color.primaryColor)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+            }
+        }
+        //        .navigationTitle("상세 페이지")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    isResetViewPresented = false // 닫기 버튼으로 Sheet 해제
+                }) {
+                    Image(systemName: "xmark") // 시스템 이미지 닫기 버튼
+                        .foregroundColor(.primary)
+                }
+            }
+        }
+    }
+}
+
+struct DetailView2: View {
+    @Binding var isResetViewPresented: Bool
+    
+    var body: some View {
+        VStack {
+            Text("Detail Page")
+                .font(.largeTitle)
+                .padding()
+            
+            Spacer()
+            
+            NavigationLink(destination:MainViewPhase3()) {
+                Text("다음 페이지로 이동")
+                    .padding()
+                    .background(Color.primaryColor)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+            }
+        }
+        //        .navigationTitle("상세 페이지")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    isResetViewPresented = false // 닫기 버튼으로 Sheet 해제
+                }) {
+                    Image(systemName: "xmark") // 시스템 이미지 닫기 버튼
+                        .foregroundColor(.primary)
+                }
+            }
+        }
+        
+    }
+}
 
 #Preview {
     MainViewPhase3()
