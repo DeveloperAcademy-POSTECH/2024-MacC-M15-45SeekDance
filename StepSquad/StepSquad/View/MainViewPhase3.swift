@@ -45,6 +45,10 @@ struct MainViewPhase3: View {
     }
     let electricBirdAchievementCount = UserDefaults.standard.integer(forKey: "electricBirdAchievementCount")
     
+    var isHighestLevel: Bool {
+        return currentStatus.currentLevel.level == 20
+    }
+    
     var body: some View {
         if isLaunching {
             SplashView()
@@ -348,17 +352,19 @@ struct MainViewPhase3: View {
                 MaterialsView(isMaterialSheetPresented: $isMaterialSheetPresented, isShowingNewItem: $isShowingNewItem, completedLevels: completedLevels, collectedItems: collectedItems)
             }
             // MARK: 임시 리셋 버튼
-            Button {
-                service.fetchAndSaveFlightsClimbedSinceButtonPress()
-            } label: {
-                HStack() {
-                    Image(systemName: "leaf.fill")
-                    Text("리셋하기")
+            if isHighestLevel {
+                Button {
+                    resetLevel()
+                } label: {
+                    HStack() {
+                        Image(systemName: "leaf.fill")
+                        Text("리셋하기")
+                    }
+                    .padding(.vertical, 7)
+                    .padding(.horizontal, 14)
+                    .foregroundStyle(Color.white)
+                    .background(Color(hex: 0x864035), in: RoundedRectangle(cornerRadius: 30))
                 }
-                .padding(.vertical, 7)
-                .padding(.horizontal, 14)
-                .foregroundStyle(Color.white)
-                .background(Color(hex: 0x864035), in: RoundedRectangle(cornerRadius: 30))
             }
         }
         .onAppear {
@@ -600,6 +606,21 @@ struct MainViewPhase3: View {
         updateLeaderboard()
     }
     
+    // MARK: 만렙 이후 리셋하기
+    func resetLevel() {
+        currentStatus.updateStaircase(0)
+        saveCurrentStatus()
+        do {
+            try context.delete(model: StairStepModel.self)
+        } catch {
+            print("error: Failed to clear all StairStepModel data.")
+        }
+        gameCenterManager.resetAchievements()
+        completedLevels.resetLevels()
+        collectedItems.resetItems()
+        service.fetchAndSaveFlightsClimbedSinceButtonPress()
+    }
+
     // MARK: Level 관련 테스트 프린트문
     func printAll() {
         print("누적 층계: \(currentStatus.getTotalStaircase())")
@@ -611,6 +632,7 @@ struct MainViewPhase3: View {
         print("현재 단계 이미지: \(currentStatus.progressImage)")
         print("사용자에게 보여준 마지막 달성 레벨: \(completedLevels.lastUpdatedLevel)")
         print("collected items: \(collectedItems.getSortedItemsNameList())")
+        print("nfc 태깅 횟수: \(stairSteps.count)")
     }
 }
 

@@ -210,4 +210,14 @@ let levels: [Int: Level] = [
         difficulty: .impossible,
         wikiLink: "",
         achievementId: "hr24"),
+    // TODO: - 만렙 설정하기
+    20: Level(
+        level: 20,
+        minStaircase: 1440,
+        maxStaircase: Int.max - 1,
+        item: "",
+        itemImage: "",
+        difficulty: .impossible,
+        wikiLink: "",
+        achievementId: "")
 ]

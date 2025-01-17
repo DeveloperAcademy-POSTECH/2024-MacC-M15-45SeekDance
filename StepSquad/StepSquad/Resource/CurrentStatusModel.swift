@@ -15,7 +15,7 @@ class CurrentStatus: Codable {
                 return levels[i]!
             }
         }
-        return levels[1]! // 에러 발생시 레벨 1으로 설정
+        return levels[20]! // 19레벨까지 달성했을 때 만렙
     }
     var currentProgress: Int { // 현재 레벨의 현재 단계
         let gap = (currentLevel.maxStaircase + 1) - currentLevel.minStaircase

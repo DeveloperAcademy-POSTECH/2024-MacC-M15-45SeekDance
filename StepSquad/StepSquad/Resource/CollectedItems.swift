@@ -54,4 +54,9 @@ class CollectedItems: Codable {
     func getSortedItemsNameList() -> [String] {
         return items.sorted { (first, second) in return first.value > second.value}.map(\.key)
     }
+    
+    func resetItems() {
+        items = [String: Date]()
+        save()
+    }
 }
