@@ -591,7 +591,7 @@ struct MainViewPhase3: View {
         }
     }
     
-    // MARK: 오프라인 환경에서 받지 못한 레벨, 입단증 성취 다시 주기
+    // MARK: 오프라인 환경에서 받지 못한 레벨, 입단증, 환경 관련 성취 다시 주기
     func reportMissedAchievement() {
         if isHealthKitAuthorized {
             gameCenterManager.reportCompletedAchievement(achievementId: "memberOfStepSquad")
@@ -599,6 +599,11 @@ struct MainViewPhase3: View {
         if completedLevels.lastUpdatedLevel >= 1 {
             for level in 1...completedLevels.lastUpdatedLevel {
                 gameCenterManager.reportCompletedAchievement(achievementId: levels[level]!.achievementId)
+            }
+        }
+        for i in [1, 10, 20, 36] {
+            if lastElectricAchievementCount >= i {
+                gameCenterManager.reportCompletedAchievement(achievementId: "electricBird\(i != 1 ? String(i) : "")")
             }
         }
     }
