@@ -121,11 +121,31 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
     }
         
     // MARK: 성취 달성 여부 확인 후 성취 업데이트하기
-    func reportCompletedAchievement(achievementId: String) -> Bool {
+    func reportCompletedAchievement(achievementId: String){
+        guard isGameCenterLoggedIn else {
+            print("Error: user is not logged in to Game Center.")
+            return
+        }
+        let achievement = GKAchievement(identifier: achievementId)
+        if !achievement.isCompleted {
+            achievement.percentComplete = 100.0
+            achievement.showsCompletionBanner = true
+            GKAchievement.report([achievement], withCompletionHandler: {(error: Error?) in
+                guard error == nil else {
+                    print("Error: \(String(describing: error))")
+                    return
+                }
+                print("game center: \(achievement.identifier) achievement completed.")
+            })
+        }
+    }
+    
+    // MARK: 성취 달성 여부 확인 후 성취 업데이트하기, 달성 여부 반환
+    func reportCompletedAchievementWithReturn(achievementId: String) -> Bool {
         var isReported = false
         guard isGameCenterLoggedIn else {
             print("Error: user is not logged in to Game Center.")
-//            print("login isReported: \(isReported)")
+            print("login isReported: \(isReported)")
             return isReported
         }
         let achievement = GKAchievement(identifier: achievementId)
@@ -140,10 +160,10 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
                 print("game center: \(achievement.identifier) achievement completed.")
                 isReported = true
             })
-//            print("after report isReported: \(isReported)")
+            print("after report isReported: \(isReported)")
             return isReported
         }
-//        print("login isReported: \(isReported)")
+        print("login isReported: \(isReported)")
         return isReported
     }
     
