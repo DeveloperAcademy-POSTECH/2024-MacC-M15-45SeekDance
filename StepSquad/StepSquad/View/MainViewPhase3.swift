@@ -204,7 +204,6 @@ struct MainViewPhase3: View {
                             service.getWeeklyStairDataAndSave()
                             service.fetchAndSaveFlightsClimbedSinceAuthorization()
                             updateLevelsAndGameCenter()
-                            printAll()
                         }
                         .scrollIndicators(ScrollIndicatorVisibility.hidden)
                         .onAppear {
@@ -464,7 +463,6 @@ struct MainViewPhase3: View {
         gameCenterManager.authenticateUser()
         // MARK: 저장된 레벨 정보 불러오고 헬스킷 정보로 업데이트하기
         currentStatus = loadCurrentStatus()
-        printAll()
     }
     
     // MARK: - 타이머
@@ -621,7 +619,6 @@ struct MainViewPhase3: View {
         completedLevels.resetLevels()
         collectedItems.resetItems()
         service.fetchAndSaveFlightsClimbedSinceButtonPress()
-        printAll()
     }
 
     // MARK: Level 관련 테스트 프린트문
