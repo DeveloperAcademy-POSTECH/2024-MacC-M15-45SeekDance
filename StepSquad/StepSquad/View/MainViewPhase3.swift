@@ -43,7 +43,7 @@ struct MainViewPhase3: View {
             saveCurrentStatus()
         }
     }
-    @AppStorage("lastElectricAchievementCount") var lastElectricAchievementCount = 0
+    @AppStorage("lastElectricAchievementKwh") var lastElectricAchievementKwh = 0
     
     var isHighestLevel: Bool {
         return currentStatus.currentLevel.level == 20
@@ -582,10 +582,10 @@ struct MainViewPhase3: View {
         }
         for i in [1, 10, 20, 36] { // 40, 400, 800, 1440층에서 환경 성취 달성
             if (currentStatus.getTotalStaircase() / 40) >= i { // 특정 층 이상으로 계단을 걸었다면,
-                if i > lastElectricAchievementCount { // 특정 층을 달성하고 성취를 아직 받지 않았다면,
+                if i > lastElectricAchievementKwh { // 특정 층을 달성하고 성취를 아직 받지 않았다면,
                     print("\(i)kWh 틈새 전기 절약 성취 달성")
-                    gameCenterManager.reportCompletedAchievement(achievementId: "electricBird\(i != 1 ? String(i) : "")")
-                    lastElectricAchievementCount = i
+                    gameCenterManager.reportCompletedAchievement(achievementId: "electricBird\(i)")
+                    lastElectricAchievementKwh = i
                 }
             }
         }
@@ -602,8 +602,8 @@ struct MainViewPhase3: View {
             }
         }
         for i in [1, 10, 20, 36] {
-            if lastElectricAchievementCount >= i {
-                gameCenterManager.reportCompletedAchievement(achievementId: "electricBird\(i != 1 ? String(i) : "")")
+            if lastElectricAchievementKwh >= i {
+                gameCenterManager.reportCompletedAchievement(achievementId: "electricBird\(i)")
             }
         }
     }
@@ -641,7 +641,7 @@ struct MainViewPhase3: View {
         print("현재 단계: \(currentStatus.currentProgress)")
         print("현재 단계 이미지: \(currentStatus.progressImage)")
         print("사용자에게 보여준 마지막 달성 레벨: \(completedLevels.lastUpdatedLevel)")
-        print("마지막으로 달성한 환경 성취: \(lastElectricAchievementCount)kWh")
+        print("마지막으로 달성한 환경 성취: \(lastElectricAchievementKwh)kWh")
         print("collected items: \(collectedItems.getSortedItemsNameList())")
         print("nfc 태깅 횟수: \(stairSteps.count)")
     }
