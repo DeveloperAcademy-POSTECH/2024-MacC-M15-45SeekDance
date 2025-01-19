@@ -620,6 +620,7 @@ struct MainViewPhase3: View {
     func resetLevel() {
         currentStatus.updateStaircase(0)
         saveCurrentStatus()
+        lastElectricAchievementKwh = 0
         do {
             try context.delete(model: StairStepModel.self)
         } catch {
