@@ -204,7 +204,6 @@ struct MainViewPhase3: View {
                             service.getWeeklyStairDataAndSave()
                             service.fetchAndSaveFlightsClimbedSinceAuthorization()
                             updateLevelsAndGameCenter()
-                            printAll()
                         }
                         .scrollIndicators(ScrollIndicatorVisibility.hidden)
                         .onAppear {
@@ -464,7 +463,6 @@ struct MainViewPhase3: View {
         gameCenterManager.authenticateUser()
         // MARK: 저장된 레벨 정보 불러오고 헬스킷 정보로 업데이트하기
         currentStatus = loadCurrentStatus()
-        printAll()
     }
     
     // MARK: - 타이머
@@ -583,7 +581,7 @@ struct MainViewPhase3: View {
         for i in [1, 10, 20, 36] { // 40, 400, 800, 1440층에서 환경 성취 달성
             if (currentStatus.getTotalStaircase() / 40) >= i { // 특정 층 이상으로 계단을 걸었다면,
                 if i > lastElectricAchievementKwh { // 특정 층을 달성하고 성취를 아직 받지 않았다면,
-                    print("\(i)kWh 틈새 전기 절약 성취 달성")
+//                    print("\(i)kWh 틈새 전기 절약 성취 달성")
                     gameCenterManager.reportCompletedAchievement(achievementId: "electricBird\(i)")
                     lastElectricAchievementKwh = i
                 }
