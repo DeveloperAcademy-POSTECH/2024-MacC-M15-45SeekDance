@@ -97,17 +97,10 @@ struct MainViewPhase3: View {
                                     GetHealthKitView
                                 }
                                 
-                                Divider()
-                                    .background(Color(hex: 0xCAE5B9))
-                                    .padding(.horizontal, 16)
-                                    .onAppear() {
-                                        service.fetchAllFlightsClimbedData()
-                                        service.migrateAuthorizationDataToSharedDefaults()
-                                    }
-                                
                                 NFCReadingView
                                     .padding(.top, 17)
                                     .padding(.bottom, 17)
+                                    .background(Color(hex: 0xFBFCFB))
                                     .fullScreenCover(isPresented: $isResultViewPresented) {
                                         ResultView(isResultViewPresented: $isResultViewPresented,
                                                    stairName: nfcMessage,
@@ -126,7 +119,11 @@ struct MainViewPhase3: View {
                             .background(Color.white)
                             .cornerRadius(16)
                             .padding(.top, 20)
-                            
+                            .onAppear() {
+                                service.fetchAllFlightsClimbedData()
+                                service.migrateAuthorizationDataToSharedDefaults()
+                            }
+
                             HStack {
                                 Button {
                                     // MARK: 성취로 이동
@@ -165,15 +162,39 @@ struct MainViewPhase3: View {
                                                 in: RoundedRectangle(cornerRadius: 12))
                                 }
                             }
-                            .padding(.top, 16)
+                            .padding(.top, 12)
                             .padding(.horizontal, 36)
-                            
+
+                            Button {
+                                isMaterialSheetPresented.toggle()
+                            } label: {
+                                HStack() {
+                                    Image(systemName: "list.bullet")
+                                    Text("획득 재료 확인하기")
+//                                    if isShowingNewItem { // 새로 획득한 약재가 있다면,
+//                                        NewItemView()
+//                                    }
+                                    Spacer(minLength: 2)
+
+                                    Image(systemName: "chevron.right")
+                                }
+                                .foregroundStyle(Color(hex: 0x3A542B))
+                                .padding(.vertical, 10)
+                                .padding(.horizontal, 20)
+                                .background(Color(red: 0.98, green: 0.99, blue: 0.98), in: RoundedRectangle(cornerRadius: 12))
+                            }
+                            .padding(.horizontal, 36)
+                            .padding(.top, 8)
+                            .sheet(isPresented: $isMaterialSheetPresented) {
+                                MaterialsView(isMaterialSheetPresented: $isMaterialSheetPresented, isShowingNewItem: $isShowingNewItem, completedLevels: completedLevels, collectedItems: collectedItems)
+                            }
+
                             if isHealthKitAuthorized {
                                 Divider()
                                     .background(Color(hex: 0xCDD3C5))
-                                    .padding(.horizontal, 35)
-                                    .padding(.vertical, 28)
-                                
+                                    .padding(.horizontal, 24)
+                                    .padding(.vertical, 24)
+
                                 EntryCertificateView(userPlayerImage: userProfileImage, nickName: gameCenterManager.loadLocalPlayerName())
                                 
                                 Button {
@@ -321,8 +342,8 @@ struct MainViewPhase3: View {
                     .padding(4)
                     .background(getDifficultyPaleColor(difficulty: currentStatus.currentLevel.difficulty), in: RoundedRectangle(cornerRadius: 4))
             }
-            .padding(.top, 23)
-            
+            .padding(.top, 32)
+
             Text("\(currentStatus.currentLevel.maxStaircase + 1)층 올라가기")
                 .font(.system(size: 20, weight: .semibold))
                 .padding(.top, 8)
@@ -330,27 +351,9 @@ struct MainViewPhase3: View {
                 .font(.system(size: 12))
                 .foregroundStyle(Color(hex: 0x3C3C43))
                 .padding(.top, 4)
-            
-            Button {
-                isMaterialSheetPresented.toggle()
-            } label: {
-                HStack() {
-                    Image(systemName: "leaf.fill")
-                    Text("획득 재료보기")
-                    if isShowingNewItem { // 새로 획득한 약재가 있다면,
-                        NewItemView()
-                    }
-                }
-                .padding(.vertical, 7)
-                .padding(.horizontal, 14)
-                .foregroundStyle(Color.white)
-                .background(Color(hex: 0x864035), in: RoundedRectangle(cornerRadius: 30))
-            }
-            .padding(.top, 16)
-            .padding(.bottom, 28)
-            .sheet(isPresented: $isMaterialSheetPresented) {
-                MaterialsView(isMaterialSheetPresented: $isMaterialSheetPresented, isShowingNewItem: $isShowingNewItem, completedLevels: completedLevels, collectedItems: collectedItems)
-            }
+
+            Spacer()
+
             // MARK: 임시 리셋 버튼
             if isHighestLevel {
                 Button {
