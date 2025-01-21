@@ -355,7 +355,7 @@ struct MainViewPhase3: View {
                 isResetViewPresented = true
             } label: {
                 HStack() {
-                    Image(systemName: "leaf.fill")
+                    Image(systemName: "mountain.2.fill")
                     Text("리셋하기")
                 }
                 .padding(.vertical, 7)
@@ -631,11 +631,12 @@ struct ResetNavigationView: View {
                 
                 Text("최고 레벨 달성!")
                     .font(.system(size: 12))
-                    .foregroundStyle(Color.white)
-                    .padding(4)
-                    .cornerRadius(4)
-                    .background(Color.primaryColor)
-                
+                    .foregroundColor(.white) // 텍스트 색상 설정
+                    .padding(4) // 내부 여백 추가
+                    .background(
+                        Color.primaryColor // 배경색 설정
+                            .cornerRadius(4) // 배경의 모서리 둥글게
+                    )
                 
                 Text("틈새를 속세로!\n이제는 하산할 시간")
                     .multilineTextAlignment(.center)
@@ -716,12 +717,13 @@ struct DetailView: View {
                 }) {
                     Image(systemName: "x.circle.fill")
                         .foregroundColor(.secondary)
-                    
                 }
             }
         }
     }
 }
+
+
 // MARK: - 3번 째 뷰
 struct DetailView2: View {
     @Binding var isResetViewPresented: Bool
@@ -767,6 +769,7 @@ struct DetailView2: View {
     }
 }
 
+// MARK: - 4번 째 뷰 (입력창)
 struct DetailView3: View {
     @Binding var isResetViewPresented: Bool
     let gameCenterManager = GameCenterManager()
