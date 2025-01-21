@@ -44,7 +44,11 @@ struct MainViewPhase3: View {
             saveCurrentStatus()
         }
     }
-    let electricBirdAchievementCount = UserDefaults.standard.integer(forKey: "electricBirdAchievementCount")
+    @AppStorage("lastElectricAchievementKwh") var lastElectricAchievementKwh = 0
+    
+    var isHighestLevel: Bool {
+        return currentStatus.currentLevel.level == 20
+    }
     
     var body: some View {
         if isLaunching {
@@ -350,18 +354,19 @@ struct MainViewPhase3: View {
                 MaterialsView(isMaterialSheetPresented: $isMaterialSheetPresented, isShowingNewItem: $isShowingNewItem, completedLevels: completedLevels, collectedItems: collectedItems)
             }
             // MARK: 임시 리셋 버튼
-            Button {
-                //                service.fetchAndSaveFlightsClimbedSinceButtonPress()
-                isResetViewPresented = true
-            } label: {
-                HStack() {
-                    Image(systemName: "mountain.2.fill")
-                    Text("리셋하기")
+            if isHighestLevel {
+                Button {
+                    resetLevel()
+                } label: {
+                    HStack() {
+                        Image(systemName: "mountain.2.fill")
+                        Text("리셋하기")
+                    }
+                    .padding(.vertical, 7)
+                    .padding(.horizontal, 14)
+                    .foregroundStyle(Color.white)
+                    .background(Color(hex: 0x864035), in: RoundedRectangle(cornerRadius: 30))
                 }
-                .padding(.vertical, 7)
-                .padding(.horizontal, 14)
-                .foregroundStyle(Color.white)
-                .background(Color(hex: 0x864035), in: RoundedRectangle(cornerRadius: 30))
             }
             .fullScreenCover(isPresented: $isResetViewPresented) {
                 ResetNavigationView(isResetViewPresented: $isResetViewPresented)
@@ -578,15 +583,18 @@ struct MainViewPhase3: View {
                 gameCenterManager.reportCompletedAchievement(achievementId: levels[i]!.achievementId) // 해당 레벨의 성취 달성
             }
         }
-        if (currentStatus.getTotalStaircase() / 40) > electricBirdAchievementCount { // 누적 오른 층계가 40층의 배수라면,
-            //            print("It's \(currentStatus.getTotalStaircase() / 40)번째 틈새 전기 절약 성취")
-            if gameCenterManager.reportCompletedAchievement(achievementId: "electricBird") { // 성취를 정상적으로 받는다면,
-                UserDefaults.standard.setValue(currentStatus.getTotalStaircase() / 40, forKey: "electricBirdAchievementCount")
+        for i in [1, 10, 20, 36] { // 40, 400, 800, 1440층에서 환경 성취 달성
+            if (currentStatus.getTotalStaircase() / 40) >= i { // 특정 층 이상으로 계단을 걸었다면,
+                if i > lastElectricAchievementKwh { // 특정 층을 달성하고 성취를 아직 받지 않았다면,
+//                    print("\(i)kWh 틈새 전기 절약 성취 달성")
+                    gameCenterManager.reportCompletedAchievement(achievementId: "electricBird\(i)")
+                    lastElectricAchievementKwh = i
+                }
             }
         }
     }
     
-    // MARK: 오프라인 환경에서 받지 못한 레벨, 입단증 성취 다시 주기
+    // MARK: 오프라인 환경에서 받지 못한 레벨, 입단증, 환경 관련 성취 다시 주기
     func reportMissedAchievement() {
         if isHealthKitAuthorized {
             gameCenterManager.reportCompletedAchievement(achievementId: "memberOfStepSquad")
@@ -594,6 +602,11 @@ struct MainViewPhase3: View {
         if completedLevels.lastUpdatedLevel >= 1 {
             for level in 1...completedLevels.lastUpdatedLevel {
                 gameCenterManager.reportCompletedAchievement(achievementId: levels[level]!.achievementId)
+            }
+        }
+        for i in [1, 10, 20, 36] {
+            if lastElectricAchievementKwh >= i {
+                gameCenterManager.reportCompletedAchievement(achievementId: "electricBird\(i)")
             }
         }
     }
@@ -606,6 +619,22 @@ struct MainViewPhase3: View {
         updateLeaderboard()
     }
     
+    // MARK: 만렙 이후 리셋하기
+    func resetLevel() {
+        currentStatus.updateStaircase(0)
+        saveCurrentStatus()
+        lastElectricAchievementKwh = 0
+        do {
+            try context.delete(model: StairStepModel.self)
+        } catch {
+            print("error: Failed to clear all StairStepModel data.")
+        }
+        gameCenterManager.resetAchievements()
+        completedLevels.resetLevels()
+        collectedItems.resetItems()
+        service.fetchAndSaveFlightsClimbedSinceButtonPress()
+    }
+
     // MARK: Level 관련 테스트 프린트문
     func printAll() {
         print("누적 층계: \(currentStatus.getTotalStaircase())")
@@ -616,7 +645,9 @@ struct MainViewPhase3: View {
         print("현재 단계: \(currentStatus.currentProgress)")
         print("현재 단계 이미지: \(currentStatus.progressImage)")
         print("사용자에게 보여준 마지막 달성 레벨: \(completedLevels.lastUpdatedLevel)")
+        print("마지막으로 달성한 환경 성취: \(lastElectricAchievementKwh)kWh")
         print("collected items: \(collectedItems.getSortedItemsNameList())")
+        print("nfc 태깅 횟수: \(stairSteps.count)")
     }
 }
 
