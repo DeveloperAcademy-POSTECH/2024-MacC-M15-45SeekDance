@@ -628,6 +628,15 @@ struct ResetNavigationView: View {
     var body: some View {
         NavigationStack {
             VStack {
+                
+                Text("최고 레벨 달성!")
+                    .font(.system(size: 12))
+                    .foregroundStyle(Color.white)
+                    .padding(4)
+                    .cornerRadius(4)
+                    .background(Color.primaryColor)
+                
+                
                 Text("틈새를 속세로!\n이제는 하산할 시간")
                     .multilineTextAlignment(.center)
                     .font(.title)
@@ -780,20 +789,30 @@ struct DetailView3: View {
                 .font(.body)
             
             
-            TextField("텍스트 입력", text: $userInput)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
+//            TextField("건강해라", text: $userInput)
+//                .textFieldStyle(RoundedBorderTextFieldStyle())
+            TextField("건강해라", text: $userInput)
+                .padding()
+                .background(Color.secondary.opacity(0.2)) // 배경색
+                .cornerRadius(10) // 둥근 모서리
+//                .overlay(
+//                    RoundedRectangle(cornerRadius: 10) // 테두리 추가
+//                        .stroke(Color.blue, lineWidth: 2)
+//                )
+                .foregroundColor(.primary) // 텍스트 색상
+                .padding(10)
             
             if !errorMessage.isEmpty {
                 Text(errorMessage)
                     .foregroundColor(.red)
                     .font(.footnote)
-                    .padding(.top)
+        
             }
             Text("달성 뱃지, 약재, 리더보드 점수는 영구적으로 사라집니다.\n하산 기록(날짜, 횟수)는 입단증을 통해 확인할 수 있습니다.")
                 .font(.footnote)
                 .multilineTextAlignment(.center)
                 .foregroundColor(.secondary)
-                .padding(.top)
+                
             
             Spacer()
             
@@ -810,8 +829,6 @@ struct DetailView3: View {
                 }
                 .disabled(userInput != correctText)
                 .padding(.top)
-            
-            //            Spacer()
         }
         .padding()
         .navigationBarTitleDisplayMode(.inline)
