@@ -354,24 +354,21 @@ struct MainViewPhase3: View {
                 MaterialsView(isMaterialSheetPresented: $isMaterialSheetPresented, isShowingNewItem: $isShowingNewItem, completedLevels: completedLevels, collectedItems: collectedItems)
             }
             // MARK: 임시 리셋 버튼
-            if isHighestLevel {
-                Button {
-                    resetLevel()
-                } label: {
-                    HStack() {
-                        Image(systemName: "mountain.2.fill")
-                        Text("리셋하기")
-                    }
-                    .padding(.vertical, 7)
-                    .padding(.horizontal, 14)
-                    .foregroundStyle(Color.white)
-                    .background(Color(hex: 0x864035), in: RoundedRectangle(cornerRadius: 30))
-                }
-            }
-            .fullScreenCover(isPresented: $isResetViewPresented) {
-                ResetNavigationView(isResetViewPresented: $isResetViewPresented)
-            }
-        }
+                     if isHighestLevel {
+                         Button {
+                             resetLevel()
+                         } label: {
+                             HStack() {
+                                 Image(systemName: "leaf.fill")
+                                 Text("리셋하기")
+                             }
+                             .padding(.vertical, 7)
+                             .padding(.horizontal, 14)
+                             .foregroundStyle(Color.white)
+                             .background(Color(hex: 0x864035), in: RoundedRectangle(cornerRadius: 30))
+                         }
+                     }
+                 }
         .onAppear {
             // MARK: 일단 임시로 onAppear 사용해서 권한 받자마자 뷰를 그릴 수 있도록 임시조치함. 단, onAppear를 사용하면 뷰에 접속 할때마다 갱신되므로 사실 상, pulltoRefreash가 의미 없어짐.
             gameCenterManager.authenticateUser()
