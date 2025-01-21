@@ -351,7 +351,7 @@ struct MainViewPhase3: View {
             }
             // MARK: 임시 리셋 버튼
             Button {
-                //    service.fetchAndSaveFlightsClimbedSinceButtonPress()
+//                service.fetchAndSaveFlightsClimbedSinceButtonPress()
                 isResetViewPresented = true
             } label: {
                 HStack() {
@@ -620,29 +620,37 @@ struct MainViewPhase3: View {
     }
 }
 
+
+    // MARK: - 1번 째 뷰
 struct ResetNavigationView: View {
     @Binding var isResetViewPresented: Bool // FullScreen 상태를 상위 뷰와 공유
     
     var body: some View {
         NavigationStack {
             VStack {
-                Text("틈새 하산..")
-                    .font(.largeTitle)
+                Text("틈새를 속세로!\n이제는 하산할 시간")
+                    .multilineTextAlignment(.center)
+                    .font(.title)
+                    .fontWeight(.bold)
+                //                .padding()
+                Text("하산하기를 완료하면\n틈새와 함께 모은 기록들은 초기화가 됩니다.")
+                    .multilineTextAlignment(.center)
+                    .font(.body)
                     .padding()
+                Image("LazyBird")
+                    .resizable()
+                    .frame(width: 222, height: 222)
                 
                 Spacer()
                 
                 NavigationLink(destination: DetailView(isResetViewPresented: $isResetViewPresented)) {
-                    Text("다음 페이지로 이동")
+                    Text("설명보기")
                         .padding()
+                        .frame(width: 352, height: 50)
                         .background(Color.primaryColor)
                         .foregroundColor(.white)
                         .cornerRadius(10)
                 }
-                
-                
-                
-                
                 //                .navigationTitle("틈새 하산")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
@@ -659,21 +667,73 @@ struct ResetNavigationView: View {
         }
     }
 }
-
+    // MARK: - 2번 째 뷰
 struct DetailView: View {
     @Binding var isResetViewPresented: Bool
     
     var body: some View {
         VStack {
-            Text("Detail Page")
+            Text("틈새를 속세로!")
                 .font(.largeTitle)
+                .fontWeight(.bold)
+            //                .padding()
+            Text("지금까지 모은 약재를 갖고\n틈새는 하산합니다!")
+                .multilineTextAlignment(.center)
+                .font(.title3)
                 .padding()
+            Image("LazyBird")
+                .resizable()
+                .frame(width: 222, height: 222)
             
             Spacer()
             
             NavigationLink(destination: DetailView2(isResetViewPresented: $isResetViewPresented)) {
-                Text("다음 페이지로 이동")
+                Text("다음으로")
                     .padding()
+                    .frame(width: 352, height: 50)
+                    .background(Color.primaryColor)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+            }
+        }
+        //        .navigationTitle("상세 페이지")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    isResetViewPresented = false // 닫기 버튼으로 Sheet 해제
+                }) {
+                    Image(systemName: "xmark") // 시스템 이미지 닫기 버튼
+                        .foregroundColor(.primary)
+                }
+            }
+        }
+    }
+}
+    // MARK: - 3번 째 뷰
+struct DetailView2: View {
+    @Binding var isResetViewPresented: Bool
+    
+    var body: some View {
+        VStack {
+            Text("틈새를 속세로!")
+                .font(.largeTitle)
+                .fontWeight(.bold)
+            //                .padding()
+            Text("지금까지 모은 약재를 갖고\n틈새는 하산합니다!")
+                .multilineTextAlignment(.center)
+                .font(.title3)
+                .padding()
+            Image("LazyBird")
+                .resizable()
+                .frame(width: 222, height: 222)
+            
+            Spacer()
+            
+            NavigationLink(destination: DetailView3(isResetViewPresented: $isResetViewPresented)) {
+                Text("다음으로")
+                    .padding()
+                    .frame(width: 352, height: 50)
                     .background(Color.primaryColor)
                     .foregroundColor(.white)
                     .cornerRadius(10)
@@ -694,40 +754,84 @@ struct DetailView: View {
     }
 }
 
-struct DetailView2: View {
+struct DetailView3: View {
     @Binding var isResetViewPresented: Bool
+    let gameCenterManager = GameCenterManager()
+    let service = HealthKitService()
+    
+    @State private var userInput = ""
+    @State private var errorMessage = ""
+    
+    private let correctText = "건강해라"
     
     var body: some View {
         VStack {
-            Text("Detail Page")
+            Text("틈새를 하산시킬까요?")
                 .font(.largeTitle)
-                .padding()
+                .fontWeight(.bold)
+            
+            Text("진행하려면 ‘\(correctText)’를 입력하세요.")
+                .multilineTextAlignment(.center)
+                .font(.title3)
+//                .padding()
+            
+            TextField("텍스트 입력", text: $userInput)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+//                .padding()
+            
+            if !errorMessage.isEmpty {
+                Text(errorMessage)
+                    .foregroundColor(.red)
+                    .font(.footnote)
+                    .padding(.top)
+            }
+            Text("달성 뱃지, 약재, 리더보드 점수는 영구적으로 사라집니다.\n하산 기록(날짜, 횟수)는 입단증을 통해 확인할 수 있습니다.")
+                .font(.footnote)
+                .multilineTextAlignment(.center)
+                .foregroundColor(.secondary)
+                .padding(.top)
             
             Spacer()
             
-            NavigationLink(destination:MainViewPhase3()) {
-                Text("다음 페이지로 이동")
+            NavigationLink(destination: MainViewPhase3()
+                .onAppear {
+                    service.fetchAndSaveFlightsClimbedSinceButtonPress()
+                }) {
+                Text("하산하기")
                     .padding()
-                    .background(Color.primaryColor)
+                    .frame(maxWidth: .infinity)
+                    .background(userInput == correctText ? Color.primaryColor : Color.gray)
                     .foregroundColor(.white)
                     .cornerRadius(10)
             }
+            .disabled(userInput != correctText)
+            .padding(.top)
+            
+//            Spacer()
         }
-        //        .navigationTitle("상세 페이지")
+        .padding()
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
-                    isResetViewPresented = false // 닫기 버튼으로 Sheet 해제
+                    isResetViewPresented = false
                 }) {
-                    Image(systemName: "xmark") // 시스템 이미지 닫기 버튼
+                    Image(systemName: "xmark")
                         .foregroundColor(.primary)
                 }
             }
         }
-        
+        .onChange(of: userInput) { newValue in
+            if newValue != correctText {
+                errorMessage = "틈새에게 마지막으로 덕담인 ‘건강해라'를 입력해주세요."
+            } else {
+                errorMessage = ""
+            }
+        }
     }
 }
+
+
 
 #Preview {
     MainViewPhase3()
