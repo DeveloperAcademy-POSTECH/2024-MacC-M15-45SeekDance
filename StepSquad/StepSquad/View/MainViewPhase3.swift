@@ -351,7 +351,7 @@ struct MainViewPhase3: View {
             }
             // MARK: 임시 리셋 버튼
             Button {
-//                service.fetchAndSaveFlightsClimbedSinceButtonPress()
+                //                service.fetchAndSaveFlightsClimbedSinceButtonPress()
                 isResetViewPresented = true
             } label: {
                 HStack() {
@@ -621,7 +621,7 @@ struct MainViewPhase3: View {
 }
 
 
-    // MARK: - 1번 째 뷰
+// MARK: - 1번 째 뷰
 struct ResetNavigationView: View {
     @Binding var isResetViewPresented: Bool // FullScreen 상태를 상위 뷰와 공유
     
@@ -632,14 +632,15 @@ struct ResetNavigationView: View {
                     .multilineTextAlignment(.center)
                     .font(.title)
                     .fontWeight(.bold)
-                //                .padding()
+                
                 Text("하산하기를 완료하면\n틈새와 함께 모은 기록들은 초기화가 됩니다.")
                     .multilineTextAlignment(.center)
                     .font(.body)
-                    .padding()
-                Image("LazyBird")
+                
+                Image("Down1")
                     .resizable()
-                    .frame(width: 222, height: 222)
+                    .scaledToFit()
+                    .frame(width: 256)
                 
                 Spacer()
                 
@@ -651,15 +652,14 @@ struct ResetNavigationView: View {
                         .foregroundColor(.white)
                         .cornerRadius(10)
                 }
-                //                .navigationTitle("틈새 하산")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button(action: {
                             isResetViewPresented = false // 닫기 버튼으로 Sheet 해제
                         }) {
-                            Image(systemName: "xmark") // 시스템 이미지 닫기 버튼
-                                .foregroundColor(.primary)
+                            Image(systemName: "x.circle.fill")
+                                .foregroundColor(.secondary)
                         }
                     }
                 }
@@ -667,23 +667,25 @@ struct ResetNavigationView: View {
         }
     }
 }
-    // MARK: - 2번 째 뷰
+// MARK: - 2번 째 뷰
 struct DetailView: View {
     @Binding var isResetViewPresented: Bool
     
     var body: some View {
         VStack {
-            Text("틈새를 속세로!")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-            //                .padding()
-            Text("지금까지 모은 약재를 갖고\n틈새는 하산합니다!")
+            Text("그 동안 모은 건\n틈새 하산 선물로!")
                 .multilineTextAlignment(.center)
-                .font(.title3)
-                .padding()
-            Image("LazyBird")
+                .font(.title)
+                .fontWeight(.bold)
+            
+            Text("틈새와 함께 모은 약재, 뱃지, 점수는\n하산이 완료되면 모두 초기화가 됩니다.")
+                .multilineTextAlignment(.center)
+                .font(.body)
+            
+            Image("Down2")
                 .resizable()
-                .frame(width: 222, height: 222)
+                .scaledToFit()
+                .frame(width: 348)
             
             Spacer()
             
@@ -703,30 +705,33 @@ struct DetailView: View {
                 Button(action: {
                     isResetViewPresented = false // 닫기 버튼으로 Sheet 해제
                 }) {
-                    Image(systemName: "xmark") // 시스템 이미지 닫기 버튼
-                        .foregroundColor(.primary)
+                    Image(systemName: "x.circle.fill")
+                        .foregroundColor(.secondary)
+                    
                 }
             }
         }
     }
 }
-    // MARK: - 3번 째 뷰
+// MARK: - 3번 째 뷰
 struct DetailView2: View {
     @Binding var isResetViewPresented: Bool
     
     var body: some View {
         VStack {
-            Text("틈새를 속세로!")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-            //                .padding()
-            Text("지금까지 모은 약재를 갖고\n틈새는 하산합니다!")
+            Text("역대 하산 기록은\n남아있어요!")
                 .multilineTextAlignment(.center)
-                .font(.title3)
-                .padding()
-            Image("LazyBird")
+                .font(.title)
+                .fontWeight(.bold)
+            
+            Text("입단증의 뒤집으면\n역대 하산 기록을 볼 수 있습니다.")
+                .multilineTextAlignment(.center)
+                .font(.body)
+            
+            Image("Down3")
                 .resizable()
-                .frame(width: 222, height: 222)
+                .scaledToFit()
+                .frame(width: 348)
             
             Spacer()
             
@@ -739,15 +744,14 @@ struct DetailView2: View {
                     .cornerRadius(10)
             }
         }
-        //        .navigationTitle("상세 페이지")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
                     isResetViewPresented = false // 닫기 버튼으로 Sheet 해제
                 }) {
-                    Image(systemName: "xmark") // 시스템 이미지 닫기 버튼
-                        .foregroundColor(.primary)
+                    Image(systemName: "x.circle.fill")
+                        .foregroundColor(.secondary)
                 }
             }
         }
@@ -767,17 +771,17 @@ struct DetailView3: View {
     var body: some View {
         VStack {
             Text("틈새를 하산시킬까요?")
-                .font(.largeTitle)
+                .multilineTextAlignment(.center)
+                .font(.title)
                 .fontWeight(.bold)
             
             Text("진행하려면 ‘\(correctText)’를 입력하세요.")
                 .multilineTextAlignment(.center)
-                .font(.title3)
-//                .padding()
+                .font(.body)
+            
             
             TextField("텍스트 입력", text: $userInput)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
-//                .padding()
             
             if !errorMessage.isEmpty {
                 Text(errorMessage)
@@ -797,17 +801,17 @@ struct DetailView3: View {
                 .onAppear {
                     service.fetchAndSaveFlightsClimbedSinceButtonPress()
                 }) {
-                Text("하산하기")
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(userInput == correctText ? Color.primaryColor : Color.gray)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-            }
-            .disabled(userInput != correctText)
-            .padding(.top)
+                    Text("하산하기")
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(userInput == correctText ? Color.primaryColor : Color.gray)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                .disabled(userInput != correctText)
+                .padding(.top)
             
-//            Spacer()
+            //            Spacer()
         }
         .padding()
         .navigationBarTitleDisplayMode(.inline)
@@ -816,8 +820,8 @@ struct DetailView3: View {
                 Button(action: {
                     isResetViewPresented = false
                 }) {
-                    Image(systemName: "xmark")
-                        .foregroundColor(.primary)
+                    Image(systemName: "x.circle.fill")
+                        .foregroundColor(.secondary)
                 }
             }
         }
