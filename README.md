@@ -17,8 +17,8 @@
 <tr>
     <td align="center"><img src="https://github.com/user-attachments/assets/7cd9ac9f-40a9-4f0f-a053-15c286178b19" width="80%" /></a></td>
     <td align="center"><img src="https://github.com/user-attachments/assets/53ccfb59-fe0b-4426-9a65-150af2bced25" width="80%" /></a></td>
-    <td align="center"><img src="https://github.com/user-attachments/assets/eb70d3f7-3277-431b-81a0-f986bed24c16" width="80%" /></a></td>   
-    <td align="center"><img src="https://github.com/user-attachments/assets/76e5e1cc-b858-4b5a-8a75-89ab34279656" width="80%" /></a></td>   
+    <td align="center"><img src="https://github.com/user-attachments/assets/eb70d3f7-3277-431b-81a0-f986bed24c16" width="80%" /></a></td>
+    <td align="center"><img src="https://github.com/user-attachments/assets/d9852b6a-4fe2-4f93-9b79-2a717723118a" width="80%" /></a></td>   
   </tr>
   <tr>
     <td align="center">메인 뷰</td>
