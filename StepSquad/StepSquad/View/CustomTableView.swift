@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CustomTableView: View {
-    let headers = ["회차", "층수", "일자", "하산날짜"]
+    let headers = ["회차", "층수", "일자", "하산 일"]
     let rows = [
         ["2", "1445", "100일", "25.01.20"],
         ["1", "1480", "102일", "25.01.20"]

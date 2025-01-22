@@ -11,7 +11,8 @@ struct DescendRecordView: View {
     @State private var isSharing: Bool = false
     @State private var sharedImage: UIImage?
     @State private var isButtonClicked: Bool = false
-    
+    @State private var infoButtonClicked: Bool = false
+
     var body: some View {
         VStack() {
             HStack(spacing: 0) {
@@ -40,33 +41,40 @@ struct DescendRecordView: View {
                 }
             }
 
-            HStack() {
-                Image("DescendRecordImage")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
+                HStack() {
 
-                VStack(alignment: .leading) {
-                    Spacer()
+                        Image("DescendRecordImage")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
 
-                    HStack() {
-                        Text("계단으로 아낀 전력량")
-                            .font(.system(size: 15))
-                            .foregroundStyle(Color(hex: 0x3A542B))
+                        VStack(alignment: .leading) {
+                            Spacer()
 
-                        Spacer()
+                            HStack() {
+                                Text("계단으로 아낀 전력량")
+                                    .font(.system(size: 15))
+                                    .foregroundStyle(Color(hex: 0x3A542B))
 
-                        Button {
-                            // TODO: 정보창 뜨게 하기
-                        } label: {
-                            Image(systemName: "info.circle")
+                                Spacer()
+
+                                Button {
+                                    infoButtonClicked.toggle()
+                                } label: {
+                                    Image(systemName: "info.circle")
+                                        .foregroundStyle(Color(hex: 0x3A542B))
+                                }
+                            }
+
+                            Text("123kWh")
+                                .font(.system(size: 28, weight: .medium))
                                 .foregroundStyle(Color(hex: 0x3A542B))
                         }
-                    }
 
-                    Text("123kWh")
-                        .font(.system(size: 28, weight: .medium))
-                        .foregroundStyle(Color(hex: 0x3A542B))
-                }
+
+                        //Text("1층을 오를 때 엘리베이터 대신 계단을 이용하면 약 25kWh를 아낄 수 있어요.")
+
+
+
             }
             .padding(12)
             .background(Color(hex: 0xF3F9F0),
