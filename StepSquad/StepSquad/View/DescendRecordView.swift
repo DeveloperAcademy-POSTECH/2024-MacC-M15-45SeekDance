@@ -40,6 +40,7 @@ struct DescendRecordView: View {
                                 in: RoundedRectangle(cornerRadius: 8))
                 }
             }
+
             VStack() {
                 HStack() {
                     Image("DescendRecordImage")
@@ -62,13 +63,11 @@ struct DescendRecordView: View {
                                     .foregroundStyle(Color(hex: 0x3A542B))
                             }
                         }
-
                         Text("1.6시간")
                             .font(.system(size: 28, weight: .medium))
                             .foregroundStyle(Color(hex: 0x3A542B))
                     }
                 }
-
                 if infoButtonClicked {
                     Text("1층을 오를 때 엘리베이터 대신 계단을 이용하면 약 25kWh를 아낄 수 있어요.")
                         .font(.system(size: 13))
@@ -95,8 +94,6 @@ struct DescendRecordView: View {
                     .foregroundColor(Color(red: 0.23, green: 0.33, blue: 0.17))
                     .background(Color(red: 0.79, green: 0.9, blue: 0.73), in: RoundedRectangle(cornerRadius: 8))
             }
-
-
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 16)
@@ -108,7 +105,6 @@ struct DescendRecordView: View {
                 ShareSheet(activityItems: [sharedImage])
             }
         }
-
     }
 
     func captureAndShare() {
