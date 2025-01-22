@@ -40,46 +40,44 @@ struct DescendRecordView: View {
                                 in: RoundedRectangle(cornerRadius: 8))
                 }
             }
-
+            VStack() {
                 HStack() {
+                    Image("DescendRecordImage")
+                        .resizable()
+                        .frame(width: 80, height: 80)
+                        .aspectRatio(contentMode: .fit)
 
-                        Image("DescendRecordImage")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
+                    VStack(alignment: .leading) {
+                        HStack(alignment: .bottom) {
+                            Text("연장된 건강 수명")
+                                .font(.system(size: 15))
+                                .foregroundStyle(Color(hex: 0x3A542B))
 
-                        VStack(alignment: .leading) {
                             Spacer()
 
-                            HStack() {
-                                Text("계단으로 아낀 전력량")
-                                    .font(.system(size: 15))
+                            Button {
+                                infoButtonClicked.toggle()
+                            } label: {
+                                Image(systemName: "info.circle")
                                     .foregroundStyle(Color(hex: 0x3A542B))
-
-                                Spacer()
-
-                                Button {
-                                    infoButtonClicked.toggle()
-                                } label: {
-                                    Image(systemName: "info.circle")
-                                        .foregroundStyle(Color(hex: 0x3A542B))
-                                }
                             }
-
-                            Text("123kWh")
-                                .font(.system(size: 28, weight: .medium))
-                                .foregroundStyle(Color(hex: 0x3A542B))
                         }
 
+                        Text("1.6시간")
+                            .font(.system(size: 28, weight: .medium))
+                            .foregroundStyle(Color(hex: 0x3A542B))
+                    }
+                }
 
-                        //Text("1층을 오를 때 엘리베이터 대신 계단을 이용하면 약 25kWh를 아낄 수 있어요.")
-
-
-
+                if infoButtonClicked {
+                    Text("1층을 오를 때 엘리베이터 대신 계단을 이용하면 약 25kWh를 아낄 수 있어요.")
+                        .font(.system(size: 13))
+                        .foregroundStyle(Color(hex: 0x638D48))
+                }
             }
             .padding(12)
             .background(Color(hex: 0xF3F9F0),
                         in: RoundedRectangle(cornerRadius: 8))
-            .frame(width: 289, height: 104)
             .padding(.top, 19)
 
             CustomTableView()
