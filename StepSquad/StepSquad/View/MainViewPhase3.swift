@@ -354,21 +354,24 @@ struct MainViewPhase3: View {
                 MaterialsView(isMaterialSheetPresented: $isMaterialSheetPresented, isShowingNewItem: $isShowingNewItem, completedLevels: completedLevels, collectedItems: collectedItems)
             }
             // MARK: 임시 리셋 버튼
-                     if isHighestLevel {
-                         Button {
-                             resetLevel()
-                         } label: {
-                             HStack() {
-                                 Image(systemName: "leaf.fill")
-                                 Text("리셋하기")
-                             }
-                             .padding(.vertical, 7)
-                             .padding(.horizontal, 14)
-                             .foregroundStyle(Color.white)
-                             .background(Color(hex: 0x864035), in: RoundedRectangle(cornerRadius: 30))
-                         }
-                     }
-                 }
+            //                     if isHighestLevel {
+            Button {
+                isResetViewPresented = true
+            } label: {
+                HStack() {
+                    Image(systemName: "mountain.2.fill")
+                    Text("리셋하기")
+                }
+                .padding(.vertical, 7)
+                .padding(.horizontal, 14)
+                .foregroundStyle(Color.white)
+                .background(Color(hex: 0x864035), in: RoundedRectangle(cornerRadius: 30))
+            }
+        }
+        .fullScreenCover(isPresented: $isResetViewPresented) {
+            ResetNavigationView(isResetViewPresented: $isResetViewPresented)
+        }
+        //                 }
         .onAppear {
             // MARK: 일단 임시로 onAppear 사용해서 권한 받자마자 뷰를 그릴 수 있도록 임시조치함. 단, onAppear를 사용하면 뷰에 접속 할때마다 갱신되므로 사실 상, pulltoRefreash가 의미 없어짐.
             gameCenterManager.authenticateUser()
@@ -583,7 +586,7 @@ struct MainViewPhase3: View {
         for i in [1, 10, 20, 36] { // 40, 400, 800, 1440층에서 환경 성취 달성
             if (currentStatus.getTotalStaircase() / 40) >= i { // 특정 층 이상으로 계단을 걸었다면,
                 if i > lastElectricAchievementKwh { // 특정 층을 달성하고 성취를 아직 받지 않았다면,
-//                    print("\(i)kWh 틈새 전기 절약 성취 달성")
+                    //                    print("\(i)kWh 틈새 전기 절약 성취 달성")
                     gameCenterManager.reportCompletedAchievement(achievementId: "electricBird\(i)")
                     lastElectricAchievementKwh = i
                 }
@@ -631,7 +634,7 @@ struct MainViewPhase3: View {
         collectedItems.resetItems()
         service.fetchAndSaveFlightsClimbedSinceButtonPress()
     }
-
+    
     // MARK: Level 관련 테스트 프린트문
     func printAll() {
         print("누적 층계: \(currentStatus.getTotalStaircase())")
@@ -820,16 +823,16 @@ struct DetailView3: View {
                 .font(.body)
             
             
-//            TextField("건강해라", text: $userInput)
-//                .textFieldStyle(RoundedBorderTextFieldStyle())
+            //            TextField("건강해라", text: $userInput)
+            //                .textFieldStyle(RoundedBorderTextFieldStyle())
             TextField("건강해라", text: $userInput)
                 .padding()
                 .background(Color.secondary.opacity(0.2)) // 배경색
                 .cornerRadius(10) // 둥근 모서리
-//                .overlay(
-//                    RoundedRectangle(cornerRadius: 10) // 테두리 추가
-//                        .stroke(Color.blue, lineWidth: 2)
-//                )
+            //                .overlay(
+            //                    RoundedRectangle(cornerRadius: 10) // 테두리 추가
+            //                        .stroke(Color.blue, lineWidth: 2)
+            //                )
                 .foregroundColor(.primary) // 텍스트 색상
                 .padding(10)
             
@@ -837,13 +840,13 @@ struct DetailView3: View {
                 Text(errorMessage)
                     .foregroundColor(.red)
                     .font(.footnote)
-        
+                
             }
             Text("달성 뱃지, 약재, 리더보드 점수는 영구적으로 사라집니다.\n하산 기록(날짜, 횟수)는 입단증을 통해 확인할 수 있습니다.")
                 .font(.footnote)
                 .multilineTextAlignment(.center)
                 .foregroundColor(.secondary)
-                
+            
             
             Spacer()
             
