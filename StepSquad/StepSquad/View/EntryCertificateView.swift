@@ -26,9 +26,23 @@ struct EntryCertificateView: View {
 
                 Spacer()
 
-                Text("StepSquad")
-                    .font(Font.custom("ChosunCentennial", size: 15))
-                    .foregroundStyle(Color(hex: 0x7EB55D))
+                if !isButtonClicked {
+                    Button {
+                        isButtonClicked = true
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            captureAndShare()
+                            isButtonClicked = false
+                        }
+                    } label: {
+                        Label("공유하기", systemImage: "square.and.arrow.up")
+                            .font(.system(size: 13))
+                            .foregroundStyle(Color(hex: 0x4C6D38))
+                            .padding(.vertical, 4)
+                            .padding(.horizontal, 8)
+                    }
+                    .background(Color(hex: 0xDBEED0),
+                                in: RoundedRectangle(cornerRadius: 8))
+                }
             }
             .padding(.top, 18)
 
@@ -52,6 +66,10 @@ struct EntryCertificateView: View {
                         .font(.system(size: 34, weight: .bold))
                         .foregroundStyle(Color(hex: 0x3A542B))
 
+                    Text("1회차")
+                        .font(.system(size: 17, weight: .semibold))
+                        .foregroundStyle(Color(hex: 0x638D48))
+
                     if let userIMG = userPlayerImage {
                         userIMG
                             .resizable()
@@ -59,7 +77,7 @@ struct EntryCertificateView: View {
                             .frame(width: 60, height: 60)
                             .clipShape(Circle())
                             .padding(.leading, 124)
-                            .padding(.top, 16)
+                            .padding(.top, 5)
                     }
                 }
                 .padding(.top, 24)
@@ -72,44 +90,26 @@ struct EntryCertificateView: View {
                 .multilineTextAlignment(.leading)
                 .padding(.top, 8)
 
-            Text("\(formattedDate) 입단")
+            Text("\(formattedDate) 입단 1회차")
                 .font(.system(size: 13))
                 .foregroundStyle(Color(hex: 0x4C6D38))
 
             Spacer()
 
-
-            HStack(alignment: .bottom, spacing: 0) {
-                Text("계단사랑단")
-                    .font(Font.custom("ChosunCentennial", size: 15))
-                    .foregroundStyle(Color(hex: 0x3A542B))
-                    .padding(.trailing, 5)
-
-                Text("StepSquad")
-                    .font(Font.custom("ChosunCentennial", size: 15))
-                    .foregroundStyle(Color(hex: 0x7EB55D))
-
-                Spacer()
-
-                if !isButtonClicked {
-                    Button {
-                        isButtonClicked = true
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                            captureAndShare()
-                            isButtonClicked = false
-                        }
-                    } label: {
-                        Label("공유하기", systemImage: "square.and.arrow.up")
-                            .font(.system(size: 13))
-                            .foregroundStyle(Color(hex: 0x4C6D38))
-                            .padding(.vertical, 4)
-                            .padding(.horizontal, 8)
-                    }
-                    .background(Color(hex: 0xDBEED0),
-                                in: RoundedRectangle(cornerRadius: 8))
-                }
+            if !isButtonClicked {
+                Button(action: {
+                    
+                }, label: {
+                    Text("하산 기록 보기")
+                        .font(Font.custom("SF Pro", size: 13))
+                        .padding(.horizontal, 101)
+                        .padding(.vertical, 7)
+                        .foregroundStyle(Color(hex: 0x3A542B))
+                        .background(Color(hex: 0xCAE5B9),
+                                    in: RoundedRectangle(cornerRadius: 8))
+                })
+                .padding(.bottom, 16)
             }
-            .padding(.bottom, 23)
 
         }
         .padding(.horizontal, 20)
@@ -173,4 +173,8 @@ struct EntryCertificateView: View {
             isSharing = true
         }
     }
+}
+
+#Preview {
+    EntryCertificateView()
 }
