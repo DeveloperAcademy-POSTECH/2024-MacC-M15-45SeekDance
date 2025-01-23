@@ -19,36 +19,39 @@ struct MainViewPhase3: View {
     @State var isLaunching: Bool = true
     @State private var completedLevels = CompletedLevels()
     @State private var collectedItems = CollectedItems()
+    @State var isCardFlipped: Bool = true
+
+    @State private var isResetViewPresented = false
     
     @State var userProfileImage: Image?
-    
+
     @State private var nfcCount: Int = 0
     @State private var nfcMessage: String = ""
-    
+
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.modelContext) var context
-    
+
     @Query(sort: [SortDescriptor(\StairStepModel.stairStepDate, order: .forward)]) var stairSteps: [StairStepModel]
-    
+
     @ObservedObject var service = HealthKitService()
-    
+
     @AppStorage("HealthKitAuthorized") var isHealthKitAuthorized: Bool = false
-    
+
     @AppStorage("isShowingNewItem") private var isShowingNewItem = false
-    
+
     let gameCenterManager = GameCenterManager()
-    
+
     var currentStatus: CurrentStatus = CurrentStatus() {
         didSet {
             saveCurrentStatus()
         }
     }
     @AppStorage("lastElectricAchievementKwh") var lastElectricAchievementKwh = 0
-    
+
     var isHighestLevel: Bool {
         return currentStatus.currentLevel.level == 20
     }
-    
+
     var body: some View {
         if isLaunching {
             SplashView()
@@ -61,20 +64,20 @@ struct MainViewPhase3: View {
             NavigationStack {
                 ZStack() {
                     Color.backgroundColor
-                    
+
                     VStack(spacing: 0) {
                         HStack(spacing: 0) {
                             Spacer()
-                            
+
                             Text(service.LastFetchTime.isEmpty == false
                                  ? "당겨서 계단 정보 불러오기\n계단 업데이트: \(service.LastFetchTime)"
                                  : "아직 계단을 안 오르셨군요!\n계단을 오르고 10분 뒤 다시 당겨보세요!")
                             .font(.footnote)
                             .foregroundColor(Color(hex: 0x808080))
                             .multilineTextAlignment(.center)
-                            
+
                             Spacer()
-                            
+
                             NavigationLink(destination: ExplainView()) {
                                 Image(systemName: "gear")
                                     .resizable()
@@ -83,12 +86,12 @@ struct MainViewPhase3: View {
                                     .padding(5)
                                     .background(Color(hex: 0xE1E1E1), in: Circle.circle)
                             }
-                            
+
                         }
                         .padding(.top, 72)
                         .padding(.bottom, 4)
                         .padding(.horizontal, 36)
-                        
+
                         ScrollView {
                             VStack(spacing: 0) {
                                 if isHealthKitAuthorized {
@@ -96,18 +99,11 @@ struct MainViewPhase3: View {
                                 } else {
                                     GetHealthKitView
                                 }
-                                
-                                Divider()
-                                    .background(Color(hex: 0xCAE5B9))
-                                    .padding(.horizontal, 16)
-                                    .onAppear() {
-                                        service.fetchAllFlightsClimbedData()
-                                        service.migrateAuthorizationDataToSharedDefaults()
-                                    }
-                                
+
                                 NFCReadingView
                                     .padding(.top, 17)
                                     .padding(.bottom, 17)
+                                    .background(Color(hex: 0xFBFCFB))
                                     .fullScreenCover(isPresented: $isResultViewPresented) {
                                         ResultView(isResultViewPresented: $isResultViewPresented,
                                                    stairName: nfcMessage,
@@ -126,7 +122,11 @@ struct MainViewPhase3: View {
                             .background(Color.white)
                             .cornerRadius(16)
                             .padding(.top, 20)
-                            
+                            .onAppear() {
+                                service.fetchAllFlightsClimbedData()
+                                service.migrateAuthorizationDataToSharedDefaults()
+                            }
+
                             HStack {
                                 Button {
                                     // MARK: 성취로 이동
@@ -145,9 +145,9 @@ struct MainViewPhase3: View {
                                     .background(Color(hex: 0x4C6D38),
                                                 in: RoundedRectangle(cornerRadius: 12))
                                 }
-                                
+
                                 Spacer()
-                                
+
                                 Button {
                                     // MARK: 순위표로 이동
                                     gameCenterManager.showLeaderboard()
@@ -165,17 +165,51 @@ struct MainViewPhase3: View {
                                                 in: RoundedRectangle(cornerRadius: 12))
                                 }
                             }
-                            .padding(.top, 16)
+                            .padding(.top, 12)
                             .padding(.horizontal, 36)
-                            
+
+                            Button {
+                                isMaterialSheetPresented.toggle()
+                            } label: {
+                                HStack() {
+                                    Image(systemName: "list.bullet")
+                                    Text("획득 재료 확인하기")
+                                    //                                    if isShowingNewItem { // 새로 획득한 약재가 있다면,
+                                    //                                        NewItemView()
+                                    //                                    }
+                                    Spacer(minLength: 2)
+
+                                    Image(systemName: "chevron.right")
+                                }
+                                .foregroundStyle(Color(hex: 0x3A542B))
+                                .padding(.vertical, 10)
+                                .padding(.horizontal, 20)
+                                .background(Color(red: 0.98, green: 0.99, blue: 0.98), in: RoundedRectangle(cornerRadius: 12))
+                            }
+                            .padding(.horizontal, 36)
+                            .padding(.top, 8)
+                            .sheet(isPresented: $isMaterialSheetPresented) {
+                                MaterialsView(isMaterialSheetPresented: $isMaterialSheetPresented, isShowingNewItem: $isShowingNewItem, completedLevels: completedLevels, collectedItems: collectedItems)
+                            }
+
                             if isHealthKitAuthorized {
                                 Divider()
                                     .background(Color(hex: 0xCDD3C5))
-                                    .padding(.horizontal, 35)
-                                    .padding(.vertical, 28)
-                                
-                                EntryCertificateView(userPlayerImage: userProfileImage, nickName: gameCenterManager.loadLocalPlayerName())
-                                
+                                    .padding(.horizontal, 24)
+                                    .padding(.vertical, 24)
+
+                                ZStack {
+                                    EntryCertificateView(userPlayerImage: userProfileImage, nickName: gameCenterManager.loadLocalPlayerName())
+                                        .rotation3DEffect(.degrees(isCardFlipped ? 0 : -90), axis: (x: 0, y: 1, z: 0))
+                                        .animation(isCardFlipped ? .linear.delay(0.35) : .linear, value: isCardFlipped)
+                                    DescendRecordView()
+                                        .rotation3DEffect(.degrees(isCardFlipped ? 90 : 0), axis: (x: 0, y: 1, z: 0))
+                                        .animation(isCardFlipped ? .linear : .linear.delay(0.35), value: isCardFlipped)
+                                }
+                                .onTapGesture {
+                                    isCardFlipped.toggle()
+                                }
+
                                 Button {
                                     gameCenterManager.showFriendsList()
                                     gameCenterManager.reportCompletedAchievement(achievementId: "clover")
@@ -198,7 +232,7 @@ struct MainViewPhase3: View {
                                 .padding(.bottom, 51)
                                 .padding(.horizontal, 36)
                             }
-                            
+
                         }
                         .refreshable {
                             service.getWeeklyStairDataAndSave()
@@ -228,11 +262,12 @@ struct MainViewPhase3: View {
                     }
                 }
             }
+            .navigationBarBackButtonHidden(true)
             .tint(Color(hex: 0x8BC766))
         }
     }
-    
-    
+
+
     private var GetHealthKitView: some View {
         VStack(spacing: 0) {
             Image("GetHealthKitImage")
@@ -240,19 +275,19 @@ struct MainViewPhase3: View {
                 .scaledToFit()
                 .frame(width: 133, height: 133)
                 .padding(.top, 82)
-            
+
             Text("계단사랑단에 입단하세요!")
                 .font(.system(size: 20, weight: .bold))
                 .multilineTextAlignment(.center)
                 .foregroundColor(.black)
                 .padding(.top, 20)
-            
+
             Text("오늘부터 오른 층수 데이터를 추가하면\n진정한 계단사랑단원이 될 수 있어요!")
                 .font(.system(size: 15))
                 .multilineTextAlignment(.center)
                 .foregroundStyle(Color(red: 0.44, green: 0.44, blue: 0.44))
                 .padding(.top, 8)
-            
+
             Button {
                 service.configure()
             } label: {
@@ -268,16 +303,16 @@ struct MainViewPhase3: View {
             .padding(.top, 40)
             .padding(.bottom, 60)
         }
-        
+
     }
-    
+
     private var LevelUpView: some View {
         VStack(spacing: 0) {
             ZStack() {
                 VStack(spacing: 0) {
                     HStack() {
                         Spacer()
-                        
+
                         ZStack() {
                             Image("Union")
                                 .resizable()
@@ -288,17 +323,17 @@ struct MainViewPhase3: View {
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 20, height: 20)
-                                
+
                                 Spacer().frame(maxHeight: 13)
                             }
                         }
                     }
                     Spacer()
                 }
-                
+
                 VStack() {
                     Spacer()
-                    
+
                     Image(currentStatus.progressImage)
                         .resizable()
                         .scaledToFit()
@@ -307,22 +342,22 @@ struct MainViewPhase3: View {
             }
             .frame(width: 220, height: 256)
             .padding(.top, 16)
-            
+
             HStack(spacing: 4) {
                 Text(currentStatus.currentLevel.difficulty.rawValue)
                     .font(.system(size: 12))
                     .foregroundStyle(Color.white)
                     .padding(4)
                     .background(getDifficultyColor(difficulty: currentStatus.currentLevel.difficulty), in: RoundedRectangle(cornerRadius: 4))
-                
+
                 Text("레벨 \(currentStatus.currentLevel.level)")
                     .font(.system(size: 12))
                     .foregroundStyle(getDifficultyColor(difficulty: currentStatus.currentLevel.difficulty))
                     .padding(4)
                     .background(getDifficultyPaleColor(difficulty: currentStatus.currentLevel.difficulty), in: RoundedRectangle(cornerRadius: 4))
             }
-            .padding(.top, 23)
-            
+            .padding(.top, 32)
+
             Text("\(currentStatus.currentLevel.maxStaircase + 1)층 올라가기")
                 .font(.system(size: 20, weight: .semibold))
                 .padding(.top, 8)
@@ -330,43 +365,28 @@ struct MainViewPhase3: View {
                 .font(.system(size: 12))
                 .foregroundStyle(Color(hex: 0x3C3C43))
                 .padding(.top, 4)
-            
+
+            Spacer()
+
+            // MARK: 임시 리셋 버튼
+            //                     if isHighestLevel {
             Button {
-                isMaterialSheetPresented.toggle()
+                isResetViewPresented = true
             } label: {
                 HStack() {
-                    Image(systemName: "leaf.fill")
-                    Text("획득 재료보기")
-                    if isShowingNewItem { // 새로 획득한 약재가 있다면,
-                        NewItemView()
-                    }
+                    Image(systemName: "mountain.2.fill")
+                    Text("리셋하기")
                 }
                 .padding(.vertical, 7)
                 .padding(.horizontal, 14)
                 .foregroundStyle(Color.white)
                 .background(Color(hex: 0x864035), in: RoundedRectangle(cornerRadius: 30))
             }
-            .padding(.top, 16)
-            .padding(.bottom, 28)
-            .sheet(isPresented: $isMaterialSheetPresented) {
-                MaterialsView(isMaterialSheetPresented: $isMaterialSheetPresented, isShowingNewItem: $isShowingNewItem, completedLevels: completedLevels, collectedItems: collectedItems)
-            }
-            // MARK: 임시 리셋 버튼
-            if isHighestLevel {
-                Button {
-                    resetLevel()
-                } label: {
-                    HStack() {
-                        Image(systemName: "leaf.fill")
-                        Text("리셋하기")
-                    }
-                    .padding(.vertical, 7)
-                    .padding(.horizontal, 14)
-                    .foregroundStyle(Color.white)
-                    .background(Color(hex: 0x864035), in: RoundedRectangle(cornerRadius: 30))
-                }
-            }
         }
+        .fullScreenCover(isPresented: $isResetViewPresented) {
+            ResetNavigationView(isResetViewPresented: $isResetViewPresented)
+        }
+        //                 }
         .onAppear {
             // MARK: 일단 임시로 onAppear 사용해서 권한 받자마자 뷰를 그릴 수 있도록 임시조치함. 단, onAppear를 사용하면 뷰에 접속 할때마다 갱신되므로 사실 상, pulltoRefreash가 의미 없어짐.
             gameCenterManager.authenticateUser()
@@ -376,7 +396,7 @@ struct MainViewPhase3: View {
             service.fetchAllFlightsClimbedData()
         }
     }
-    
+
     private var NFCReadingView: some View {
         HStack(spacing: 0) {
             Image("NFCButtonImage")
@@ -384,7 +404,7 @@ struct MainViewPhase3: View {
                 .frame(width: 36, height: 36)
                 .padding(.leading, 16)
                 .padding(.trailing, 9)
-            
+
             VStack(alignment: .leading, spacing: 0) {
                 Text("5분마다 획득할 수 있어요!")
                     .font(.system(size: 13))
@@ -393,16 +413,16 @@ struct MainViewPhase3: View {
                     .font(.system(size: 15))
                     .fontWeight(.semibold)
             }
-            
+
             Spacer()
-            
+
             Button {
                 nfcReader = NFCReader { result in
                     switch result {
                     case .success((let message, let serialNumber)):
                         (nfcMessage, nfcCount) = findNFCSerialNuber(serialNumber: serialNumber)
                         print(serialNumber)
-                        
+
                         if nfcCount != 0 {
                             context.insert(StairStepModel(stairType: message, stairStepDate: Date(), stairNum: nfcCount))
                             do {
@@ -422,7 +442,7 @@ struct MainViewPhase3: View {
                         } else {
                             isShowingNFCAlert.toggle()
                         }
-                        
+
                     case .failure(let error):
                         print("error 발생")
                     }
@@ -456,7 +476,7 @@ struct MainViewPhase3: View {
             }
         }
     }
-    
+
     // MARK: - 생성자
     init() {
         // MARK: 사용자 게임 센터 인증
@@ -464,19 +484,19 @@ struct MainViewPhase3: View {
         // MARK: 저장된 레벨 정보 불러오고 헬스킷 정보로 업데이트하기
         currentStatus = loadCurrentStatus()
     }
-    
+
     // MARK: - 타이머
     func startTimer() {
         Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
             updateButtonState()
         }
     }
-    
+
     func updateButtonState() {
         if let lastStep = stairSteps.last {
             let elapsedTime = Date().timeIntervalSince(lastStep.stairStepDate)
             let remainingTime = max(0, 300 - elapsedTime)
-            
+
             if remainingTime <= 0 {
                 isButtonEnabled = true
             } else {
@@ -489,7 +509,7 @@ struct MainViewPhase3: View {
             isButtonEnabled = true
         }
     }
-    
+
     // MARK: - 시리얼 정보를 통해 계단 찾기
     func findNFCSerialNuber(serialNumber: String) -> (String, Int) {
         if gariStairs.contains(where: { $0.serialNumber == serialNumber }) {
@@ -500,46 +520,46 @@ struct MainViewPhase3: View {
             return ("지원되지 않는 NFC입니다", 0)
         }
     }
-    
+
     // MARK: - 오늘 계단 걷기 기록 횟수
     func countTodayStairSteps() -> Int {
         let calendar = Calendar.current
         let today = Date()
-        
+
         return stairSteps.filter { stairStep in
             let isToday = calendar.isDate(stairStep.stairStepDate, inSameDayAs: today)
             return isToday
         }.count
     }
-    
+
     // MARK: - 이번달 계단 걷기 기록 횟수
     func countThisMonthStairSteps() -> Int {
         let calendar = Calendar.current
         let startOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: Date()))!
         let startOfNextMonth = calendar.date(byAdding: .month, value: 1, to: startOfMonth)!
-        
+
         return stairSteps.filter { stairStep in
             stairStep.stairStepDate >= startOfMonth && stairStep.stairStepDate < startOfNextMonth
         }.count
     }
-    
+
     // MARK: - NFC 주간 점수 계산
     func weeklyScore(from data: [StairStepModel], currentDate: Date = Date()) -> Int {
         let calendar = Calendar.current
         var startOfWeek = currentDate
-        
+
         while calendar.component(.weekday, from: startOfWeek) != 7 {
             startOfWeek = calendar.date(byAdding: .day, value: -1, to: startOfWeek)!
         }
         startOfWeek = calendar.startOfDay(for: startOfWeek)
-        
+
         let totalScore = data
             .filter { $0.stairStepDate >= startOfWeek && $0.stairStepDate <= currentDate }
             .reduce(0) { $0 + $1.stairNum }
-        
+
         return totalScore
     }
-    
+
     // MARK: - 이번주 총 점수 계산 후 순위표 업데이트하기
     func updateLeaderboard() {
         let weeklyNfcPoint = weeklyScore(from: stairSteps)
@@ -550,14 +570,14 @@ struct MainViewPhase3: View {
             await gameCenterManager.submitPoint(point: Int(weeklyNfcPoint) + Int(weeklyStairPoint))
         }
     }
-    
+
     // MARK: UserDefaults에 currentStatus 저장하기
     func saveCurrentStatus() {
         if let encodedData = try? JSONEncoder().encode(currentStatus) {
             UserDefaults.standard.setValue(encodedData, forKey: "currentStatus")
         }
     }
-    
+
     // MARK: UserDefaults에 저장한 currentStatus 반환하기
     func loadCurrentStatus() -> CurrentStatus {
         if let loadedData = UserDefaults.standard.data(forKey: "currentStatus") {
@@ -568,7 +588,7 @@ struct MainViewPhase3: View {
         print("Error: UserDefaults에서 이전 currentStatus 불러오기 실패.")
         return CurrentStatus()
     }
-    
+
     // MARK: 뷰에 접근했을 때 현재 레벨과 lastCompletedLevels와 비교해서 완료한 레벨 날짜를 기록하고 성취 전달
     func compareCurrentLevelAndUpdate() {
         if currentStatus.currentLevel.level - (completedLevels.lastUpdatedLevel) > 1 { // 만약 업데이트 되지 않은 레벨이 있다면,
@@ -581,14 +601,14 @@ struct MainViewPhase3: View {
         for i in [1, 10, 20, 36] { // 40, 400, 800, 1440층에서 환경 성취 달성
             if (currentStatus.getTotalStaircase() / 40) >= i { // 특정 층 이상으로 계단을 걸었다면,
                 if i > lastElectricAchievementKwh { // 특정 층을 달성하고 성취를 아직 받지 않았다면,
-//                    print("\(i)kWh 틈새 전기 절약 성취 달성")
+                    //                    print("\(i)kWh 틈새 전기 절약 성취 달성")
                     gameCenterManager.reportCompletedAchievement(achievementId: "electricBird\(i)")
                     lastElectricAchievementKwh = i
                 }
             }
         }
     }
-    
+
     // MARK: 오프라인 환경에서 받지 못한 레벨, 입단증, 환경 관련 성취 다시 주기
     func reportMissedAchievement() {
         if isHealthKitAuthorized {
@@ -605,7 +625,7 @@ struct MainViewPhase3: View {
             }
         }
     }
-    
+
     // MARK: 헬스킷 업데이트 주기마다 레벨 관련 변경하고, 게임센터 업데이트하는 것 모두 모은 함수
     func updateLevelsAndGameCenter() {
         currentStatus.updateStaircase(Int(service.TotalFlightsClimbedSinceAuthorization))
@@ -613,7 +633,7 @@ struct MainViewPhase3: View {
         compareCurrentLevelAndUpdate()
         updateLeaderboard()
     }
-    
+
     // MARK: 만렙 이후 리셋하기
     func resetLevel() {
         currentStatus.updateStaircase(0)
@@ -629,7 +649,7 @@ struct MainViewPhase3: View {
         collectedItems.resetItems()
         service.fetchAndSaveFlightsClimbedSinceButtonPress()
     }
-
+    
     // MARK: Level 관련 테스트 프린트문
     func printAll() {
         print("누적 층계: \(currentStatus.getTotalStaircase())")
@@ -645,6 +665,242 @@ struct MainViewPhase3: View {
         print("nfc 태깅 횟수: \(stairSteps.count)")
     }
 }
+
+
+// MARK: - 1번 째 뷰
+struct ResetNavigationView: View {
+    @Binding var isResetViewPresented: Bool // FullScreen 상태를 상위 뷰와 공유
+    
+    var body: some View {
+        NavigationStack {
+            VStack {
+                
+                Text("최고 레벨 달성!")
+                    .font(.system(size: 12))
+                    .foregroundColor(.white) // 텍스트 색상 설정
+                    .padding(4) // 내부 여백 추가
+                    .background(
+                        Color.primaryColor // 배경색 설정
+                            .cornerRadius(4) // 배경의 모서리 둥글게
+                    )
+                
+                Text("틈새를 속세로!\n이제는 하산할 시간")
+                    .multilineTextAlignment(.center)
+                    .font(.title)
+                    .fontWeight(.bold)
+                
+                Text("하산하기를 완료하면\n틈새와 함께 모은 기록들은 초기화가 됩니다.")
+                    .multilineTextAlignment(.center)
+                    .font(.body)
+                
+                Image("Down1")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 256)
+                
+                Spacer()
+                
+                NavigationLink(destination: DetailView(isResetViewPresented: $isResetViewPresented)) {
+                    Text("설명보기")
+                        .padding()
+                        .frame(width: 352, height: 50)
+                        .background(Color.primaryColor)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button(action: {
+                            isResetViewPresented = false // 닫기 버튼으로 Sheet 해제
+                        }) {
+                            Image(systemName: "x.circle.fill")
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+// MARK: - 2번 째 뷰
+struct DetailView: View {
+    @Binding var isResetViewPresented: Bool
+    
+    var body: some View {
+        VStack {
+            Text("그 동안 모은 건\n틈새 하산 선물로!")
+                .multilineTextAlignment(.center)
+                .font(.title)
+                .fontWeight(.bold)
+            
+            Text("틈새와 함께 모은 약재, 뱃지, 점수는\n하산이 완료되면 모두 초기화가 됩니다.")
+                .multilineTextAlignment(.center)
+                .font(.body)
+            
+            Image("Down2")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 348)
+            
+            Spacer()
+            
+            NavigationLink(destination: DetailView2(isResetViewPresented: $isResetViewPresented)) {
+                Text("다음으로")
+                    .padding()
+                    .frame(width: 352, height: 50)
+                    .background(Color.primaryColor)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+            }
+        }
+        //        .navigationTitle("상세 페이지")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    isResetViewPresented = false // 닫기 버튼으로 Sheet 해제
+                }) {
+                    Image(systemName: "x.circle.fill")
+                        .foregroundColor(.secondary)
+                }
+            }
+        }
+    }
+}
+
+
+// MARK: - 3번 째 뷰
+struct DetailView2: View {
+    @Binding var isResetViewPresented: Bool
+    
+    var body: some View {
+        VStack {
+            Text("역대 하산 기록은\n남아있어요!")
+                .multilineTextAlignment(.center)
+                .font(.title)
+                .fontWeight(.bold)
+            
+            Text("입단증의 뒤집으면\n역대 하산 기록을 볼 수 있습니다.")
+                .multilineTextAlignment(.center)
+                .font(.body)
+            
+            Image("Down3")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 348)
+            
+            Spacer()
+            
+            NavigationLink(destination: DetailView3(isResetViewPresented: $isResetViewPresented)) {
+                Text("다음으로")
+                    .padding()
+                    .frame(width: 352, height: 50)
+                    .background(Color.primaryColor)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+            }
+        }
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    isResetViewPresented = false // 닫기 버튼으로 Sheet 해제
+                }) {
+                    Image(systemName: "x.circle.fill")
+                        .foregroundColor(.secondary)
+                }
+            }
+        }
+    }
+}
+
+// MARK: - 4번 째 뷰 (입력창)
+struct DetailView3: View {
+    @Binding var isResetViewPresented: Bool
+    let gameCenterManager = GameCenterManager()
+    let service = HealthKitService()
+    
+    @State private var userInput = ""
+    @State private var errorMessage = ""
+    
+    private let correctText = "건강해라"
+    
+    var body: some View {
+        VStack {
+            Text("틈새를 하산시킬까요?")
+                .multilineTextAlignment(.center)
+                .font(.title)
+                .fontWeight(.bold)
+            
+            Text("진행하려면 ‘\(correctText)’를 입력하세요.")
+                .multilineTextAlignment(.center)
+                .font(.body)
+            
+            
+            //            TextField("건강해라", text: $userInput)
+            //                .textFieldStyle(RoundedBorderTextFieldStyle())
+            TextField("건강해라", text: $userInput)
+                .padding()
+                .background(Color.secondary.opacity(0.2)) // 배경색
+                .cornerRadius(10) // 둥근 모서리
+            //                .overlay(
+            //                    RoundedRectangle(cornerRadius: 10) // 테두리 추가
+            //                        .stroke(Color.blue, lineWidth: 2)
+            //                )
+                .foregroundColor(.primary) // 텍스트 색상
+                .padding(10)
+            
+            if !errorMessage.isEmpty {
+                Text(errorMessage)
+                    .foregroundColor(.red)
+                    .font(.footnote)
+                
+            }
+            Text("달성 뱃지, 약재, 리더보드 점수는 영구적으로 사라집니다.\n하산 기록(날짜, 횟수)는 입단증을 통해 확인할 수 있습니다.")
+                .font(.footnote)
+                .multilineTextAlignment(.center)
+                .foregroundColor(.secondary)
+            
+            
+            Spacer()
+            
+            NavigationLink(destination: MainViewPhase3()
+                .onAppear {
+                    service.fetchAndSaveFlightsClimbedSinceButtonPress()
+                }) {
+                    Text("하산하기")
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(userInput == correctText ? Color.primaryColor : Color.gray)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                .disabled(userInput != correctText)
+                .padding(.top)
+        }
+        .padding()
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    isResetViewPresented = false
+                }) {
+                    Image(systemName: "x.circle.fill")
+                        .foregroundColor(.secondary)
+                }
+            }
+        }
+        .onChange(of: userInput) { newValue in
+            if newValue != correctText {
+                errorMessage = "틈새에게 마지막으로 덕담인 ‘건강해라'를 입력해주세요."
+            } else {
+                errorMessage = ""
+            }
+        }
+    }
+}
+
 
 
 #Preview {
