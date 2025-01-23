@@ -357,7 +357,7 @@ struct MainViewPhase3: View {
                     .background(getDifficultyPaleColor(difficulty: currentStatus.currentLevel.difficulty), in: RoundedRectangle(cornerRadius: 4))
             }
             .padding(.top, 32)
-
+            
             Text("\(currentStatus.currentLevel.maxStaircase + 1)층 올라가기")
                 .font(.system(size: 20, weight: .semibold))
                 .padding(.top, 8)
@@ -368,19 +368,21 @@ struct MainViewPhase3: View {
 
             Spacer()
 
-            // MARK: 임시 리셋 버튼
-            //                     if isHighestLevel {
-            Button {
-                isResetViewPresented = true
-            } label: {
-                HStack() {
-                    Image(systemName: "mountain.2.fill")
-                    Text("리셋하기")
+//            // MARK: 임시 리셋 버튼
+            if isHighestLevel {
+                Button {
+                    isResetViewPresented = true
+                } label: {
+                    HStack() {
+                        Image(systemName: "mountain.2.fill")
+                        Text("리셋하기")
+                    }
+                    .padding(.vertical, 7)
+                    .padding(.horizontal, 14)
+                    .foregroundStyle(Color.white)
+                    .background(Color(hex: 0x864035), in: RoundedRectangle(cornerRadius: 30))
                 }
-                .padding(.vertical, 7)
-                .padding(.horizontal, 14)
-                .foregroundStyle(Color.white)
-                .background(Color(hex: 0x864035), in: RoundedRectangle(cornerRadius: 30))
+                Spacer()
             }
         }
         .fullScreenCover(isPresented: $isResetViewPresented) {
