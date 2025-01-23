@@ -12,11 +12,11 @@ struct ClimbingRecord: Identifiable, Codable {
     let round: Int                     // 회차
     let descentTime: TimeInterval      // 하산에 걸린 시간 (초 단위)
     let descentDate: Date              // 하산 날짜
-    let floorsClimbed: Int             // 오른 계단 층수
+    let floorsClimbed: Float             // 오른 계단 층수
 }
 
 class ClimbingManager: ObservableObject {
-    @Published private(set) var records: [ClimbingRecord] = [] // 기록 배열
+    @Published var records: [ClimbingRecord] = [] // 기록 배열
     private var currentRound: Int = 1 // 회차 관리 변수
     
     private let userDefaultsKey = "ClimbingRecords" // 저장소 키
@@ -26,7 +26,7 @@ class ClimbingManager: ObservableObject {
     }
 
     // 기록 추가
-    func addRecord(descentTime: TimeInterval, descentDate: Date, floorsClimbed: Int) {
+    func addRecord(descentTime: TimeInterval, descentDate: Date, floorsClimbed: Float) {
         let newRecord = ClimbingRecord(
             round: currentRound,
             descentTime: descentTime,
