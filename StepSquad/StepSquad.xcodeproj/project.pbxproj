@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B051B132D420AD400E7EC73 /* RiveRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = 1B051B122D420AD400E7EC73 /* RiveRuntime */; };
 		BDC8DCA52CF5E44900C74796 /* StepSquadStickers.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = BDC8DC9E2CF5E44800C74796 /* StepSquadStickers.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		BDE8C0A82CFC761D0060CDA7 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDE8C0A72CFC761D0060CDA7 /* WidgetKit.framework */; };
 		BDE8C0AA2CFC761D0060CDA7 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDE8C0A92CFC761D0060CDA7 /* SwiftUI.framework */; };
@@ -102,6 +103,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B051B132D420AD400E7EC73 /* RiveRuntime in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,6 +195,7 @@
 			);
 			name = StepSquad;
 			packageProductDependencies = (
+				1B051B122D420AD400E7EC73 /* RiveRuntime */,
 			);
 			productName = AppName;
 			productReference = BDD309C22CBA62C3003EDC28 /* StepSquad.app */;
@@ -721,6 +724,14 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1B051B122D420AD400E7EC73 /* RiveRuntime */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1BA96D6F2D4202E50002D27D /* XCRemoteSwiftPackageReference "rive-ios" */;
+			productName = RiveRuntime;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BDD309BA2CBA62C3003EDC28 /* Project object */;
 }
