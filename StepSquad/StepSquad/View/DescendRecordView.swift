@@ -79,7 +79,7 @@ struct DescendRecordView: View {
                         in: RoundedRectangle(cornerRadius: 8))
             .padding(.top, 19)
 
-            CustomTableView()
+            CustomTableView(manager: ClimbingManager())
                 .padding(.top, 12)
 
             Spacer()

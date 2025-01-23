@@ -817,6 +817,9 @@ struct DetailView2: View {
 
 // MARK: - 4번 째 뷰 (입력창)
 struct DetailView3: View {
+    
+    @StateObject private var manager = ClimbingManager()
+    
     @Binding var isResetViewPresented: Bool
     let gameCenterManager = GameCenterManager()
     let service = HealthKitService()
