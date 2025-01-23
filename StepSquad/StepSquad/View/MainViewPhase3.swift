@@ -308,59 +308,81 @@ struct MainViewPhase3: View {
 
     private var LevelUpView: some View {
         VStack(spacing: 0) {
-            ZStack() {
-                VStack(spacing: 0) {
-                    HStack() {
-                        Spacer()
-
-                        ZStack() {
-                            Image("Union")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 48, height: 60)
-                            VStack() {
-                                Image(currentStatus.currentLevel.itemImage + "_TextImage")
+            if isHighestLevel {
+                Spacer()
+                Image("Down1")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 256, height: 256)
+            } else {
+                ZStack() {
+                    VStack(spacing: 0) {
+                        HStack() {
+                            Spacer()
+                            
+                            ZStack() {
+                                Image("Union")
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(width: 20, height: 20)
-
-                                Spacer().frame(maxHeight: 13)
+                                    .frame(width: 48, height: 60)
+                                VStack() {
+                                    Image(currentStatus.currentLevel.itemImage + "_TextImage")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 20, height: 20)
+                                    
+                                    Spacer().frame(maxHeight: 13)
+                                }
                             }
                         }
+                        Spacer()
                     }
-                    Spacer()
+                    
+                    VStack() {
+                        Spacer()
+                        
+                        Image(currentStatus.progressImage)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 220, height: 256)
+                    }
                 }
-
-                VStack() {
-                    Spacer()
-
-                    Image(currentStatus.progressImage)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 220, height: 256)
-                }
+                .frame(width: 220, height: 256)
+                .padding(.top, 16)
             }
-            .frame(width: 220, height: 256)
-            .padding(.top, 16)
 
             HStack(spacing: 4) {
-                Text(currentStatus.currentLevel.difficulty.rawValue)
-                    .font(.system(size: 12))
-                    .foregroundStyle(Color.white)
-                    .padding(4)
-                    .background(getDifficultyColor(difficulty: currentStatus.currentLevel.difficulty), in: RoundedRectangle(cornerRadius: 4))
+                if isHighestLevel {
+                    Text("최고 레벨")
+                        .font(.system(size: 12))
+                        .foregroundStyle(Color.white)
+                        .padding(4)
+                        .background(getDifficultyColor(difficulty: .easy), in: RoundedRectangle(cornerRadius: 4))
+                } else {
+                    Text(currentStatus.currentLevel.difficulty.rawValue)
+                        .font(.system(size: 12))
+                        .foregroundStyle(Color.white)
+                        .padding(4)
+                        .background(getDifficultyColor(difficulty: currentStatus.currentLevel.difficulty), in: RoundedRectangle(cornerRadius: 4))
 
-                Text("레벨 \(currentStatus.currentLevel.level)")
-                    .font(.system(size: 12))
-                    .foregroundStyle(getDifficultyColor(difficulty: currentStatus.currentLevel.difficulty))
-                    .padding(4)
-                    .background(getDifficultyPaleColor(difficulty: currentStatus.currentLevel.difficulty), in: RoundedRectangle(cornerRadius: 4))
+                    Text("레벨 \(currentStatus.currentLevel.level)")
+                        .font(.system(size: 12))
+                        .foregroundStyle(getDifficultyColor(difficulty: currentStatus.currentLevel.difficulty))
+                        .padding(4)
+                        .background(getDifficultyPaleColor(difficulty: currentStatus.currentLevel.difficulty), in: RoundedRectangle(cornerRadius: 4))
+                }
             }
             .padding(.top, 32)
             
-            Text("\(currentStatus.currentLevel.maxStaircase + 1)층 올라가기")
-                .font(.system(size: 20, weight: .semibold))
-                .padding(.top, 8)
+            if isHighestLevel {
+                Text("이제 틈새를 속세로!")
+                    .font(.system(size: 20, weight: .semibold))
+                    .padding(.top, 8)
+            } else {
+                Text("\(currentStatus.currentLevel.maxStaircase + 1)층 올라가기")
+                    .font(.system(size: 20, weight: .semibold))
+                    .padding(.top, 8)
+            }
             Text("\(currentStatus.getTotalStaircase())층 올라가는 중")
                 .font(.system(size: 12))
                 .foregroundStyle(Color(hex: 0x3C3C43))
@@ -375,7 +397,7 @@ struct MainViewPhase3: View {
                 } label: {
                     HStack() {
                         Image(systemName: "mountain.2.fill")
-                        Text("리셋하기")
+                        Text("하산하기")
                     }
                     .padding(.vertical, 7)
                     .padding(.horizontal, 14)
