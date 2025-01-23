@@ -10,9 +10,9 @@ import Foundation
 struct ClimbingRecord: Identifiable, Codable {
     var id: UUID = UUID()              // 각 기록의 고유 ID
     let round: Int                     // 회차
-    let descentTime: TimeInterval      // 하산에 걸린 시간 (초 단위)
     let descentDate: Date              // 하산 날짜
     let floorsClimbed: Float             // 오른 계단 층수
+    let dDay: Int
 }
 
 class ClimbingManager: ObservableObject {
@@ -26,12 +26,12 @@ class ClimbingManager: ObservableObject {
     }
 
     // 기록 추가
-    func addRecord(descentTime: TimeInterval, descentDate: Date, floorsClimbed: Float) {
+    func addRecord(descentDate: Date, floorsClimbed: Float, dDay: Int) {
         let newRecord = ClimbingRecord(
             round: currentRound,
-            descentTime: descentTime,
             descentDate: descentDate,
-            floorsClimbed: floorsClimbed
+            floorsClimbed: floorsClimbed,
+            dDay: dDay
         )
         records.append(newRecord)
         currentRound += 1 // 회차 증가

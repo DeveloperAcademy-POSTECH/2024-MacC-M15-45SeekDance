@@ -10,8 +10,7 @@ import SwiftUI
 struct CustomTableView: View {
     
     @ObservedObject var manager: ClimbingManager
-    //    @StateObject private var manager = ClimbingManager()
-    
+ 
     let headers = ["회차", "층수", "시간", "날짜"]
     
     var body: some View {
@@ -84,7 +83,7 @@ struct CustomTableView: View {
                             .foregroundColor(Color(hex: 0x3A542B))
                         
                         // 시간
-                        Text("\(record.descentTime, specifier: "%.1f")")
+                        Text("\(record.dDay)")
                             .font(.system(size: 13))
                             .frame(maxWidth: .infinity)
                             .padding(10)

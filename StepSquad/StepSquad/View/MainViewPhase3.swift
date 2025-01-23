@@ -202,7 +202,7 @@ struct MainViewPhase3: View {
                                     EntryCertificateView(userPlayerImage: userProfileImage, nickName: gameCenterManager.loadLocalPlayerName())
                                         .rotation3DEffect(.degrees(isCardFlipped ? 0 : -90), axis: (x: 0, y: 1, z: 0))
                                         .animation(isCardFlipped ? .linear.delay(0.35) : .linear, value: isCardFlipped)
-                                    DescendRecordView()
+                                    DescendRecordView(manager: ClimbingManager())
                                         .rotation3DEffect(.degrees(isCardFlipped ? 90 : 0), axis: (x: 0, y: 1, z: 0))
                                         .animation(isCardFlipped ? .linear : .linear.delay(0.35), value: isCardFlipped)
                                 }
@@ -254,13 +254,13 @@ struct MainViewPhase3: View {
                 }
                 .ignoresSafeArea()
                 // MARK: - scenePhase 연결
-                .onChange(of: scenePhase) {
-                    if scenePhase == .active {
-                        service.getWeeklyStairDataAndSave()
-                        service.fetchAndSaveFlightsClimbedSinceAuthorization()
-                        updateLevelsAndGameCenter()
-                    }
-                }
+//                .onChange(of: scenePhase) {
+//                    if scenePhase == .active {
+//                        service.getWeeklyStairDataAndSave()
+//                        service.fetchAndSaveFlightsClimbedSinceAuthorization()
+//                        updateLevelsAndGameCenter()
+//                    }
+//                }
             }
             .navigationBarBackButtonHidden(true)
             .tint(Color(hex: 0x8BC766))
