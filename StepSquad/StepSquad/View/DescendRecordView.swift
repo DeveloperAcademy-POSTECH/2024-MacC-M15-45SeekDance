@@ -29,9 +29,9 @@ struct DescendRecordView: View {
                     
                     let floorsClimbed = service.getSavedFlightsClimbedFromDefaults()
                     
-//                    let dDay = loadDDayFromDefaults()
+                    let dDay = loadDDayFromDefaults()
                     
-                    manager.addRecord(descentDate: Date(), floorsClimbed: Float(floorsClimbed), dDay: 2)
+                    manager.addRecord(descentDate: Date(), floorsClimbed: Float(floorsClimbed), dDay: Int(dDay))
                 } label: {
                     Text("로그 저장")
                         .font(Font.custom("SF Pro", size: 13))
@@ -135,6 +135,14 @@ struct DescendRecordView: View {
             sharedImage = uiImage
             isSharing = true
         }
+    }
+    
+    // MARK: - dDay 가져오기
+    func loadDDayFromDefaults() -> Int {
+        let userDefaults = UserDefaults.standard
+        let storedDDay = userDefaults.integer(forKey: "DDayValue") // 기본값은 0
+        print("UserDefaults에서 가져온 dDay 값: \(storedDDay)")
+        return storedDDay
     }
     
 }

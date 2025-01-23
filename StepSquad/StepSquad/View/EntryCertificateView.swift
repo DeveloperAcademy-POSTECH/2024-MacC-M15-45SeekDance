@@ -169,13 +169,7 @@ struct EntryCertificateView: View {
         print("dDay (\(dDay))가 UserDefaults에 저장되었습니다.")
     }
     
-    // MARK: - dDay 가져오기
-    func loadDDayFromDefaults() -> Int {
-        let userDefaults = UserDefaults.standard
-        let storedDDay = userDefaults.integer(forKey: "DDayValue") // 기본값은 0
-        print("UserDefaults에서 가져온 dDay 값: \(storedDDay)")
-        return storedDDay
-    }
+
     
     func captureAndShare() {
         let renderer = ImageRenderer(content: self)

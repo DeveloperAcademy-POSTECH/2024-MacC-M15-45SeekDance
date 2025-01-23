@@ -10,8 +10,8 @@ import SwiftUI
 struct CustomTableView: View {
     
     @ObservedObject var manager: ClimbingManager
- 
-    let headers = ["회차", "층수", "시간", "날짜"]
+    
+    let headers = ["회차", "층수", "일자", "날짜"]
     
     var body: some View {
         VStack(spacing: 0) {
@@ -75,7 +75,7 @@ struct CustomTableView: View {
                             .foregroundColor(Color(hex: 0x3A542B))
                         
                         // 층수
-                        Text("\(record.floorsClimbed)")
+                        Text("\(Int(record.floorsClimbed))")
                             .font(.system(size: 13))
                             .frame(maxWidth: .infinity)
                             .padding(10)
@@ -108,7 +108,7 @@ struct CustomTableView: View {
 extension Date {
     var formattedDate: String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy.MM.dd"
+        formatter.dateFormat = "yy.MM.dd"
         return formatter.string(from: self)
     }
 }
@@ -124,7 +124,7 @@ struct CustomTableView_Previews: PreviewProvider {
 struct RoundedCorner: Shape {
     var radius: CGFloat = .infinity
     var corners: UIRectCorner = .allCorners
-
+    
     func path(in rect: CGRect) -> Path {
         let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
         return Path(path.cgPath)
