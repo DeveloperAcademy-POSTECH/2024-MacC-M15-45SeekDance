@@ -11,7 +11,6 @@ import RiveRuntime
 struct RiveExampleView: View {
     var body: some View {
         VStack {
-            RiveViewModel(fileName: "cool_rive_animation").view()
             RiveViewModel(
                 webURL: "https://cdn.rive.app/animations/off_road_car_v7.riv"
             ).view()
