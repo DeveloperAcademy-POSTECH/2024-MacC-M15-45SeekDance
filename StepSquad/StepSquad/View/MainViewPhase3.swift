@@ -360,6 +360,7 @@ struct MainViewPhase3: View {
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 48, height: 60)
+                                
                                 VStack() {
                                     Image(currentStatus.currentLevel.itemImage + "_TextImage")
                                         .resizable()
@@ -416,7 +417,6 @@ struct MainViewPhase3: View {
         .fullScreenCover(isPresented: $isResetViewPresented) {
             ResetNavigationView(isResetViewPresented: $isResetViewPresented)
         }
-        //                 }
         .onAppear {
             // MARK: 일단 임시로 onAppear 사용해서 권한 받자마자 뷰를 그릴 수 있도록 임시조치함. 단, onAppear를 사용하면 뷰에 접속 할때마다 갱신되므로 사실 상, pulltoRefreash가 의미 없어짐.
             gameCenterManager.authenticateUser()
