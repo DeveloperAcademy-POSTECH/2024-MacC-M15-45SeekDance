@@ -6,10 +6,26 @@
 //
 
 import SwiftUI
+import EffectsLibrary
 
 struct NewBirdView: View {
     var body: some View {
         ZStack {
+            ConfettiView(config:
+                ConfettiConfig(
+                    content: [
+                        .image(Image("1_Gamcho").asUIImage(), .white, 0.02),
+                        .image(Image("2_Daechu").asUIImage(), .white, 0.02),
+                        .image(Image("3_Saenggang").asUIImage(), .white, 0.02),
+                        .image(Image("4_Doraji").asUIImage(), .white, 0.02),
+                        .image(Image("8_Chik").asUIImage(), .white, 0.02),
+                        .image(Image("9_Oksususuyeom").asUIImage(), .white, 0.02),
+                        .image(Image("10_Insam").asUIImage(), .white, 0.02),
+                        .image(Image("12_Gugija").asUIImage(), .white, 0.02),
+                        .image(Image("13_Sansuyu").asUIImage(), .white, 0.02),
+                    ]
+                )
+            )
             VStack {
                 Spacer()
                 VStack {
@@ -24,9 +40,9 @@ struct NewBirdView: View {
                     Text("함께 오른 틈새가")
                     Text("하산을 했어요!")
                 }
-                    .multilineTextAlignment(.center)
-                    .font(.title)
-                    .fontWeight(.bold)
+                .multilineTextAlignment(.center)
+                .font(.title)
+                .fontWeight(.bold)
                 Image("Down1")
                     .resizable()
                     .scaledToFit()
@@ -39,4 +55,37 @@ struct NewBirdView: View {
 
 #Preview {
     NewBirdView()
+}
+
+extension View {
+    // This function changes our View to UIView, then calls another function
+    // to convert the newly-made UIView to a UIImage.
+    public func asUIImage() -> UIImage {
+        let controller = UIHostingController(rootView: self)
+        
+        // Set the background to be transparent incase the image is a PNG, WebP or (Static) GIF
+        controller.view.backgroundColor = .clear
+        
+        controller.view.frame = CGRect(x: 0, y: CGFloat(Int.max), width: 1, height: 1)
+        UIApplication.shared.windows.first!.rootViewController?.view.addSubview(controller.view)
+        
+        let size = controller.sizeThatFits(in: UIScreen.main.bounds.size)
+        controller.view.bounds = CGRect(origin: .zero, size: size)
+        controller.view.sizeToFit()
+        
+        // here is the call to the function that converts UIView to UIImage: `.asUIImage()`
+        let image = controller.view.asUIImage()
+        controller.view.removeFromSuperview()
+        return image
+    }
+}
+
+extension UIView {
+    // This is the function to convert UIView to UIImage
+    public func asUIImage() -> UIImage {
+        let renderer = UIGraphicsImageRenderer(bounds: bounds)
+        return renderer.image { rendererContext in
+            layer.render(in: rendererContext.cgContext)
+        }
+    }
 }
