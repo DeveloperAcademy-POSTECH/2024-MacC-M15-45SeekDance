@@ -118,7 +118,7 @@ struct MainViewPhase3: View {
                                               dismissButton: .default(Text("확인")))
                                     }
                             }
-                            .frame(width: 321, height: 524)
+                            .frame(width: 321, height: 484)
                             .background(Color.white)
                             .cornerRadius(16)
                             .padding(.top, 20)
@@ -309,28 +309,29 @@ struct MainViewPhase3: View {
     private var LevelUpView: some View {
         VStack(spacing: 0) {
             if isHighestLevel {
-                Spacer()
                 Image("Down1")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 256, height: 256)
-                Text("최고 레벨")
-                    .font(.system(size: 12))
-                    .foregroundStyle(Color.white)
-                    .padding(4)
-                    .background(getDifficultyColor(difficulty: .easy), in: RoundedRectangle(cornerRadius: 4))
-                Text("이제 틈새를 속세로!")
-                    .font(.system(size: 20, weight: .semibold))
-                    .padding(.top, 8)
-                Text("\(currentStatus.currentLevel.maxStaircase + 1)층 올라가기")
-                    .font(.system(size: 20, weight: .semibold))
-                    .padding(.top, 8)
-                Text("\(currentStatus.getTotalStaircase())층 올라가는 중")
-                    .font(.system(size: 12))
-                    .foregroundStyle(Color(hex: 0x3C3C43))
-                    .padding(.top, 4)
+                    .padding(.top, 16)
                 
-                Spacer()
+                VStack(spacing: 0) {
+                    Text("최고 레벨")
+                        .font(.system(size: 12))
+                        .foregroundStyle(Color.white)
+                        .padding(4)
+                        .background(getDifficultyColor(difficulty: .easy), in: RoundedRectangle(cornerRadius: 4))
+                    
+                    Text("이제 틈새를 속세로!")
+                        .font(.system(size: 20, weight: .semibold))
+                        .padding(.top, 8)
+                    
+                    Text("\(currentStatus.getTotalStaircase())층 올라가는 중")
+                        .font(.system(size: 12))
+                        .foregroundStyle(Color(hex: 0x3C3C43))
+                        .padding(.top, 4)
+                }
+                .padding(.top, 12)
                 
                 // MARK: 만렙일 때 보여주는 리셋 버튼
                 Button {
@@ -345,6 +346,8 @@ struct MainViewPhase3: View {
                     .foregroundStyle(Color.white)
                     .background(Color(hex: 0x864035), in: RoundedRectangle(cornerRadius: 30))
                 }
+                .padding(.top, 10)
+                
                 Spacer()
             } else {
                 ZStack() {
@@ -367,6 +370,7 @@ struct MainViewPhase3: View {
                                 }
                             }
                         }
+                        
                         Spacer()
                     }
                     
@@ -381,6 +385,7 @@ struct MainViewPhase3: View {
                 }
                 .frame(width: 220, height: 256)
                 .padding(.top, 16)
+                
                 HStack(spacing: 4) {
                     Text(currentStatus.currentLevel.difficulty.rawValue)
                         .font(.system(size: 12))
@@ -395,9 +400,11 @@ struct MainViewPhase3: View {
                         .background(getDifficultyPaleColor(difficulty: currentStatus.currentLevel.difficulty), in: RoundedRectangle(cornerRadius: 4))
                 }
                 .padding(.top, 32)
+                
                 Text("\(currentStatus.currentLevel.maxStaircase + 1)층 올라가기")
                     .font(.system(size: 20, weight: .semibold))
                     .padding(.top, 8)
+                
                 Text("\(currentStatus.getTotalStaircase())층 올라가는 중")
                     .font(.system(size: 12))
                     .foregroundStyle(Color(hex: 0x3C3C43))
