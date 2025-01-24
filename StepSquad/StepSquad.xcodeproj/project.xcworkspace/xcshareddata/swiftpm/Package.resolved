@@ -1,0 +1,15 @@
+{
+  "originHash" : "cc8799570f587371c0c4a36e5ff972da497918c89c3cb834226e01d9a22416a9",
+  "pins" : [
+    {
+      "identity" : "effects-library",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/GetStream/effects-library",
+      "state" : {
+        "revision" : "09ebd8e7536aa6dd70a48042244524e895ccd2aa",
+        "version" : "1.0.0"
+      }
+    }
+  ],
+  "version" : 3
+}
