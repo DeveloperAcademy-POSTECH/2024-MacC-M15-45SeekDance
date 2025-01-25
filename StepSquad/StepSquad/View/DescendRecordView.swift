@@ -13,9 +13,6 @@ struct DescendRecordView: View {
     @State private var isButtonClicked: Bool = false
     @State private var infoButtonClicked: Bool = false
     
-    @ObservedObject var service = HealthKitService()
-    let manager: ClimbingManager
-    
     var body: some View {
         VStack() {
             HStack(spacing: 0) {
@@ -24,20 +21,6 @@ struct DescendRecordView: View {
                     .foregroundStyle(Color(hex: 0x4C6D38))
                 
                 Spacer()
-                
-                Button {
-                    
-                    let floorsClimbed = service.getSavedFlightsClimbedFromDefaults()
-                    
-                    let dDay = loadDDayFromDefaults()
-                    
-                    manager.addRecord(descentDate: Date(), floorsClimbed: Float(floorsClimbed), dDay: Int(dDay))
-                } label: {
-                    Text("로그 저장")
-                        .font(Font.custom("SF Pro", size: 13))
-                    
-                }
-                
                 
                 if !isButtonClicked {
                     Button {
@@ -136,17 +119,8 @@ struct DescendRecordView: View {
             isSharing = true
         }
     }
-    
-    // MARK: - dDay 가져오기
-    func loadDDayFromDefaults() -> Int {
-        let userDefaults = UserDefaults.standard
-        let storedDDay = userDefaults.integer(forKey: "DDayValue") // 기본값은 0
-        print("UserDefaults에서 가져온 dDay 값: \(storedDDay)")
-        return storedDDay
-    }
-    
 }
 
 #Preview {
-    DescendRecordView(manager: ClimbingManager())
+    DescendRecordView()
 }
