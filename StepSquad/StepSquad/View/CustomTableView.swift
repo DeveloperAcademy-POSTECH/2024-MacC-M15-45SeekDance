@@ -11,7 +11,7 @@ struct CustomTableView: View {
     
     @ObservedObject var manager: ClimbingManager
     
-    let headers = ["회차", "층수", "일자", "날짜"]
+    let headers = ["회차", "층수", "일자", "하산 일"]
     
     var body: some View {
         VStack(spacing: 0) {
