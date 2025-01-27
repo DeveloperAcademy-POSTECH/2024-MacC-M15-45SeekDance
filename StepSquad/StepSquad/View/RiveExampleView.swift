@@ -14,7 +14,7 @@ struct RiveExampleView: View {
 //            RiveViewModel(
 //                webURL: "https://cdn.rive.app/animations/off_road_car_v7.riv"
 //            ).view()
-            RiveViewModel(fileName: "stepsquad.riv").view()
+            RiveViewModel(fileName: "stepsquad").view()
         }
     }
 }

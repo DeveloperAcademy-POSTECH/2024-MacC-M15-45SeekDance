@@ -2,7 +2,8 @@
   "data" : [
     {
       "filename" : "stepsquad.riv",
-      "idiom" : "universal"
+      "idiom" : "universal",
+      "universal-type-identifier" : ""
     }
   ],
   "info" : {
