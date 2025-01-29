@@ -239,6 +239,7 @@ struct MainViewPhase3: View {
                             service.getWeeklyStairDataAndSave()
                             service.fetchAndSaveFlightsClimbedSinceAuthorization()
                             updateLevelsAndGameCenter()
+                            printAll()
                         }
                         .scrollIndicators(ScrollIndicatorVisibility.hidden)
                         .onAppear {
@@ -517,6 +518,7 @@ struct MainViewPhase3: View {
         gameCenterManager.authenticateUser()
         // MARK: 저장된 레벨 정보 불러오고 헬스킷 정보로 업데이트하기
         currentStatus = loadCurrentStatus()
+        printAll()
     }
     
     // MARK: - 타이머
@@ -670,18 +672,14 @@ struct MainViewPhase3: View {
     
     // MARK: 만렙 이후 리셋하기
     func resetLevel() {
+        print("--------resetLevel--------")
         currentStatus.updateStaircase(0)
         saveCurrentStatus()
         lastElectricAchievementKwh = 0
-        do {
-            try context.delete(model: StairStepModel.self)
-        } catch {
-            print("error: Failed to clear all StairStepModel data.")
-        }
         gameCenterManager.resetAchievements()
         completedLevels.resetLevels()
         collectedItems.resetItems()
-        service.fetchAndSaveFlightsClimbedSinceButtonPress()
+        printAll()
     }
     
     // MARK: Level 관련 테스트 프린트문
@@ -851,6 +849,7 @@ struct DetailView2: View {
 
 // MARK: - 4번 째 뷰 (입력창)
 struct DetailView3: View {
+    @Environment(\.modelContext) var context
     
     @StateObject private var manager = ClimbingManager()
     
@@ -908,14 +907,22 @@ struct DetailView3: View {
                     
 //                    // MARK: 순위표로 이동 입력창에 오타 없이 사용자가 입력하면 자동으로 실행되는 함수들
 //                    
-//                    // 1. 날짜 리셋 함수
-//                    service.fetchAndSaveFlightsClimbedSinceButtonPress()
-//                    
-//                    // 2. 하산 날짜, 계단 오른 층수, dDAY, 회차 더하기 함수
-//                    let floorsClimbed = service.getSavedFlightsClimbedFromDefaults()
-//                    let dDay = loadDDayFromDefaults()
-//                    
-//                    manager.addRecord(descentDate: Date(), floorsClimbed: Float(floorsClimbed), dDay: Int(dDay))
+                    // 1. 날짜 리셋 함수
+                    service.fetchAndSaveFlightsClimbedSinceButtonPress()
+                    
+                    // 2. 하산 날짜, 계단 오른 층수, dDAY, 회차 더하기 함수
+                    let floorsClimbed = service.getSavedFlightsClimbedFromDefaults()
+                    let dDay = loadDDayFromDefaults()
+                    
+                    manager.addRecord(descentDate: Date(), floorsClimbed: Float(floorsClimbed), dDay: Int(dDay))
+                    
+                    // 3. 현재 레벨, 획득 재료, nfc 태깅 정보, 성취 관련 리셋
+                    MainViewPhase3().resetLevel()
+                    do {
+                        try context.delete(model: StairStepModel.self)
+                    } catch {
+                        print("error: Failed to clear all StairStepModel data.")
+                    }
                     
                 }) {
                     Text("하산하기")
