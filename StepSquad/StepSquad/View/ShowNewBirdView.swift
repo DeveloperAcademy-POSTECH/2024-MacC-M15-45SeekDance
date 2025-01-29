@@ -10,6 +10,7 @@ import EffectsLibrary
 import RiveRuntime
 
 struct ShowNewBirdView: View {
+    @Binding var isShowNewBirdPresented: Bool
     @State var timeCount = 0
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @State var opacity1 = 1.0
@@ -17,15 +18,33 @@ struct ShowNewBirdView: View {
     @State var opacity3 = 0.0
     @State var opacity4 = 0.0
     @State var opacity5 = 0.0
+    @State var opacity6 = 1.0
     let viewChangeTime = 4
     var body: some View {
         ZStack {
             ItemsConfettiView()
                 .opacity(opacity1)
                 .animation(.linear(duration: 1), value: opacity1)
-            NewBirdView(viewChangeTime: viewChangeTime, opacityFirstText: $opacity3, opacitySecondText: $opacity4, opacityThirdText: $opacity5)
+            NewBirdView(isShowNewBirdPresented: $isShowNewBirdPresented, viewChangeTime: viewChangeTime, opacityFirstText: $opacity3, opacitySecondText: $opacity4, opacityThirdText: $opacity5)
                 .opacity(opacity2)
                 .animation(.linear(duration: 1), value: opacity2)
+            VStack {
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        isShowNewBirdPresented = false
+                    }) {
+                        Image(systemName: "x.circle.fill")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                            .foregroundColor(.secondary)
+                    }
+                    .padding(.horizontal, 35)
+                    .opacity(opacity6)
+                }
+                .padding(.top, 42)
+                Spacer()
+            }
         }
         .ignoresSafeArea()
         .onReceive(timer) { _ in
@@ -41,13 +60,14 @@ struct ShowNewBirdView: View {
             } else if timeCount == viewChangeTime + 6 {
                 opacity4 = 0.0
                 opacity5 = 1.0
+                opacity6 = 0.0
             }
         }
     }
 }
 
 #Preview {
-    ShowNewBirdView()
+    ShowNewBirdView(isShowNewBirdPresented: .constant(true))
 }
 
 struct ItemsConfettiView: View {
@@ -97,6 +117,7 @@ struct ItemsConfettiView: View {
 }
 
 struct NewBirdView: View {
+    @Binding var isShowNewBirdPresented: Bool
     let viewChangeTime: Int
     @Binding var opacityFirstText: Double
     @Binding var opacitySecondText: Double
@@ -124,7 +145,7 @@ struct NewBirdView: View {
             VStack {
                 Spacer()
                 Button(action: {
-                    // TODO: - 버튼 기능 설정
+                    isShowNewBirdPresented = false
                 }, label: {
                     HStack {
                         Text("새 틈새와 함께하기")
