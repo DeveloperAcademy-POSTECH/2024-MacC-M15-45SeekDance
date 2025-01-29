@@ -14,22 +14,33 @@ struct ShowNewBirdView: View {
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @State var opacity1 = 1.0
     @State var opacity2 = 0.0
-    let viewChangeTime = 3
+    @State var opacity3 = 0.0
+    @State var opacity4 = 0.0
+    @State var opacity5 = 0.0
+    let viewChangeTime = 4
     var body: some View {
         ZStack {
             ItemsConfettiView()
                 .opacity(opacity1)
                 .animation(.linear(duration: 1), value: opacity1)
-            NewBirdView()
+            NewBirdView(viewChangeTime: viewChangeTime, opacityFirstText: $opacity3, opacitySecondText: $opacity4, opacityThirdText: $opacity5)
                 .opacity(opacity2)
-                .animation(.linear(duration: 3), value: opacity2)
+                .animation(.linear(duration: 1), value: opacity2)
         }
         .ignoresSafeArea()
         .onReceive(timer) { _ in
             timeCount += 1
             if timeCount == viewChangeTime {
                 opacity1 = 0.0
+            } else if timeCount == viewChangeTime + 1 {
                 opacity2 = 1.0
+                opacity3 = 1.0
+            } else if timeCount == viewChangeTime + 3 {
+                opacity3 = 0.0
+                opacity4 = 1.0
+            } else if timeCount == viewChangeTime + 6 {
+                opacity4 = 0.0
+                opacity5 = 1.0
             }
         }
     }
@@ -86,13 +97,20 @@ struct ItemsConfettiView: View {
 }
 
 struct NewBirdView: View {
+    let viewChangeTime: Int
+    @Binding var opacityFirstText: Double
+    @Binding var opacitySecondText: Double
+    @Binding var opacityThirdText: Double
     var body: some View {
         ZStack {
             VStack {
                 ZStack(alignment: .top) {
                     FirstText()
+                        .opacity(opacityFirstText)
                     SecondText()
+                        .opacity(opacitySecondText)
                     ThirdText()
+                        .opacity(opacityThirdText)
                 }
                 .padding(.top, 158)
                 Spacer()
@@ -119,8 +137,10 @@ struct NewBirdView: View {
                 })
                 .padding(.bottom, 38)
                 .padding(.horizontal, 28)
+                .opacity(opacityThirdText)
             }
         }
+        .animation(.easeInOut(duration: 0.5))
     }
 }
 
