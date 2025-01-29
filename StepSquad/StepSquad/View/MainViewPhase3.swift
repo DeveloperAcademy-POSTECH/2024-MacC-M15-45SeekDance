@@ -254,13 +254,13 @@ struct MainViewPhase3: View {
                 }
                 .ignoresSafeArea()
                 // MARK: - scenePhase 연결
-                .onChange(of: scenePhase) {
-                    if scenePhase == .active {
-                        service.getWeeklyStairDataAndSave()
-                        service.fetchAndSaveFlightsClimbedSinceAuthorization()
-                        updateLevelsAndGameCenter()
-                    }
-                }
+                //                .onChange(of: scenePhase) {
+                //                    if scenePhase == .active {
+                //                        service.getWeeklyStairDataAndSave()
+                //                        service.fetchAndSaveFlightsClimbedSinceAuthorization()
+                //                        updateLevelsAndGameCenter()
+                //                    }
+                //                }
             }
             .navigationBarBackButtonHidden(true)
             .tint(Color(hex: 0x8BC766))
@@ -338,6 +338,7 @@ struct MainViewPhase3: View {
                     isResetViewPresented = true
                 } label: {
                     HStack() {
+
                         Image(systemName: "mountain.2.fill")
                         Text("하산하기")
                     }
@@ -384,6 +385,7 @@ struct MainViewPhase3: View {
                             .frame(width: 220, height: 256)
                     }
                 }
+
                 .frame(width: 220, height: 256)
                 .padding(.top, 16)
                 
@@ -412,6 +414,7 @@ struct MainViewPhase3: View {
                     .padding(.top, 4)
                 
                 Spacer()
+
             }
         }
         .fullScreenCover(isPresented: $isResetViewPresented) {
@@ -847,6 +850,9 @@ struct DetailView2: View {
 
 // MARK: - 4번 째 뷰 (입력창)
 struct DetailView3: View {
+    
+    @StateObject private var manager = ClimbingManager()
+    
     @Binding var isResetViewPresented: Bool
     let gameCenterManager = GameCenterManager()
     let service = HealthKitService()
@@ -897,7 +903,18 @@ struct DetailView3: View {
             
             NavigationLink(destination: MainViewPhase3()
                 .onAppear {
+                    
+                    // MARK: 순위표로 이동 입력창에 오타 없이 사용자가 입력하면 자동으로 실행되는 함수들
+                    
+                    // 1. 날짜 리셋 함수
                     service.fetchAndSaveFlightsClimbedSinceButtonPress()
+                    
+                    // 2. 하산 날짜, 계단 오른 층수, dDAY, 회차 더하기 함수
+                    let floorsClimbed = service.getSavedFlightsClimbedFromDefaults()
+                    let dDay = loadDDayFromDefaults()
+                    
+                    manager.addRecord(descentDate: Date(), floorsClimbed: Float(floorsClimbed), dDay: Int(dDay))
+                    
                 }) {
                     Text("하산하기")
                         .padding()
@@ -928,6 +945,14 @@ struct DetailView3: View {
                 errorMessage = ""
             }
         }
+    }
+    
+    // MARK: - dDay 가져오기
+    func loadDDayFromDefaults() -> Int {
+        let userDefaults = UserDefaults.standard
+        let storedDDay = userDefaults.integer(forKey: "DDayValue") // 기본값은 0
+        print("UserDefaults에서 가져온 dDay 값: \(storedDDay)")
+        return storedDDay
     }
 }
 

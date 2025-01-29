@@ -12,16 +12,16 @@ struct DescendRecordView: View {
     @State private var sharedImage: UIImage?
     @State private var isButtonClicked: Bool = false
     @State private var infoButtonClicked: Bool = false
-
+    
     var body: some View {
         VStack() {
             HStack(spacing: 0) {
                 Text("계단사랑단 하산 기록")
                     .font(Font.custom("ChosunCentennial", size: 15))
                     .foregroundStyle(Color(hex: 0x4C6D38))
-
+                
                 Spacer()
-
+                
                 if !isButtonClicked {
                     Button {
                         isButtonClicked = true
@@ -40,22 +40,22 @@ struct DescendRecordView: View {
                                 in: RoundedRectangle(cornerRadius: 8))
                 }
             }
-
+            
             VStack() {
                 HStack() {
                     Image("DescendRecordImage")
                         .resizable()
                         .frame(width: 80, height: 80)
                         .aspectRatio(contentMode: .fit)
-
+                    
                     VStack(alignment: .leading) {
                         HStack(alignment: .bottom) {
                             Text("연장된 건강 수명")
                                 .font(.system(size: 15))
                                 .foregroundStyle(Color(hex: 0x3A542B))
-
+                            
                             Spacer()
-
+                            
                             Button {
                                 infoButtonClicked.toggle()
                             } label: {
@@ -78,14 +78,14 @@ struct DescendRecordView: View {
             .background(Color(hex: 0xF3F9F0),
                         in: RoundedRectangle(cornerRadius: 8))
             .padding(.top, 19)
-
-            CustomTableView()
+            
+            CustomTableView(manager: ClimbingManager())
                 .padding(.top, 12)
-
+            
             Spacer()
-
+            
             Button {
-
+                
             } label: {
                 Text("입단증 보기")
                     .font(Font.custom("SF Pro", size: 13))
@@ -106,20 +106,19 @@ struct DescendRecordView: View {
             }
         }
     }
-
+    
     func captureAndShare() {
         let renderer = ImageRenderer(content: self)
-
+        
         // 원하는 해상도로 크기 조정
         _ = CGSize(width: 321 * 3, height: 560 * 3) // 3배 스케일
         renderer.scale = 3.0 // 디스플레이의 배율에 따라 조정
-
+        
         if let uiImage = renderer.uiImage {
             sharedImage = uiImage
             isSharing = true
         }
     }
-
 }
 
 #Preview {

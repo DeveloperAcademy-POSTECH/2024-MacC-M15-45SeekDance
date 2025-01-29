@@ -16,7 +16,7 @@ class HealthKitService: ObservableObject {
     
     let healthStore = HKHealthStore()
     
-    @AppStorage("TodayFlightsClimbed", store: UserDefaults(suiteName: "group.macmac.pratice.carot")) var TodayFlightsClimbed: Double = 0.0
+    //    @AppStorage("TodayFlightsClimbed", store: UserDefaults(suiteName: "group.macmac.pratice.carot")) var TodayFlightsClimbed: Double = 0.0
     @AppStorage("WeeklyFlightsClimbed", store: UserDefaults(suiteName: "group.macmac.pratice.carot")) var weeklyFlightsClimbed: Double = 0.0
     @AppStorage("TotalFlightsClimbedSinceAuthorization", store: UserDefaults(suiteName: "group.macmac.pratice.carot")) var TotalFlightsClimbedSinceAuthorization: Double = 0.0
     @AppStorage("LastFetchTime", store: UserDefaults(suiteName: "group.macmac.pratice.carot")) var LastFetchTime: String = ""
@@ -140,6 +140,20 @@ class HealthKitService: ObservableObject {
         print("2. 총 계단 오르기 수 \(flightsClimbed)를 저장했습니다. (패치 시각: \(formattedFetchTime))")
         print("2. Authorization Date: \(authorizationDate)")
     }
+    
+    func getSavedFlightsClimbedFromDefaults() -> Double {
+        // App Group UserDefaults 설정
+        let appGroupDefaults = UserDefaults(suiteName: "group.macmac.pratice.carot")
+        
+        // 저장된 값 가져오기. 값이 없으면 기본값 0.0 반환
+        let savedFlightsClimbed = appGroupDefaults?.double(forKey: "TotalFlightsClimbedSinceAuthorization") ?? 0.0
+        
+        // 가져온 값 출력
+        print("UserDefaults에서 가져온 계단 오르기 수: \(savedFlightsClimbed)")
+        return savedFlightsClimbed
+    }
+    
+    
     
     
     // MARK: - 헬스킷 권한을 받았는지 아닌지를 확인하기 위해 전체 계단오르기 데이터를 호출해서 isHealthKitAuthorized를 업데이트하는 함수
