@@ -336,7 +336,7 @@ struct MainViewPhase3: View {
                 
                 // MARK: 만렙일 때 보여주는 리셋 버튼
                 Button {
-                    isShowNewBirdPresented = true
+                    isResetViewPresented = true
                 } label: {
                     HStack() {
 
