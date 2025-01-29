@@ -59,11 +59,11 @@ struct ItemsConfettiView: View {
                                     .image(Image("10_Insam").asUIImage(), .white, 0.02),
                                     .image(Image("12_Gugija").asUIImage(), .white, 0.02),
                                     .image(Image("13_Sansuyu").asUIImage(), .white, 0.02),
-                                ]
+                                ],
+                                intensity: .low
                             )
             )
             VStack {
-                Spacer()
                 VStack {
                     HStack(spacing: 0) {
                         Text("\(123)")
@@ -76,13 +76,14 @@ struct ItemsConfettiView: View {
                     Text("함께 오른 틈새가")
                     Text("하산을 했어요!")
                 }
-                .multilineTextAlignment(.center)
                 .font(.title)
                 .fontWeight(.bold)
+                .padding(.top, 158)
                 Image("Down1")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 256)
+                    .padding(.top, 66)
                 Spacer()
             }
         }
