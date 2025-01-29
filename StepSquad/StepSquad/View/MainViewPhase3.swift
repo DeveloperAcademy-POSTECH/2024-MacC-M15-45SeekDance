@@ -929,6 +929,7 @@ struct DetailView3: View {
                 .multilineTextAlignment(.center)
                 .font(.body)
             }
+            .padding(.top, 36)
             
             
             TextField("건강해라", text: $userInput)
