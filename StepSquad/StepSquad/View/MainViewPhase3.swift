@@ -201,10 +201,10 @@ struct MainViewPhase3: View {
                                 
                                 ZStack {
                                     EntryCertificateView(userPlayerImage: userProfileImage, nickName: gameCenterManager.loadLocalPlayerName())
-                                        .rotation3DEffect(.degrees(isCardFlipped ? 0 : -90), axis: (x: 0, y: 1, z: 0))
+                                        .rotation3DEffect(.degrees(isCardFlipped ? 0.001 : -90), axis: (x: 0.001, y: 1, z: 0.001))
                                         .animation(isCardFlipped ? .linear.delay(0.35) : .linear, value: isCardFlipped)
                                     DescendRecordView()
-                                        .rotation3DEffect(.degrees(isCardFlipped ? 90 : 0), axis: (x: 0, y: 1, z: 0))
+                                        .rotation3DEffect(.degrees(isCardFlipped ? 90 : 0.001), axis: (x: 0.001, y: 1, z: 0.001))
                                         .animation(isCardFlipped ? .linear : .linear.delay(0.35), value: isCardFlipped)
                                 }
                                 .onTapGesture {
