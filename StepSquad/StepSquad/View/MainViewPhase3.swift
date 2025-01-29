@@ -421,9 +421,6 @@ struct MainViewPhase3: View {
         .fullScreenCover(isPresented: $isResetViewPresented) {
             ResetNavigationView(isResetViewPresented: $isResetViewPresented)
         }
-        .fullScreenCover(isPresented: $isShowNewBirdPresented) {
-            ShowNewBirdView(isShowNewBirdPresented: $isShowNewBirdPresented)
-        }
         .onAppear {
             // MARK: 일단 임시로 onAppear 사용해서 권한 받자마자 뷰를 그릴 수 있도록 임시조치함. 단, onAppear를 사용하면 뷰에 접속 할때마다 갱신되므로 사실 상, pulltoRefreash가 의미 없어짐.
             gameCenterManager.authenticateUser()
@@ -905,19 +902,20 @@ struct DetailView3: View {
             
             Spacer()
             
-            NavigationLink(destination: MainViewPhase3()
+            NavigationLink(destination: ShowNewBirdView(isShowNewBirdPresented: $isResetViewPresented)
+                .navigationBarHidden(true)
                 .onAppear {
                     
-                    // MARK: 순위표로 이동 입력창에 오타 없이 사용자가 입력하면 자동으로 실행되는 함수들
-                    
-                    // 1. 날짜 리셋 함수
-                    service.fetchAndSaveFlightsClimbedSinceButtonPress()
-                    
-                    // 2. 하산 날짜, 계단 오른 층수, dDAY, 회차 더하기 함수
-                    let floorsClimbed = service.getSavedFlightsClimbedFromDefaults()
-                    let dDay = loadDDayFromDefaults()
-                    
-                    manager.addRecord(descentDate: Date(), floorsClimbed: Float(floorsClimbed), dDay: Int(dDay))
+//                    // MARK: 순위표로 이동 입력창에 오타 없이 사용자가 입력하면 자동으로 실행되는 함수들
+//                    
+//                    // 1. 날짜 리셋 함수
+//                    service.fetchAndSaveFlightsClimbedSinceButtonPress()
+//                    
+//                    // 2. 하산 날짜, 계단 오른 층수, dDAY, 회차 더하기 함수
+//                    let floorsClimbed = service.getSavedFlightsClimbedFromDefaults()
+//                    let dDay = loadDDayFromDefaults()
+//                    
+//                    manager.addRecord(descentDate: Date(), floorsClimbed: Float(floorsClimbed), dDay: Int(dDay))
                     
                 }) {
                     Text("하산하기")
