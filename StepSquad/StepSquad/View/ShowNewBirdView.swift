@@ -24,6 +24,7 @@ struct ShowNewBirdView: View {
                 .opacity(opacity2)
                 .animation(.linear(duration: 3), value: opacity2)
         }
+        .ignoresSafeArea()
         .onReceive(timer) { _ in
             timeCount += 1
             if timeCount == viewChangeTime {
@@ -86,26 +87,40 @@ struct ItemsConfettiView: View {
 
 struct NewBirdView: View {
     var body: some View {
-        VStack {
+        ZStack {
             VStack {
-                Text("하산한 틈새가 떠나고")
-                HStack(spacing: 0) {
-                    Text("새로운 틈새")
-                        .foregroundStyle(Color(hex: 0x7EB55D))
-                    Text("가 왔어요!")
+                ZStack(alignment: .top) {
+                    FirstText()
+                    SecondText()
+                    ThirdText()
                 }
+                .padding(.top, 158)
+                Spacer()
             }
-            .font(.title)
-            .fontWeight(.bold)
-            Text("같은 틈새 아닌가 하는 마음이 든다면 그건 착각이에요")
-                .frame(width: 256)
-            Image("ResultIMG")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 256)
-            Spacer()
+            VStack {
+                RiveViewModel(fileName: "reset").view()
+                    .frame(width: 256, height: 256)
+                    .padding(.top, 326)
+                Spacer()
+            }
+            VStack {
+                Spacer()
+                Button(action: {
+                    // TODO: - 버튼 기능 설정
+                }, label: {
+                    HStack {
+                        Text("새 틈새와 함께하기")
+                            .frame(maxWidth: .infinity)
+                            .foregroundStyle(.white)
+                            .padding()
+                    }
+                    .background(Color(hex: 0x7EB55D))
+                    .cornerRadius(12)
+                })
+                .padding(.bottom, 38)
+                .padding(.horizontal, 28)
+            }
         }
-        .multilineTextAlignment(.center)
     }
 }
 
@@ -132,32 +147,20 @@ struct SecondText: View {
 struct ThirdText: View {
     var body: some View {
         VStack {
-            Text("하산한 틈새가 떠나고")
-            HStack(spacing: 0) {
-                Text("새로운 틈새")
-                    .foregroundStyle(Color(hex: 0x7EB55D))
-                Text("가 왔어요!")
+            VStack {
+                Text("하산한 틈새가 떠나고")
+                HStack(spacing: 0) {
+                    Text("새로운 틈새")
+                        .foregroundStyle(Color(hex: 0x7EB55D))
+                    Text("가 왔어요!")
+                }
             }
+            .font(.title)
+            .fontWeight(.bold)
+            Text("같은 틈새 아닌가 하는 마음이 든다면 그건 착각이에요")
+                .frame(width: 256)
+                .multilineTextAlignment(.center)
+                .padding(.top, 16)
         }
-        .font(.title)
-        .fontWeight(.bold)
-        Text("같은 틈새 아닌가 하는 마음이 든다면 그건 착각이에요")
-            .frame(width: 256)
-            .multilineTextAlignment(.center)
     }
 }
-
-
-
-//Button(action: {
-//    // TODO: - 버튼 기능 설정
-//}, label: {
-//    HStack {
-//        Text("새 틈새와 함께하기")
-//            .frame(maxWidth: .infinity)
-//            .foregroundStyle(.white)
-//            .padding()
-//    }
-//    .background(Color(hex: 0x7EB55D))
-//    .cornerRadius(12)
-//})
