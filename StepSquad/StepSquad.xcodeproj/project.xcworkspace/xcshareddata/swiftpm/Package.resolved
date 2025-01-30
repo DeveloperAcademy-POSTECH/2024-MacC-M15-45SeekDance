@@ -1,6 +1,15 @@
 {
-  "originHash" : "0ed1a20ef167ff6bbd7e233d8316ce8089f144b9619fb921d55eb1b69ffdfd4c",
+  "originHash" : "4c0bbce475ab2f78b4c40b28111fcbb3a4bc056a148c7011a688004bacc3993b",
   "pins" : [
+    {
+      "identity" : "effects-library",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/GetStream/effects-library",
+      "state" : {
+        "revision" : "09ebd8e7536aa6dd70a48042244524e895ccd2aa",
+        "version" : "1.0.0"
+      }
+    },
     {
       "identity" : "rive-ios",
       "kind" : "remoteSourceControl",

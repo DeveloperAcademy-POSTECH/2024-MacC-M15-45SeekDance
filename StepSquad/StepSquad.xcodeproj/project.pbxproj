@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1B051B132D420AD400E7EC73 /* RiveRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = 1B051B122D420AD400E7EC73 /* RiveRuntime */; };
+		1BC5BF302D49B9B2008DBDC9 /* EffectsLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 1BC5BF2F2D49B9B2008DBDC9 /* EffectsLibrary */; };
 		BDC8DCA52CF5E44900C74796 /* StepSquadStickers.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = BDC8DC9E2CF5E44800C74796 /* StepSquadStickers.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		BDE8C0A82CFC761D0060CDA7 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDE8C0A72CFC761D0060CDA7 /* WidgetKit.framework */; };
 		BDE8C0AA2CFC761D0060CDA7 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDE8C0A92CFC761D0060CDA7 /* SwiftUI.framework */; };
@@ -104,6 +105,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B051B132D420AD400E7EC73 /* RiveRuntime in Frameworks */,
+				1BC5BF302D49B9B2008DBDC9 /* EffectsLibrary in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,6 +198,7 @@
 			name = StepSquad;
 			packageProductDependencies = (
 				1B051B122D420AD400E7EC73 /* RiveRuntime */,
+				1BC5BF2F2D49B9B2008DBDC9 /* EffectsLibrary */,
 			);
 			productName = AppName;
 			productReference = BDD309C22CBA62C3003EDC28 /* StepSquad.app */;
@@ -256,6 +259,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				1BA96D6F2D4202E50002D27D /* XCRemoteSwiftPackageReference "rive-ios" */,
+				1BC5BF2E2D49B9B2008DBDC9 /* XCRemoteSwiftPackageReference "effects-library" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = BDD309C32CBA62C3003EDC28 /* Products */;
@@ -723,6 +727,14 @@
 				minimumVersion = 6.5.7;
 			};
 		};
+		1BC5BF2E2D49B9B2008DBDC9 /* XCRemoteSwiftPackageReference "effects-library" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/GetStream/effects-library";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -730,6 +742,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1BA96D6F2D4202E50002D27D /* XCRemoteSwiftPackageReference "rive-ios" */;
 			productName = RiveRuntime;
+		};
+		1BC5BF2F2D49B9B2008DBDC9 /* EffectsLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1BC5BF2E2D49B9B2008DBDC9 /* XCRemoteSwiftPackageReference "effects-library" */;
+			productName = EffectsLibrary;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
