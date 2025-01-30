@@ -22,8 +22,8 @@ struct CustomTableView: View {
                         .font(.system(size: 15))
                         .frame(maxWidth: .infinity)
                         .padding(10)
-                        .background(Color(hex: 0xB1D998))
-                        .foregroundColor(Color(hex: 0x3A542B))
+                        .background(.green300)
+                        .foregroundColor(.green900)
                 }
             }
             .background(RoundedRectangle(cornerRadius: 10).fill(Color(red: 0.85, green: 0.93, blue: 0.80)))
@@ -37,31 +37,31 @@ struct CustomTableView: View {
                         .font(.system(size: 13))
                         .frame(maxWidth: .infinity)
                         .padding(10)
-                        .background(Color(hex: 0xF3F9F0))
-                        .foregroundColor(Color(hex: 0x3A542B))
+                        .background(.green50)
+                        .foregroundColor(.green900)
                     
                     Text("없습니다.")
                         .font(.system(size: 13))
                         .frame(maxWidth: .infinity)
                         .padding(10)
-                        .background(Color(hex: 0xF3F9F0))
-                        .foregroundColor(Color(hex: 0x3A542B))
+                        .background(.green50)
+                        .foregroundColor(.green900)
                     
                     Text("없습니다.")
                         .font(.system(size: 13))
                         .frame(maxWidth: .infinity)
                         .padding(10)
-                        .background(Color(hex: 0xF3F9F0))
-                        .foregroundColor(Color(hex: 0x3A542B))
+                        .background(.green50)
+                        .foregroundColor(.green900)
                     
                     Text("없습니다.")
                         .font(.system(size: 13))
                         .frame(maxWidth: .infinity)
                         .padding(10)
-                        .background(Color(hex: 0xF3F9F0))
-                        .foregroundColor(Color(hex: 0x3A542B))
+                        .background(.green50)
+                        .foregroundColor(.green900)
                 }
-                .border(Color(hex: 0xDBEED0), width: 0.5)
+                .border(.green100, width: 0.5)
             } else {
                 // Data Rows
                 ForEach(manager.records, id: \.id) { record in
@@ -71,34 +71,34 @@ struct CustomTableView: View {
                             .font(.system(size: 13))
                             .frame(maxWidth: .infinity)
                             .padding(10)
-                            .background(Color(hex: 0xF3F9F0))
-                            .foregroundColor(Color(hex: 0x3A542B))
+                            .background(.green50)
+                            .foregroundColor(.green900)
                         
                         // 층수
                         Text("\(Int(record.floorsClimbed))")
                             .font(.system(size: 13))
                             .frame(maxWidth: .infinity)
                             .padding(10)
-                            .background(Color(hex: 0xF3F9F0))
-                            .foregroundColor(Color(hex: 0x3A542B))
+                            .background(.green50)
+                            .foregroundColor(.green900)
                         
                         // 시간
                         Text("\(record.dDay)")
                             .font(.system(size: 13))
                             .frame(maxWidth: .infinity)
                             .padding(10)
-                            .background(Color(hex: 0xF3F9F0))
-                            .foregroundColor(Color(hex: 0x3A542B))
+                            .background(.green50)
+                            .foregroundColor(.green900)
                         
                         // 날짜
                         Text(record.descentDate.formattedDate)
                             .font(.system(size: 13))
                             .frame(maxWidth: .infinity)
                             .padding(10)
-                            .background(Color(hex: 0xF3F9F0))
-                            .foregroundColor(Color(hex: 0x3A542B))
+                            .background(.green50)
+                            .foregroundColor(.green900)
                     }
-                    .border(Color(hex: 0xDBEED0), width: 0.5)
+                    .border(.green100, width: 0.5)
                 }
             }
         }
