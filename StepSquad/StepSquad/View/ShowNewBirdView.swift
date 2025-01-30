@@ -11,6 +11,9 @@ import RiveRuntime
 
 struct ShowNewBirdView: View {
     @Binding var isShowNewBirdPresented: Bool
+    let days: Int
+    let stairs: Int
+    
     @State var timeCount = 0
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @State var opacity1 = 1.0
@@ -20,9 +23,10 @@ struct ShowNewBirdView: View {
     @State var opacity5 = 0.0
     @State var opacity6 = 1.0
     let viewChangeTime = 4
+    
     var body: some View {
         ZStack {
-            ItemsConfettiView()
+            ItemsConfettiView(days: days, stairs: stairs)
                 .opacity(opacity1)
                 .animation(.linear(duration: 1), value: opacity1)
             NewBirdView(isShowNewBirdPresented: $isShowNewBirdPresented, viewChangeTime: viewChangeTime, opacityFirstText: $opacity3, opacitySecondText: $opacity4, opacityThirdText: $opacity5)
@@ -67,10 +71,13 @@ struct ShowNewBirdView: View {
 }
 
 #Preview {
-    ShowNewBirdView(isShowNewBirdPresented: .constant(true))
+    ShowNewBirdView(isShowNewBirdPresented: .constant(true), days: 263, stairs: 1456)
 }
 
 struct ItemsConfettiView: View {
+    let days: Int
+    let stairs: Int
+    
     var body: some View {
         ZStack {
             ConfettiView(config:
@@ -92,10 +99,10 @@ struct ItemsConfettiView: View {
             VStack {
                 VStack {
                     HStack(spacing: 0) {
-                        Text("\(123)")
+                        Text("\(days)")
                             .foregroundStyle(Color(hex: 0x7EB55D))
                         Text("일 동안")
-                        Text(" \(1449)")
+                        Text(" \(stairs)")
                             .foregroundStyle(Color(hex: 0x7EB55D))
                         Text("층을")
                     }

@@ -902,7 +902,7 @@ struct DetailView3: View {
             
             Spacer()
             
-            NavigationLink(destination: ShowNewBirdView(isShowNewBirdPresented: $isResetViewPresented)
+            NavigationLink(destination: ShowNewBirdView(isShowNewBirdPresented: $isResetViewPresented, days: 123, stairs: 1444)
                 .navigationBarHidden(true)
                 .onAppear {
                     
