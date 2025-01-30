@@ -14,13 +14,20 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
     
     // MARK: 게임 센터 계정 인증하기
     func authenticateUser() {
+        var isErrorOccurred = false
         GKLocalPlayer.local.authenticateHandler = { vc, error in
             guard error == nil else {
                 print(error?.localizedDescription ?? "")
+                isErrorOccurred = true
                 return
             }
-            self.isGameCenterLoggedIn = true
-            print("game center: authenticated user")
+            if isErrorOccurred {
+                self.isGameCenterLoggedIn = false
+                print("game center: not authenticated user")
+            } else {
+                self.isGameCenterLoggedIn = true
+                print("game center: authenticated user")
+            }
         }
     }
     
@@ -121,7 +128,7 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
     }
         
     // MARK: 성취 달성 여부 확인 후 성취 업데이트하기
-    func reportCompletedAchievement(achievementId: String){
+    func reportCompletedAchievement(achievementId: String) {
         guard isGameCenterLoggedIn else {
             print("Error: user is not logged in to Game Center.")
             return
