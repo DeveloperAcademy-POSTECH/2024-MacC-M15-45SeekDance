@@ -340,7 +340,7 @@ struct MainViewPhase3: View {
                     isResetViewPresented = true
                 } label: {
                     HStack() {
-
+                        
                         Image(systemName: "mountain.2.fill")
                         Text("하산하기")
                     }
@@ -387,7 +387,7 @@ struct MainViewPhase3: View {
                             .frame(width: 220, height: 256)
                     }
                 }
-
+                
                 .frame(width: 220, height: 256)
                 .padding(.top, 16)
                 
@@ -416,11 +416,11 @@ struct MainViewPhase3: View {
                     .padding(.top, 4)
                 
                 Spacer()
-
+                
             }
         }
         .fullScreenCover(isPresented: $isResetViewPresented) {
-            ResetNavigationView(isResetViewPresented: $isResetViewPresented)
+            ResetNavigationView(isResetViewPresented: $isResetViewPresented, manager: ClimbingManager())
         }
         .onAppear {
             // MARK: 일단 임시로 onAppear 사용해서 권한 받자마자 뷰를 그릴 수 있도록 임시조치함. 단, onAppear를 사용하면 뷰에 접속 할때마다 갱신되므로 사실 상, pulltoRefreash가 의미 없어짐.
@@ -704,17 +704,19 @@ struct MainViewPhase3: View {
 struct ResetNavigationView: View {
     @Binding var isResetViewPresented: Bool // FullScreen 상태를 상위 뷰와 공유
     
+    // 최근 기록 표시위한 @ObservedObject 선언
+    @ObservedObject var manager: ClimbingManager
+    
     var body: some View {
         NavigationStack {
-            VStack {
-                
+            VStack(spacing: 16) {
                 Text("최고 레벨 달성!")
                     .font(.system(size: 12))
-                    .foregroundColor(.white) // 텍스트 색상 설정
-                    .padding(4) // 내부 여백 추가
+                    .foregroundColor(.white)
+                    .padding(4)
                     .background(
-                        Color.primaryColor // 배경색 설정
-                            .cornerRadius(4) // 배경의 모서리 둥글게
+                        Color.primaryColor
+                            .cornerRadius(4)
                     )
                 
                 Text("틈새를 속세로!\n이제는 하산할 시간")
@@ -726,55 +728,84 @@ struct ResetNavigationView: View {
                     .multilineTextAlignment(.center)
                     .font(.body)
                 
-                Image("Down1")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 256)
-                
-                Spacer()
-                
-                NavigationLink(destination: DetailView(isResetViewPresented: $isResetViewPresented)) {
-                    Text("설명보기")
-                        .padding()
-                        .frame(width: 352, height: 50)
-                        .background(Color.primaryColor)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
+            }
+            .padding(.top, 36)
+            
+            Image("Ultimate")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 256)
+                .padding(.top, 32)
+            
+            
+            // 최근 기록 표시
+            if let latestRecord = manager.records.last {
+                VStack {
+                    Text("\(Int(latestRecord.floorsClimbed))층")
+                    Text("D-Day: \(latestRecord.dDay)")
                 }
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button(action: {
-                            isResetViewPresented = false // 닫기 버튼으로 Sheet 해제
-                        }) {
-                            Image(systemName: "x.circle.fill")
-                                .foregroundColor(.secondary)
-                        }
+            }
+            
+            Spacer()
+            
+            NavigationLink(destination: DetailView(isResetViewPresented: $isResetViewPresented)) {
+                Text("설명보기")
+                    .padding()
+                    .frame(width: 352, height: 50)
+                    .background(Color.primaryColor)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+            }
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        isResetViewPresented = false // 닫기 버튼으로 Sheet 해제
+                    }) {
+                        Image(systemName: "x.circle.fill")
+                            .foregroundColor(.secondary)
                     }
                 }
             }
         }
     }
 }
+
 // MARK: - 2번 째 뷰
 struct DetailView: View {
     @Binding var isResetViewPresented: Bool
     
     var body: some View {
         VStack {
-            Text("그 동안 모은 건\n틈새 하산 선물로!")
+            VStack(spacing: 16) {
+                Text("")
+                    .font(.system(size: 12))
+                    .foregroundColor(.white)
+                    .padding(4)
+                
+                VStack {
+                    Text("그 동안 모은 건\n") +
+                    Text("틈새 하산 선물")
+                        .foregroundColor(Color.primaryColor) +
+                    Text("로!")
+                    
+                }
                 .multilineTextAlignment(.center)
                 .font(.title)
                 .fontWeight(.bold)
-            
-            Text("틈새와 함께 모은 약재, 뱃지, 점수는\n하산이 완료되면 모두 초기화가 됩니다.")
-                .multilineTextAlignment(.center)
-                .font(.body)
+                
+                Text("틈새와 함께 모은 약재, 뱃지, 점수는\n하산이 완료되면 모두 초기화가 됩니다.")
+                    .multilineTextAlignment(.center)
+                    .font(.body)
+            }
+            .padding(.top, 36)
             
             Image("Down2")
                 .resizable()
                 .scaledToFit()
                 .frame(width: 348)
+                .padding(.top, 16)
+            
             
             Spacer()
             
@@ -809,19 +840,32 @@ struct DetailView2: View {
     
     var body: some View {
         VStack {
-            Text("역대 하산 기록은\n남아있어요!")
+            VStack(spacing: 16) {
+                Text("")
+                    .font(.system(size: 12))
+                    .foregroundColor(.white)
+                    .padding(4)
+                
+                VStack {
+                    Text("역대 하산 기록은\n")
+                        .foregroundColor(Color.primaryColor) +
+                    Text("남아있어요!")
+                }
                 .multilineTextAlignment(.center)
                 .font(.title)
                 .fontWeight(.bold)
-            
-            Text("입단증의 뒤집으면\n역대 하산 기록을 볼 수 있습니다.")
-                .multilineTextAlignment(.center)
-                .font(.body)
+                
+                Text("입단증의 뒤집으면\n역대 하산 기록을 볼 수 있습니다.")
+                    .multilineTextAlignment(.center)
+                    .font(.body)
+            }
+            .padding(.top, 36)
             
             Image("Down3")
                 .resizable()
                 .scaledToFit()
                 .frame(width: 348)
+                .padding(.top, 10)
             
             Spacer()
             
@@ -865,40 +909,51 @@ struct DetailView3: View {
     
     var body: some View {
         VStack {
-            Text("틈새를 하산시킬까요?")
-                .multilineTextAlignment(.center)
-                .font(.title)
-                .fontWeight(.bold)
-            
-            Text("진행하려면 ‘\(correctText)’를 입력하세요.")
+            VStack(spacing: 16) {
+                
+                Text("")
+                    .font(.system(size: 12))
+                    .foregroundColor(.white)
+                    .padding(4)
+                
+                Text("틈새를 하산시킬까요?")
+                    .multilineTextAlignment(.center)
+                    .font(.title)
+                    .fontWeight(.bold)
+                VStack {
+                    Text("진행하려면 ") +
+                    Text("‘\(correctText)’")
+                        .foregroundColor(Color.primaryColor) +
+                    Text("를 입력하세요.")
+                    
+                }
                 .multilineTextAlignment(.center)
                 .font(.body)
+            }
+            .padding(.top, 36)
             
             
-            //            TextField("건강해라", text: $userInput)
-            //                .textFieldStyle(RoundedBorderTextFieldStyle())
             TextField("건강해라", text: $userInput)
                 .padding()
-                .background(Color.secondary.opacity(0.2)) // 배경색
-                .cornerRadius(10) // 둥근 모서리
-            //                .overlay(
-            //                    RoundedRectangle(cornerRadius: 10) // 테두리 추가
-            //                        .stroke(Color.blue, lineWidth: 2)
-            //                )
-                .foregroundColor(.primary) // 텍스트 색상
+                .frame(width: 322, height: 44)
+                .background(Color.secondary.opacity(0.2))
+                .cornerRadius(10)
+                .foregroundColor(.primary)
                 .padding(10)
+                .padding(.top, 40)
             
-            if !errorMessage.isEmpty {
-                Text(errorMessage)
-                    .foregroundColor(.red)
-                    .font(.footnote)
-                
+            VStack(spacing: 10) {
+                if !errorMessage.isEmpty {
+                    Text(errorMessage)
+                        .foregroundColor(.red)
+                        .font(.caption2)
+                    
+                }
+                Text("달성 뱃지, 약재, 리더보드 점수는 영구적으로 사라집니다.\n하산 기록(날짜, 횟수)는 입단증을 통해 확인할 수 있습니다.")
+                    .font(.caption2)
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(.secondary)
             }
-            Text("달성 뱃지, 약재, 리더보드 점수는 영구적으로 사라집니다.\n하산 기록(날짜, 횟수)는 입단증을 통해 확인할 수 있습니다.")
-                .font(.footnote)
-                .multilineTextAlignment(.center)
-                .foregroundColor(.secondary)
-            
             
             Spacer()
             
@@ -928,7 +983,7 @@ struct DetailView3: View {
                 }) {
                     Text("하산하기")
                         .padding()
-                        .frame(maxWidth: .infinity)
+                        .frame(width: 352, height: 50)
                         .background(userInput == correctText ? Color.primaryColor : Color.gray)
                         .foregroundColor(.white)
                         .cornerRadius(10)
@@ -936,7 +991,6 @@ struct DetailView3: View {
                 .disabled(userInput != correctText)
                 .padding(.top)
         }
-        .padding()
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
