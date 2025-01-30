@@ -684,6 +684,7 @@ struct MainViewPhase3: View {
     
     // MARK: Level 관련 테스트 프린트문
     func printAll() {
+        print("--------printAll--------")
         print("누적 층계: \(currentStatus.getTotalStaircase())")
         print("현재 레벨: \(currentStatus.currentLevel.level)")
         print("현재 레벨 난이도: \(currentStatus.currentLevel.difficulty.rawValue)")
