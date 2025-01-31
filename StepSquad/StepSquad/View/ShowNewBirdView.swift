@@ -96,6 +96,7 @@ struct ItemsConfettiView: View {
                                 intensity: .low
                             )
             )
+            LinearGradient(colors: [.white, .white,  .clear], startPoint: .top, endPoint: .center)
             VStack {
                 VStack {
                     HStack(spacing: 0) {

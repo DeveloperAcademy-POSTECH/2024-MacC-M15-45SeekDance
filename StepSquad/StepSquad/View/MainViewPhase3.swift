@@ -23,6 +23,7 @@ struct MainViewPhase3: View {
     
     @State private var isResetViewPresented = false
     @State private var isShowNewBirdPresented = false
+    @State private var isWifiAlertPresented = false
     
     @State var userProfileImage: Image?
     
@@ -239,7 +240,7 @@ struct MainViewPhase3: View {
                             service.getWeeklyStairDataAndSave()
                             service.fetchAndSaveFlightsClimbedSinceAuthorization()
                             updateLevelsAndGameCenter()
-                            printAll()
+//                            printAll()
                         }
                         .scrollIndicators(ScrollIndicatorVisibility.hidden)
                         .onAppear {
@@ -337,7 +338,11 @@ struct MainViewPhase3: View {
                 
                 // MARK: 만렙일 때 보여주는 리셋 버튼
                 Button {
-                    isResetViewPresented = true
+                    if gameCenterManager.isGameCenterLoggedIn {
+                        isResetViewPresented = true
+                    } else {
+                        isWifiAlertPresented = true
+                    }
                 } label: {
                     HStack() {
                         
@@ -350,6 +355,13 @@ struct MainViewPhase3: View {
                     .background(Color(hex: 0x864035), in: RoundedRectangle(cornerRadius: 30))
                 }
                 .padding(.top, 10)
+                .alert("네트워크 연결 상태를 확인한 후 앱에 다시 접속해주세요.", isPresented: $isWifiAlertPresented) {
+                    Button("확인") {
+                        isWifiAlertPresented = false
+                    }
+                } message: {
+                    Text("틈새는 온라인 환경에서만 하산을 할 수 있어요!")
+                }
                 
                 Spacer()
             } else {
@@ -518,7 +530,7 @@ struct MainViewPhase3: View {
         gameCenterManager.authenticateUser()
         // MARK: 저장된 레벨 정보 불러오고 헬스킷 정보로 업데이트하기
         currentStatus = loadCurrentStatus()
-        printAll()
+//        printAll()
     }
     
     // MARK: - 타이머
@@ -672,14 +684,13 @@ struct MainViewPhase3: View {
     
     // MARK: 만렙 이후 리셋하기
     func resetLevel() {
-        print("--------resetLevel--------")
         currentStatus.updateStaircase(0)
         saveCurrentStatus()
         lastElectricAchievementKwh = 0
         gameCenterManager.resetAchievements()
         completedLevels.resetLevels()
         collectedItems.resetItems()
-        printAll()
+//        printAll()
     }
     
     // MARK: Level 관련 테스트 프린트문
