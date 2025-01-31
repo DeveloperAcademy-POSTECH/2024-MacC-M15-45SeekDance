@@ -23,6 +23,7 @@ struct MainViewPhase3: View {
     
     @State private var isResetViewPresented = false
     @State private var isShowNewBirdPresented = false
+    @State private var isWifiAlertPresented = false
     
     @State var userProfileImage: Image?
     
@@ -337,7 +338,11 @@ struct MainViewPhase3: View {
                 
                 // MARK: 만렙일 때 보여주는 리셋 버튼
                 Button {
-                    isResetViewPresented = true
+                    if gameCenterManager.isGameCenterLoggedIn {
+                        isResetViewPresented = true
+                    } else {
+                        isWifiAlertPresented = true
+                    }
                 } label: {
                     HStack() {
                         
@@ -350,6 +355,13 @@ struct MainViewPhase3: View {
                     .background(Color(hex: 0x864035), in: RoundedRectangle(cornerRadius: 30))
                 }
                 .padding(.top, 10)
+                .alert("네트워크 연결 상태를 확인한 후 앱에 다시 접속해주세요.", isPresented: $isWifiAlertPresented) {
+                    Button("확인") {
+                        isWifiAlertPresented = false
+                    }
+                } message: {
+                    Text("틈새는 온라인 환경에서만 하산을 할 수 있어요!")
+                }
                 
                 Spacer()
             } else {
