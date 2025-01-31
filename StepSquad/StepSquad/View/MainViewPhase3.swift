@@ -749,15 +749,6 @@ struct ResetNavigationView: View {
                 .frame(width: 256)
                 .padding(.top, 32)
             
-            
-            // 최근 기록 표시
-            if let latestRecord = manager.records.last {
-                VStack {
-                    Text("\(Int(latestRecord.floorsClimbed))층")
-                    Text("D-Day: \(latestRecord.dDay)")
-                }
-            }
-            
             Spacer()
             
             NavigationLink(destination: DetailView(isResetViewPresented: $isResetViewPresented)) {
@@ -907,7 +898,6 @@ struct DetailView2: View {
 // MARK: - 4번 째 뷰 (입력창)
 struct DetailView3: View {
     @Environment(\.modelContext) var context
-    
     @StateObject private var manager = ClimbingManager()
     
     @Binding var isResetViewPresented: Bool
@@ -922,7 +912,6 @@ struct DetailView3: View {
     var body: some View {
         VStack {
             VStack(spacing: 16) {
-                
                 Text("")
                     .font(.system(size: 12))
                     .foregroundColor(.white)
@@ -932,18 +921,17 @@ struct DetailView3: View {
                     .multilineTextAlignment(.center)
                     .font(.title)
                     .fontWeight(.bold)
+                
                 VStack {
                     Text("진행하려면 ") +
                     Text("‘\(correctText)’")
                         .foregroundColor(Color.primaryColor) +
                     Text("를 입력하세요.")
-                    
                 }
                 .multilineTextAlignment(.center)
                 .font(.body)
             }
             .padding(.top, 36)
-            
             
             TextField("건강해라", text: $userInput)
                 .padding()
@@ -959,7 +947,6 @@ struct DetailView3: View {
                     Text(errorMessage)
                         .foregroundColor(.red)
                         .font(.caption2)
-                    
                 }
                 Text("달성 뱃지, 약재, 리더보드 점수는 영구적으로 사라집니다.\n하산 기록(날짜, 횟수)는 입단증을 통해 확인할 수 있습니다.")
                     .font(.caption2)
@@ -969,30 +956,14 @@ struct DetailView3: View {
             
             Spacer()
             
-            NavigationLink(destination: ShowNewBirdView(isShowNewBirdPresented: $isResetViewPresented, days: 123, stairs: 1444)
-                .navigationBarHidden(true)
-                .onAppear {
-                    
-//                    // MARK: 순위표로 이동 입력창에 오타 없이 사용자가 입력하면 자동으로 실행되는 함수들
-//                    
-                    // 1. 날짜 리셋 함수
-                    service.fetchAndSaveFlightsClimbedSinceButtonPress()
-                    
-                    // 2. 하산 날짜, 계단 오른 층수, dDAY, 회차 더하기 함수
-                    let floorsClimbed = service.getSavedFlightsClimbedFromDefaults()
-                    let dDay = loadDDayFromDefaults()
-                    
-                    manager.addRecord(descentDate: Date(), floorsClimbed: Float(floorsClimbed), dDay: Int(dDay))
-                    
-                    // 3. 현재 레벨, 획득 재료, nfc 태깅 정보, 성취 관련 리셋
-                    MainViewPhase3().resetLevel()
-                    do {
-                        try context.delete(model: StairStepModel.self)
-                    } catch {
-                        print("error: Failed to clear all StairStepModel data.")
-                    }
-                    
-                }) {
+            if let latestRecord = manager.records.last {
+                NavigationLink(
+                    destination: ShowNewBirdView(
+                        isShowNewBirdPresented: $isResetViewPresented,
+                        days: latestRecord.dDay,
+                        stairs: Int(latestRecord.floorsClimbed)
+                    )
+                ) {
                     Text("하산하기")
                         .padding()
                         .frame(width: 352, height: 50)
@@ -1002,6 +973,7 @@ struct DetailView3: View {
                 }
                 .disabled(userInput != correctText)
                 .padding(.top)
+            }
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -1014,11 +986,31 @@ struct DetailView3: View {
                 }
             }
         }
-        .onChange(of: userInput) { newValue in
-            if newValue != correctText {
-                errorMessage = "틈새에게 마지막으로 덕담인 ‘건강해라'를 입력해주세요."
-            } else {
-                errorMessage = ""
+        //        .onChange(of: userInput) { newValue in
+        //            if newValue != correctText {
+        //                errorMessage = "틈새에게 마지막으로 덕담인 ‘건강해라'를 입력해주세요."
+        //            } else {
+        //                errorMessage = ""
+        //            }
+        //        }
+        .onAppear {
+            // MARK: 순위표로 이동 입력창에 오타 없이 사용자가 입력하면 자동으로 실행되는 함수들
+            
+            // 1. 날짜 리셋 함수
+            service.fetchAndSaveFlightsClimbedSinceButtonPress()
+            
+            // 2. 하산 날짜, 계단 오른 층수, dDAY, 회차 더하기 함수
+            let dDay = loadDDayFromDefaults()
+            let floorsClimbed = service.getSavedFlightsClimbedFromDefaults()
+            
+            manager.addRecord(descentDate: Date(), floorsClimbed: Float(floorsClimbed), dDay: Int(dDay))
+            
+            // 3. 현재 레벨, 획득 재료, NFC 태깅 정보, 성취 관련 리셋
+            MainViewPhase3().resetLevel()
+            do {
+                try context.delete(model: StairStepModel.self)
+            } catch {
+                print("error: Failed to clear all StairStepModel data.")
             }
         }
     }
