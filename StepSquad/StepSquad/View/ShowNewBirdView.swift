@@ -67,6 +67,7 @@ struct ShowNewBirdView: View {
                 opacity6 = 0.0
             }
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 
