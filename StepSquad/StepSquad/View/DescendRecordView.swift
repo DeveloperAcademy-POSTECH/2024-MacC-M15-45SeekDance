@@ -83,17 +83,12 @@ struct DescendRecordView: View {
                 .padding(.top, 12)
             
             Spacer()
-            
-            Button {
-                
-            } label: {
-                Text("입단증 보기")
-                    .font(Font.custom("SF Pro", size: 13))
-                    .padding(.vertical, 4)
-                    .padding(.horizontal, 100)
-                    .foregroundColor(Color(red: 0.23, green: 0.33, blue: 0.17))
-                    .background(Color(red: 0.79, green: 0.9, blue: 0.73), in: RoundedRectangle(cornerRadius: 8))
-            }
+
+            Text("입단증 보기")
+                .font(Font.custom("SF Pro", size: 13))
+                .padding(.vertical, 4)
+                .padding(.horizontal, 100)
+                .foregroundColor(Color(red: 0.23, green: 0.33, blue: 0.17))
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 16)

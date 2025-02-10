@@ -97,20 +97,13 @@ struct EntryCertificateView: View {
             Spacer()
             
             if !isButtonClicked {
-                Button(action: {
-                    
-                }, label: {
-                    Text("하산 기록 보기")
-                        .font(Font.custom("SF Pro", size: 13))
-                        .padding(.horizontal, 101)
-                        .padding(.vertical, 7)
-                        .foregroundStyle(.green900)
-                        .background(.green200,
-                                    in: RoundedRectangle(cornerRadius: 8))
-                })
-                .padding(.bottom, 16)
+                Text("하산 기록 보기")
+                    .font(Font.custom("SF Pro", size: 13))
+                    .padding(.horizontal, 101)
+                    .padding(.vertical, 7)
+                    .foregroundStyle(.green900)
+                    .padding(.bottom, 20)
             }
-            
         }
         .padding(.horizontal, 20)
         .frame(width: 321, height: 560)
