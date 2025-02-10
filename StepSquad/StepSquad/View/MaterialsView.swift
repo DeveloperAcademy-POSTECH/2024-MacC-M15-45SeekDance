@@ -96,7 +96,7 @@ struct MaterialsView: View {
                     
                     Text("주의: 계단사랑단 앱은 게임입니다. 실제 의학적 참고, 권고, 진단등을 위해 앱을 활용하면 안 됩니다.")
                         .font(.system(size: 15))
-                        .foregroundStyle(Color(hex: 0x8F8F8F))
+                        .foregroundStyle(.grey800)
                 }
                 .navigationTitle("획득 재료보기")
                 .navigationBarTitleDisplayMode(.inline)

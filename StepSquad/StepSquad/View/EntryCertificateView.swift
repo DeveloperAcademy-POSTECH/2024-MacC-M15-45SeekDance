@@ -22,7 +22,7 @@ struct EntryCertificateView: View {
             HStack(spacing: 0) {
                 Text("계단사랑단 입단증")
                     .font(Font.custom("ChosunCentennial", size: 15))
-                    .foregroundStyle(Color(hex: 0x4C6D38))
+                    .foregroundStyle(.green800)
                 
                 Spacer()
                 
@@ -36,7 +36,7 @@ struct EntryCertificateView: View {
                     } label: {
                         Label("공유하기", systemImage: "square.and.arrow.up")
                             .font(.system(size: 13))
-                            .foregroundStyle(Color(hex: 0x4C6D38))
+                            .foregroundStyle(.green800)
                             .padding(.vertical, 4)
                             .padding(.horizontal, 8)
                     }
@@ -60,11 +60,11 @@ struct EntryCertificateView: View {
                 VStack(alignment: .leading, spacing: 0) {
                     Text("계단 오르기 맹세한 지")
                         .font(.system(size: 22))
-                        .foregroundStyle(Color(hex: 0x4C6D38))
+                        .foregroundStyle(.green800)
                     
                     Text("\(dDay)일 차")
                         .font(.system(size: 34, weight: .bold))
-                        .foregroundStyle(Color(hex: 0x3A542B))
+                        .foregroundStyle(.green900)
                     
                     Text("1회차")
                         .font(.system(size: 17, weight: .semibold))
@@ -92,25 +92,18 @@ struct EntryCertificateView: View {
             
             Text("\(formattedDate) 입단 1회차")
                 .font(.system(size: 13))
-                .foregroundStyle(Color(hex: 0x4C6D38))
+                .foregroundStyle(.green800)
             
             Spacer()
             
             if !isButtonClicked {
-                Button(action: {
-                    
-                }, label: {
-                    Text("하산 기록 보기")
-                        .font(Font.custom("SF Pro", size: 13))
-                        .padding(.horizontal, 101)
-                        .padding(.vertical, 7)
-                        .foregroundStyle(Color(hex: 0x3A542B))
-                        .background(Color(hex: 0xCAE5B9),
-                                    in: RoundedRectangle(cornerRadius: 8))
-                })
-                .padding(.bottom, 16)
+                Text("하산 기록 보기")
+                    .font(Font.custom("SF Pro", size: 13))
+                    .padding(.horizontal, 101)
+                    .padding(.vertical, 7)
+                    .foregroundStyle(.green900)
+                    .padding(.bottom, 20)
             }
-            
         }
         .padding(.horizontal, 20)
         .frame(width: 321, height: 560)

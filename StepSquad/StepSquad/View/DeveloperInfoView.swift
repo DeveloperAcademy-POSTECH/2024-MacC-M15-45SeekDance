@@ -24,12 +24,12 @@ struct ProfileCard: View {
 
             Text(name)
                 .font(.system(size: 18, weight: .bold))
-                .foregroundColor(Color(hex: 0x4C6D38))
+                .foregroundColor(.green800)
                 .padding(.top, 7.2)
 
             Text(role)
                 .font(.system(size: 12))
-                .foregroundColor(Color(hex: 0x7EB55D))
+                .foregroundColor(.green600)
 
             Text(description)
                 .font(.system(size: 11.7))
