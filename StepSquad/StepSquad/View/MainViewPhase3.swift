@@ -84,11 +84,10 @@ struct MainViewPhase3: View {
                                 Image(systemName: "gear")
                                     .resizable()
                                     .frame(width: 22, height: 22)
-                                    .foregroundStyle(Color(hex: 0x6F6F6F))
+                                    .foregroundStyle(.grey700)
                                     .padding(5)
-                                    .background(Color(hex: 0xE1E1E1), in: Circle.circle)
+                                    .background(.grey100, in: Circle.circle)
                             }
-                            
                         }
                         .padding(.top, 72)
                         .padding(.bottom, 4)
@@ -105,7 +104,7 @@ struct MainViewPhase3: View {
                                 NFCReadingView
                                     .padding(.top, 17)
                                     .padding(.bottom, 17)
-                                    .background(Color(hex: 0xFBFCFB))
+                                    .background(.grey10)
                                     .fullScreenCover(isPresented: $isResultViewPresented) {
                                         ResultView(isResultViewPresented: $isResultViewPresented,
                                                    stairName: nfcMessage,
@@ -144,7 +143,7 @@ struct MainViewPhase3: View {
                                     .frame(width: 156)
                                     .font(.system(size: 17))
                                     .foregroundColor(Color.white)
-                                    .background(Color(hex: 0x4C6D38),
+                                    .background(.green800,
                                                 in: RoundedRectangle(cornerRadius: 12))
                                 }
                                 
@@ -163,7 +162,7 @@ struct MainViewPhase3: View {
                                     .frame(width: 156)
                                     .font(.system(size: 17))
                                     .foregroundColor(Color.white)
-                                    .background(Color(hex: 0x4C6D38),
+                                    .background(.green800,
                                                 in: RoundedRectangle(cornerRadius: 12))
                                 }
                             }
@@ -183,7 +182,7 @@ struct MainViewPhase3: View {
                                     
                                     Image(systemName: "chevron.right")
                                 }
-                                .foregroundStyle(Color(hex: 0x3A542B))
+                                .foregroundStyle(.green900)
                                 .padding(.vertical, 10)
                                 .padding(.horizontal, 20)
                                 .background(Color(red: 0.98, green: 0.99, blue: 0.98), in: RoundedRectangle(cornerRadius: 12))
@@ -229,7 +228,7 @@ struct MainViewPhase3: View {
                                     }
                                     .padding(.vertical, 14)
                                 }
-                                .background(Color(hex: 0x4C6D38), in: RoundedRectangle(cornerRadius: 12))
+                                .background(.green800, in: RoundedRectangle(cornerRadius: 12))
                                 .padding(.top, 16)
                                 .padding(.bottom, 51)
                                 .padding(.horizontal, 36)
@@ -352,7 +351,7 @@ struct MainViewPhase3: View {
                     .padding(.vertical, 7)
                     .padding(.horizontal, 14)
                     .foregroundStyle(Color.white)
-                    .background(Color(hex: 0x864035), in: RoundedRectangle(cornerRadius: 30))
+                    .background(.brown500, in: RoundedRectangle(cornerRadius: 30))
                 }
                 .padding(.top, 10)
                 .alert("네트워크 연결 상태를 확인한 후 앱에 다시 접속해주세요.", isPresented: $isWifiAlertPresented) {
@@ -501,8 +500,8 @@ struct MainViewPhase3: View {
                         .font(.system(size: 13))
                         .padding(.horizontal, 12)
                         .padding(.vertical, 8)
-                        .foregroundColor(Color(hex: 0x3A542B))
-                        .background(Color(hex: 0xCAE5B9),
+                        .foregroundColor(.green900)
+                        .background(.green200,
                                     in: RoundedRectangle(cornerRadius: 4))
                 } else {
                     Text("\(buttonCountMessage)")
@@ -512,7 +511,7 @@ struct MainViewPhase3: View {
                         .fontWeight(.regular)
                         .padding(.horizontal, 12)
                         .padding(.vertical, 8)
-                        .background(Color(hex: 0xD9D9D9))
+                        .background(.grey500)
                         .cornerRadius(4)
                 }
             }

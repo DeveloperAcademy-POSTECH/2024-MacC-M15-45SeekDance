@@ -26,7 +26,8 @@ struct CustomTableView: View {
                         .foregroundColor(.green900)
                 }
             }
-            .background(RoundedRectangle(cornerRadius: 10).fill(Color(red: 0.85, green: 0.93, blue: 0.80)))
+            .background(RoundedRectangle(cornerRadius: 10)
+                .fill(Color(red: 0.85, green: 0.93, blue: 0.80)))
             .roundedCorner(10, corners: [.topLeft, .topRight])
             // Data Rows
             if manager.records.isEmpty {

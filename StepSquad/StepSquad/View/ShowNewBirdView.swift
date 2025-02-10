@@ -161,7 +161,7 @@ struct NewBirdView: View {
                             .foregroundStyle(.white)
                             .padding()
                     }
-                    .background(Color(hex: 0x7EB55D))
+                    .background(.green600)
                     .cornerRadius(12)
                 })
                 .padding(.bottom, 38)
@@ -189,7 +189,7 @@ struct SecondText: View {
         Text("앗 뭐지??")
             .font(.title)
             .fontWeight(.bold)
-            .foregroundStyle(Color(hex: 0x638D48))
+            .foregroundStyle(.green700)
     }
 }
 
@@ -200,7 +200,7 @@ struct ThirdText: View {
                 Text("하산한 틈새가 떠나고")
                 HStack(spacing: 0) {
                     Text("새로운 틈새")
-                        .foregroundStyle(Color(hex: 0x7EB55D))
+                        .foregroundStyle(.green600)
                     Text("가 왔어요!")
                 }
             }

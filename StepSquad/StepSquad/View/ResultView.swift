@@ -22,7 +22,7 @@ struct ResultView: View {
             VStack(alignment: .center) {
                 Text("재료 획득")
                     .font(.system(size: 28, weight: .bold))
-                    .foregroundStyle(Color(hex: 0x7EB55D))
+                    .foregroundStyle(.green600)
 
                 Image("ResultIMG")
                     .resizable()
@@ -31,23 +31,23 @@ struct ResultView: View {
 
                 Text("\(materialName)")
                     .font(.chosunFont)
-                    .foregroundStyle(Color(hex: 0x3A542B))
+                    .foregroundStyle(.green900)
 
                 Text("\(stairName)의 \(stairCount)칸을 걸었어요!")
                     .font(.system(size: 17))
-                    .foregroundStyle(Color(hex: 0x638D48))
+                    .foregroundStyle(.green700)
 
                 VStack(spacing: 8) {
                     Text("특별 점수")
                         .font(.system(size: 20))
-                        .foregroundStyle(Color(hex: 0x7EB55D))
+                        .foregroundStyle(.green600)
 
                     HStack() {
                         Image(systemName: "figure.stairs")
                         Text("\(stairCount)칸")
                     }
                     .font(.system(size: 22))
-                    .foregroundStyle(Color(hex: 0x3A542B))
+                    .foregroundStyle(.green900)
                 }
                 .padding(16)
                 .background(Color.white,
@@ -57,7 +57,7 @@ struct ResultView: View {
                         .inset(by: 1)
                         .stroke(
                             LinearGradient(
-                                gradient: Gradient(colors: [Color(hex: 0x7EB55D), Color(hex: 0x3A542B)]),
+                                gradient: Gradient(colors: [.green600, .green900]),
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             ),
@@ -75,7 +75,7 @@ struct ResultView: View {
                         .font(.body)
                         .fontWeight(.regular)
                         .frame(width: 320, height: 50)
-                        .background(Color(hex: 0x5B3833))
+                        .background(.brown600)
                         .cornerRadius(12)
                 }
                 .padding(.top, 4)
