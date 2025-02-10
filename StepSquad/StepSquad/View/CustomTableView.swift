@@ -64,7 +64,7 @@ struct CustomTableView: View {
                 .border(.green100, width: 0.5)
             } else {
                 // Data Rows
-                ForEach(manager.records, id: \.id) { record in
+                ForEach(Array(manager.records.reversed()), id: \.id) { record in
                     HStack(spacing: 0) {
                         // 회차
                         Text("\(record.round)")

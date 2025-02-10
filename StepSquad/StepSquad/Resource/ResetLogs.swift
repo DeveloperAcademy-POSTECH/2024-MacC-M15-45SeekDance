@@ -55,4 +55,12 @@ class ClimbingManager: ObservableObject {
             currentRound = (records.last?.round ?? 0) + 1 // 마지막 회차 이후로 시작
         }
     }
+    
+    // 가장 최근의 기록을 반환하는 함수
+    func getLatestRecord() -> ClimbingRecord? {
+        return records.last
+    }
+//    let latestRecord = manager.getLatestRecord() {
+//        Text("최근 회차 층수: \(latestRecord.floorsClimbed)")
+//        Text("D-Day: \(latestRecord.dDay)")
 }

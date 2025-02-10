@@ -22,6 +22,8 @@ struct MainViewPhase3: View {
     @State var isCardFlipped: Bool = true
     
     @State private var isResetViewPresented = false
+    @State private var isShowNewBirdPresented = false
+    @State private var isWifiAlertPresented = false
     
     @State var userProfileImage: Image?
     
@@ -200,10 +202,10 @@ struct MainViewPhase3: View {
                                 
                                 ZStack {
                                     EntryCertificateView(userPlayerImage: userProfileImage, nickName: gameCenterManager.loadLocalPlayerName())
-                                        .rotation3DEffect(.degrees(isCardFlipped ? 0 : -90), axis: (x: 0, y: 1, z: 0))
+                                        .rotation3DEffect(.degrees(isCardFlipped ? 0.001 : -90), axis: (x: 0.001, y: 1, z: 0.001))
                                         .animation(isCardFlipped ? .linear.delay(0.35) : .linear, value: isCardFlipped)
                                     DescendRecordView()
-                                        .rotation3DEffect(.degrees(isCardFlipped ? 90 : 0), axis: (x: 0, y: 1, z: 0))
+                                        .rotation3DEffect(.degrees(isCardFlipped ? 90 : 0.001), axis: (x: 0.001, y: 1, z: 0.001))
                                         .animation(isCardFlipped ? .linear : .linear.delay(0.35), value: isCardFlipped)
                                 }
                                 .onTapGesture {
@@ -238,6 +240,7 @@ struct MainViewPhase3: View {
                             service.getWeeklyStairDataAndSave()
                             service.fetchAndSaveFlightsClimbedSinceAuthorization()
                             updateLevelsAndGameCenter()
+//                            printAll()
                         }
                         .scrollIndicators(ScrollIndicatorVisibility.hidden)
                         .onAppear {
@@ -335,10 +338,14 @@ struct MainViewPhase3: View {
                 
                 // MARK: 만렙일 때 보여주는 리셋 버튼
                 Button {
-                    isResetViewPresented = true
+                    if gameCenterManager.isGameCenterLoggedIn {
+                        isResetViewPresented = true
+                    } else {
+                        isWifiAlertPresented = true
+                    }
                 } label: {
                     HStack() {
-
+                        
                         Image(systemName: "mountain.2.fill")
                         Text("하산하기")
                     }
@@ -348,6 +355,13 @@ struct MainViewPhase3: View {
                     .background(Color(hex: 0x864035), in: RoundedRectangle(cornerRadius: 30))
                 }
                 .padding(.top, 10)
+                .alert("네트워크 연결 상태를 확인한 후 앱에 다시 접속해주세요.", isPresented: $isWifiAlertPresented) {
+                    Button("확인") {
+                        isWifiAlertPresented = false
+                    }
+                } message: {
+                    Text("틈새는 온라인 환경에서만 하산을 할 수 있어요!")
+                }
                 
                 Spacer()
             } else {
@@ -385,7 +399,7 @@ struct MainViewPhase3: View {
                             .frame(width: 220, height: 256)
                     }
                 }
-
+                
                 .frame(width: 220, height: 256)
                 .padding(.top, 16)
                 
@@ -414,11 +428,11 @@ struct MainViewPhase3: View {
                     .padding(.top, 4)
                 
                 Spacer()
-
+                
             }
         }
         .fullScreenCover(isPresented: $isResetViewPresented) {
-            ResetNavigationView(isResetViewPresented: $isResetViewPresented)
+            ResetNavigationView(isResetViewPresented: $isResetViewPresented, manager: ClimbingManager())
         }
         .onAppear {
             // MARK: 일단 임시로 onAppear 사용해서 권한 받자마자 뷰를 그릴 수 있도록 임시조치함. 단, onAppear를 사용하면 뷰에 접속 할때마다 갱신되므로 사실 상, pulltoRefreash가 의미 없어짐.
@@ -516,6 +530,7 @@ struct MainViewPhase3: View {
         gameCenterManager.authenticateUser()
         // MARK: 저장된 레벨 정보 불러오고 헬스킷 정보로 업데이트하기
         currentStatus = loadCurrentStatus()
+//        printAll()
     }
     
     // MARK: - 타이머
@@ -672,19 +687,15 @@ struct MainViewPhase3: View {
         currentStatus.updateStaircase(0)
         saveCurrentStatus()
         lastElectricAchievementKwh = 0
-        do {
-            try context.delete(model: StairStepModel.self)
-        } catch {
-            print("error: Failed to clear all StairStepModel data.")
-        }
         gameCenterManager.resetAchievements()
         completedLevels.resetLevels()
         collectedItems.resetItems()
-        service.fetchAndSaveFlightsClimbedSinceButtonPress()
+//        printAll()
     }
     
     // MARK: Level 관련 테스트 프린트문
     func printAll() {
+        print("--------printAll--------")
         print("누적 층계: \(currentStatus.getTotalStaircase())")
         print("현재 레벨: \(currentStatus.currentLevel.level)")
         print("현재 레벨 난이도: \(currentStatus.currentLevel.difficulty.rawValue)")
@@ -704,17 +715,19 @@ struct MainViewPhase3: View {
 struct ResetNavigationView: View {
     @Binding var isResetViewPresented: Bool // FullScreen 상태를 상위 뷰와 공유
     
+    // 최근 기록 표시위한 @ObservedObject 선언
+    @ObservedObject var manager: ClimbingManager
+    
     var body: some View {
         NavigationStack {
-            VStack {
-                
+            VStack(spacing: 16) {
                 Text("최고 레벨 달성!")
                     .font(.system(size: 12))
-                    .foregroundColor(.white) // 텍스트 색상 설정
-                    .padding(4) // 내부 여백 추가
+                    .foregroundColor(.white)
+                    .padding(4)
                     .background(
-                        Color.primaryColor // 배경색 설정
-                            .cornerRadius(4) // 배경의 모서리 둥글게
+                        Color.primaryColor
+                            .cornerRadius(4)
                     )
                 
                 Text("틈새를 속세로!\n이제는 하산할 시간")
@@ -726,55 +739,75 @@ struct ResetNavigationView: View {
                     .multilineTextAlignment(.center)
                     .font(.body)
                 
-                Image("Down1")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 256)
-                
-                Spacer()
-                
-                NavigationLink(destination: DetailView(isResetViewPresented: $isResetViewPresented)) {
-                    Text("설명보기")
-                        .padding()
-                        .frame(width: 352, height: 50)
-                        .background(Color.primaryColor)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                }
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button(action: {
-                            isResetViewPresented = false // 닫기 버튼으로 Sheet 해제
-                        }) {
-                            Image(systemName: "x.circle.fill")
-                                .foregroundColor(.secondary)
-                        }
+            }
+            .padding(.top, 36)
+            
+            Image("Ultimate")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 256)
+                .padding(.top, 32)
+            
+            Spacer()
+            
+            NavigationLink(destination: DetailView(isResetViewPresented: $isResetViewPresented)) {
+                Text("설명보기")
+                    .padding()
+                    .frame(width: 352, height: 50)
+                    .background(Color.primaryColor)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+            }
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        isResetViewPresented = false // 닫기 버튼으로 Sheet 해제
+                    }) {
+                        Image(systemName: "x.circle.fill")
+                            .foregroundColor(.secondary)
                     }
                 }
             }
         }
     }
 }
+
 // MARK: - 2번 째 뷰
 struct DetailView: View {
     @Binding var isResetViewPresented: Bool
     
     var body: some View {
         VStack {
-            Text("그 동안 모은 건\n틈새 하산 선물로!")
+            VStack(spacing: 16) {
+                Text("")
+                    .font(.system(size: 12))
+                    .foregroundColor(.white)
+                    .padding(4)
+                
+                VStack {
+                    Text("그 동안 모은 건\n") +
+                    Text("틈새 하산 선물")
+                        .foregroundColor(Color.primaryColor) +
+                    Text("로!")
+                    
+                }
                 .multilineTextAlignment(.center)
                 .font(.title)
                 .fontWeight(.bold)
-            
-            Text("틈새와 함께 모은 약재, 뱃지, 점수는\n하산이 완료되면 모두 초기화가 됩니다.")
-                .multilineTextAlignment(.center)
-                .font(.body)
+                
+                Text("틈새와 함께 모은 약재, 뱃지, 점수는\n하산이 완료되면 모두 초기화가 됩니다.")
+                    .multilineTextAlignment(.center)
+                    .font(.body)
+            }
+            .padding(.top, 36)
             
             Image("Down2")
                 .resizable()
                 .scaledToFit()
                 .frame(width: 348)
+                .padding(.top, 16)
+            
             
             Spacer()
             
@@ -809,19 +842,32 @@ struct DetailView2: View {
     
     var body: some View {
         VStack {
-            Text("역대 하산 기록은\n남아있어요!")
+            VStack(spacing: 16) {
+                Text("")
+                    .font(.system(size: 12))
+                    .foregroundColor(.white)
+                    .padding(4)
+                
+                VStack {
+                    Text("역대 하산 기록은\n")
+                        .foregroundColor(Color.primaryColor) +
+                    Text("남아있어요!")
+                }
                 .multilineTextAlignment(.center)
                 .font(.title)
                 .fontWeight(.bold)
-            
-            Text("입단증의 뒤집으면\n역대 하산 기록을 볼 수 있습니다.")
-                .multilineTextAlignment(.center)
-                .font(.body)
+                
+                Text("입단증의 뒤집으면\n역대 하산 기록을 볼 수 있습니다.")
+                    .multilineTextAlignment(.center)
+                    .font(.body)
+            }
+            .padding(.top, 36)
             
             Image("Down3")
                 .resizable()
                 .scaledToFit()
                 .frame(width: 348)
+                .padding(.top, 10)
             
             Spacer()
             
@@ -850,7 +896,7 @@ struct DetailView2: View {
 
 // MARK: - 4번 째 뷰 (입력창)
 struct DetailView3: View {
-    
+    @Environment(\.modelContext) var context
     @StateObject private var manager = ClimbingManager()
     
     @Binding var isResetViewPresented: Bool
@@ -864,69 +910,70 @@ struct DetailView3: View {
     
     var body: some View {
         VStack {
-            Text("틈새를 하산시킬까요?")
-                .multilineTextAlignment(.center)
-                .font(.title)
-                .fontWeight(.bold)
-            
-            Text("진행하려면 ‘\(correctText)’를 입력하세요.")
+            VStack(spacing: 16) {
+                Text("")
+                    .font(.system(size: 12))
+                    .foregroundColor(.white)
+                    .padding(4)
+                
+                Text("틈새를 하산시킬까요?")
+                    .multilineTextAlignment(.center)
+                    .font(.title)
+                    .fontWeight(.bold)
+                
+                VStack {
+                    Text("진행하려면 ") +
+                    Text("‘\(correctText)’")
+                        .foregroundColor(Color.primaryColor) +
+                    Text("를 입력하세요.")
+                }
                 .multilineTextAlignment(.center)
                 .font(.body)
+            }
+            .padding(.top, 36)
             
-            
-            //            TextField("건강해라", text: $userInput)
-            //                .textFieldStyle(RoundedBorderTextFieldStyle())
             TextField("건강해라", text: $userInput)
                 .padding()
-                .background(Color.secondary.opacity(0.2)) // 배경색
-                .cornerRadius(10) // 둥근 모서리
-            //                .overlay(
-            //                    RoundedRectangle(cornerRadius: 10) // 테두리 추가
-            //                        .stroke(Color.blue, lineWidth: 2)
-            //                )
-                .foregroundColor(.primary) // 텍스트 색상
+                .frame(width: 322, height: 44)
+                .background(Color.secondary.opacity(0.2))
+                .cornerRadius(10)
+                .foregroundColor(.primary)
                 .padding(10)
+                .padding(.top, 40)
             
-            if !errorMessage.isEmpty {
-                Text(errorMessage)
-                    .foregroundColor(.red)
-                    .font(.footnote)
-                
+            VStack(spacing: 10) {
+                if !errorMessage.isEmpty {
+                    Text(errorMessage)
+                        .foregroundColor(.red)
+                        .font(.caption2)
+                }
+                Text("달성 뱃지, 약재, 리더보드 점수는 영구적으로 사라집니다.\n하산 기록(날짜, 횟수)는 입단증을 통해 확인할 수 있습니다.")
+                    .font(.caption2)
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(.secondary)
             }
-            Text("달성 뱃지, 약재, 리더보드 점수는 영구적으로 사라집니다.\n하산 기록(날짜, 횟수)는 입단증을 통해 확인할 수 있습니다.")
-                .font(.footnote)
-                .multilineTextAlignment(.center)
-                .foregroundColor(.secondary)
-            
             
             Spacer()
             
-            NavigationLink(destination: MainViewPhase3()
-                .onAppear {
-                    
-                    // MARK: 순위표로 이동 입력창에 오타 없이 사용자가 입력하면 자동으로 실행되는 함수들
-                    
-                    // 1. 날짜 리셋 함수
-                    service.fetchAndSaveFlightsClimbedSinceButtonPress()
-                    
-                    // 2. 하산 날짜, 계단 오른 층수, dDAY, 회차 더하기 함수
-                    let floorsClimbed = service.getSavedFlightsClimbedFromDefaults()
-                    let dDay = loadDDayFromDefaults()
-                    
-                    manager.addRecord(descentDate: Date(), floorsClimbed: Float(floorsClimbed), dDay: Int(dDay))
-                    
-                }) {
+            if let latestRecord = manager.records.last {
+                NavigationLink(
+                    destination: ShowNewBirdView(
+                        isShowNewBirdPresented: $isResetViewPresented,
+                        days: latestRecord.dDay,
+                        stairs: Int(latestRecord.floorsClimbed)
+                    )
+                ) {
                     Text("하산하기")
                         .padding()
-                        .frame(maxWidth: .infinity)
+                        .frame(width: 352, height: 50)
                         .background(userInput == correctText ? Color.primaryColor : Color.gray)
                         .foregroundColor(.white)
                         .cornerRadius(10)
                 }
                 .disabled(userInput != correctText)
                 .padding(.top)
+            }
         }
-        .padding()
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -938,11 +985,31 @@ struct DetailView3: View {
                 }
             }
         }
-        .onChange(of: userInput) { newValue in
-            if newValue != correctText {
-                errorMessage = "틈새에게 마지막으로 덕담인 ‘건강해라'를 입력해주세요."
-            } else {
-                errorMessage = ""
+        //        .onChange(of: userInput) { newValue in
+        //            if newValue != correctText {
+        //                errorMessage = "틈새에게 마지막으로 덕담인 ‘건강해라'를 입력해주세요."
+        //            } else {
+        //                errorMessage = ""
+        //            }
+        //        }
+        .onAppear {
+            // MARK: 순위표로 이동 입력창에 오타 없이 사용자가 입력하면 자동으로 실행되는 함수들
+            
+            // 1. 날짜 리셋 함수
+            service.fetchAndSaveFlightsClimbedSinceButtonPress()
+            
+            // 2. 하산 날짜, 계단 오른 층수, dDAY, 회차 더하기 함수
+            let dDay = loadDDayFromDefaults()
+            let floorsClimbed = service.getSavedFlightsClimbedFromDefaults()
+            
+            manager.addRecord(descentDate: Date(), floorsClimbed: Float(floorsClimbed), dDay: Int(dDay))
+            
+            // 3. 현재 레벨, 획득 재료, NFC 태깅 정보, 성취 관련 리셋
+            MainViewPhase3().resetLevel()
+            do {
+                try context.delete(model: StairStepModel.self)
+            } catch {
+                print("error: Failed to clear all StairStepModel data.")
             }
         }
     }
