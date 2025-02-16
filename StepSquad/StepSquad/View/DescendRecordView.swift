@@ -69,7 +69,7 @@ struct DescendRecordView: View {
                     }
                 }
                 if infoButtonClicked {
-                    Text("1층을 오를 때 엘리베이터 대신 계단을 이용하면 약 25kWh를 아낄 수 있어요.")
+                    Text("한 계단 오를 때마다 건강 수명이 4초씩 연장됩니다.")
                         .font(.system(size: 13))
                         .foregroundStyle(.green700)
                 }
