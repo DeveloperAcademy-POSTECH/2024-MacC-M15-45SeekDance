@@ -97,7 +97,7 @@ struct EntryCertificateView: View {
             Spacer()
             
             if !isButtonClicked {
-                Text("하산 기록 보기")
+                Text("입단증 눌러서 하산 기록 보기")
                     .font(Font.custom("SF Pro", size: 13))
                     .padding(.horizontal, 101)
                     .padding(.vertical, 7)
@@ -161,9 +161,7 @@ struct EntryCertificateView: View {
         userDefaults.set(dDay, forKey: "DDayValue")
         print("dDay (\(dDay))가 UserDefaults에 저장되었습니다.")
     }
-    
 
-    
     func captureAndShare() {
         let renderer = ImageRenderer(content: self)
         
