@@ -99,7 +99,7 @@ struct EntryCertificateView: View {
             if !isButtonClicked {
                 Text("입단증 눌러서 하산 기록 보기")
                     .font(Font.custom("SF Pro", size: 13))
-                    .padding(.horizontal, 101)
+                    .padding(.horizontal, 60)
                     .padding(.vertical, 7)
                     .foregroundStyle(.green900)
                     .padding(.bottom, 20)

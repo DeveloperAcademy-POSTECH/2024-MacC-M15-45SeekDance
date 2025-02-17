@@ -10,9 +10,11 @@ import SwiftUI
 struct DescendRecordView: View {
     @State private var isSharing: Bool = false
     @State private var sharedImage: UIImage?
-    @State private var isButtonClicked: Bool = false
+    @State private var isShareButtonClicked: Bool = false
     @State private var infoButtonClicked: Bool = false
-    
+
+    @ObservedObject var climbManager: ClimbingManager
+
     var body: some View {
         VStack() {
             HStack(spacing: 0) {
@@ -22,12 +24,12 @@ struct DescendRecordView: View {
                 
                 Spacer()
                 
-                if !isButtonClicked {
+                if !isShareButtonClicked {
                     Button {
-                        isButtonClicked = true
+                        isShareButtonClicked = true
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                             captureAndShare()
-                            isButtonClicked = false
+                            isShareButtonClicked = false
                         }
                     } label: {
                         Label("공유하기", systemImage: "square.and.arrow.up")
@@ -40,55 +42,78 @@ struct DescendRecordView: View {
                                 in: RoundedRectangle(cornerRadius: 8))
                 }
             }
-            
-            VStack() {
-                HStack() {
-                    Image("DescendRecordImage")
-                        .resizable()
-                        .frame(width: 80, height: 80)
-                        .aspectRatio(contentMode: .fit)
-                    
-                    VStack(alignment: .leading) {
-                        HStack(alignment: .bottom) {
-                            Text("연장된 건강 수명")
-                                .font(.system(size: 15))
-                                .foregroundStyle(.green900)
-                            
-                            Spacer()
-                            
-                            Button {
-                                infoButtonClicked.toggle()
-                            } label: {
-                                Image(systemName: "info.circle")
+
+            if !climbManager.records.isEmpty {
+                VStack() {
+                    HStack() {
+                        Image("DescendRecordImage")
+                            .resizable()
+                            .frame(width: 80, height: 80)
+                            .aspectRatio(contentMode: .fit)
+
+                        VStack(alignment: .leading) {
+                            HStack(alignment: .bottom) {
+                                Text("연장된 건강 수명")
+                                    .font(.system(size: 15))
                                     .foregroundStyle(.green900)
+
+                                Spacer()
+
+                                Button {
+                                    infoButtonClicked.toggle()
+                                } label: {
+                                    Image(systemName: "info.circle")
+                                        .foregroundStyle(.green900)
+                                }
                             }
+                            Text("1.6시간")
+                                .font(.system(size: 28, weight: .medium))
+                                .foregroundStyle(.green900)
                         }
-                        Text("1.6시간")
-                            .font(.system(size: 28, weight: .medium))
-                            .foregroundStyle(.green900)
+                    }
+                    if infoButtonClicked {
+                        Text("한 계단 오를 때마다 건강 수명이 4초씩 연장됩니다.")
+                            .font(.system(size: 13))
+                            .foregroundStyle(.green700)
                     }
                 }
-                if infoButtonClicked {
-                    Text("한 계단 오를 때마다 건강 수명이 4초씩 연장됩니다.")
-                        .font(.system(size: 13))
-                        .foregroundStyle(.green700)
-                }
-            }
-            .padding(12)
-            .background(.green300,
-                        in: RoundedRectangle(cornerRadius: 8))
-            .padding(.top, 19)
-            
-            CustomTableView(manager: ClimbingManager())
-                .padding(.top, 12)
-            
-            Spacer()
+                .padding(12)
+                .background(.green300,
+                            in: RoundedRectangle(cornerRadius: 8))
+                .padding(.top, 19)
 
-            Text("입단증 보기")
-                .font(Font.custom("SF Pro", size: 13))
-                .padding(.vertical, 4)
-                .padding(.horizontal, 100)
-                .foregroundColor(Color(red: 0.23, green: 0.33, blue: 0.17))
+                CustomTableView(manager: ClimbingManager())
+                    .padding(.top, 12)
+
+                Spacer()
+
+                Text("입단증 보기")
+                    .font(Font.custom("SF Pro", size: 13))
+                    .padding(.vertical, 4)
+                    .padding(.horizontal, 100)
+                    .foregroundColor(Color(red: 0.23, green: 0.33, blue: 0.17))
+            } else {
+                Spacer()
+                    .frame(maxHeight: 51)
+
+                Image("certificateEmptyView")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 222, height: 222)
+
+                Spacer()
+
+                Text("아직 하산한 틈새가 없어요!")
+                    .foregroundStyle(.green800)
+                    .font(.system(size: 20, weight: .semibold))
+                    .padding(.bottom, 8)
+                Text("최고 레벨을 달성하면\n 틈새를 하산시키고 기록을 남길 수 있어요.")
+                    .foregroundStyle(.green600)
+                    .font(.system(size: 15))
+                    .multilineTextAlignment(.center)
+
+                Spacer()
+            }
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 16)
@@ -116,6 +141,3 @@ struct DescendRecordView: View {
     }
 }
 
-#Preview {
-    DescendRecordView()
-}

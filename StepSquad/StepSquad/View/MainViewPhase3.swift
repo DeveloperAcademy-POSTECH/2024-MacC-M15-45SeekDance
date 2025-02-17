@@ -203,7 +203,7 @@ struct MainViewPhase3: View {
                                     EntryCertificateView(userPlayerImage: userProfileImage, nickName: gameCenterManager.loadLocalPlayerName())
                                         .rotation3DEffect(.degrees(isCardFlipped ? 0.001 : -90), axis: (x: 0.001, y: 1, z: 0.001))
                                         .animation(isCardFlipped ? .linear.delay(0.35) : .linear, value: isCardFlipped)
-                                    DescendRecordView()
+                                    DescendRecordView(climbManager: ClimbingManager())
                                         .rotation3DEffect(.degrees(isCardFlipped ? 90 : 0.001), axis: (x: 0.001, y: 1, z: 0.001))
                                         .animation(isCardFlipped ? .linear : .linear.delay(0.35), value: isCardFlipped)
                                 }
