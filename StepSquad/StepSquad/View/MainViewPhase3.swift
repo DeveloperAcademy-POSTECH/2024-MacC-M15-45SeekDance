@@ -175,12 +175,16 @@ struct MainViewPhase3: View {
                                 HStack() {
                                     Image(systemName: "list.bullet")
                                     Text("획득 재료 확인하기")
-                                    //                                    if isShowingNewItem { // 새로 획득한 약재가 있다면,
-                                    //                                        NewItemView()
-                                    //                                    }
+
                                     Spacer(minLength: 2)
-                                    
+
+                                    if isShowingNewItem { // 새로 획득한 약재가 있다면,
+                                        NewItemView()
+                                    }
+
+
                                     Image(systemName: "chevron.right")
+                                        .padding(.leading, 8)
                                 }
                                 .foregroundStyle(.green900)
                                 .padding(.vertical, 10)
