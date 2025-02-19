@@ -59,8 +59,6 @@ struct ExplainView: View {
                             } label: {
                                 Text("팀 45식단 소개")
                             }
-
-
                         }
                     }
 
