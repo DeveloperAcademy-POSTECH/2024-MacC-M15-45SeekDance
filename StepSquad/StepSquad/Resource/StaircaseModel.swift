@@ -19,7 +19,7 @@ enum KoreanProvince: String, Codable {
     case chungbuk = "충청북도"
 }
 
-class Staircase: Codable {
+class Staircase: Codable, Identifiable {
     let id: String // TODO: id는 영문명으로 계단 이미지도 id와 동일하게 설정
     let name: String
     let title: String
@@ -44,3 +44,8 @@ class Staircase: Codable {
         self.achievementId = achievementId
     }
 }
+
+let localStaircases: [Staircase] = [
+    Staircase(id: "Test1", name: "동네 계단", title: "우리 동네에 이런 계단이 있다고?", steps: 70, location: (1, 2), province: .jeju, description: "네 있습니다. 참고 설명입니다.", reward: "굉장한 선물", achievementId: "test1"),
+    Staircase(id: "Test2", name: "먼 계단", title: "먼 동네에 이런 계단이 있다고?", steps: 70, location: (1, 2), province: .jeju, description: "네 있습니다. 참고 설명입니다.", reward: "굉장히 선물", achievementId: "test2"),
+]

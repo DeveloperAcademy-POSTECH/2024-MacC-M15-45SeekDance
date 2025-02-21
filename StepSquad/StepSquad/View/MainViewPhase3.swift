@@ -88,6 +88,14 @@ struct MainViewPhase3: View {
                                     .padding(5)
                                     .background(.grey100, in: Circle.circle)
                             }
+                            NavigationLink(destination: TestLocalStaircaseVerification(collectedItems: $collectedItems)) {
+                                Image(systemName: "chevron.right")
+                                    .resizable()
+                                    .frame(width: 22, height: 22)
+                                    .foregroundStyle(.primary)
+                                    .padding(5)
+                                    .background(.primary, in: Circle.circle)
+                            }
                         }
                         .padding(.top, 72)
                         .padding(.bottom, 4)

@@ -27,6 +27,11 @@ class CollectedItems: Codable {
         save()
     }
     
+    func deleteItem(item: String) {
+        items.removeValue(forKey: item)
+        save()
+    }
+    
     func save() {
         do {
             let data = try JSONEncoder().encode(items)

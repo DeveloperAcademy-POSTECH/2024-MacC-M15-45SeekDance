@@ -36,4 +36,16 @@ let hiddenItems: [String: Item] = [
         itemColor: 0x03787B,
         achievementId: "clover",
         keyword: "퀘스트"),
+    "Test1": Item(
+        item: "가까운 동네 보상",
+        itemImage: "Clover",
+        itemColor: 0x03787B,
+        achievementId: "test1",
+        keyword: "계단 정복"),
+    "Test2": Item(
+        item: "먼 동네 보상",
+        itemImage: "Clover",
+        itemColor: 0x03787B,
+        achievementId: "test2",
+        keyword: "계단 정복"),
 ]
