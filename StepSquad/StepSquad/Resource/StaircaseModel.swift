@@ -8,15 +8,15 @@
 import Foundation
 
 enum KoreanProvince: String, Codable {
-    case gangwon = "강원특별자치도"
-    case gyeonggi = "경기도"
-    case gyeongnam = "경상남도"
-    case gyeongbuk = "경상북도"
-    case jeonnam = "전라남도"
-    case jeonbuk = "전북특별자치도"
-    case jeju = "제주특별자치도"
-    case chungnam = "충청남도"
-    case chungbuk = "충청북도"
+    case gangwon = "강원"
+    case gyeonggi = "수도권"
+    case gyeongnam = "부산/울산/경남"
+    case gyeongbuk = "대구/경북"
+    case jeonnam = "광주/전남"
+    case jeonbuk = "전북"
+    case jeju = "제주"
+    case chungnam = "대전/충남"
+    case chungbuk = "충북"
 }
 
 class Staircase: Codable, Identifiable {
