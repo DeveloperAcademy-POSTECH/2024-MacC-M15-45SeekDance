@@ -49,4 +49,28 @@ class GPSStaircase: Codable, Identifiable {
 
 let gpsStaircases: [GPSStaircase] = [
     GPSStaircase(id: "Test1", name: "초량 이바구길 168 계단", title: "역사가 오래된 초량의 이바구 길", steps: 168, latitude: 35.117143, longitude: 129.035298, province: .gyeongnam, description: "이바구길을 이바구를 떨며 걸어올라가 볼까나?", verificationLocation: "인증 장소 예시", reward: "국밥 육수", achievementId: "test1"),
+    GPSStaircase(
+        id: "Busan-168",
+        name: "초량 이바구길 168 계단",
+        title: "이바구 떨며 오르세요",
+        steps: 168,
+        latitude: 35.117143,
+        longitude: 129.035298,
+        province: .gyeongnam,
+        description: "부산의 경사로를 몸소 느껴보자",
+        verificationLocation: "계단 아래",
+        reward: "국밥 육수",
+        achievementId: "Busan-168"),
+    GPSStaircase(
+        id: "Busan-40",
+        name: "부산 40 계단",
+        title: "피난민의 역사가 깃든",
+        steps: 40,
+        latitude: 35.103911,
+        longitude: 129.034629,
+        province: .gyeongnam,
+        description: "원조 만남의 광장",
+        verificationLocation: "조각상 앞",
+        reward: "다대기",
+        achievementId: "Busan-40"),
 ]
