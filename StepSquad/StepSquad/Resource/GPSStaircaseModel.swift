@@ -188,4 +188,24 @@ let gpsStaircases: [GPSStaircase] = [
         gpsLocation: (36.012276, 129.32505),
         verificationLocation: "계단 아래 지점",
         reward: "창업 계획서 양식.hwp"),
+    GPSStaircase(
+        id: "SeongsanIlchulbong",
+        name: "성산일출봉",
+        title: "일출이 아름다운",
+        description: "제주도에 왔다면 성산 일출을 보러가자!",
+        province: .jeju,
+        steps: 0, // TODO: 수정 필요
+        gpsLocation: (33.462336, 126.936886),
+        verificationLocation: "매표소",
+        reward: "한라봉"),
+    GPSStaircase(
+        id: "YeongjuMountain",
+        name: "영주산 둘레길 천국의 계단",
+        title: "천국의 계단이 있어요",
+        description: "제주 여행 중 뭔가를 많이 먹었다면 필수로 방문하세요",
+        province: .jeju,
+        steps: 724,
+        gpsLocation: (33.405684, 126.806024),
+        verificationLocation: "입구 주차장",
+        reward: "돌하르방"),
 ]
