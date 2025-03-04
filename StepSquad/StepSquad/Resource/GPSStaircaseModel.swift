@@ -32,15 +32,15 @@ class GPSStaircase: Codable, Identifiable {
     let reward: String // 획득 재료 TODO: 리워드 이미지 파일명은 "[id]_reward"로 설정
     let achievementId: String // id의 맨 앞글자를 소문자로 만듬
     
-    init(id: String, name: String, title: String, description: String, province: KoreanProvince, steps: Int, latitude: Double, longitude: Double, verificationLocation: String, reward: String) {
+    init(id: String, name: String, title: String, description: String, province: KoreanProvince, steps: Int, gpsLocation: (latitude: Double, longitude: Double), verificationLocation: String, reward: String) {
         self.id = id
         self.name = name
         self.title = title
         self.description = description
         self.province = province
         self.steps = steps
-        self.latitude = latitude
-        self.longitude = longitude
+        self.latitude = gpsLocation.latitude
+        self.longitude = gpsLocation.longitude
         self.verificationLocation = verificationLocation
         self.reward = reward
         self.achievementId = id.prefix(1).lowercased() + id.suffix(id.count - 1)
@@ -55,8 +55,7 @@ let gpsStaircases: [GPSStaircase] = [
         description: "이바구길을 이바구를 떨며 걸어올라가 볼까나?",
         province: .gyeongnam,
         steps: 168,
-        latitude: 35.117143,
-        longitude: 129.035298,
+        gpsLocation: (35.117143, 129.035298),
         verificationLocation: "인증 장소 예시",
         reward: "국밥 육수"),
     GPSStaircase(
@@ -66,8 +65,7 @@ let gpsStaircases: [GPSStaircase] = [
         description: "부산의 경사로를 몸소 느껴보자",
         province: .gyeongnam,
         steps: 168,
-        latitude: 35.117143,
-        longitude: 129.035298,
+        gpsLocation: (35.117143, 129.035298),
         verificationLocation: "계단 아래",
         reward: "국밥 육수"),
     GPSStaircase(
@@ -77,8 +75,7 @@ let gpsStaircases: [GPSStaircase] = [
         description: "원조 만남의 광장",
         province: .gyeongnam,
         steps: 40,
-        latitude: 35.103911,
-        longitude: 129.034629,
+        gpsLocation: (35.103911, 129.034629),
         verificationLocation: "조각상 앞",
         reward: "다대기"),
     GPSStaircase(
@@ -88,8 +85,7 @@ let gpsStaircases: [GPSStaircase] = [
         description: "계단식 논도 계단이라고 일단 정했어요",
         province: .gyeongnam,
         steps: 108,
-        latitude: 34.726835,
-        longitude: 127.896276,
+        gpsLocation: (34.726835, 127.896276),
         verificationLocation: "다랭이마을 전망대",
         reward: "통통한 멸치"),
     GPSStaircase(
@@ -99,8 +95,7 @@ let gpsStaircases: [GPSStaircase] = [
         description: "모노레일 말고 계단을 이용해서 나의 기세를 보여주자",
         province: .gyeongnam,
         steps: 365,
-        latitude: 35.149216,
-        longitude: 128.661541,
+        gpsLocation: (35.149216, 128.661541),
         verificationLocation: "모노레일 옆 계단 입구 지점",
         reward: "버찌"),
     GPSStaircase(
@@ -110,8 +105,7 @@ let gpsStaircases: [GPSStaircase] = [
         description: "출렁다리 건너기전에 건너야만 해요",
         province: .gangwon,
         steps: 578,
-        latitude: 37.367791,
-        longitude: 127.825207,
+        gpsLocation: (37.367791, 127.825207),
         verificationLocation: "1-2, 매표소", // TODO: 수정 필요
         reward: "십년(된) 감수"),
     GPSStaircase(
@@ -121,8 +115,7 @@ let gpsStaircases: [GPSStaircase] = [
         description: "심사임당과 율곡이이의 고향이라던데?",
         province: .gangwon,
         steps: 17,
-        latitude: 37.779131,
-        longitude: 128.879658,
+        gpsLocation: (37.779131, 128.879658),
         verificationLocation: "매표소",
         reward: "5만 5천원"),
     GPSStaircase(
@@ -132,8 +125,7 @@ let gpsStaircases: [GPSStaircase] = [
         description: "동굴로 가보자",
         province: .gangwon,
         steps: 365,
-        latitude: 37.351108,
-        longitude: 128.79053,
+        gpsLocation: (37.351108, 128.79053),
         verificationLocation: "매표소",
         reward: "곤드레"),
     GPSStaircase(
@@ -143,8 +135,7 @@ let gpsStaircases: [GPSStaircase] = [
         description: "건강도 챙기고 소원도 빌어보세요!",
         province: .gyeongbuk,
         steps: 1365,
-        latitude: 35.977617,
-        longitude: 128.733097,
+        gpsLocation: (35.977617, 128.733097),
         verificationLocation: "관암사 계단 입구",
         reward: "갓바위 돌가루"),
     GPSStaircase(
@@ -154,8 +145,7 @@ let gpsStaircases: [GPSStaircase] = [
         description: "3.1운동의 역사가 깃들어 있는 멋진 계단",
         province: .gyeongbuk,
         steps: 90,
-        latitude: 35.867500,
-        longitude: 128.586135,
+        gpsLocation: (35.867500, 128.586135),
         verificationLocation: "", // TODO: 수정 필요
         reward: "태극기"),
     GPSStaircase(
@@ -165,8 +155,7 @@ let gpsStaircases: [GPSStaircase] = [
         description: "바다가 한눈에 보이는 스페이스 워크!",
         province: .gyeongbuk,
         steps: 717,
-        latitude: 36.065128,
-        longitude: 129.390362,
+        gpsLocation: (36.065128, 129.390362),
         verificationLocation: "계단 바로 앞",
         reward: "포항산 철분"),
     GPSStaircase(
@@ -176,8 +165,7 @@ let gpsStaircases: [GPSStaircase] = [
         description: "아주 높으신 분들만 걸을 수 있는 계단이라네. 우리는 다른 계단으로 걷자.",
         province: .gyeongbuk,
         steps: 34,
-        latitude: 35.789713,
-        longitude: 129.332154,
+        gpsLocation: (35.789713, 129.332154),
         verificationLocation: "계단 아래 지점",
         reward: "해탈"),
     GPSStaircase(
@@ -187,8 +175,7 @@ let gpsStaircases: [GPSStaircase] = [
         description: "계단사랑단은 여기서 시작되었어요",
         province: .gyeongbuk,
         steps: 78,
-        latitude: 36.01481,
-        longitude: 129.321583,
+        gpsLocation: (36.01481, 129.321583),
         verificationLocation: "계단 중앙 지점", // TODO: 위치 명칭 통일
         reward: "노벨 제발(please)상"),
     GPSStaircase(
@@ -198,8 +185,7 @@ let gpsStaircases: [GPSStaircase] = [
         description: "계단사랑단은 여기서도 시작하려고 했어요",
         province: .gyeongbuk,
         steps: 0, // TODO: 수정 필요
-        latitude: 36.012276,
-        longitude: 129.32505,
+        gpsLocation: (36.012276, 129.32505),
         verificationLocation: "계단 아래 지점",
         reward: "창업 계획서 양식.hwp"),
 ]
