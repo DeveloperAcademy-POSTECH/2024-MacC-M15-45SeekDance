@@ -48,7 +48,7 @@ class GPSStaircase: Codable, Identifiable {
 }
 
 let gpsStaircases: [GPSStaircase] = [
-    GPSStaircase(
+    GPSStaircase( // TODO: 추후 삭제
         id: "Test1",
         name: "초량 이바구길 168 계단",
         title: "역사가 오래된 초량의 이바구 길",
@@ -66,7 +66,7 @@ let gpsStaircases: [GPSStaircase] = [
         province: .gyeongnam,
         steps: 168,
         gpsLocation: (35.117143, 129.035298),
-        verificationLocation: "계단 아래",
+        verificationLocation: "계단 아래", // TODO: 수정 필요
         reward: "국밥 육수"),
     GPSStaircase(
         id: "Busan40",
@@ -112,7 +112,7 @@ let gpsStaircases: [GPSStaircase] = [
         id: "Ojukheon",
         name: "강릉 오죽헌 계단",
         title: "심사임당과 율곡이이의 홈 스윗 홈",
-        description: "심사임당과 율곡이이의 고향이라던데?",
+        description: "심사임당과 율곡이이의 고향이라던대?",
         province: .gangwon,
         steps: 17,
         gpsLocation: (37.779131, 128.879658),
@@ -166,7 +166,7 @@ let gpsStaircases: [GPSStaircase] = [
         province: .gyeongbuk,
         steps: 34,
         gpsLocation: (35.789713, 129.332154),
-        verificationLocation: "계단 아래 지점",
+        verificationLocation: "계단 아래 지점", // TODO: 수정 필요
         reward: "해탈"),
     GPSStaircase(
         id: "Postech78",
@@ -194,7 +194,7 @@ let gpsStaircases: [GPSStaircase] = [
         title: "일출이 아름다운",
         description: "제주도에 왔다면 성산 일출을 보러가자!",
         province: .jeju,
-        steps: 0, // TODO: 수정 필요
+        steps: 976, // TODO: 수정 필요
         gpsLocation: (33.462336, 126.936886),
         verificationLocation: "매표소",
         reward: "한라봉"),
@@ -246,7 +246,7 @@ let gpsStaircases: [GPSStaircase] = [
         province: .jeonnam,
         steps: 365,
         gpsLocation: (35.361538, 126.394593),
-        verificationLocation: "2번 출구 밖",
+        verificationLocation: "계단 현판 앞",
         reward: "굴비"),
     GPSStaircase(
         id: "SangdoStation",
@@ -266,7 +266,7 @@ let gpsStaircases: [GPSStaircase] = [
         province: .gyeonggi,
         steps: 61,
         gpsLocation: (37.554509, 126.981684),
-        verificationLocation: "계단 아래",
+        verificationLocation: "계단 아래", // TODO: 수정 필요
         reward: "양푼이비빔밥"),
     GPSStaircase(
         id: "EwhaCampusComplex ",
