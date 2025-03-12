@@ -146,7 +146,7 @@ let gpsStaircases: [GPSStaircase] = [
         province: .gyeongbuk,
         steps: 90,
         gpsLocation: (35.867500, 128.586135),
-        verificationLocation: "", // TODO: 수정 필요
+        verificationLocation: "계단 아래 지점",
         reward: "태극기"),
     GPSStaircase(
         id: "SpaceWalk",
@@ -179,12 +179,12 @@ let gpsStaircases: [GPSStaircase] = [
         verificationLocation: "계단 중앙 지점",
         reward: "노벨 제발(please)상"),
     GPSStaircase(
-        id: "PostechLibrary",
+        id: "ThePathOfEntrepreneurs",
         name: "포항공대 창업자의 길 계단",
         title: "창업자가 되고 싶다면!",
         description: "계단사랑단은 여기서도 시작하려고 했어요",
         province: .gyeongbuk,
-        steps: 0, // TODO: 수정 필요
+        steps: 136,
         gpsLocation: (36.012276, 129.32505),
         verificationLocation: "계단 아래 지점",
         reward: "창업 계획서 양식.hwp"),
@@ -216,7 +216,7 @@ let gpsStaircases: [GPSStaircase] = [
         province: .jeonnam,
         steps: 63,
         gpsLocation: (35.148407, 126.918694),
-        verificationLocation: "", // TODO: 수정 필요
+        verificationLocation: "전일빌딩245",
         reward: "무등산 수박"),
     GPSStaircase(
         id: "BalsanVillage",
@@ -286,7 +286,7 @@ let gpsStaircases: [GPSStaircase] = [
         province: .gyeonggi,
         steps: 42,
         gpsLocation: (37.398326, 127.10985),
-        verificationLocation: "", // TODO: 수정 필요
+        verificationLocation: "계단 아래 지점",
         reward: "판교 사투리 사전"),
     GPSStaircase(
         id: "MuryangGongdeok",
