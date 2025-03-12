@@ -66,7 +66,7 @@ let gpsStaircases: [GPSStaircase] = [
         province: .gyeongnam,
         steps: 168,
         gpsLocation: (35.117143, 129.035298),
-        verificationLocation: "계단 아래", // TODO: 수정 필요
+        verificationLocation: "계단 아래 지점",
         reward: "국밥 육수"),
     GPSStaircase(
         id: "Busan40",
@@ -96,7 +96,7 @@ let gpsStaircases: [GPSStaircase] = [
         province: .gyeongnam,
         steps: 365,
         gpsLocation: (35.149216, 128.661541),
-        verificationLocation: "모노레일 옆 계단 입구 지점",
+        verificationLocation: "모노레일 옆 계단 입구",
         reward: "버찌"),
     GPSStaircase(
         id: "SogeumMountain",
@@ -106,7 +106,7 @@ let gpsStaircases: [GPSStaircase] = [
         province: .gangwon,
         steps: 578,
         gpsLocation: (37.367791, 127.825207),
-        verificationLocation: "1-2, 매표소", // TODO: 수정 필요
+        verificationLocation: "1-2 매표소",
         reward: "십년(된) 감수"),
     GPSStaircase(
         id: "Ojukheon",
@@ -166,7 +166,7 @@ let gpsStaircases: [GPSStaircase] = [
         province: .gyeongbuk,
         steps: 34,
         gpsLocation: (35.789713, 129.332154),
-        verificationLocation: "계단 아래 지점", // TODO: 수정 필요
+        verificationLocation: "계단 아래 지점",
         reward: "해탈"),
     GPSStaircase(
         id: "Postech78",
@@ -176,7 +176,7 @@ let gpsStaircases: [GPSStaircase] = [
         province: .gyeongbuk,
         steps: 78,
         gpsLocation: (36.01481, 129.321583),
-        verificationLocation: "계단 중앙 지점", // TODO: 위치 명칭 통일
+        verificationLocation: "계단 중앙 지점",
         reward: "노벨 제발(please)상"),
     GPSStaircase(
         id: "PostechLibrary",
@@ -266,7 +266,7 @@ let gpsStaircases: [GPSStaircase] = [
         province: .gyeonggi,
         steps: 61,
         gpsLocation: (37.554509, 126.981684),
-        verificationLocation: "계단 아래", // TODO: 수정 필요
+        verificationLocation: "계단 아래 지점",
         reward: "양푼이비빔밥"),
     GPSStaircase(
         id: "EwhaCampusComplex ",
@@ -276,7 +276,7 @@ let gpsStaircases: [GPSStaircase] = [
         province: .gyeonggi,
         steps: 180,
         gpsLocation: (37.561451, 126.946778),
-        verificationLocation: "계단 위치", // TODO: 수정 필요
+        verificationLocation: "계단 중앙 지점",
         reward: "배꽃"),
     GPSStaircase(
         id: "PangyoFootbridge",
