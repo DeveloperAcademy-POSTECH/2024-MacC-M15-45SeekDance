@@ -159,7 +159,7 @@ let gpsStaircases: [GPSStaircase] = [
         verificationLocation: "계단 바로 앞",
         reward: "포항산 철분"),
     GPSStaircase(
-        id: "Cheongungyo-Baegungyo",
+        id: "CheongungyoBaegungyo",
         name: "불국사 계단",
         title: "여기는 오르지 말고 구경만!",
         description: "아주 높으신 분들만 걸을 수 있는 계단이라네. 우리는 다른 계단으로 걷자.",
