@@ -315,7 +315,7 @@ struct MainViewPhase3: View {
     private var LevelUpView: some View {
         VStack(spacing: 0) {
             if isHighestLevel {
-                Image("Down1")
+                Image("Ultimate")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 256, height: 256)
