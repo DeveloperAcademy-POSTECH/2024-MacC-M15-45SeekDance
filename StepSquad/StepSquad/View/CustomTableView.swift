@@ -18,21 +18,13 @@ struct CustomTableView: View {
             // Header Row
             HStack(spacing: 0) {
                 Text("회차")
-                    .frame(maxWidth: 60)
+                    .frame(maxWidth: 48)
                 Text("층수")
-                    .frame(maxWidth: 80)
+                    .frame(maxWidth: 60)
                 Text("일자")
-                    .frame(maxWidth: 80)
+                    .frame(maxWidth: 60)
                 Text("하산 날짜")
                     .frame(maxWidth: .infinity)
-                //                ForEach(headers, id: \.self) { header in
-                //                    Text(header)
-                //                        .font(.system(size: 15))
-                //                        .frame(maxWidth: .infinity)
-                //                        .padding(10)
-                //                        .background(.green300)
-                //                        .foregroundColor(.green900)
-                //                }
             }
             .font(.system(size: 15))
             .padding(10)
@@ -47,13 +39,13 @@ struct CustomTableView: View {
                 // 아직 데이터가 없으면 기본 메시지 표시
                 HStack(spacing: 0) {
                     Text("0")
+                        .frame(maxWidth: 48)
+                    
+                    Text("없습니다.")
                         .frame(maxWidth: 60)
                     
                     Text("없습니다.")
-                        .frame(maxWidth: 80)
-                    
-                    Text("없습니다.")
-                        .frame(maxWidth: 80)
+                        .frame(maxWidth: 60)
                     
                     Text("없습니다.")
                         .frame(maxWidth: .infinity)
@@ -69,15 +61,15 @@ struct CustomTableView: View {
                     HStack(spacing: 0) {
                         // 회차
                         Text("\(record.round)")
-                            .frame(maxWidth: 60)
+                            .frame(maxWidth: 48)
                         
                         // 층수
                         Text("\(Int(record.floorsClimbed))")
-                            .frame(maxWidth: 80)
+                            .frame(maxWidth: 60)
                         
                         // 시간
                         Text("\(record.dDay)")
-                            .frame(maxWidth: 80)
+                            .frame(maxWidth: 60)
                         
                         // 날짜
                         Text(record.descentDate.formattedDate)
