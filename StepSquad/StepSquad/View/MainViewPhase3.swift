@@ -127,7 +127,7 @@ struct MainViewPhase3: View {
                                     MaterialsView(isMaterialSheetPresented: $isMaterialSheetPresented, isShowingNewItem: $isShowingNewItem, completedLevels: completedLevels, collectedItems: collectedItems)
                                 }
                             }
-                            .frame(width: 321, height: 484)
+                            .frame(width: 321, height: 467)
                             .background(Color.white)
                             .cornerRadius(16)
                             .padding(.top, 20)
@@ -382,9 +382,8 @@ struct MainViewPhase3: View {
                             .frame(width: 220, height: 256)
                     }
                 }
-                
                 .frame(width: 220, height: 256)
-                .padding(.top, 16)
+                .padding(.top, 32)
                 
                 HStack(spacing: 4) {
                     Text(currentStatus.currentLevel.difficulty.rawValue)
