@@ -101,23 +101,31 @@ struct MainViewPhase3: View {
                                     GetHealthKitView
                                 }
                                 
-                                NFCReadingView
-                                    .padding(.top, 17)
-                                    .padding(.bottom, 17)
-                                    .background(.grey10)
-                                    .fullScreenCover(isPresented: $isResultViewPresented) {
-                                        ResultView(isResultViewPresented: $isResultViewPresented,
-                                                   stairName: nfcMessage,
-                                                   stairCount: nfcCount)
+                                Button {
+                                    isMaterialSheetPresented.toggle()
+                                } label: {
+                                    HStack() {
+                                        Image(systemName: "list.bullet")
+                                        Text("획득 재료 확인하기")
+
+                                        Spacer()
+
+                                        if isShowingNewItem { // 새로 획득한 약재가 있다면,
+                                            NewItemView()
+                                        }
+
+                                        Image(systemName: "chevron.right")
+                                            .padding(.leading, 8)
                                     }
-                                    .onChange(of: isResultViewPresented) {
-                                        startTimer()
-                                    }
-                                    .alert(isPresented: $isShowingNFCAlert) {
-                                        Alert(title: Text("지원하지 않는 NFC입니다."),
-                                              message: Text("계단에 위치한 NFC를 태그해주세요."),
-                                              dismissButton: .default(Text("확인")))
-                                    }
+                                    .foregroundStyle(.green900)
+                                    .padding(.vertical, 10)
+                                    .padding(.horizontal, 20)
+                                    .background(Color(red: 0.98, green: 0.99, blue: 0.98), in: RoundedRectangle(cornerRadius: 12))
+                                }
+                                .padding(.top, 8)
+                                .sheet(isPresented: $isMaterialSheetPresented) {
+                                    MaterialsView(isMaterialSheetPresented: $isMaterialSheetPresented, isShowingNewItem: $isShowingNewItem, completedLevels: completedLevels, collectedItems: collectedItems)
+                                }
                             }
                             .frame(width: 321, height: 484)
                             .background(Color.white)
@@ -168,34 +176,6 @@ struct MainViewPhase3: View {
                             }
                             .padding(.top, 12)
                             .padding(.horizontal, 36)
-                            
-                            Button {
-                                isMaterialSheetPresented.toggle()
-                            } label: {
-                                HStack() {
-                                    Image(systemName: "list.bullet")
-                                    Text("획득 재료 확인하기")
-
-                                    Spacer(minLength: 2)
-
-                                    if isShowingNewItem { // 새로 획득한 약재가 있다면,
-                                        NewItemView()
-                                    }
-
-
-                                    Image(systemName: "chevron.right")
-                                        .padding(.leading, 8)
-                                }
-                                .foregroundStyle(.green900)
-                                .padding(.vertical, 10)
-                                .padding(.horizontal, 20)
-                                .background(Color(red: 0.98, green: 0.99, blue: 0.98), in: RoundedRectangle(cornerRadius: 12))
-                            }
-                            .padding(.horizontal, 36)
-                            .padding(.top, 8)
-                            .sheet(isPresented: $isMaterialSheetPresented) {
-                                MaterialsView(isMaterialSheetPresented: $isMaterialSheetPresented, isShowingNewItem: $isShowingNewItem, completedLevels: completedLevels, collectedItems: collectedItems)
-                            }
                             
                             if isHealthKitAuthorized {
                                 Divider()
