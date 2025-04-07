@@ -93,26 +93,29 @@ struct DescendRecordView: View {
                     .padding(.horizontal, 100)
                     .foregroundColor(Color(red: 0.23, green: 0.33, blue: 0.17))
             } else {
-                Spacer()
-                    .frame(maxHeight: 51)
-
                 Image("certificateEmptyView")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 222, height: 222)
-
-                Spacer()
+                    .padding(20)
 
                 Text("아직 하산한 틈새가 없어요!")
                     .foregroundStyle(.green800)
                     .font(.system(size: 20, weight: .semibold))
                     .padding(.bottom, 8)
+                
                 Text("최고 레벨을 달성하면\n 틈새를 하산시키고 기록을 남길 수 있어요.")
-                    .foregroundStyle(.green600)
+                    .foregroundStyle(.green700)
                     .font(.system(size: 15))
                     .multilineTextAlignment(.center)
 
                 Spacer()
+                
+                Text("입단증 보기")
+                    .font(Font.custom("SF Pro", size: 13))
+                    .padding(.vertical, 4)
+                    .padding(.horizontal, 100)
+                    .foregroundColor(Color(red: 0.23, green: 0.33, blue: 0.17))
             }
         }
         .padding(.horizontal, 16)
@@ -140,4 +143,3 @@ struct DescendRecordView: View {
         }
     }
 }
-
