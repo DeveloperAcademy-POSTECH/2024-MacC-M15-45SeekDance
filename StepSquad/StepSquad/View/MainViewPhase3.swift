@@ -287,7 +287,7 @@ struct MainViewPhase3: View {
             .background(Color.secondaryColor,
                         in: RoundedRectangle(cornerRadius: 12))
             .padding(.top, 40)
-            .padding(.bottom, 60)
+            Spacer()
         }
         
     }
