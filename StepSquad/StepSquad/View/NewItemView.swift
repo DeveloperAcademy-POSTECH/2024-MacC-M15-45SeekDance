@@ -10,9 +10,9 @@ import SwiftUI
 struct NewItemView: View {
     var body: some View {
         Text("N")
-            .font(.system(size: 7))
+            .font(.system(size: 8))
             .foregroundStyle(.white)
-            .padding(4)
+            .frame(width: 18, height: 18)
             .background(Color(hex: 0xFC573F))
             .clipShape(.circle)
     }

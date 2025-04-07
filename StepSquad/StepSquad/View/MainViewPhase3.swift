@@ -88,14 +88,6 @@ struct MainViewPhase3: View {
                                     .padding(5)
                                     .background(.grey100, in: Circle.circle)
                             }
-                            NavigationLink(destination: TestLocalStaircaseVerification(collectedItems: $collectedItems)) {
-                                Image(systemName: "chevron.right")
-                                    .resizable()
-                                    .frame(width: 22, height: 22)
-                                    .foregroundStyle(.primary)
-                                    .padding(5)
-                                    .background(.primary, in: Circle.circle)
-                            }
                         }
                         .padding(.top, 72)
                         .padding(.bottom, 4)
@@ -109,25 +101,33 @@ struct MainViewPhase3: View {
                                     GetHealthKitView
                                 }
                                 
-                                NFCReadingView
-                                    .padding(.top, 17)
-                                    .padding(.bottom, 17)
-                                    .background(.grey10)
-                                    .fullScreenCover(isPresented: $isResultViewPresented) {
-                                        ResultView(isResultViewPresented: $isResultViewPresented,
-                                                   stairName: nfcMessage,
-                                                   stairCount: nfcCount)
+                                Button {
+                                    isMaterialSheetPresented.toggle()
+                                } label: {
+                                    HStack() {
+                                        Image(systemName: "list.bullet")
+                                        Text("획득 재료 확인하기")
+
+                                        Spacer()
+
+                                        if isShowingNewItem { // 새로 획득한 약재가 있다면,
+                                            NewItemView()
+                                        }
+
+                                        Image(systemName: "chevron.right")
+                                            .padding(.leading, 8)
                                     }
-                                    .onChange(of: isResultViewPresented) {
-                                        startTimer()
-                                    }
-                                    .alert(isPresented: $isShowingNFCAlert) {
-                                        Alert(title: Text("지원하지 않는 NFC입니다."),
-                                              message: Text("계단에 위치한 NFC를 태그해주세요."),
-                                              dismissButton: .default(Text("확인")))
-                                    }
+                                    .foregroundStyle(.green900)
+                                    .padding(.vertical, 10)
+                                    .padding(.horizontal, 20)
+                                    .background(Color(red: 0.98, green: 0.99, blue: 0.98), in: RoundedRectangle(cornerRadius: 12))
+                                }
+                                .padding(.top, 8)
+                                .sheet(isPresented: $isMaterialSheetPresented) {
+                                    MaterialsView(isMaterialSheetPresented: $isMaterialSheetPresented, isShowingNewItem: $isShowingNewItem, completedLevels: completedLevels, collectedItems: collectedItems)
+                                }
                             }
-                            .frame(width: 321, height: 484)
+                            .frame(width: 321, height: 467)
                             .background(Color.white)
                             .cornerRadius(16)
                             .padding(.top, 20)
@@ -176,34 +176,6 @@ struct MainViewPhase3: View {
                             }
                             .padding(.top, 12)
                             .padding(.horizontal, 36)
-                            
-                            Button {
-                                isMaterialSheetPresented.toggle()
-                            } label: {
-                                HStack() {
-                                    Image(systemName: "list.bullet")
-                                    Text("획득 재료 확인하기")
-
-                                    Spacer(minLength: 2)
-
-                                    if isShowingNewItem { // 새로 획득한 약재가 있다면,
-                                        NewItemView()
-                                    }
-
-
-                                    Image(systemName: "chevron.right")
-                                        .padding(.leading, 8)
-                                }
-                                .foregroundStyle(.green900)
-                                .padding(.vertical, 10)
-                                .padding(.horizontal, 20)
-                                .background(Color(red: 0.98, green: 0.99, blue: 0.98), in: RoundedRectangle(cornerRadius: 12))
-                            }
-                            .padding(.horizontal, 36)
-                            .padding(.top, 8)
-                            .sheet(isPresented: $isMaterialSheetPresented) {
-                                MaterialsView(isMaterialSheetPresented: $isMaterialSheetPresented, isShowingNewItem: $isShowingNewItem, completedLevels: completedLevels, collectedItems: collectedItems)
-                            }
                             
                             if isHealthKitAuthorized {
                                 Divider()
@@ -315,7 +287,7 @@ struct MainViewPhase3: View {
             .background(Color.secondaryColor,
                         in: RoundedRectangle(cornerRadius: 12))
             .padding(.top, 40)
-            .padding(.bottom, 60)
+            Spacer()
         }
         
     }
@@ -323,7 +295,7 @@ struct MainViewPhase3: View {
     private var LevelUpView: some View {
         VStack(spacing: 0) {
             if isHighestLevel {
-                Image("Down1")
+                Image("Ultimate")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 256, height: 256)
@@ -410,9 +382,8 @@ struct MainViewPhase3: View {
                             .frame(width: 220, height: 256)
                     }
                 }
-                
                 .frame(width: 220, height: 256)
-                .padding(.top, 16)
+                .padding(.top, 32)
                 
                 HStack(spacing: 4) {
                     Text(currentStatus.currentLevel.difficulty.rawValue)
