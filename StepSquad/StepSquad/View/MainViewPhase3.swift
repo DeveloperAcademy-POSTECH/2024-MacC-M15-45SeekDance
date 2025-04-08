@@ -41,6 +41,9 @@ struct MainViewPhase3: View {
     
     @AppStorage("isShowingNewItem") private var isShowingNewItem = false
     
+    // TODO: - 지우기
+    @State var isTestResetViewPresented = false
+    
     let gameCenterManager = GameCenterManager()
     
     var currentStatus: CurrentStatus = CurrentStatus() {
@@ -94,6 +97,31 @@ struct MainViewPhase3: View {
                         .padding(.horizontal, 36)
                         
                         ScrollView {
+                            // TODO: - 지우기
+                            Button("리셋하기") {
+                                isTestResetViewPresented = true
+                            }
+                            .buttonStyle(.borderedProminent)
+                            
+                            
+                            NFCReadingView
+                                .padding(.top, 17)
+                                .padding(.bottom, 17)
+                                .background(.grey10)
+                                .fullScreenCover(isPresented: $isResultViewPresented) {
+                                    ResultView(isResultViewPresented: $isResultViewPresented,
+                                               stairName: nfcMessage,
+                                               stairCount: nfcCount)
+                                }
+                                .onChange(of: isResultViewPresented) {
+                                    startTimer()
+                                }
+                                .alert(isPresented: $isShowingNFCAlert) {
+                                    Alert(title: Text("지원하지 않는 NFC입니다."),
+                                          message: Text("계단에 위치한 NFC를 태그해주세요."),
+                                          dismissButton: .default(Text("확인")))
+                                }
+                            
                             VStack(spacing: 0) {
                                 if isHealthKitAuthorized {
                                     LevelUpView
@@ -413,8 +441,9 @@ struct MainViewPhase3: View {
                 
             }
         }
-        .fullScreenCover(isPresented: $isResetViewPresented) {
-            ResetNavigationView(isResetViewPresented: $isResetViewPresented, manager: ClimbingManager())
+        .fullScreenCover(isPresented: $isTestResetViewPresented) {
+//            ResetNavigationView(isResetViewPresented: $isResetViewPresented, manager: ClimbingManager())
+            ResetTestView(isResetViewPresented: $isTestResetViewPresented)
         }
         .onAppear {
             // MARK: 일단 임시로 onAppear 사용해서 권한 받자마자 뷰를 그릴 수 있도록 임시조치함. 단, onAppear를 사용하면 뷰에 접속 할때마다 갱신되므로 사실 상, pulltoRefreash가 의미 없어짐.
@@ -666,13 +695,14 @@ struct MainViewPhase3: View {
     
     // MARK: 만렙 이후 리셋하기
     func resetLevel() {
+        print("------------------------------------resetLevel------------------------------------")
         currentStatus.updateStaircase(0)
         saveCurrentStatus()
         lastElectricAchievementKwh = 0
         gameCenterManager.resetAchievements()
         completedLevels.resetLevels()
         collectedItems.resetItems()
-//        printAll()
+        printAll()
     }
     
     // MARK: Level 관련 테스트 프린트문
