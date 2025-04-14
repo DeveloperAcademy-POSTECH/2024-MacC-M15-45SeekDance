@@ -265,6 +265,7 @@ struct MainViewPhase3: View {
                             }
                         }
                         .onChange(of: isTestResetViewPresented) {
+                            print("isTestResetViewPresented: \(isTestResetViewPresented)$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
                             service.getWeeklyStairDataAndSave()
                             service.fetchAndSaveFlightsClimbedSinceAuthorization()
                             updateLevelsAndGameCenter()
