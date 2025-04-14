@@ -264,6 +264,11 @@ struct MainViewPhase3: View {
                                 gameCenterManager.reportCompletedAchievement(achievementId: "memberOfStepSquad")
                             }
                         }
+                        .onChange(of: isTestResetViewPresented) {
+                            service.getWeeklyStairDataAndSave()
+                            service.fetchAndSaveFlightsClimbedSinceAuthorization()
+                            updateLevelsAndGameCenter()
+                        }
                     }
                 }
                 .ignoresSafeArea()
@@ -442,8 +447,8 @@ struct MainViewPhase3: View {
             }
         }
         .fullScreenCover(isPresented: $isTestResetViewPresented) {
-//            ResetNavigationView(isResetViewPresented: $isResetViewPresented, manager: ClimbingManager())
-            ResetTestView(isResetViewPresented: $isTestResetViewPresented)
+            ResetNavigationView(isResetViewPresented: $isTestResetViewPresented, manager: ClimbingManager())
+//            ResetTestView(isResetViewPresented: $isTestResetViewPresented)
         }
         .onAppear {
             // MARK: 일단 임시로 onAppear 사용해서 권한 받자마자 뷰를 그릴 수 있도록 임시조치함. 단, onAppear를 사용하면 뷰에 접속 할때마다 갱신되므로 사실 상, pulltoRefreash가 의미 없어짐.
@@ -702,6 +707,7 @@ struct MainViewPhase3: View {
         gameCenterManager.resetAchievements()
         completedLevels.resetLevels()
         collectedItems.resetItems()
+        isShowingNewItem = false
         printAll()
     }
     
