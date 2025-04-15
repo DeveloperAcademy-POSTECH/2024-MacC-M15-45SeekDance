@@ -16,6 +16,7 @@ struct ExplainView: View {
                 Color.backgroundColor.ignoresSafeArea()
 
                 VStack {
+                    NotiView()
                     List {
                         Section(header: Text("고객 센터")) {
                             NavigationLink {
