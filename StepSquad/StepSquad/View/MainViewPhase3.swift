@@ -103,25 +103,6 @@ struct MainViewPhase3: View {
                             }
                             .buttonStyle(.borderedProminent)
                             
-                            
-                            NFCReadingView
-                                .padding(.top, 17)
-                                .padding(.bottom, 17)
-                                .background(.grey10)
-                                .fullScreenCover(isPresented: $isResultViewPresented) {
-                                    ResultView(isResultViewPresented: $isResultViewPresented,
-                                               stairName: nfcMessage,
-                                               stairCount: nfcCount)
-                                }
-                                .onChange(of: isResultViewPresented) {
-                                    startTimer()
-                                }
-                                .alert(isPresented: $isShowingNFCAlert) {
-                                    Alert(title: Text("지원하지 않는 NFC입니다."),
-                                          message: Text("계단에 위치한 NFC를 태그해주세요."),
-                                          dismissButton: .default(Text("확인")))
-                                }
-                            
                             VStack(spacing: 0) {
                                 if isHealthKitAuthorized {
                                     LevelUpView
@@ -265,6 +246,7 @@ struct MainViewPhase3: View {
                             }
                         }
                         .onChange(of: isTestResetViewPresented) {
+                            // TODO: isTestResetViewPresented를 isTestResetViewPresented로 변경하기
                             print("isTestResetViewPresented: \(isTestResetViewPresented)$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
                             service.getWeeklyStairDataAndSave()
                             service.fetchAndSaveFlightsClimbedSinceAuthorization()
