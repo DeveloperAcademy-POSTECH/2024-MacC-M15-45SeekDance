@@ -98,10 +98,10 @@ struct MainViewPhase3: View {
                         
                         ScrollView {
                             // TODO: - 지우기
-                            Button("리셋하기") {
-                                isTestResetViewPresented = true
-                            }
-                            .buttonStyle(.borderedProminent)
+//                            Button("리셋하기") {
+//                                isTestResetViewPresented = true
+//                            }
+//                            .buttonStyle(.borderedProminent)
                             
                             VStack(spacing: 0) {
                                 if isHealthKitAuthorized {
@@ -245,9 +245,9 @@ struct MainViewPhase3: View {
                                 gameCenterManager.reportCompletedAchievement(achievementId: "memberOfStepSquad")
                             }
                         }
-                        .onChange(of: isTestResetViewPresented) {
+                        .onChange(of: isResetViewPresented) {
                             // TODO: isTestResetViewPresented를 isTestResetViewPresented로 변경하기
-                            print("isTestResetViewPresented: \(isTestResetViewPresented)$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+                            print("isTestResetViewPresented: \(isResetViewPresented)$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
                             service.getWeeklyStairDataAndSave()
                             service.fetchAndSaveFlightsClimbedSinceAuthorization()
                             updateLevelsAndGameCenter()
@@ -429,8 +429,9 @@ struct MainViewPhase3: View {
                 
             }
         }
-        .fullScreenCover(isPresented: $isTestResetViewPresented) {
-            ResetNavigationView(isResetViewPresented: $isTestResetViewPresented, manager: ClimbingManager())
+        .fullScreenCover(isPresented: $isResetViewPresented) {
+            // TODO: - 변경하기
+            ResetNavigationView(isResetViewPresented: $isResetViewPresented, manager: ClimbingManager())
 //            ResetTestView(isResetViewPresented: $isTestResetViewPresented)
         }
         .onAppear {
