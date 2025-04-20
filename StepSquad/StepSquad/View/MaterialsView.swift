@@ -112,6 +112,8 @@ struct MaterialsView: View {
             }
         }
         .onAppear {
+            print("❗️ onAppear MaterialsView")
+            print("completedLevels.lastUpdatedLevel: \(completedLevels.lastUpdatedLevel)")
             isShowingNewItem = false
         }
     }
