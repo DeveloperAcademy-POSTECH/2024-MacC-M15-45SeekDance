@@ -58,7 +58,7 @@ struct MaterialsView: View {
                                     }
                                 }
                             }
-                            if completedLevels.lastUpdatedLevel >= 1 { // 획득한 약재가 있을 때
+                            if completedLevels.lastUpdatedLevel >= 1 { // 획득한 일반 재료가 있을 때
                                 Section(header: Text("일반 재료").bold(), footer: Text("일반 재료는 계단 오르기만을 통해서만 얻을 수 있습니다.")) {
                                     ForEach((1...completedLevels.lastUpdatedLevel).reversed(), id: \.self) { level in
                                         HStack(spacing: 0) {
@@ -113,6 +113,14 @@ struct MaterialsView: View {
         }
         .onAppear {
             isShowingNewItem = false
+            print("❗️ onAppear MaterialsView")
+            print("completedLevels: \(completedLevels.lastUpdatedLevel)")
+            print("collectedItems.isEmpty: \(collectedItems.isEmpty())")
+        }
+        .onChange(of: completedLevels.lastUpdatedLevel) { newValue in
+            print("❗️ onChange MaterialsView")
+            print("completedLevels: \(self.completedLevels.lastUpdatedLevel)")
+            print("collectedItems.isEmpty: \(collectedItems.isEmpty())")
         }
     }
 }

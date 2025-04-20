@@ -229,10 +229,11 @@ struct MainViewPhase3: View {
                             
                         }
                         .refreshable {
+                            print("❗️ refreshable")
                             service.getWeeklyStairDataAndSave()
                             service.fetchAndSaveFlightsClimbedSinceAuthorization()
                             updateLevelsAndGameCenter()
-//                            printAll()
+                            printAll()
                         }
                         .scrollIndicators(ScrollIndicatorVisibility.hidden)
                         .onAppear {
@@ -246,11 +247,13 @@ struct MainViewPhase3: View {
                             }
                         }
                         .onChange(of: isResetViewPresented) {
+                            print("❗️ onChange of isResetViewPresented")
                             // TODO: isTestResetViewPresented를 isTestResetViewPresented로 변경하기
-                            print("isTestResetViewPresented: \(isResetViewPresented)$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+                            print("isTestResetViewPresented: \(isResetViewPresented)")
                             service.getWeeklyStairDataAndSave()
                             service.fetchAndSaveFlightsClimbedSinceAuthorization()
                             updateLevelsAndGameCenter()
+                            printAll()
                         }
                     }
                 }
@@ -435,12 +438,14 @@ struct MainViewPhase3: View {
 //            ResetTestView(isResetViewPresented: $isTestResetViewPresented)
         }
         .onAppear {
+            print("❗️ onAppear")
             // MARK: 일단 임시로 onAppear 사용해서 권한 받자마자 뷰를 그릴 수 있도록 임시조치함. 단, onAppear를 사용하면 뷰에 접속 할때마다 갱신되므로 사실 상, pulltoRefreash가 의미 없어짐.
             gameCenterManager.authenticateUser()
             service.getWeeklyStairDataAndSave()
             service.fetchAndSaveFlightsClimbedSinceAuthorization()
             updateLevelsAndGameCenter()
             service.fetchAllFlightsClimbedData()
+            printAll()
         }
     }
     
@@ -526,11 +531,12 @@ struct MainViewPhase3: View {
     
     // MARK: - 생성자
     init() {
+        print("❗️ init")
         // MARK: 사용자 게임 센터 인증
         gameCenterManager.authenticateUser()
         // MARK: 저장된 레벨 정보 불러오고 헬스킷 정보로 업데이트하기
         currentStatus = loadCurrentStatus()
-//        printAll()
+        printAll()
     }
     
     // MARK: - 타이머
@@ -676,6 +682,7 @@ struct MainViewPhase3: View {
     
     // MARK: 헬스킷 업데이트 주기마다 레벨 관련 변경하고, 게임센터 업데이트하는 것 모두 모은 함수
     func updateLevelsAndGameCenter() {
+        print("❗️ updateLevelsAndGameCenter")
         currentStatus.updateStaircase(Int(service.TotalFlightsClimbedSinceAuthorization))
         saveCurrentStatus()
         compareCurrentLevelAndUpdate()
@@ -684,20 +691,22 @@ struct MainViewPhase3: View {
     
     // MARK: 만렙 이후 리셋하기
     func resetLevel() {
-        print("------------------------------------resetLevel------------------------------------")
+        print("✏️ resetLevel")
         currentStatus.updateStaircase(0)
         saveCurrentStatus()
         lastElectricAchievementKwh = 0
         gameCenterManager.resetAchievements()
         completedLevels.resetLevels()
+        print("completedLevels.lastUpdatedLevel:  \(completedLevels.lastUpdatedLevel)")
         collectedItems.resetItems()
+        print("collectedItems.isEmpty: \(collectedItems.isEmpty())")
         isShowingNewItem = false
         printAll()
     }
     
     // MARK: Level 관련 테스트 프린트문
     func printAll() {
-        print("--------printAll--------")
+        print("✔️ printAll")
         print("누적 층계: \(currentStatus.getTotalStaircase())")
         print("현재 레벨: \(currentStatus.currentLevel.level)")
         print("현재 레벨 난이도: \(currentStatus.currentLevel.difficulty.rawValue)")
