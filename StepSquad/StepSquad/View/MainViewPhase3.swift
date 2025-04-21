@@ -25,6 +25,8 @@ struct MainViewPhase3: View {
     @State private var isShowNewBirdPresented = false
     @State private var isWifiAlertPresented = false
     
+    @State var isResetCompleted: Bool = false
+    
     @State var userProfileImage: Image?
     
     @State private var nfcCount: Int = 0
@@ -415,7 +417,7 @@ struct MainViewPhase3: View {
             }
         }
         .fullScreenCover(isPresented: $isResetViewPresented) {
-            ResetNavigationView(isResetViewPresented: $isResetViewPresented, manager: ClimbingManager())
+            ResetNavigationView(isResetViewPresented: $isResetViewPresented, isResetCompleted: $isResetCompleted, manager: ClimbingManager())
         }
         .onAppear {
             // MARK: 일단 임시로 onAppear 사용해서 권한 받자마자 뷰를 그릴 수 있도록 임시조치함. 단, onAppear를 사용하면 뷰에 접속 할때마다 갱신되므로 사실 상, pulltoRefreash가 의미 없어짐.
@@ -427,6 +429,18 @@ struct MainViewPhase3: View {
             updateLevelsAndGameCenter()
             printAll()
         }
+        .onChange(of: isResetViewPresented, {
+            // MARK: 리셋 조건 달성 확인 후, 데이터 리셋 시작
+            if(!isResetViewPresented && isResetCompleted) {
+                resetLevel()
+                isResetCompleted = false
+                // 완료 후 새로 고침
+                service.getWeeklyStairDataAndSave()
+                service.fetchAndSaveFlightsClimbedSinceAuthorization()
+                updateLevelsAndGameCenter()
+                printAll()
+            }
+        })
     }
     
     private var NFCReadingView: some View {

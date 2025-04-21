@@ -10,6 +10,7 @@ import SwiftUI
 // MARK: - 1번 째 뷰
 struct ResetNavigationView: View {
     @Binding var isResetViewPresented: Bool // FullScreen 상태를 상위 뷰와 공유
+    @Binding var isResetCompleted: Bool
 
     // 최근 기록 표시위한 @ObservedObject 선언
     @ObservedObject var manager: ClimbingManager
@@ -46,7 +47,7 @@ struct ResetNavigationView: View {
 
             Spacer()
 
-            NavigationLink(destination: DetailView(isResetViewPresented: $isResetViewPresented)) {
+            NavigationLink(destination: DetailView(isResetViewPresented: $isResetViewPresented, isResetCompleted: $isResetCompleted)) {
                 Text("설명보기")
                     .padding()
                     .frame(width: 352, height: 50)
@@ -72,6 +73,7 @@ struct ResetNavigationView: View {
 // MARK: - 2번 째 뷰
 struct DetailView: View {
     @Binding var isResetViewPresented: Bool
+    @Binding var isResetCompleted: Bool
 
     var body: some View {
         VStack {
@@ -107,7 +109,7 @@ struct DetailView: View {
 
             Spacer()
 
-            NavigationLink(destination: DetailView2(isResetViewPresented: $isResetViewPresented)) {
+            NavigationLink(destination: DetailView2(isResetViewPresented: $isResetViewPresented, isResetCompleted: $isResetCompleted)) {
                 Text("다음으로")
                     .padding()
                     .frame(width: 352, height: 50)
@@ -135,6 +137,7 @@ struct DetailView: View {
 // MARK: - 3번 째 뷰
 struct DetailView2: View {
     @Binding var isResetViewPresented: Bool
+    @Binding var isResetCompleted: Bool
 
     var body: some View {
         VStack {
@@ -167,7 +170,7 @@ struct DetailView2: View {
 
             Spacer()
 
-            NavigationLink(destination: DetailView3(isResetViewPresented: $isResetViewPresented)) {
+            NavigationLink(destination: DetailView3(isResetViewPresented: $isResetViewPresented, isResetCompleted: $isResetCompleted)) {
                 Text("다음으로")
                     .padding()
                     .frame(width: 352, height: 50)
@@ -196,6 +199,7 @@ struct DetailView3: View {
     @StateObject private var manager = ClimbingManager()
 
     @Binding var isResetViewPresented: Bool
+    @Binding var isResetCompleted: Bool
     let gameCenterManager = GameCenterManager()
     let service = HealthKitService()
 
@@ -301,12 +305,13 @@ struct DetailView3: View {
             manager.addRecord(descentDate: Date(), floorsClimbed: Float(floorsClimbed), dDay: Int(dDay))
 
             // 3. 현재 레벨, 획득 재료, NFC 태깅 정보, 성취 관련 리셋
-            MainViewPhase3().resetLevel()
             do {
                 try context.delete(model: StairStepModel.self)
             } catch {
                 print("error: Failed to clear all StairStepModel data.")
             }
+            
+            isResetCompleted = true
         }
     }
 
