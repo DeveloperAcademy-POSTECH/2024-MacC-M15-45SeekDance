@@ -176,10 +176,6 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
     
     // MARK: 성취 리셋하기
     func resetAchievements() {
-        guard isGameCenterLoggedIn else {
-            print("Error: user is not logged in to Game Center.")
-            return
-        }
         GKAchievement.resetAchievements(completionHandler: {(error: Error?) in
             guard error == nil else {
                 print("Error: \(String(describing: error))")
