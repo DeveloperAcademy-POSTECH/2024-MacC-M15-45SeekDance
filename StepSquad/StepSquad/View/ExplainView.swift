@@ -42,7 +42,7 @@ struct ExplainView: View {
 
                                 Spacer()
 
-                                Text("2.1.0")
+                                Text("2.3.0")
                                     .foregroundStyle(Color(hex: 0x3C3C43))
                                     .opacity(0.6)
                             }
