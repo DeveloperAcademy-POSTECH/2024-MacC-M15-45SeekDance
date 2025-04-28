@@ -18,43 +18,43 @@ struct QuestionsView: View {
 
             VStack {
                 List {
-                    Section(header: Text("NFC 관련")) {
-                        DisclosureGroup(
-                            isExpanded: Binding(
-                                get: { expandedGroup == 1 },
-                                set: { expandedGroup = $0 ? 1 : nil }
-                            ),
-                            content: {
-                                QuestionText("앱에서 NFC 태깅을 통해 특별 재료와 추가 점수를 제공합니다. 공식 NFC 설치 장소에서만 이용 가능합니다.")
-                                QuestionURLButton(text: "계단사랑단 NFC 더 알아보기", url: "https://smiling-taxicab-536.notion.site/NFC-2900b764680b4dbc8fff8b82b6760b89?pvs=4")
-                            },
-                            label: { Text("NFC 어떻게 사용하나요?") }
-                        )
-
-                        DisclosureGroup(
-                            isExpanded: Binding(
-                                get: { expandedGroup == 2 },
-                                set: { expandedGroup = $0 ? 2 : nil }
-                            ),
-                            content: {
-                                QuestionText("1. 앱에서 NFC 태깅하기의 '열기' 버튼을 탭하세요.\n2. '스캔 준비 완료' 창이 뜨면 휴대폰 상단부를 NFC 태그에 가까이 대주세요.")
-                            },
-                            label: { Text("NFC는 어떻게 사용하나요?") }
-                        )
-
-                        DisclosureGroup(
-                            isExpanded: Binding(
-                                get: { expandedGroup == 3 },
-                                set: { expandedGroup = $0 ? 3 : nil }
-                            ),
-                            content: {
-                                QuestionText("NFC 설치 위치는 이벤트마다 달라집니다.")
-                                QuestionURLButton(text: "위치 확인", url: "https://smiling-taxicab-536.notion.site/NFC-24-12-02-39808c1784fe41a29681ab553dc114ae?pvs=4")
-                                QuestionURLButton(text: "설치 문의", url: "https://forms.gle/yaeE8wyvDGDGqq4F8")
-                            },
-                            label: { Text("NFC는 어디에 있나요?") }
-                        )
-                    }
+//                    Section(header: Text("NFC 관련")) {
+//                        DisclosureGroup(
+//                            isExpanded: Binding(
+//                                get: { expandedGroup == 1 },
+//                                set: { expandedGroup = $0 ? 1 : nil }
+//                            ),
+//                            content: {
+//                                QuestionText("앱에서 NFC 태깅을 통해 특별 재료와 추가 점수를 제공합니다. 공식 NFC 설치 장소에서만 이용 가능합니다.")
+//                                QuestionURLButton(text: "계단사랑단 NFC 더 알아보기", url: "https://smiling-taxicab-536.notion.site/NFC-2900b764680b4dbc8fff8b82b6760b89?pvs=4")
+//                            },
+//                            label: { Text("NFC 어떻게 사용하나요?") }
+//                        )
+//
+//                        DisclosureGroup(
+//                            isExpanded: Binding(
+//                                get: { expandedGroup == 2 },
+//                                set: { expandedGroup = $0 ? 2 : nil }
+//                            ),
+//                            content: {
+//                                QuestionText("1. 앱에서 NFC 태깅하기의 '열기' 버튼을 탭하세요.\n2. '스캔 준비 완료' 창이 뜨면 휴대폰 상단부를 NFC 태그에 가까이 대주세요.")
+//                            },
+//                            label: { Text("NFC는 어떻게 사용하나요?") }
+//                        )
+//
+//                        DisclosureGroup(
+//                            isExpanded: Binding(
+//                                get: { expandedGroup == 3 },
+//                                set: { expandedGroup = $0 ? 3 : nil }
+//                            ),
+//                            content: {
+//                                QuestionText("NFC 설치 위치는 이벤트마다 달라집니다.")
+//                                QuestionURLButton(text: "위치 확인", url: "https://smiling-taxicab-536.notion.site/NFC-24-12-02-39808c1784fe41a29681ab553dc114ae?pvs=4")
+//                                QuestionURLButton(text: "설치 문의", url: "https://forms.gle/yaeE8wyvDGDGqq4F8")
+//                            },
+//                            label: { Text("NFC는 어디에 있나요?") }
+//                        )
+//                    }
 
                     Section(header: Text("게임 레벨")) {
                         DisclosureGroup(
@@ -89,7 +89,7 @@ struct QuestionsView: View {
                                 QuestionText("레벨에 따라 다양한 재료를 얻을 수 있습니다.")
                                 QuestionText("- 낮은 레벨: 흔한 재료")
                                 QuestionText("- 높은 레벨: 귀한 재료")
-                                QuestionText("- NFC 이벤트나 히든 퀘스트: 깜짝 재료")
+                                QuestionText("- 이벤트나 히든 퀘스트: 깜짝 재료")
                             },
                             label: { Text("획득 재료는 무엇인가요?") }
                         )
@@ -114,7 +114,6 @@ struct QuestionsView: View {
                             ),
                             content: {
                                 QuestionText("계단 한 층(약 16계단)을 기준으로 16칸(점)을 드립니다.")
-                                QuestionText("NFC를 태깅하면 실제 계단 수에 맞춰 점수를 드립니다.(예: 78계단 → 78칸(점))")
                             },
                             label: { Text("‘나의 순위’는 어떻게 계산되나요?") }
                         )
