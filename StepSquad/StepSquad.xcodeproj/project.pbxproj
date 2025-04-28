@@ -523,7 +523,6 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "StepSquad-Info.plist";
-				INFOPLIST_KEY_NFCReaderUsageDescription = "계단 인증을 위한 NFC 스캔이 필요합니다.";
 				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "We will use your health information\nto track the number of flights of stairs walked";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "We will use your health information\nto track the number of flights of stairs walked";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "We will use your health information\nto track the number of flights of stairs walked";
@@ -569,7 +568,6 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "StepSquad-Info.plist";
-				INFOPLIST_KEY_NFCReaderUsageDescription = "계단 인증을 위한 NFC 스캔이 필요합니다.";
 				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "We will use your health information\nto track the number of flights of stairs walked";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "We will use your health information\nto track the number of flights of stairs walked";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "We will use your health information\nto track the number of flights of stairs walked";
