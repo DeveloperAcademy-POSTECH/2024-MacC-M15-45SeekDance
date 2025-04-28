@@ -25,9 +25,6 @@ struct ExplainView: View {
                                 Text("자주 묻는 질문")
                             }
 
-                            URLButton(text: "NFC 설치 문의",
-                                      url: "https://forms.gle/yaeE8wyvDGDGqq4F8")
-
                             URLButton(text: "오류 문의",
                                       url: "https://docs.google.com/forms/d/e/1FAIpQLScvUDBnW2y7YfmcOeIzlA9KvzSUcIYix6-wkENPDCiDRaf04Q/viewform")
 
