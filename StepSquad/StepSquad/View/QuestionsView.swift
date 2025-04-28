@@ -89,7 +89,7 @@ struct QuestionsView: View {
                                 QuestionText("레벨에 따라 다양한 재료를 얻을 수 있습니다.")
                                 QuestionText("- 낮은 레벨: 흔한 재료")
                                 QuestionText("- 높은 레벨: 귀한 재료")
-                                QuestionText("- NFC 이벤트나 히든 퀘스트: 깜짝 재료")
+                                QuestionText("- 이벤트나 히든 퀘스트: 깜짝 재료")
                             },
                             label: { Text("획득 재료는 무엇인가요?") }
                         )
@@ -114,7 +114,6 @@ struct QuestionsView: View {
                             ),
                             content: {
                                 QuestionText("계단 한 층(약 16계단)을 기준으로 16칸(점)을 드립니다.")
-                                QuestionText("NFC를 태깅하면 실제 계단 수에 맞춰 점수를 드립니다.(예: 78계단 → 78칸(점))")
                             },
                             label: { Text("‘나의 순위’는 어떻게 계산되나요?") }
                         )
