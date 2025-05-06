@@ -37,7 +37,7 @@ struct GPSStaircaseMainView: View {
                                     .bold()
                             }
                             .frame(width: 248, height: 50)
-                            .background(RoundedRectangle(cornerRadius: 10).fill(.green500))
+                            .background(RoundedRectangle(cornerRadius: 12).fill(.green500))
                         })
                         .padding(.bottom, 40)
                     }
@@ -48,10 +48,32 @@ struct GPSStaircaseMainView: View {
                 
                 ProfileView()
                 
+                VStack {
+                    Text("미션")
+                        .font(.subheadline)
+                        .bold()
+                        .foregroundStyle(.white)
+                        .padding(10)
+                        .background(RoundedRectangle(cornerRadius: 20).fill(.green700))
+                    VStack(spacing: 4) {
+                        Text("전국의 계단 오르고 인증하자!")
+                            .font(.title3)
+                            .bold()
+                        Text("특별 재료에 점수 2배 이벤트")
+                            .font(.footnote)
+                        Text("(계단 오르기 점수 + 특별 계단 점수)")
+                            .font(.caption2)
+                            .foregroundStyle(.grey600)
+                    }
+                    .padding(.top, 12)
+                }
+                .padding(.top, 26)
+                
                 Spacer()
             }
         }
         .ignoresSafeArea()
+        .background(.green50)
     }
 }
 
