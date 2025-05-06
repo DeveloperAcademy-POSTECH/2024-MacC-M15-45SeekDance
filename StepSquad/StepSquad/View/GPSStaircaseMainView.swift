@@ -10,7 +10,7 @@ import SwiftUI
 struct GPSStaircaseMainView: View {
     var body: some View {
         ScrollView {
-            VStack {
+            VStack(spacing: 0) {
                 ZStack {
                     // TODO: 캐러셀 이미지, 애니메이션 추가
                     
@@ -46,10 +46,40 @@ struct GPSStaircaseMainView: View {
                 .frame(maxWidth: .infinity)
                 .background(.green200)
                 
+                ProfileView()
+                
                 Spacer()
             }
         }
         .ignoresSafeArea()
+    }
+}
+
+struct ProfileView: View {
+    var body: some View {
+        HStack {
+            Circle()
+                .foregroundStyle(.blue200)
+                .frame(width: 60, height: 60)
+                .padding(.trailing, 12)
+            VStack(alignment: .leading) {
+                Text("🍎저속노화처돌이")
+                    .font(.headline)
+                    .padding(.bottom, 4)
+                HStack(spacing: 0) {
+                    Text("방문한 계단 ")
+                        .font(.footnote)
+                    Text("2개 / 24개")
+                        .font(.footnote)
+                        .bold()
+                }
+            }
+            .foregroundStyle(.white)
+            Spacer()
+        }
+        .frame(height: 84)
+        .padding(.horizontal, 16)
+        .background(.green900)
     }
 }
 
