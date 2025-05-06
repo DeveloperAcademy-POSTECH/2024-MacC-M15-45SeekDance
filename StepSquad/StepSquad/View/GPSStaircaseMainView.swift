@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct GPSStaircaseMainView: View {
+    @State var selectedGroup: Int = 0
     var body: some View {
         ScrollView {
             VStack(spacing: 0) {
@@ -102,6 +103,41 @@ struct GPSStaircaseMainView: View {
                 .frame(height: 289)
                 .background(RoundedRectangle(cornerRadius: 12).fill(.white))
                 .padding(.top, 40)
+                
+                VStack {
+                    Image("ribbonWhite")
+                        .resizable()
+                        .frame(width: 241.5, height: 77.02)
+                        .padding(.top, 40)
+                    Picker("모든 계단", selection: $selectedGroup){
+                        Section {
+                            Text("모든 계단").tag(0)
+                            HStack {
+                                Text("북마크")
+                                Spacer()
+                                Image(systemName: "bookmark")
+                            }.tag(1)
+                            HStack {
+                                Text("도전 완료")
+                                Spacer()
+                                Image(systemName: "medal")
+                            }.tag(1)
+                        }
+                        Section("지역 필터") {
+                            Text("전국").tag(0)
+                            Text("수도권").tag(1)
+                            Text("강원도").tag(2)
+                            Text("세종·충북").tag(2)
+                            Text("대전·충남").tag(2)
+                            Text("대구·경북").tag(2)
+                            Text("부산·울산·경남").tag(2)
+                            Text("전북").tag(2)
+                            Text("광주·전남").tag(2)
+                            Text("제주").tag(2)
+                        }
+                          }
+                    .tint(.green800)
+                }
                 
                 Spacer()
             }
