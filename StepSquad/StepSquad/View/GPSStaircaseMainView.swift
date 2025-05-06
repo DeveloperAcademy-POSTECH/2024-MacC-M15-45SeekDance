@@ -69,6 +69,40 @@ struct GPSStaircaseMainView: View {
                 }
                 .padding(.top, 26)
                 
+                VStack {
+                    Text("참여 방법")
+                        .font(.subheadline)
+                        .bold()
+                        .foregroundStyle(.white)
+                        .padding(10)
+                        .background(RoundedRectangle(cornerRadius: 20).fill(.green700))
+                        .padding(.top, 16)
+                    
+                    HStack(spacing: 32) {
+                        VStack {
+                            Image("authenticationExample1")
+                            Text("인증 장소를 확인한 gn 직접 방문한다")
+                                .font(.footnote)
+                                .frame(width: 120)
+                        }
+                        
+                        VStack {
+                            Image("authenticationExample2")
+                            Text("해당 계단 하단의 인증하기를 탭!")
+                                .font(.footnote)
+                                .frame(width: 120)
+                        }
+                    }
+                    .padding(.top, 26)
+                    .multilineTextAlignment(.center)
+                    
+                    Spacer()
+                }
+                .frame(maxWidth: .infinity)
+                .frame(height: 289)
+                .background(RoundedRectangle(cornerRadius: 12).fill(.white))
+                .padding(.top, 40)
+                
                 Spacer()
             }
         }
