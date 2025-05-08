@@ -54,16 +54,6 @@ class GPSStaircase: Codable, Identifiable {
 }
 
 let gpsStaircases: [GPSStaircase] = [
-    GPSStaircase( // TODO: 추후 삭제
-        id: "Test1",
-        name: "초량 이바구길 168 계단",
-        title: "역사가 오래된 초량의 이바구 길",
-        description: "이바구길을 이바구를 떨며 걸어올라가 볼까나?",
-        province: .gyeongnam,
-        steps: 168,
-        gpsLocation: (35.117143, 129.035298),
-        verificationLocation: "인증 장소 예시",
-        reward: "국밥 육수"),
     GPSStaircase(
         id: "Busan168",
         name: "초량 이바구길 168 계단",
