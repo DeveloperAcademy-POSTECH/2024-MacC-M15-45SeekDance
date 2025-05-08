@@ -11,17 +11,19 @@ struct GPSStaircaseListView: View {
     var body: some View {
         ScrollView {
             Grid {
-                ForEach(1..<10) { _ in
+                ForEach(gpsStaircases) { staircase in
                     GridRow() {
-                        GPSStaircaseThumbnailView()
-                        GPSStaircaseThumbnailView()
+                        GPSStaircaseThumbnailView(staircase: staircase)
+                        GPSStaircaseThumbnailView(staircase: staircase)
                             .padding(.leading, 20)
                     }
                     .padding(.bottom, 20)
                 }
             }
             .frame(maxWidth: .infinity)
+            .background(.green50)
         }
+        .ignoresSafeArea()
     }
 }
 
@@ -30,22 +32,23 @@ struct GPSStaircaseListView: View {
 }
 
 struct GPSStaircaseThumbnailView: View {
+    let staircase: GPSStaircase
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("소원을 이뤄주는 계단")
+            Text(staircase.title)
                 .font(.footnote)
                 .bold()
                 .foregroundStyle(.green700)
                 .frame(maxWidth: .infinity)
             
-            Image("87stairs")
+            Image(staircase.imageName)
                 .resizable()
                 .scaledToFill()
                 .frame(width: 124, height: 108)
                 .clipShape(Rectangle())
             
             HStack {
-                Text("팔공산 갓바위")
+                Text(staircase.name)
                     .font(.footnote)
                     .bold()
                 Spacer()
@@ -59,13 +62,13 @@ struct GPSStaircaseThumbnailView: View {
             }
             
             HStack {
-                Text("대구/경북")
+                Text(staircase.province.rawValue)
                     .font(.caption)
                     .foregroundStyle(.white)
                     .padding(4)
                     .background(RoundedRectangle(cornerRadius: 4).fill(.green600))
                 
-                Text("1365칸")
+                Text("\(staircase.steps)칸")
                     .font(.caption)
                     .foregroundStyle(.green800)
                     .padding(4)
@@ -73,6 +76,6 @@ struct GPSStaircaseThumbnailView: View {
             }
         }
         .frame(width: 124, height: 220)
-        .background(RoundedRectangle(cornerRadius: 4).fill(.blue300).frame(width: 148, height: 244))
+        .background(RoundedRectangle(cornerRadius: 4).fill(.white).frame(width: 148, height: 244))
     }
 }
