@@ -8,21 +8,29 @@
 import SwiftUI
 
 struct GPSStaircaseListView: View {
+    let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 2)
     var body: some View {
         ScrollView {
-            Grid {
+            LazyVGrid(columns: columns) {
                 ForEach(gpsStaircases) { staircase in
-                    GridRow() {
-                        GPSStaircaseThumbnailView(staircase: staircase)
-                        GPSStaircaseThumbnailView(staircase: staircase)
-                            .padding(.leading, 20)
-                    }
-                    .padding(.bottom, 20)
+                    GPSStaircaseThumbnailView(staircase: staircase)
+                        .padding(12)
                 }
             }
-            .frame(maxWidth: .infinity)
-            .background(.green50)
+            
+//            Grid {
+//                ForEach(gpsStaircases) { staircase in
+//                    GridRow() {
+//                        GPSStaircaseThumbnailView(staircase: staircase)
+//                        GPSStaircaseThumbnailView(staircase: staircase)
+//                            .padding(.leading, 20)
+//                    }
+//                    .padding(.bottom, 20)
+//                }
+//            }
+//            .frame(maxWidth: .infinity)
         }
+        .background(.grey50)
         .ignoresSafeArea()
     }
 }
@@ -40,6 +48,7 @@ struct GPSStaircaseThumbnailView: View {
                 .bold()
                 .foregroundStyle(.green700)
                 .frame(maxWidth: .infinity)
+                .multilineTextAlignment(.center)
             
             Image(staircase.imageName)
                 .resizable()
