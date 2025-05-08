@@ -20,7 +20,8 @@ enum KoreanProvince: String, Codable {
 }
 
 class GPSStaircase: Codable, Identifiable {
-    let id: String // 영문명 TODO: 계단 이미지도 id와 동일하게 설정
+    let id: String // 영문명
+    let imageName: String // 계단 대표 이미지, id와 동일
     let name: String // 계단명
     let title: String // 계단의 부제
     let description: String // 설명
@@ -28,8 +29,10 @@ class GPSStaircase: Codable, Identifiable {
     let steps: Int // 계단 개수
     let latitude: Double // 위도
     let longitude: Double // 경도
-    let verificationLocation: String // 인증 위치 TODO: 인증 위치 파일명은 "[id]_location"
-    let reward: String // 획득 재료 TODO: 리워드 이미지 파일명은 "[id]_reward"로 설정
+    let verificationLocation: String // 인증 위치
+    let verificationLocationImageName: String // 인증 위치 이미지 "[id]_location"
+    let reward: String // 획득 재료
+    let reweardImageName: String // 획득 재료 이미지 "[id]_reward"
     let achievementId: String // id의 맨 앞글자를 소문자로 만듬
     
     init(id: String, name: String, title: String, description: String, province: KoreanProvince, steps: Int, gpsLocation: (latitude: Double, longitude: Double), verificationLocation: String, reward: String) {
@@ -44,6 +47,9 @@ class GPSStaircase: Codable, Identifiable {
         self.verificationLocation = verificationLocation
         self.reward = reward
         self.achievementId = id.prefix(1).lowercased() + id.suffix(id.count - 1)
+        self.imageName = id
+        self.verificationLocationImageName = id + "_location"
+        self.reweardImageName = id + "_reward"
     }
 }
 
