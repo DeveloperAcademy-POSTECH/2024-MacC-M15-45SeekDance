@@ -10,6 +10,7 @@ import SwiftUI
 struct GPSStaircaseMainView: View {
     // TODO: gameCenterManager 전달받기
     @State var selectedGroup: Int = 0
+    @State var bookmarks = Bookmarks()
     var body: some View {
         // TODO: NavigationStack 삭제
         NavigationStack {
@@ -144,7 +145,7 @@ struct GPSStaircaseMainView: View {
                             }
                             .tint(.green800)
                             
-                            GPSStaircaseListView()
+                            GPSStaircaseListView(bookmarks: $bookmarks)
                         }
                         .id("GPSStaircaseListView")
                         
