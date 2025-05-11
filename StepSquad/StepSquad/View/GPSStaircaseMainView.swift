@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct GPSStaircaseMainView: View {
+    // TODO: gameCenterManager 전달받기
+    let gameCenterManager = GameCenterManager()
+    @State var localPlayerImage: Image?
     @State var selectedGroup: Int = 0
+    @State var isGameCenterLoggin: Bool
     var body: some View {
         // TODO: NavigationStack 삭제
         NavigationStack {
@@ -16,6 +20,8 @@ struct GPSStaircaseMainView: View {
                 VStack(spacing: 0) {
                     ZStack {
                         // TODO: 캐러셀 이미지, 애니메이션 추가
+                        Text(isGameCenterLoggin ? "로그인" : "로그아웃")
+                            .font(.largeTitle)
                         
                         VStack {
                             Spacer()
@@ -49,7 +55,8 @@ struct GPSStaircaseMainView: View {
                     .frame(maxWidth: .infinity)
                     .background(.green200)
                     
-                    ProfileView()
+                    // TODO: 기본 프로필 이미지 전달받기
+                    ProfileView(userName: gameCenterManager.loadLocalPlayerName(), userProfile: $localPlayerImage)
                     
                     VStack {
                         Text("미션")
@@ -156,19 +163,43 @@ struct GPSStaircaseMainView: View {
             .background(.green50)
             .navigationTitle("미션")
             .navigationBarTitleDisplayMode(.inline)
+            .onAppear {
+                Task {
+                    localPlayerImage = await gameCenterManager.loadLocalPlayerImage()
+                    print("프로필 이미지 로드")
+                }
+            }
         }
+    }
+    
+    init() {
+        gameCenterManager.authenticateUser()
+        print("게임 센터 로그인")
+        isGameCenterLoggin = gameCenterManager.isGameCenterLoggedIn
+        print("isGameCenterLoggin: \(isGameCenterLoggin)")
     }
 }
 
 struct ProfileView: View {
+    let userName: String?
+    @Binding var userProfile: Image?
     var body: some View {
         HStack {
-            Circle()
-                .foregroundStyle(.blue200)
-                .frame(width: 60, height: 60)
-                .padding(.trailing, 12)
+            if let userProfile = userProfile {
+                userProfile
+                    .resizable()
+                    .clipShape(Circle())
+                    .frame(width: 60, height: 60)
+                    .padding(.trailing, 12)
+            } else {
+                Image(systemName: "person.fill")
+                    .foregroundStyle(.white)
+                    .clipShape(Circle())
+                    .frame(width: 60, height: 60)
+                    .padding(.trailing, 12)
+            }
             VStack(alignment: .leading) {
-                Text("🍎저속노화처돌이")
+                Text(userName ?? "계단 오르기를 실천하는 사람")
                     .font(.headline)
                     .padding(.bottom, 4)
                 HStack(spacing: 0) {
@@ -185,6 +216,9 @@ struct ProfileView: View {
         .frame(height: 84)
         .padding(.horizontal, 16)
         .background(.green900)
+        .onAppear {
+            print("프로필 뷰 로드")
+        }
     }
 }
 
