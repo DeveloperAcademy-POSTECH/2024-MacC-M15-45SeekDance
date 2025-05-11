@@ -8,13 +8,16 @@
 import SwiftUI
 
 struct GPSStaircaseListView: View {
-    let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 2)
+//    let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 2)
+    let columns: [GridItem] = [
+        GridItem(.flexible(), spacing: 8),
+        GridItem(.flexible(), spacing: 8)
+    ]
     var body: some View {
         ScrollView {
-            LazyVGrid(columns: columns) {
+            LazyVGrid(columns: columns, spacing: 28) {
                 ForEach(gpsStaircases) { staircase in
                     GPSStaircaseThumbnailView(staircase: staircase)
-                        .padding(12)
                 }
             }
             
