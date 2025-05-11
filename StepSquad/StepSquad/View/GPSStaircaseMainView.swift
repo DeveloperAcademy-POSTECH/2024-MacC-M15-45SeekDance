@@ -106,7 +106,7 @@ struct GPSStaircaseMainView: View {
                         }
                         .frame(maxWidth: .infinity)
                         .frame(height: 289)
-                        .background(RoundedRectangle(cornerRadius: 12).fill(.white))
+                        .background(.white)
                         .padding(.top, 40)
                         
                         VStack {
