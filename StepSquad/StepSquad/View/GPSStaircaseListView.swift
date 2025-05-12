@@ -10,14 +10,13 @@ import SwiftUI
 struct GPSStaircaseListView: View {
     @Binding var filteredStaircases: [GPSStaircase]
     @Binding var bookmarks: Bookmarks
-//    let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 2)
     let columns: [GridItem] = [
-        GridItem(.flexible(), spacing: 8),
-        GridItem(.flexible(), spacing: 8)
+        GridItem(.fixed(148)),
+        GridItem(.fixed(148))
     ]
     var body: some View {
         ScrollView {
-            LazyVGrid(columns: columns, spacing: 28) {
+            LazyVGrid(columns: columns, spacing: 8) {
                 ForEach(filteredStaircases) { staircase in
                         VStack(alignment: .leading, spacing: 12) {
                             Text(staircase.title)
@@ -66,23 +65,11 @@ struct GPSStaircaseListView: View {
                             }
                         }
                         .frame(width: 124, height: 220)
-                        .background(RoundedRectangle(cornerRadius: 4).fill(.white).frame(width: 148, height: 244))
+                        .padding(12)
+                        .background(RoundedRectangle(cornerRadius: 4).fill(.white))
                 }
             }
-            
-//            Grid {
-//                ForEach(gpsStaircases) { staircase in
-//                    GridRow() {
-//                        GPSStaircaseThumbnailView(staircase: staircase)
-//                        GPSStaircaseThumbnailView(staircase: staircase)
-//                            .padding(.leading, 20)
-//                    }
-//                    .padding(.bottom, 20)
-//                }
-//            }
-//            .frame(maxWidth: .infinity)
         }
-        .background(.grey50)
         .ignoresSafeArea()
     }
 }
