@@ -173,9 +173,10 @@ struct GPSStaircaseMainView: View {
     
     func filterStaircases() {
         if(selectedGroup == 0) { // 북마크한 계단 리스트
-            //                                    filteredGPSStaircases =
+            filteredGPSStaircases = gpsStaircases.filter { stair in
+                return bookmarks.contains(stair.id)
+            }
         } else if(selectedGroup == 1) { // 도전 완료한 계단 리스트
-            
         } else if(selectedGroup == 3) { // 수도권 계단 리스트
             filteredGPSStaircases = gpsStaircases.filter { stair in
                 return stair.province == .gyeonggi
