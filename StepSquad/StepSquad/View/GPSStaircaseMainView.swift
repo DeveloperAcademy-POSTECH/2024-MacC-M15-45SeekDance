@@ -9,8 +9,9 @@ import SwiftUI
 
 struct GPSStaircaseMainView: View {
     // TODO: gameCenterManager 전달받기
-    @State var selectedGroup: Int = 0
+    @State var selectedGroup: Int = 2
     @State var bookmarks = Bookmarks()
+    @State var filteredGPSStaircases = gpsStaircases
     var body: some View {
         // TODO: NavigationStack 삭제
         NavigationStack {
@@ -116,14 +117,13 @@ struct GPSStaircaseMainView: View {
                                 .frame(width: 241.5, height: 77.02)
                                 .padding(.top, 40)
                             
-                            Picker("모든 계단", selection: $selectedGroup){
+                            Picker("전국", selection: $selectedGroup){
                                 Section {
-                                    Text("모든 계단").tag(0)
                                     HStack {
                                         Text("북마크")
                                         Spacer()
                                         Image(systemName: "bookmark")
-                                    }.tag(1)
+                                    }.tag(0)
                                     HStack {
                                         Text("도전 완료")
                                         Spacer()
@@ -131,21 +131,24 @@ struct GPSStaircaseMainView: View {
                                     }.tag(1)
                                 }
                                 Section("지역 필터") {
-                                    Text("전국").tag(0)
-                                    Text("수도권").tag(1)
-                                    Text("강원도").tag(2)
-                                    Text("세종·충북").tag(2)
-                                    Text("대전·충남").tag(2)
-                                    Text("대구·경북").tag(2)
-                                    Text("부산·울산·경남").tag(2)
-                                    Text("전북").tag(2)
-                                    Text("광주·전남").tag(2)
-                                    Text("제주").tag(2)
+                                    Text("전국").tag(2)
+                                    Text("수도권").tag(3)
+                                    Text("강원도").tag(4)
+                                    Text("세종·충북").tag(5)
+                                    Text("대전·충남").tag(6)
+                                    Text("대구·경북").tag(7)
+                                    Text("부산·울산·경남").tag(8)
+                                    Text("전북").tag(9)
+                                    Text("광주·전남").tag(10)
+                                    Text("제주").tag(11)
                                 }
                             }
                             .tint(.green800)
+                            .onChange(of: selectedGroup) {
+                                filterStaircases()
+                            }
                             
-                            GPSStaircaseListView(bookmarks: $bookmarks)
+                            GPSStaircaseListView(filteredStaircases: $filteredGPSStaircases, bookmarks: $bookmarks)
                         }
                         .id("GPSStaircaseListView")
                         
@@ -166,7 +169,54 @@ struct GPSStaircaseMainView: View {
                 .navigationBarTitleDisplayMode(.inline)
             }
         }
-    }}
+    }
+    
+    func filterStaircases() {
+        if(selectedGroup == 0) { // 북마크한 계단 리스트
+            //                                    filteredGPSStaircases =
+        } else if(selectedGroup == 1) { // 도전 완료한 계단 리스트
+            
+        } else if(selectedGroup == 3) { // 수도권 계단 리스트
+            filteredGPSStaircases = gpsStaircases.filter { stair in
+                return stair.province == .gyeonggi
+            }
+        } else if(selectedGroup == 4) { // 강원도 계단 리스트
+            filteredGPSStaircases = gpsStaircases.filter { stair in
+                return stair.province == .gangwon
+            }
+        } else if(selectedGroup == 5) { // 세종·충북 계단 리스트
+            filteredGPSStaircases = gpsStaircases.filter { stair in
+                return stair.province == .chungbuk
+            }
+        } else if(selectedGroup == 6) { // 대전·충남 계단 리스트
+            filteredGPSStaircases = gpsStaircases.filter { stair in
+                return stair.province == .chungnam
+            }
+        } else if(selectedGroup == 7) { // 대구·경북 계단 리스트
+            filteredGPSStaircases = gpsStaircases.filter { stair in
+                return stair.province == .gyeongbuk
+            }
+        } else if(selectedGroup == 8) { // 부산·울산·경남 계단 리스트
+            filteredGPSStaircases = gpsStaircases.filter { stair in
+                return stair.province == .gyeongnam
+            }
+        } else if(selectedGroup == 9) { // 전북 계단 리스트
+            filteredGPSStaircases = gpsStaircases.filter { stair in
+                return stair.province == .jeonbuk
+            }
+        } else if(selectedGroup == 10) { // 광주·전남 계단 리스트
+            filteredGPSStaircases = gpsStaircases.filter { stair in
+                return stair.province == .jeonnam
+            }
+        } else if(selectedGroup == 11) { // 제주 계단 리스트
+            filteredGPSStaircases = gpsStaircases.filter { stair in
+                return stair.province == .jeju
+            }
+        } else { // 전국 계단 리스트
+            filteredGPSStaircases = gpsStaircases
+        }
+    }
+}
 
 struct ProfileView: View {
     var body: some View {

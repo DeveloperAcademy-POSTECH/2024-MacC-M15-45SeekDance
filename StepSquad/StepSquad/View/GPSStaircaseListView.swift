@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct GPSStaircaseListView: View {
+    @Binding var filteredStaircases: [GPSStaircase]
     @Binding var bookmarks: Bookmarks
 //    let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 2)
     let columns: [GridItem] = [
@@ -17,7 +18,7 @@ struct GPSStaircaseListView: View {
     var body: some View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 28) {
-                ForEach(gpsStaircases) { staircase in
+                ForEach(filteredStaircases) { staircase in
                         VStack(alignment: .leading, spacing: 12) {
                             Text(staircase.title)
                                 .font(.footnote)
