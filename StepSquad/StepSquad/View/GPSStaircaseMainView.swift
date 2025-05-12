@@ -63,6 +63,7 @@ struct GPSStaircaseMainView: View {
                                 .foregroundStyle(.white)
                                 .padding(10)
                                 .background(RoundedRectangle(cornerRadius: 20).fill(.green700))
+                            
                             VStack(spacing: 4) {
                                 Text("전국의 계단 오르고 인증하자!")
                                     .font(.title3)
@@ -130,6 +131,7 @@ struct GPSStaircaseMainView: View {
                                         Image(systemName: "medal")
                                     }.tag(1)
                                 }
+                                
                                 Section("지역 필터") {
                                     Text("전국").tag(2)
                                     Text("수도권").tag(3)
@@ -177,6 +179,10 @@ struct GPSStaircaseMainView: View {
                 return bookmarks.contains(stair.id)
             }
         } else if(selectedGroup == 1) { // 도전 완료한 계단 리스트
+            // TODO: collectedItems로 도전 완료 계단 리스트 필터하기
+//            filteredGPSStaircases = gpsStaircases.filter { stair in
+//                return 
+//            }
         } else if(selectedGroup == 3) { // 수도권 계단 리스트
             filteredGPSStaircases = gpsStaircases.filter { stair in
                 return stair.province == .gyeonggi
