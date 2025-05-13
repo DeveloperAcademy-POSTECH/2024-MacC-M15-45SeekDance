@@ -26,7 +26,7 @@ struct StepSquadApp: App {
     
     var body: some Scene {
         WindowGroup {
-            GPSStaircaseMainView()
+            MainViewPhase3()
                 .onOpenURL { url in
                     print("App opened via URL Scheme: \(url.absoluteString)")
                 }

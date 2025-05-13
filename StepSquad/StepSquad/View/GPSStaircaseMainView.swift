@@ -8,10 +8,14 @@
 import SwiftUI
 
 struct GPSStaircaseMainView: View {
+    var localPlayerImage: Image?
+    var localPlayerName: String?
+    
     // TODO: gameCenterManager 전달받기
     @State var selectedGroup: Int = 2
     @State var bookmarks = Bookmarks()
     @State var filteredGPSStaircases = gpsStaircases
+
     var body: some View {
         // TODO: NavigationStack 삭제
         NavigationStack {
@@ -54,7 +58,7 @@ struct GPSStaircaseMainView: View {
                         .background(.green200)
                         
                         // TODO: 기본 프로필 이미지 전달받기
-                        ProfileView()
+                        ProfileView(localPlayerImage: localPlayerImage, localPlayerName: localPlayerName)
                         
                         VStack {
                             Text("미션")
@@ -226,22 +230,34 @@ struct GPSStaircaseMainView: View {
 }
 
 struct ProfileView: View {
+    var localPlayerImage: Image?
+    var localPlayerName: String?
     var body: some View {
         HStack {
-            Image(systemName: "person.fill")
-                .resizable()
-                .foregroundStyle(.white)
-                .clipShape(Circle())
-                .frame(width: 60, height: 60)
-                .padding(.trailing, 12)
+            if let localPlayerImage = localPlayerImage {
+                localPlayerImage
+                    .resizable()
+                    .foregroundStyle(.white)
+                    .clipShape(Circle())
+                    .frame(width: 60, height: 60)
+                    .padding(.trailing, 12)
+            } else {
+                Image(systemName: "person.fill")
+                    .resizable()
+                    .foregroundStyle(.white)
+                    .clipShape(Circle())
+                    .frame(width: 60, height: 60)
+                    .padding(.trailing, 12)
+            }
             
             VStack(alignment: .leading) {
-                Text("🍎저속노화처돌이")
+                Text(localPlayerName ?? "계단 오르기를 실천하는 사람")
                     .font(.headline)
                     .padding(.bottom, 4)
                 HStack(spacing: 0) {
                     Text("방문한 계단 ")
                         .font(.footnote)
+                    // TODO: 실제 완료한 계단 데이터 연결
                     Text("2개 / 24개")
                         .font(.footnote)
                         .bold()
