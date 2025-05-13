@@ -179,6 +179,34 @@ struct MainViewPhase3: View {
                             .padding(.top, 12)
                             .padding(.horizontal, 36)
                             
+                            NavigationLink(destination: GPSStaircaseMainView(), label: {
+                                HStack {
+                                    // TODO: 전국의 계단 이미지 전달받기
+                                    Rectangle()
+                                        .frame(width: 36, height: 36)
+                                        .padding(.trailing, 8)
+                                    
+                                    VStack(alignment: .leading, spacing: 0) {
+                                        Text("세상에 이런 계단이?!")
+                                            .font(.footnote)
+                                            .foregroundStyle(.green600)
+                                        Text("전국의 계단 미션을 깨보세요!")
+                                            .font(.subheadline)
+                                            .bold()
+                                            .foregroundStyle(.green900)
+                                    }
+                                    
+                                    Spacer()
+                                    
+                                    Image(systemName: "chevron.right")
+                                        .foregroundStyle(.green800)
+                                }
+                                .padding(17)
+                                .background(RoundedRectangle(cornerRadius: 12).fill(.white))
+                                .padding(.top, 8)
+                                .padding(.horizontal, 36)
+                            })
+                            
                             if isHealthKitAuthorized {
                                 Divider()
                                     .background(Color(hex: 0xCDD3C5))
