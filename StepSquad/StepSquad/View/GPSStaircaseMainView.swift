@@ -11,6 +11,8 @@ struct GPSStaircaseMainView: View {
     var localPlayerImage: Image?
     var localPlayerName: String?
     
+    @Binding var collectedItems: CollectedItems
+    
     // TODO: gameCenterManager 전달받기
     @State var selectedGroup: Int = 2
     @State var bookmarks = Bookmarks()
@@ -154,7 +156,7 @@ struct GPSStaircaseMainView: View {
                                 filterStaircases()
                             }
                             
-                            GPSStaircaseListView(filteredStaircases: $filteredGPSStaircases, bookmarks: $bookmarks)
+                            GPSStaircaseListView(filteredStaircases: $filteredGPSStaircases, bookmarks: $bookmarks, collectedItems: $collectedItems)
                         }
                         .id("GPSStaircaseListView")
                         
@@ -273,8 +275,4 @@ struct ProfileView: View {
             print("프로필 뷰 로드")
         }
     }
-}
-
-#Preview {
-    GPSStaircaseMainView()
 }

@@ -179,7 +179,7 @@ struct MainViewPhase3: View {
                             .padding(.top, 12)
                             .padding(.horizontal, 36)
                             
-                            NavigationLink(destination: GPSStaircaseMainView(localPlayerImage: userProfileImage, localPlayerName: gameCenterManager.loadLocalPlayerName()), label: {
+                            NavigationLink(destination: GPSStaircaseMainView(localPlayerImage: userProfileImage, localPlayerName: gameCenterManager.loadLocalPlayerName(), collectedItems: $collectedItems), label: {
                                 HStack {
                                     // TODO: 전국의 계단 이미지 전달받기
                                     Rectangle()
