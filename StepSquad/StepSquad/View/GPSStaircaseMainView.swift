@@ -60,7 +60,7 @@ struct GPSStaircaseMainView: View {
                         .background(.green200)
                         
                         // TODO: 기본 프로필 이미지 전달받기
-                        ProfileView(localPlayerImage: localPlayerImage, localPlayerName: localPlayerName)
+                        ProfileView(localPlayerImage: localPlayerImage, localPlayerName: localPlayerName, collectedItems: $collectedItems)
                         
                         VStack {
                             Text("미션")
@@ -234,6 +234,15 @@ struct GPSStaircaseMainView: View {
 struct ProfileView: View {
     var localPlayerImage: Image?
     var localPlayerName: String?
+    
+    @Binding var collectedItems: CollectedItems
+    var completedStaircasesCount: Int {
+        let completedStaircases = gpsStaircases.filter {
+            return collectedItems.isCollected(item: $0.id)
+        }
+        return completedStaircases.count
+    }
+    
     var body: some View {
         HStack {
             if let localPlayerImage = localPlayerImage {
@@ -259,8 +268,7 @@ struct ProfileView: View {
                 HStack(spacing: 0) {
                     Text("방문한 계단 ")
                         .font(.footnote)
-                    // TODO: 실제 완료한 계단 데이터 연결
-                    Text("2개 / 24개")
+                    Text("\(completedStaircasesCount)개 / 24개")
                         .font(.footnote)
                         .bold()
                 }
@@ -271,8 +279,5 @@ struct ProfileView: View {
         .frame(height: 84)
         .padding(.horizontal, 16)
         .background(.green900)
-        .onAppear {
-            print("프로필 뷰 로드")
-        }
     }
 }

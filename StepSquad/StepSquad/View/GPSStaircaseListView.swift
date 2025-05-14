@@ -22,6 +22,7 @@ struct GPSStaircaseListView: View {
             LazyVGrid(columns: columns, spacing: 8) {
                 ForEach(filteredStaircases) { staircase in
                     VStack(alignment: .leading, spacing: 12) {
+                        // TODO: 인증 과정 구현 후 삭제
 //                        Button("임시 인증/해제") {
 //                            if collectedItems.isCollected(item: staircase.id) {
 //                                collectedItems.deleteItem(item: staircase.id)
