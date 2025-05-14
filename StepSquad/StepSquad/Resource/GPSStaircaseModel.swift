@@ -265,7 +265,7 @@ let gpsStaircases: [GPSStaircase] = [
         verificationLocation: "계단 아래 지점",
         reward: "양푼이비빔밥"),
     GPSStaircase(
-        id: "EwhaCampusComplex ",
+        id: "EwhaCampusComplex",
         name: "이화여대 ECC 계단",
         title: "이화여대 관광명소",
         description: "엘베 대신 계단을 이용해보며 건강한 대학생이 되어보자",
