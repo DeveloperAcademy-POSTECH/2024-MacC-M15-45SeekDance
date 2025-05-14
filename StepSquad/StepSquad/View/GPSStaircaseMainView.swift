@@ -186,9 +186,9 @@ struct GPSStaircaseMainView: View {
             }
         } else if(selectedGroup == 1) { // 도전 완료한 계단 리스트
             // TODO: collectedItems로 도전 완료 계단 리스트 필터하기
-//            filteredGPSStaircases = gpsStaircases.filter { stair in
-//                return 
-//            }
+            filteredGPSStaircases = gpsStaircases.filter { stair in
+                return collectedItems.isCollected(item: stair.id)
+            }
         } else if(selectedGroup == 3) { // 수도권 계단 리스트
             filteredGPSStaircases = gpsStaircases.filter { stair in
                 return stair.province == .gyeonggi
