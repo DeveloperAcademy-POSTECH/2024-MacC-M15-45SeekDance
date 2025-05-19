@@ -34,7 +34,7 @@ struct GPSStaircaseMainView: View {
                             }
                             
                             VStack {
-                                Image("ribbon")
+                                Image("ribbonDarkGreen")
                                     .resizable()
                                     .frame(width: 312, height: 100)
                                     .padding(.top, 122)
@@ -119,7 +119,7 @@ struct GPSStaircaseMainView: View {
                         .padding(.top, 40)
                         
                         VStack {
-                            Image("ribbonWhite")
+                            Image("ribbonGreen")
                                 .resizable()
                                 .frame(width: 241.5, height: 77.02)
                                 .padding(.top, 40)
