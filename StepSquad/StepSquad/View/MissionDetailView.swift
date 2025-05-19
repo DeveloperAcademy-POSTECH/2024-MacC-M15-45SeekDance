@@ -122,11 +122,12 @@ struct MissionDetailView: View {
                             VStack(spacing: 12) {
                                 Label {
                                     Text("인증 위치")
-                                        .font(.subheadline)
+                                        .font(.footnote)
                                         .bold()
                                         .foregroundColor(Color.Green700)
                                 } icon: {
                                     Image(systemName: "pin.fill")
+                                        .font(.footnote)
                                         .foregroundColor(Color.Green700)
                                 }
                                 
@@ -135,12 +136,15 @@ struct MissionDetailView: View {
                                     .scaledToFit()
                                     .frame(width: 124, height: 108)
                                 
-                                VStack(spacing: 2) {
+                                VStack(spacing: 4) {
                                     Text("갓바위 정상 앞")
-                                        .font(.subheadline)
-                                        .bold()
-                                    Text("해당 위치 주변에서 인증이 됩니다.")
                                         .font(.caption)
+                                        .bold()
+                                    VStack {
+                                        Text("해당 위치 주변에서")
+                                        Text("인증이 됩니다.")
+                                    }
+                                        .font(.caption2)
                                         .foregroundColor(Color.Grey500)
                                         .multilineTextAlignment(.center)
                                 }
@@ -153,11 +157,12 @@ struct MissionDetailView: View {
                             VStack(spacing: 12) {
                                 Label {
                                     Text("획득 재료")
-                                        .font(.subheadline)
+                                        .font(.footnote)
                                         .bold()
                                         .foregroundColor(Color.Green700)
                                 } icon: {
                                     Image(systemName: "leaf.fill")
+                                        .font(.footnote)
                                         .foregroundColor(Color.Green700)
                                 }
                                 
@@ -166,12 +171,15 @@ struct MissionDetailView: View {
                                     .scaledToFit()
                                     .frame(width: 124, height: 108)
                                 
-                                VStack(spacing: 2) {
+                                VStack(spacing: 4) {
                                     Text("갓바위 돌가루")
-                                        .font(.subheadline)
-                                        .bold()
-                                    Text("실제로 채취하진 마세요.")
                                         .font(.caption)
+                                        .bold()
+                                    VStack {
+                                        Text("실제로 채취하진")
+                                        Text("마세요.")
+                                    }
+                                        .font(.caption2)
                                         .foregroundColor(Color.Grey500)
                                         .multilineTextAlignment(.center)
                                 }
