@@ -13,16 +13,16 @@ struct GPSStaircaseListView: View {
     @Binding var collectedItems: CollectedItems
     
     let columns: [GridItem] = [
-        GridItem(.fixed(148)),
-        GridItem(.fixed(148))
+        GridItem(.fixed(176)),
+        GridItem(.fixed(176))
     ]
     
     var body: some View {
         ScrollView {
-            LazyVGrid(columns: columns, spacing: 8) {
+            LazyVGrid(columns: columns, spacing: 12) {
                 ForEach(filteredStaircases) { staircase in
                     NavigationLink(destination: MissionDetailView(bookmarks: $bookmarks, collectedItems: $collectedItems, gpsStaircase: staircase), label: {
-                        VStack(alignment: .leading, spacing: 12) {
+                        VStack(alignment: .leading) {
                             // TODO: 인증 과정 구현 후 삭제
     //                        Button("임시 인증/해제") {
     //                            if collectedItems.isCollected(item: staircase.id) {
@@ -31,72 +31,96 @@ struct GPSStaircaseListView: View {
     //                                collectedItems.collectItem(item: staircase.id, collectedDate: Date.now)
     //                            }
     //                        }
-                            
-                            Text(staircase.title)
-                                .font(.footnote)
-                                .bold()
-                                .foregroundStyle(.green700)
-                                .frame(maxWidth: .infinity)
-                                .multilineTextAlignment(.center)
-                            
                             ZStack {
                                 Image(staircase.imageName)
                                     .resizable()
                                     .scaledToFill()
-                                    .frame(width: 124, height: 108)
-                                    .clipShape(Rectangle())
+                                    .frame(width: 176, height: 152)
+                                    .clipShape(.rect)
                                 
                                 if collectedItems.isCollected(item: staircase.id) {
                                     Rectangle()
                                         .foregroundStyle(.black)
                                         .opacity(0.4)
-                                        .frame(width: 124, height: 108)
+                                        .frame(width: 176, height: 152)
                                     
                                     Text("방문 완료")
                                         .font(.footnote)
                                         .bold()
                                         .foregroundStyle(.white)
                                 }
-                            }
-                            
-                            HStack {
-                                Text(staircase.name)
-                                    .font(.footnote)
-                                    .bold()
-                                Spacer()
-                                Button(action: {
-                                    if bookmarks.contains(staircase.id) {
-                                        bookmarks.remove(staircase.id)
-                                    } else {
-                                        bookmarks.add(staircase.id)
-                                    }
-                                }, label: {
-                                    Image(systemName: bookmarks.contains(staircase.id) ? "bookmark.fill" : "bookmark")
-                                        .font(.caption)
-                                        .foregroundStyle(bookmarks.contains(staircase.id) ? .brown500 : .grey400)
-                                })
-                            }
-                            
-                            HStack {
-                                Text(staircase.province.rawValue)
-                                    .font(.caption)
-                                    .foregroundStyle(.white)
-                                    .padding(4)
-                                    .background(RoundedRectangle(cornerRadius: 4).fill(.green600))
                                 
-                                Text("\(staircase.steps)칸")
-                                    .font(.caption)
-                                    .foregroundStyle(.green800)
-                                    .padding(4)
-                                    .background(RoundedRectangle(cornerRadius: 4).fill(.green50))
+                                VStack {
+                                    HStack {
+                                        Button(action: {
+                                            if bookmarks.contains(staircase.id) {
+                                                bookmarks.remove(staircase.id)
+                                            } else {
+                                                bookmarks.add(staircase.id)
+                                            }
+                                        }, label: {
+                                            Image(systemName: bookmarks.contains(staircase.id) ? "bookmark.fill" : "bookmark")
+                                                .font(.title3)
+                                                .foregroundStyle(bookmarks.contains(staircase.id) ? .brown500 : .white)
+                                        })
+                                        .offset(x: 8, y: 10)
+                                        
+                                        Spacer()
+                                    }
+                                    
+                                    Spacer()
+                                    
+                                    HStack {
+                                        Spacer()
+                                        
+                                        Image(staircase.reweardImageName)
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: 72, height: 72)
+                                    }
+                                }
+                                
                             }
+                            
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(staircase.title)
+                                    .font(.subheadline)
+                                    .bold()
+                                    .foregroundStyle(.green700)
+                                    .multilineTextAlignment(.leading)
+                                
+                                Text(staircase.name)
+                                    .font(.caption2)
+                                    .foregroundStyle(.grey700)
+                                
+                                Spacer()
+                                
+                                HStack {
+                                    Text(staircase.province.rawValue)
+                                        .font(.caption2)
+                                        .bold()
+                                        .foregroundStyle(.grey800)
+                                        .padding(4)
+                                        .background(RoundedRectangle(cornerRadius: 4).fill(.grey50))
+                                    
+                                    Text("\(staircase.steps)칸")
+                                        .font(.caption2)
+                                        .bold()
+                                        .foregroundStyle(.green800)
+                                        .padding(4)
+                                        .background(RoundedRectangle(cornerRadius: 4).fill(.green50))
+                                }
+                            }
+                            .padding(.vertical, 12)
+                            .padding(.horizontal, 8)
                         }
-                        .frame(width: 124, height: 220)
-                        .padding(12)
-                        .background(RoundedRectangle(cornerRadius: 4).fill(.white))
+                        .frame(width: 176, height: 252)
+                        .background(.white)
+                        .clipShape(RoundedRectangle(cornerRadius: 4))
                     })
                 }
             }
+            Spacer(minLength: 120)
         }
         .ignoresSafeArea()
     }
