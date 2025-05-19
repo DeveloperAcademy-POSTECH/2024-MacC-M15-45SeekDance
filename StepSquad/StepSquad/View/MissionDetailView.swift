@@ -196,16 +196,19 @@ struct MissionDetailView: View {
             // 하단 버튼
             Button(action: {
             }) {
-                Text("계단 도전 인증하기")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.Green800)
-                    .cornerRadius(12)
-                    .padding(.horizontal)
+                HStack {
+                    Spacer()
+                    Text("계단 도전 인증하기")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                    Spacer()
+                }
+                .padding(.horizontal, 20)
+                .padding(.vertical, 14)
             }
-            .padding(.vertical)
+            .background(Color.Green800)
+            .cornerRadius(12)
+            .padding(.horizontal, 36)
         }
         .toolbar {
             // TODO: 공유 기능 추가
