@@ -91,33 +91,35 @@ struct MissionDetailView: View {
                         }
                         
                         // 뱃지
-                        VStack(alignment: .leading) {
-                            HStack(spacing: 12) {
-                                Image(systemName: "medal")
-                                    .font(.system(size: 24, weight: .semibold))
-                                    .foregroundColor(Color.Green700)
-                                
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text("도전 완료된 계단")
-                                        .fontWeight(.bold)
-                                        .foregroundColor(Color.Green900)
+                        if collectedItems.isCollected(item: gpsStaircase.id) {
+                            VStack(alignment: .leading) {
+                                HStack(spacing: 12) {
+                                    Image(systemName: "medal")
+                                        .font(.system(size: 24, weight: .semibold))
+                                        .foregroundColor(Color.Green700)
                                     
-                                    Text("추가 점수는 계속 받을 수 있어요!")
-                                        .font(.footnote)
-                                        .foregroundColor(Color.Green800)
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Text("도전 완료된 계단")
+                                            .fontWeight(.bold)
+                                            .foregroundColor(Color.Green900)
+                                        
+                                        Text("추가 점수는 계속 받을 수 있어요!")
+                                            .font(.footnote)
+                                            .foregroundColor(Color.Green800)
+                                    }
                                 }
+                                .padding(.leading, 20)
+                                .padding(.vertical, 12)
                             }
-                            .padding(.leading, 20)
-                            .padding(.vertical, 12)
+                            .frame(width: 312, height: 72, alignment: .leading)
+                            .background(Color.white)
+                            .cornerRadius(12)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .stroke(Color.Green600, lineWidth: 1)
+                            )
+                            .padding(.bottom, 20)
                         }
-                        .frame(width: 312, height: 72, alignment: .leading)
-                        .background(Color.white)
-                        .cornerRadius(12)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 12)
-                                .stroke(Color.Green600, lineWidth: 1)
-                        )
-                        .padding(.bottom, 20)
                         
                         // 인증 위치 & 획득 자료
                         HStack(spacing: 16) {
