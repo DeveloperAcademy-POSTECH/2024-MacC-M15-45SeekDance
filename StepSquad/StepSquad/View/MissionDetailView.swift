@@ -225,11 +225,14 @@ struct MissionDetailView: View {
 //            }
             ToolbarItem(placement: .topBarTrailing) {
                 Button(action: {
-                    // TODO: 북마크 기능 추가
+                    if bookmarks.contains(gpsStaircase.id) {
+                        bookmarks.remove(gpsStaircase.id)
+                    } else {
+                        bookmarks.add(gpsStaircase.id)
+                    }
                 }) {
-                    Image(systemName: "bookmark")
-                        .font(.system(size: 22))
-                        .foregroundColor(Color.Green700)
+                    Image(systemName: bookmarks.contains(gpsStaircase.id) ? "bookmark.fill" : "bookmark")
+                        .foregroundStyle(bookmarks.contains(gpsStaircase.id) ? .brown500 : .green700)
                 }
             }
         }
