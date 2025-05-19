@@ -9,7 +9,9 @@
 import SwiftUI
 
 struct MissionDetailView: View {
-    @Environment(\.presentationMode) var presentationMode
+    @Binding var bookmarks: Bookmarks
+    @Binding var collectedItems: CollectedItems
+    let gpsStaircase: GPSStaircase
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -36,7 +38,7 @@ struct MissionDetailView: View {
                     VStack(spacing: 0) {
                         // 이미지 + 텍스트
                         ZStack(alignment: .bottom) {
-                            Image("Gatbawi")
+                            Image(gpsStaircase.imageName)
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 394, height: 368)
@@ -56,13 +58,13 @@ struct MissionDetailView: View {
                             
                             VStack(spacing: 10) {
                                 HStack {
-                                    Text("대구/경북")
+                                    Text(gpsStaircase.province.rawValue)
                                         .foregroundStyle(Color.white)
                                         .font(.caption)
                                         .padding(4)
                                         .background(Color.Green600)
                                         .cornerRadius(4)
-                                    Text("1365칸")
+                                    Text("\(gpsStaircase.steps)칸")
                                         .foregroundStyle(Color.Green800)
                                         .font(.caption)
                                         .padding(4)
@@ -70,18 +72,18 @@ struct MissionDetailView: View {
                                         .cornerRadius(4)
                                 }
                                 
-                                Text("소원을 이뤄줘요")
+                                Text(gpsStaircase.title)
                                     .font(.body)
                                     .fontWeight(.regular)
                                     .foregroundColor(Color.Grey100)
                                     .padding(.bottom, -8)
                                 
-                                Text("팔공산 갓바위")
+                                Text(gpsStaircase.name)
                                     .font(.title)
                                     .fontWeight(.bold)
                                     .foregroundColor(.white)
                                 
-                                Text("대구에 위치한 엄청난 높이의 돌계단")
+                                Text(gpsStaircase.description)
                                     .font(.footnote)
                                     .foregroundColor(Color.Grey100)
                             }
@@ -131,13 +133,13 @@ struct MissionDetailView: View {
                                         .foregroundColor(Color.Green700)
                                 }
                                 
-                                Image("Gatbawi_location")
+                                Image(gpsStaircase.verificationLocationImageName)
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 124, height: 108)
                                 
                                 VStack(spacing: 4) {
-                                    Text("갓바위 정상 앞")
+                                    Text(gpsStaircase.verificationLocation)
                                         .font(.caption)
                                         .bold()
                                     VStack {
@@ -166,13 +168,13 @@ struct MissionDetailView: View {
                                         .foregroundColor(Color.Green700)
                                 }
                                 
-                                Image("Gatbawi_reward")
+                                Image(gpsStaircase.reweardImageName)
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 124, height: 108)
                                 
                                 VStack(spacing: 4) {
-                                    Text("갓바위 돌가루")
+                                    Text(gpsStaircase.reward)
                                         .font(.caption)
                                         .bold()
                                     VStack {
@@ -233,6 +235,6 @@ struct MissionDetailView: View {
     }
 }
 
-#Preview {
-    MissionDetailView()
-}
+//#Preview {
+//    MissionDetailView()
+//}

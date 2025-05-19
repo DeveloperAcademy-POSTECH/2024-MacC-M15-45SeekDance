@@ -21,7 +21,7 @@ struct GPSStaircaseListView: View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 8) {
                 ForEach(filteredStaircases) { staircase in
-                    NavigationLink(destination: MissionDetailView(), label: {
+                    NavigationLink(destination: MissionDetailView(bookmarks: $bookmarks, collectedItems: $collectedItems, gpsStaircase: staircase), label: {
                         VStack(alignment: .leading, spacing: 12) {
                             // TODO: 인증 과정 구현 후 삭제
     //                        Button("임시 인증/해제") {
