@@ -91,6 +91,8 @@ extension Color {
 
     static let NeutralWhite = Color("NeutralWhite")
     static let NetralBlack = Color("NetralBlack")
+    
+    static let DeepGreen = Color(hex: 0x0C1806)
 
 }
 
