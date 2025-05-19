@@ -147,7 +147,7 @@ struct MissionDetailView: View {
                             RoundedRectangle(cornerRadius: 12)
                                 .stroke(Color.Green600, lineWidth: 1)
                         )
-                        .padding(12)
+                        .padding(.bottom, 20)
                         
                         // 인증 위치 & 획득 자료
                         HStack(spacing: 16) {
