@@ -31,38 +31,6 @@ struct MissionDetailView: View {
             
             // [2] 콘텐츠
             VStack(spacing: 0) {
-                // 상단 바
-                HStack {
-                    Button(action: {
-                        presentationMode.wrappedValue.dismiss()
-                    }) {
-                        Image(systemName: "chevron.left")
-                            .font(.system(size: 22))
-                            .foregroundColor(Color.Green700)
-                            .frame(width: 44, height: 44)
-                    }
-                    
-                    Spacer()
-                    
-                    HStack(spacing: 16) {
-                        Button(action: {}) {
-                            Image(systemName: "square.and.arrow.up")
-                                .font(.system(size: 22))
-                                .foregroundColor(Color.Green700)
-                            
-                        }
-                        
-                        Button(action: {}) {
-                            Image(systemName: "bookmark")
-                                .font(.system(size: 22))
-                                .foregroundColor(Color.Green700)
-                        }
-                    }
-                    .frame(width: 80, height: 44)
-                    .padding(.trailing, 10)
-                    
-                }
-                
                 // 메인 콘텐츠
                 ScrollView {
                     VStack(spacing: 0) {
@@ -71,7 +39,7 @@ struct MissionDetailView: View {
                             Image("Gatbawi")
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
-                                .frame(width: 393, height: 368)
+                                .frame(width: 394, height: 368)
                                 .clipped()
                             
                             LinearGradient(
@@ -230,6 +198,25 @@ struct MissionDetailView: View {
                     .padding(.horizontal)
             }
             .padding(.vertical)
+        }
+        .toolbar {
+            // TODO: 공유 기능 추가
+//            ToolbarItem(placement: .topBarTrailing) {
+//                Button(action: {}) {
+//                    Image(systemName: "square.and.arrow.up")
+//                        .font(.system(size: 22))
+//                        .foregroundColor(Color.Green700)
+//                }
+//            }
+            ToolbarItem(placement: .topBarTrailing) {
+                Button(action: {
+                    // TODO: 북마크 기능 추가
+                }) {
+                    Image(systemName: "bookmark")
+                        .font(.system(size: 22))
+                        .foregroundColor(Color.Green700)
+                }
+            }
         }
         .navigationBarTitleDisplayMode(.inline)
     }
