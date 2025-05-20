@@ -190,7 +190,7 @@ let gpsStaircases: [GPSStaircase] = [
         title: "일출이 아름다운",
         description: "제주도에 왔다면 성산 일출을 보러가자!",
         province: .jeju,
-        steps: 976, // TODO: 수정 필요
+        steps: 976,
         gpsLocation: (33.462336, 126.936886),
         verificationLocation: "매표소",
         reward: "한라봉"),
