@@ -93,13 +93,14 @@ struct MissionDetailView: View {
                         // 뱃지
                         if collectedItems.isCollected(item: gpsStaircase.id) {
                             VStack(alignment: .leading) {
-                                HStack(spacing: 12) {
+                                HStack(spacing: 8) {
                                     Image(systemName: "medal")
-                                        .font(.system(size: 24, weight: .semibold))
+                                        .font(.title)
                                         .foregroundColor(Color.Green700)
                                     
-                                    VStack(alignment: .leading, spacing: 4) {
+                                    VStack(alignment: .leading) {
                                         Text("도전 완료된 계단")
+                                            .font(.subheadline)
                                             .fontWeight(.bold)
                                             .foregroundColor(Color.Green900)
                                         
@@ -108,7 +109,7 @@ struct MissionDetailView: View {
                                             .foregroundColor(Color.Green800)
                                     }
                                 }
-                                .padding(.leading, 20)
+                                .padding(.leading, 16)
                                 .padding(.vertical, 12)
                             }
                             .frame(width: 312, height: 72, alignment: .leading)
