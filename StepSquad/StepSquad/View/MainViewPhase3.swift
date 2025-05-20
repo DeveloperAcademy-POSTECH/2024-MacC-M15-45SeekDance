@@ -181,9 +181,9 @@ struct MainViewPhase3: View {
                             
                             NavigationLink(destination: GPSStaircaseMainView(localPlayerImage: userProfileImage, localPlayerName: gameCenterManager.loadLocalPlayerName(), collectedItems: $collectedItems), label: {
                                 HStack {
-                                    // TODO: 전국의 계단 이미지 전달받기
-                                    Rectangle()
-                                        .frame(width: 36, height: 36)
+                                    Image("gpsStaircaseLogo")
+                                        .resizable()
+                                        .frame(width: 48, height: 48)
                                         .padding(.trailing, 8)
                                     
                                     VStack(alignment: .leading, spacing: 0) {

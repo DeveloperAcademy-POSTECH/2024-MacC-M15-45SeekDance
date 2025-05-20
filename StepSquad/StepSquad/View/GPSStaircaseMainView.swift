@@ -17,165 +17,161 @@ struct GPSStaircaseMainView: View {
     @State var selectedGroup: Int = 2
     @State var bookmarks = Bookmarks()
     @State var filteredGPSStaircases = gpsStaircases
-
+    
     var body: some View {
-        // TODO: NavigationStack 삭제
-        NavigationStack {
-            ScrollViewReader { proxy in
-                ScrollView {
-                    VStack(spacing: 0) {
-                        ZStack {
-                            // TODO: 캐러셀 이미지, 애니메이션 추가
-                            
-                            VStack {
-                                Spacer()
-                                LinearGradient(stops: [.init(color: Color(hex: 0x16240E), location: 0), .init(color: .clear, location: 1)], startPoint: .bottom, endPoint: .top)
-                                    .frame(height: 142)
-                            }
-                            
-                            VStack {
-                                Image("ribbonDarkGreen")
-                                    .resizable()
-                                    .frame(width: 312, height: 100)
-                                    .padding(.top, 122)
-                                
-                                Spacer()
-                                
-                                Button(action: {
-                                    proxy.scrollTo("GPSStaircaseListView", anchor: .top)
-                                }, label: {
-                                    HStack {
-                                        Text("전국의 계단 리스트 보기")
-                                            .foregroundStyle(.white)
-                                            .bold()
-                                    }
-                                    .frame(width: 248, height: 50)
-                                    .background(RoundedRectangle(cornerRadius: 12).fill(.green500))
-                                })
-                                .padding(.bottom, 40)
-                            }
-                        }
-                        .frame(height: 444)
-                        .frame(maxWidth: .infinity)
-                        .background(.green200)
-                        
-                        // TODO: 기본 프로필 이미지 전달받기
-                        ProfileView(localPlayerImage: localPlayerImage, localPlayerName: localPlayerName, collectedItems: $collectedItems)
+        ScrollViewReader { proxy in
+            ScrollView {
+                VStack(spacing: 0) {
+                    ZStack {
+                        // TODO: 캐러셀 이미지, 애니메이션 추가
                         
                         VStack {
-                            Text("미션")
-                                .font(.subheadline)
-                                .bold()
-                                .foregroundStyle(.white)
-                                .padding(10)
-                                .background(RoundedRectangle(cornerRadius: 20).fill(.green700))
-                            
-                            VStack(spacing: 4) {
-                                Text("전국의 계단 오르고 인증하자!")
-                                    .font(.title3)
-                                    .bold()
-                                Text("특별 재료에 점수 2배 이벤트")
-                                    .font(.footnote)
-                                Text("(계단 오르기 점수 + 특별 계단 점수)")
-                                    .font(.caption2)
-                                    .foregroundStyle(.grey600)
-                            }
-                            .padding(.top, 12)
+                            Spacer()
+                            LinearGradient(stops: [.init(color: Color(hex: 0x16240E), location: 0), .init(color: .clear, location: 1)], startPoint: .bottom, endPoint: .top)
+                                .frame(height: 142)
                         }
-                        .padding(.top, 26)
                         
                         VStack {
-                            Text("참여 방법")
-                                .font(.subheadline)
-                                .bold()
-                                .foregroundStyle(.white)
-                                .padding(10)
-                                .background(RoundedRectangle(cornerRadius: 20).fill(.green700))
-                                .padding(.top, 16)
-                            
-                            HStack(spacing: 32) {
-                                VStack {
-                                    Image("authenticationExample1")
-                                    Text("인증 장소를 확인한 gn 직접 방문한다")
-                                        .font(.footnote)
-                                        .frame(width: 120)
-                                }
-                                
-                                VStack {
-                                    Image("authenticationExample2")
-                                    Text("해당 계단 하단의 인증하기를 탭!")
-                                        .font(.footnote)
-                                        .frame(width: 120)
-                                }
-                            }
-                            .padding(.top, 26)
-                            .multilineTextAlignment(.center)
+                            Image("ribbonDarkGreen")
+                                .resizable()
+                                .frame(width: 312, height: 100)
+                                .padding(.top, 122)
                             
                             Spacer()
+                            
+                            Button(action: {
+                                proxy.scrollTo("GPSStaircaseListView", anchor: .top)
+                            }, label: {
+                                HStack {
+                                    Text("전국의 계단 리스트 보기")
+                                        .foregroundStyle(.white)
+                                        .bold()
+                                }
+                                .frame(width: 248, height: 50)
+                                .background(RoundedRectangle(cornerRadius: 12).fill(.green500))
+                            })
+                            .padding(.bottom, 40)
                         }
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 289)
-                        .background(.white)
-                        .padding(.top, 40)
+                    }
+                    .frame(height: 444)
+                    .frame(maxWidth: .infinity)
+                    .background(.green200)
+                    
+                    ProfileView(localPlayerImage: localPlayerImage, localPlayerName: localPlayerName, collectedItems: $collectedItems)
+                    
+                    VStack {
+                        Text("미션")
+                            .font(.subheadline)
+                            .bold()
+                            .foregroundStyle(.white)
+                            .padding(10)
+                            .background(RoundedRectangle(cornerRadius: 20).fill(.green700))
                         
-                        VStack {
-                            Image("ribbonGreen")
-                                .resizable()
-                                .frame(width: 241.5, height: 77.02)
-                                .padding(.top, 40)
-                            
-                            Picker("전국", selection: $selectedGroup){
-                                Section {
-                                    HStack {
-                                        Text("북마크")
-                                        Spacer()
-                                        Image(systemName: "bookmark")
-                                    }.tag(0)
-                                    HStack {
-                                        Text("도전 완료")
-                                        Spacer()
-                                        Image(systemName: "medal")
-                                    }.tag(1)
-                                }
-                                
-                                Section("지역 필터") {
-                                    Text("전국").tag(2)
-                                    Text("수도권").tag(3)
-                                    Text("강원도").tag(4)
-                                    Text("세종·충북").tag(5)
-                                    Text("대전·충남").tag(6)
-                                    Text("대구·경북").tag(7)
-                                    Text("부산·울산·경남").tag(8)
-                                    Text("전북").tag(9)
-                                    Text("광주·전남").tag(10)
-                                    Text("제주").tag(11)
-                                }
-                            }
-                            .tint(.green800)
-                            .onChange(of: selectedGroup) {
-                                filterStaircases()
-                            }
-                            
-                            GPSStaircaseListView(filteredStaircases: $filteredGPSStaircases, bookmarks: $bookmarks, collectedItems: $collectedItems)
+                        VStack(spacing: 4) {
+                            Text("전국의 계단 오르고 인증하자!")
+                                .font(.title3)
+                                .bold()
+                            Text("특별 재료에 점수 2배 이벤트")
+                                .font(.footnote)
+                            Text("(계단 오르기 점수 + 특별 계단 점수)")
+                                .font(.caption2)
+                                .foregroundStyle(.grey600)
                         }
-                        .id("GPSStaircaseListView")
+                        .padding(.top, 12)
+                    }
+                    .padding(.top, 26)
+                    
+                    VStack {
+                        Text("참여 방법")
+                            .font(.subheadline)
+                            .bold()
+                            .foregroundStyle(.white)
+                            .padding(10)
+                            .background(RoundedRectangle(cornerRadius: 20).fill(.green700))
+                            .padding(.top, 16)
+                        
+                        HStack(spacing: 32) {
+                            VStack {
+                                Image("authenticationExample1")
+                                Text("인증 장소를 확인한 gn 직접 방문한다")
+                                    .font(.footnote)
+                                    .frame(width: 120)
+                            }
+                            
+                            VStack {
+                                Image("authenticationExample2")
+                                Text("해당 계단 하단의 인증하기를 탭!")
+                                    .font(.footnote)
+                                    .frame(width: 120)
+                            }
+                        }
+                        .padding(.top, 26)
+                        .multilineTextAlignment(.center)
                         
                         Spacer()
                     }
-                }
-                .toolbar {
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button("안내") {
-                            // TODO: 안내 기능 추가
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 289)
+                    .background(.white)
+                    .padding(.top, 40)
+                    
+                    VStack {
+                        Image("ribbonGreen")
+                            .resizable()
+                            .frame(width: 241.5, height: 77.02)
+                            .padding(.top, 40)
+                        
+                        Picker("전국", selection: $selectedGroup){
+                            Section {
+                                HStack {
+                                    Text("북마크")
+                                    Spacer()
+                                    Image(systemName: "bookmark")
+                                }.tag(0)
+                                HStack {
+                                    Text("도전 완료")
+                                    Spacer()
+                                    Image(systemName: "medal")
+                                }.tag(1)
+                            }
+                            
+                            Section("지역 필터") {
+                                Text("전국").tag(2)
+                                Text("수도권").tag(3)
+                                Text("강원도").tag(4)
+                                Text("세종·충북").tag(5)
+                                Text("대전·충남").tag(6)
+                                Text("대구·경북").tag(7)
+                                Text("부산·울산·경남").tag(8)
+                                Text("전북").tag(9)
+                                Text("광주·전남").tag(10)
+                                Text("제주").tag(11)
+                            }
                         }
-                        .tint(.green700)
+                        .tint(.green800)
+                        .onChange(of: selectedGroup) {
+                            filterStaircases()
+                        }
+                        
+                        GPSStaircaseListView(filteredStaircases: $filteredGPSStaircases, bookmarks: $bookmarks, collectedItems: $collectedItems)
                     }
+                    .id("GPSStaircaseListView")
+                    
+                    Spacer()
                 }
-                .ignoresSafeArea()
-                .background(.green50)
-                .navigationTitle("미션")
-                .navigationBarTitleDisplayMode(.inline)
             }
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("안내") {
+                        // TODO: 안내 기능 추가
+                    }
+                    .tint(.green700)
+                }
+            }
+            .ignoresSafeArea()
+            .background(.green50)
+            .navigationTitle("미션")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
     
@@ -185,7 +181,6 @@ struct GPSStaircaseMainView: View {
                 return bookmarks.contains(stair.id)
             }
         } else if(selectedGroup == 1) { // 도전 완료한 계단 리스트
-            // TODO: collectedItems로 도전 완료 계단 리스트 필터하기
             filteredGPSStaircases = gpsStaircases.filter { stair in
                 return collectedItems.isCollected(item: stair.id)
             }
@@ -253,7 +248,7 @@ struct ProfileView: View {
                     .frame(width: 60, height: 60)
                     .padding(.trailing, 12)
             } else {
-                Image(systemName: "person.fill")
+                Image("defaultProfile")
                     .resizable()
                     .foregroundStyle(.white)
                     .clipShape(Circle())
