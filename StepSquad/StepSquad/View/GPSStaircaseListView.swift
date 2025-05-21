@@ -24,13 +24,13 @@ struct GPSStaircaseListView: View {
                     NavigationLink(destination: MissionDetailView(bookmarks: $bookmarks, collectedItems: $collectedItems, gpsStaircase: staircase), label: {
                         VStack(alignment: .leading) {
                             // TODO: 인증 과정 구현 후 삭제
-    //                        Button("임시 인증/해제") {
-    //                            if collectedItems.isCollected(item: staircase.id) {
-    //                                collectedItems.deleteItem(item: staircase.id)
-    //                            } else {
-    //                                collectedItems.collectItem(item: staircase.id, collectedDate: Date.now)
-    //                            }
-    //                        }
+//                            Button("임시 인증/해제") {
+//                                if collectedItems.isCollected(item: staircase.id) {
+//                                    collectedItems.deleteItem(item: staircase.id)
+//                                } else {
+//                                    collectedItems.collectItem(item: staircase.id, collectedDate: Date.now)
+//                                }
+//                            }
                             ZStack {
                                 Image(staircase.imageName)
                                     .resizable()

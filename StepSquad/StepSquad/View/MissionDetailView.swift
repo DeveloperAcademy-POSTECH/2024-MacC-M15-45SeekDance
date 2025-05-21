@@ -204,7 +204,7 @@ struct MissionDetailView: View {
                 HStack {
                     Spacer()
                     Text("계단 도전 인증하기")
-                        .font(.footnote)
+                        .font(.body)
                         .foregroundColor(.white)
                     Spacer()
                 }
