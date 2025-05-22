@@ -10,6 +10,8 @@ import CoreLocation
 
 class LocationManager: NSObject, CLLocationManagerDelegate {
     private var locationManager = CLLocationManager()
+    var latitude: Double = 0.0
+    var longitude: Double = 0.0
     
     override init() {
         super.init()
@@ -19,5 +21,22 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     
     func requestWhenInUseAuthorization() {
         locationManager.requestWhenInUseAuthorization()
+    }
+    
+    func startLocationUpdates() {
+        locationManager.startUpdatingLocation()
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.last {
+            print("Latitude: \(location.coordinate.latitude), Longitude: \(location.coordinate.longitude)")
+            latitude = location.coordinate.latitude
+            longitude = location.coordinate.longitude
+        }
+    }
+    
+    func verifyLocation() -> String {
+        startLocationUpdates()
+        return "현재 latitude: \(latitude), longitude: \(longitude)"
     }
 }
