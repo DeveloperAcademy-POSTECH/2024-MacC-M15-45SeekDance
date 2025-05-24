@@ -35,147 +35,147 @@ struct MissionDetailView: View {
             .ignoresSafeArea()
             
             ScrollView {
-                        VStack {
-                            Spacer(minLength: 207)
-                            
-                            HStack {
-                                Text(gpsStaircase.province.rawValue)
-                                    .foregroundStyle(Color.white)
-                                    .font(.caption)
-                                    .padding(4)
-                                    .background(Color.Green600)
-                                    .cornerRadius(4)
-                                Text("\(gpsStaircase.steps)칸")
-                                    .foregroundStyle(Color.Green800)
-                                    .font(.caption)
-                                    .padding(4)
-                                    .background(Color.Green50)
-                                    .cornerRadius(4)
-                            }
-                            
-                            VStack(spacing: 10) {
-                                Text(gpsStaircase.title)
-                                    .font(.body)
-                                    .fontWeight(.regular)
-                                    .foregroundColor(Color.Grey100)
-                                    .padding(.bottom, -8)
-                                
-                                Text(gpsStaircase.name)
+                VStack {
+                    Spacer(minLength: 207)
+                    
+                    HStack {
+                        Text(gpsStaircase.province.rawValue)
+                            .foregroundStyle(Color.white)
+                            .font(.caption)
+                            .padding(4)
+                            .background(Color.Green600)
+                            .cornerRadius(4)
+                        Text("\(gpsStaircase.steps)칸")
+                            .foregroundStyle(Color.Green800)
+                            .font(.caption)
+                            .padding(4)
+                            .background(Color.Green50)
+                            .cornerRadius(4)
+                    }
+                    
+                    VStack(spacing: 10) {
+                        Text(gpsStaircase.title)
+                            .font(.body)
+                            .fontWeight(.regular)
+                            .foregroundColor(Color.Grey100)
+                            .padding(.bottom, -8)
+                        
+                        Text(gpsStaircase.name)
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                        
+                        Text(gpsStaircase.description)
+                            .font(.footnote)
+                            .foregroundColor(Color.Grey100)
+                    }
+                    .padding(.bottom, 42)
+                    
+                    // 뱃지
+                    if collectedItems.isCollected(item: gpsStaircase.id) {
+                        VStack(alignment: .leading) {
+                            HStack(spacing: 8) {
+                                Image(systemName: "medal")
                                     .font(.title)
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.white)
+                                    .foregroundColor(Color.Green700)
                                 
-                                Text(gpsStaircase.description)
-                                    .font(.footnote)
-                                    .foregroundColor(Color.Grey100)
-                            }
-                            .padding(.bottom, 42)
-                            
-                            // 뱃지
-                            if collectedItems.isCollected(item: gpsStaircase.id) {
                                 VStack(alignment: .leading) {
-                                    HStack(spacing: 8) {
-                                        Image(systemName: "medal")
-                                            .font(.title)
-                                            .foregroundColor(Color.Green700)
-                                        
-                                        VStack(alignment: .leading) {
-                                            Text("도전 완료된 계단")
-                                                .font(.subheadline)
-                                                .fontWeight(.bold)
-                                                .foregroundColor(Color.Green900)
-                                            
-                                            Text("추가 점수는 계속 받을 수 있어요!")
-                                                .font(.footnote)
-                                                .foregroundColor(Color.Green800)
-                                        }
-                                    }
-                                    .padding(.leading, 16)
-                                    .padding(.vertical, 12)
+                                    Text("도전 완료된 계단")
+                                        .font(.subheadline)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(Color.Green900)
+                                    
+                                    Text("추가 점수는 계속 받을 수 있어요!")
+                                        .font(.footnote)
+                                        .foregroundColor(Color.Green800)
                                 }
-                                .frame(width: 312, height: 72, alignment: .leading)
-                                .background(Color.white)
-                                .cornerRadius(12)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 12)
-                                        .stroke(Color.Green600, lineWidth: 1)
-                                )
-                                .padding(.bottom, 20)
+                            }
+                            .padding(.leading, 16)
+                            .padding(.vertical, 12)
+                        }
+                        .frame(width: 312, height: 72, alignment: .leading)
+                        .background(Color.white)
+                        .cornerRadius(12)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(Color.Green600, lineWidth: 1)
+                        )
+                        .padding(.bottom, 20)
+                    }
+                    
+                    // 인증 위치 & 획득 자료
+                    HStack(spacing: 16) {
+                        VStack(spacing: 12) {
+                            Label {
+                                Text("인증 위치")
+                                    .font(.footnote)
+                                    .bold()
+                                    .foregroundColor(Color.Green700)
+                            } icon: {
+                                Image(systemName: "pin.fill")
+                                    .font(.footnote)
+                                    .foregroundColor(Color.Green700)
                             }
                             
-                            // 인증 위치 & 획득 자료
-                            HStack(spacing: 16) {
-                                VStack(spacing: 12) {
-                                    Label {
-                                        Text("인증 위치")
-                                            .font(.footnote)
-                                            .bold()
-                                            .foregroundColor(Color.Green700)
-                                    } icon: {
-                                        Image(systemName: "pin.fill")
-                                            .font(.footnote)
-                                            .foregroundColor(Color.Green700)
-                                    }
-                                    
-                                    Image(gpsStaircase.verificationLocationImageName)
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 124, height: 108)
-                                    
-                                    VStack(spacing: 4) {
-                                        Text(gpsStaircase.verificationLocation)
-                                            .font(.caption)
-                                            .bold()
-                                        VStack {
-                                            Text("해당 위치 주변에서")
-                                            Text("인증이 됩니다.")
-                                        }
-                                        .font(.caption2)
-                                        .foregroundColor(Color.Grey500)
-                                        .multilineTextAlignment(.center)
-                                    }
+                            Image(gpsStaircase.verificationLocationImageName)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 124, height: 108)
+                            
+                            VStack(spacing: 4) {
+                                Text(gpsStaircase.verificationLocation)
+                                    .font(.caption)
+                                    .bold()
+                                VStack {
+                                    Text("해당 위치 주변에서")
+                                    Text("인증이 됩니다.")
                                 }
-                                .padding(12)
-                                .frame(width: 148, height: 220)
-                                .background(Color.white)
-                                .cornerRadius(4)
-                                
-                                VStack(spacing: 12) {
-                                    Label {
-                                        Text("획득 재료")
-                                            .font(.footnote)
-                                            .bold()
-                                            .foregroundColor(Color.Green700)
-                                    } icon: {
-                                        Image(systemName: "leaf.fill")
-                                            .font(.footnote)
-                                            .foregroundColor(Color.Green700)
-                                    }
-                                    
-                                    Image(gpsStaircase.reweardImageName)
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 124, height: 108)
-                                    
-                                    VStack(spacing: 4) {
-                                        Text(gpsStaircase.reward)
-                                            .font(.caption)
-                                            .bold()
-                                        VStack {
-                                            Text("실제로 채취하진")
-                                            Text("마세요.")
-                                        }
-                                        .font(.caption2)
-                                        .foregroundColor(Color.Grey500)
-                                        .multilineTextAlignment(.center)
-                                    }
-                                }
-                                .padding(12)
-                                .frame(width: 148, height: 220)
-                                .background(Color.white)
-                                .cornerRadius(4)
+                                .font(.caption2)
+                                .foregroundColor(Color.Grey500)
+                                .multilineTextAlignment(.center)
                             }
                         }
+                        .padding(12)
+                        .frame(width: 148, height: 220)
+                        .background(Color.white)
+                        .cornerRadius(4)
+                        
+                        VStack(spacing: 12) {
+                            Label {
+                                Text("획득 재료")
+                                    .font(.footnote)
+                                    .bold()
+                                    .foregroundColor(Color.Green700)
+                            } icon: {
+                                Image(systemName: "leaf.fill")
+                                    .font(.footnote)
+                                    .foregroundColor(Color.Green700)
+                            }
+                            
+                            Image(gpsStaircase.reweardImageName)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 124, height: 108)
+                            
+                            VStack(spacing: 4) {
+                                Text(gpsStaircase.reward)
+                                    .font(.caption)
+                                    .bold()
+                                VStack {
+                                    Text("실제로 채취하진")
+                                    Text("마세요.")
+                                }
+                                .font(.caption2)
+                                .foregroundColor(Color.Grey500)
+                                .multilineTextAlignment(.center)
+                            }
+                        }
+                        .padding(12)
+                        .frame(width: 148, height: 220)
+                        .background(Color.white)
+                        .cornerRadius(4)
+                    }
+                }
             }
             
             // 하단 버튼
