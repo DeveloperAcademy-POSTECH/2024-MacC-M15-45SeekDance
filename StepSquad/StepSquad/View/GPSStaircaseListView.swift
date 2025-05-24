@@ -61,7 +61,8 @@ struct GPSStaircaseListView: View {
                                         }, label: {
                                             Image(systemName: bookmarks.contains(staircase.id) ? "bookmark.fill" : "bookmark")
                                                 .font(.title3)
-                                                .foregroundStyle(bookmarks.contains(staircase.id) ? .brown500 : .white)
+                                                .foregroundStyle(.white)
+                                                .shadow(color: .black.opacity(0.8), radius: 6.15, x: 0, y: 2)
                                         })
                                         .offset(x: 8, y: 10)
                                         
