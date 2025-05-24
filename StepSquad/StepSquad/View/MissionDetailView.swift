@@ -24,20 +24,17 @@ struct MissionDetailView: View {
                 Spacer()
             }
             
+            LinearGradient(
+                gradient: Gradient(stops: [
+                    .init(color: .clear, location: 0.08),
+                    .init(color: Color(hex: 0x0C1806), location: 0.58)
+                ]),
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea()
+            
             ScrollView {
-                VStack(spacing: 0) {
-                    // 이미지 + 텍스트
-                    ZStack(alignment: .bottom) {
-                        LinearGradient(
-                            gradient: Gradient(stops: [
-                                .init(color: .clear, location: 0.0),
-                                .init(color: Color(hex: 0x0C1806), location: 0.5)
-                            ]),
-                            startPoint: .top,
-                            endPoint: .bottom
-                        )
-                        .ignoresSafeArea()
-                        
                         VStack {
                             Spacer(minLength: 207)
                             
@@ -179,8 +176,6 @@ struct MissionDetailView: View {
                                 .cornerRadius(4)
                             }
                         }
-                    }
-                }
             }
             
             // 하단 버튼
