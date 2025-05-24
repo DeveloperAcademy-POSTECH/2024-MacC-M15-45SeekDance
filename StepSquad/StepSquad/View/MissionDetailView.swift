@@ -15,63 +15,48 @@ struct MissionDetailView: View {
     
     var body: some View {
         ZStack(alignment: .bottom) {
-            // [1] 배경 그라디언트 (전체 화면에 깔림)
-            LinearGradient(
-                gradient: Gradient(stops: [
-                    .init(color: .clear, location: 0.0),
-                    .init(color: .DeepGreen.opacity(0.0), location: 0.1),
-                    .init(color: .DeepGreen.opacity(0.2), location: 0.28),
-                    .init(color: .DeepGreen.opacity(0.34), location: 0.3),
-                    .init(color: .DeepGreen.opacity(0.8), location: 0.35),
-                    .init(color: .DeepGreen.opacity(1.0), location: 0.4),
-                    .init(color: .DeepGreen.opacity(1.0), location: 1.0)
-                ]),
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
+            VStack {
+                Image(gpsStaircase.imageName)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 394, height: 368)
+                    .clipped()
+                Spacer()
+            }
             
-            // [2] 콘텐츠
-            VStack(spacing: 0) {
-                // 메인 콘텐츠
-                ScrollView {
-                    VStack(spacing: 0) {
-                        // 이미지 + 텍스트
-                        ZStack(alignment: .bottom) {
-                            Image(gpsStaircase.imageName)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 394, height: 368)
-                                .clipped()
+            ScrollView {
+                VStack(spacing: 0) {
+                    // 이미지 + 텍스트
+                    ZStack(alignment: .bottom) {
+                        LinearGradient(
+                            gradient: Gradient(stops: [
+                                .init(color: .clear, location: 0.0),
+                                .init(color: Color(hex: 0x0C1806), location: 0.5)
+                            ]),
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                        .ignoresSafeArea()
+                        
+                        VStack {
+                            Spacer(minLength: 207)
                             
-                            LinearGradient(
-                                gradient: Gradient(stops: [
-                                    .init(color: .clear, location: 0.0),
-                                    .init(color: .DeepGreen.opacity(0.0), location: 0.1),
-                                    .init(color: .DeepGreen.opacity(0.2), location: 0.4),
-                                    .init(color: .DeepGreen.opacity(1.0), location: 1.0)
-                                ]),
-                                startPoint: .top,
-                                endPoint: .bottom
-                            )
-                            .ignoresSafeArea()
+                            HStack {
+                                Text(gpsStaircase.province.rawValue)
+                                    .foregroundStyle(Color.white)
+                                    .font(.caption)
+                                    .padding(4)
+                                    .background(Color.Green600)
+                                    .cornerRadius(4)
+                                Text("\(gpsStaircase.steps)칸")
+                                    .foregroundStyle(Color.Green800)
+                                    .font(.caption)
+                                    .padding(4)
+                                    .background(Color.Green50)
+                                    .cornerRadius(4)
+                            }
                             
                             VStack(spacing: 10) {
-                                HStack {
-                                    Text(gpsStaircase.province.rawValue)
-                                        .foregroundStyle(Color.white)
-                                        .font(.caption)
-                                        .padding(4)
-                                        .background(Color.Green600)
-                                        .cornerRadius(4)
-                                    Text("\(gpsStaircase.steps)칸")
-                                        .foregroundStyle(Color.Green800)
-                                        .font(.caption)
-                                        .padding(4)
-                                        .background(Color.Green50)
-                                        .cornerRadius(4)
-                                }
-                                
                                 Text(gpsStaircase.title)
                                     .font(.body)
                                     .fontWeight(.regular)
@@ -88,111 +73,111 @@ struct MissionDetailView: View {
                                     .foregroundColor(Color.Grey100)
                             }
                             .padding(.bottom, 42)
-                        }
-                        
-                        // 뱃지
-                        if collectedItems.isCollected(item: gpsStaircase.id) {
-                            VStack(alignment: .leading) {
-                                HStack(spacing: 8) {
-                                    Image(systemName: "medal")
-                                        .font(.title)
-                                        .foregroundColor(Color.Green700)
-                                    
-                                    VStack(alignment: .leading) {
-                                        Text("도전 완료된 계단")
-                                            .font(.subheadline)
-                                            .fontWeight(.bold)
-                                            .foregroundColor(Color.Green900)
-                                        
-                                        Text("추가 점수는 계속 받을 수 있어요!")
-                                            .font(.footnote)
-                                            .foregroundColor(Color.Green800)
-                                    }
-                                }
-                                .padding(.leading, 16)
-                                .padding(.vertical, 12)
-                            }
-                            .frame(width: 312, height: 72, alignment: .leading)
-                            .background(Color.white)
-                            .cornerRadius(12)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 12)
-                                    .stroke(Color.Green600, lineWidth: 1)
-                            )
-                            .padding(.bottom, 20)
-                        }
-                        
-                        // 인증 위치 & 획득 자료
-                        HStack(spacing: 16) {
-                            VStack(spacing: 12) {
-                                Label {
-                                    Text("인증 위치")
-                                        .font(.footnote)
-                                        .bold()
-                                        .foregroundColor(Color.Green700)
-                                } icon: {
-                                    Image(systemName: "pin.fill")
-                                        .font(.footnote)
-                                        .foregroundColor(Color.Green700)
-                                }
-                                
-                                Image(gpsStaircase.verificationLocationImageName)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 124, height: 108)
-                                
-                                VStack(spacing: 4) {
-                                    Text(gpsStaircase.verificationLocation)
-                                        .font(.caption)
-                                        .bold()
-                                    VStack {
-                                        Text("해당 위치 주변에서")
-                                        Text("인증이 됩니다.")
-                                    }
-                                        .font(.caption2)
-                                        .foregroundColor(Color.Grey500)
-                                        .multilineTextAlignment(.center)
-                                }
-                            }
-                            .padding(12)
-                            .frame(width: 148, height: 220)
-                            .background(Color.white)
-                            .cornerRadius(4)
                             
-                            VStack(spacing: 12) {
-                                Label {
-                                    Text("획득 재료")
-                                        .font(.footnote)
-                                        .bold()
-                                        .foregroundColor(Color.Green700)
-                                } icon: {
-                                    Image(systemName: "leaf.fill")
-                                        .font(.footnote)
-                                        .foregroundColor(Color.Green700)
-                                }
-                                
-                                Image(gpsStaircase.reweardImageName)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 124, height: 108)
-                                
-                                VStack(spacing: 4) {
-                                    Text(gpsStaircase.reward)
-                                        .font(.caption)
-                                        .bold()
-                                    VStack {
-                                        Text("실제로 채취하진")
-                                        Text("마세요.")
+                            // 뱃지
+                            if collectedItems.isCollected(item: gpsStaircase.id) {
+                                VStack(alignment: .leading) {
+                                    HStack(spacing: 8) {
+                                        Image(systemName: "medal")
+                                            .font(.title)
+                                            .foregroundColor(Color.Green700)
+                                        
+                                        VStack(alignment: .leading) {
+                                            Text("도전 완료된 계단")
+                                                .font(.subheadline)
+                                                .fontWeight(.bold)
+                                                .foregroundColor(Color.Green900)
+                                            
+                                            Text("추가 점수는 계속 받을 수 있어요!")
+                                                .font(.footnote)
+                                                .foregroundColor(Color.Green800)
+                                        }
                                     }
+                                    .padding(.leading, 16)
+                                    .padding(.vertical, 12)
+                                }
+                                .frame(width: 312, height: 72, alignment: .leading)
+                                .background(Color.white)
+                                .cornerRadius(12)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .stroke(Color.Green600, lineWidth: 1)
+                                )
+                                .padding(.bottom, 20)
+                            }
+                            
+                            // 인증 위치 & 획득 자료
+                            HStack(spacing: 16) {
+                                VStack(spacing: 12) {
+                                    Label {
+                                        Text("인증 위치")
+                                            .font(.footnote)
+                                            .bold()
+                                            .foregroundColor(Color.Green700)
+                                    } icon: {
+                                        Image(systemName: "pin.fill")
+                                            .font(.footnote)
+                                            .foregroundColor(Color.Green700)
+                                    }
+                                    
+                                    Image(gpsStaircase.verificationLocationImageName)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 124, height: 108)
+                                    
+                                    VStack(spacing: 4) {
+                                        Text(gpsStaircase.verificationLocation)
+                                            .font(.caption)
+                                            .bold()
+                                        VStack {
+                                            Text("해당 위치 주변에서")
+                                            Text("인증이 됩니다.")
+                                        }
                                         .font(.caption2)
                                         .foregroundColor(Color.Grey500)
                                         .multilineTextAlignment(.center)
+                                    }
                                 }
+                                .padding(12)
+                                .frame(width: 148, height: 220)
+                                .background(Color.white)
+                                .cornerRadius(4)
+                                
+                                VStack(spacing: 12) {
+                                    Label {
+                                        Text("획득 재료")
+                                            .font(.footnote)
+                                            .bold()
+                                            .foregroundColor(Color.Green700)
+                                    } icon: {
+                                        Image(systemName: "leaf.fill")
+                                            .font(.footnote)
+                                            .foregroundColor(Color.Green700)
+                                    }
+                                    
+                                    Image(gpsStaircase.reweardImageName)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 124, height: 108)
+                                    
+                                    VStack(spacing: 4) {
+                                        Text(gpsStaircase.reward)
+                                            .font(.caption)
+                                            .bold()
+                                        VStack {
+                                            Text("실제로 채취하진")
+                                            Text("마세요.")
+                                        }
+                                        .font(.caption2)
+                                        .foregroundColor(Color.Grey500)
+                                        .multilineTextAlignment(.center)
+                                    }
+                                }
+                                .padding(12)
+                                .frame(width: 148, height: 220)
+                                .background(Color.white)
+                                .cornerRadius(4)
                             }
-                            .padding(12)
-                            .frame(width: 148, height: 220)
-                            .background(Color.white)
-                            .cornerRadius(4)
                         }
                     }
                 }
@@ -217,13 +202,13 @@ struct MissionDetailView: View {
         }
         .toolbar {
             // TODO: 공유 기능 추가
-//            ToolbarItem(placement: .topBarTrailing) {
-//                Button(action: {}) {
-//                    Image(systemName: "square.and.arrow.up")
-//                        .font(.system(size: 22))
-//                        .foregroundColor(Color.Green700)
-//                }
-//            }
+            //            ToolbarItem(placement: .topBarTrailing) {
+            //                Button(action: {}) {
+            //                    Image(systemName: "square.and.arrow.up")
+            //                        .font(.system(size: 22))
+            //                        .foregroundColor(Color.Green700)
+            //                }
+            //            }
             ToolbarItem(placement: .topBarTrailing) {
                 Button(action: {
                     if bookmarks.contains(gpsStaircase.id) {
