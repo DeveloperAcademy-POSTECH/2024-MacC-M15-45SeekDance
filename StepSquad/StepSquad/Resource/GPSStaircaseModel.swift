@@ -77,7 +77,7 @@ let gpsStaircases: [GPSStaircase] = [
     GPSStaircase(
         id: "GacheonVillage",
         name: "남해군 가천마을 다랑이논",
-        title: "남해가 한 눈에 들어오는",
+        title: "남해가 한 눈에",
         description: "계단식 논도 계단이라고 일단 정했어요",
         province: .gyeongnam,
         steps: 108,
@@ -87,7 +87,7 @@ let gpsStaircases: [GPSStaircase] = [
     GPSStaircase(
         id: "JehwangMountain",
         name: "진해 제황산 1년 계단",
-        title: "모노레일 이용객, 기선제압하자!",
+        title: "모노레일보다 더 좋은 것은?",
         description: "모노레일 말고 계단을 이용해서 나의 기세를 보여주자",
         province: .gyeongnam,
         steps: 365,
@@ -97,7 +97,7 @@ let gpsStaircases: [GPSStaircase] = [
     GPSStaircase(
         id: "SogeumMountain",
         name: "원주 소금산 출렁다리 578 계단",
-        title: "출렁다리로 가기 위한 관문",
+        title: "계단 끝엔 출렁다리",
         description: "출렁다리 건너기전에 건너야만 해요",
         province: .gangwon,
         steps: 578,
@@ -107,7 +107,7 @@ let gpsStaircases: [GPSStaircase] = [
     GPSStaircase(
         id: "Ojukheon",
         name: "강릉 오죽헌 계단",
-        title: "심사임당과 율곡이이의 홈 스윗 홈",
+        title: "조선시대 계단뷰 맛집",
         description: "심사임당과 율곡이이의 고향이라던대?",
         province: .gangwon,
         steps: 17,
@@ -147,7 +147,7 @@ let gpsStaircases: [GPSStaircase] = [
     GPSStaircase(
         id: "SpaceWalk",
         name: "포항 스페이스 워크",
-        title: "쫄보력 테스트를 해보세요",
+        title: "진정한 쫄보를 가리자",
         description: "바다가 한눈에 보이는 스페이스 워크!",
         province: .gyeongbuk,
         steps: 717,
@@ -157,7 +157,7 @@ let gpsStaircases: [GPSStaircase] = [
     GPSStaircase(
         id: "CheongungyoBaegungyo",
         name: "불국사 계단",
-        title: "여기는 오르지 말고 구경만!",
+        title: "이 계단은 오르지마세요",
         description: "아주 높으신 분들만 걸을 수 있는 계단이라네. 우리는 다른 계단으로 걷자.",
         province: .gyeongbuk,
         steps: 34,
@@ -177,7 +177,7 @@ let gpsStaircases: [GPSStaircase] = [
     GPSStaircase(
         id: "ThePathOfEntrepreneurs",
         name: "포항공대 창업자의 길 계단",
-        title: "창업자가 되고 싶다면!",
+        title: "창업자가 되고 싶다면?",
         description: "계단사랑단은 여기서도 시작하려고 했어요",
         province: .gyeongbuk,
         steps: 136,
@@ -197,7 +197,7 @@ let gpsStaircases: [GPSStaircase] = [
     GPSStaircase(
         id: "YeongjuMountain",
         name: "영주산 둘레길 천국의 계단",
-        title: "천국의 계단이 있어요",
+        title: "계단으로 천국까지",
         description: "제주 여행 중 뭔가를 많이 먹었다면 필수로 방문하세요",
         province: .jeju,
         steps: 724,
@@ -217,7 +217,7 @@ let gpsStaircases: [GPSStaircase] = [
     GPSStaircase(
         id: "BalsanVillage",
         name: "청춘발산마을 벽화 108 계단",
-        title: "뒤집은 밥그릇 모양의 마을",
+        title: "마을을 탐방하는 계단",
         description: "오래된 동네를 예쁘게 꾸며 둔 계단 명소!",
         province: .jeonnam,
         steps: 108,
@@ -237,7 +237,7 @@ let gpsStaircases: [GPSStaircase] = [
     GPSStaircase(
         id: "Yeonggwang365",
         name: "영광 365 계단",
-        title: "1년 365일 건강하자!",
+        title: "건강을 기원하며 걸어요",
         description: "이 계단의 비밀 사실! 사실 365개가 아닙니다.",
         province: .jeonnam,
         steps: 365,
