@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import RiveRuntime
 
 struct GPSStaircaseMainView: View {
     var localPlayerImage: Image?
@@ -24,6 +25,8 @@ struct GPSStaircaseMainView: View {
                 VStack(spacing: 0) {
                     ZStack {
                         // TODO: 캐러셀 이미지, 애니메이션 추가
+                        RiveViewModel(fileName: "carousel_v1.0").view()
+                            .padding(.top, 222)
                         
                         VStack {
                             Spacer()
