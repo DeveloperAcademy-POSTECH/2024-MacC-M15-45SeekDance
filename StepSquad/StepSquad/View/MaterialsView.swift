@@ -29,9 +29,9 @@ struct MaterialsView: View {
                             if !collectedItems.isEmpty() { // 획득한 깜짝 재료가 있을 때
                                 Section(header: Text("깜짝 재료").bold()) {
                                     ForEach(collectedItems.getSortedItemsNameList(), id: \.self) { item in
-                                        if let item = gpsStaircasesDictionary[item] {
+                                        if Array(gpsStaircasesDictionary.keys).contains(item) {
                                                 HStack(spacing: 0) {
-                                                    Image(item.rewardImageName) // 약재 이미지
+                                                    Image("\(gpsStaircasesDictionary[item]!.id)_reward") // 약재 이미지
                                                         .resizable()
                                                         .aspectRatio(1, contentMode: .fit)
                                                         .frame(width: 42, height: 42)
@@ -44,7 +44,7 @@ struct MaterialsView: View {
                                                         .background(.green600, in: RoundedRectangle(cornerRadius: 4))
                                                         .padding(.horizontal, 8)
                                                     
-                                                    Text(" \(hiddenItemsDictionary[item]!.item)") // 약재 이름
+                                                    Text(" \(gpsStaircasesDictionary[item]!.reward)") // 약재 이름
                                                         .font(.system(size: 17))
                                                     
                                                     Spacer()
@@ -63,7 +63,7 @@ struct MaterialsView: View {
                                                     .frame(width: 42, height: 42)
                                                     .padding(.trailing, 0)
                                                 
-                                                Text(hiddenItemsDictionary[item]!.keyword) // 레벨 표시
+                                                Text(hiddenItemsDictionary[item]!.keyword) // 키워드 표시
                                                     .font(.system(size: 12))
                                                     .foregroundStyle(.white)
                                                     .padding(4)
