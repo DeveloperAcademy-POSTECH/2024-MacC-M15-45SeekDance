@@ -26,8 +26,8 @@ struct MissionDetailView: View {
             
             LinearGradient(
                 gradient: Gradient(stops: [
-                    .init(color: .clear, location: 0.08),
-                    .init(color: Color(hex: 0x0C1806), location: 0.58)
+                    .init(color: .clear, location: 0.2),
+                    .init(color: Color(hex: 0x0C1806), location: 0.5)
                 ]),
                 startPoint: .top,
                 endPoint: .bottom
