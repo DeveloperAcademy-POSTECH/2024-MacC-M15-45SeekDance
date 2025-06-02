@@ -53,8 +53,8 @@ class GPSStaircase: Codable, Identifiable {
     }
 }
 
-let gpsStaircases: [GPSStaircase] = [
-    GPSStaircase(
+let gpsStaircasesDictionary: [String: GPSStaircase] = [
+    "Busan168": GPSStaircase(
         id: "Busan168",
         name: "초량 이바구길 168 계단",
         title: "이바구 떨며 오르세요",
@@ -64,7 +64,7 @@ let gpsStaircases: [GPSStaircase] = [
         gpsLocation: (35.117143, 129.035298),
         verificationLocation: "계단 아래 지점",
         reward: "국밥 육수"),
-    GPSStaircase(
+    "Busan40": GPSStaircase(
         id: "Busan40",
         name: "부산 40 계단",
         title: "피난민의 역사가 깃든",
@@ -74,7 +74,7 @@ let gpsStaircases: [GPSStaircase] = [
         gpsLocation: (35.103911, 129.034629),
         verificationLocation: "조각상 앞",
         reward: "다대기"),
-    GPSStaircase(
+    "GacheonVillage": GPSStaircase(
         id: "GacheonVillage",
         name: "남해군 가천마을 다랑이논",
         title: "남해가 한 눈에",
@@ -84,7 +84,7 @@ let gpsStaircases: [GPSStaircase] = [
         gpsLocation: (34.726835, 127.896276),
         verificationLocation: "다랭이마을 전망대",
         reward: "통통한 멸치"),
-    GPSStaircase(
+    "JehwangMountain": GPSStaircase(
         id: "JehwangMountain",
         name: "진해 제황산 1년 계단",
         title: "모노레일말고 계단",
@@ -94,7 +94,7 @@ let gpsStaircases: [GPSStaircase] = [
         gpsLocation: (35.149216, 128.661541),
         verificationLocation: "모노레일 옆 계단 입구",
         reward: "버찌"),
-    GPSStaircase(
+    "SogeumMountain": GPSStaircase(
         id: "SogeumMountain",
         name: "원주 소금산 출렁다리 578 계단",
         title: "계단 끝엔 출렁다리",
@@ -104,7 +104,7 @@ let gpsStaircases: [GPSStaircase] = [
         gpsLocation: (37.367791, 127.825207),
         verificationLocation: "1-2 매표소",
         reward: "십년(된) 감수"),
-    GPSStaircase(
+    "Ojukheon": GPSStaircase(
         id: "Ojukheon",
         name: "강릉 오죽헌 계단",
         title: "조선시대 계단뷰 맛집",
@@ -114,7 +114,7 @@ let gpsStaircases: [GPSStaircase] = [
         gpsLocation: (37.779131, 128.879658),
         verificationLocation: "매표소",
         reward: "5만 5천원"),
-    GPSStaircase(
+    "HwaamCave": GPSStaircase(
         id: "HwaamCave",
         name: "정선 화암동굴 365 계단",
         title: "걸어서 동굴 속으로",
@@ -124,7 +124,7 @@ let gpsStaircases: [GPSStaircase] = [
         gpsLocation: (37.351108, 128.79053),
         verificationLocation: "매표소",
         reward: "곤드레"),
-    GPSStaircase(
+    "Gatbawi": GPSStaircase(
         id: "Gatbawi",
         name: "팔공산 갓바위 1365 계단",
         title: "소원을 이뤄주는",
@@ -134,7 +134,7 @@ let gpsStaircases: [GPSStaircase] = [
         gpsLocation: (35.977617, 128.733097),
         verificationLocation: "관암사 계단 입구",
         reward: "갓바위 돌가루"),
-    GPSStaircase(
+    "31HeritageTrail": GPSStaircase(
         id: "31HeritageTrail",
         name: "3.1만세 운동길 계단",
         title: "대한 독립 만세!",
@@ -144,7 +144,7 @@ let gpsStaircases: [GPSStaircase] = [
         gpsLocation: (35.867500, 128.586135),
         verificationLocation: "계단 아래 지점",
         reward: "태극기"),
-    GPSStaircase(
+    "SpaceWalk": GPSStaircase(
         id: "SpaceWalk",
         name: "포항 스페이스 워크",
         title: "진정한 쫄보를 가리자",
@@ -154,7 +154,7 @@ let gpsStaircases: [GPSStaircase] = [
         gpsLocation: (36.065128, 129.390362),
         verificationLocation: "계단 바로 앞",
         reward: "포항산 철분"),
-    GPSStaircase(
+    "CheongungyoBaegungyo": GPSStaircase(
         id: "CheongungyoBaegungyo",
         name: "불국사 계단",
         title: "이 계단은 오르지마세요",
@@ -164,7 +164,7 @@ let gpsStaircases: [GPSStaircase] = [
         gpsLocation: (35.789713, 129.332154),
         verificationLocation: "계단 아래 지점",
         reward: "해탈"),
-    GPSStaircase(
+    "Postech78": GPSStaircase(
         id: "Postech78",
         name: "포항공대 78계단",
         title: "모든 것이 시작된 곳",
@@ -174,7 +174,7 @@ let gpsStaircases: [GPSStaircase] = [
         gpsLocation: (36.01481, 129.321583),
         verificationLocation: "계단 중앙 지점",
         reward: "노벨 제발(please)상"),
-    GPSStaircase(
+    "ThePathOfEntrepreneurs": GPSStaircase(
         id: "ThePathOfEntrepreneurs",
         name: "포항공대 창업자의 길 계단",
         title: "창업자가 되고 싶다면?",
@@ -184,7 +184,7 @@ let gpsStaircases: [GPSStaircase] = [
         gpsLocation: (36.012276, 129.32505),
         verificationLocation: "계단 아래 지점",
         reward: "창업 계획서 양식.hwp"),
-    GPSStaircase(
+    "SeongsanIlchulbong": GPSStaircase(
         id: "SeongsanIlchulbong",
         name: "성산일출봉",
         title: "일출이 아름다운",
@@ -194,7 +194,7 @@ let gpsStaircases: [GPSStaircase] = [
         gpsLocation: (33.462336, 126.936886),
         verificationLocation: "매표소",
         reward: "한라봉"),
-    GPSStaircase(
+    "YeongjuMountain": GPSStaircase(
         id: "YeongjuMountain",
         name: "영주산 둘레길 천국의 계단",
         title: "계단으로 천국까지",
@@ -204,7 +204,7 @@ let gpsStaircases: [GPSStaircase] = [
         gpsLocation: (33.405684, 126.806024),
         verificationLocation: "입구 주차장",
         reward: "돌하르방"),
-    GPSStaircase(
+    "JeonilBuilding": GPSStaircase(
         id: "JeonilBuilding",
         name: "전일빌딩 245 계단",
         title: "한국 민주화운동의 흔적",
@@ -214,7 +214,7 @@ let gpsStaircases: [GPSStaircase] = [
         gpsLocation: (35.148407, 126.918694),
         verificationLocation: "전일빌딩245",
         reward: "무등산 수박"),
-    GPSStaircase(
+    "BalsanVillage": GPSStaircase(
         id: "BalsanVillage",
         name: "청춘발산마을 벽화 108 계단",
         title: "마을을 탐방하는 계단",
@@ -224,7 +224,7 @@ let gpsStaircases: [GPSStaircase] = [
         gpsLocation: (35.159700, 126.891696),
         verificationLocation: "계단 입구",
         reward: "뒤집어 놓은 밥그릇"),
-    GPSStaircase(
+    "ChunhyangThemePark": GPSStaircase(
         id: "ChunhyangThemePark",
         name: "남원 춘향 테마 파크 계단",
         title: "에스컬레이터 말고 계단",
@@ -234,7 +234,7 @@ let gpsStaircases: [GPSStaircase] = [
         gpsLocation: (35.402639, 127.386723),
         verificationLocation: "계단 현판 앞",
         reward: "춘향골 사과"),
-    GPSStaircase(
+    "Yeonggwang365": GPSStaircase(
         id: "Yeonggwang365",
         name: "영광 365 계단",
         title: "건강을 기원하며 걸어요",
@@ -244,7 +244,7 @@ let gpsStaircases: [GPSStaircase] = [
         gpsLocation: (35.361538, 126.394593),
         verificationLocation: "계단 현판 앞",
         reward: "굴비"),
-    GPSStaircase(
+    "SangdoStation": GPSStaircase(
         id: "SangdoStation",
         name: "7호선 상도역 앞 멍청한 계단",
         title: "기묘한 6칸짜리 계단",
@@ -254,7 +254,7 @@ let gpsStaircases: [GPSStaircase] = [
         gpsLocation: (37.503328, 126.947441),
         verificationLocation: "2번 출구 밖",
         reward: "7호선 종이 티켓"),
-    GPSStaircase(
+    "NamsanPark": GPSStaircase(
         id: "NamsanPark",
         name: "남산 삼순이 계단",
         title: "90년대생까지는 다 아는",
@@ -264,7 +264,7 @@ let gpsStaircases: [GPSStaircase] = [
         gpsLocation: (37.554509, 126.981684),
         verificationLocation: "계단 아래 지점",
         reward: "양푼이비빔밥"),
-    GPSStaircase(
+    "EwhaCampusComplex": GPSStaircase(
         id: "EwhaCampusComplex",
         name: "이화여대 ECC 계단",
         title: "이화여대 관광명소",
@@ -274,7 +274,7 @@ let gpsStaircases: [GPSStaircase] = [
         gpsLocation: (37.561451, 126.946778),
         verificationLocation: "계단 중앙 지점",
         reward: "배꽃"),
-    GPSStaircase(
+    "PangyoFootbridge": GPSStaircase(
         id: "PangyoFootbridge",
         name: "판교 뜬금없는 육교 계단",
         title: "판교 나폴리탄 괴담!?",
@@ -284,7 +284,7 @@ let gpsStaircases: [GPSStaircase] = [
         gpsLocation: (37.398326, 127.10985),
         verificationLocation: "계단 아래 지점",
         reward: "판교 사투리 사전"),
-    GPSStaircase(
+    "MuryangGongdeok": GPSStaircase(
         id: "MuryangGongdeok",
         name: "천안 각원사 무량공덕계단",
         title: "동양 최대 청동좌불상!",
@@ -295,3 +295,5 @@ let gpsStaircases: [GPSStaircase] = [
         verificationLocation: "불상 앞",
         reward: "호두"),
 ]
+
+let gpsStaircases = Array(gpsStaircasesDictionary.values)
