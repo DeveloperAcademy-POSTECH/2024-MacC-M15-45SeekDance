@@ -112,7 +112,8 @@ struct GPSStaircaseListView: View {
                                         .background(RoundedRectangle(cornerRadius: 4).fill(.green50))
                                 }
                             }
-                            .padding(.vertical, 12)
+                            .padding(.top, 4)
+                            .padding(.bottom, 12)
                             .padding(.horizontal, 8)
                         }
                         .frame(width: 176, height: 252)
