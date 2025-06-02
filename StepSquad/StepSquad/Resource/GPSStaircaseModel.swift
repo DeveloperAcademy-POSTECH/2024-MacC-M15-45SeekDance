@@ -87,7 +87,7 @@ let gpsStaircases: [GPSStaircase] = [
     GPSStaircase(
         id: "JehwangMountain",
         name: "진해 제황산 1년 계단",
-        title: "모노레일보다 더 좋은 것은?",
+        title: "모노레일말고 계단",
         description: "모노레일 말고 계단을 이용해서 나의 기세를 보여주자",
         province: .gyeongnam,
         steps: 365,
