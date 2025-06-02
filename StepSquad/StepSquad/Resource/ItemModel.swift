@@ -23,7 +23,7 @@ class Item: Codable {
     }
 }
 
-let hiddenItems: [String: Item] = [
+let hiddenItemsDictionary: [String: Item] = [
     "Bullocho": Item(
         item: "불로초",
         itemImage: "Bullocho",

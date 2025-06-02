@@ -30,20 +30,20 @@ struct MaterialsView: View {
                                 Section(header: Text("깜짝 재료").bold()) {
                                     ForEach(collectedItems.getSortedItemsNameList(), id: \.self) { item in
                                         HStack(spacing: 0) {
-                                            Image(hiddenItems[item]!.itemImage) // 약재 이미지
+                                            Image(hiddenItemsDictionary[item]!.itemImage) // 약재 이미지
                                                 .resizable()
                                                 .aspectRatio(1, contentMode: .fit)
                                                 .frame(width: 42, height: 42)
                                                 .padding(.trailing, 0)
                                             
-                                            Text(hiddenItems[item]!.keyword) // 레벨 표시
+                                            Text(hiddenItemsDictionary[item]!.keyword) // 레벨 표시
                                                 .font(.system(size: 12))
                                                 .foregroundStyle(.white)
                                                 .padding(4)
-                                                .background(Color(hex: hiddenItems[item]!.itemColor), in: RoundedRectangle(cornerRadius: 4))
+                                                .background(Color(hex: hiddenItemsDictionary[item]!.itemColor), in: RoundedRectangle(cornerRadius: 4))
                                                 .padding(.horizontal, 8)
                                             
-                                            Text(" \(hiddenItems[item]!.item)") // 약재 이름
+                                            Text(" \(hiddenItemsDictionary[item]!.item)") // 약재 이름
                                                 .font(.system(size: 17))
                                             
                                             Spacer()
