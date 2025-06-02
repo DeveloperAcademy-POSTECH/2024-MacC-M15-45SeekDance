@@ -213,7 +213,7 @@ struct MissionDetailView: View {
                     }
                 }) {
                     Image(systemName: bookmarks.contains(gpsStaircase.id) ? "bookmark.fill" : "bookmark")
-                        .foregroundStyle(bookmarks.contains(gpsStaircase.id) ? .brown500 : .green700)
+                        .foregroundStyle(.green500)
                 }
             }
         }
