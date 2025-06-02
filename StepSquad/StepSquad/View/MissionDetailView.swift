@@ -175,6 +175,8 @@ struct MissionDetailView: View {
                         .background(Color.white)
                         .cornerRadius(4)
                     }
+                    
+                    Spacer(minLength: 100)
                 }
             }
             
