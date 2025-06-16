@@ -179,6 +179,7 @@ struct MissionDetailView: View {
                     Spacer(minLength: 100)
                 }
             }
+            .scrollIndicators(.hidden)
             
             // 하단 버튼
             Button(action: {
