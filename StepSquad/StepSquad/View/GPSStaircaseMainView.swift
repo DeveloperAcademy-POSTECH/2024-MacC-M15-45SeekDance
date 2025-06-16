@@ -106,6 +106,7 @@ struct GPSStaircaseMainView: View {
                                 Text("해당 계단 하단의 인증하기를 탭!")
                                     .font(.footnote)
                                     .frame(width: 120)
+                                    .id("GPSStaircaseListView")
                             }
                         }
                         .padding(.top, 26)
@@ -158,7 +159,6 @@ struct GPSStaircaseMainView: View {
                         
                         GPSStaircaseListView(filteredStaircases: $filteredGPSStaircases, bookmarks: $bookmarks, collectedItems: $collectedItems)
                     }
-                    .id("GPSStaircaseListView")
                     
                     Spacer()
                 }
