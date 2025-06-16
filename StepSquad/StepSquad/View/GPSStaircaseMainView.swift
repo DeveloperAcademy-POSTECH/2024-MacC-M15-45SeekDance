@@ -96,7 +96,7 @@ struct GPSStaircaseMainView: View {
                         HStack(spacing: 32) {
                             VStack {
                                 Image("authenticationExample1")
-                                Text("인증 장소를 확인한 gn 직접 방문한다")
+                                Text("인증 장소를 확인한 후 직접 방문한다")
                                     .font(.footnote)
                                     .frame(width: 120)
                             }
@@ -175,6 +175,8 @@ struct GPSStaircaseMainView: View {
             .background(.green50)
             .navigationTitle("미션")
             .navigationBarTitleDisplayMode(.inline)
+            .scrollBounceBehavior(.basedOnSize)
+            .frame(maxHeight: .infinity)
         }
     }
     
