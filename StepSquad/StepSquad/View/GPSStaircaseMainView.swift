@@ -130,12 +130,12 @@ struct GPSStaircaseMainView: View {
                                 HStack {
                                     Text("북마크")
                                     Spacer()
-                                    Image(systemName: "bookmark")
+                                    Image(systemName: "bookmark.fill")
                                 }.tag(0)
                                 HStack {
                                     Text("도전 완료")
                                     Spacer()
-                                    Image(systemName: "medal")
+                                    Image(systemName: "medal.fill")
                                 }.tag(1)
                             }
                             
