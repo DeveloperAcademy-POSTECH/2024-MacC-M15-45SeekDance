@@ -23,7 +23,7 @@ class Item: Codable {
     }
 }
 
-let hiddenItems: [String: Item] = [
+let hiddenItemsDictionary: [String: Item] = [
     "Bullocho": Item(
         item: "불로초",
         itemImage: "Bullocho",
@@ -35,11 +35,5 @@ let hiddenItems: [String: Item] = [
         itemImage: "Clover",
         itemColor: 0x03787B,
         achievementId: "clover",
-        keyword: "퀘스트"),
-    "Test1": Item(
-        item: "국밥 육수",
-        itemImage: "Clover",
-        itemColor: 0x7B4703,
-        achievementId: "test1",
-        keyword: "계단 정복"),
+        keyword: "히든")
 ]
