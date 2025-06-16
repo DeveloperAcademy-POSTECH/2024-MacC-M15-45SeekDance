@@ -279,7 +279,7 @@ struct MainViewPhase3: View {
                 //                }
             }
             .navigationBarBackButtonHidden(true)
-            .tint(Color(hex: 0x8BC766))
+            .accentColor(.Green800)
         }
     }
     
