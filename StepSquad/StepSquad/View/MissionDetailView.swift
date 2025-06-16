@@ -162,7 +162,7 @@ struct MissionDetailView: View {
                                     .font(.caption)
                                     .bold()
                                 VStack {
-                                    Text("실제로 채취하진")
+                                    Text("실제로 가져가진")
                                     Text("마세요.")
                                 }
                                 .font(.caption2)
