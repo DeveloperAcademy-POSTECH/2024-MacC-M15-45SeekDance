@@ -10,27 +10,39 @@ import SwiftData
 import CoreNFC
 
 struct MainViewPhase3: View {
-    @State var isMaterialSheetPresented: Bool = false
-    @State private var nfcReader: NFCReader?
-    @State private var isButtonEnabled: Bool = true
-    @State var isResultViewPresented: Bool = false
-    @State var isShowingNFCAlert: Bool = false
-    @State var buttonCountMessage: String = ""
-    @State var isLaunching: Bool = true
-    @State private var completedLevels = CompletedLevels()
-    @State private var collectedItems = CollectedItems()
-    @State var isCardFlipped: Bool = true
-    
     @State private var isResetViewPresented = false
     @State private var isShowNewBirdPresented = false
     @State private var isWifiAlertPresented = false
-    
-    @State var isResetCompleted: Bool = false
-    
-    @State var userProfileImage: Image?
+    @State var isResultViewPresented: Bool = false
+    @State var isShowingNFCAlert: Bool = false
+    @State var isMaterialSheetPresented: Bool = false
+    @State var isCardFlipped: Bool = true
+    @State var isLaunching: Bool = true
+    @State private var isButtonEnabled: Bool = true
+    @AppStorage("isShowingNewItem") private var isShowingNewItem = false
     
     @State private var nfcCount: Int = 0
     @State private var nfcMessage: String = ""
+    @State private var nfcReader: NFCReader?
+    @State var buttonCountMessage: String = ""
+    
+    @State var isResetCompleted: Bool = false
+    
+    @State private var completedLevels = CompletedLevels()
+    @State private var collectedItems = CollectedItems()
+    @AppStorage("lastElectricAchievementKwh") var lastElectricAchievementKwh = 0
+    @State var userProfileImage: Image?
+    
+    var currentStatus: CurrentStatus = CurrentStatus() {
+        didSet {
+            saveCurrentStatus()
+        }
+    }
+    var isHighestLevel: Bool {
+        return currentStatus.currentLevel.level == 20
+    }
+    
+    let gameCenterManager = GameCenterManager()
     
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.modelContext) var context
@@ -38,23 +50,7 @@ struct MainViewPhase3: View {
     @Query(sort: [SortDescriptor(\StairStepModel.stairStepDate, order: .forward)]) var stairSteps: [StairStepModel]
     
     @ObservedObject var service = HealthKitService()
-    
     @AppStorage("HealthKitAuthorized") var isHealthKitAuthorized: Bool = false
-    
-    @AppStorage("isShowingNewItem") private var isShowingNewItem = false
-    
-    let gameCenterManager = GameCenterManager()
-    
-    var currentStatus: CurrentStatus = CurrentStatus() {
-        didSet {
-            saveCurrentStatus()
-        }
-    }
-    @AppStorage("lastElectricAchievementKwh") var lastElectricAchievementKwh = 0
-    
-    var isHighestLevel: Bool {
-        return currentStatus.currentLevel.level == 20
-    }
     
     var body: some View {
         if isLaunching {
