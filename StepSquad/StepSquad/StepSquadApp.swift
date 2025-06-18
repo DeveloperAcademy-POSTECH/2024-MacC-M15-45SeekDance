@@ -26,7 +26,7 @@ struct StepSquadApp: App {
     
     var body: some Scene {
         WindowGroup {
-            TestLocationVerificationView()
+            MainViewPhase3()
                 .onOpenURL { url in
                     print("App opened via URL Scheme: \(url.absoluteString)")
                 }
