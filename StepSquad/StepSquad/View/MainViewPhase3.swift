@@ -128,7 +128,7 @@ struct MainViewPhase3: View {
                             .frame(width: 321, height: 467)
                             .background(Color.white)
                             .cornerRadius(16)
-                            .padding(.top, 20)
+                            .padding(.top, 12)
                             .onAppear() {
                                 service.fetchAllFlightsClimbedData()
                                 service.migrateAuthorizationDataToSharedDefaults()
@@ -172,7 +172,7 @@ struct MainViewPhase3: View {
                                                 in: RoundedRectangle(cornerRadius: 12))
                                 }
                             }
-                            .padding(.top, 12)
+                            .padding(.top, 8)
                             .padding(.horizontal, 36)
                             
                             NavigationLink(destination: GPSStaircaseMainView(localPlayerImage: userProfileImage, localPlayerName: gameCenterManager.loadLocalPlayerName(), collectedItems: $collectedItems), label: {
@@ -197,7 +197,7 @@ struct MainViewPhase3: View {
                                     Image(systemName: "chevron.right")
                                         .foregroundStyle(.green800)
                                 }
-                                .padding(17)
+                                .padding(12)
                                 .background(RoundedRectangle(cornerRadius: 12).fill(.white))
                                 .padding(.top, 8)
                                 .padding(.horizontal, 36)
