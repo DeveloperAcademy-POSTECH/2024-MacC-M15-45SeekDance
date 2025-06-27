@@ -210,11 +210,7 @@ struct GPSStaircaseDetailView: View {
                     Button(action: {
                         isShowingMissionSheet = false
                     }) {
-                        Image(systemName: "xmark")
-                            .foregroundColor(.secondary)
-                            .background(.tertiary)
-                            .clipShape(.circle)
-                            .frame(width: 30, height: 30)
+                        XCircleButtonView()
                     }
                 }
                 if (true) { // 위치 인증을 성공하지 못 했을 때
