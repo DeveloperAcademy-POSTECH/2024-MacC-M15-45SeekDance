@@ -12,6 +12,7 @@ struct GPSStaircaseDetailView: View {
     @Binding var bookmarks: Bookmarks
     @Binding var collectedItems: CollectedItems
     let gpsStaircase: GPSStaircase
+    @State private var isShowingMissionSheet: Bool = false
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -183,6 +184,7 @@ struct GPSStaircaseDetailView: View {
             
             // 하단 버튼
             Button(action: {
+                isShowingMissionSheet = true
             }) {
                 HStack {
                     Spacer()
@@ -197,6 +199,58 @@ struct GPSStaircaseDetailView: View {
             .background(Color.Green800)
             .cornerRadius(12)
             .padding(.horizontal, 36)
+        }
+        .sheet(isPresented: $isShowingMissionSheet) {
+            VStack {
+                HStack {
+                    Text("계단 인증 도전하기")
+                        .font(.title3)
+                        .bold()
+                    Spacer()
+                    Button(action: {
+                        isShowingMissionSheet = false
+                    }) {
+                        Image(systemName: "xmark")
+                            .foregroundColor(.secondary)
+                            .background(.tertiary)
+                            .clipShape(.circle)
+                            .frame(width: 30, height: 30)
+                    }
+                }
+                if (true) { // 위치 인증을 성공하지 못 했을 때
+                    Image("ShakeBird")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 170, height: 170)
+                        .padding(.bottom, 16)
+                    Text("인증 위치에서 인증해주세요.")
+                        .font(.title3)
+                        .bold()
+                        .padding(.bottom, 8)
+                    Text("인증 위치에서도 해당 창이 뜬다면 하단의 새로고침을 눌러주세요.")
+                        .font(.callout)
+                        .foregroundStyle(.grey700)
+                        .frame(width: 219)
+                        .multilineTextAlignment(.center)
+                        .padding(.bottom, 16)
+                    Button(
+                        action: {
+                        // TODO: 위치 정보 새로 불러오기
+                    }, label: {
+                        HStack {
+                            Spacer()
+                            Text("위치 정보 새로고침")
+                                .foregroundStyle(.green700)
+                                .padding(.vertical, 14)
+                            Spacer()
+                        }
+                    })
+                } else { // 위치 인증을 성공했을 때
+                    
+                }
+            }
+            .presentationDetents([.medium])
+            .padding(.horizontal, 16)
         }
         .toolbar {
             // TODO: 공유 기능 추가
