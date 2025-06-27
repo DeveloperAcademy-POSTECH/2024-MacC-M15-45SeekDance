@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct MissionDetailView: View {
+struct GPSStaircaseDetailView: View {
     @Binding var bookmarks: Bookmarks
     @Binding var collectedItems: CollectedItems
     let gpsStaircase: GPSStaircase
