@@ -219,16 +219,19 @@ struct GPSStaircaseDetailView: View {
                         .scaledToFit()
                         .frame(width: 170, height: 170)
                         .padding(.bottom, 16)
+                    
                     Text("인증 위치에서 인증해주세요.")
                         .font(.title3)
                         .bold()
                         .padding(.bottom, 8)
+                    
                     Text("인증 위치에서도 해당 창이 뜬다면 하단의 새로고침을 눌러주세요.")
                         .font(.callout)
                         .foregroundStyle(.grey700)
                         .frame(width: 219)
                         .multilineTextAlignment(.center)
                         .padding(.bottom, 16)
+                    
                     Button(
                         action: {
                         // TODO: 위치 정보 새로 불러오기
@@ -242,7 +245,34 @@ struct GPSStaircaseDetailView: View {
                         }
                     })
                 } else { // 위치 인증을 성공했을 때
+                    Image("WinBird")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 170, height: 170)
+                        .padding(.bottom, 19)
                     
+                    Text(gpsStaircase.name)
+                        .font(.title2)
+                        .bold()
+                        .foregroundStyle(.green800)
+                        .padding(.bottom, 4)
+                    
+                    Text(gpsStaircase.title)
+                        .foregroundStyle(.grey700)
+                        .padding(.bottom, 15)
+                    
+                    Button(action: {
+                        // TODO: 리워드 얻기 뷰로 이동
+                    }, label: {
+                        Text("리워드 얻기")
+                            .foregroundStyle(.white)
+                            .padding(.vertical, 14)
+                    })
+                    .frame(width: 315)
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)
+                            .foregroundStyle(.green800)
+                    )
                 }
             }
             .presentationDetents([.medium])
