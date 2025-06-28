@@ -19,12 +19,35 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
     }
     
+    func requestAlwaysAuthorization() {
+        locationManager.requestAlwaysAuthorization()
+    }
+    
     func requestWhenInUseAuthorization() {
         locationManager.requestWhenInUseAuthorization()
     }
     
-    func startLocationUpdates() {
+//    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+//        print("didChangeAuthorization")
+//        switch status {
+//        case .authorizedAlways, .authorizedWhenInUse:
+//            startUpdatingLocation()
+//        default:
+//            // 필요한 처리를 여기에 추가
+//            break
+//        }
+//    }
+    
+    func startUpdatingLocation() {
         locationManager.startUpdatingLocation()
+    }
+    
+    func stopUpdatingLocation() {
+        locationManager.stopUpdatingLocation()
+    }
+    
+    func requestLocation() {
+        locationManager.requestLocation()
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -36,7 +59,15 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     func verifyLocation() -> String {
-        startLocationUpdates()
+        requestLocation()
         return "현재 latitude: \(latitude), longitude: \(longitude)"
     }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+            //에러를 확인하려면 NSError타입으로 캐스팅해야함.
+            let error = error as NSError
+            guard error.code != CLError.Code.locationUnknown.rawValue else {return}
+            
+            print(error)
+        }
 }
