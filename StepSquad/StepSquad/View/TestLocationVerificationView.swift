@@ -19,7 +19,7 @@ struct TestLocationVerificationView: View {
             .buttonStyle(.borderedProminent)
             Button("위치 확인") {
                 print("위치 권한 버튼")
-                location = locationManager.verifyLocation()
+                location = locationManager.testLocation()
             }
             .buttonStyle(.bordered)
             Text(location)

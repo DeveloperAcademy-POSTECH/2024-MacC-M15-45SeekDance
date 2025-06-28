@@ -27,16 +27,16 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         locationManager.requestWhenInUseAuthorization()
     }
     
-//    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-//        print("didChangeAuthorization")
-//        switch status {
-//        case .authorizedAlways, .authorizedWhenInUse:
-//            startUpdatingLocation()
-//        default:
-//            // 필요한 처리를 여기에 추가
-//            break
-//        }
-//    }
+    //    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    //        print("didChangeAuthorization")
+    //        switch status {
+    //        case .authorizedAlways, .authorizedWhenInUse:
+    //            startUpdatingLocation()
+    //        default:
+    //            // 필요한 처리를 여기에 추가
+    //            break
+    //        }
+    //    }
     
     func startUpdatingLocation() {
         locationManager.startUpdatingLocation()
@@ -49,7 +49,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     func requestLocation() {
         locationManager.requestLocation()
     }
-
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
             print("Latitude: \(location.coordinate.latitude), Longitude: \(location.coordinate.longitude)")
@@ -58,16 +58,34 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         }
     }
     
-    func verifyLocation() -> String {
+    func testLocation() -> String {
         requestLocation()
         return "현재 latitude: \(latitude), longitude: \(longitude)"
     }
     
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-            //에러를 확인하려면 NSError타입으로 캐스팅해야함.
-            let error = error as NSError
-            guard error.code != CLError.Code.locationUnknown.rawValue else {return}
-            
-            print(error)
+    func verificateLocation(gpsStaircaseLatitude: Double, gpsStaircaseLongitude: Double) -> Bool {
+        requestLocation()
+        let gpsStaircaseLocation = (editDouble(number: gpsStaircaseLatitude), editDouble(number: gpsStaircaseLongitude))
+        let currentLocation = (editDouble(number: latitude), editDouble(number: longitude))
+        print("계단 위치: ", gpsStaircaseLocation)
+        print("현재 위치: ", currentLocation)
+        if gpsStaircaseLocation == currentLocation {
+            return true
+        } else {
+            return false
         }
+    }
+    
+    func editDouble(number: Double) -> Double { // Double의 5째 자리에서 반올림한 수를 리턴
+        let digit: Double = pow(10, 4) // 10의 4제곱
+        return round(number * digit) / digit
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        //에러를 확인하려면 NSError타입으로 캐스팅해야함.
+        let error = error as NSError
+        guard error.code != CLError.Code.locationUnknown.rawValue else {return}
+        
+        print(error)
+    }
 }

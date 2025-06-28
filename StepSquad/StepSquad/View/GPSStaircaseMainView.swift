@@ -19,6 +19,8 @@ struct GPSStaircaseMainView: View {
     @State var bookmarks = Bookmarks()
     @State var filteredGPSStaircases = gpsStaircases
     
+    let locationManager = LocationManager()
+    
     var body: some View {
         ScrollViewReader { proxy in
             ScrollView {
@@ -157,7 +159,7 @@ struct GPSStaircaseMainView: View {
                             filterStaircases()
                         }
                         
-                        GPSStaircaseListView(filteredStaircases: $filteredGPSStaircases, bookmarks: $bookmarks, collectedItems: $collectedItems)
+                        GPSStaircaseListView(filteredStaircases: $filteredGPSStaircases, bookmarks: $bookmarks, collectedItems: $collectedItems, locationManager: locationManager)
                     }
                     
                     Spacer()

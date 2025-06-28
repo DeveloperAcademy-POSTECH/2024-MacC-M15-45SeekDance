@@ -14,6 +14,9 @@ struct GPSStaircaseDetailView: View {
     let gpsStaircase: GPSStaircase
     @State private var isShowingMissionSheet: Bool = false
     
+    let locationManager: LocationManager
+    @State private var isAtLocation: Bool = false
+    
     var body: some View {
         ZStack(alignment: .bottom) {
             VStack {
@@ -184,6 +187,12 @@ struct GPSStaircaseDetailView: View {
             
             // 하단 버튼
             Button(action: {
+                locationManager.requestAlwaysAuthorization()
+                if (locationManager.verificateLocation(gpsStaircaseLatitude: gpsStaircase.latitude, gpsStaircaseLongitude: gpsStaircase.longitude)) {
+                    isAtLocation = true
+                } else {
+                    isAtLocation = false
+                }
                 isShowingMissionSheet = true
             }) {
                 HStack {
@@ -213,7 +222,7 @@ struct GPSStaircaseDetailView: View {
                         XCircleButtonView()
                     }
                 }
-                if (true) { // 위치 인증을 성공하지 못 했을 때
+                if (!isAtLocation) { // 위치 인증을 성공하지 못 했을 때
                     Image("ShakeBird")
                         .resizable()
                         .scaledToFit()

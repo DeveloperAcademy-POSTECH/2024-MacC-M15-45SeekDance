@@ -12,6 +12,8 @@ struct GPSStaircaseListView: View {
     @Binding var bookmarks: Bookmarks
     @Binding var collectedItems: CollectedItems
     
+    let locationManager: LocationManager
+    
     let columns: [GridItem] = [
         GridItem(.fixed(176)),
         GridItem(.fixed(176))
@@ -21,7 +23,7 @@ struct GPSStaircaseListView: View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 12) {
                 ForEach(filteredStaircases) { staircase in
-                    NavigationLink(destination: GPSStaircaseDetailView(bookmarks: $bookmarks, collectedItems: $collectedItems, gpsStaircase: staircase), label: {
+                    NavigationLink(destination: GPSStaircaseDetailView(bookmarks: $bookmarks, collectedItems: $collectedItems, gpsStaircase: staircase, locationManager: locationManager), label: {
                         VStack(alignment: .leading) {
                             // TODO: 인증 과정 구현 후 삭제
 //                            Button("임시 인증/해제") {
