@@ -15,7 +15,7 @@ struct GPSStaircaseDetailView: View {
     @State private var isShowingMissionSheet: Bool = false
     
     let locationManager: LocationManager
-    @State private var isAtLocation: Bool = false
+    @State var verifyingLocationStatus: VerifyLocationState = .verifing
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -188,11 +188,7 @@ struct GPSStaircaseDetailView: View {
             // 하단 버튼
             Button(action: {
                 locationManager.requestAlwaysAuthorization()
-                if (locationManager.verificateLocation(gpsStaircaseLatitude: gpsStaircase.latitude, gpsStaircaseLongitude: gpsStaircase.longitude)) {
-                    isAtLocation = true
-                } else {
-                    isAtLocation = false
-                }
+                verifyingLocationStatus = locationManager.verifyLocation(gpsStaircaseLatitude: gpsStaircase.latitude, gpsStaircaseLongitude: gpsStaircase.longitude)
                 isShowingMissionSheet = true
             }) {
                 HStack {
@@ -222,7 +218,13 @@ struct GPSStaircaseDetailView: View {
                         XCircleButtonView()
                     }
                 }
-                if (!isAtLocation) { // 위치 인증을 성공하지 못 했을 때
+                if (verifyingLocationStatus == .verifing) {
+                    Spacer()
+                    
+                    ProgressView()
+                    
+                    Spacer()
+                } else if (verifyingLocationStatus == .denied) { // 위치 인증을 성공하지 못 했을 때
                     Image("ShakeBird")
                         .resizable()
                         .scaledToFit()
@@ -244,6 +246,8 @@ struct GPSStaircaseDetailView: View {
                     Button(
                         action: {
                         // TODO: 위치 정보 새로 불러오기
+                            verifyingLocationStatus = .verifing
+                            verifyingLocationStatus = locationManager.verifyLocation(gpsStaircaseLatitude: gpsStaircase.latitude, gpsStaircaseLongitude: gpsStaircase.longitude)
                     }, label: {
                         HStack {
                             Spacer()

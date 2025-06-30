@@ -8,6 +8,10 @@
 import Foundation
 import CoreLocation
 
+enum VerifyLocationState {
+    case verifing, verified, denied
+}
+
 class LocationManager: NSObject, CLLocationManagerDelegate {
     private var locationManager = CLLocationManager()
     var latitude: Double = 0.0
@@ -59,7 +63,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     func testLocation() -> String {
-        requestLocation()
+        startUpdatingLocation()
         return "현재 latitude: \(latitude), longitude: \(longitude)"
     }
     
@@ -74,6 +78,23 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         } else {
             return false
         }
+    }
+    
+    func verifyLocation(gpsStaircaseLatitude: Double, gpsStaircaseLongitude: Double) -> VerifyLocationState {
+        startUpdatingLocation()
+        let gpsStaircaseLocation = (editDouble(number: gpsStaircaseLatitude), editDouble(number: gpsStaircaseLongitude))
+        let currentLocation = (editDouble(number: latitude), editDouble(number: longitude))
+        print("계단 위치: ", gpsStaircaseLocation)
+        print("현재 위치: ", currentLocation)
+        stopUpdatingLocation()
+        if gpsStaircaseLocation == currentLocation {
+            print("return verified")
+            return .verified
+        } else {
+            print("return denied")
+            return .denied
+        }
+        
     }
     
     func editDouble(number: Double) -> Double { // Double의 5째 자리에서 반올림한 수를 리턴
