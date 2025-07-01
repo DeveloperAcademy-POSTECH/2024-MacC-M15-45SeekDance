@@ -67,7 +67,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         return "현재 latitude: \(latitude), longitude: \(longitude)"
     }
     
-    func verificateLocation(gpsStaircaseLatitude: Double, gpsStaircaseLongitude: Double) -> Bool {
+    func verificateLocation(gpsStaircaseLatitude: Double, gpsStaircaseLongitude: Double) async -> Bool {
         requestLocation()
         let gpsStaircaseLocation = (editDouble(number: gpsStaircaseLatitude), editDouble(number: gpsStaircaseLongitude))
         let currentLocation = (editDouble(number: latitude), editDouble(number: longitude))

@@ -15,7 +15,7 @@ struct GPSStaircaseDetailView: View {
     @State private var isShowingMissionSheet: Bool = false
     
     let locationManager: LocationManager
-    @State var verifyingLocationStatus: VerifyLocationState = .verifing
+    @State var isAtLocation: Bool? = nil
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -187,8 +187,10 @@ struct GPSStaircaseDetailView: View {
             
             // 하단 버튼
             Button(action: {
-                locationManager.requestAlwaysAuthorization()
-                verifyingLocationStatus = locationManager.verifyLocation(gpsStaircaseLatitude: gpsStaircase.latitude, gpsStaircaseLongitude: gpsStaircase.longitude)
+                locationManager.requestAlwaysAuthorization() // TODO: 위치 변경
+                Task {
+                    isAtLocation = await locationManager.verificateLocation(gpsStaircaseLatitude: gpsStaircase.latitude, gpsStaircaseLongitude: gpsStaircase.longitude)
+                }
                 isShowingMissionSheet = true
             }) {
                 HStack {
@@ -218,75 +220,85 @@ struct GPSStaircaseDetailView: View {
                         XCircleButtonView()
                     }
                 }
-                if (verifyingLocationStatus == .verifing) {
-                    Spacer()
-                    
-                    ProgressView()
-                    
-                    Spacer()
-                } else if (verifyingLocationStatus == .denied) { // 위치 인증을 성공하지 못 했을 때
-                    Image("ShakeBird")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 170, height: 170)
-                        .padding(.bottom, 16)
-                    
-                    Text("인증 위치에서 인증해주세요.")
-                        .font(.title3)
-                        .bold()
-                        .padding(.bottom, 8)
-                    
-                    Text("인증 위치에서도 해당 창이 뜬다면 하단의 새로고침을 눌러주세요.")
-                        .font(.callout)
-                        .foregroundStyle(.grey700)
-                        .frame(width: 219)
-                        .multilineTextAlignment(.center)
-                        .padding(.bottom, 16)
-                    
-                    Button(
-                        action: {
-                        // TODO: 위치 정보 새로 불러오기
-                            verifyingLocationStatus = .verifing
-                            verifyingLocationStatus = locationManager.verifyLocation(gpsStaircaseLatitude: gpsStaircase.latitude, gpsStaircaseLongitude: gpsStaircase.longitude)
-                    }, label: {
-                        HStack {
-                            Spacer()
-                            Text("위치 정보 새로고침")
-                                .foregroundStyle(.green700)
-                                .padding(.vertical, 14)
-                            Spacer()
-                        }
-                    })
-                } else { // 위치 인증을 성공했을 때
-                    Image("WinBird")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 170, height: 170)
-                        .padding(.bottom, 19)
-                    
-                    Text(gpsStaircase.name)
-                        .font(.title2)
-                        .bold()
-                        .foregroundStyle(.green800)
-                        .padding(.bottom, 4)
-                    
-                    Text(gpsStaircase.title)
-                        .foregroundStyle(.grey700)
-                        .padding(.bottom, 15)
-                    
-                    Button(action: {
-                        // TODO: 리워드 얻기 뷰로 이동
-                    }, label: {
-                        Text("리워드 얻기")
-                            .foregroundStyle(.white)
-                            .padding(.vertical, 14)
-                    })
-                    .frame(width: 315)
-                    .background(
-                        RoundedRectangle(cornerRadius: 12)
-                            .foregroundStyle(.green800)
-                    )
+                Text(isAtLocation?.description ?? "loading")
+                    .font(.title)
+                if (isAtLocation == true) {
+                    Text("인증 성공")
+                } else if (isAtLocation == false) {
+                    Text("인증 실패")
+                } else {
+                    Text("인증 중...")
                 }
+//                if (verifyingLocationStatus == .verifing) {
+//                    Spacer()
+//                    
+//                    ProgressView()
+//                    
+//                    Spacer()
+//                } else if (verifyingLocationStatus == .denied) { // 위치 인증을 성공하지 못 했을 때
+//                    Image("ShakeBird")
+//                        .resizable()
+//                        .scaledToFit()
+//                        .frame(width: 170, height: 170)
+//                        .padding(.bottom, 16)
+//                    
+//                    Text("인증 위치에서 인증해주세요.")
+//                        .font(.title3)
+//                        .bold()
+//                        .padding(.bottom, 8)
+//                    
+//                    Text("인증 위치에서도 해당 창이 뜬다면 하단의 새로고침을 눌러주세요.")
+//                        .font(.callout)
+//                        .foregroundStyle(.grey700)
+//                        .frame(width: 219)
+//                        .multilineTextAlignment(.center)
+//                        .padding(.bottom, 16)
+//                    
+//                    Button(
+//                        action: {
+//                        // TODO: 위치 정보 새로 불러오기
+//                            verifyingLocationStatus = .verifing
+//                            verifyingLocationStatus = locationManager.verifyLocation(gpsStaircaseLatitude: gpsStaircase.latitude, gpsStaircaseLongitude: gpsStaircase.longitude)
+//                            print("verifyingLocationStatus: ", verifyingLocationStatus)
+//                    }, label: {
+//                        HStack {
+//                            Spacer()
+//                            Text("위치 정보 새로고침")
+//                                .foregroundStyle(.green700)
+//                                .padding(.vertical, 14)
+//                            Spacer()
+//                        }
+//                    })
+//                } else { // 위치 인증을 성공했을 때
+//                    Image("WinBird")
+//                        .resizable()
+//                        .scaledToFit()
+//                        .frame(width: 170, height: 170)
+//                        .padding(.bottom, 19)
+//                    
+//                    Text(gpsStaircase.name)
+//                        .font(.title2)
+//                        .bold()
+//                        .foregroundStyle(.green800)
+//                        .padding(.bottom, 4)
+//                    
+//                    Text(gpsStaircase.title)
+//                        .foregroundStyle(.grey700)
+//                        .padding(.bottom, 15)
+//                    
+//                    Button(action: {
+//                        // TODO: 리워드 얻기 뷰로 이동
+//                    }, label: {
+//                        Text("리워드 얻기")
+//                            .foregroundStyle(.white)
+//                            .padding(.vertical, 14)
+//                    })
+//                    .frame(width: 315)
+//                    .background(
+//                        RoundedRectangle(cornerRadius: 12)
+//                            .foregroundStyle(.green800)
+//                    )
+//                }
             }
             .presentationDetents([.medium])
             .padding(.horizontal, 16)
