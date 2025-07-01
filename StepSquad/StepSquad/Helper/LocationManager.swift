@@ -8,8 +8,10 @@
 import Foundation
 import CoreLocation
 
-enum VerifyLocationState {
-    case verifing, verified, denied
+enum VerifyLocationState: String {
+    case verifing = "인증 중"
+    case verified = "인증 성공"
+    case denied = "인증 실패"
 }
 
 class LocationManager: NSObject, CLLocationManagerDelegate {
@@ -80,7 +82,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         }
     }
     
-    func verifyLocation(gpsStaircaseLatitude: Double, gpsStaircaseLongitude: Double) -> VerifyLocationState {
+    func verifyLocation(gpsStaircaseLatitude: Double, gpsStaircaseLongitude: Double) async -> VerifyLocationState {
         startUpdatingLocation()
         let gpsStaircaseLocation = (editDouble(number: gpsStaircaseLatitude), editDouble(number: gpsStaircaseLongitude))
         let currentLocation = (editDouble(number: latitude), editDouble(number: longitude))
