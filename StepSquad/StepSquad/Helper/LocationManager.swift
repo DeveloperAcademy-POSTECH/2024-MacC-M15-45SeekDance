@@ -9,7 +9,6 @@ import Foundation
 import CoreLocation
 
 enum VerifyLocationState: String {
-    case verifing = "인증 중"
     case verified = "인증 성공"
     case denied = "인증 실패"
 }
