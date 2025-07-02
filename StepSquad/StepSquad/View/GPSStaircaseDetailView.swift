@@ -191,9 +191,9 @@ struct GPSStaircaseDetailView: View {
                 Task {
                     verificationResult = await locationManager.verifyLocation(gpsStaircaseLatitude: gpsStaircase.latitude, gpsStaircaseLongitude: gpsStaircase.longitude)
                     print("1 verificationResult 수정")
+                    isShowingMissionSheet = true
+                    print("2 isShowingMissionSheet ture")
                 }
-                isShowingMissionSheet = true
-                print("2 isShowingMissionSheet ture")
             }) {
                 HStack {
                     Spacer()
