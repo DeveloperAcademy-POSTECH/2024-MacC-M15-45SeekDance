@@ -13,10 +13,9 @@ enum VerifyLocationState: String {
     case denied = "인증 실패"
 }
 
-class LocationManager: NSObject, CLLocationManagerDelegate {
+class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
+    private var locationContinuation: CheckedContinuation<CLLocationCoordinate2D?, Error>?
     private var locationManager = CLLocationManager()
-    var latitude: Double = 0.0
-    var longitude: Double = 0.0
     
     override init() {
         super.init()
@@ -32,82 +31,33 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         locationManager.requestWhenInUseAuthorization()
     }
     
-    //    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-    //        print("didChangeAuthorization")
-    //        switch status {
-    //        case .authorizedAlways, .authorizedWhenInUse:
-    //            startUpdatingLocation()
-    //        default:
-    //            // 필요한 처리를 여기에 추가
-    //            break
-    //        }
-    //    }
-    
-    func startUpdatingLocation() {
-        locationManager.startUpdatingLocation()
-    }
-    
-    func stopUpdatingLocation() {
-        locationManager.stopUpdatingLocation()
-    }
-    
-    func requestLocation() {
-        locationManager.requestLocation()
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.last {
-            print("Latitude: \(location.coordinate.latitude), Longitude: \(location.coordinate.longitude)")
-            latitude = location.coordinate.latitude
-            longitude = location.coordinate.longitude
+    func requestLocation() async throws -> CLLocationCoordinate2D? {
+        try await withCheckedThrowingContinuation { continuation in
+            locationContinuation = continuation
+            locationManager.requestLocation()
+            // continuation 을 resume 시키지 않는 한, 비동기 블럭을 대기하고 있는다.
         }
     }
     
-    func testLocation() -> String {
-        startUpdatingLocation()
-        return "현재 latitude: \(latitude), longitude: \(longitude)"
+    //  MARK: CLLocationManagerDelegate - 현재 위치 획득
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        // Continuation 에 위치정보를 전달하면서 멈춰있던 실행을 진행시킨다.
+        locationContinuation?.resume(returning: locations.first?.coordinate)
     }
     
-    func verificateLocation(gpsStaircaseLatitude: Double, gpsStaircaseLongitude: Double) async -> Bool {
-        requestLocation()
-        let gpsStaircaseLocation = (editDouble(number: gpsStaircaseLatitude), editDouble(number: gpsStaircaseLongitude))
-        let currentLocation = (editDouble(number: latitude), editDouble(number: longitude))
-        print("계단 위치: ", gpsStaircaseLocation)
-        print("현재 위치: ", currentLocation)
-        if gpsStaircaseLocation == currentLocation {
+    // MARK: CLLocationManagerDelegate - 위치 찾기 실패
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        // Continuation 에 오류를 전달하면서 멈춰있던 실행을 진행시킨다.
+        locationContinuation?.resume(throwing: error)
+    }
+    
+    // MARK: 계단의 경도, 위도와 현재 위치의 경도, 위도 비교
+    func compareLocations(staircaseLongitude: Double, staircaseLatitude: Double, currentLongitude: Double, currentLatitude: Double) -> Bool {
+        let digit: Double = pow(10, 4) // 10의 4제곱
+        if (round(staircaseLongitude * digit) / digit == round(currentLongitude * digit) / digit && round(staircaseLatitude * digit) / digit == round(currentLatitude * digit) / digit) {
             return true
         } else {
             return false
         }
-    }
-    
-    func verifyLocation(gpsStaircaseLatitude: Double, gpsStaircaseLongitude: Double) async -> VerifyLocationState {
-        startUpdatingLocation()
-        let gpsStaircaseLocation = (editDouble(number: gpsStaircaseLatitude), editDouble(number: gpsStaircaseLongitude))
-        let currentLocation = (editDouble(number: latitude), editDouble(number: longitude))
-        print("계단 위치: ", gpsStaircaseLocation)
-        print("현재 위치: ", currentLocation)
-        stopUpdatingLocation()
-        if gpsStaircaseLocation == currentLocation {
-            print("return verified")
-            return .verified
-        } else {
-            print("return denied")
-            return .denied
-        }
-        
-    }
-    
-    func editDouble(number: Double) -> Double { // Double의 5째 자리에서 반올림한 수를 리턴
-        let digit: Double = pow(10, 4) // 10의 4제곱
-        return round(number * digit) / digit
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        //에러를 확인하려면 NSError타입으로 캐스팅해야함.
-        let error = error as NSError
-        guard error.code != CLError.Code.locationUnknown.rawValue else {return}
-        
-        print(error)
     }
 }
