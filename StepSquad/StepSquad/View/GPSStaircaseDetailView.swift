@@ -7,6 +7,8 @@
 
 
 import SwiftUI
+import CoreLocation
+import CoreLocationUI
 
 struct GPSStaircaseDetailView: View {
     @Binding var bookmarks: Bookmarks
@@ -15,7 +17,8 @@ struct GPSStaircaseDetailView: View {
     @State private var isShowingMissionSheet: Bool = false
     
     let locationManager: LocationManager
-    @State var verificationResult: VerifyLocationState? = nil
+    @State private var currentLocation: CLLocationCoordinate2D?
+    @State private var isAtLocation: Bool = false
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -188,11 +191,21 @@ struct GPSStaircaseDetailView: View {
             // 하단 버튼
             Button(action: {
                 locationManager.requestAlwaysAuthorization() // TODO: 위치 변경
+                isShowingMissionSheet = true
                 Task {
-                    verificationResult = await locationManager.verifyLocation(gpsStaircaseLatitude: gpsStaircase.latitude, gpsStaircaseLongitude: gpsStaircase.longitude)
-                    print("1 verificationResult 수정")
-                    isShowingMissionSheet = true
-                    print("2 isShowingMissionSheet ture")
+                    if let location = try? await locationManager.requestLocation() {
+                        print("Location: \(location)")
+                        currentLocation = location
+                        if (locationManager.compareLocations(staircaseLongitude: gpsStaircase.longitude, staircaseLatitude: gpsStaircase.latitude, currentLongitude: currentLocation!.longitude, currentLatitude: currentLocation!.latitude)) {
+                            print("위치 같음")
+                            isAtLocation = true
+                        } else {
+                            isAtLocation = false
+                        }
+                    } else {
+                        // TODO: location을 못 부를 때, 권한이 없을 때 나타낼 것 고민
+                        print("위치 문제")
+                    }
                 }
             }) {
                 HStack {
@@ -222,73 +235,13 @@ struct GPSStaircaseDetailView: View {
                         XCircleButtonView()
                     }
                 }
-                if (verificationResult == .verified) { // 위치 인증을 성공했을 때
-                    Image("WinBird")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 170, height: 170)
-                        .padding(.bottom, 19)
-                    
-                    Text(gpsStaircase.name)
-                        .font(.title2)
-                        .bold()
-                        .foregroundStyle(.green800)
-                        .padding(.bottom, 4)
-                    
-                    Text(gpsStaircase.title)
-                        .foregroundStyle(.grey700)
-                        .padding(.bottom, 15)
-                    
-                    Button(action: {
-                        // TODO: 리워드 얻기 뷰로 이동
-                    }, label: {
-                        Text("리워드 얻기")
-                            .foregroundStyle(.white)
-                            .padding(.vertical, 14)
-                    })
-                    .frame(width: 315)
-                    .background(
-                        RoundedRectangle(cornerRadius: 12)
-                            .foregroundStyle(.green800)
-                    )
+                if (currentLocation == nil) {
+                    ProgressView()
+                } else if (isAtLocation) { // 위치 인증을 성공했을 때
+                    VerifiedLocationView(gpsStaircase: gpsStaircase)
                 } else { // 위치 인증을 성공하지 못 했을 때
-                    Image("ShakeBird")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 170, height: 170)
-                        .padding(.bottom, 16)
-                    
-                    Text("인증 위치에서 인증해주세요.")
-                        .font(.title3)
-                        .bold()
-                        .padding(.bottom, 8)
-                    
-                    Text("인증 위치에서도 해당 창이 뜬다면 하단의 새로고침을 눌러주세요.")
-                        .font(.callout)
-                        .foregroundStyle(.grey700)
-                        .frame(width: 219)
-                        .multilineTextAlignment(.center)
-                        .padding(.bottom, 16)
-                    
-                    Button(
-                        action: {
-                        // TODO: 위치 정보 새로 불러오기
-                            Task {
-                                verificationResult = await locationManager.verifyLocation(gpsStaircaseLatitude: gpsStaircase.latitude, gpsStaircaseLongitude: gpsStaircase.longitude)
-                            }
-                    }, label: {
-                        HStack {
-                            Spacer()
-                            Text("위치 정보 새로고침")
-                                .foregroundStyle(.green700)
-                                .padding(.vertical, 14)
-                            Spacer()
-                        }
-                    })
+                    FailedLocationView()
                 }
-            }
-            .onAppear {
-                print("3 bottom sheet 나타내기, verificationResult: \(verificationResult)")
             }
             .presentationDetents([.medium])
             .padding(.horizontal, 16)
@@ -316,6 +269,80 @@ struct GPSStaircaseDetailView: View {
             }
         }
         .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
+struct VerifiedLocationView: View {
+    let gpsStaircase: GPSStaircase
+    var body: some View {
+        VStack {
+            Image("WinBird")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 170, height: 170)
+                .padding(.bottom, 19)
+            
+            Text(gpsStaircase.name)
+                .font(.title2)
+                .bold()
+                .foregroundStyle(.green800)
+                .padding(.bottom, 4)
+            
+            Text(gpsStaircase.title)
+                .foregroundStyle(.grey700)
+                .padding(.bottom, 15)
+            
+            Button(action: {
+                // TODO: 리워드 얻기 뷰로 이동
+            }, label: {
+                Text("리워드 얻기")
+                    .foregroundStyle(.white)
+                    .padding(.vertical, 14)
+            })
+            .frame(width: 315)
+            .background(
+                RoundedRectangle(cornerRadius: 12)
+                    .foregroundStyle(.green800)
+            )
+        }
+    }
+}
+
+struct FailedLocationView: View {
+    var body: some View {
+        Image("ShakeBird")
+            .resizable()
+            .scaledToFit()
+            .frame(width: 170, height: 170)
+            .padding(.bottom, 16)
+        
+        Text("인증 위치에서 인증해주세요.")
+            .font(.title3)
+            .bold()
+            .padding(.bottom, 8)
+        
+        Text("인증 위치에서도 해당 창이 뜬다면 하단의 새로고침을 눌러주세요.")
+            .font(.callout)
+            .foregroundStyle(.grey700)
+            .frame(width: 219)
+            .multilineTextAlignment(.center)
+            .padding(.bottom, 16)
+        
+        Button(
+            action: {
+            // TODO: 위치 정보 새로 불러오기
+                Task {
+//                                verificationResult = await locationManager.verifyLocation(gpsStaircaseLatitude: gpsStaircase.latitude, gpsStaircaseLongitude: gpsStaircase.longitude)
+                }
+        }, label: {
+            HStack {
+                Spacer()
+                Text("위치 정보 새로고침")
+                    .foregroundStyle(.green700)
+                    .padding(.vertical, 14)
+                Spacer()
+            }
+        })
     }
 }
 
