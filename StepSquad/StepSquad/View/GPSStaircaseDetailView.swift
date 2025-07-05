@@ -194,10 +194,9 @@ struct GPSStaircaseDetailView: View {
                 isShowingMissionSheet = true
                 Task {
                     if let location = try? await locationManager.requestLocation() {
-                        print("Location: \(location)")
                         currentLocation = location
+                        print("Location: \(location)")
                         if (locationManager.compareLocations(staircaseLongitude: gpsStaircase.longitude, staircaseLatitude: gpsStaircase.latitude, currentLongitude: currentLocation!.longitude, currentLatitude: currentLocation!.latitude)) {
-                            print("위치 같음")
                             isAtLocation = true
                         } else {
                             isAtLocation = false
@@ -228,19 +227,27 @@ struct GPSStaircaseDetailView: View {
                     Text("계단 인증 도전하기")
                         .font(.title3)
                         .bold()
+                    
                     Spacer()
+                    
                     Button(action: {
                         isShowingMissionSheet = false
                     }) {
                         XCircleButtonView()
                     }
                 }
+                .frame(height: 56)
+                
+                Spacer()
+                
                 if (currentLocation == nil) {
                     ProgressView()
+                    
+                    Spacer()
                 } else if (isAtLocation) { // 위치 인증을 성공했을 때
                     VerifiedLocationView(gpsStaircase: gpsStaircase)
                 } else { // 위치 인증을 성공하지 못 했을 때
-                    FailedLocationView()
+                    FailedLocationView(locationManager: locationManager, currentLocation: $currentLocation, isAtLocation: $isAtLocation, gpsStaircase: gpsStaircase)
                 }
             }
             .presentationDetents([.medium])
@@ -309,6 +316,10 @@ struct VerifiedLocationView: View {
 }
 
 struct FailedLocationView: View {
+    let locationManager: LocationManager
+    @Binding var currentLocation: CLLocationCoordinate2D?
+    @Binding var isAtLocation: Bool
+    let gpsStaircase: GPSStaircase
     var body: some View {
         Image("ShakeBird")
             .resizable()
@@ -330,9 +341,20 @@ struct FailedLocationView: View {
         
         Button(
             action: {
-            // TODO: 위치 정보 새로 불러오기
                 Task {
-//                                verificationResult = await locationManager.verifyLocation(gpsStaircaseLatitude: gpsStaircase.latitude, gpsStaircaseLongitude: gpsStaircase.longitude)
+                    currentLocation = nil
+                    if let location = try? await locationManager.requestLocation() {
+                        currentLocation = location
+                        print("Location: \(location)")
+                        if (locationManager.compareLocations(staircaseLongitude: gpsStaircase.longitude, staircaseLatitude: gpsStaircase.latitude, currentLongitude: currentLocation!.longitude, currentLatitude: currentLocation!.latitude)) {
+                            isAtLocation = true
+                        } else {
+                            isAtLocation = false
+                        }
+                    } else {
+                        // TODO: location을 못 부를 때, 권한이 없을 때 나타낼 것 고민
+                        print("위치 문제")
+                    }
                 }
         }, label: {
             HStack {
