@@ -51,8 +51,8 @@ struct ShowMissionRewardView: View {
             .cornerRadius(12)
             .padding(.bottom, 32)
         }
-        .ignoresSafeArea()
         .frame(maxWidth: .infinity)
+        .ignoresSafeArea()
         .background(Color.backgroundColor)
     }
 }
