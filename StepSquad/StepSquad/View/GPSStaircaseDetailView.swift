@@ -14,11 +14,13 @@ struct GPSStaircaseDetailView: View {
     @Binding var bookmarks: Bookmarks
     @Binding var collectedItems: CollectedItems
     let gpsStaircase: GPSStaircase
-    @State private var isShowingMissionSheet: Bool = false
     
     let locationManager: LocationManager
     @State private var currentLocation: CLLocationCoordinate2D?
+    
     @State private var isAtLocation: Bool = false
+    @State private var isShowingMissionSheet: Bool = false
+    @State private var isShowingRewardSheet: Bool = false
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -245,7 +247,7 @@ struct GPSStaircaseDetailView: View {
                     
                     Spacer()
                 } else if (isAtLocation) { // 위치 인증을 성공했을 때
-                    VerifiedLocationView(gpsStaircase: gpsStaircase)
+                    VerifiedLocationView(gpsStaircase: gpsStaircase, isShowingMissionSheet: $isShowingMissionSheet, isShowingRewardSheet: $isShowingRewardSheet)
                 } else { // 위치 인증을 성공하지 못 했을 때
                     FailedLocationView(locationManager: locationManager, currentLocation: $currentLocation, isAtLocation: $isAtLocation, gpsStaircase: gpsStaircase)
                 }
@@ -253,6 +255,9 @@ struct GPSStaircaseDetailView: View {
             .presentationDetents([.medium])
             .padding(.horizontal, 16)
         }
+        .fullScreenCover(isPresented: $isShowingMissionSheet, content: {
+            ShowMissionRewardView(isRewardViewPresented: $isShowingRewardSheet, gpsStaircase: gpsStaircase)
+        })
         .toolbar {
             // TODO: 공유 기능 추가
             //            ToolbarItem(placement: .topBarTrailing) {
@@ -281,6 +286,8 @@ struct GPSStaircaseDetailView: View {
 
 struct VerifiedLocationView: View {
     let gpsStaircase: GPSStaircase
+    @Binding var isShowingMissionSheet: Bool
+    @Binding var isShowingRewardSheet: Bool
     var body: some View {
         VStack {
             Image("WinBird")
@@ -300,7 +307,8 @@ struct VerifiedLocationView: View {
                 .padding(.bottom, 15)
             
             Button(action: {
-                // TODO: 리워드 얻기 뷰로 이동
+                isShowingMissionSheet = false
+                isShowingRewardSheet = true
             }, label: {
                 Text("리워드 얻기")
                     .foregroundStyle(.white)
