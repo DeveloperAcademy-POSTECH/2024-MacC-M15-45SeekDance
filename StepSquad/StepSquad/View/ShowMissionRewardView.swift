@@ -40,7 +40,7 @@ struct ShowMissionRewardView: View {
             Spacer()
             
             Button(action: {
-                isRewardViewPresented.toggle()
+                isRewardViewPresented = false
             }) {
                 Text("계단 도전 인증하기")
                     .foregroundColor(.white)

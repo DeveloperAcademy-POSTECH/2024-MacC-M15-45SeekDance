@@ -23,264 +23,263 @@ struct GPSStaircaseDetailView: View {
     @State private var isShowingRewardSheet: Bool = false
     
     var body: some View {
-        ZStack(alignment: .bottom) {
-            VStack {
-                Image(gpsStaircase.imageName)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 394, height: 368)
-                    .clipped()
-                Spacer()
-            }
-            
-            LinearGradient(
-                gradient: Gradient(stops: [
-                    .init(color: .clear, location: 0.2),
-                    .init(color: Color(hex: 0x0C1806), location: 0.5)
-                ]),
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
-            
-            ScrollView {
+        NavigationStack {
+            ZStack(alignment: .bottom) {
                 VStack {
-                    Spacer(minLength: 207)
-                    
-                    HStack {
-                        Text(gpsStaircase.province.rawValue)
-                            .foregroundStyle(Color.white)
-                            .font(.caption)
-                            .padding(4)
-                            .background(Color.Green600)
-                            .cornerRadius(4)
-                        Text("\(gpsStaircase.steps)칸")
-                            .foregroundStyle(Color.Green800)
-                            .font(.caption)
-                            .padding(4)
-                            .background(Color.Green50)
-                            .cornerRadius(4)
-                    }
-                    
-                    VStack(spacing: 10) {
-                        Text(gpsStaircase.title)
-                            .font(.body)
-                            .fontWeight(.regular)
-                            .foregroundColor(Color.Grey100)
-                            .padding(.bottom, -8)
+                    Image(gpsStaircase.imageName)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 394, height: 368)
+                        .clipped()
+                    Spacer()
+                }
+                
+                LinearGradient(
+                    gradient: Gradient(stops: [
+                        .init(color: .clear, location: 0.2),
+                        .init(color: Color(hex: 0x0C1806), location: 0.5)
+                    ]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .ignoresSafeArea()
+                
+                ScrollView {
+                    VStack {
+                        Spacer(minLength: 207)
                         
-                        Text(gpsStaircase.name)
-                            .font(.title)
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
+                        HStack {
+                            Text(gpsStaircase.province.rawValue)
+                                .foregroundStyle(Color.white)
+                                .font(.caption)
+                                .padding(4)
+                                .background(Color.Green600)
+                                .cornerRadius(4)
+                            Text("\(gpsStaircase.steps)칸")
+                                .foregroundStyle(Color.Green800)
+                                .font(.caption)
+                                .padding(4)
+                                .background(Color.Green50)
+                                .cornerRadius(4)
+                        }
                         
-                        Text(gpsStaircase.description)
-                            .font(.footnote)
-                            .foregroundColor(Color.Grey100)
-                    }
-                    .padding(.bottom, 42)
-                    
-                    // 뱃지
-                    if collectedItems.isCollected(item: gpsStaircase.id) {
-                        VStack(alignment: .leading) {
-                            HStack(spacing: 8) {
-                                Image(systemName: "medal")
-                                    .font(.title)
-                                    .foregroundColor(Color.Green700)
-                                
-                                VStack(alignment: .leading) {
-                                    Text("도전 완료된 계단")
-                                        .font(.subheadline)
-                                        .fontWeight(.bold)
-                                        .foregroundColor(Color.Green900)
+                        VStack(spacing: 10) {
+                            Text(gpsStaircase.title)
+                                .font(.body)
+                                .fontWeight(.regular)
+                                .foregroundColor(Color.Grey100)
+                                .padding(.bottom, -8)
+                            
+                            Text(gpsStaircase.name)
+                                .font(.title)
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                            
+                            Text(gpsStaircase.description)
+                                .font(.footnote)
+                                .foregroundColor(Color.Grey100)
+                        }
+                        .padding(.bottom, 42)
+                        
+                        // 뱃지
+                        if collectedItems.isCollected(item: gpsStaircase.id) {
+                            VStack(alignment: .leading) {
+                                HStack(spacing: 8) {
+                                    Image(systemName: "medal")
+                                        .font(.title)
+                                        .foregroundColor(Color.Green700)
                                     
-                                    Text("추가 점수는 계속 받을 수 있어요!")
-                                        .font(.footnote)
-                                        .foregroundColor(Color.Green800)
+                                    VStack(alignment: .leading) {
+                                        Text("도전 완료된 계단")
+                                            .font(.subheadline)
+                                            .fontWeight(.bold)
+                                            .foregroundColor(Color.Green900)
+                                        
+                                        Text("추가 점수는 계속 받을 수 있어요!")
+                                            .font(.footnote)
+                                            .foregroundColor(Color.Green800)
+                                    }
                                 }
+                                .padding(.leading, 16)
+                                .padding(.vertical, 12)
                             }
-                            .padding(.leading, 16)
-                            .padding(.vertical, 12)
+                            .frame(width: 312, height: 72, alignment: .leading)
+                            .background(Color.white)
+                            .cornerRadius(12)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .stroke(Color.Green600, lineWidth: 1)
+                            )
+                            .padding(.bottom, 20)
                         }
-                        .frame(width: 312, height: 72, alignment: .leading)
-                        .background(Color.white)
-                        .cornerRadius(12)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 12)
-                                .stroke(Color.Green600, lineWidth: 1)
-                        )
-                        .padding(.bottom, 20)
-                    }
-                    
-                    // 인증 위치 & 획득 자료
-                    HStack(spacing: 16) {
-                        VStack(spacing: 12) {
-                            Label {
-                                Text("인증 위치")
-                                    .font(.footnote)
-                                    .bold()
-                                    .foregroundColor(Color.Green700)
-                            } icon: {
-                                Image(systemName: "pin.fill")
-                                    .font(.footnote)
-                                    .foregroundColor(Color.Green700)
-                            }
-                            
-                            Image(gpsStaircase.verificationLocationImageName)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 124, height: 108)
-                            
-                            VStack(spacing: 4) {
-                                Text(gpsStaircase.verificationLocation)
-                                    .font(.caption)
-                                    .bold()
-                                VStack {
-                                    Text("해당 위치 주변에서")
-                                    Text("인증이 됩니다.")
-                                }
-                                .font(.caption2)
-                                .foregroundColor(Color.Grey500)
-                                .multilineTextAlignment(.center)
-                            }
-                        }
-                        .padding(12)
-                        .frame(width: 148, height: 220)
-                        .background(Color.white)
-                        .cornerRadius(4)
                         
-                        VStack(spacing: 12) {
-                            Label {
-                                Text("획득 재료")
-                                    .font(.footnote)
-                                    .bold()
-                                    .foregroundColor(Color.Green700)
-                            } icon: {
-                                Image(systemName: "leaf.fill")
-                                    .font(.footnote)
-                                    .foregroundColor(Color.Green700)
-                            }
-                            
-                            Image(gpsStaircase.reweardImageName)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 124, height: 108)
-                            
-                            VStack(spacing: 4) {
-                                Text(gpsStaircase.reward)
-                                    .font(.caption)
-                                    .bold()
-                                VStack {
-                                    Text("실제로 가져가진")
-                                    Text("마세요.")
+                        // 인증 위치 & 획득 자료
+                        HStack(spacing: 16) {
+                            VStack(spacing: 12) {
+                                Label {
+                                    Text("인증 위치")
+                                        .font(.footnote)
+                                        .bold()
+                                        .foregroundColor(Color.Green700)
+                                } icon: {
+                                    Image(systemName: "pin.fill")
+                                        .font(.footnote)
+                                        .foregroundColor(Color.Green700)
                                 }
-                                .font(.caption2)
-                                .foregroundColor(Color.Grey500)
-                                .multilineTextAlignment(.center)
+                                
+                                Image(gpsStaircase.verificationLocationImageName)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 124, height: 108)
+                                
+                                VStack(spacing: 4) {
+                                    Text(gpsStaircase.verificationLocation)
+                                        .font(.caption)
+                                        .bold()
+                                    VStack {
+                                        Text("해당 위치 주변에서")
+                                        Text("인증이 됩니다.")
+                                    }
+                                    .font(.caption2)
+                                    .foregroundColor(Color.Grey500)
+                                    .multilineTextAlignment(.center)
+                                }
                             }
+                            .padding(12)
+                            .frame(width: 148, height: 220)
+                            .background(Color.white)
+                            .cornerRadius(4)
+                            
+                            VStack(spacing: 12) {
+                                Label {
+                                    Text("획득 재료")
+                                        .font(.footnote)
+                                        .bold()
+                                        .foregroundColor(Color.Green700)
+                                } icon: {
+                                    Image(systemName: "leaf.fill")
+                                        .font(.footnote)
+                                        .foregroundColor(Color.Green700)
+                                }
+                                
+                                Image(gpsStaircase.reweardImageName)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 124, height: 108)
+                                
+                                VStack(spacing: 4) {
+                                    Text(gpsStaircase.reward)
+                                        .font(.caption)
+                                        .bold()
+                                    VStack {
+                                        Text("실제로 가져가진")
+                                        Text("마세요.")
+                                    }
+                                    .font(.caption2)
+                                    .foregroundColor(Color.Grey500)
+                                    .multilineTextAlignment(.center)
+                                }
+                            }
+                            .padding(12)
+                            .frame(width: 148, height: 220)
+                            .background(Color.white)
+                            .cornerRadius(4)
                         }
-                        .padding(12)
-                        .frame(width: 148, height: 220)
-                        .background(Color.white)
-                        .cornerRadius(4)
-                    }
-                    
-                    Spacer(minLength: 100)
-                }
-            }
-            .scrollIndicators(.hidden)
-            
-            // 하단 버튼
-            Button(action: {
-                locationManager.requestAlwaysAuthorization() // TODO: 위치 변경
-                isShowingMissionSheet = true
-                Task {
-                    if let location = try? await locationManager.requestLocation() {
-                        currentLocation = location
-                        print("Location: \(location)")
-                        if (locationManager.compareLocations(staircaseLongitude: gpsStaircase.longitude, staircaseLatitude: gpsStaircase.latitude, currentLongitude: currentLocation!.longitude, currentLatitude: currentLocation!.latitude)) {
-                            isAtLocation = true
-                        } else {
-                            isAtLocation = false
-                        }
-                    } else {
-                        // TODO: location을 못 부를 때, 권한이 없을 때 나타낼 것 고민
-                        print("위치 문제")
+                        
+                        Spacer(minLength: 100)
                     }
                 }
-            }) {
-                HStack {
-                    Spacer()
-                    Text("계단 도전 인증하기")
-                        .font(.body)
-                        .foregroundColor(.white)
-                    Spacer()
-                }
-                .padding(.horizontal, 20)
-                .padding(.vertical, 14)
-            }
-            .background(Color.Green800)
-            .cornerRadius(12)
-            .padding(.horizontal, 36)
-        }
-        .sheet(isPresented: $isShowingMissionSheet) {
-            VStack {
-                HStack {
-                    Text("계단 인증 도전하기")
-                        .font(.title3)
-                        .bold()
-                    
-                    Spacer()
-                    
-                    Button(action: {
-                        isShowingMissionSheet = false
-                    }) {
-                        XCircleButtonView()
-                    }
-                }
-                .frame(height: 56)
+                .scrollIndicators(.hidden)
                 
-                Spacer()
-                
-                if (currentLocation == nil) {
-                    ProgressView()
-                    
-                    Spacer()
-                } else if (isAtLocation) { // 위치 인증을 성공했을 때
-                    VerifiedLocationView(gpsStaircase: gpsStaircase, isShowingMissionSheet: $isShowingMissionSheet, isShowingRewardSheet: $isShowingRewardSheet)
-                } else { // 위치 인증을 성공하지 못 했을 때
-                    FailedLocationView(locationManager: locationManager, currentLocation: $currentLocation, isAtLocation: $isAtLocation, gpsStaircase: gpsStaircase)
-                }
-            }
-            .presentationDetents([.medium])
-            .padding(.horizontal, 16)
-        }
-        .fullScreenCover(isPresented: $isShowingMissionSheet, content: {
-            ShowMissionRewardView(isRewardViewPresented: $isShowingRewardSheet, gpsStaircase: gpsStaircase)
-        })
-        .toolbar {
-            // TODO: 공유 기능 추가
-            //            ToolbarItem(placement: .topBarTrailing) {
-            //                Button(action: {}) {
-            //                    Image(systemName: "square.and.arrow.up")
-            //                        .font(.system(size: 22))
-            //                        .foregroundColor(Color.Green700)
-            //                }
-            //            }
-            ToolbarItem(placement: .topBarTrailing) {
+                // 하단 버튼
                 Button(action: {
-                    if bookmarks.contains(gpsStaircase.id) {
-                        bookmarks.remove(gpsStaircase.id)
-                    } else {
-                        bookmarks.add(gpsStaircase.id)
+                    locationManager.requestAlwaysAuthorization() // TODO: 위치 변경
+                    isShowingMissionSheet = true
+                    Task {
+                        if let location = try? await locationManager.requestLocation() {
+                            currentLocation = location
+                            print("Location: \(location)")
+                            if (locationManager.compareLocations(staircaseLongitude: gpsStaircase.longitude, staircaseLatitude: gpsStaircase.latitude, currentLongitude: currentLocation!.longitude, currentLatitude: currentLocation!.latitude)) {
+                                isAtLocation = true
+                            } else {
+                                isAtLocation = false
+                            }
+                        } else {
+                            // TODO: location을 못 부를 때, 권한이 없을 때 나타낼 것 고민
+                            print("위치 문제")
+                        }
                     }
                 }) {
-                    Image(systemName: bookmarks.contains(gpsStaircase.id) ? "bookmark.fill" : "bookmark")
-                        .foregroundStyle(.green500)
+                    HStack {
+                        Spacer()
+                        Text("계단 도전 인증하기")
+                            .font(.body)
+                            .foregroundColor(.white)
+                        Spacer()
+                    }
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 14)
+                }
+                .background(Color.Green800)
+                .cornerRadius(12)
+                .padding(.horizontal, 36)
+            }
+            .sheet(isPresented: $isShowingMissionSheet) {
+                VStack {
+                    HStack {
+                        Text("계단 인증 도전하기")
+                            .font(.title3)
+                            .bold()
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            isShowingMissionSheet = false
+                        }) {
+                            XCircleButtonView()
+                        }
+                    }
+                    .frame(height: 56)
+                    
+                    Spacer()
+                    
+                    if (currentLocation == nil) {
+                        ProgressView()
+                        
+                        Spacer()
+                    } else if (isAtLocation) { // 위치 인증을 성공했을 때
+                        VerifiedLocationView(gpsStaircase: gpsStaircase, isShowingMissionSheet: $isShowingMissionSheet, isShowingRewardSheet: $isShowingRewardSheet)
+                    } else { // 위치 인증을 성공하지 못 했을 때
+                        FailedLocationView(locationManager: locationManager, currentLocation: $currentLocation, isAtLocation: $isAtLocation, gpsStaircase: gpsStaircase)
+                    }
+                }
+                .presentationDetents([.medium])
+                .padding(.horizontal, 16)
+            }
+            .toolbar {
+                // TODO: 공유 기능 추가
+                //            ToolbarItem(placement: .topBarTrailing) {
+                //                Button(action: {}) {
+                //                    Image(systemName: "square.and.arrow.up")
+                //                        .font(.system(size: 22))
+                //                        .foregroundColor(Color.Green700)
+                //                }
+                //            }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(action: {
+                        if bookmarks.contains(gpsStaircase.id) {
+                            bookmarks.remove(gpsStaircase.id)
+                        } else {
+                            bookmarks.add(gpsStaircase.id)
+                        }
+                    }) {
+                        Image(systemName: bookmarks.contains(gpsStaircase.id) ? "bookmark.fill" : "bookmark")
+                            .foregroundStyle(.green500)
+                    }
                 }
             }
+            .navigationBarTitleDisplayMode(.inline)
         }
-        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
@@ -319,6 +318,9 @@ struct VerifiedLocationView: View {
                 RoundedRectangle(cornerRadius: 12)
                     .foregroundStyle(.green800)
             )
+            .fullScreenCover(isPresented: $isShowingRewardSheet, content: {
+                ShowMissionRewardView(isRewardViewPresented: $isShowingRewardSheet, gpsStaircase: gpsStaircase)
+            })
         }
     }
 }
@@ -364,15 +366,15 @@ struct FailedLocationView: View {
                         print("위치 문제")
                     }
                 }
-        }, label: {
-            HStack {
-                Spacer()
-                Text("위치 정보 새로고침")
-                    .foregroundStyle(.green700)
-                    .padding(.vertical, 14)
-                Spacer()
-            }
-        })
+            }, label: {
+                HStack {
+                    Spacer()
+                    Text("위치 정보 새로고침")
+                        .foregroundStyle(.green700)
+                        .padding(.vertical, 14)
+                    Spacer()
+                }
+            })
     }
 }
 
