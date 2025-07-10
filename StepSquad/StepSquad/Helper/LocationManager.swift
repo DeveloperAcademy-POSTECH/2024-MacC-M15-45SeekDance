@@ -53,7 +53,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     // MARK: 계단의 경도, 위도와 현재 위치의 경도, 위도 비교
     func compareLocations(staircaseLongitude: Double, staircaseLatitude: Double, currentLongitude: Double, currentLatitude: Double) -> Bool {
-        let digit: Double = pow(10, 4) // 10의 4제곱
+        let digit: Double = pow(10, 3) // 10의 3제곱
         if (round(staircaseLongitude * digit) / digit == round(currentLongitude * digit) / digit && round(staircaseLatitude * digit) / digit == round(currentLatitude * digit) / digit) {
             return true
         } else {
