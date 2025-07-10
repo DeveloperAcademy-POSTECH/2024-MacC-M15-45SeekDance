@@ -42,9 +42,13 @@ struct ShowMissionRewardView: View {
             Button(action: {
                 isRewardViewPresented = false
             }) {
-                Text("계단 도전 인증하기")
-                    .foregroundColor(.white)
-                    .padding(.vertical, 14)
+                HStack {
+                    Spacer()
+                    Text("계단 도전 인증하기")
+                        .foregroundColor(.white)
+                        .padding(.vertical, 14)
+                    Spacer()
+                }
             }
             .frame(width: 320, height: 50)
             .background(.green800)

@@ -308,9 +308,13 @@ struct VerifiedLocationView: View {
             Button(action: {
                 isShowingRewardSheet = true
             }, label: {
-                Text("리워드 얻기")
-                    .foregroundStyle(.white)
-                    .padding(.vertical, 14)
+                HStack {
+                    Spacer()
+                    Text("리워드 얻기")
+                        .foregroundStyle(.white)
+                        .padding(.vertical, 14)
+                    Spacer()
+                }
             })
             .frame(width: 315)
             .background(
