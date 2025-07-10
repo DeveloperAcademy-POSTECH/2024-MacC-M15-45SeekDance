@@ -306,7 +306,6 @@ struct VerifiedLocationView: View {
                 .padding(.bottom, 15)
             
             Button(action: {
-                isShowingMissionSheet = false
                 isShowingRewardSheet = true
             }, label: {
                 Text("리워드 얻기")
