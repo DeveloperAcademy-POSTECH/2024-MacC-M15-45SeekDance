@@ -175,7 +175,7 @@ struct MainViewPhase3: View {
                             .padding(.top, 8)
                             .padding(.horizontal, 36)
                             
-                            NavigationLink(destination: GPSStaircaseMainView(localPlayerImage: userProfileImage, localPlayerName: gameCenterManager.loadLocalPlayerName(), collectedItems: $collectedItems), label: {
+                            NavigationLink(destination: GPSStaircaseMainView(localPlayerImage: userProfileImage, localPlayerName: gameCenterManager.loadLocalPlayerName(), collectedItems: $collectedItems, gameCenterManager: gameCenterManager, isShowingNewItem: $isShowingNewItem), label: {
                                 HStack {
                                     Image("gpsStaircaseLogo")
                                         .resizable()

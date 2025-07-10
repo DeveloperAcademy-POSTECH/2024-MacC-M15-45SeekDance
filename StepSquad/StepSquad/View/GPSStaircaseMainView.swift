@@ -21,6 +21,10 @@ struct GPSStaircaseMainView: View {
     
     let locationManager = LocationManager()
     
+    let gameCenterManager: GameCenterManager
+    
+    @Binding var isShowingNewItem: Bool
+    
     var body: some View {
         ScrollViewReader { proxy in
             ScrollView {
@@ -159,7 +163,7 @@ struct GPSStaircaseMainView: View {
                             filterStaircases()
                         }
                         
-                        GPSStaircaseListView(filteredStaircases: $filteredGPSStaircases, bookmarks: $bookmarks, collectedItems: $collectedItems, locationManager: locationManager)
+                        GPSStaircaseListView(filteredStaircases: $filteredGPSStaircases, bookmarks: $bookmarks, collectedItems: $collectedItems, locationManager: locationManager, gameCenterManager: gameCenterManager, isShowingNewItem: $isShowingNewItem)
                     }
                     
                     Spacer()

@@ -14,6 +14,10 @@ struct GPSStaircaseListView: View {
     
     let locationManager: LocationManager
     
+    let gameCenterManager: GameCenterManager
+    
+    @Binding var isShowingNewItem: Bool
+    
     let columns: [GridItem] = [
         GridItem(.fixed(176)),
         GridItem(.fixed(176))
@@ -23,16 +27,8 @@ struct GPSStaircaseListView: View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 12) {
                 ForEach(filteredStaircases) { staircase in
-                    NavigationLink(destination: GPSStaircaseDetailView(bookmarks: $bookmarks, collectedItems: $collectedItems, gpsStaircase: staircase, locationManager: locationManager), label: {
+                    NavigationLink(destination: GPSStaircaseDetailView(bookmarks: $bookmarks, collectedItems: $collectedItems, gpsStaircase: staircase, locationManager: locationManager, gameCenterManager: gameCenterManager, isShowingNewItem: $isShowingNewItem), label: {
                         VStack(alignment: .leading) {
-                            // TODO: 인증 과정 구현 후 삭제
-//                            Button("임시 인증/해제") {
-//                                if collectedItems.isCollected(item: staircase.id) {
-//                                    collectedItems.deleteItem(item: staircase.id)
-//                                } else {
-//                                    collectedItems.collectItem(item: staircase.id, collectedDate: Date.now)
-//                                }
-//                            }
                             ZStack {
                                 Image(staircase.imageName)
                                     .resizable()
