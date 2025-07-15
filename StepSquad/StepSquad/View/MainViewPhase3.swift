@@ -32,6 +32,7 @@ struct MainViewPhase3: View {
     @State private var collectedItems = CollectedItems()
     @AppStorage("lastElectricAchievementKwh") var lastElectricAchievementKwh = 0
     @State var userProfileImage: Image?
+    @State private var weeklyGPSStaircaseScore = GPSStaircaseWeekScore()
     
     var currentStatus: CurrentStatus = CurrentStatus() {
         didSet {
@@ -97,6 +98,10 @@ struct MainViewPhase3: View {
                                     LevelUpView
                                 } else {
                                     GetHealthKitView
+                                }
+                                
+                                Button("임시 계단 정복") {
+                                    weeklyGPSStaircaseScore.addScore(score: 1)
                                 }
                                 
                                 Button {

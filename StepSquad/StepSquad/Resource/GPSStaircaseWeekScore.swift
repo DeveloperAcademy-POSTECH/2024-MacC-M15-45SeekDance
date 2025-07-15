@@ -24,16 +24,27 @@ class GPSStaircaseWeekScore: Codable {
     
     // MARK: 특정 계단 인증 완료 후 이번주 점수에 더하기
     func addScore(score: Int, todayDate: Date = Date.now) {
-        let formattedToday = todayDate.formatted(date: .numeric, time: .omitted)
-        if let dayScore = scores[formattedToday] {
-            scores[formattedToday]! += score // 오늘 기록이 있을 때
+        print("addScore")
+        print("before scores: \(scores)")
+        let dateFormatter: DateFormatter = .init()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.timeStyle = .none
+        let formattedTodayString = dateFormatter.string(from: todayDate)
+        print("todayDate: \(todayDate)")
+        print("formattedTodayString: \(formattedTodayString)")
+        
+        if let dayScore = scores[formattedTodayString] {
+            scores[formattedTodayString]! += score // 오늘 기록이 있을 때
         } else {
-            scores[formattedToday] = score // 오늘 기록이 없을 때
+            scores[formattedTodayString] = score // 오늘 기록이 없을 때
         }
+        
+        print("after scores: \(scores)")
     }
     
     // MARK: 이번주 점수 계산 후 반환
     func getWeeklyScore() -> Int {
+        print("getWeeklyScore")
         cleanOutdatedScores()
         var totalScore = 0
         for dayScore in scores {
@@ -44,8 +55,34 @@ class GPSStaircaseWeekScore: Codable {
     
     // MARK: 이번주가 아닌 점수 삭제
     func cleanOutdatedScores(todayDate: Date = Date.now) {
+        print("cleanOutdatedScores")
+        let dateFormatter: DateFormatter = .init()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.timeStyle = .none
+        let formattedTodayString = dateFormatter.string(from: todayDate)
         let today = Calendar.current.component(.weekday, from: todayDate) // 오늘의 요일, 일요일 = 1 ~ 토요일 = 7
+        print("today: \(today)")
+        
         // TODO: 토요일부터 오늘까지의 점수를 제외하고 항목 모두 삭제
+        if (today == 7) {
+            let todayScore = scores[formattedTodayString] ?? 0
+            scores.removeAll()
+            scores[formattedTodayString] = todayScore
+        } else {
+            for (key, _) in scores {
+                guard let targetDate = dateFormatter.date(from: key) else {
+                    print("GPSStaircaseWeekScore: targetDate 설정이 잘못되었습니다.")
+                    return
+                }
+                if let gap = Calendar.current.dateComponents([.day], from: targetDate, to: todayDate).day {
+                    if (gap > today) {
+                        scores.removeValue(forKey: key)
+                        print("deleted gap: \(gap)")
+                    }
+                }
+            }
+            print("scores: \(scores)")
+        }
     }
     
     func save() {
