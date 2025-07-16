@@ -8,7 +8,7 @@
 import Foundation
 
 @Observable
-class GPSStaircaseWeekScore: Codable {
+class GPSStaircaseWeeklyScore: Codable {
     private var scores: [String: Int]
     private let savePath = URL.documentsDirectory.appending(path: "GPSStaircaseWeekScore")
     

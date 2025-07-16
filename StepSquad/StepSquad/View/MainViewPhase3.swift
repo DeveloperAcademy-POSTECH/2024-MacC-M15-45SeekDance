@@ -32,7 +32,7 @@ struct MainViewPhase3: View {
     @State private var collectedItems = CollectedItems()
     @AppStorage("lastElectricAchievementKwh") var lastElectricAchievementKwh = 0
     @State var userProfileImage: Image?
-    @State private var weeklyGPSStaircaseScore = GPSStaircaseWeekScore()
+    @State private var weeklyGPSStaircaseScore = GPSStaircaseWeeklyScore()
     
     var currentStatus: CurrentStatus = CurrentStatus() {
         didSet {
