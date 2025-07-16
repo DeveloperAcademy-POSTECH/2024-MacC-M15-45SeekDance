@@ -9,7 +9,7 @@ import Foundation
 
 public let dateFormatter: DateFormatter = {
     let formatter = DateFormatter()
-    formatter.locale = Locale(identifier: "en_US_POSIX")
+    formatter.locale = Locale(identifier: Locale.current.identifier)
     formatter.dateFormat = "yyyy-MM-dd"
     return formatter
 }()
