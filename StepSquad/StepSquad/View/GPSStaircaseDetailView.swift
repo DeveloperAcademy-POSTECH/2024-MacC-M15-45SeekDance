@@ -13,6 +13,8 @@ import CoreLocationUI
 struct GPSStaircaseDetailView: View {
     @Binding var bookmarks: Bookmarks
     @Binding var collectedItems: CollectedItems
+    @Binding var gpsStaircaseWeeklyScore: GPSStaircaseWeeklyScore
+    
     let gpsStaircase: GPSStaircase
     
     let locationManager: LocationManager
@@ -252,7 +254,7 @@ struct GPSStaircaseDetailView: View {
                         
                         Spacer()
                     } else if (isAtLocation) { // 위치 인증을 성공했을 때
-                        VerifiedLocationView(gpsStaircase: gpsStaircase, isShowingMissionSheet: $isShowingMissionSheet, isShowingRewardSheet: $isShowingRewardSheet, gameCenterManager: gameCenterManager, collectedItems: $collectedItems, isShowingNewItem: $isShowingNewItem)
+                        VerifiedLocationView(gpsStaircase: gpsStaircase, isShowingMissionSheet: $isShowingMissionSheet, isShowingRewardSheet: $isShowingRewardSheet, gameCenterManager: gameCenterManager, collectedItems: $collectedItems, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, isShowingNewItem: $isShowingNewItem)
                     } else { // 위치 인증을 성공하지 못 했을 때
                         FailedLocationView(locationManager: locationManager, currentLocation: $currentLocation, isAtLocation: $isAtLocation, gpsStaircase: gpsStaircase)
                     }
@@ -295,6 +297,7 @@ struct VerifiedLocationView: View {
     let gameCenterManager: GameCenterManager
     
     @Binding var collectedItems: CollectedItems
+    @Binding var gpsStaircaseWeeklyScore: GPSStaircaseWeeklyScore
     
     @Binding var isShowingNewItem: Bool
     
@@ -339,7 +342,8 @@ struct VerifiedLocationView: View {
         .onAppear {
             // TODO: 성취 현지화 설정
             Task {
-                await gameCenterManager.submitPointWithFormerPoint(point: gpsStaircase.steps)
+                // TODO: 오른 계단 정보(HealthKit) 합산하기
+                await gameCenterManager.submitPoint(point: gpsStaircaseWeeklyScore.getWeeklyScore())
             }
             if (!collectedItems.isCollected(item: gpsStaircase.id)) {
                 gameCenterManager.reportCompletedAchievement(achievementId: gpsStaircase.achievementId)

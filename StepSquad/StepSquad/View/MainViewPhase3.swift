@@ -32,7 +32,7 @@ struct MainViewPhase3: View {
     @State private var collectedItems = CollectedItems()
     @AppStorage("lastElectricAchievementKwh") var lastElectricAchievementKwh = 0
     @State var userProfileImage: Image?
-    @State private var weeklyGPSStaircaseScore = GPSStaircaseWeeklyScore()
+    @State private var gpsStaircaseWeeklyScore = GPSStaircaseWeeklyScore()
     
     var currentStatus: CurrentStatus = CurrentStatus() {
         didSet {
@@ -98,10 +98,6 @@ struct MainViewPhase3: View {
                                     LevelUpView
                                 } else {
                                     GetHealthKitView
-                                }
-                                
-                                Button("임시 계단 정복") {
-                                    weeklyGPSStaircaseScore.addScore(score: 1)
                                 }
                                 
                                 Button {
@@ -180,7 +176,7 @@ struct MainViewPhase3: View {
                             .padding(.top, 8)
                             .padding(.horizontal, 36)
                             
-                            NavigationLink(destination: GPSStaircaseMainView(localPlayerImage: userProfileImage, localPlayerName: gameCenterManager.loadLocalPlayerName(), collectedItems: $collectedItems, gameCenterManager: gameCenterManager, isShowingNewItem: $isShowingNewItem), label: {
+                            NavigationLink(destination: GPSStaircaseMainView(localPlayerImage: userProfileImage, localPlayerName: gameCenterManager.loadLocalPlayerName(), collectedItems: $collectedItems, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, gameCenterManager: gameCenterManager, isShowingNewItem: $isShowingNewItem), label: {
                                 HStack {
                                     Image("gpsStaircaseLogo")
                                         .resizable()
@@ -641,6 +637,7 @@ struct MainViewPhase3: View {
         let weeklyStairPoint = service.weeklyFlightsClimbed * 16
         print("이번주 걸은 층계 * 16: \(weeklyStairPoint), nfc 점수: \(weeklyNfcPoint)")
         Task {
+            // TODO: 이번주 전국의 계단 점수로 교체
             await gameCenterManager.submitPoint(point: Int(weeklyNfcPoint) + Int(weeklyStairPoint))
         }
     }

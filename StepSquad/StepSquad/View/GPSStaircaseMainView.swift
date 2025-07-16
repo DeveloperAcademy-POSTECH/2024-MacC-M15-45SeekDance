@@ -13,6 +13,7 @@ struct GPSStaircaseMainView: View {
     var localPlayerName: String?
     
     @Binding var collectedItems: CollectedItems
+    @Binding var gpsStaircaseWeeklyScore: GPSStaircaseWeeklyScore
     
     // TODO: gameCenterManager 전달받기
     @State var selectedGroup: Int = 2
@@ -163,7 +164,7 @@ struct GPSStaircaseMainView: View {
                             filterStaircases()
                         }
                         
-                        GPSStaircaseListView(filteredStaircases: $filteredGPSStaircases, bookmarks: $bookmarks, collectedItems: $collectedItems, locationManager: locationManager, gameCenterManager: gameCenterManager, isShowingNewItem: $isShowingNewItem)
+                        GPSStaircaseListView(filteredStaircases: $filteredGPSStaircases, bookmarks: $bookmarks, collectedItems: $collectedItems, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, locationManager: locationManager, gameCenterManager: gameCenterManager, isShowingNewItem: $isShowingNewItem)
                     }
                     
                     Spacer()
