@@ -134,16 +134,14 @@ struct GPSStaircaseMainView: View {
                         
                         Picker("전국", selection: $selectedGroup){
                             Section {
-                                HStack {
-                                    Text("북마크")
-                                    Spacer()
-                                    Image(systemName: "bookmark.fill")
-                                }.tag(0)
-                                HStack {
-                                    Text("도전 완료")
-                                    Spacer()
-                                    Image(systemName: "medal.fill")
-                                }.tag(1)
+                                Label("북마크", systemImage: "bookmark.fill")
+                                    .font(.title)
+                                    .labelStyle(.titleAndIcon)
+                                    .tag(0)
+                                Label("도전 완료", systemImage: "medal.fill")
+                                    .font(.title)
+                                    .labelStyle(.titleAndIcon)
+                                    .tag(1)
                             }
                             
                             Section("지역 필터") {
