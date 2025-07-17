@@ -343,6 +343,7 @@ struct VerifiedLocationView: View {
             // TODO: 성취 현지화 설정
             Task {
                 // TODO: 오른 계단 정보(HealthKit) 합산하기
+                gpsStaircaseWeeklyScore.addScore(score: gpsStaircase.steps)
                 await gameCenterManager.submitPoint(point: gpsStaircaseWeeklyScore.getWeeklyScore())
             }
             if (!collectedItems.isCollected(item: gpsStaircase.id)) {
