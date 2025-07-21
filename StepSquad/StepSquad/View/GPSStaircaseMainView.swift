@@ -68,104 +68,107 @@ struct GPSStaircaseMainView: View {
                     .background(.green200)
                     
                     ProfileView(localPlayerImage: localPlayerImage, localPlayerName: localPlayerName, collectedItems: $collectedItems)
-                    
                     VStack {
-                        Text("미션")
-                            .font(.subheadline)
-                            .bold()
-                            .foregroundStyle(.white)
-                            .padding(10)
-                            .background(RoundedRectangle(cornerRadius: 20).fill(.green700))
-                        
-                        VStack(spacing: 4) {
-                            Text("전국의 계단 오르고 인증하자!")
-                                .font(.title3)
+                        VStack {
+                            Text("미션")
+                                .font(.subheadline)
                                 .bold()
-                            Text("특별 재료에 점수 2배 이벤트")
-                                .font(.footnote)
-                            Text("(계단 오르기 점수 + 특별 계단 점수)")
-                                .font(.caption2)
-                                .foregroundStyle(.grey600)
-                        }
-                        .padding(.top, 12)
-                    }
-                    .padding(.top, 26)
-                    
-                    VStack {
-                        Text("참여 방법")
-                            .font(.subheadline)
-                            .bold()
-                            .foregroundStyle(.white)
-                            .padding(10)
-                            .background(RoundedRectangle(cornerRadius: 20).fill(.green700))
-                            .padding(.top, 16)
-                        
-                        HStack(spacing: 32) {
-                            VStack {
-                                Image("authenticationExample1")
-                                Text("인증 장소를 확인한 후 직접 방문한다")
-                                    .font(.footnote)
-                                    .frame(width: 120)
-                            }
+                                .foregroundStyle(.white)
+                                .padding(10)
+                                .background(RoundedRectangle(cornerRadius: 20).fill(.green700))
                             
-                            VStack {
-                                Image("authenticationExample2")
-                                Text("해당 계단 하단의 인증하기를 탭!")
+                            VStack(spacing: 4) {
+                                Text("전국의 계단 오르고 인증하자!")
+                                    .font(.title3)
+                                    .bold()
+                                Text("특별 재료에 점수 2배 이벤트")
                                     .font(.footnote)
-                                    .frame(width: 120)
-                                    .id("GPSStaircaseListView")
+                                Text("(계단 오르기 점수 + 특별 계단 점수)")
+                                    .font(.caption2)
+                                    .foregroundStyle(.grey600)
                             }
+                            .padding(.top, 12)
                         }
                         .padding(.top, 26)
-                        .multilineTextAlignment(.center)
+                        .background(.green50)
+                        
+                        VStack {
+                            Text("참여 방법")
+                                .font(.subheadline)
+                                .bold()
+                                .foregroundStyle(.white)
+                                .padding(10)
+                                .background(RoundedRectangle(cornerRadius: 20).fill(.green700))
+                                .padding(.top, 16)
+                            
+                            HStack(spacing: 32) {
+                                VStack {
+                                    Image("authenticationExample1")
+                                    Text("인증 장소를 확인한 후 직접 방문한다")
+                                        .font(.footnote)
+                                        .frame(width: 120)
+                                }
+                                
+                                VStack {
+                                    Image("authenticationExample2")
+                                    Text("해당 계단 하단의 인증하기를 탭!")
+                                        .font(.footnote)
+                                        .frame(width: 120)
+                                        .id("GPSStaircaseListView")
+                                }
+                            }
+                            .padding(.top, 26)
+                            .multilineTextAlignment(.center)
+                            
+                            Spacer()
+                        }
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 289)
+                        .background(.white)
+                        .padding(.top, 40)
+                        
+                        VStack {
+                            Image("ribbonGreen")
+                                .resizable()
+                                .frame(width: 241.5, height: 77.02)
+                                .padding(.top, 40)
+                            
+                            Picker("전국", selection: $selectedGroup){
+                                Section {
+                                    Label("북마크", systemImage: "bookmark.fill")
+                                        .font(.title)
+                                        .labelStyle(.titleAndIcon)
+                                        .tag(0)
+                                    Label("도전 완료", systemImage: "medal.fill")
+                                        .font(.title)
+                                        .labelStyle(.titleAndIcon)
+                                        .tag(1)
+                                }
+                                
+                                Section("지역 필터") {
+                                    Text("전국").tag(2)
+                                    Text("수도권").tag(3)
+                                    Text("강원도").tag(4)
+                                    Text("세종·충북").tag(5)
+                                    Text("대전·충남").tag(6)
+                                    Text("대구·경북").tag(7)
+                                    Text("부산·울산·경남").tag(8)
+                                    Text("전북").tag(9)
+                                    Text("광주·전남").tag(10)
+                                    Text("제주").tag(11)
+                                }
+                            }
+                            .tint(.green800)
+                            .onChange(of: selectedGroup) {
+                                filterStaircases()
+                            }
+                            
+                            GPSStaircaseListView(filteredStaircases: $filteredGPSStaircases, bookmarks: $bookmarks, collectedItems: $collectedItems, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, locationManager: locationManager, gameCenterManager: gameCenterManager, isShowingNewItem: $isShowingNewItem)
+                        }
                         
                         Spacer()
                     }
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 289)
-                    .background(.white)
-                    .padding(.top, 40)
-                    
-                    VStack {
-                        Image("ribbonGreen")
-                            .resizable()
-                            .frame(width: 241.5, height: 77.02)
-                            .padding(.top, 40)
-                        
-                        Picker("전국", selection: $selectedGroup){
-                            Section {
-                                Label("북마크", systemImage: "bookmark.fill")
-                                    .font(.title)
-                                    .labelStyle(.titleAndIcon)
-                                    .tag(0)
-                                Label("도전 완료", systemImage: "medal.fill")
-                                    .font(.title)
-                                    .labelStyle(.titleAndIcon)
-                                    .tag(1)
-                            }
-                            
-                            Section("지역 필터") {
-                                Text("전국").tag(2)
-                                Text("수도권").tag(3)
-                                Text("강원도").tag(4)
-                                Text("세종·충북").tag(5)
-                                Text("대전·충남").tag(6)
-                                Text("대구·경북").tag(7)
-                                Text("부산·울산·경남").tag(8)
-                                Text("전북").tag(9)
-                                Text("광주·전남").tag(10)
-                                Text("제주").tag(11)
-                            }
-                        }
-                        .tint(.green800)
-                        .onChange(of: selectedGroup) {
-                            filterStaircases()
-                        }
-                        
-                        GPSStaircaseListView(filteredStaircases: $filteredGPSStaircases, bookmarks: $bookmarks, collectedItems: $collectedItems, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, locationManager: locationManager, gameCenterManager: gameCenterManager, isShowingNewItem: $isShowingNewItem)
-                    }
-                    
-                    Spacer()
+                    .background(.green50)
                 }
             }
             .toolbar {
@@ -177,7 +180,13 @@ struct GPSStaircaseMainView: View {
                 }
             }
             .ignoresSafeArea()
-            .background(.green50)
+            .background(
+                VStack(spacing: .zero) {
+                    Color.Green200
+                    Color.Green50
+                }
+                    .ignoresSafeArea()
+            )
             .navigationTitle("미션")
             .navigationBarTitleDisplayMode(.inline)
             .scrollBounceBehavior(.basedOnSize)
