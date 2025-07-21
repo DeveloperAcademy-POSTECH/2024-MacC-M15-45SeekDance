@@ -199,7 +199,6 @@ struct GPSStaircaseDetailView: View {
                 
                 // 하단 버튼
                 Button(action: {
-                    locationManager.requestAlwaysAuthorization() // TODO: 위치 변경
                     isShowingMissionSheet = true
                     Task {
                         if let location = try? await locationManager.requestLocation() {
@@ -255,6 +254,9 @@ struct GPSStaircaseDetailView: View {
                 }
                 .presentationDetents([.medium])
                 .padding(.horizontal, 16)
+            }
+            .onAppear {
+                locationManager.requestAlwaysAuthorization()
             }
             .toolbar {
                 // TODO: 공유 기능 추가
