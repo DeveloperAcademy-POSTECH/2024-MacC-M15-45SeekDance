@@ -244,6 +244,8 @@ struct GPSStaircaseDetailView: View {
                     
                     if (currentLocation == nil) {
                         ProgressView()
+                        Text("위치 확인 중")
+                            .foregroundStyle(.secondary)
                         
                         Spacer()
                     } else if (isAtLocation) { // 위치 인증을 성공했을 때
