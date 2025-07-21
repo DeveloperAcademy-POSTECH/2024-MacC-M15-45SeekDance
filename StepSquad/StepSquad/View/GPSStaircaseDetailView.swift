@@ -238,12 +238,6 @@ struct GPSStaircaseDetailView: View {
                             .bold()
                         
                         Spacer()
-                        
-                        Button(action: {
-                            isShowingMissionSheet = false
-                        }) {
-                            XCircleButtonView()
-                        }
                     }
                     .frame(height: 56)
                     
