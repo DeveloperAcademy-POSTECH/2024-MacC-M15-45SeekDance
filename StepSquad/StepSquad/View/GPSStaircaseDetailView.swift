@@ -22,7 +22,6 @@ struct GPSStaircaseDetailView: View {
     
     @State private var isAtLocation: Bool = false
     @State private var isShowingMissionSheet: Bool = false
-    @State private var isShowingRewardSheet: Bool = false
     
     let gameCenterManager: GameCenterManager
     
@@ -242,7 +241,7 @@ struct GPSStaircaseDetailView: View {
                         Spacer()
                     } else {
                         if (isAtLocation) { // 위치 인증을 성공했을 때
-                            VerifiedLocationView(gpsStaircase: gpsStaircase, isShowingMissionSheet: $isShowingMissionSheet, isShowingRewardSheet: $isShowingRewardSheet, gameCenterManager: gameCenterManager, collectedItems: $collectedItems, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, isShowingNewItem: $isShowingNewItem)
+                            VerifiedLocationView(gpsStaircase: gpsStaircase, isShowingMissionSheet: $isShowingMissionSheet, gameCenterManager: gameCenterManager, collectedItems: $collectedItems, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, isShowingNewItem: $isShowingNewItem)
                         } else { // 위치 인증을 성공하지 못 했을 때
                             FailedLocationView(locationManager: locationManager, currentLocation: $currentLocation, isAtLocation: $isAtLocation, isShowingMissionSheet: $isShowingMissionSheet, gpsStaircase: gpsStaircase)
                         }
@@ -284,7 +283,6 @@ struct GPSStaircaseDetailView: View {
 struct VerifiedLocationView: View {
     let gpsStaircase: GPSStaircase
     @Binding var isShowingMissionSheet: Bool
-    @Binding var isShowingRewardSheet: Bool
     
     let gameCenterManager: GameCenterManager
     
@@ -293,45 +291,67 @@ struct VerifiedLocationView: View {
     
     @Binding var isShowingNewItem: Bool
     
+    @State private var animationAmount = 0.0
     var body: some View {
         VStack {
-            Image("WinBird")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 170, height: 170)
-                .padding(.bottom, 19)
-            
-            Text(gpsStaircase.name)
-                .font(.title2)
+            Text("전국의 계단 성공!")
+                .font(.title3)
                 .bold()
-                .foregroundStyle(.green800)
-                .padding(.bottom, 4)
+                .foregroundStyle(.green600)
+                .frame(height: 50)
             
-            Text(gpsStaircase.title)
+            Spacer()
+            
+            ZStack {
+                Image("Effect")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 120, height: 120)
+                    .rotationEffect(.degrees(animationAmount))
+                    .animation(
+                        .linear(duration: 2)
+                        .repeatForever(autoreverses: true),
+                        value: animationAmount
+                    )
+                
+                Image(gpsStaircase.reweardImageName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 120, height: 120)
+                    .padding(.bottom, 12)
+            }
+            
+            Text("\(gpsStaircase.name) 정복 성공!")
+                .font(.callout)
                 .foregroundStyle(.grey700)
-                .padding(.bottom, 15)
+                .padding(.bottom, 12)
+            
+            HStack(spacing: 12) {
+                GradientSquareView(type: "획득 재료", text: gpsStaircase.reward, isWithSymbol: false)
+                GradientSquareView(type: "추가 점수", text: "\(gpsStaircase.steps)", isWithSymbol: false)
+            }
+            
+            Spacer()
             
             Button(action: {
-                isShowingRewardSheet = true
+                isShowingMissionSheet = false
             }, label: {
                 HStack {
                     Spacer()
-                    Text("리워드 얻기")
+                    Text("확인하기")
                         .foregroundStyle(.white)
                         .padding(.vertical, 14)
                     Spacer()
                 }
             })
-            .frame(width: 315)
+            .frame(width: 316)
             .background(
                 RoundedRectangle(cornerRadius: 12)
                     .foregroundStyle(.green800)
             )
-            .fullScreenCover(isPresented: $isShowingRewardSheet, content: {
-                ShowMissionRewardView(isRewardViewPresented: $isShowingRewardSheet, gpsStaircase: gpsStaircase)
-            })
         }
         .onAppear {
+            animationAmount = 360.0
             // TODO: 성취 현지화 설정
             Task {
                 // TODO: 오른 계단 정보(HealthKit) 합산하기
@@ -406,34 +426,47 @@ struct FailedLocationView: View {
                 .frame(width: 152, height: 50)
             }
             .padding(.horizontal, 40)
-            
-//            Button(
-//                action: {
-//                    Task {
-//                        currentLocation = nil
-//                        if let location = try? await locationManager.requestLocation() {
-//                            currentLocation = location
-//                            print("Location: \(location)")
-//                            if (locationManager.compareLocations(staircaseLongitude: gpsStaircase.longitude, staircaseLatitude: gpsStaircase.latitude, currentLongitude: currentLocation!.longitude, currentLatitude: currentLocation!.latitude)) {
-//                                isAtLocation = true
-//                            } else {
-//                                isAtLocation = false
-//                            }
-//                        } else {
-//                            // TODO: location을 못 부를 때, 권한이 없을 때 나타낼 것 고민
-//                            print("위치 문제")
-//                        }
-//                    }
-//                }, label: {
-//                    HStack {
-//                        Spacer()
-//                        Text("위치 정보 새로고침")
-//                            .foregroundStyle(.green700)
-//                            .padding(.vertical, 14)
-//                        Spacer()
-//                    }
-//                })
         }
+    }
+}
+
+struct GradientSquareView: View {
+    let type: String
+    let text: String
+    let isWithSymbol: Bool
+    var body: some View {
+        VStack(spacing: 16) {
+            Text(type)
+                .font(.headline)
+                .foregroundStyle(.green600)
+            
+            HStack(spacing: 8) {
+                if (isWithSymbol) {
+                    Image(systemName: "figure.stairs")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 25)
+                }
+                Text(text)
+            }
+            .font(.title3)
+            .bold()
+            .foregroundStyle(.green900)
+        }
+        .frame(width: 152, height: 95)
+        .background(Color.white,
+                    in: RoundedRectangle(cornerRadius: 12))
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .inset(by: 1)
+                .stroke(
+                    LinearGradient(
+                        gradient: Gradient(colors: [Color(hex: 0xA4DA81), Color(hex: 0x638D48)]),
+                        startPoint: .top,
+                        endPoint: .bottom
+                    ),
+                    lineWidth: 2
+                ))
     }
 }
 
