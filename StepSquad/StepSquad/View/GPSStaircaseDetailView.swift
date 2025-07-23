@@ -231,27 +231,32 @@ struct GPSStaircaseDetailView: View {
             }
             .sheet(isPresented: $isShowingMissionSheet) {
                 VStack {
-                    HStack {
-                        Text("계단 인증 도전하기")
-                            .font(.title3)
-                            .bold()
-                        
-                        Spacer()
-                    }
-                    .frame(height: 56)
-                    
-                    Spacer()
-                    
                     if (currentLocation == nil) {
+                        Spacer()
+                        
                         ProgressView()
-                        Text("위치 확인 중")
+                        
+                        Text("나의 위치 확인 중")
                             .foregroundStyle(.secondary)
                         
                         Spacer()
-                    } else if (isAtLocation) { // 위치 인증을 성공했을 때
-                        VerifiedLocationView(gpsStaircase: gpsStaircase, isShowingMissionSheet: $isShowingMissionSheet, isShowingRewardSheet: $isShowingRewardSheet, gameCenterManager: gameCenterManager, collectedItems: $collectedItems, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, isShowingNewItem: $isShowingNewItem)
-                    } else { // 위치 인증을 성공하지 못 했을 때
-                        FailedLocationView(locationManager: locationManager, currentLocation: $currentLocation, isAtLocation: $isAtLocation, gpsStaircase: gpsStaircase)
+                    } else {
+                        HStack {
+                            Text("계단 인증 도전하기")
+                                .font(.title3)
+                                .bold()
+                            
+                            Spacer()
+                        }
+                        .frame(height: 56)
+                        
+                        Spacer()
+                        
+                        if (isAtLocation) { // 위치 인증을 성공했을 때
+                            VerifiedLocationView(gpsStaircase: gpsStaircase, isShowingMissionSheet: $isShowingMissionSheet, isShowingRewardSheet: $isShowingRewardSheet, gameCenterManager: gameCenterManager, collectedItems: $collectedItems, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, isShowingNewItem: $isShowingNewItem)
+                        } else { // 위치 인증을 성공하지 못 했을 때
+                            FailedLocationView(locationManager: locationManager, currentLocation: $currentLocation, isAtLocation: $isAtLocation, gpsStaircase: gpsStaircase)
+                        }
                     }
                 }
                 .presentationDetents([.medium])
