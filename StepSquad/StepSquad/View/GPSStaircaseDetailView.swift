@@ -241,21 +241,10 @@ struct GPSStaircaseDetailView: View {
                         
                         Spacer()
                     } else {
-                        HStack {
-                            Text("계단 인증 도전하기")
-                                .font(.title3)
-                                .bold()
-                            
-                            Spacer()
-                        }
-                        .frame(height: 56)
-                        
-                        Spacer()
-                        
                         if (isAtLocation) { // 위치 인증을 성공했을 때
                             VerifiedLocationView(gpsStaircase: gpsStaircase, isShowingMissionSheet: $isShowingMissionSheet, isShowingRewardSheet: $isShowingRewardSheet, gameCenterManager: gameCenterManager, collectedItems: $collectedItems, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, isShowingNewItem: $isShowingNewItem)
                         } else { // 위치 인증을 성공하지 못 했을 때
-                            FailedLocationView(locationManager: locationManager, currentLocation: $currentLocation, isAtLocation: $isAtLocation, gpsStaircase: gpsStaircase)
+                            FailedLocationView(locationManager: locationManager, currentLocation: $currentLocation, isAtLocation: $isAtLocation, isShowingMissionSheet: $isShowingMissionSheet, gpsStaircase: gpsStaircase)
                         }
                     }
                 }
@@ -360,54 +349,91 @@ struct VerifiedLocationView: View {
 
 struct FailedLocationView: View {
     let locationManager: LocationManager
+    
     @Binding var currentLocation: CLLocationCoordinate2D?
     @Binding var isAtLocation: Bool
+    @Binding var isShowingMissionSheet: Bool
+    
     let gpsStaircase: GPSStaircase
+    
     var body: some View {
-        Image("ShakeBird")
-            .resizable()
-            .scaledToFit()
-            .frame(width: 170, height: 170)
-            .padding(.bottom, 16)
-        
-        Text("인증 위치에서 인증해주세요.")
-            .font(.title3)
-            .bold()
-            .padding(.bottom, 8)
-        
-        Text("인증 위치에서도 해당 창이 뜬다면 하단의 새로고침을 눌러주세요.")
-            .font(.callout)
-            .foregroundStyle(.grey700)
-            .frame(width: 219)
-            .multilineTextAlignment(.center)
-            .padding(.bottom, 16)
-        
-        Button(
-            action: {
-                Task {
-                    currentLocation = nil
-                    if let location = try? await locationManager.requestLocation() {
-                        currentLocation = location
-                        print("Location: \(location)")
-                        if (locationManager.compareLocations(staircaseLongitude: gpsStaircase.longitude, staircaseLatitude: gpsStaircase.latitude, currentLongitude: currentLocation!.longitude, currentLatitude: currentLocation!.latitude)) {
-                            isAtLocation = true
-                        } else {
-                            isAtLocation = false
-                        }
-                    } else {
-                        // TODO: location을 못 부를 때, 권한이 없을 때 나타낼 것 고민
-                        print("위치 문제")
-                    }
-                }
-            }, label: {
-                HStack {
-                    Spacer()
-                    Text("위치 정보 새로고침")
-                        .foregroundStyle(.green700)
+        VStack {
+            Spacer()
+            
+            Image("ShakeBird")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 160, height: 160)
+                .padding(.bottom, 24)
+            
+            Text("인증 위치를 다시 확인해주세요.")
+                .font(.title3)
+                .bold()
+                .padding(.bottom, 8)
+            
+            Text("정해진 위치에서만 퀘스트를 깰 수 있어요.")
+                .font(.callout)
+                .foregroundStyle(.grey700)
+            
+            Spacer()
+            
+            HStack {
+                // TODO: Button 기능 설정
+                Button(action: {
+                    
+                }, label: {
+                    Text("다시 시도하기")
+                        .foregroundStyle(.green800)
                         .padding(.vertical, 14)
-                    Spacer()
-                }
-            })
+                        .padding(.horizontal, 20)
+                })
+                .background(.green200)
+                .cornerRadius(12)
+                .frame(width: 152, height: 50)
+                
+                Spacer()
+                
+                Button(action: {
+                    isShowingMissionSheet = false
+                }, label: {
+                    Text("위치 확인하기")
+                        .foregroundStyle(.white)
+                        .padding(.vertical, 14)
+                        .padding(.horizontal, 20)
+                })
+                .background(.green700)
+                .cornerRadius(12)
+                .frame(width: 152, height: 50)
+            }
+            .padding(.horizontal, 40)
+            
+//            Button(
+//                action: {
+//                    Task {
+//                        currentLocation = nil
+//                        if let location = try? await locationManager.requestLocation() {
+//                            currentLocation = location
+//                            print("Location: \(location)")
+//                            if (locationManager.compareLocations(staircaseLongitude: gpsStaircase.longitude, staircaseLatitude: gpsStaircase.latitude, currentLongitude: currentLocation!.longitude, currentLatitude: currentLocation!.latitude)) {
+//                                isAtLocation = true
+//                            } else {
+//                                isAtLocation = false
+//                            }
+//                        } else {
+//                            // TODO: location을 못 부를 때, 권한이 없을 때 나타낼 것 고민
+//                            print("위치 문제")
+//                        }
+//                    }
+//                }, label: {
+//                    HStack {
+//                        Spacer()
+//                        Text("위치 정보 새로고침")
+//                            .foregroundStyle(.green700)
+//                            .padding(.vertical, 14)
+//                        Spacer()
+//                    }
+//                })
+        }
     }
 }
 
