@@ -376,6 +376,7 @@ struct FailedLocationView: View {
     
     let gpsStaircase: GPSStaircase
     
+    @State private var isReVerifing = false
     var body: some View {
         VStack {
             Spacer()
@@ -397,35 +398,68 @@ struct FailedLocationView: View {
             
             Spacer()
             
-            HStack {
-                // TODO: Button 기능 설정
-                Button(action: {
+            if (isReVerifing) {
+                HStack {
+                    ProgressView()
                     
-                }, label: {
-                    Text("다시 시도하기")
-                        .foregroundStyle(.green800)
-                        .padding(.vertical, 14)
-                        .padding(.horizontal, 20)
-                })
-                .background(.green200)
-                .cornerRadius(12)
-                .frame(width: 152, height: 50)
-                
-                Spacer()
-                
-                Button(action: {
-                    isShowingMissionSheet = false
-                }, label: {
-                    Text("위치 확인하기")
-                        .foregroundStyle(.white)
-                        .padding(.vertical, 14)
-                        .padding(.horizontal, 20)
-                })
-                .background(.green700)
-                .cornerRadius(12)
-                .frame(width: 152, height: 50)
+                    Text("확인하는 중")
+                        .foregroundStyle(.secondary)
+                }
+                .frame(height: 50)
+            } else {
+                HStack {
+                    // TODO: Button 기능 설정
+                    Button(action: {
+                        isReVerifing = true
+                        Task {
+                            if let location = try? await locationManager.requestLocation() {
+                                currentLocation = location
+                                print("Location: \(location)")
+                                if (locationManager.compareLocations(staircaseLongitude: gpsStaircase.longitude, staircaseLatitude: gpsStaircase.latitude, currentLongitude: currentLocation!.longitude, currentLatitude: currentLocation!.latitude)) {
+                                    isAtLocation = true
+                                } else {
+                                    isAtLocation = false
+                                }
+                            } else {
+                                // TODO: location을 못 부를 때, 권한이 없을 때 나타낼 것 고민
+                                print("위치 문제")
+                            }
+                            isReVerifing = false
+                        }
+                    }, label: {
+                        HStack {
+                            Spacer()
+                            Text("다시 시도하기")
+                                .foregroundStyle(.green800)
+                                .padding(.vertical, 14)
+                                .padding(.horizontal, 20)
+                            Spacer()
+                        }
+                    })
+                    .background(.green200)
+                    .cornerRadius(12)
+                    .frame(width: 152, height: 50)
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        isShowingMissionSheet = false
+                    }, label: {
+                        HStack {
+                            Spacer()
+                            Text("위치 확인하기")
+                                .foregroundStyle(.white)
+                                .padding(.vertical, 14)
+                                .padding(.horizontal, 20)
+                            Spacer()
+                        }
+                    })
+                    .background(.green700)
+                    .cornerRadius(12)
+                    .frame(width: 152, height: 50)
+                }
+                .padding(.horizontal, 40)
             }
-            .padding(.horizontal, 40)
         }
     }
 }
