@@ -309,7 +309,7 @@ struct VerifiedLocationView: View {
                     .frame(width: 120, height: 120)
                     .rotationEffect(.degrees(animationAmount))
                     .animation(
-                        .linear(duration: 2)
+                        .linear(duration: 3)
                         .repeatForever(autoreverses: true),
                         value: animationAmount
                     )
