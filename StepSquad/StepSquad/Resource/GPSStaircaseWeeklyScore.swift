@@ -17,21 +17,23 @@ class GPSStaircaseWeeklyScore: Codable {
             let data = try Data(contentsOf: savePath)
             let decoded = try JSONDecoder().decode([String: Int].self, from: data)
             scores = decoded
+            print("❗️loaded scores: \(scores)")
         } catch {
             scores = [String: Int]()
         }
     }
     
-    // MARK: 특정 계단 인증 완료 후 이번주 점수에 더하기
+    // MARK: 특정 계단 인증 완료 후 scores에 기록
     func addScore(score: Int, todayDate: Date = Date.now) {
         let formattedTodayString = dateFormatter.string(from: todayDate)
+        print(formattedTodayString)
         if let dayScore = scores[formattedTodayString] {
             scores[formattedTodayString]! += score // 오늘 기록이 있을 때
         } else {
             scores[formattedTodayString] = score // 오늘 기록이 없을 때
         }
         save()
-        print("saved scores: \(scores)")
+        print("❗️saved scores: \(scores)")
     }
     
     // MARK: 이번주 점수 계산 후 반환
@@ -46,13 +48,15 @@ class GPSStaircaseWeeklyScore: Codable {
     
     // MARK: 이번주가 아닌 점수 삭제
     func cleanOutdatedScores(todayDate: Date = Date.now) {
-        print("cleanOutdatedScores")
+        print("❗️cleanOutdatedScores")
+        print("before cleaning, scores: \(scores)")
         let formattedTodayString = dateFormatter.string(from: todayDate)
-        let today = Calendar.current.component(.weekday, from: todayDate) // 오늘의 요일, 일요일 = 1 ~ 토요일 = 7
+        print("formattedTodayString: \(formattedTodayString)")
+        let today = Calendar.current.component(.weekday, from: todayDate) // 오늘의 요일❗️, 일요일 = 1 ~ 토요일 = 7
         print("today: \(today)")
         
-        // TODO: 토요일부터 오늘까지의 점수를 제외하고 항목 모두 삭제
-        if (today == 7) {
+        // TODO: 토요일(7)부터 오늘까지의 점수를 제외하고 항목 모두 삭제
+        if (today == 6) {
             let todayScore = scores[formattedTodayString] ?? 0
             scores.removeAll()
             scores[formattedTodayString] = todayScore
@@ -70,8 +74,9 @@ class GPSStaircaseWeeklyScore: Codable {
                     }
                 }
             }
-            print("scores: \(scores)")
         }
+        
+        print("❗️cleaned scores: \(scores)")
         save()
     }
     
@@ -79,7 +84,6 @@ class GPSStaircaseWeeklyScore: Codable {
         do {
             let data = try JSONEncoder().encode(scores)
             try data.write(to: savePath, options: [.atomic, .completeFileProtection])
-            print("save 완료")
         } catch {
             print("Unable to save GPSStaircaseWeekScore.")
         }
