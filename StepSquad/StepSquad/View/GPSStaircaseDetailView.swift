@@ -328,7 +328,7 @@ struct VerifiedLocationView: View {
             
             HStack(spacing: 12) {
                 GradientSquareView(type: "획득 재료", text: gpsStaircase.reward, isWithSymbol: false)
-                GradientSquareView(type: "추가 점수", text: "\(gpsStaircase.steps)", isWithSymbol: false)
+                GradientSquareView(type: "추가 점수", text: "\(gpsStaircase.steps)칸", isWithSymbol: true)
             }
             
             Spacer()
