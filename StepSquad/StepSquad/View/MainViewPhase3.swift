@@ -630,15 +630,15 @@ struct MainViewPhase3: View {
         return totalScore
     }
     
-    // MARK: - 이번주 총 점수 계산 후 순위표 업데이트하기
+    // MARK: - 이번주 총 점수(전국의 계단 점수 + 오른 계단 칸) 계산 후 순위표 업데이트하기
     func updateLeaderboard() {
-        let weeklyNfcPoint = weeklyScore(from: stairSteps)
+//        let weeklyNfcPoint = weeklyScore(from: stairSteps)
         service.getWeeklyStairDataAndSave()
         let weeklyStairPoint = service.weeklyFlightsClimbed * 16
-        print("이번주 걸은 층계 * 16: \(weeklyStairPoint), nfc 점수: \(weeklyNfcPoint)")
+        let weeklyGpsStaircaseScore = gpsStaircaseWeeklyScore.getWeeklyScore()
+        print("이번주 걸은 층계 * 16: \(weeklyStairPoint), 전국의 계단 점수: \(weeklyGpsStaircaseScore)")
         Task {
-            // TODO: 이번주 전국의 계단 점수로 교체
-            await gameCenterManager.submitPoint(point: Int(weeklyNfcPoint) + Int(weeklyStairPoint))
+            await gameCenterManager.submitPoint(point: Int(weeklyGpsStaircaseScore) + Int(weeklyStairPoint))
         }
     }
     
