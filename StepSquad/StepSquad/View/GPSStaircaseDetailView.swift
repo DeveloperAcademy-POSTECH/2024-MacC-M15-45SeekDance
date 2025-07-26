@@ -22,6 +22,10 @@ struct GPSStaircaseDetailView: View {
     
     @State private var isAtLocation: Bool = false
     @State private var isShowingMissionSheet: Bool = false
+    @State private var isVerificationActive: Bool = true
+    
+    @State var timeRemaining = 300
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     let gameCenterManager: GameCenterManager
     
@@ -198,7 +202,6 @@ struct GPSStaircaseDetailView: View {
                 }
                 .scrollIndicators(.hidden)
                 
-                // 하단 버튼
                 Button(action: {
                     isShowingMissionSheet = true
                     Task {
@@ -218,7 +221,7 @@ struct GPSStaircaseDetailView: View {
                 }) {
                     HStack {
                         Spacer()
-                        Text("계단 도전 인증하기")
+                        Text(isVerificationActive ? "계단 도전 인증하기" : "\(timeRemaining / 60)분 \(timeRemaining % 60)초 후에 인증하기")
                             .font(.body)
                             .foregroundColor(.white)
                         Spacer()
@@ -226,7 +229,19 @@ struct GPSStaircaseDetailView: View {
                     .padding(.horizontal, 20)
                     .padding(.vertical, 14)
                 }
-                .background(Color.Green800)
+                .disabled(!isVerificationActive)
+                .onReceive(timer) {_ in
+                    if (!isVerificationActive) {
+                        if (timeRemaining > 0) {
+                            timeRemaining -= 1
+                            print("timeRemaining: \(timeRemaining)")
+                        } else {
+                            isVerificationActive = true
+                            timeRemaining = 300
+                        }
+                    }
+                }
+                .background(isVerificationActive ? Color.Green800: .secondary)
                 .cornerRadius(12)
                 .padding(.horizontal, 36)
             }
@@ -243,7 +258,7 @@ struct GPSStaircaseDetailView: View {
                         Spacer()
                     } else {
                         if (isAtLocation) { // 위치 인증을 성공했을 때
-                            VerifiedLocationView(gpsStaircase: gpsStaircase, isShowingMissionSheet: $isShowingMissionSheet, gameCenterManager: gameCenterManager, collectedItems: $collectedItems, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, isShowingNewItem: $isShowingNewItem, healthKitService: service)
+                            VerifiedLocationView(gpsStaircase: gpsStaircase, isShowingMissionSheet: $isShowingMissionSheet, gameCenterManager: gameCenterManager, collectedItems: $collectedItems, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, isShowingNewItem: $isShowingNewItem, isVerificationActive: $isVerificationActive, healthKitService: service)
                         } else { // 위치 인증을 성공하지 못 했을 때
                             FailedLocationView(locationManager: locationManager, currentLocation: $currentLocation, isAtLocation: $isAtLocation, isShowingMissionSheet: $isShowingMissionSheet, gpsStaircase: gpsStaircase)
                         }
@@ -292,6 +307,7 @@ struct VerifiedLocationView: View {
     @Binding var gpsStaircaseWeeklyScore: GPSStaircaseWeeklyScore
     
     @Binding var isShowingNewItem: Bool
+    @Binding var isVerificationActive: Bool
     
     @ObservedObject var healthKitService: HealthKitService
     
@@ -356,6 +372,7 @@ struct VerifiedLocationView: View {
         }
         .onAppear {
             animationAmount = 360.0
+            isVerificationActive = false
             healthKitService.getWeeklyStairDataAndSave()
             // TODO: 성취 현지화 설정
             Task {
@@ -413,7 +430,6 @@ struct FailedLocationView: View {
                 .frame(height: 50)
             } else {
                 HStack {
-                    // TODO: Button 기능 설정
                     Button(action: {
                         isReVerifing = true
                         Task {
