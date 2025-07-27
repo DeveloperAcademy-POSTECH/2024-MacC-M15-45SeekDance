@@ -203,27 +203,41 @@ struct GPSStaircaseDetailView: View {
                 .scrollIndicators(.hidden)
                 
                 Button(action: {
-                    isShowingMissionSheet = true
-                    Task {
-                        if let location = try? await locationManager.requestLocation() {
-                            currentLocation = location
-                            print("Location: \(location)")
-                            if (locationManager.compareLocations(staircaseLongitude: gpsStaircase.longitude, staircaseLatitude: gpsStaircase.latitude, currentLongitude: currentLocation!.longitude, currentLatitude: currentLocation!.latitude)) {
-                                isAtLocation = true
+                    if (locationManager.getAuthorizationStatus() == .authorizedAlways || locationManager.getAuthorizationStatus() == .authorizedWhenInUse) { // 위치 권한 사용을 허가했을 경우
+                        isShowingMissionSheet = true
+                        Task {
+                            if let location = try? await locationManager.requestLocation() {
+                                currentLocation = location
+                                print("Location: \(location)")
+                                if (locationManager.compareLocations(staircaseLongitude: gpsStaircase.longitude, staircaseLatitude: gpsStaircase.latitude, currentLongitude: currentLocation!.longitude, currentLatitude: currentLocation!.latitude)) {
+                                    isAtLocation = true
+                                } else {
+                                    isAtLocation = false
+                                }
                             } else {
-                                isAtLocation = false
+                                // TODO: location을 못 부를 때, 권한이 없을 때 나타낼 것 고민
+                                print("위치 인증 문제")
                             }
-                        } else {
-                            // TODO: location을 못 부를 때, 권한이 없을 때 나타낼 것 고민
-                            print("위치 문제")
                         }
+                    } else if (locationManager.getAuthorizationStatus() == .denied) { // 위치 권한을 거절한 경우
+                        if let url = URL(string: UIApplication.openSettingsURLString) {
+                            UIApplication.shared.open(url)
+                        }
+                    } else { // 위치 권한을 결정하지 않은 경우
+                        locationManager.requestAlwaysAuthorization()
                     }
                 }) {
                     HStack {
                         Spacer()
-                        Text(isVerificationActive ? "계단 도전 인증하기" : "\(timeRemaining / 60)분 \(timeRemaining % 60)초 후에 인증하기")
-                            .font(.body)
-                            .foregroundColor(.white)
+                        if (locationManager.getAuthorizationStatus() == .authorizedAlways || locationManager.getAuthorizationStatus() == .authorizedWhenInUse) {
+                            Text(isVerificationActive ? "계단 도전 인증하기" : "\(timeRemaining / 60)분 \(timeRemaining % 60)초 후에 인증하기")
+                                .font(.body)
+                                .foregroundColor(.white)
+                        } else {
+                            Text("위치 권한 허용하기")
+                                .font(.body)
+                                .foregroundColor(.white)
+                        }
                         Spacer()
                     }
                     .padding(.horizontal, 20)
@@ -266,9 +280,6 @@ struct GPSStaircaseDetailView: View {
                 }
                 .presentationDetents([.medium])
                 .padding(.horizontal, 16)
-            }
-            .onAppear {
-                locationManager.requestAlwaysAuthorization()
             }
             .toolbar {
                 // TODO: 공유 기능 추가

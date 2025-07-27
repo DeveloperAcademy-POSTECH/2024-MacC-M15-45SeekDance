@@ -23,6 +23,10 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
     }
     
+    func getAuthorizationStatus() -> CLAuthorizationStatus {
+        return locationManager.authorizationStatus
+    }
+    
     func requestAlwaysAuthorization() {
         locationManager.requestAlwaysAuthorization()
     }

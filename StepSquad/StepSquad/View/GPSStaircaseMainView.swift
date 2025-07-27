@@ -15,7 +15,6 @@ struct GPSStaircaseMainView: View {
     @Binding var collectedItems: CollectedItems
     @Binding var gpsStaircaseWeeklyScore: GPSStaircaseWeeklyScore
     
-    // TODO: gameCenterManager 전달받기
     @State var selectedGroup: Int = 2
     @State var bookmarks = Bookmarks()
     @State var filteredGPSStaircases = gpsStaircases
@@ -31,7 +30,6 @@ struct GPSStaircaseMainView: View {
             ScrollView {
                 VStack(spacing: 0) {
                     ZStack {
-                        // TODO: 캐러셀 이미지, 애니메이션 추가
                         RiveViewModel(fileName: "carousel_v1.0").view()
                             .padding(.top, 222)
                         
