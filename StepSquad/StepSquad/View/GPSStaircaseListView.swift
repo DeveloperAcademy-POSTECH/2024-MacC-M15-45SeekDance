@@ -11,6 +11,15 @@ struct GPSStaircaseListView: View {
     @Binding var filteredStaircases: [GPSStaircase]
     @Binding var bookmarks: Bookmarks
     @Binding var collectedItems: CollectedItems
+    @Binding var gpsStaircaseWeeklyScore: GPSStaircaseWeeklyScore
+    
+    let locationManager: LocationManager
+    
+    let gameCenterManager: GameCenterManager
+    
+    @ObservedObject var service = HealthKitService()
+    
+    @Binding var isShowingNewItem: Bool
     
     let columns: [GridItem] = [
         GridItem(.fixed(176)),
@@ -21,16 +30,8 @@ struct GPSStaircaseListView: View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 12) {
                 ForEach(filteredStaircases) { staircase in
-                    NavigationLink(destination: MissionDetailView(bookmarks: $bookmarks, collectedItems: $collectedItems, gpsStaircase: staircase), label: {
+                    NavigationLink(destination: GPSStaircaseDetailView(bookmarks: $bookmarks, collectedItems: $collectedItems, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, gpsStaircase: staircase, locationManager: locationManager, gameCenterManager: gameCenterManager, isShowingNewItem: $isShowingNewItem, healthkitService: service), label: {
                         VStack(alignment: .leading) {
-                            // TODO: 인증 과정 구현 후 삭제
-//                            Button("임시 인증/해제") {
-//                                if collectedItems.isCollected(item: staircase.id) {
-//                                    collectedItems.deleteItem(item: staircase.id)
-//                                } else {
-//                                    collectedItems.collectItem(item: staircase.id, collectedDate: Date.now)
-//                                }
-//                            }
                             ZStack {
                                 Image(staircase.imageName)
                                     .resizable()

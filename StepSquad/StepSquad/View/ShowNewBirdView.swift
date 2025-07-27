@@ -38,10 +38,7 @@ struct ShowNewBirdView: View {
                     Button(action: {
                         isShowNewBirdPresented = false
                     }) {
-                        Image(systemName: "x.circle.fill")
-                            .resizable()
-                            .frame(width: 30, height: 30)
-                            .foregroundColor(.secondary)
+                        XCircleButtonView()
                     }
                     .padding(.horizontal, 35)
                     .opacity(opacity6)

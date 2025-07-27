@@ -246,7 +246,7 @@ let gpsStaircasesDictionary: [String: GPSStaircase] = [
         reward: "굴비"),
     "SangdoStation": GPSStaircase(
         id: "SangdoStation",
-        name: "7호선 상도역 앞 멍청한 계단",
+        name: "7호선 상도역 앞 의문스러운 계단",
         title: "기묘한 6칸짜리 계단",
         description: "목적을 알 수 없는 계단! 목적이 있을수도?",
         province: .gyeonggi,
