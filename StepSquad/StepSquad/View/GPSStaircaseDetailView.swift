@@ -215,8 +215,7 @@ struct GPSStaircaseDetailView: View {
                                     isAtLocation = false
                                 }
                             } else {
-                                // TODO: location을 못 부를 때, 권한이 없을 때 나타낼 것 고민
-                                print("위치 인증 문제")
+                                print("Error: 위치 인증 불가")
                             }
                         }
                     } else if (locationManager.getAuthorizationStatus() == .denied) { // 위치 권한을 거절한 경우
@@ -453,8 +452,7 @@ struct FailedLocationView: View {
                                     isAtLocation = false
                                 }
                             } else {
-                                // TODO: location을 못 부를 때, 권한이 없을 때 나타낼 것 고민
-                                print("위치 문제")
+                                print("Error: 위치 인증 불가")
                             }
                             isReVerifing = false
                         }

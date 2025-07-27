@@ -170,12 +170,12 @@ struct GPSStaircaseMainView: View {
                 }
             }
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button("안내") {
-                        // TODO: 안내 기능 추가
-                    }
-                    .tint(.green700)
-                }
+//                ToolbarItem(placement: .topBarTrailing) {
+//                    Button("안내") {
+//                        // TODO: 안내 기능 추가
+//                    }
+//                    .tint(.green700)
+//                }
             }
             .ignoresSafeArea()
             .background(

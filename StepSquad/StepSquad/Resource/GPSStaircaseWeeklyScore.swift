@@ -49,7 +49,6 @@ class GPSStaircaseWeeklyScore: Codable {
         let formattedTodayString = dateFormatter.string(from: todayDate)
         let today = Calendar.current.component(.weekday, from: todayDate) // 오늘의 요일, 일요일 = 1 ~ 토요일 = 7
         
-        // TODO: 토요일(7)부터 오늘까지의 점수를 제외하고 항목 모두 삭제
         if (today == 7) {
             let todayScore = scores[formattedTodayString] ?? 0
             scores.removeAll()
