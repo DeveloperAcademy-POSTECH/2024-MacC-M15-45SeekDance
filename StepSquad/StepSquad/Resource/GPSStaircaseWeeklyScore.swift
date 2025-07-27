@@ -17,7 +17,6 @@ class GPSStaircaseWeeklyScore: Codable {
             let data = try Data(contentsOf: savePath)
             let decoded = try JSONDecoder().decode([String: Int].self, from: data)
             scores = decoded
-            print("❗️loaded scores: \(scores)")
         } catch {
             scores = [String: Int]()
         }
@@ -33,7 +32,6 @@ class GPSStaircaseWeeklyScore: Codable {
             scores[formattedTodayString] = score // 오늘 기록이 없을 때
         }
         save()
-        print("❗️saved scores: \(scores)")
     }
     
     // MARK: 이번주 점수 계산 후 반환
@@ -48,15 +46,11 @@ class GPSStaircaseWeeklyScore: Codable {
     
     // MARK: 이번주가 아닌 점수 삭제
     func cleanOutdatedScores(todayDate: Date = Date.now) {
-        print("❗️cleanOutdatedScores")
-        print("before cleaning, scores: \(scores)")
         let formattedTodayString = dateFormatter.string(from: todayDate)
-        print("formattedTodayString: \(formattedTodayString)")
-        let today = Calendar.current.component(.weekday, from: todayDate) // 오늘의 요일❗️, 일요일 = 1 ~ 토요일 = 7
-        print("today: \(today)")
+        let today = Calendar.current.component(.weekday, from: todayDate) // 오늘의 요일, 일요일 = 1 ~ 토요일 = 7
         
         // TODO: 토요일(7)부터 오늘까지의 점수를 제외하고 항목 모두 삭제
-        if (today == 6) {
+        if (today == 7) {
             let todayScore = scores[formattedTodayString] ?? 0
             scores.removeAll()
             scores[formattedTodayString] = todayScore
@@ -75,8 +69,6 @@ class GPSStaircaseWeeklyScore: Codable {
                 }
             }
         }
-        
-        print("❗️cleaned scores: \(scores)")
         save()
     }
     

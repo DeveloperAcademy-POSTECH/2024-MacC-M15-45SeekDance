@@ -636,7 +636,7 @@ struct MainViewPhase3: View {
         service.getWeeklyStairDataAndSave()
         let weeklyStairPoint = service.weeklyFlightsClimbed * 16
         let weeklyGpsStaircaseScore = gpsStaircaseWeeklyScore.getWeeklyScore()
-        print("이번주 걸은 층계 * 16: \(weeklyStairPoint), 전국의 계단 점수: \(weeklyGpsStaircaseScore)")
+        print("🔧이번주 걸은 층계 * 16: \(weeklyStairPoint), 전국의 계단 점수: \(weeklyGpsStaircaseScore)")
         Task {
             await gameCenterManager.submitPoint(point: Int(weeklyGpsStaircaseScore) + Int(weeklyStairPoint))
         }
