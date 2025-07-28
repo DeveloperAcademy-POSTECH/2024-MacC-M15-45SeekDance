@@ -9,4 +9,5 @@ import SwiftUI
 
 extension Font {
     static let chosunFont: Font = .custom("ChosunCentennial", size: 60)
+    static let chosunTitleFont: Font = .custom("ChosunCentennial", size: 40)
 }

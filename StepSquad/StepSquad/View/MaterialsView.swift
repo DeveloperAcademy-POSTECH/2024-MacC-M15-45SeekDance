@@ -29,32 +29,59 @@ struct MaterialsView: View {
                             if !collectedItems.isEmpty() { // 획득한 깜짝 재료가 있을 때
                                 Section(header: Text("깜짝 재료").bold()) {
                                     ForEach(collectedItems.getSortedItemsNameList(), id: \.self) { item in
-                                        HStack(spacing: 0) {
-                                            Image(hiddenItems[item]!.itemImage) // 약재 이미지
-                                                .resizable()
-                                                .aspectRatio(1, contentMode: .fit)
-                                                .frame(width: 42, height: 42)
-                                                .padding(.trailing, 0)
-                                            
-                                            Text(hiddenItems[item]!.keyword) // 레벨 표시
-                                                .font(.system(size: 12))
-                                                .foregroundStyle(.white)
-                                                .padding(4)
-                                                .background(Color(hex: hiddenItems[item]!.itemColor), in: RoundedRectangle(cornerRadius: 4))
-                                                .padding(.horizontal, 8)
-                                            
-                                            Text(" \(hiddenItems[item]!.item)") // 약재 이름
-                                                .font(.system(size: 17))
-                                            
-                                            Spacer()
-                                            
-                                            Text(collectedItems.getCollectedDateString(item: item)) // 레벨 달성 날짜
-                                                .font(.system(size: 15))
-                                                .foregroundStyle(Color(hex: 0x3C3C43))
-                                                .opacity(0.6)
+                                        if Array(gpsStaircasesDictionary.keys).contains(item) {
+                                                HStack(spacing: 0) {
+                                                    Image("\(gpsStaircasesDictionary[item]!.id)_reward") // 약재 이미지
+                                                        .resizable()
+                                                        .aspectRatio(1, contentMode: .fit)
+                                                        .frame(width: 42, height: 42)
+                                                        .padding(.trailing, 0)
+                                                    
+                                                    Text("퀘스트") // 키워드 표시
+                                                        .font(.system(size: 12))
+                                                        .foregroundStyle(.white)
+                                                        .padding(4)
+                                                        .background(.green600, in: RoundedRectangle(cornerRadius: 4))
+                                                        .padding(.horizontal, 8)
+                                                    
+                                                    Text(" \(gpsStaircasesDictionary[item]!.reward)") // 약재 이름
+                                                        .font(.system(size: 17))
+                                                    
+                                                    Spacer()
+                                                    
+                                                    Text(collectedItems.getCollectedDateString(item: item)) // 레벨 달성 날짜
+                                                        .font(.system(size: 15))
+                                                        .foregroundStyle(Color(hex: 0x3C3C43))
+                                                        .opacity(0.6)
+                                                }
+                                                .padding(.horizontal, 4)
+                                        } else {
+                                            HStack(spacing: 0) {
+                                                Image(hiddenItemsDictionary[item]!.itemImage) // 약재 이미지
+                                                    .resizable()
+                                                    .aspectRatio(1, contentMode: .fit)
+                                                    .frame(width: 42, height: 42)
+                                                    .padding(.trailing, 0)
+                                                
+                                                Text(hiddenItemsDictionary[item]!.keyword) // 키워드 표시
+                                                    .font(.system(size: 12))
+                                                    .foregroundStyle(.white)
+                                                    .padding(4)
+                                                    .background(Color(hex: hiddenItemsDictionary[item]!.itemColor), in: RoundedRectangle(cornerRadius: 4))
+                                                    .padding(.horizontal, 8)
+                                                
+                                                Text(" \(hiddenItemsDictionary[item]!.item)") // 약재 이름
+                                                    .font(.system(size: 17))
+                                                
+                                                Spacer()
+                                                
+                                                Text(collectedItems.getCollectedDateString(item: item)) // 레벨 달성 날짜
+                                                    .font(.system(size: 15))
+                                                    .foregroundStyle(Color(hex: 0x3C3C43))
+                                                    .opacity(0.6)
+                                            }
+                                            .padding(.horizontal, 4)
                                         }
-                                        .padding(.horizontal, 4)
-                                        
                                     }
                                 }
                             }

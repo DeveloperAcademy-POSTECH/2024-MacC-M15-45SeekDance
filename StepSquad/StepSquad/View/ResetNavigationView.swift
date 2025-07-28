@@ -61,8 +61,7 @@ struct ResetNavigationView: View {
                     Button(action: {
                         isResetViewPresented = false // 닫기 버튼으로 Sheet 해제
                     }) {
-                        Image(systemName: "x.circle.fill")
-                            .foregroundColor(.secondary)
+                        XCircleButtonView()
                     }
                 }
             }
@@ -125,8 +124,7 @@ struct DetailView: View {
                 Button(action: {
                     isResetViewPresented = false // 닫기 버튼으로 Sheet 해제
                 }) {
-                    Image(systemName: "x.circle.fill")
-                        .foregroundColor(.secondary)
+                    XCircleButtonView()
                 }
             }
         }
@@ -185,8 +183,7 @@ struct DetailView2: View {
                 Button(action: {
                     isResetViewPresented = false // 닫기 버튼으로 Sheet 해제
                 }) {
-                    Image(systemName: "x.circle.fill")
-                        .foregroundColor(.secondary)
+                    XCircleButtonView()
                 }
             }
         }
@@ -300,8 +297,7 @@ struct DetailView3: View {
                 Button(action: {
                     isResetViewPresented = false
                 }) {
-                    Image(systemName: "x.circle.fill")
-                        .foregroundColor(.secondary)
+                    XCircleButtonView()
                 }
             }
         }

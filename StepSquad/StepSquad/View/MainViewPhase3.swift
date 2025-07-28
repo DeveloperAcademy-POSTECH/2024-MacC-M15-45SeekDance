@@ -10,27 +10,21 @@ import SwiftData
 import CoreNFC
 
 struct MainViewPhase3: View {
-    @State var isMaterialSheetPresented: Bool = false
-    @State private var nfcReader: NFCReader?
-    @State private var isButtonEnabled: Bool = true
-    @State var isResultViewPresented: Bool = false
-    @State var isShowingNFCAlert: Bool = false
-    @State var buttonCountMessage: String = ""
-    @State var isLaunching: Bool = true
-    @State private var completedLevels = CompletedLevels()
-    @State private var collectedItems = CollectedItems()
-    @State var isCardFlipped: Bool = true
-    
     @State private var isResetViewPresented = false
     @State private var isShowNewBirdPresented = false
     @State private var isWifiAlertPresented = false
-    
-    @State var isResetCompleted: Bool = false
-    
-    @State var userProfileImage: Image?
+    @State var isResultViewPresented: Bool = false
+    @State var isShowingNFCAlert: Bool = false
+    @State var isMaterialSheetPresented: Bool = false
+    @State var isCardFlipped: Bool = true
+    @State var isLaunching: Bool = true
+    @State private var isButtonEnabled: Bool = true
+    @AppStorage("isShowingNewItem") private var isShowingNewItem = false
     
     @State private var nfcCount: Int = 0
     @State private var nfcMessage: String = ""
+    @State private var nfcReader: NFCReader?
+    @State var buttonCountMessage: String = ""
     
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.modelContext) var context
@@ -43,19 +37,33 @@ struct MainViewPhase3: View {
     @AppStorage("HealthKitAuthorized") var isHealthKitAuthorized: Bool = false
     
     @AppStorage("isShowingNewItem") private var isShowingNewItem = false
+  
+    @State var isResetCompleted: Bool = false
     
-    let gameCenterManager = GameCenterManager()
+    @State private var completedLevels = CompletedLevels()
+    @State private var collectedItems = CollectedItems()
+    @AppStorage("lastElectricAchievementKwh") var lastElectricAchievementKwh = 0
+    @State var userProfileImage: Image?
+    @State private var gpsStaircaseWeeklyScore = GPSStaircaseWeeklyScore()
     
     var currentStatus: CurrentStatus = CurrentStatus() {
         didSet {
             saveCurrentStatus()
         }
     }
-    @AppStorage("lastElectricAchievementKwh") var lastElectricAchievementKwh = 0
-    
     var isHighestLevel: Bool {
         return currentStatus.currentLevel.level == 20
     }
+    
+    let gameCenterManager = GameCenterManager()
+    
+    @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.modelContext) var context
+    
+    @Query(sort: [SortDescriptor(\StairStepModel.stairStepDate, order: .forward)]) var stairSteps: [StairStepModel]
+    
+    @ObservedObject var service = HealthKitService()
+    @AppStorage("HealthKitAuthorized") var isHealthKitAuthorized: Bool = false
     
     var body: some View {
         if isLaunching {
@@ -133,7 +141,7 @@ struct MainViewPhase3: View {
                             .frame(width: 321, height: 467)
                             .background(Color.white)
                             .cornerRadius(16)
-                            .padding(.top, 20)
+                            .padding(.top, 12)
                             .onAppear() {
                                 service.fetchAllFlightsClimbedData()
                                 service.migrateAuthorizationDataToSharedDefaults()
@@ -177,8 +185,36 @@ struct MainViewPhase3: View {
                                                 in: RoundedRectangle(cornerRadius: 12))
                                 }
                             }
-                            .padding(.top, 12)
+                            .padding(.top, 8)
                             .padding(.horizontal, 36)
+                            
+                            NavigationLink(destination: GPSStaircaseMainView(localPlayerImage: userProfileImage, localPlayerName: gameCenterManager.loadLocalPlayerName(), collectedItems: $collectedItems, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, gameCenterManager: gameCenterManager, isShowingNewItem: $isShowingNewItem), label: {
+                                HStack {
+                                    Image("gpsStaircaseLogo")
+                                        .resizable()
+                                        .frame(width: 48, height: 48)
+                                        .padding(.trailing, 8)
+                                    
+                                    VStack(alignment: .leading, spacing: 0) {
+                                        Text("세상에 이런 계단이?!")
+                                            .font(.footnote)
+                                            .foregroundStyle(.green600)
+                                        Text("전국의 계단 미션을 깨보세요!")
+                                            .font(.subheadline)
+                                            .bold()
+                                            .foregroundStyle(.green900)
+                                    }
+                                    
+                                    Spacer()
+                                    
+                                    Image(systemName: "chevron.right")
+                                        .foregroundStyle(.green800)
+                                }
+                                .padding(12)
+                                .background(RoundedRectangle(cornerRadius: 12).fill(.white))
+                                .padding(.top, 8)
+                                .padding(.horizontal, 36)
+                            })
                             
                             if isHealthKitAuthorized {
                                 Divider()
@@ -252,7 +288,7 @@ struct MainViewPhase3: View {
                 //                }
             }
             .navigationBarBackButtonHidden(true)
-            .tint(Color(hex: 0x8BC766))
+            .accentColor(.Green800)
         }
     }
     
@@ -606,14 +642,15 @@ struct MainViewPhase3: View {
         return totalScore
     }
     
-    // MARK: - 이번주 총 점수 계산 후 순위표 업데이트하기
+    // MARK: - 이번주 총 점수(전국의 계단 점수 + 오른 계단 칸) 계산 후 순위표 업데이트하기
     func updateLeaderboard() {
-        let weeklyNfcPoint = weeklyScore(from: stairSteps)
+//        let weeklyNfcPoint = weeklyScore(from: stairSteps)
         service.getWeeklyStairDataAndSave()
         let weeklyStairPoint = service.weeklyFlightsClimbed * 16
-        print("이번주 걸은 층계 * 16: \(weeklyStairPoint), nfc 점수: \(weeklyNfcPoint)")
+        let weeklyGpsStaircaseScore = gpsStaircaseWeeklyScore.getWeeklyScore()
+        print("🔧이번주 걸은 층계 * 16: \(weeklyStairPoint), 전국의 계단 점수: \(weeklyGpsStaircaseScore)")
         Task {
-            await gameCenterManager.submitPoint(point: Int(weeklyNfcPoint) + Int(weeklyStairPoint))
+            await gameCenterManager.submitPoint(point: Int(weeklyGpsStaircaseScore) + Int(weeklyStairPoint))
         }
     }
     
