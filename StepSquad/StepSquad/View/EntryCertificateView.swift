@@ -14,8 +14,16 @@ struct EntryCertificateView: View {
     @State private var sharedImage: UIImage?
     @State private var isButtonClicked: Bool = false
     
+    // ClimbingManager 추가
+    @ObservedObject var manager: ClimbingManager
+    
     var userPlayerImage: Image?
     var nickName: String?
+    
+    // 현재 회차 계산
+    private var currentRound: Int {
+        return manager.records.isEmpty ? 1 : manager.getCurrentRound
+    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -66,7 +74,7 @@ struct EntryCertificateView: View {
                         .font(.system(size: 34, weight: .bold))
                         .foregroundStyle(.green900)
                     
-                    Text("1회차")
+                    Text("\(currentRound)회차")
                         .font(.system(size: 17, weight: .semibold))
                         .foregroundStyle(Color(hex: 0x638D48))
                     
@@ -90,7 +98,7 @@ struct EntryCertificateView: View {
                 .multilineTextAlignment(.leading)
                 .padding(.top, 8)
             
-            Text("\(formattedDate) 입단 1회차")
+            Text("\(formattedDate) 입단 \(currentRound)회차")
                 .font(.system(size: 13))
                 .foregroundStyle(.green800)
             
@@ -177,5 +185,5 @@ struct EntryCertificateView: View {
 }
 
 #Preview {
-    EntryCertificateView()
+    EntryCertificateView(manager: ClimbingManager())
 }

@@ -26,6 +26,18 @@ struct MainViewPhase3: View {
     @State private var nfcReader: NFCReader?
     @State var buttonCountMessage: String = ""
     
+    @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.modelContext) var context
+    
+    @Query(sort: [SortDescriptor(\StairStepModel.stairStepDate, order: .forward)]) var stairSteps: [StairStepModel]
+    
+    @ObservedObject var service = HealthKitService()
+    @ObservedObject var climbingManager = ClimbingManager()
+    
+    @AppStorage("HealthKitAuthorized") var isHealthKitAuthorized: Bool = false
+    
+    @AppStorage("isShowingNewItem") private var isShowingNewItem = false
+  
     @State var isResetCompleted: Bool = false
     
     @State private var completedLevels = CompletedLevels()
@@ -211,10 +223,10 @@ struct MainViewPhase3: View {
                                     .padding(.vertical, 24)
                                 
                                 ZStack {
-                                    EntryCertificateView(userPlayerImage: userProfileImage, nickName: gameCenterManager.loadLocalPlayerName())
+                                    EntryCertificateView(manager: climbingManager, userPlayerImage: userProfileImage, nickName: gameCenterManager.loadLocalPlayerName())
                                         .rotation3DEffect(.degrees(isCardFlipped ? 0.001 : -90), axis: (x: 0.001, y: 1, z: 0.001))
                                         .animation(isCardFlipped ? .linear.delay(0.35) : .linear, value: isCardFlipped)
-                                    DescendRecordView(climbManager: ClimbingManager())
+                                    DescendRecordView(climbManager: climbingManager)
                                         .rotation3DEffect(.degrees(isCardFlipped ? 90 : 0.001), axis: (x: 0.001, y: 1, z: 0.001))
                                         .animation(isCardFlipped ? .linear : .linear.delay(0.35), value: isCardFlipped)
                                 }
