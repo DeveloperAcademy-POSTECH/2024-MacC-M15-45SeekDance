@@ -19,6 +19,11 @@ class ClimbingManager: ObservableObject {
     @Published var records: [ClimbingRecord] = [] // 기록 배열
     private var currentRound: Int = 1 // 회차 관리 변수
     
+    // 현재 회차 getter
+    var getCurrentRound: Int {
+        return currentRound
+    }
+    
     private let userDefaultsKey = "ClimbingRecords" // 저장소 키
 
     init() {

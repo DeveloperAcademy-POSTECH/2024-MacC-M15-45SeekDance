@@ -255,46 +255,44 @@ struct DetailView3: View {
             
             Spacer()
             
-            if let latestRecord = manager.records.last {
-                NavigationLink(
-                    destination: ShowNewBirdView(
-                        isShowNewBirdPresented: $isResetViewPresented,
-                        days: latestRecord.dDay,
-                        stairs: Int(latestRecord.floorsClimbed)
-                    )
-                ) {
-                    Text("하산하기")
-                        .padding()
-                        .frame(width: 352, height: 50)
-                        .background(userInput == correctText ? Color.primaryColor : Color.gray)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                }
-                .disabled(userInput != correctText)
-                .simultaneousGesture(TapGesture().onEnded {
-                    if userInput == correctText {
-                        // 리셋 로직 실행
-                        service.fetchAndSaveFlightsClimbedSinceButtonPress()
-                        
-                        let dDay = loadDDayFromDefaults()
-                        let floorsClimbed = service.getSavedFlightsClimbedFromDefaults()
-                        
-                        manager.addRecord(
-                            descentDate: Date(),
-                            floorsClimbed: Float(floorsClimbed),
-                            dDay: Int(dDay)
-                        )
-                        
-                        do {
-                            try context.delete(model: StairStepModel.self)
-                        } catch {
-                            print("error: Failed to clear all StairStepModel data.")
-                        }
-                        
-                        isResetCompleted = true
-                    }
-                })
+            NavigationLink(
+                destination: ShowNewBirdView(
+                    isShowNewBirdPresented: $isResetViewPresented,
+                    days: manager.records.last?.dDay ?? 0,
+                    stairs: Int(manager.records.last?.floorsClimbed ?? 0)
+                )
+            ) {
+                Text("하산하기")
+                    .padding()
+                    .frame(width: 352, height: 50)
+                    .background(userInput == correctText ? Color.primaryColor : Color.gray)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
             }
+            .disabled(userInput != correctText)
+            .simultaneousGesture(TapGesture().onEnded {
+                if userInput == correctText {
+                    // 리셋 로직 실행
+                    service.fetchAndSaveFlightsClimbedSinceButtonPress()
+                    
+                    let dDay = loadDDayFromDefaults()
+                    let floorsClimbed = service.getSavedFlightsClimbedFromDefaults()
+                    
+                    manager.addRecord(
+                        descentDate: Date(),
+                        floorsClimbed: Float(floorsClimbed),
+                        dDay: Int(dDay)
+                    )
+                    
+                    do {
+                        try context.delete(model: StairStepModel.self)
+                    } catch {
+                        print("error: Failed to clear all StairStepModel data.")
+                    }
+                    
+                    isResetCompleted = true
+                }
+            })
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
