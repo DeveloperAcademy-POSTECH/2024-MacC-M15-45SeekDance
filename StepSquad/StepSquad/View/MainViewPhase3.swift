@@ -26,18 +26,6 @@ struct MainViewPhase3: View {
     @State private var nfcReader: NFCReader?
     @State var buttonCountMessage: String = ""
     
-    @Environment(\.scenePhase) private var scenePhase
-    @Environment(\.modelContext) var context
-    
-    @Query(sort: [SortDescriptor(\StairStepModel.stairStepDate, order: .forward)]) var stairSteps: [StairStepModel]
-    
-    @ObservedObject var service = HealthKitService()
-    @ObservedObject var climbingManager = ClimbingManager()
-    
-    @AppStorage("HealthKitAuthorized") var isHealthKitAuthorized: Bool = false
-    
-    @AppStorage("isShowingNewItem") private var isShowingNewItem = false
-  
     @State var isResetCompleted: Bool = false
     
     @State private var completedLevels = CompletedLevels()
@@ -64,6 +52,7 @@ struct MainViewPhase3: View {
     
     @ObservedObject var service = HealthKitService()
     @AppStorage("HealthKitAuthorized") var isHealthKitAuthorized: Bool = false
+    @ObservedObject var climbingManager = ClimbingManager()
     
     var body: some View {
         if isLaunching {
@@ -118,13 +107,13 @@ struct MainViewPhase3: View {
                                     HStack() {
                                         Image(systemName: "list.bullet")
                                         Text("획득 재료 확인하기")
-
+                                        
                                         Spacer()
-
+                                        
                                         if isShowingNewItem { // 새로 획득한 약재가 있다면,
                                             NewItemView()
                                         }
-
+                                        
                                         Image(systemName: "chevron.right")
                                             .padding(.leading, 8)
                                     }
@@ -262,7 +251,7 @@ struct MainViewPhase3: View {
                             service.getWeeklyStairDataAndSave()
                             service.fetchAndSaveFlightsClimbedSinceAuthorization()
                             updateLevelsAndGameCenter()
-//                            printAll()
+                            //                            printAll()
                         }
                         .scrollIndicators(ScrollIndicatorVisibility.hidden)
                         .onAppear {
@@ -462,7 +451,7 @@ struct MainViewPhase3: View {
             service.fetchAndSaveFlightsClimbedSinceAuthorization()
             service.fetchAllFlightsClimbedData()
             updateLevelsAndGameCenter()
-//            printAll()
+            //            printAll()
         }
         .onChange(of: isResetViewPresented, {
             // MARK: 리셋 조건 달성 확인 후, 데이터 리셋 시작
@@ -473,7 +462,7 @@ struct MainViewPhase3: View {
                 service.getWeeklyStairDataAndSave()
                 service.fetchAndSaveFlightsClimbedSinceAuthorization()
                 updateLevelsAndGameCenter()
-//                printAll()
+                //                printAll()
             }
         })
     }
@@ -564,7 +553,7 @@ struct MainViewPhase3: View {
         gameCenterManager.authenticateUser()
         // MARK: 저장된 레벨 정보 불러오고 헬스킷 정보로 업데이트하기
         currentStatus = loadCurrentStatus()
-//        printAll()
+        //        printAll()
     }
     
     // MARK: - 타이머
@@ -644,7 +633,7 @@ struct MainViewPhase3: View {
     
     // MARK: - 이번주 총 점수(전국의 계단 점수 + 오른 계단 칸) 계산 후 순위표 업데이트하기
     func updateLeaderboard() {
-//        let weeklyNfcPoint = weeklyScore(from: stairSteps)
+        //        let weeklyNfcPoint = weeklyScore(from: stairSteps)
         service.getWeeklyStairDataAndSave()
         let weeklyStairPoint = service.weeklyFlightsClimbed * 16
         let weeklyGpsStaircaseScore = gpsStaircaseWeeklyScore.getWeeklyScore()
@@ -725,7 +714,7 @@ struct MainViewPhase3: View {
         gameCenterManager.resetAchievements()
         completedLevels.resetLevels()
         collectedItems.resetItems()
-//        printAll()
+        //        printAll()
     }
     
     // MARK: Level 관련 테스트 프린트문
