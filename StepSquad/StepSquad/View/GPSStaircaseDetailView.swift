@@ -22,16 +22,20 @@ struct GPSStaircaseDetailView: View {
     
     @State private var isAtLocation: Bool = false
     @State private var isShowingMissionSheet: Bool = false
-    @State private var isVerificationActive: Bool = true
+    @AppStorage("isVerificationActive") var isVerificationActive: Bool = true
     
-    @State var timeRemaining = 300
+    @AppStorage("lastVerificationTime") var lastVerificationTime: Date = dateFormatter.date(from: "2000-01-01")!
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    @State var timeDifference: Int = 0
+    let timeLimit: Int = 60 * 5
     
     let gameCenterManager: GameCenterManager
     
     @Binding var isShowingNewItem: Bool
     
     @ObservedObject var healthkitService: HealthKitService
+    
+    @Environment(\.scenePhase) var scenePhase
     
     var body: some View {
         NavigationStack {
@@ -229,7 +233,7 @@ struct GPSStaircaseDetailView: View {
                     HStack {
                         Spacer()
                         if (locationManager.getAuthorizationStatus() == .authorizedAlways || locationManager.getAuthorizationStatus() == .authorizedWhenInUse) {
-                            Text(isVerificationActive ? "계단 도전 인증하기" : "\(timeRemaining / 60)분 \(timeRemaining % 60)초 후에 인증하기")
+                            Text(isVerificationActive ? "계단 도전 인증하기" : "\((timeLimit -  timeDifference) / 60)분 \((timeLimit -  timeDifference) % 60)초 후에 인증하기")
                                 .font(.body)
                                 .foregroundColor(.white)
                         } else {
@@ -245,12 +249,10 @@ struct GPSStaircaseDetailView: View {
                 .disabled(!isVerificationActive)
                 .onReceive(timer) {_ in
                     if (!isVerificationActive) {
-                        if (timeRemaining > 0) {
-                            timeRemaining -= 1
-                            print("timeRemaining: \(timeRemaining)")
-                        } else {
+                        // MARK: 마지막 인증 시간과 현재 시간을 차이를 계산하여 인증 허용하기
+                        timeDifference = Int(lastVerificationTime.distance(to: Date.now))
+                        if (timeDifference > timeLimit) {
                             isVerificationActive = true
-                            timeRemaining = 300
                         }
                     }
                 }
@@ -271,7 +273,7 @@ struct GPSStaircaseDetailView: View {
                         Spacer()
                     } else {
                         if (isAtLocation) { // 위치 인증을 성공했을 때
-                            VerifiedLocationView(gpsStaircase: gpsStaircase, isShowingMissionSheet: $isShowingMissionSheet, gameCenterManager: gameCenterManager, collectedItems: $collectedItems, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, isShowingNewItem: $isShowingNewItem, isVerificationActive: $isVerificationActive, healthKitService: healthkitService)
+                            VerifiedLocationView(gpsStaircase: gpsStaircase, isShowingMissionSheet: $isShowingMissionSheet, gameCenterManager: gameCenterManager, collectedItems: $collectedItems, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, isShowingNewItem: $isShowingNewItem, isVerificationActive: $isVerificationActive, healthKitService: healthkitService, lastVerificationTime: $lastVerificationTime)
                         } else { // 위치 인증을 성공하지 못 했을 때
                             FailedLocationView(locationManager: locationManager, currentLocation: $currentLocation, isAtLocation: $isAtLocation, isShowingMissionSheet: $isShowingMissionSheet, gpsStaircase: gpsStaircase)
                         }
@@ -320,6 +322,8 @@ struct VerifiedLocationView: View {
     @Binding var isVerificationActive: Bool
     
     @ObservedObject var healthKitService: HealthKitService
+    
+    @Binding var lastVerificationTime: Date
     
     @State private var animationAmount = 0.0
     var body: some View {
@@ -380,9 +384,10 @@ struct VerifiedLocationView: View {
                     .foregroundStyle(.green800)
             )
         }
-        .onAppear {
+        .onAppear { // MARK: 위치 인증에 성공했을 때
             animationAmount = 360.0
             isVerificationActive = false
+            lastVerificationTime = Date.now
             healthKitService.getWeeklyStairDataAndSave()
             // TODO: 성취 현지화 설정
             Task {
