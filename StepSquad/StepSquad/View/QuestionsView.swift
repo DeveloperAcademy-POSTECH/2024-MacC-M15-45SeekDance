@@ -56,7 +56,7 @@ struct QuestionsView: View {
 //                        )
 //                    }
 
-                    Section(header: Text("게임 레벨")) {
+                    Section(header: Text("게임 관련")) {
                         DisclosureGroup(
                             isExpanded: Binding(
                                 get: { expandedGroup == 4 },
@@ -92,6 +92,28 @@ struct QuestionsView: View {
                                 QuestionText("- 이벤트나 히든 퀘스트: 깜짝 재료")
                             },
                             label: { Text("획득 재료는 무엇인가요?") }
+                        )
+                        
+                        DisclosureGroup(
+                            isExpanded: Binding(
+                                get: { expandedGroup == 14 },
+                                set: { expandedGroup = $0 ? 14 : nil }
+                            ),
+                            content: {
+                                QuestionText("마지막 레벨인 19를 달성하면 레벨 1부터 다시 시작하는 기능입니다. 함께한 틈새가 약재를 갖고 하산하면 새로운 틈새를 만날 수 있어요! (똑같은 틈새처럼 보이지만 아무튼 새로운 틈새에요.)")
+                            },
+                            label: { Text("하산하기는 무슨 기능인가요?") }
+                        )
+                        
+                        DisclosureGroup(
+                            isExpanded: Binding(
+                                get: { expandedGroup == 15 },
+                                set: { expandedGroup = $0 ? 15 : nil }
+                            ),
+                            content: {
+                                QuestionText("계단사랑단이라면 대한민국의 유명 계단을 다 방문해봐야죠! 전국의 계단에 있는 계단을 방문한 후 인증을 하면 특별 재료와 보너스 점수를 드리고 있어요.")
+                            },
+                            label: { Text("전국의 계단은 무슨 기능인가요?") }
                         )
                     }
 
