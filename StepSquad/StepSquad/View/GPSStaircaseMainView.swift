@@ -278,7 +278,7 @@ struct ProfileView: View {
                     .font(.headline)
                     .padding(.bottom, 4)
                 HStack(spacing: 0) {
-                    Text("방문한 계단 ")
+                    Text("인증한 계단 ")
                         .font(.footnote)
                     Text("\(completedStaircasesCount)개 / \(gpsStaircases.count)개")
                         .font(.footnote)
