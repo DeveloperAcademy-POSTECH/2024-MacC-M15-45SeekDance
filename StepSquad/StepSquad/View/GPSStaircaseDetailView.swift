@@ -429,7 +429,7 @@ struct FailedLocationView: View {
                 .bold()
                 .padding(.bottom, 8)
             
-            Text("정해진 위치에서만 퀘스트를 깰 수 있어요.")
+            Text("정해진 위치에서만 미션을 깰 수 있어요.")
                 .font(.callout)
                 .foregroundStyle(.grey700)
             
