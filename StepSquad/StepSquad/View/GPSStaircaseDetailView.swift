@@ -235,7 +235,7 @@ struct GPSStaircaseDetailView: View {
                         if (locationManager.getAuthorizationStatus() == .authorizedAlways || locationManager.getAuthorizationStatus() == .authorizedWhenInUse) {
                             Text(isVerificationActive ? "계단 도전 인증하기" : "\((timeLimit -  timeDifference) / 60)분 \((timeLimit -  timeDifference) % 60)초 후에 인증하기")
                                 .font(.body)
-                                .foregroundColor(.Grey800)
+                                .foregroundColor(isVerificationActive ? .white : .Grey800)
                         } else {
                             Text("위치 권한 허용하기")
                                 .font(.body)
