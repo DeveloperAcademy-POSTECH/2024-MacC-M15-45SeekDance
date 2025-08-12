@@ -53,6 +53,12 @@
     },
     "%lld개 / %lld개" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld stairs / %2$lld stairs"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "new",
@@ -63,6 +69,12 @@
     },
     "%lld분 %lld초 후에 인증하기" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verify in %1$lld minutes %2$lld seconds"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "new",
@@ -72,361 +84,1152 @@
       }
     },
     "%lld일 차" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Day %lld"
+          }
+        }
+      }
     },
     "%lld층 올라가기" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Climb %lldfloors "
+          }
+        }
+      }
     },
     "%lld층 올라가는 중" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lldfloors climbed"
+          }
+        }
+      }
     },
     "%lld칸" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lldsteps"
+          }
+        }
+      }
     },
     "%lld회차" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Round %lld"
+          }
+        }
+      }
     },
     "0" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "0"
+          }
+        }
+      }
     },
     "1.6시간" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1.6h"
+          }
+        }
+      }
     },
     "3.0" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3.0"
+          }
+        }
+      }
     },
     "5분마다 획득할 수 있어요!" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Available every 5 minutes!"
+          }
+        }
+      }
     },
     "N" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "N"
+          }
+        }
+      }
     },
     "NFC로 특별 재료 얻기" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "By tagging NFC, get hidden items"
+          }
+        }
+      }
     },
     "가 왔어요!" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "is Here!"
+          }
+        }
+      }
     },
     "강원도" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gangwon"
+          }
+        }
+      }
     },
     "같은 틈새 아닌가 하는 마음이 든다면 그건 착각이에요" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Think it’s the same bird? Nah, that’s just your imagination playing tricks!\n"
+          }
+        }
+      }
     },
     "건강해라" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stay healthy!"
+          }
+        }
+      }
     },
     "게임 관련" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About then Game"
+          }
+        }
+      }
     },
     "계단 데이터가 연동되지 않아요!" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stair data not syncing!"
+          }
+        }
+      }
     },
     "계단 도전 인증하기" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verify my location"
+          }
+        }
+      }
     },
     "계단 오르기 맹세한 지" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "StepSquad Streak"
+          }
+        }
+      }
     },
     "계단사랑단 입단증" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Certificate of admission"
+          }
+        }
+      }
     },
     "계단사랑단 하산 기록" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Graduation Records"
+          }
+        }
+      }
     },
     "계단사랑단에 입단하세요!" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hop into the StepSquad!"
+          }
+        }
+      }
     },
     "계단사랑단의 이야기" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The story of the StepSquad"
+          }
+        }
+      }
     },
     "계단사랑단인 친구 찾기" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Find Your StepSquad Friends"
+          }
+        }
+      }
     },
     "계단을 걷기 싫을 때는 어떻게 하나요?" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What if I don’t feel like climbing stairs?"
+          }
+        }
+      }
     },
     "계단을 올라야 재료를 모을 수 있어요!" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can only collect items by climbing stairs!"
+          }
+        }
+      }
     },
     "고객 센터" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Help Center"
+          }
+        }
+      }
     },
     "공유하기" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share"
+          }
+        }
+      }
     },
     "광주·전남" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gwangju·Jeonnam"
+          }
+        }
+      }
     },
     "그 동안 모은 건\n" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Items collected so far"
+          }
+        }
+      }
     },
     "기타" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "etc"
+          }
+        }
+      }
     },
     "기타를 배우고 싶어요" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Can E.T. See?"
+          }
+        }
+      }
     },
     "깜짝 재료" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hidden Items"
+          }
+        }
+      }
     },
     "나의 순위" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "My Ranking"
+          }
+        }
+      }
     },
     "나의 위치 확인 중" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verifying my location"
+          }
+        }
+      }
     },
     "남아있어요!" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Still remaining!"
+          }
+        }
+      }
     },
     "네트워크 연결 상태를 확인한 후 앱에 다시 접속해주세요." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please check your network connection and reconnect to the app."
+          }
+        }
+      }
     },
     "다시 시도하기" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retry"
+          }
+        }
+      }
     },
     "다음으로" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Next"
+          }
+        }
+      }
     },
     "달성 뱃지" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Achievements"
+          }
+        }
+      }
     },
     "달성 뱃지, 약재, 리더보드 점수는 영구적으로 사라집니다.\n하산 기록(날짜, 횟수)는 입단증을 통해 확인할 수 있습니다." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Achievements, items, and leaderboard scores are permanently deleted. \nGraduation records (date, count) can be viewed via your Certificate of admission."
+          }
+        }
+      }
     },
     "당겨서 계단 정보 불러오기\n계단 업데이트: %@" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pull to refresh stair data.\nLast Sync: %@"
+          }
+        }
+      }
     },
     "대구·경북" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daegu·Gyeongbuk"
+          }
+        }
+      }
     },
     "대전·충남" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daejeon·Chungnam"
+          }
+        }
+      }
     },
     "데이터 관련" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Data Settings"
+          }
+        }
+      }
     },
     "도전 완료" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Misson Completed"
+          }
+        }
+      }
     },
     "도전 완료된 계단" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Completed K-Stairs"
+          }
+        }
+      }
     },
     "레벨 %lld" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Level %lld"
+          }
+        }
+      }
     },
     "레벨업은 어떻게 하나요?" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How do I level up?"
+          }
+        }
+      }
     },
     "레벨은 어떻게 구성이 되나요?" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How are levels structured?"
+          }
+        }
+      }
     },
     "로!" : {
 
     },
     "를 입력하세요." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please enter"
+          }
+        }
+      }
     },
     "마세요." : {
 
     },
     "미션" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mission"
+          }
+        }
+      }
     },
     "밥 먹고 계단걷기 잊지말자" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Don’t forget to climb stairs after meals!"
+          }
+        }
+      }
     },
     "방문 완료" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Completed"
+          }
+        }
+      }
     },
     "버전 정보" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Version"
+          }
+        }
+      }
     },
     "부산·울산·경남" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Busan·Ulsan·Gyeongnam"
+          }
+        }
+      }
     },
     "북마크" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bookmark"
+          }
+        }
+      }
     },
     "빈 둥지가 되었어요" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "It’s an empty nest now"
+          }
+        }
+      }
     },
     "새 틈새와 함께하기" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Join with the new bird, Teum-Sae"
+          }
+        }
+      }
     },
     "새로운 틈새" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New Teum-Sae"
+          }
+        }
+      }
     },
     "설명보기" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "View Details"
+          }
+        }
+      }
     },
     "세상에 이런 계단이?!" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Step into the Legend"
+          }
+        }
+      }
     },
     "세종·충북" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sejong·Chungbuk"
+          }
+        }
+      }
     },
     "수도권" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Greater Seoul"
+          }
+        }
+      }
     },
     "실제로 가져가진" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Do not actually take this item."
+          }
+        }
+      }
     },
     "아직 계단을 안 오르셨군요!\n계단을 오르고 10분 뒤 다시 당겨보세요!" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You haven’t climbed stairs yet! \nTry again 10 minutes after climbing."
+          }
+        }
+      }
     },
     "아직 하산한 틈새가 없어요!" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No graduation records yet!"
+          }
+        }
+      }
     },
     "알림 받기" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enable notifications"
+          }
+        }
+      }
     },
     "앗 뭐지??" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What is this??"
+          }
+        }
+      }
     },
     "앱 정보" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App information"
+          }
+        }
+      }
     },
     "앱을 지우면 데이터가 유지되나요?" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Will data be saved after deleting the app?"
+          }
+        }
+      }
     },
     "없습니다." : {
 
     },
     "역대 하산 기록은\n" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Past Graduation records are"
+          }
+        }
+      }
     },
     "연장된 건강 수명" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bonus Life"
+          }
+        }
+      }
     },
     "열기" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open"
+          }
+        }
+      }
     },
     "오늘부터 오른 층수 데이터를 추가하면\n진정한 계단사랑단원이 될 수 있어요!" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add your climbed flights starting today to become a true StepSquad member!"
+          }
+        }
+      }
     },
     "오른 층수 추가하기" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add Climbed Flights"
+          }
+        }
+      }
     },
     "위치 권한 허용하기" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allow Location Access"
+          }
+        }
+      }
     },
     "이제 틈새를 속세로!" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Let Teum-Sae Fly Away!"
+          }
+        }
+      }
     },
     "인증 위치" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verification Spot"
+          }
+        }
+      }
     },
     "인증 위치 보기" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "View Verification Spot"
+          }
+        }
+      }
     },
     "인증 위치를 다시 확인해주세요." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please recheck the spot."
+          }
+        }
+      }
     },
     "인증 장소를 확인한 후 직접 방문한다" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Check the spot and visit in person."
+          }
+        }
+      }
     },
     "인증이 됩니다." : {
 
     },
     "인증한 계단 " : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verified K-Stairs"
+          }
+        }
+      }
     },
     "일 동안" : {
 
     },
     "일반 재료" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Normal Items"
+          }
+        }
+      }
     },
     "일반 재료는 계단 오르기만을 통해서만 얻을 수 있습니다." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can get normal items by climbing staircases."
+          }
+        }
+      }
     },
     "일자" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "days"
+          }
+        }
+      }
     },
     "입단증 눌러서 하산 기록 보기" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Click to see graduation records"
+          }
+        }
+      }
     },
     "입단증 보기" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "See certificate of admission"
+          }
+        }
+      }
     },
     "입단증의 뒤집으면\n역대 하산 기록을 볼 수 있습니다." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can see graduation records by flipping the certificate of admission."
+          }
+        }
+      }
     },
     "자주 묻는 질문" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FAQ"
+          }
+        }
+      }
     },
     "재료 획득" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New item"
+          }
+        }
+      }
     },
     "전국" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "all"
+          }
+        }
+      }
     },
     "전국의 계단 리스트 보기" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "See list of K-Stairs"
+          }
+        }
+      }
     },
     "전국의 계단 미션을 깨보세요!" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Master K-Stairs!"
+          }
+        }
+      }
     },
     "전국의 계단 성공!" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You climbed the  K-Stair!"
+          }
+        }
+      }
     },
     "전국의 계단 오르고 인증하자!" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Climb K-Stairs and get special presents!"
+          }
+        }
+      }
     },
     "전국의 계단은 무슨 기능인가요?" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What is K-Stair Master?"
+          }
+        }
+      }
     },
     "전북" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jeonbuk"
+          }
+        }
+      }
     },
     "정해진 위치에서만 미션을 깰 수 있어요." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can only be verified in a certain spot."
+          }
+        }
+      }
     },
     "제주" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jeju"
+          }
+        }
+      }
     },
     "주의: 계단사랑단 앱은 게임입니다. 실제 의학적 참고, 권고, 진단등을 위해 앱을 활용하면 안 됩니다." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CAUTION: StepSquad is a game. You should not use the app for actual medical reference, recommendations, diagnoses, etc."
+          }
+        }
+      }
     },
     "지역 필터" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filter by regions"
+          }
+        }
+      }
     },
     "진행하려면 " : {
 
     },
     "참여 방법" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How to do"
+          }
+        }
+      }
     },
     "첫 번째 레벨을 달성하고 재료를 얻어보세요." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Complete the first level and get items."
+          }
+        }
+      }
     },
     "최고 레벨" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "the highest level"
+          }
+        }
+      }
     },
     "최고 레벨 달성!" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Completed the highest level!"
+          }
+        }
+      }
     },
     "최고 레벨을 달성하면\n 틈새를 하산시키고 기록을 남길 수 있어요." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "After you complete the highest level, Teum-Sae can graduate and record  achievements."
+          }
+        }
+      }
     },
     "추가 점수는 계속 받을 수 있어요!" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can get a score again!"
+          }
+        }
+      }
     },
     "층수" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "floors"
+          }
+        }
+      }
     },
     "층을" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "floors❗️"
+          }
+        }
+      }
     },
     "캐릭터 이름은 무엇인가요?" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What’s the name of bird?"
+          }
+        }
+      }
     },
     "특별 재료에 점수 2배 이벤트" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Special items and double score event"
+          }
+        }
+      }
     },
     "특별 점수" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Special score"
+          }
+        }
+      }
     },
     "틈새 하산 선물" : {
 
@@ -435,76 +1238,244 @@
 
     },
     "틈새는 온라인 환경에서만 하산을 할 수 있어요!" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teum-Sae can only graduate in an online environment."
+          }
+        }
+      }
     },
     "틈새를 속세로!\n이제는 하산할 시간" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Let Teum-Sae fly away! It’s time to say goodbye to Teumsae"
+          }
+        }
+      }
     },
     "틈새를 하산시킬까요?" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Do you want Teum-Sae to graduate?"
+          }
+        }
+      }
     },
     "틈새와 함께 모은 약재, 뱃지, 점수는\n하산이 완료되면 모두 초기화가 됩니다." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "After graduation, every item, achievement, and score will be reset."
+          }
+        }
+      }
     },
     "팀 45식단 소개" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About team 45SeekDance"
+          }
+        }
+      }
     },
     "평일 오후 2시 계단 알림" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weekday 2 p.m. reminders for climbing steps"
+          }
+        }
+      }
     },
     "하산 날짜" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "graduation date"
+          }
+        }
+      }
     },
     "하산을 했어요!" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teum-Sae just graduated!"
+          }
+        }
+      }
     },
     "하산하기" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Graduate"
+          }
+        }
+      }
     },
     "하산하기는 무슨 기능인가요?" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What is graduation for Teum-Sae?"
+          }
+        }
+      }
     },
     "하산하기를 완료하면\n틈새와 함께 모은 기록들은 초기화가 됩니다." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "After Teum-Sae graduates, all your achievements will be reset."
+          }
+        }
+      }
     },
     "하산한 틈새가 떠나고" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teum-Sae flew away,"
+          }
+        }
+      }
     },
     "한 계단 오를 때마다 건강 수명이 4초씩 연장됩니다." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Each step up will extend your healthy life by 4 seconds."
+          }
+        }
+      }
     },
     "함께 오른 틈새가" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your partner Teumsae"
+          }
+        }
+      }
     },
     "해당 계단 하단의 인증하기를 탭!" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Click the bottom button!"
+          }
+        }
+      }
     },
     "해당 위치 주변에서" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nearby the spot,"
+          }
+        }
+      }
     },
     "확인" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        }
+      }
     },
     "확인하기" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        }
+      }
     },
     "확인하는 중" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verifying the location"
+          }
+        }
+      }
     },
     "회차" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "round"
+          }
+        }
+      }
     },
     "획득 재료" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Special item"
+          }
+        }
+      }
     },
     "획득 재료 확인하기" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inventory"
+          }
+        }
+      }
     },
     "획득 재료는 무엇인가요?" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What is an item?"
+          }
+        }
+      }
     },
     "획득 재료보기" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inventory"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

@@ -1,10 +1,6 @@
-/* 
-  InfoPlist.strings
+/* InfoPlist.strings
   StepSquad
 
-  Created by hanseoyoung on 11/2/24.
-  
-*/
-
-
+  Created by hanseoyoung on 11/2/24. */
 "CFBundleDisplayName" = "StepSquad";
+
