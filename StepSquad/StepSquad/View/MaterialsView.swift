@@ -29,7 +29,7 @@ struct MaterialsView: View {
                             if !collectedItems.isEmpty() { // 획득한 깜짝 재료가 있을 때
                                 Section(header: Text("깜짝 재료").bold()) {
                                     ForEach(collectedItems.getSortedItemsNameList(), id: \.self) { item in
-                                        if Array(gpsStaircasesDictionary.keys).contains(item) {
+                                        if Array(gpsStaircasesDictionary.keys).contains(item) { // 전국의 계단 관련 보상
                                                 HStack(spacing: 0) {
                                                     Image("\(gpsStaircasesDictionary[item]!.id)_reward") // 약재 이미지
                                                         .resizable()
@@ -37,7 +37,7 @@ struct MaterialsView: View {
                                                         .frame(width: 42, height: 42)
                                                         .padding(.trailing, 0)
                                                     
-                                                    Text("퀘스트") // 키워드 표시
+                                                    Text("미션") // 키워드 표시
                                                         .font(.system(size: 12))
                                                         .foregroundStyle(.white)
                                                         .padding(4)

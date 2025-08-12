@@ -235,7 +235,7 @@ struct GPSStaircaseDetailView: View {
                         if (locationManager.getAuthorizationStatus() == .authorizedAlways || locationManager.getAuthorizationStatus() == .authorizedWhenInUse) {
                             Text(isVerificationActive ? "계단 도전 인증하기" : "\((timeLimit -  timeDifference) / 60)분 \((timeLimit -  timeDifference) % 60)초 후에 인증하기")
                                 .font(.body)
-                                .foregroundColor(.white)
+                                .foregroundColor(isVerificationActive ? .white : .Grey800)
                         } else {
                             Text("위치 권한 허용하기")
                                 .font(.body)
@@ -256,7 +256,7 @@ struct GPSStaircaseDetailView: View {
                         }
                     }
                 }
-                .background(isVerificationActive ? Color.Green800: .secondary)
+                .background(isVerificationActive ? Color.Green800: .Grey200)
                 .cornerRadius(12)
                 .padding(.horizontal, 36)
             }
@@ -482,7 +482,7 @@ struct FailedLocationView: View {
                     }, label: {
                         HStack {
                             Spacer()
-                            Text("위치 확인하기")
+                            Text("인증 위치 보기")
                                 .foregroundStyle(.white)
                                 .padding(.vertical, 14)
                                 .padding(.horizontal, 20)
