@@ -233,7 +233,7 @@ let gpsStaircasesDictionary: [String: GPSStaircase] = [
         steps: 100,
         gpsLocation: (35.402639, 127.386723),
         verificationLocation: "계단 현판 앞",
-        reward: "춘향골 사과"),
+        reward: "춘향골 복숭아"),
     "Yeonggwang365": GPSStaircase(
         id: "Yeonggwang365",
         name: "영광 365 계단",
