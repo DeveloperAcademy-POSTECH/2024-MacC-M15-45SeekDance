@@ -548,7 +548,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Completed K-Stairs"
+            "value" : "Completed K-Stair"
           }
         }
       }
@@ -1013,7 +1013,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "all"
+            "value" : "All"
           }
         }
       }
@@ -1447,6 +1447,16 @@
         }
       }
     },
+    "획득 재료 보기" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inventory"
+          }
+        }
+      }
+    },
     "획득 재료 확인하기" : {
       "localizations" : {
         "en" : {
@@ -1463,16 +1473,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "What is an item?"
-          }
-        }
-      }
-    },
-    "획득 재료보기" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Inventory"
           }
         }
       }
