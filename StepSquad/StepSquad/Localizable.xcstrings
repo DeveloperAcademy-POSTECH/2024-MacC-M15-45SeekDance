@@ -131,7 +131,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%1$lld stairs / %2$lld stairs"
+            "value" : " %1$lld stairs / %2$lld stairs"
           }
         },
         "ko" : {
@@ -173,7 +173,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Climb %lldfloors "
+            "value" : "Climb %lld floors"
           }
         }
       }
@@ -183,7 +183,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lldfloors climbed"
+            "value" : "%lld floors climbed"
           }
         }
       }
@@ -193,7 +193,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lldsteps"
+            "value" : "%lld steps"
           }
         }
       }
@@ -1537,7 +1537,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Inventory"
+            "value" : "See Inventory"
           }
         }
       }
