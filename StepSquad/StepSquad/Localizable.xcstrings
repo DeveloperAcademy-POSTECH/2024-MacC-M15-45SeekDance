@@ -5,28 +5,83 @@
 
     },
     " %@" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@"
+          }
+        }
+      }
     },
     " %lld" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
+          }
+        }
+      }
     },
     "‘%@’" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "‘%@’"
+          }
+        }
+      }
     },
     "‘나의 순위’는 어떻게 계산되나요?" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How is ‘My Ranking’ calculated?"
+          }
+        }
+      }
     },
     "'나의 순위'는 얼마나 유지되나요?" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How long does ‘My Ranking’ last?"
+          }
+        }
+      }
     },
     "(계단 오르기 점수 + 특별 계단 점수)" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "(Stair Climbing Score + K-Stair Master Score)"
+          }
+        }
+      }
     },
     "%@" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@"
+          }
+        }
+      }
     },
     "%@ 입단 %lld회차" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ Entry, Round %2$lld"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "new",
@@ -36,10 +91,23 @@
       }
     },
     "%@ 정복 성공!" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ Conquered!"
+          }
+        }
+      }
     },
     "%@의 %lld칸을 걸었어요!" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Walked %2$lld steps at %1$@!"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "new",
@@ -49,7 +117,14 @@
       }
     },
     "%lld" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
+          }
+        }
+      }
     },
     "%lld개 / %lld개" : {
       "localizations" : {
@@ -1292,7 +1367,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Weekday 2 p.m. reminders for climbing steps"
+            "value" : "Weekday 2 p.m. reminders"
           }
         }
       }
