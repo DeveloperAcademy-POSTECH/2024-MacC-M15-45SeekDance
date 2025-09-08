@@ -187,8 +187,7 @@ struct GPSStaircaseDetailView: View {
                                         .font(.caption)
                                         .bold()
                                     VStack {
-                                        Text("실제로 가져가진")
-                                        Text("마세요.")
+                                        Text("실제로 가져가진\n마세요.")
                                     }
                                     .font(.caption2)
                                     .foregroundColor(Color.Grey500)
