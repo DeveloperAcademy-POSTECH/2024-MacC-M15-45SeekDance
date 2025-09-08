@@ -56,7 +56,7 @@ class GPSStaircase: Codable, Identifiable {
 let gpsStaircasesDictionary: [String: GPSStaircase] = [
     "Busan168": GPSStaircase(
         id: "Busan168",
-        name: "초량 이바구길 168 계단",
+        name: String(localized: "초량 이바구길 168 계단"),
         title: "이바구 떨며 오르세요",
         description: "부산의 경사로를 몸소 느껴보자",
         province: .gyeongnam,

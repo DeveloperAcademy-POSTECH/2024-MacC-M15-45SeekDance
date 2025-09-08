@@ -1216,6 +1216,16 @@
         }
       }
     },
+    "초량 이바구길 168 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choryang Ibagu-gil 168 Stairs"
+          }
+        }
+      }
+    },
     "최고 레벨" : {
       "localizations" : {
         "en" : {
