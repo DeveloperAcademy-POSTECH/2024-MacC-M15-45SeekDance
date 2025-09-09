@@ -124,11 +124,11 @@ struct NotiView: View {
     // MARK: - 알림 예약 함수
     func scheduleWeekdayNotifications() {
         let contentsPerWeekday: [Int: (title: String, body: String)] = [
-            2: ("월요일의 고통을 잊는 법은?!", "더 큰 고통인 계단 오르기를 하시면 되겠습니다."), // 월
-            3: ("계단 오르Go! 혈당 낮추Go!", "혈당 스파이크 왔을 땐 계단 오르기로 잡아보자!"), // 화
-            4: ("계단 오르기 전 주의하세요!", "발은 11자, 허리는 세우고, 무릎이 발보다 더 나오지 않게 조심하기!"), // 수
-            5: ("걷기보다 빠른 체지방 태우는 법은?", "30분간 계단을 오르면 221kcal를 소비할 수 있어요!"), // 목
-            6: ("주말엔… 안 오를 거죠…?", "다 알아요… 주말에는 알람 안 보낼게요. 그렇지만 월요일엔 꼭 다시 만나요!") // 금
+            2: (String(localized: "월요일의 고통을 잊는 법은?!"), String(localized: "더 큰 고통인 계단 오르기를 하시면 되겠습니다.")), // 월
+            3: (String(localized: "계단 오르Go! 혈당 낮추Go!"), String(localized: "혈당 스파이크 왔을 땐 계단 오르기로 잡아보자!")), // 화
+            4: (String(localized: "계단 오르기 전 주의하세요!"), String(localized: "발은 11자, 허리는 세우고, 무릎이 발보다 더 나오지 않게 조심하기!")), // 수
+            5: (String(localized: "걷기보다 빠른 체지방 태우는 법은?"), String(localized: "30분간 계단을 오르면 221kcal를 소비할 수 있어요!")), // 목
+            6: (String(localized: "주말엔… 안 오를 거죠…?"), String(localized: "다 알아요… 주말에는 알람 안 보낼게요. 그렇지만 월요일엔 꼭 다시 만나요!")) // 금
         ]
         
         for (weekday, contentTuple) in contentsPerWeekday {

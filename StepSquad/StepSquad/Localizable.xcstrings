@@ -318,6 +318,16 @@
         }
       }
     },
+    "30분간 계단을 오르면 221kcal를 소비할 수 있어요!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Climb stairs for 30 minutes and burn about 221 kcal!"
+          }
+        }
+      }
+    },
     "90년대생까지는 다 아는" : {
       "localizations" : {
         "en" : {
@@ -438,6 +448,16 @@
         }
       }
     },
+    "걷기보다 빠른 체지방 태우는 법은?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Faster fat burning than walking?"
+          }
+        }
+      }
+    },
     "걸어서 동굴 속으로" : {
       "localizations" : {
         "en" : {
@@ -518,12 +538,32 @@
         }
       }
     },
+    "계단 오르Go! 혈당 낮추Go!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Step it up! Sugar levels down!"
+          }
+        }
+      }
+    },
     "계단 오르기 맹세한 지" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "StepSquad Streak"
+          }
+        }
+      }
+    },
+    "계단 오르기 전 주의하세요!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stair Safety 101: Read Before You Climb!"
           }
         }
       }
@@ -548,12 +588,32 @@
         }
       }
     },
+    "계단 한 칸당 건강 수명 4초가\n늘어난다는 소문이 있어요" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rumor has it, each stair you climb\\nadds 4 seconds to your healthy lifespan."
+          }
+        }
+      }
+    },
     "계단 현판 앞" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "In front of the stair nameplate"
+          }
+        }
+      }
+    },
+    "계단사랑단 심마니가 되어\n‘한약 재료'를 찾자!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Become a member of StepSquad,\\nand get “special items”!"
           }
         }
       }
@@ -908,6 +968,16 @@
         }
       }
     },
+    "다 알아요… 주말에는 알람 안 보낼게요. 그렇지만 월요일엔 꼭 다시 만나요!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No alarm this weekend. But Monday? We start again."
+          }
+        }
+      }
+    },
     "다대기" : {
       "localizations" : {
         "en" : {
@@ -1024,6 +1094,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "March for Korea’s freedom!"
+          }
+        }
+      }
+    },
+    "더 큰 고통인 계단 오르기를 하시면 되겠습니다." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Easy fix — climb stairs and feel an even greater pain."
           }
         }
       }
@@ -1257,6 +1337,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "The Space Walk — full sea view guaranteed"
+          }
+        }
+      }
+    },
+    "발은 11자, 허리는 세우고, 무릎이 발보다 더 나오지 않게 조심하기!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feet straight. Back up. Keep knees stay behind toes."
           }
         }
       }
@@ -1621,6 +1711,46 @@
         }
       }
     },
+    "앱을 쓰면 개발자 박수진이\n춤을 춘다는 사실을 아시나요?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Did you know that using the app\\nmakes developer Park Sujin dance?"
+          }
+        }
+      }
+    },
+    "앱을 쓰면 개발자 이그루가\n이얏호를 외친다는 걸 아시나요?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Did you know that using the app\\nmakes developer Lee Groo shout “Yah-ho!”?"
+          }
+        }
+      }
+    },
+    "앱을 쓰면 개발자 정소희가\n노래를 부른다는 사실을 아시나요?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Did you know that using the app\\nmakes developer Jeong Sohee sing?"
+          }
+        }
+      }
+    },
+    "앱을 쓰면 개발자 한서영이\n행복해진다는 사실을 아시나요?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Did you know that using the app\\nmakes developer Han Seoyoung happy?"
+          }
+        }
+      }
+    },
     "앱을 지우면 데이터가 유지되나요?" : {
       "localizations" : {
         "en" : {
@@ -1660,6 +1790,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Take the stairs, not the escalator"
+          }
+        }
+      }
+    },
+    "엘리베이터 대신 계단을 사용하면\n전기를 절약할 수 있다는 사실!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Did you know that using the stairs\\nsaves electricity?"
           }
         }
       }
@@ -1780,6 +1920,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sogeumsan Mountain Suspension Bridge, Wonju"
+          }
+        }
+      }
+    },
+    "월요일의 고통을 잊는 법은?!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Got the Monday blues?"
           }
         }
       }
@@ -2180,6 +2330,16 @@
         }
       }
     },
+    "주말엔… 안 오를 거죠…?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We won’t bug you this weekend…"
+          }
+        }
+      }
+    },
     "주의: 계단사랑단 앱은 게임입니다. 실제 의학적 참고, 권고, 진단등을 위해 앱을 활용하면 안 됩니다." : {
       "localizations" : {
         "en" : {
@@ -2399,6 +2559,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "floors❗️"
+          }
+        }
+      }
+    },
+    "친구를 추가하면 친구를 이긴 뒤\n자랑할 수 있어요!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add a friend, beat them,\\nand then brag all you want!"
           }
         }
       }
@@ -2755,6 +2925,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Haetal(Enlightenment)"
+          }
+        }
+      }
+    },
+    "혈당 스파이크 왔을 땐 계단 오르기로 잡아보자!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Easy fix — climb stairs and feel an even greater pain."
           }
         }
       }
