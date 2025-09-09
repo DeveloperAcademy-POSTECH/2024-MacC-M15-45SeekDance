@@ -218,12 +218,32 @@
         }
       }
     },
+    "1-2 매표소" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ticket booth 1-2"
+          }
+        }
+      }
+    },
     "1.6시간" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "1.6h"
+          }
+        }
+      }
+    },
+    "2번 출구 밖" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Outside Exit 2"
           }
         }
       }
@@ -238,12 +258,72 @@
         }
       }
     },
+    "3.1만세 운동길 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daegu Heritage Trail Stairs"
+          }
+        }
+      }
+    },
+    "3.1운동의 역사가 깃들어 있는 멋진 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Steps with the spirit of March 1st Movement"
+          }
+        }
+      }
+    },
+    "5만 5천원" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "55,000won"
+          }
+        }
+      }
+    },
     "5분마다 획득할 수 있어요!" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Available every 5 minutes!"
+          }
+        }
+      }
+    },
+    "7호선 상도역 앞 의문스러운 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sangdo Station"
+          }
+        }
+      }
+    },
+    "7호선 종이 티켓" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Line 7 Ticket"
+          }
+        }
+      }
+    },
+    "90년대생까지는 다 아는" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Every '90s Korean kid knows"
           }
         }
       }
@@ -278,6 +358,26 @@
         }
       }
     },
+    "갓바위 돌가루" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gatbawi Dolgaru(Stone Powder)"
+          }
+        }
+      }
+    },
+    "강릉 오죽헌 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ojukheon House Stairs"
+          }
+        }
+      }
+    },
     "강원도" : {
       "localizations" : {
         "en" : {
@@ -298,6 +398,26 @@
         }
       }
     },
+    "건강도 챙기고 소원도 빌어보세요!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get healthy. Make a wish"
+          }
+        }
+      }
+    },
+    "건강을 기원하며 걸어요" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Step up your health game!"
+          }
+        }
+      }
+    },
     "건강해라" : {
       "localizations" : {
         "en" : {
@@ -308,12 +428,32 @@
         }
       }
     },
+    "걸어서 동굴 속으로" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Step into the cave"
+          }
+        }
+      }
+    },
     "게임 관련" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "About then Game"
+          }
+        }
+      }
+    },
+    "계단 끝엔 출렁다리" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A swaying bridge at the top"
           }
         }
       }
@@ -338,12 +478,62 @@
         }
       }
     },
+    "계단 바로 앞" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Right in front of the stairs"
+          }
+        }
+      }
+    },
+    "계단 아래 지점" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bottom of the stairs"
+          }
+        }
+      }
+    },
     "계단 오르기 맹세한 지" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "StepSquad Streak"
+          }
+        }
+      }
+    },
+    "계단 입구" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stair entrance"
+          }
+        }
+      }
+    },
+    "계단 중앙 지점" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Midway up the stairs"
+          }
+        }
+      }
+    },
+    "계단 현판 앞" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In front of the stair nameplate"
           }
         }
       }
@@ -378,6 +568,26 @@
         }
       }
     },
+    "계단사랑단은 여기서 시작되었어요" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Project StepSquad started here"
+          }
+        }
+      }
+    },
+    "계단사랑단은 여기서도 시작하려고 했어요" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Project StepSquad almost started here too."
+          }
+        }
+      }
+    },
     "계단사랑단의 이야기" : {
       "localizations" : {
         "en" : {
@@ -394,6 +604,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Find Your StepSquad Friends"
+          }
+        }
+      }
+    },
+    "계단식 논도 계단이라고 일단 정했어요" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terraced rice fields? Still stairs to us"
+          }
+        }
+      }
+    },
+    "계단으로 천국까지" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The stairway to heaven exists"
           }
         }
       }
@@ -428,12 +658,32 @@
         }
       }
     },
+    "곤드레" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gondre"
+          }
+        }
+      }
+    },
     "공유하기" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Share"
+          }
+        }
+      }
+    },
+    "관암사 계단 입구" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gwanamsa Temple stair entrance"
           }
         }
       }
@@ -448,12 +698,52 @@
         }
       }
     },
+    "광주의 삶과 역사가 깃든, 245에 518의 진실 깃든 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gwangju’s story, told in 245 steps"
+          }
+        }
+      }
+    },
+    "국밥 육수" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gukbap Yuksu(Broth)"
+          }
+        }
+      }
+    },
+    "굴비" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gulbi"
+          }
+        }
+      }
+    },
     "그 동안 모은 건\n" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Items collected so far"
+          }
+        }
+      }
+    },
+    "기묘한 6칸짜리 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The bizarre six-step stairs"
           }
         }
       }
@@ -508,6 +798,16 @@
         }
       }
     },
+    "남산 삼순이 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Namsan Park Samsuni Stairs"
+          }
+        }
+      }
+    },
     "남아있어요!" : {
       "localizations" : {
         "en" : {
@@ -518,12 +818,72 @@
         }
       }
     },
+    "남원 춘향 테마 파크 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chunhyang Theme Park Stairs, Namwon"
+          }
+        }
+      }
+    },
+    "남해가 한 눈에" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Namhae at a glance"
+          }
+        }
+      }
+    },
+    "남해군 가천마을 다랑이논" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terraced Paddy Fields of Gacheon Village, Namhae"
+          }
+        }
+      }
+    },
     "네트워크 연결 상태를 확인한 후 앱에 다시 접속해주세요." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Please check your network connection and reconnect to the app."
+          }
+        }
+      }
+    },
+    "노벨 제발(please)상" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nobel (Please) Prize"
+          }
+        }
+      }
+    },
+    "다대기" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dadaegi(Sauce)"
+          }
+        }
+      }
+    },
+    "다랭이마을 전망대" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daraengi Village observatory"
           }
         }
       }
@@ -598,6 +958,16 @@
         }
       }
     },
+    "대한 독립 만세!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "March for Korea’s freedom!"
+          }
+        }
+      }
+    },
     "데이터 관련" : {
       "localizations" : {
         "en" : {
@@ -624,6 +994,46 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Completed K-Stair"
+          }
+        }
+      }
+    },
+    "돌하르방" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dolhareubang"
+          }
+        }
+      }
+    },
+    "동굴로 가보자" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Step into the cave"
+          }
+        }
+      }
+    },
+    "동양 최대 청동좌불상!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buddha's Big Sit-Down!"
+          }
+        }
+      }
+    },
+    "뒤집어 놓은 밥그릇" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Upside-down Rice Bowl"
           }
         }
       }
@@ -671,12 +1081,102 @@
         }
       }
     },
+    "마을을 탐방하는 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Village tour via stairs"
+          }
+        }
+      }
+    },
+    "매표소" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ticket booth"
+          }
+        }
+      }
+    },
+    "모노레일 말고 계단을 이용해서 나의 기세를 보여주자" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skip the monorail — stairs show your power"
+          }
+        }
+      }
+    },
+    "모노레일 옆 계단 입구" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stair entrance beside the monorail"
+          }
+        }
+      }
+    },
+    "모노레일말고 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skip the monorail, take the stairs!"
+          }
+        }
+      }
+    },
+    "모든 것이 시작된 곳" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Where it all began"
+          }
+        }
+      }
+    },
+    "목적을 알 수 없는 계단! 목적이 있을수도?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A staircase with no known purpose… or maybe it does have one?"
+          }
+        }
+      }
+    },
+    "무등산 수박" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mudeungsan Subak(Expensive Watermelon)"
+          }
+        }
+      }
+    },
     "미션" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mission"
+          }
+        }
+      }
+    },
+    "바다가 한눈에 보이는 스페이스 워크!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Space Walk — full sea view guaranteed"
           }
         }
       }
@@ -701,12 +1201,52 @@
         }
       }
     },
+    "방송에서 이 계단을 많이 본 나이라면, 무릎을 조심하세요." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recognize these stairs? You might need a health checkup 🙊"
+          }
+        }
+      }
+    },
+    "배꽃" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pear Blossom"
+          }
+        }
+      }
+    },
     "버전 정보" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Version"
+          }
+        }
+      }
+    },
+    "버찌" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beojji(Cherry)"
+          }
+        }
+      }
+    },
+    "부산 40 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Busan 40-step"
           }
         }
       }
@@ -721,12 +1261,42 @@
         }
       }
     },
+    "부산의 경사로를 몸소 느껴보자" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feel Busan’s slopes with your own legs"
+          }
+        }
+      }
+    },
     "북마크" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bookmark"
+          }
+        }
+      }
+    },
+    "불국사 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bulguksa Temple Stairs"
+          }
+        }
+      }
+    },
+    "불상 앞" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In front of the Buddha statue"
           }
         }
       }
@@ -771,6 +1341,16 @@
         }
       }
     },
+    "성산일출봉" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seongsan Ilchulbong"
+          }
+        }
+      }
+    },
     "세상에 이런 계단이?!" : {
       "localizations" : {
         "en" : {
@@ -791,6 +1371,16 @@
         }
       }
     },
+    "소원을 이뤄주는" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Step by step to your wishes!"
+          }
+        }
+      }
+    },
     "수도권" : {
       "localizations" : {
         "en" : {
@@ -807,6 +1397,36 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Do not actually take this item."
+          }
+        }
+      }
+    },
+    "심사임당과 율곡이이의 고향이라던대?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Birthplace of Shin Saimdang & Yulgok Yi I?"
+          }
+        }
+      }
+    },
+    "십년(된) 감수" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ten-year-old Gamsu"
+          }
+        }
+      }
+    },
+    "아주 높으신 분들만 걸을 수 있는 계단이라네. 우리는 다른 계단으로 걷자." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A protected site — please don’t climb."
           }
         }
       }
@@ -871,8 +1491,48 @@
         }
       }
     },
+    "양푼이비빔밥" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yangpuni Bibimbap"
+          }
+        }
+      }
+    },
+    "엄청난 규모의 불상과 엄청난 칸 수의 계단!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "One massive Buddha. One massive staircase"
+          }
+        }
+      }
+    },
     "없습니다." : {
 
+    },
+    "에스컬레이터 말고 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Take the stairs, not the escalator"
+          }
+        }
+      }
+    },
+    "엘베 대신 계단을 이용해보며 건강한 대학생이 되어보자" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ditch the elevator. Be a healthy student!"
+          }
+        }
+      }
     },
     "역대 하산 기록은\n" : {
       "localizations" : {
@@ -904,12 +1564,42 @@
         }
       }
     },
+    "영광 365 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yeonggwang 365 Stairs"
+          }
+        }
+      }
+    },
+    "영주산 둘레길 천국의 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yeongjusan Dullegil Stairs"
+          }
+        }
+      }
+    },
     "오늘부터 오른 층수 데이터를 추가하면\n진정한 계단사랑단원이 될 수 있어요!" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Add your climbed flights starting today to become a true StepSquad member!"
+          }
+        }
+      }
+    },
+    "오래된 동네를 예쁘게 꾸며 둔 계단 명소!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A pretty staircase in a vintage neighborhood"
           }
         }
       }
@@ -924,6 +1614,26 @@
         }
       }
     },
+    "원조 만남의 광장" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The OG meeting spot."
+          }
+        }
+      }
+    },
+    "원주 소금산 출렁다리 578 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sogeumsan Mountain Suspension Bridge, Wonju"
+          }
+        }
+      }
+    },
     "위치 권한 허용하기" : {
       "localizations" : {
         "en" : {
@@ -934,12 +1644,62 @@
         }
       }
     },
+    "이 계단은 오르지마세요" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Do not climb these stairs"
+          }
+        }
+      }
+    },
+    "이 계단의 비밀 사실! 사실 365개가 아닙니다." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fun fact: this staircase… actually doesn’t have 365 steps."
+          }
+        }
+      }
+    },
+    "이바구 떨며 오르세요" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chat your way up"
+          }
+        }
+      }
+    },
     "이제 틈새를 속세로!" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Let Teum-Sae Fly Away!"
+          }
+        }
+      }
+    },
+    "이화여대 ECC 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ewha Campus Complex (ECC) Stairs, Ewha Womans University"
+          }
+        }
+      }
+    },
+    "이화여대 관광명소" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ewha’s Iconic photo spot"
           }
         }
       }
@@ -1026,6 +1786,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "days"
+          }
+        }
+      }
+    },
+    "일출이 아름다운" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sunrise worth the climb"
+          }
+        }
+      }
+    },
+    "입구 주차장" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entrance parking lot"
           }
         }
       }
@@ -1150,6 +1930,36 @@
         }
       }
     },
+    "전일빌딩 245 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jeonil Building 245"
+          }
+        }
+      }
+    },
+    "전일빌딩245" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jeonil Building 245"
+          }
+        }
+      }
+    },
+    "정선 화암동굴 365 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hwaam Cave, Jeongseon"
+          }
+        }
+      }
+    },
     "정해진 위치에서만 미션을 깰 수 있어요." : {
       "localizations" : {
         "en" : {
@@ -1166,6 +1976,46 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Jeju"
+          }
+        }
+      }
+    },
+    "제주 여행 중 뭔가를 많이 먹었다면 필수로 방문하세요" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A must-visit if you’ve eaten a lot during your Jeju trip."
+          }
+        }
+      }
+    },
+    "제주도에 왔다면 성산 일출을 보러가자!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In Jeju? Go see the sunrise at Seongsan"
+          }
+        }
+      }
+    },
+    "조각상 앞" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In front of the statue"
+          }
+        }
+      }
+    },
+    "조선시대 계단뷰 맛집" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Joseon Dynasty’s best stair-view spot"
           }
         }
       }
@@ -1190,6 +2040,26 @@
         }
       }
     },
+    "진정한 쫄보를 가리자" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Only for the brave!"
+          }
+        }
+      }
+    },
+    "진해 제황산 1년 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jehwangsan 1 year Stairs"
+          }
+        }
+      }
+    },
     "진행하려면 " : {
 
     },
@@ -1203,12 +2073,52 @@
         }
       }
     },
+    "창업 계획서 양식.hwp" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Business Plan Template.docs"
+          }
+        }
+      }
+    },
+    "창업자가 되고 싶다면?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Want to be an Entrepreneur?"
+          }
+        }
+      }
+    },
+    "천안 각원사 무량공덕계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gakwonsa Muryang Gongdeok Stairs"
+          }
+        }
+      }
+    },
     "첫 번째 레벨을 달성하고 재료를 얻어보세요." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Complete the first level and get items."
+          }
+        }
+      }
+    },
+    "청춘발산마을 벽화 108 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cheongchun Bal-san Village"
           }
         }
       }
@@ -1263,6 +2173,36 @@
         }
       }
     },
+    "춘향골 복숭아" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chunhyanggol Peach"
+          }
+        }
+      }
+    },
+    "춘향이의 힘을 빌려 계단 사랑력을 뽐내보세요" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show your StepSquad power, Chunhyang’s sprite will join you"
+          }
+        }
+      }
+    },
+    "출렁다리 건너기전에 건너야만 해요" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cross this before the bridge wobbles!"
+          }
+        }
+      }
+    },
     "층수" : {
       "localizations" : {
         "en" : {
@@ -1289,6 +2229,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "What’s the name of bird?"
+          }
+        }
+      }
+    },
+    "태극기" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Taegukgi"
+          }
+        }
+      }
+    },
+    "통통한 멸치" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tongtong Myeolchi(Anchovies)"
           }
         }
       }
@@ -1369,12 +2329,112 @@
         }
       }
     },
+    "판교 나폴리탄 괴담!?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Spooky Stairs Story!?"
+          }
+        }
+      }
+    },
+    "판교 뜬금없는 육교 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pangyo Gapbun Footbridge"
+          }
+        }
+      }
+    },
+    "판교 사투리 사전" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pangyo Dialect Dictionary"
+          }
+        }
+      }
+    },
+    "판교에는 육교가 아닌 육교가 있어요" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An overpass… that isn’t one. Only in Pangyo"
+          }
+        }
+      }
+    },
+    "팔공산 갓바위 1365 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gatbawi Stone Steps"
+          }
+        }
+      }
+    },
     "평일 오후 2시 계단 알림" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Weekday 2 p.m. reminders"
+          }
+        }
+      }
+    },
+    "포항 스페이스 워크" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Space Walk, Pohang"
+          }
+        }
+      }
+    },
+    "포항공대 78계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Postech 78 Stairs"
+          }
+        }
+      }
+    },
+    "포항공대 창업자의 길 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The path of entrepreneurs"
+          }
+        }
+      }
+    },
+    "포항산 철분" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iron from Pohang"
+          }
+        }
+      }
+    },
+    "피난민의 역사가 깃든" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A stairway steeped in refugee history"
           }
         }
       }
@@ -1449,6 +2509,26 @@
         }
       }
     },
+    "한국 민주화운동의 흔적" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Steps of Korean democracy"
+          }
+        }
+      }
+    },
+    "한라봉" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hallabong(Citrus Fruit)"
+          }
+        }
+      }
+    },
     "함께 오른 틈새가" : {
       "localizations" : {
         "en" : {
@@ -1475,6 +2555,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nearby the spot,"
+          }
+        }
+      }
+    },
+    "해탈" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haetal(Enlightenment)"
+          }
+        }
+      }
+    },
+    "호두" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hodoo(Walnut)"
           }
         }
       }
