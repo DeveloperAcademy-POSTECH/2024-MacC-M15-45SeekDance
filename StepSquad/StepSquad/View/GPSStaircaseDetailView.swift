@@ -64,7 +64,7 @@ struct GPSStaircaseDetailView: View {
                         Spacer(minLength: 207)
                         
                         HStack {
-                            Text(gpsStaircase.province.rawValue)
+                            Text(KoreanProvince.getTitleFor(title: gpsStaircase.province))
                                 .foregroundStyle(Color.white)
                                 .font(.caption)
                                 .padding(4)
@@ -360,8 +360,8 @@ struct VerifiedLocationView: View {
                 .padding(.bottom, 12)
             
             HStack(spacing: 12) {
-                GradientSquareView(type: "획득 재료", text: gpsStaircase.reward, isWithSymbol: false)
-                GradientSquareView(type: "추가 점수", text: "\(gpsStaircase.steps)칸", isWithSymbol: true)
+                GradientSquareView(type: String(localized: "획득 재료"), text: gpsStaircase.reward, isWithSymbol: false)
+                GradientSquareView(type: String(localized: "추가 점수"), text: "\(gpsStaircase.steps)칸", isWithSymbol: true)
             }
             
             Spacer()

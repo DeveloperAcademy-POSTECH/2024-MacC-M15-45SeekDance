@@ -125,7 +125,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ Conquered!"
+            "value" : "%@ is conquered!"
           }
         }
       }
@@ -663,7 +663,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Rumor has it, each stair you climb\\nadds 4 seconds to your healthy lifespan."
+            "value" : "Rumor has it, each stair you climb adds 4 seconds to your healthy lifespan."
           }
         }
       }
@@ -683,7 +683,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Become a member of StepSquad,\\nand get “special items”!"
+            "value" : "Become a member of StepSquad, and get “special items”!"
           }
         }
       }
@@ -1846,7 +1846,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Did you know that using the app\\nmakes developer Park Sujin dance?"
+            "value" : "Did you know that using the app makes developer Park Sujin dance?"
           }
         }
       }
@@ -1856,7 +1856,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Did you know that using the app\\nmakes developer Lee Groo shout “Yah-ho!”?"
+            "value" : "Did you know that using the app makes developer Lee Groo shout “Yah-ho!”?"
           }
         }
       }
@@ -1866,7 +1866,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Did you know that using the app\\nmakes developer Jeong Sohee sing?"
+            "value" : "Did you know that using the app makes developer Jeong Sohee sing?"
           }
         }
       }
@@ -1876,7 +1876,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Did you know that using the app\\nmakes developer Han Seoyoung happy?"
+            "value" : "Did you know that using the app makes developer Han Seoyoung happy?"
           }
         }
       }
@@ -1929,7 +1929,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Did you know that using the stairs\\nsaves electricity?"
+            "value" : "Did you know that using the stairs saves electricity?"
           }
         }
       }
@@ -2365,7 +2365,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You climbed the  K-Stair!"
+            "value" : "You climbed the K-Stair!"
           }
         }
       }
@@ -2728,7 +2728,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add a friend, beat them,\\nand then brag all you want!"
+            "value" : "Add a friend, beat them, and then brag all you want!"
           }
         }
       }
