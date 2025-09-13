@@ -414,7 +414,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "is Here!"
+            "value" : " is Here!"
           }
         }
       }
@@ -475,7 +475,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Think it’s the same bird? Nah, that’s just your imagination playing tricks!\n"
+            "value" : "Think it’s the same bird?\nNah, that’s just your imagination playing tricks!\n"
           }
         }
       }
@@ -1036,7 +1036,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Still remaining!"
+            "value" : "\nare still remaining!"
           }
         }
       }
@@ -2046,7 +2046,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Past Graduation records are"
+            "value" : "Past Graduation records"
           }
         }
       }
@@ -2312,7 +2312,14 @@
       }
     },
     "일 동안" : {
-
+        "localizations" : {
+          "en" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : " days "
+            }
+          }
+        }
     },
     "일반 재료" : {
       "localizations" : {
@@ -2389,7 +2396,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You can see graduation records by flipping the certificate of admission."
+            "value" : "You can see graduation records\nby flipping the certificate of admission."
           }
         }
       }
@@ -2822,7 +2829,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "floors❗️"
+            "value" : " floors completed,"
           }
         }
       }
@@ -2905,7 +2912,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Teum-Sae flew away, it’s an empty nest now"
+            "value" : "Teum-Sae flew away,\nit’s an empty nest now"
           }
         }
       }
@@ -2925,7 +2932,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Let Teum-Sae fly away! It’s time to say goodbye to Teumsae"
+            "value" : "Let Teum-Sae fly away!\nIt’s time to say goodbye to Teumsae"
           }
         }
       }
@@ -2945,7 +2952,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "After graduation, every item, achievement, and score will be reset."
+            "value" : "After graduation,\nevery item, achievement, and score will be reset."
           }
         }
       }
@@ -3165,7 +3172,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your partner Teum-Sae just graduated!"
+            "value" : "your partner Teum-Sae\njust graduated!"
           }
         }
       }
