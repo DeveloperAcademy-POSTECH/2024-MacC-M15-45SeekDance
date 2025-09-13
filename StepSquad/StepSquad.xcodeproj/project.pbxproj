@@ -345,10 +345,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 17;
 				MARKETING_VERSION = 2.2.1;
 				NEW_SETTING = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.45SeekDance.StepSquad.Stickers;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.45SeekDance.2024.Stickers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "StepSquadStickersProfile 2025";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = StepSquadStickersProfile;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -376,10 +376,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 17;
 				MARKETING_VERSION = 2.2.1;
 				NEW_SETTING = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.45SeekDance.StepSquad.Stickers;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.45SeekDance.2024.Stickers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "StepSquadStickersProfile 2025";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = StepSquadStickersProfile;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -547,10 +547,10 @@
 				);
 				MARKETING_VERSION = 3.0;
 				NEW_SETTING = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.45SeekDance.StepSquad;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.45SeekDance.2024;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "StepSquadAppProfile 2025";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = StepSquadAppProfile;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -597,10 +597,10 @@
 				);
 				MARKETING_VERSION = 3.0;
 				NEW_SETTING = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.45SeekDance.StepSquad;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.45SeekDance.2024;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "StepSquadAppProfile 2025";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = StepSquadAppProfile;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -635,10 +635,10 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 2.2.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.45SeekDance.StepSquad.Widget;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.45SeekDance.2024.Widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "StepSquadWidgetProfile 2025";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = StepSquadWidgetProfile;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -674,10 +674,10 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 2.2.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.45SeekDance.StepSquad.Widget;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.45SeekDance.2024.Widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "StepSquadWidgetProfile 2025";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = StepSquadWidgetProfile;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
