@@ -17,6 +17,14 @@ enum KoreanProvince: String, Codable {
     case jeju = "제주"
     case chungnam = "대전/충남"
     case chungbuk = "충북"
+    
+    func localizedString() -> String {
+        return NSLocalizedString(rawValue, comment: "")
+    }
+    
+    static func getTitleFor(title: KoreanProvince) -> String {
+        return title.localizedString()
+    }
 }
 
 class GPSStaircase: Codable, Identifiable {

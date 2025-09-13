@@ -448,6 +448,17 @@
         }
       }
     },
+    "강원" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gangwon"
+          }
+        }
+      }
+    },
     "강원도" : {
       "localizations" : {
         "en" : {
@@ -858,6 +869,17 @@
         }
       }
     },
+    "광주/전남" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gwangju/Jeonnam"
+          }
+        }
+      }
+    },
     "광주의 삶과 역사가 깃든, 245에 518의 진실 깃든 계단" : {
       "localizations" : {
         "en" : {
@@ -1148,12 +1170,34 @@
         }
       }
     },
+    "대구/경북" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daegu/Gyeongbuk"
+          }
+        }
+      }
+    },
     "대전·충남" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Daejeon·Chungnam"
+          }
+        }
+      }
+    },
+    "대전/충남" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daejeon/Chungnam"
           }
         }
       }
@@ -1551,6 +1595,17 @@
         }
       }
     },
+    "부산/울산/경남" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Busan/Ulsan/Gyeongnam"
+          }
+        }
+      }
+    },
     "부산의 경사로를 몸소 느껴보자" : {
       "localizations" : {
         "en" : {
@@ -1707,6 +1762,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sejong·Chungbuk"
+          }
+        }
+      }
+    },
+    "세종/충북" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sejong/Chungbuk"
           }
         }
       }
@@ -2169,7 +2235,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Verification Spot"
+            "value" : "Spot"
           }
         }
       }
@@ -2179,7 +2245,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "View Verification Spot"
+            "value" : "View Spot"
           }
         }
       }
@@ -2203,9 +2269,6 @@
           }
         }
       }
-    },
-    "인증이 됩니다." : {
-
     },
     "인증한 계단 " : {
       "localizations" : {
@@ -2663,6 +2726,16 @@
         }
       }
     },
+    "추가 점수" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Special points"
+          }
+        }
+      }
+    },
     "추가 점수는 계속 받을 수 있어요!" : {
       "localizations" : {
         "en" : {
@@ -3079,12 +3152,12 @@
         }
       }
     },
-    "해당 위치 주변에서" : {
+    "해당 위치 주변에서\n인증이 됩니다." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nearby the spot,"
+            "value" : "Nearby the spot,\nyou can verify."
           }
         }
       }

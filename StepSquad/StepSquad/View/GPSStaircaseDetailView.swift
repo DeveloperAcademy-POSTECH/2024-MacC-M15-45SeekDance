@@ -151,10 +151,7 @@ struct GPSStaircaseDetailView: View {
                                     Text(gpsStaircase.verificationLocation)
                                         .font(.caption)
                                         .bold()
-                                    VStack {
-                                        Text("해당 위치 주변에서")
-                                        Text("인증이 됩니다.")
-                                    }
+                                    Text("해당 위치 주변에서\n인증이 됩니다.")
                                     .font(.caption2)
                                     .foregroundColor(Color.Grey500)
                                     .multilineTextAlignment(.center)
@@ -361,7 +358,7 @@ struct VerifiedLocationView: View {
             
             HStack(spacing: 12) {
                 GradientSquareView(type: String(localized: "획득 재료"), text: gpsStaircase.reward, isWithSymbol: false)
-                GradientSquareView(type: String(localized: "추가 점수"), text: "\(gpsStaircase.steps)칸", isWithSymbol: true)
+                GradientSquareView(type: String(localized: "추가 점수"), text: String(localized: "\(gpsStaircase.steps)칸"), isWithSymbol: true)
             }
             
             Spacer()
