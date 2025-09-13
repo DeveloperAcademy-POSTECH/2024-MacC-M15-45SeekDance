@@ -199,7 +199,6 @@
       }
     },
     "%lld층 올라가기" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2312,14 +2311,14 @@
       }
     },
     "일 동안" : {
-        "localizations" : {
-          "en" : {
-            "stringUnit" : {
-              "state" : "translated",
-              "value" : " days "
-            }
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " days "
           }
         }
+      }
     },
     "일반 재료" : {
       "localizations" : {
