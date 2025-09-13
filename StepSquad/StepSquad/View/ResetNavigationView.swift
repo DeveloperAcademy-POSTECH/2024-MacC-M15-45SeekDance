@@ -66,6 +66,7 @@ struct ResetNavigationView: View {
                 }
             }
         }
+        .tint(Color.primaryColor)
     }
 }
 

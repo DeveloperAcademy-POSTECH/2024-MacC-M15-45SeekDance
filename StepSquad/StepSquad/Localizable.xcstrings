@@ -199,6 +199,7 @@
       }
     },
     "%lld층 올라가기" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -413,7 +414,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : " is Here!"
+            "value" : " is here!"
           }
         }
       }
@@ -540,14 +541,7 @@
       }
     },
     "건강해라" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stay healthy!"
-          }
-        }
-      }
+
     },
     "걷기보다 빠른 체지방 태우는 법은?" : {
       "localizations" : {
@@ -955,7 +949,18 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Items collected so far"
+            "value" : "Teum-Sae will take"
+          }
+        }
+      }
+    },
+    "그 동안 모은 건\n틈새 하산 선물로!" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Items collected so far are going to send to Teum-Sae as souvenir"
           }
         }
       }
@@ -1383,14 +1388,21 @@
       }
     },
     "로!" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "\nas soveniers!"
+          }
+        }
+      }
     },
     "를 입력하세요." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Please enter"
+            "value" : " please"
           }
         }
       }
@@ -2648,7 +2660,14 @@
       }
     },
     "진행하려면 " : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "If you are sure, enter "
+          }
+        }
+      }
     },
     "참여 방법" : {
       "localizations" : {
@@ -2835,7 +2854,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : " floors completed,"
+            "value" : " floors,"
           }
         }
       }
@@ -2911,7 +2930,14 @@
       }
     },
     "틈새 하산 선물" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "\nthe items collected"
+          }
+        }
+      }
     },
     "틈새가 떠나\n빈 둥지가 되었어요" : {
       "localizations" : {
