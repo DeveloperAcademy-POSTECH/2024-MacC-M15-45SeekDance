@@ -1998,7 +1998,14 @@
       }
     },
     "없습니다." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No data"
+          }
+        }
+      }
     },
     "에스컬레이터 말고 계단" : {
       "localizations" : {
