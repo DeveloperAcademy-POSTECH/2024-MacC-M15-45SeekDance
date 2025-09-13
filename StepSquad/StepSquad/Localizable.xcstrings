@@ -199,6 +199,7 @@
       }
     },
     "%lld층 올라가기" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -479,12 +480,42 @@
         }
       }
     },
+    "개발 스토리" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About our development story"
+          }
+        }
+      }
+    },
+    "개발자 기쁘게 하기" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How to make developers happy"
+          }
+        }
+      }
+    },
     "개발자를 춤추게 하고 싶어요!" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Do you want to make us dance?"
+          }
+        }
+      }
+    },
+    "개인정보 처리 방침" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy Policy"
           }
         }
       }
@@ -1656,16 +1687,6 @@
         }
       }
     },
-    "빈 둥지가 되었어요" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "It’s an empty nest now"
-          }
-        }
-      }
-    },
     "산삼" : {
       "localizations" : {
         "en" : {
@@ -2086,6 +2107,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "A pretty staircase in a vintage neighborhood"
+          }
+        }
+      }
+    },
+    "오류 문의" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Report Error"
           }
         }
       }
@@ -2869,8 +2900,15 @@
     "틈새 하산 선물" : {
 
     },
-    "틈새가 떠나" : {
-
+    "틈새가 떠나\n빈 둥지가 되었어요" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teum-Sae flew away, it’s an empty nest now"
+          }
+        }
+      }
     },
     "틈새는 온라인 환경에서만 하산을 할 수 있어요!" : {
       "localizations" : {
@@ -3042,16 +3080,6 @@
         }
       }
     },
-    "하산을 했어요!" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Teum-Sae just graduated!"
-          }
-        }
-      }
-    },
     "하산하기" : {
       "localizations" : {
         "en" : {
@@ -3077,7 +3105,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "After Teum-Sae graduates, all your achievements will be reset."
+            "value" : "After Teum-Sae graduates,\nall your achievements will be reset."
           }
         }
       }
@@ -3132,12 +3160,12 @@
         }
       }
     },
-    "함께 오른 틈새가" : {
+    "함께 오른 틈새가\n하산을 했어요!" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your partner Teumsae"
+            "value" : "Your partner Teum-Sae just graduated!"
           }
         }
       }
