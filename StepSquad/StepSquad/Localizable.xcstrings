@@ -199,7 +199,6 @@
       }
     },
     "%lld층 올라가기" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -541,7 +540,7 @@
       }
     },
     "건강해라" : {
-
+      "comment" : "리셋할 때 입력하는 문자열 place holder"
     },
     "걷기보다 빠른 체지방 태우는 법은?" : {
       "localizations" : {
@@ -1010,7 +1009,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "My Ranking"
+            "value" : "Ranking"
           }
         }
       }
@@ -1160,7 +1159,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Achievements"
+            "value" : "Badges"
           }
         }
       }
@@ -2394,7 +2393,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Click to see graduation records"
+            "value" : "Tap to see graduation records"
           }
         }
       }
@@ -2404,7 +2403,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "See certificate of admission"
+            "value" : "Tap to see certificate of admission"
           }
         }
       }
