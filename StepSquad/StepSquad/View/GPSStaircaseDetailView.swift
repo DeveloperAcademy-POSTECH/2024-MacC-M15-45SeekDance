@@ -95,6 +95,7 @@ struct GPSStaircaseDetailView: View {
                                 .foregroundColor(Color.Grey100)
                         }
                         .padding(.bottom, 42)
+                        .padding(.horizontal, 40)
                         
                         // 뱃지
                         if collectedItems.isCollected(item: gpsStaircase.id) {
