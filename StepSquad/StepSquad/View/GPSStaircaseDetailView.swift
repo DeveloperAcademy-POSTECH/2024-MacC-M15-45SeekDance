@@ -386,7 +386,6 @@ struct VerifiedLocationView: View {
             isVerificationActive = false
             lastVerificationTime = Date.now
             healthKitService.getWeeklyStairDataAndSave()
-            // TODO: 성취 현지화 설정
             Task {
                 gpsStaircaseWeeklyScore.addScore(score: gpsStaircase.steps)
                 let weeklyScore = gpsStaircaseWeeklyScore.getWeeklyScore() + Int(healthKitService.weeklyFlightsClimbed) * 16
