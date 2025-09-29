@@ -696,6 +696,13 @@ struct MainViewPhase3: View {
                 gameCenterManager.reportCompletedAchievement(achievementId: "electricBird\(i)")
             }
         }
+        for item in collectedItems.getSortedItemsNameList() {
+            if let gpsStaircase = gpsStaircasesDictionary[item] {
+                gameCenterManager.reportCompletedAchievement(achievementId: gpsStaircase.achievementId)
+            } else if let hiddenItem = hiddenItemsDictionary[item] {
+                gameCenterManager.reportCompletedAchievement(achievementId: hiddenItem.achievementId)
+            }
+        }
     }
     
     // MARK: 헬스킷 업데이트 주기마다 레벨 관련 변경하고, 게임센터 업데이트하는 것 모두 모은 함수
