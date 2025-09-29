@@ -278,12 +278,12 @@
         }
       }
     },
-    "3.0" : {
+    "3.1" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "3.0"
+            "value" : "3.1"
           }
         }
       }
@@ -3354,6 +3354,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "What is an item?"
+          }
+        }
+      }
+    },
+    "히든" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hidden"
           }
         }
       }

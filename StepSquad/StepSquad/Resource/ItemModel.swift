@@ -35,5 +35,5 @@ let hiddenItemsDictionary: [String: Item] = [
         itemImage: "Clover",
         itemColor: 0x03787B,
         achievementId: "clover",
-        keyword: "히든")
+        keyword: String(localized: "히든"))
 ]
