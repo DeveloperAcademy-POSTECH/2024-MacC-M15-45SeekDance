@@ -25,13 +25,13 @@ class Item: Codable {
 
 let hiddenItemsDictionary: [String: Item] = [
     "Bullocho": Item(
-        item: "불로초",
+        item: String(localized: "불로초"),
         itemImage: "Bullocho",
         itemColor: 0x03787B,
         achievementId: "bullocho",
         keyword: "NFC"),
     "Clover": Item(
-        item: "네잎 클로버",
+        item: String(localized: "네잎 클로버"),
         itemImage: "Clover",
         itemColor: 0x03787B,
         achievementId: "clover",

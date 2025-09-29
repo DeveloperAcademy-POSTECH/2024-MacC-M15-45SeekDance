@@ -88,10 +88,10 @@ struct DescendRecordView: View {
                 Spacer()
 
                 Text("입단증 보기")
-                    .font(Font.custom("SF Pro", size: 13))
+                    .font(.footnote)
+                    .foregroundColor(.green900)
                     .padding(.vertical, 4)
-                    .padding(.horizontal, 100)
-                    .foregroundColor(Color(red: 0.23, green: 0.33, blue: 0.17))
+                    .padding(.bottom, 16)
             } else {
                 Image("certificateEmptyView")
                     .resizable()
@@ -112,10 +112,9 @@ struct DescendRecordView: View {
                 Spacer()
                 
                 Text("입단증 보기")
-                    .font(Font.custom("SF Pro", size: 13))
+                    .font(.footnote)
+                    .foregroundColor(.green900)
                     .padding(.vertical, 4)
-                    .padding(.horizontal, 100)
-                    .foregroundColor(Color(red: 0.23, green: 0.33, blue: 0.17))
             }
         }
         .padding(.horizontal, 16)

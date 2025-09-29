@@ -337,7 +337,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2.2.1;
 				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = AZ7B294WMJ;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 62WZR6T98R;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = StepSquadStickers/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = StepSquadStickers;
@@ -345,10 +345,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 17;
 				MARKETING_VERSION = 2.2.1;
 				NEW_SETTING = "";
-				PRODUCT_BUNDLE_IDENTIFIER = kr.45SeekDance.2024.StepSquadStickers;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.45SeekDance.2024.Stickers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = imessageStickerExtension;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = StepSquadStickersProfile;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -368,7 +368,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2.2.1;
 				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = AZ7B294WMJ;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 62WZR6T98R;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = StepSquadStickers/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = StepSquadStickers;
@@ -376,10 +376,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 17;
 				MARKETING_VERSION = 2.2.1;
 				NEW_SETTING = "";
-				PRODUCT_BUNDLE_IDENTIFIER = kr.45SeekDance.2024.StepSquadStickers;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.45SeekDance.2024.Stickers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = imessageStickerExtension;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = StepSquadStickersProfile;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -449,6 +449,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -505,6 +506,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -521,7 +523,7 @@
 				CURRENT_PROJECT_VERSION = 3.0;
 				DEVELOPMENT_ASSET_PATHS = "\"StepSquad/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = AZ7B294WMJ;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 62WZR6T98R;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "StepSquad-Info.plist";
@@ -548,7 +550,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = kr.45SeekDance.2024;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = stepSquadApp;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = StepSquadAppProfile;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -571,7 +573,7 @@
 				CURRENT_PROJECT_VERSION = 3.0;
 				DEVELOPMENT_ASSET_PATHS = "\"StepSquad/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = AZ7B294WMJ;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 62WZR6T98R;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "StepSquad-Info.plist";
@@ -598,7 +600,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = kr.45SeekDance.2024;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = stepSquadApp;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = StepSquadAppProfile;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -620,7 +622,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2.2.1;
 				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = AZ7B294WMJ;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 62WZR6T98R;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = StepSquadWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = StepSquadWidget;
@@ -633,10 +635,10 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 2.2.1;
-				PRODUCT_BUNDLE_IDENTIFIER = kr.45SeekDance.2024.StepSquadWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.45SeekDance.2024.Widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = stepsQuadAppWidget;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = StepSquadWidgetProfile;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -659,7 +661,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2.2.1;
 				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = AZ7B294WMJ;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 62WZR6T98R;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = StepSquadWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = StepSquadWidget;
@@ -672,10 +674,10 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 2.2.1;
-				PRODUCT_BUNDLE_IDENTIFIER = kr.45SeekDance.2024.StepSquadWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.45SeekDance.2024.Widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = stepsQuadAppWidget;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = StepSquadWidgetProfile;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

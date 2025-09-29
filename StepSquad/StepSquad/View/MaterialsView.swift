@@ -125,7 +125,7 @@ struct MaterialsView: View {
                         .font(.system(size: 15))
                         .foregroundStyle(.grey800)
                 }
-                .navigationTitle("획득 재료보기")
+                .navigationTitle("획득 재료 보기")
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationBarItems(
                     leading: Button(action: {

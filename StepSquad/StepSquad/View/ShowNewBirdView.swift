@@ -105,9 +105,9 @@ struct ItemsConfettiView: View {
                             .foregroundStyle(Color(hex: 0x7EB55D))
                         Text("층을")
                     }
-                    Text("함께 오른 틈새가")
-                    Text("하산을 했어요!")
+                    Text("함께 오른 틈새가\n하산을 했어요!")
                 }
+                .multilineTextAlignment(.center)
                 .font(.title)
                 .fontWeight(.bold)
                 .padding(.top, 158)
@@ -173,12 +173,10 @@ struct NewBirdView: View {
 
 struct FirstText: View {
     var body: some View {
-        VStack {
-            Text("틈새가 떠나")
-            Text("빈 둥지가 되었어요")
-        }
+        Text("틈새가 떠나\n빈 둥지가 되었어요")
         .font(.title)
         .fontWeight(.bold)
+        .multilineTextAlignment(.center)
     }
 }
 

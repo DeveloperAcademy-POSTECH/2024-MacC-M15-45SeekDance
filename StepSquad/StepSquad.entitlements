@@ -14,7 +14,7 @@
 	</array>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.com.stepSquad.widget</string>
+		<string>group.com.stepsquad.appgroup</string>
 	</array>
 </dict>
 </plist>

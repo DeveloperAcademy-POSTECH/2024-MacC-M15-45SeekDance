@@ -1,0 +1,3363 @@
+{
+  "sourceLanguage" : "ko",
+  "strings" : {
+    "" : {
+
+    },
+    " %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@"
+          }
+        }
+      }
+    },
+    " %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
+          }
+        }
+      }
+    },
+    "- 낮은 레벨: 흔한 재료" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "- low level: normal and common items"
+          }
+        }
+      }
+    },
+    "- 높은 레벨: 귀한 재료" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "- high level: normal, but special items"
+          }
+        }
+      }
+    },
+    "- 이벤트나 히든 퀘스트: 깜짝 재료" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "- event or hidden mission: hidden items"
+          }
+        }
+      }
+    },
+    "‘%@’" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "‘%@’"
+          }
+        }
+      }
+    },
+    "‘나의 순위’는 어떻게 계산되나요?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How is ‘My Ranking’ calculated?"
+          }
+        }
+      }
+    },
+    "'나의 순위'는 얼마나 유지되나요?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How long does ‘My Ranking’ last?"
+          }
+        }
+      }
+    },
+    "(계단 오르기 점수 + 특별 계단 점수)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "(Stair Climbing Score + K-Stair Master Score)"
+          }
+        }
+      }
+    },
+    "%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@"
+          }
+        }
+      }
+    },
+    "%@ 입단 %lld회차" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ Entry, Round %2$lld"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ 입단 %2$lld회차"
+          }
+        }
+      }
+    },
+    "%@ 정복 성공!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ is conquered!"
+          }
+        }
+      }
+    },
+    "%@의 %lld칸을 걸었어요!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Walked %2$lld steps at %1$@!"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@의 %2$lld칸을 걸었어요!"
+          }
+        }
+      }
+    },
+    "%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
+          }
+        }
+      }
+    },
+    "%lld개 / %lld개" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " %1$lld stairs / %2$lld stairs"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld개 / %2$lld개"
+          }
+        }
+      }
+    },
+    "%lld분 %lld초 후에 인증하기" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verify in %1$lld minutes %2$lld seconds"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld분 %2$lld초 후에 인증하기"
+          }
+        }
+      }
+    },
+    "%lld일 차" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Day %lld"
+          }
+        }
+      }
+    },
+    "%lld층 올라가기" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Climb %lld floors"
+          }
+        }
+      }
+    },
+    "%lld층 올라가는 중" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld floors climbed"
+          }
+        }
+      }
+    },
+    "%lld칸" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld steps"
+          }
+        }
+      }
+    },
+    "%lld회차" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Round %lld"
+          }
+        }
+      }
+    },
+    "0" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "0"
+          }
+        }
+      }
+    },
+    "1-2 매표소" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ticket booth 1-2"
+          }
+        }
+      }
+    },
+    "1.6시간" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1.6h"
+          }
+        }
+      }
+    },
+    "2번 출구 밖" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Outside Exit 2"
+          }
+        }
+      }
+    },
+    "3.0" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3.0"
+          }
+        }
+      }
+    },
+    "3.1만세 운동길 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daegu Heritage Trail Stairs"
+          }
+        }
+      }
+    },
+    "3.1운동의 역사가 깃들어 있는 멋진 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Steps with the spirit of March 1st Movement"
+          }
+        }
+      }
+    },
+    "5만 5천원" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "55,000won"
+          }
+        }
+      }
+    },
+    "5분마다 획득할 수 있어요!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Available every 5 minutes!"
+          }
+        }
+      }
+    },
+    "7호선 상도역 앞 의문스러운 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sangdo Station"
+          }
+        }
+      }
+    },
+    "7호선 종이 티켓" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Line 7 Ticket"
+          }
+        }
+      }
+    },
+    "30분간 계단을 오르면 221kcal를 소비할 수 있어요!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Climb stairs for 30 minutes and burn about 221 kcal!"
+          }
+        }
+      }
+    },
+    "90년대생까지는 다 아는" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Every '90s Korean kid knows"
+          }
+        }
+      }
+    },
+    "Apple 건강 앱 → 둘러보기 → 오른 층수 → 데이터 소스 및 접근에서 '계단사랑단'의 데이터 읽기 권한이 활성화되어 있는지 확인하세요." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Go Apple Health App → Show All Health Data → Flights Climbed → Data Sources & Access. Make sure the StepSquad is allowed to read data."
+          }
+        }
+      }
+    },
+    "Easy → Normal → Hard → Expert → Impossible로 구성됩니다." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configures Easy → Normal → Hard → Expert → Impossible."
+          }
+        }
+      }
+    },
+    "N" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "N"
+          }
+        }
+      }
+    },
+    "NFC로 특별 재료 얻기" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "By tagging NFC, get hidden items"
+          }
+        }
+      }
+    },
+    "가 왔어요!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " is here!"
+          }
+        }
+      }
+    },
+    "감초" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gamcho"
+          }
+        }
+      }
+    },
+    "갓바위 돌가루" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gatbawi Dolgaru(Stone Powder)"
+          }
+        }
+      }
+    },
+    "강릉 오죽헌 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ojukheon House Stairs"
+          }
+        }
+      }
+    },
+    "강원" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gangwon"
+          }
+        }
+      }
+    },
+    "강원도" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gangwon"
+          }
+        }
+      }
+    },
+    "같은 틈새 아닌가 하는 마음이 든다면 그건 착각이에요" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Think it’s the same bird?\nNah, that’s just your imagination playing tricks!\n"
+          }
+        }
+      }
+    },
+    "개발 스토리" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About our development story"
+          }
+        }
+      }
+    },
+    "개발자 기쁘게 하기" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How to make developers happy"
+          }
+        }
+      }
+    },
+    "개발자를 춤추게 하고 싶어요!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Do you want to make us dance?"
+          }
+        }
+      }
+    },
+    "개인정보 처리 방침" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy Policy"
+          }
+        }
+      }
+    },
+    "건강도 챙기고 소원도 빌어보세요!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get healthy. Make a wish"
+          }
+        }
+      }
+    },
+    "건강을 기원하며 걸어요" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Step up your health game!"
+          }
+        }
+      }
+    },
+    "건강해라" : {
+      "comment" : "리셋할 때 입력하는 문자열 place holder"
+    },
+    "걷기보다 빠른 체지방 태우는 법은?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Faster fat burning than walking?"
+          }
+        }
+      }
+    },
+    "걸어서 동굴 속으로" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Step into the cave"
+          }
+        }
+      }
+    },
+    "게임 관련" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About then Game"
+          }
+        }
+      }
+    },
+    "결명자" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gyeolmyeongja"
+          }
+        }
+      }
+    },
+    "계단 끝엔 출렁다리" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A swaying bridge at the top"
+          }
+        }
+      }
+    },
+    "계단 데이터가 연동되지 않아요!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stair data not syncing!"
+          }
+        }
+      }
+    },
+    "계단 도전 인증하기" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verify my location"
+          }
+        }
+      }
+    },
+    "계단 바로 앞" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Right in front of the stairs"
+          }
+        }
+      }
+    },
+    "계단 아래 지점" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bottom of the stairs"
+          }
+        }
+      }
+    },
+    "계단 오르Go! 혈당 낮추Go!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Step it up! Sugar levels down!"
+          }
+        }
+      }
+    },
+    "계단 오르기 맹세한 지" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "StepSquad Streak"
+          }
+        }
+      }
+    },
+    "계단 오르기 전 주의하세요!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stair Safety 101: Read Before You Climb!"
+          }
+        }
+      }
+    },
+    "계단 입구" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stair entrance"
+          }
+        }
+      }
+    },
+    "계단 중앙 지점" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Midway up the stairs"
+          }
+        }
+      }
+    },
+    "계단 한 층(약 16계단)을 기준으로 16칸(점)을 드립니다." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We will give you 16 steps (points) based on one floor of the stairs (about 16 steps)."
+          }
+        }
+      }
+    },
+    "계단 한 칸당 건강 수명 4초가\n늘어난다는 소문이 있어요" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rumor has it, each stair you climb adds 4 seconds to your healthy lifespan."
+          }
+        }
+      }
+    },
+    "계단 현판 앞" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In front of the stair nameplate"
+          }
+        }
+      }
+    },
+    "계단사랑단 심마니가 되어\n‘한약 재료'를 찾자!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Become a member of StepSquad, and get “special items”!"
+          }
+        }
+      }
+    },
+    "계단사랑단 입단증" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Certificate of admission"
+          }
+        }
+      }
+    },
+    "계단사랑단 하산 기록" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Graduation Records"
+          }
+        }
+      }
+    },
+    "계단사랑단에 입단하세요!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hop into the StepSquad!"
+          }
+        }
+      }
+    },
+    "계단사랑단은 여기서 시작되었어요" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Project StepSquad started here"
+          }
+        }
+      }
+    },
+    "계단사랑단은 여기서도 시작하려고 했어요" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Project StepSquad almost started here too."
+          }
+        }
+      }
+    },
+    "계단사랑단의 이야기" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The story of the StepSquad"
+          }
+        }
+      }
+    },
+    "계단사랑단이라면 대한민국의 유명 계단을 다 방문해봐야죠! 전국의 계단에 있는 계단을 방문한 후 인증을 하면 특별 재료와 보너스 점수를 드리고 있어요." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "If you're a member of StepSquad, you should visit all of Korea's famous stairs! By verifying the stairs across the country, you'll get special items and bonus points."
+          }
+        }
+      }
+    },
+    "계단사랑단인 친구 찾기" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Find Your StepSquad Friends"
+          }
+        }
+      }
+    },
+    "계단식 논도 계단이라고 일단 정했어요" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terraced rice fields? Still stairs to us"
+          }
+        }
+      }
+    },
+    "계단으로 천국까지" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The stairway to heaven exists"
+          }
+        }
+      }
+    },
+    "계단을 걷기 싫을 때는 어떻게 하나요?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What if I don’t feel like climbing stairs?"
+          }
+        }
+      }
+    },
+    "계단을 올라야 재료를 모을 수 있어요!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can only collect items by climbing stairs!"
+          }
+        }
+      }
+    },
+    "고객 센터" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Help Center"
+          }
+        }
+      }
+    },
+    "곤드레" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gondre"
+          }
+        }
+      }
+    },
+    "공유하기" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share"
+          }
+        }
+      }
+    },
+    "관암사 계단 입구" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gwanamsa Temple stair entrance"
+          }
+        }
+      }
+    },
+    "광주·전남" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gwangju·Jeonnam"
+          }
+        }
+      }
+    },
+    "광주/전남" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gwangju/Jeonnam"
+          }
+        }
+      }
+    },
+    "광주의 삶과 역사가 깃든, 245에 518의 진실 깃든 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gwangju’s story, told in 245 steps"
+          }
+        }
+      }
+    },
+    "구기자" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gugija"
+          }
+        }
+      }
+    },
+    "국밥 육수" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gukbap Yuksu(Broth)"
+          }
+        }
+      }
+    },
+    "굴비" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gulbi"
+          }
+        }
+      }
+    },
+    "그 동안 모은 건\n" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teum-Sae will take"
+          }
+        }
+      }
+    },
+    "그 동안 모은 건\n틈새 하산 선물로!" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Items collected so far are going to send to Teum-Sae as souvenir"
+          }
+        }
+      }
+    },
+    "기묘한 6칸짜리 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The bizarre six-step stairs"
+          }
+        }
+      }
+    },
+    "기타" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "etc"
+          }
+        }
+      }
+    },
+    "기타를 배우고 싶어요" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Can E.T. See?"
+          }
+        }
+      }
+    },
+    "깜짝 재료" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hidden Items"
+          }
+        }
+      }
+    },
+    "나의 순위" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ranking"
+          }
+        }
+      }
+    },
+    "나의 위치 확인 중" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verifying my location"
+          }
+        }
+      }
+    },
+    "남산 삼순이 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Namsan Park Samsuni Stairs"
+          }
+        }
+      }
+    },
+    "남아있어요!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "\nare still remaining!"
+          }
+        }
+      }
+    },
+    "남원 춘향 테마 파크 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chunhyang Theme Park Stairs, Namwon"
+          }
+        }
+      }
+    },
+    "남해가 한 눈에" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Namhae at a glance"
+          }
+        }
+      }
+    },
+    "남해군 가천마을 다랑이논" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terraced Paddy Fields of Gacheon Village, Namhae"
+          }
+        }
+      }
+    },
+    "네잎 클로버" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clover"
+          }
+        }
+      }
+    },
+    "네트워크 연결 상태를 확인한 후 앱에 다시 접속해주세요." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please check your network connection and reconnect to the app."
+          }
+        }
+      }
+    },
+    "노벨 제발(please)상" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nobel (Please) Prize"
+          }
+        }
+      }
+    },
+    "다 알아요… 주말에는 알람 안 보낼게요. 그렇지만 월요일엔 꼭 다시 만나요!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No alarm this weekend. But Monday? We start again."
+          }
+        }
+      }
+    },
+    "다대기" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dadaegi(Sauce)"
+          }
+        }
+      }
+    },
+    "다랭이마을 전망대" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daraengi Village observatory"
+          }
+        }
+      }
+    },
+    "다시 시도하기" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retry"
+          }
+        }
+      }
+    },
+    "다음으로" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Next"
+          }
+        }
+      }
+    },
+    "달성 뱃지" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Badges"
+          }
+        }
+      }
+    },
+    "달성 뱃지, 약재, 리더보드 점수는 영구적으로 사라집니다.\n하산 기록(날짜, 횟수)는 입단증을 통해 확인할 수 있습니다." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Achievements, items, and leaderboard scores are permanently deleted. \nGraduation records (date, count) can be viewed via your Certificate of admission."
+          }
+        }
+      }
+    },
+    "당겨서 계단 정보 불러오기\n계단 업데이트: %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pull to refresh stair data.\nLast Sync: %@"
+          }
+        }
+      }
+    },
+    "당귀" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Danggwi"
+          }
+        }
+      }
+    },
+    "대구·경북" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daegu·Gyeongbuk"
+          }
+        }
+      }
+    },
+    "대구/경북" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daegu/Gyeongbuk"
+          }
+        }
+      }
+    },
+    "대전·충남" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daejeon·Chungnam"
+          }
+        }
+      }
+    },
+    "대전/충남" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daejeon/Chungnam"
+          }
+        }
+      }
+    },
+    "대추" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daechu"
+          }
+        }
+      }
+    },
+    "대한 독립 만세!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "March for Korea’s freedom!"
+          }
+        }
+      }
+    },
+    "더 큰 고통인 계단 오르기를 하시면 되겠습니다." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Easy fix — climb stairs and feel an even greater pain."
+          }
+        }
+      }
+    },
+    "데이터 관련" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Data Settings"
+          }
+        }
+      }
+    },
+    "도라지" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Doraji"
+          }
+        }
+      }
+    },
+    "도전 완료" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Misson Completed"
+          }
+        }
+      }
+    },
+    "도전 완료된 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Completed K-Stair"
+          }
+        }
+      }
+    },
+    "돌하르방" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dolhareubang"
+          }
+        }
+      }
+    },
+    "동굴로 가보자" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Step into the cave"
+          }
+        }
+      }
+    },
+    "동양 최대 청동좌불상!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buddha's Big Sit-Down!"
+          }
+        }
+      }
+    },
+    "뒤집어 놓은 밥그릇" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Upside-down Rice Bowl"
+          }
+        }
+      }
+    },
+    "레벨 %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Level %lld"
+          }
+        }
+      }
+    },
+    "레벨업은 어떻게 하나요?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How do I level up?"
+          }
+        }
+      }
+    },
+    "레벨에 따라 다양한 재료를 얻을 수 있습니다." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Depending on the level, you can get a variety of items."
+          }
+        }
+      }
+    },
+    "레벨은 어떻게 구성이 되나요?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How are levels structured?"
+          }
+        }
+      }
+    },
+    "로!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "\nas soveniers!"
+          }
+        }
+      }
+    },
+    "를 입력하세요." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " please"
+          }
+        }
+      }
+    },
+    "마을을 탐방하는 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Village tour via stairs"
+          }
+        }
+      }
+    },
+    "마지막 레벨인 19를 달성하면 레벨 1부터 다시 시작하는 기능입니다. 함께한 틈새가 약재를 갖고 하산하면 새로운 틈새를 만날 수 있어요! (똑같은 틈새처럼 보이지만 아무튼 새로운 틈새에요.)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "If you achieve the last level of 19, you can start over from level 1. If our partner Teum-Sae graduates, a new Teum-Sae will join us! (It looks like the same Teum-Sae, but it's a new Teum-Sae anyway.)"
+          }
+        }
+      }
+    },
+    "매표소" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ticket booth"
+          }
+        }
+      }
+    },
+    "맥문동" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maengmundong"
+          }
+        }
+      }
+    },
+    "모노레일 말고 계단을 이용해서 나의 기세를 보여주자" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skip the monorail — stairs show your power"
+          }
+        }
+      }
+    },
+    "모노레일 옆 계단 입구" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stair entrance beside the monorail"
+          }
+        }
+      }
+    },
+    "모노레일말고 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skip the monorail, take the stairs!"
+          }
+        }
+      }
+    },
+    "모든 것이 시작된 곳" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Where it all began"
+          }
+        }
+      }
+    },
+    "목적을 알 수 없는 계단! 목적이 있을수도?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A staircase with no known purpose… or maybe it does have one?"
+          }
+        }
+      }
+    },
+    "무등산 수박" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mudeungsan Subak(Expensive Watermelon)"
+          }
+        }
+      }
+    },
+    "미션" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mission"
+          }
+        }
+      }
+    },
+    "바다가 한눈에 보이는 스페이스 워크!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Space Walk — full sea view guaranteed"
+          }
+        }
+      }
+    },
+    "발은 11자, 허리는 세우고, 무릎이 발보다 더 나오지 않게 조심하기!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feet straight. Back up. Keep knees stay behind toes."
+          }
+        }
+      }
+    },
+    "밥 먹고 계단걷기 잊지말자" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Don’t forget to climb stairs after meals!"
+          }
+        }
+      }
+    },
+    "방문 완료" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Completed"
+          }
+        }
+      }
+    },
+    "방송에서 이 계단을 많이 본 나이라면, 무릎을 조심하세요." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recognize these stairs? You might need a health checkup 🙊"
+          }
+        }
+      }
+    },
+    "배꽃" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pear Blossom"
+          }
+        }
+      }
+    },
+    "백복령" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Baekbongnyeong"
+          }
+        }
+      }
+    },
+    "백출" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Baekchul"
+          }
+        }
+      }
+    },
+    "버전 정보" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Version"
+          }
+        }
+      }
+    },
+    "버찌" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beojji(Cherry)"
+          }
+        }
+      }
+    },
+    "부산 40 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Busan 40-step"
+          }
+        }
+      }
+    },
+    "부산·울산·경남" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Busan·Ulsan·Gyeongnam"
+          }
+        }
+      }
+    },
+    "부산/울산/경남" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Busan/Ulsan/Gyeongnam"
+          }
+        }
+      }
+    },
+    "부산의 경사로를 몸소 느껴보자" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feel Busan’s slopes with your own legs"
+          }
+        }
+      }
+    },
+    "북마크" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bookmark"
+          }
+        }
+      }
+    },
+    "불국사 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bulguksa Temple Stairs"
+          }
+        }
+      }
+    },
+    "불로초" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bullocho"
+          }
+        }
+      }
+    },
+    "불상 앞" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In front of the Buddha statue"
+          }
+        }
+      }
+    },
+    "산삼" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sansam"
+          }
+        }
+      }
+    },
+    "산수유" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sansuyu"
+          }
+        }
+      }
+    },
+    "살면서 쉬운 일만 할 수는 없답니다! 작은 습관이 큰 변화를 만들죠. 오늘은 5층만 도전해보세요!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can't just do easy things in your life! Small habits make big changes. Just try the fifth floor today!"
+          }
+        }
+      }
+    },
+    "새 틈새와 함께하기" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Join with the new bird, Teum-Sae"
+          }
+        }
+      }
+    },
+    "새로운 틈새" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New Teum-Sae"
+          }
+        }
+      }
+    },
+    "생강" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saenggang"
+          }
+        }
+      }
+    },
+    "설명보기" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "View Details"
+          }
+        }
+      }
+    },
+    "성산일출봉" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seongsan Ilchulbong"
+          }
+        }
+      }
+    },
+    "세상에 이런 계단이?!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Step into the Legend"
+          }
+        }
+      }
+    },
+    "세종·충북" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sejong·Chungbuk"
+          }
+        }
+      }
+    },
+    "세종/충북" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sejong/Chungbuk"
+          }
+        }
+      }
+    },
+    "소원을 이뤄주는" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Step by step to your wishes!"
+          }
+        }
+      }
+    },
+    "수도권" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Greater Seoul"
+          }
+        }
+      }
+    },
+    "실제로 가져가진\n마세요." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Do not actually take this item."
+          }
+        }
+      }
+    },
+    "심사임당과 율곡이이의 고향이라던대?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Birthplace of Shin Saimdang & Yulgok Yi I?"
+          }
+        }
+      }
+    },
+    "십년(된) 감수" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ten-year-old Gamsu"
+          }
+        }
+      }
+    },
+    "아주 높으신 분들만 걸을 수 있는 계단이라네. 우리는 다른 계단으로 걷자." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A protected site — please don’t climb."
+          }
+        }
+      }
+    },
+    "아직 계단을 안 오르셨군요!\n계단을 오르고 10분 뒤 다시 당겨보세요!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You haven’t climbed stairs yet! \nTry again 10 minutes after climbing."
+          }
+        }
+      }
+    },
+    "아직 하산한 틈새가 없어요!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No graduation records yet!"
+          }
+        }
+      }
+    },
+    "알림 받기" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enable notifications"
+          }
+        }
+      }
+    },
+    "앗 뭐지??" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What is this??"
+          }
+        }
+      }
+    },
+    "앱 데이터를 삭제하면 점수와 기록은 사라지지만, 게임 센터 내 뱃지는 유지됩니다. 처음부터 다시 시작하는 마음으로 도전해보세요! 개발자에게 응원을 보내면 업데이트 가능할지도?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "When you delete the app data, you lose points and records, but the badge in the game center is maintained. Try all over again! Maybe it can be updated by sending support to the developers?"
+          }
+        }
+      }
+    },
+    "앱 정보" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App information"
+          }
+        }
+      }
+    },
+    "앱과 연동된 날짜부터 오른 층수가 누적되어 현재 레벨을 표시합니다." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The number of floors climbed accumulates from the date you joined StepSquad and displays the current level."
+          }
+        }
+      }
+    },
+    "앱을 쓰면 개발자 박수진이\n춤을 춘다는 사실을 아시나요?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Did you know that using the app makes developer Park Sujin dance?"
+          }
+        }
+      }
+    },
+    "앱을 쓰면 개발자 이그루가\n이얏호를 외친다는 걸 아시나요?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Did you know that using the app makes developer Lee Groo shout “Yah-ho!”?"
+          }
+        }
+      }
+    },
+    "앱을 쓰면 개발자 정소희가\n노래를 부른다는 사실을 아시나요?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Did you know that using the app makes developer Jeong Sohee sing?"
+          }
+        }
+      }
+    },
+    "앱을 쓰면 개발자 한서영이\n행복해진다는 사실을 아시나요?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Did you know that using the app makes developer Han Seoyoung happy?"
+          }
+        }
+      }
+    },
+    "앱을 지우면 데이터가 유지되나요?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Will data be saved after deleting the app?"
+          }
+        }
+      }
+    },
+    "양푼이비빔밥" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yangpuni Bibimbap"
+          }
+        }
+      }
+    },
+    "엄청난 규모의 불상과 엄청난 칸 수의 계단!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "One massive Buddha."
+          }
+        }
+      }
+    },
+    "없습니다." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No data"
+          }
+        }
+      }
+    },
+    "에스컬레이터 말고 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Take the stairs, not the escalator"
+          }
+        }
+      }
+    },
+    "엘리베이터 대신 계단을 사용하면\n전기를 절약할 수 있다는 사실!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Did you know that using the stairs saves electricity?"
+          }
+        }
+      }
+    },
+    "엘베 대신 계단을 이용해보며 건강한 대학생이 되어보자" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ditch the elevator. Be a healthy student!"
+          }
+        }
+      }
+    },
+    "여러분의 틈새 운동을 돕는다는 의미로 틈새라고 지었습니다! (아이메시지에서 스티커로 활용할 수 있어요!)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We named it Teum-Sae, meaning it helps your niche(Teum-Sae) exercise! (You can use it as a sticker on iMessage!)"
+          }
+        }
+      }
+    },
+    "역대 하산 기록은\n" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Past Graduation records"
+          }
+        }
+      }
+    },
+    "연장된 건강 수명" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bonus Life"
+          }
+        }
+      }
+    },
+    "열기" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open"
+          }
+        }
+      }
+    },
+    "영광 365 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yeonggwang 365 Stairs"
+          }
+        }
+      }
+    },
+    "영주산 둘레길 천국의 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yeongjusan Dullegil Stairs"
+          }
+        }
+      }
+    },
+    "오늘부터 오른 층수 데이터를 추가하면\n진정한 계단사랑단원이 될 수 있어요!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add your climbed flights starting today to become a true StepSquad member!"
+          }
+        }
+      }
+    },
+    "오래된 동네를 예쁘게 꾸며 둔 계단 명소!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A pretty staircase in a vintage neighborhood"
+          }
+        }
+      }
+    },
+    "오류 문의" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Report Error"
+          }
+        }
+      }
+    },
+    "오른 층수 추가하기" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add Climbed Flights"
+          }
+        }
+      }
+    },
+    "오른 층수에 따라 점수를 획득하고, 점수가 누적되면 레벨업됩니다. 최고 레벨은 19입니다. 이후 레벨 초기화를 할 수 있습니다." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scores are determined by the number of floors you climb, and they are leveled up as the scores accumulate. The highest level is 19. You can then perform level initialization."
+          }
+        }
+      }
+    },
+    "옥수수 수염" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oksususuyeom"
+          }
+        }
+      }
+    },
+    "원조 만남의 광장" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The OG meeting spot."
+          }
+        }
+      }
+    },
+    "원주 소금산 출렁다리 578 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sogeumsan Mountain Suspension Bridge, Wonju"
+          }
+        }
+      }
+    },
+    "월요일의 고통을 잊는 법은?!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Got the Monday blues?"
+          }
+        }
+      }
+    },
+    "위치 권한 허용하기" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allow Location Access"
+          }
+        }
+      }
+    },
+    "이 계단은 오르지마세요" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Do not climb these stairs"
+          }
+        }
+      }
+    },
+    "이 계단의 비밀 사실! 사실 365개가 아닙니다." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fun fact: this staircase… actually doesn’t have 365 steps."
+          }
+        }
+      }
+    },
+    "이바구 떨며 오르세요" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chat your way up"
+          }
+        }
+      }
+    },
+    "이제 틈새를 속세로!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Let Teum-Sae Fly Away!"
+          }
+        }
+      }
+    },
+    "이화여대 ECC 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ewha Campus Complex (ECC) Stairs, Ewha Womans University"
+          }
+        }
+      }
+    },
+    "이화여대 관광명소" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ewha’s Iconic photo spot"
+          }
+        }
+      }
+    },
+    "인삼" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Insam"
+          }
+        }
+      }
+    },
+    "인증 위치" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spot"
+          }
+        }
+      }
+    },
+    "인증 위치 보기" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "View Spot"
+          }
+        }
+      }
+    },
+    "인증 위치를 다시 확인해주세요." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please recheck the spot."
+          }
+        }
+      }
+    },
+    "인증 장소를 확인한 후 직접 방문한다" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Check the spot and visit in person."
+          }
+        }
+      }
+    },
+    "인증한 계단 " : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verified K-Stairs"
+          }
+        }
+      }
+    },
+    "일 동안" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " days "
+          }
+        }
+      }
+    },
+    "일반 재료" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Normal Items"
+          }
+        }
+      }
+    },
+    "일반 재료는 계단 오르기만을 통해서만 얻을 수 있습니다." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can get normal items by climbing staircases."
+          }
+        }
+      }
+    },
+    "일자" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "days"
+          }
+        }
+      }
+    },
+    "일출이 아름다운" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sunrise worth the climb"
+          }
+        }
+      }
+    },
+    "입구 주차장" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entrance parking lot"
+          }
+        }
+      }
+    },
+    "입단증 눌러서 하산 기록 보기" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap to see graduation records"
+          }
+        }
+      }
+    },
+    "입단증 보기" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap to see certificate of admission"
+          }
+        }
+      }
+    },
+    "입단증의 뒤집으면\n역대 하산 기록을 볼 수 있습니다." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can see graduation records\nby flipping the certificate of admission."
+          }
+        }
+      }
+    },
+    "자주 묻는 질문" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FAQ"
+          }
+        }
+      }
+    },
+    "재료 획득" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New item"
+          }
+        }
+      }
+    },
+    "저두요" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Of course"
+          }
+        }
+      }
+    },
+    "전국" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All"
+          }
+        }
+      }
+    },
+    "전국의 계단 리스트 보기" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "See list of K-Stairs"
+          }
+        }
+      }
+    },
+    "전국의 계단 미션을 깨보세요!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Master K-Stairs!"
+          }
+        }
+      }
+    },
+    "전국의 계단 성공!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You climbed the K-Stair!"
+          }
+        }
+      }
+    },
+    "전국의 계단 오르고 인증하자!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Climb K-Stairs and get special presents!"
+          }
+        }
+      }
+    },
+    "전국의 계단은 무슨 기능인가요?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What is K-Stair Master?"
+          }
+        }
+      }
+    },
+    "전북" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jeonbuk"
+          }
+        }
+      }
+    },
+    "전일빌딩 245 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jeonil Building 245"
+          }
+        }
+      }
+    },
+    "전일빌딩245" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jeonil Building 245"
+          }
+        }
+      }
+    },
+    "정선 화암동굴 365 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hwaam Cave, Jeongseon"
+          }
+        }
+      }
+    },
+    "정해진 위치에서만 미션을 깰 수 있어요." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can only be verified in a certain spot."
+          }
+        }
+      }
+    },
+    "제주" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jeju"
+          }
+        }
+      }
+    },
+    "제주 여행 중 뭔가를 많이 먹었다면 필수로 방문하세요" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A must-visit if you’ve eaten a lot during your Jeju trip."
+          }
+        }
+      }
+    },
+    "제주도에 왔다면 성산 일출을 보러가자!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In Jeju? Go see the sunrise at Seongsan"
+          }
+        }
+      }
+    },
+    "조각상 앞" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In front of the statue"
+          }
+        }
+      }
+    },
+    "조선시대 계단뷰 맛집" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Joseon Dynasty’s best stair-view spot"
+          }
+        }
+      }
+    },
+    "주말엔… 안 오를 거죠…?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We won’t bug you this weekend…"
+          }
+        }
+      }
+    },
+    "주의: 계단사랑단 앱은 게임입니다. 실제 의학적 참고, 권고, 진단등을 위해 앱을 활용하면 안 됩니다." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CAUTION: StepSquad is a game. You should not use the app for actual medical reference, recommendations, diagnoses, etc."
+          }
+        }
+      }
+    },
+    "지역 필터" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filter by regions"
+          }
+        }
+      }
+    },
+    "진정한 쫄보를 가리자" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Only for the brave!"
+          }
+        }
+      }
+    },
+    "진해 제황산 1년 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jehwangsan 1 year Stairs"
+          }
+        }
+      }
+    },
+    "진행하려면 " : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "If you are sure, enter "
+          }
+        }
+      }
+    },
+    "참여 방법" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How to do"
+          }
+        }
+      }
+    },
+    "창업 계획서 양식.hwp" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Business Plan Template.docs"
+          }
+        }
+      }
+    },
+    "창업자가 되고 싶다면?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Want to be an Entrepreneur?"
+          }
+        }
+      }
+    },
+    "천마" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chunma"
+          }
+        }
+      }
+    },
+    "천문동" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cheonmundong"
+          }
+        }
+      }
+    },
+    "천안 각원사 무량공덕계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gakwonsa Muryang Gongdeok Stairs"
+          }
+        }
+      }
+    },
+    "첫 번째 레벨을 달성하고 재료를 얻어보세요." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Complete the first level and get items."
+          }
+        }
+      }
+    },
+    "청춘발산마을 벽화 108 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cheongchun Bal-san Village"
+          }
+        }
+      }
+    },
+    "초량 이바구길 168 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choryang Ibagu-gil 168 Stairs"
+          }
+        }
+      }
+    },
+    "최고 레벨" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "the highest level"
+          }
+        }
+      }
+    },
+    "최고 레벨 달성!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Completed the highest level!"
+          }
+        }
+      }
+    },
+    "최고 레벨을 달성하면\n 틈새를 하산시키고 기록을 남길 수 있어요." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "After you complete the highest level, Teum-Sae can graduate and record  achievements."
+          }
+        }
+      }
+    },
+    "추가 점수" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Special points"
+          }
+        }
+      }
+    },
+    "추가 점수는 계속 받을 수 있어요!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can get a score again!"
+          }
+        }
+      }
+    },
+    "춘향골 복숭아" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chunhyanggol Peach"
+          }
+        }
+      }
+    },
+    "춘향이의 힘을 빌려 계단 사랑력을 뽐내보세요" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show your StepSquad power, Chunhyang’s sprite will join you"
+          }
+        }
+      }
+    },
+    "출렁다리 건너기전에 건너야만 해요" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cross this before the bridge wobbles!"
+          }
+        }
+      }
+    },
+    "층수" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "floors"
+          }
+        }
+      }
+    },
+    "층을" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " floors,"
+          }
+        }
+      }
+    },
+    "친구를 추가하면 친구를 이긴 뒤\n자랑할 수 있어요!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add a friend, beat them, and then brag all you want!"
+          }
+        }
+      }
+    },
+    "칡" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chik"
+          }
+        }
+      }
+    },
+    "캐릭터 이름은 무엇인가요?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What’s the name of bird?"
+          }
+        }
+      }
+    },
+    "태극기" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Taegukgi"
+          }
+        }
+      }
+    },
+    "통통한 멸치" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tongtong Myeolchi(Anchovies)"
+          }
+        }
+      }
+    },
+    "특별 재료에 점수 2배 이벤트" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Special items and double score event"
+          }
+        }
+      }
+    },
+    "특별 점수" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Special score"
+          }
+        }
+      }
+    },
+    "틈새 하산 선물" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "\nthe items collected"
+          }
+        }
+      }
+    },
+    "틈새가 떠나\n빈 둥지가 되었어요" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teum-Sae flew away,\nit’s an empty nest now"
+          }
+        }
+      }
+    },
+    "틈새는 온라인 환경에서만 하산을 할 수 있어요!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teum-Sae can only graduate in an online environment."
+          }
+        }
+      }
+    },
+    "틈새를 속세로!\n이제는 하산할 시간" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Let Teum-Sae fly away!\nIt’s time to say goodbye to Teumsae"
+          }
+        }
+      }
+    },
+    "틈새를 하산시킬까요?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Do you want Teum-Sae to graduate?"
+          }
+        }
+      }
+    },
+    "틈새와 함께 모은 약재, 뱃지, 점수는\n하산이 완료되면 모두 초기화가 됩니다." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "After graduation,\nevery item, achievement, and score will be reset."
+          }
+        }
+      }
+    },
+    "팀 45식단 소개" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About team 45SeekDance"
+          }
+        }
+      }
+    },
+    "판교 나폴리탄 괴담!?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Spooky Stairs Story!?"
+          }
+        }
+      }
+    },
+    "판교 뜬금없는 육교 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pangyo Gapbun Footbridge"
+          }
+        }
+      }
+    },
+    "판교 사투리 사전" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pangyo Dialect Dictionary"
+          }
+        }
+      }
+    },
+    "판교에는 육교가 아닌 육교가 있어요" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An overpass… that isn’t one. Only in Pangyo"
+          }
+        }
+      }
+    },
+    "팔공산 갓바위 1365 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gatbawi Stone Steps"
+          }
+        }
+      }
+    },
+    "평일 오후 2시 계단 알림" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weekday 2 p.m. reminders"
+          }
+        }
+      }
+    },
+    "포항 스페이스 워크" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Space Walk, Pohang"
+          }
+        }
+      }
+    },
+    "포항공대 78계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Postech 78 Stairs"
+          }
+        }
+      }
+    },
+    "포항공대 창업자의 길 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The path of entrepreneurs"
+          }
+        }
+      }
+    },
+    "포항산 철분" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iron from Pohang"
+          }
+        }
+      }
+    },
+    "피난민의 역사가 깃든" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A stairway steeped in refugee history"
+          }
+        }
+      }
+    },
+    "하산 날짜" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "graduation date"
+          }
+        }
+      }
+    },
+    "하산하기" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Graduate"
+          }
+        }
+      }
+    },
+    "하산하기는 무슨 기능인가요?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What is graduation for Teum-Sae?"
+          }
+        }
+      }
+    },
+    "하산하기를 완료하면\n틈새와 함께 모은 기록들은 초기화가 됩니다." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "After Teum-Sae graduates,\nall your achievements will be reset."
+          }
+        }
+      }
+    },
+    "하산한 틈새가 떠나고" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teum-Sae flew away,"
+          }
+        }
+      }
+    },
+    "한 계단 오를 때마다 건강 수명이 4초씩 연장됩니다." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Each step up will extend your healthy life by 4 seconds."
+          }
+        }
+      }
+    },
+    "한 주 동안 모은 점수로 순위가 매겨지며, 매주 금요일 자정에 리셋됩니다." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ranked by points collected during the week, it is reset every Friday at midnight."
+          }
+        }
+      }
+    },
+    "한국 민주화운동의 흔적" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Steps of Korean democracy"
+          }
+        }
+      }
+    },
+    "한라봉" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hallabong(Citrus Fruit)"
+          }
+        }
+      }
+    },
+    "함께 오른 틈새가\n하산을 했어요!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "your partner Teum-Sae\njust graduated!"
+          }
+        }
+      }
+    },
+    "해당 계단 하단의 인증하기를 탭!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Click the bottom button!"
+          }
+        }
+      }
+    },
+    "해당 위치 주변에서\n인증이 됩니다." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nearby the spot,\nyou can verify."
+          }
+        }
+      }
+    },
+    "해탈" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haetal(Enlightenment)"
+          }
+        }
+      }
+    },
+    "혈당 스파이크 왔을 땐 계단 오르기로 잡아보자!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Easy fix — climb stairs and feel an even greater pain."
+          }
+        }
+      }
+    },
+    "호두" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hodoo(Walnut)"
+          }
+        }
+      }
+    },
+    "확인" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        }
+      }
+    },
+    "확인하기" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        }
+      }
+    },
+    "확인하는 중" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verifying the location"
+          }
+        }
+      }
+    },
+    "황기" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hwanggi"
+          }
+        }
+      }
+    },
+    "황정" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hwangjeong"
+          }
+        }
+      }
+    },
+    "회차" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "round"
+          }
+        }
+      }
+    },
+    "획득 재료" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Special item"
+          }
+        }
+      }
+    },
+    "획득 재료 보기" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inventory"
+          }
+        }
+      }
+    },
+    "획득 재료 확인하기" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "See Inventory"
+          }
+        }
+      }
+    },
+    "획득 재료는 무엇인가요?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What is an item?"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

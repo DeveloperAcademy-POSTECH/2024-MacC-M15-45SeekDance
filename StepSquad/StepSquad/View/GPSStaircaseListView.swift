@@ -98,7 +98,7 @@ struct GPSStaircaseListView: View {
                                 Spacer()
                                 
                                 HStack {
-                                    Text(staircase.province.rawValue)
+                                    Text(KoreanProvince.getTitleFor(title: staircase.province))
                                         .font(.caption2)
                                         .bold()
                                         .foregroundStyle(.grey800)
