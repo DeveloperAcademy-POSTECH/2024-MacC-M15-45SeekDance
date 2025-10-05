@@ -418,86 +418,6 @@ struct MainView: View {
         })
     }
     
-    private var NFCReadingView: some View {
-        HStack(spacing: 0) {
-            Image("NFCButtonImage")
-                .resizable()
-                .frame(width: 36, height: 36)
-                .padding(.leading, 16)
-                .padding(.trailing, 9)
-            
-            VStack(alignment: .leading, spacing: 0) {
-                Text("5분마다 획득할 수 있어요!")
-                    .font(.system(size: 13))
-                    .foregroundStyle(Color(hex: 0x3C3C43))
-                Text("NFC로 특별 재료 얻기")
-                    .font(.system(size: 15))
-                    .fontWeight(.semibold)
-            }
-            
-            Spacer()
-            
-            Button {
-                nfcReader = NFCReader { result in
-                    switch result {
-                    case .success((let message, let serialNumber)):
-                        (nfcMessage, nfcCount) = findNFCSerialNuber(serialNumber: serialNumber)
-                        print(serialNumber)
-                        
-                        if nfcCount != 0 {
-                            context.insert(StairStepModel(stairType: message, stairStepDate: Date(), stairNum: nfcCount))
-                            do {
-                                try context.save()
-                            } catch {
-                                print("SwiftData error")
-                            }
-                            isResultViewPresented.toggle()
-                            // MARK: - 순위표, 성취 업데이트 하기
-                            gameCenterManager.reportCompletedAchievement(achievementId: serialNumber)
-                            gameCenterManager.reportCompletedAchievement(achievementId: "bullocho")
-                            updateLeaderboard()
-                            if !collectedItems.isCollected(item: "Bullocho") { // 불로초를 처음 획득한다면
-                                collectedItems.collectItem(item: "Bullocho", collectedDate: Date.now)
-                                isShowingNewItem = true
-                            }
-                        } else {
-                            isShowingNFCAlert.toggle()
-                        }
-                        
-                    case .failure(let error):
-                        print("error 발생")
-                    }
-                }
-                nfcReader?.beginScanning()
-            } label: {
-                if isButtonEnabled {
-                    Text("열기")
-                        .font(.system(size: 13))
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 8)
-                        .foregroundColor(.green900)
-                        .background(.green200,
-                                    in: RoundedRectangle(cornerRadius: 4))
-                } else {
-                    Text("\(buttonCountMessage)")
-                        .font(.system(size: 13))
-                        .foregroundColor(.black)
-                        .font(.body)
-                        .fontWeight(.regular)
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 8)
-                        .background(.grey500)
-                        .cornerRadius(4)
-                }
-            }
-            .padding(.trailing, 16)
-            .disabled(!isButtonEnabled)
-            .onAppear {
-                startTimer()
-            }
-        }
-    }
-    
     // MARK: - 생성자
     init() {
         // MARK: 사용자 게임 센터 인증
@@ -505,42 +425,6 @@ struct MainView: View {
         // MARK: 저장된 레벨 정보 불러오고 헬스킷 정보로 업데이트하기
         currentStatus = loadCurrentStatus()
         //        printAll()
-    }
-    
-    // MARK: - 타이머
-    func startTimer() {
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            updateButtonState()
-        }
-    }
-    
-    func updateButtonState() {
-        if let lastStep = stairSteps.last {
-            let elapsedTime = Date().timeIntervalSince(lastStep.stairStepDate)
-            let remainingTime = max(0, 300 - elapsedTime)
-            
-            if remainingTime <= 0 {
-                isButtonEnabled = true
-            } else {
-                isButtonEnabled = false
-                let minutes = Int(remainingTime) / 60
-                let seconds = Int(remainingTime) % 60
-                buttonCountMessage = String(format: "%02d분 %02d초", minutes, seconds)
-            }
-        } else {
-            isButtonEnabled = true
-        }
-    }
-    
-    // MARK: - 시리얼 정보를 통해 계단 찾기
-    func findNFCSerialNuber(serialNumber: String) -> (String, Int) {
-        if gariStairs.contains(where: { $0.serialNumber == serialNumber }) {
-            let stair = gariStairs.first(where: { $0.serialNumber == serialNumber })!
-            stair.isVisited = true
-            return (stair.name, stair.numberOfStairs)
-        } else {
-            return ("지원되지 않는 NFC입니다", 0)
-        }
     }
     
     // MARK: - 오늘 계단 걷기 기록 횟수
@@ -565,26 +449,8 @@ struct MainView: View {
         }.count
     }
     
-    // MARK: - NFC 주간 점수 계산
-    func weeklyScore(from data: [StairStepModel], currentDate: Date = Date()) -> Int {
-        let calendar = Calendar.current
-        var startOfWeek = currentDate
-        
-        while calendar.component(.weekday, from: startOfWeek) != 7 {
-            startOfWeek = calendar.date(byAdding: .day, value: -1, to: startOfWeek)!
-        }
-        startOfWeek = calendar.startOfDay(for: startOfWeek)
-        
-        let totalScore = data
-            .filter { $0.stairStepDate >= startOfWeek && $0.stairStepDate <= currentDate }
-            .reduce(0) { $0 + $1.stairNum }
-        
-        return totalScore
-    }
-    
     // MARK: - 이번주 총 점수(전국의 계단 점수 + 오른 계단 칸) 계산 후 순위표 업데이트하기
     func updateLeaderboard() {
-        //        let weeklyNfcPoint = weeklyScore(from: stairSteps)
         service.getWeeklyStairDataAndSave()
         let weeklyStairPoint = service.weeklyFlightsClimbed * 16
         let weeklyGpsStaircaseScore = gpsStaircaseWeeklyScore.getWeeklyScore()
@@ -677,7 +543,7 @@ struct MainView: View {
     
     // MARK: Level 관련 테스트 프린트문
     func printAll() {
-        print("✔️ printAll")
+        print("🛠️ printAll")
         print("누적 층계: \(currentStatus.getTotalStaircase())")
         print("현재 레벨: \(currentStatus.currentLevel.level)")
         print("현재 레벨 난이도: \(currentStatus.currentLevel.difficulty.rawValue)")
