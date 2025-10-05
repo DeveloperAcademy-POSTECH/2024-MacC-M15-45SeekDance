@@ -14,12 +14,9 @@ struct MainTabView: View {
     @State private var isResetViewPresented = false
     @State private var isShowNewBirdPresented = false
     @State private var isWifiAlertPresented = false
-    @State var isResultViewPresented: Bool = false
-    @State var isShowingNFCAlert: Bool = false
     @State var isMaterialSheetPresented: Bool = false
     @State var isCardFlipped: Bool = true
     @State var isLaunching: Bool = true
-    @State private var isButtonEnabled: Bool = true
     @AppStorage("isShowingNewItem") private var isShowingNewItem = false
     @Environment(\.scenePhase) private var scenePhase
     
