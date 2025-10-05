@@ -26,7 +26,7 @@ struct MainTabView: View {
                 .badge("N")
                 
                 Tab("setting", systemImage: "gear") {
-                    Text("setting")
+                    ExplainView()
                 }
             }
         }
