@@ -43,7 +43,7 @@ class GPSStaircase: Codable, Identifiable {
     let reweardImageName: String // 획득 재료 이미지 "[id]_reward"
     let achievementId: String // id의 맨 앞글자를 소문자로 만듬
     
-    init(id: String, name: String, title: String, description: String, province: KoreanProvince, steps: Int, gpsLocation: (latitude: Double, longitude: Double), verificationLocation: String, reward: String) {
+    init(id: String, name: String, title: String, description: String, province: KoreanProvince, steps: Int, gpsLocation: (latitude: Double, longitude: Double), verificationLocation: String, reward: String, achievementId: String? = nil) {
         self.id = id
         self.name = name
         self.title = title
@@ -54,10 +54,14 @@ class GPSStaircase: Codable, Identifiable {
         self.longitude = gpsLocation.longitude
         self.verificationLocation = verificationLocation
         self.reward = reward
-        self.achievementId = id.prefix(1).lowercased() + id.suffix(id.count - 1)
         self.imageName = id
         self.verificationLocationImageName = id + "_location"
         self.reweardImageName = id + "_reward"
+        if let achievementId = achievementId {
+            self.achievementId = achievementId
+        } else {
+            self.achievementId = id.prefix(1).lowercased() + id.suffix(id.count - 1)
+        }
     }
 }
 
@@ -91,7 +95,8 @@ let gpsStaircasesDictionary: [String: GPSStaircase] = [
         steps: 108,
         gpsLocation: (34.726835, 127.896276),
         verificationLocation: String(localized: "다랭이마을 전망대"),
-        reward: String(localized: "통통한 멸치")),
+        reward: String(localized: "통통한 멸치"),
+        achievementId: "GacheonVillage"),
     "JehwangMountain": GPSStaircase(
         id: "JehwangMountain",
         name: String(localized: "진해 제황산 1년 계단"),
