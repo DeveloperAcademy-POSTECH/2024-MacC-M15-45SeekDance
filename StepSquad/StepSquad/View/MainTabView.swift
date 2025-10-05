@@ -78,7 +78,6 @@ struct MainTabView: View {
         gameCenterManager.authenticateUser()
         // MARK: 저장된 레벨 정보 불러오고 헬스킷 정보로 업데이트하기
         currentStatus = loadCurrentStatus()
-            userProfileImage = await gameCenterManager.loadLocalPlayerImage()
         //        printAll()
     }
     
