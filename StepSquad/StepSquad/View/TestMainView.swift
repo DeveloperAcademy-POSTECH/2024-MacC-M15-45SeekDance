@@ -43,7 +43,6 @@ struct MainView: View {
     
     let gameCenterManager = GameCenterManager()
     
-    @Environment(\.scenePhase) private var scenePhase
     @Environment(\.modelContext) var context
     
     @Query(sort: [SortDescriptor(\StairStepModel.stairStepDate, order: .forward)]) var stairSteps: [StairStepModel]
