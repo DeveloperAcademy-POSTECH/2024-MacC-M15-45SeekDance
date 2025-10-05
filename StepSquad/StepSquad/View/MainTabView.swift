@@ -10,6 +10,7 @@ import SwiftData
 
 @available(iOS 18.0, *)
 struct MainTabView: View {
+    // MARK: 뷰 상태 관련 변수
     @State private var isResetViewPresented = false
     @State private var isShowNewBirdPresented = false
     @State private var isWifiAlertPresented = false
@@ -20,15 +21,16 @@ struct MainTabView: View {
     @State var isLaunching: Bool = true
     @State private var isButtonEnabled: Bool = true
     @AppStorage("isShowingNewItem") private var isShowingNewItem = false
+    @Environment(\.scenePhase) private var scenePhase
     
+    // MARK: 리셋 관련 변수
     @State var isResetCompleted: Bool = false
     
+    // MARK: 기록 관련 데이터
     @State private var completedLevels = CompletedLevels()
     @State private var collectedItems = CollectedItems()
     @AppStorage("lastElectricAchievementKwh") var lastElectricAchievementKwh = 0
-    @State var userProfileImage: Image?
     @State private var gpsStaircaseWeeklyScore = GPSStaircaseWeeklyScore()
-    
     var currentStatus: CurrentStatus = CurrentStatus() {
         didSet {
             saveCurrentStatus()
@@ -38,16 +40,18 @@ struct MainTabView: View {
         return currentStatus.currentLevel.level == 20
     }
     
+    // MARK: game center 관련 데이터
     let gameCenterManager = GameCenterManager()
+    @State var userProfileImage: Image?
     
-    @Environment(\.scenePhase) private var scenePhase
-    @Environment(\.modelContext) var context
-    
-    @Query(sort: [SortDescriptor(\StairStepModel.stairStepDate, order: .forward)]) var stairSteps: [StairStepModel]
-    
+    // MARK: healthkit 관련 데이터
     @ObservedObject var service = HealthKitService()
     @AppStorage("HealthKitAuthorized") var isHealthKitAuthorized: Bool = false
     @ObservedObject var climbingManager = ClimbingManager()
+    
+    // TODO: - nfc 관련 콘텐츠 삭제
+    @Query(sort: [SortDescriptor(\StairStepModel.stairStepDate, order: .forward)]) var stairSteps: [StairStepModel]
+    @Environment(\.modelContext) var context
     
     var body: some View {
         TabView {
