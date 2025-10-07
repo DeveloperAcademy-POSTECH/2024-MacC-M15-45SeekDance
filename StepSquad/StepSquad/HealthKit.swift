@@ -137,8 +137,8 @@ class HealthKitService: ObservableObject {
         appGroupDefaults?.set(formattedFetchTime, forKey: "LastFetchTime")
         
         // 저장 결과 출력
-        print("2. 총 계단 오르기 수 \(flightsClimbed)를 저장했습니다. (패치 시각: \(formattedFetchTime))")
-        print("2. Authorization Date: \(authorizationDate)")
+//        print("2. 총 계단 오르기 수 \(flightsClimbed)를 저장했습니다. (패치 시각: \(formattedFetchTime))")
+//        print("2. Authorization Date: \(authorizationDate)")
     }
     
     func getSavedFlightsClimbedFromDefaults() -> Double {
@@ -189,7 +189,7 @@ class HealthKitService: ObservableObject {
                     self?.isHealthKitAuthorized = false
                 }
                 
-                print("3. 전체 계단 오르기 데이터: \(totalFlightsClimbed)")
+//                print("3. 전체 계단 오르기 데이터: \(totalFlightsClimbed)")
             }
         }
         
@@ -266,8 +266,8 @@ class HealthKitService: ObservableObject {
                 DispatchQueue.main.async {
                     self.weeklyFlightsClimbed = totalFlightsClimbed
                 }
-                print("4.주간 계단 수 (토-금): \(totalFlightsClimbed)를 UserDefaults에 저장했습니다.")
-                print("4.Authorization Date: \(String(describing: authorizationDate)), Start: \(adjustedStartDate), End: \(endOfWeekDate)")
+//                print("4.주간 계단 수 (토-금): \(totalFlightsClimbed)를 UserDefaults에 저장했습니다.")
+//                print("4.Authorization Date: \(String(describing: authorizationDate)), Start: \(adjustedStartDate), End: \(endOfWeekDate)")
             }
             healthStore.execute(query)
         }
