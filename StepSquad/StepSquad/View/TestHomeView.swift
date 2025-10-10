@@ -161,7 +161,6 @@ struct TestHomeView: View {
                             healthManager.getWeeklyStairDataAndSave()
                             healthManager.fetchAndSaveFlightsClimbedSinceAuthorization()
                             updateLevelsAndGameCenter()
-                            //                            printAll()
                         }
                         .scrollIndicators(ScrollIndicatorVisibility.hidden)
                         .onChange(of: isHealthKitAuthorized) {
@@ -342,7 +341,6 @@ struct TestHomeView: View {
         .onAppear {
             // MARK: 일단 임시로 onAppear 사용해서 권한 받자마자 뷰를 그릴 수 있도록 임시 조치함.
             updateLevelsAndGameCenter()
-            //            printAll()
         }
         .onChange(of: isResetViewPresented, {
             // MARK: 리셋 조건 달성 확인 후, 데이터 리셋 시작
@@ -353,7 +351,6 @@ struct TestHomeView: View {
                 healthManager.getWeeklyStairDataAndSave()
                 healthManager.fetchAndSaveFlightsClimbedSinceAuthorization()
                 updateLevelsAndGameCenter()
-                //                printAll()
             }
         })
     }
@@ -435,6 +432,20 @@ struct TestHomeView: View {
         gameCenterManager.resetAchievements()
         completedLevels.resetLevels()
         collectedItems.resetItems()
-        //        printAll()
+    }
+    
+    // MARK: Level 관련 테스트 프린트문
+    func printAll() {
+        print("🛠️ printAll")
+        print("누적 층계: \(currentStatus.getTotalStaircase())")
+        print("현재 레벨: \(currentStatus.currentLevel.level)")
+        print("현재 레벨 난이도: \(currentStatus.currentLevel.difficulty.rawValue)")
+        print("목적지 약재: \(currentStatus.currentLevel.item)")
+        print("목적지 약재 이미지: \(currentStatus.currentLevel.itemImage)")
+        print("현재 단계: \(currentStatus.currentProgress)")
+        print("현재 단계 이미지: \(currentStatus.progressImage)")
+        print("사용자에게 보여준 마지막 달성 레벨: \(completedLevels.lastUpdatedLevel)")
+        print("마지막으로 달성한 환경 성취: \(lastElectricAchievementKwh)kWh")
+        print("collected items: \(collectedItems.getSortedItemsNameList())")
     }
 }
