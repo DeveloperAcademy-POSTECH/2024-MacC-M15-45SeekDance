@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import GameKit
 
 @available(iOS 18.0, *)
 struct MainTabView: View {
@@ -29,6 +30,7 @@ struct MainTabView: View {
     // MARK: game center 관련 데이터
     let gameCenterManager = GameCenterManager()
     @State var userProfileImage: Image?
+    let userName: String? = GKLocalPlayer.local.displayName
     
     // MARK: healthkit 관련 데이터
     @ObservedObject var healthManager = HealthKitService()
@@ -42,16 +44,22 @@ struct MainTabView: View {
     var body: some View {
         TabView {
             TabView {
+                Tab("k-stairs", systemImage: "stairs") {
+                    GPSStaircaseMainView(localPlayerImage: userProfileImage, localPlayerName: userName, collectedItems: $collectedItems, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, gameCenterManager: gameCenterManager, isShowingNewItem: $isShowingNewItem)
+                }
+                
                 Tab("home", systemImage: "house.fill") {
                     TestHomeView(isShowingNewItem: $isShowingNewItem, isResetCompleted: $isResetCompleted, completedLevels: completedLevels, collectedItems: collectedItems, lastElectricAchievementKwh: $lastElectricAchievementKwh, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, currentStatus: currentStatus, gameCenterManager: gameCenterManager, healthManager: healthManager, isHealthKitAuthorized: $isHealthKitAuthorized, climbManager: climbingManager)
                 }
                 
-                Tab("k-stairs", systemImage: "stairs") {
-                    GPSStaircaseMainView(localPlayerImage: userProfileImage, localPlayerName: gameCenterManager.loadLocalPlayerName(), collectedItems: $collectedItems, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, gameCenterManager: gameCenterManager, isShowingNewItem: $isShowingNewItem)
-                }
-                
                 Tab("my record", systemImage: "person.crop.rectangle.stack.fill") {
-                    Text("records")
+                    if let userProfileImage = userProfileImage {
+                        userProfileImage
+                            .resizable()
+                            .frame(width: 44, height: 44)
+                    } else {
+                        Image(systemName: "person.circle.fill")
+                    }
                 }
                 .badge("N")
                 
@@ -61,24 +69,36 @@ struct MainTabView: View {
             }
         }
         .onAppear {
-            gameCenterManager.authenticateUser()
             healthManager.getWeeklyStairDataAndSave()
             healthManager.fetchAndSaveFlightsClimbedSinceAuthorization()
             healthManager.fetchAllFlightsClimbedData()
-            Task {
-                userProfileImage = await gameCenterManager.loadLocalPlayerImage() // TODO: 디버깅 필요
+            if !GKLocalPlayer.local.isAuthenticated {
+                gameCenterManager.authenticateUser()
+            } else {
+                Task {
+                    userProfileImage = try await gameCenterManager.loadLocalPlayerImage()
+                }
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                withAnimation {
+                    if !GKLocalPlayer.local.isAuthenticated {
+                        gameCenterManager.authenticateUser()
+                    } else if userProfileImage == nil {
+                        Task {
+                            userProfileImage = try await gameCenterManager.loadLocalPlayerImage()
+                        }
+                    }
+                }
             }
         }
         .tint(.primaryColor)
     }
     
     // MARK: - 생성자
-    init() {
-        // MARK: 사용자 게임 센터 인증
+    init() {        // MARK: 사용자 게임 센터 인증
         gameCenterManager.authenticateUser()
         // MARK: 저장된 레벨 정보 불러오고 헬스킷 정보로 업데이트하기
         currentStatus = loadCurrentStatus()
-        //        printAll()
     }
     
     // MARK: UserDefaults에 저장한 currentStatus 반환하기
