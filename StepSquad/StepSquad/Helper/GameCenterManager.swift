@@ -10,23 +10,16 @@ import SwiftUI
 
 class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObject {
     private let leaderboardID: String = "leaderboardPhase2"
-    var isGameCenterLoggedIn: Bool = false
+    var isGameCenterLoggedIn: Bool {
+        return GKLocalPlayer.local.isAuthenticated
+    }
     
     // MARK: 게임 센터 계정 인증하기
     func authenticateUser() {
-        var isErrorOccurred = false
         GKLocalPlayer.local.authenticateHandler = { vc, error in
             guard error == nil else {
                 print(error?.localizedDescription ?? "")
-                isErrorOccurred = true
                 return
-            }
-            if isErrorOccurred {
-                self.isGameCenterLoggedIn = false
-                print("game center: not authenticated user")
-            } else {
-                self.isGameCenterLoggedIn = true
-                print("game center: authenticated user")
             }
         }
     }
@@ -43,16 +36,7 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
         return nil
     }
     
-    // MARK: 사용자의 game center 닉네임 가져오기
-    func loadLocalPlayerName() -> String? {
-        guard isGameCenterLoggedIn else {
-            print("Error: user is not logged in to Game Center.")
-            return nil
-        }
-        return GKLocalPlayer.local.displayName
-    }
-    
-    // MARK: 기존 순위표의 점수 가져오기
+    // MARK: 기존 순위표의 점수 가져오기, 현재 사용 안 함
     func loadFormerPoint() async -> Int {
         do {
             let leaderboards = try await GKLeaderboard.loadLeaderboards(IDs: [leaderboardID])
@@ -74,7 +58,7 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
         }
     }
     
-    // MARK: 리더보드에서 모든 사용자의 entry 읽기
+    // MARK: 리더보드에서 모든 사용자의 entry 읽기, 현재 사용 안 함
     func loadAllPoint() async {
         guard isGameCenterLoggedIn else {
             print("Error: user is not logged in to Game Center.")
@@ -90,7 +74,7 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
         }
     }
     
-    // MARK: 순위표 점수를 이전 점수에 더해 업데이트 하기
+    // MARK: 순위표 점수를 이전 점수에 더해 업데이트 하기, 현재 사용 안 함
     func submitPointWithFormerPoint(point: Int) async {
         guard isGameCenterLoggedIn else {
             print("Error: user is not logged in to Game Center.")
@@ -147,7 +131,7 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
         }
     }
     
-    // MARK: 성취 달성 여부 확인 후 성취 업데이트하기, 달성 여부 반환
+    // MARK: 성취 달성 여부 확인 후 성취 업데이트하기, 달성 여부 반환, 현재 사용 안 함
     func reportCompletedAchievementWithReturn(achievementId: String) -> Bool {
         var isReported = false
         guard isGameCenterLoggedIn else {
