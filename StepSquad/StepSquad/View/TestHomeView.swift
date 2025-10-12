@@ -17,163 +17,159 @@ struct TestHomeView: View {
         return currentStatus.currentLevel.level == 20
     }
     
-//    @AppStorage("isShowingNewItem") private var isShowingNewItem = false // TODO: 전달받아야 함
+    //    @AppStorage("isShowingNewItem") private var isShowingNewItem = false // TODO: 전달받아야 함
     @Binding var isShowingNewItem: Bool
-//    @Environment(\.scenePhase) private var scenePhase // TODO: 필요없을 듯
+    //    @Environment(\.scenePhase) private var scenePhase // TODO: 필요없을 듯
     
     // TODO: 다른 탭으로 뺌
-//    @State var isMaterialSheetPresented: Bool = false
-//    @State var isCardFlipped: Bool = true
-//    @State var isLaunching: Bool = true
+    //    @State var isMaterialSheetPresented: Bool = false
+    //    @State var isCardFlipped: Bool = true
+    //    @State var isLaunching: Bool = true
     
     // MARK: 리셋 관련 변수
     // TODO: 탭 뷰 위에 꽉 채울 수 있나
-//    @State var isResetCompleted: Bool = false // TODO: 전달받아야 함
+    //    @State var isResetCompleted: Bool = false // TODO: 전달받아야 함
     @Binding var isResetCompleted: Bool
     
     // MARK: 기록 관련 데이터
-//    @State private var completedLevels = CompletedLevels() // TODO: 필요없을 듯
+    //    @State private var completedLevels = CompletedLevels() // TODO: 필요없을 듯
     var completedLevels: CompletedLevels
-//    @State private var collectedItems = CollectedItems() // TODO: 필요없을 듯
+    //    @State private var collectedItems = CollectedItems() // TODO: 필요없을 듯
     var collectedItems: CollectedItems
-//    @AppStorage("lastElectricAchievementKwh") var lastElectricAchievementKwh = 0 // TODO: 필요없을 듯
+    //    @AppStorage("lastElectricAchievementKwh") var lastElectricAchievementKwh = 0 // TODO: 필요없을 듯
     @Binding var lastElectricAchievementKwh: Int
-//    @State private var gpsStaircaseWeeklyScore = GPSStaircaseWeeklyScore() 탭 뷰면 충분할 듯
+    //    @State private var gpsStaircaseWeeklyScore = GPSStaircaseWeeklyScore() 탭 뷰면 충분할 듯
     @Binding var gpsStaircaseWeeklyScore: GPSStaircaseWeeklyScore
-//    var currentStatus: CurrentStatus = CurrentStatus() // TODO: 전달받아야 함
+    //    var currentStatus: CurrentStatus = CurrentStatus() // TODO: 전달받아야 함
     var currentStatus: CurrentStatus
     
     // MARK: game center 관련 데이터
-//    let gameCenterManager = GameCenterManager() // TODO: 전달받아야 함
+    //    let gameCenterManager = GameCenterManager() // TODO: 전달받아야 함
     let gameCenterManager: GameCenterManager
-//    @State var userProfileImage: Image? // TODO: 필요없을 듯
+    //    @State var userProfileImage: Image? // TODO: 필요없을 듯
     
     // MARK: healthkit 관련 데이터
-//    @ObservedObject var service = HealthKitService()
+    //    @ObservedObject var service = HealthKitService()
     @ObservedObject var healthManager: HealthKitService
-//    @AppStorage("HealthKitAuthorized") var isHealthKitAuthorized: Bool = false // TODO: 전달받아야 함
+    //    @AppStorage("HealthKitAuthorized") var isHealthKitAuthorized: Bool = false // TODO: 전달받아야 함
     @Binding var isHealthKitAuthorized: Bool
-//    @ObservedObject var climbingManager = ClimbingManager()  // TODO: 리셋 위해서 전달받아야 함
+    //    @ObservedObject var climbingManager = ClimbingManager()  // TODO: 리셋 위해서 전달받아야 함
     @ObservedObject var climbManager: ClimbingManager
     
     var body: some View {
-            NavigationStack {
-                ZStack() {
-                    Color.backgroundColor
-                    
+        ZStack() {
+            Color.backgroundColor
+            
+            VStack(spacing: 0) {
+                HStack(spacing: 0) {
+                    Text(healthManager.LastFetchTime.isEmpty == false
+                         ? "당겨서 계단 정보 불러오기\n계단 업데이트: \(healthManager.LastFetchTime)"
+                         : "아직 계단을 안 오르셨군요!\n계단을 오르고 10분 뒤 다시 당겨보세요!")
+                    .font(.footnote)
+                    .foregroundColor(Color(hex: 0x808080))
+                    .multilineTextAlignment(.center)
+                }
+                .padding(.top, 72)
+                .padding(.bottom, 4)
+                .padding(.horizontal, 36)
+                
+                ScrollView {
                     VStack(spacing: 0) {
-                        HStack(spacing: 0) {
-                            Text(healthManager.LastFetchTime.isEmpty == false
-                                 ? "당겨서 계단 정보 불러오기\n계단 업데이트: \(healthManager.LastFetchTime)"
-                                 : "아직 계단을 안 오르셨군요!\n계단을 오르고 10분 뒤 다시 당겨보세요!")
-                            .font(.footnote)
-                            .foregroundColor(Color(hex: 0x808080))
-                            .multilineTextAlignment(.center)
-                        }
-                        .padding(.top, 72)
-                        .padding(.bottom, 4)
-                        .padding(.horizontal, 36)
-                        
-                        ScrollView {
-                            VStack(spacing: 0) {
-                                if isHealthKitAuthorized {
-                                    LevelUpView
-                                } else {
-                                    GetHealthKitView
-                                }
-                            }
-                            .frame(width: 321, height: 467)
-                            .background(Color.white)
-                            .cornerRadius(16)
-                            .padding(.top, 12)
-                            .onAppear() {
-                                healthManager.fetchAllFlightsClimbedData()
-                                healthManager.migrateAuthorizationDataToSharedDefaults()
-                            }
-                            
-                            HStack {
-                                Button {
-                                    // MARK: 성취로 이동
-                                    gameCenterManager.showAchievements()
-                                    reportMissedAchievement()
-                                } label: {
-                                    HStack() {
-                                        Image(systemName: "rectangle.portrait.on.rectangle.portrait.fill")
-                                        Text("달성 뱃지")
-                                    }
-                                    .padding(.horizontal, 20)
-                                    .padding(.vertical, 14)
-                                    .frame(width: 156)
-                                    .font(.system(size: 17))
-                                    .foregroundColor(Color.white)
-                                    .background(.green800,
-                                                in: RoundedRectangle(cornerRadius: 12))
-                                }
-                                
-                                Spacer()
-                                
-                                Button {
-                                    // MARK: 순위표로 이동
-                                    gameCenterManager.showLeaderboard()
-                                } label: {
-                                    HStack() {
-                                        Image(systemName: "figure.stairs")
-                                        Text("나의 순위")
-                                    }
-                                    .padding(.horizontal, 20)
-                                    .padding(.vertical, 14)
-                                    .frame(width: 156)
-                                    .font(.system(size: 17))
-                                    .foregroundColor(Color.white)
-                                    .background(.green800,
-                                                in: RoundedRectangle(cornerRadius: 12))
-                                }
-                            }
-                            .padding(.top, 8)
-                            .padding(.horizontal, 36)
-                            
-                            if isHealthKitAuthorized {
-                                Button {
-                                    gameCenterManager.showFriendsList()
-                                    gameCenterManager.reportCompletedAchievement(achievementId: "clover")
-                                    if !collectedItems.isCollected(item: "Clover") { // 클로버를 처음 획득한다면
-                                        collectedItems.collectItem(item: "Clover", collectedDate: Date.now)
-                                        isShowingNewItem = true
-                                    }
-                                } label: {
-                                    HStack() {
-                                        Spacer()
-                                        Label("계단사랑단인 친구 찾기", systemImage: "figure.socialdance")
-                                            .font(Font.custom("SF Pro", size: 17))
-                                            .foregroundColor(Color.white)
-                                        Spacer()
-                                    }
-                                    .padding(.vertical, 14)
-                                }
-                                .background(.green800, in: RoundedRectangle(cornerRadius: 12))
-                                .padding(.top, 16)
-                                .padding(.bottom, 51)
-                                .padding(.horizontal, 36)
-                            }
-                            
-                        }
-                        .refreshable {
-                            healthManager.getWeeklyStairDataAndSave()
-                            healthManager.fetchAndSaveFlightsClimbedSinceAuthorization()
-                            updateLevelsAndGameCenter()
-                        }
-                        .scrollIndicators(ScrollIndicatorVisibility.hidden)
-                        .onChange(of: isHealthKitAuthorized) {
-                            if isHealthKitAuthorized { // 헬스킷 권한 허용 후 입단 뱃지 받기
-                                gameCenterManager.reportCompletedAchievement(achievementId: "memberOfStepSquad")
-                            }
+                        if isHealthKitAuthorized {
+                            LevelUpView
+                        } else {
+                            GetHealthKitView
                         }
                     }
+                    .frame(width: 321, height: 467)
+                    .background(Color.white)
+                    .cornerRadius(16)
+                    .padding(.top, 12)
+                    .onAppear() {
+                        healthManager.fetchAllFlightsClimbedData()
+                        healthManager.migrateAuthorizationDataToSharedDefaults()
+                    }
+                    
+                    HStack {
+                        Button {
+                            // MARK: 성취로 이동
+                            gameCenterManager.showAchievements()
+                            reportMissedAchievement()
+                        } label: {
+                            HStack() {
+                                Image(systemName: "rectangle.portrait.on.rectangle.portrait.fill")
+                                Text("달성 뱃지")
+                            }
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 14)
+                            .frame(width: 156)
+                            .font(.system(size: 17))
+                            .foregroundColor(Color.white)
+                            .background(.green800,
+                                        in: RoundedRectangle(cornerRadius: 12))
+                        }
+                        
+                        Spacer()
+                        
+                        Button {
+                            // MARK: 순위표로 이동
+                            gameCenterManager.showLeaderboard()
+                        } label: {
+                            HStack() {
+                                Image(systemName: "figure.stairs")
+                                Text("나의 순위")
+                            }
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 14)
+                            .frame(width: 156)
+                            .font(.system(size: 17))
+                            .foregroundColor(Color.white)
+                            .background(.green800,
+                                        in: RoundedRectangle(cornerRadius: 12))
+                        }
+                    }
+                    .padding(.top, 8)
+                    .padding(.horizontal, 36)
+                    
+                    if isHealthKitAuthorized {
+                        Button {
+                            gameCenterManager.showFriendsList()
+                            gameCenterManager.reportCompletedAchievement(achievementId: "clover")
+                            if !collectedItems.isCollected(item: "Clover") { // 클로버를 처음 획득한다면
+                                collectedItems.collectItem(item: "Clover", collectedDate: Date.now)
+                                isShowingNewItem = true
+                            }
+                        } label: {
+                            HStack() {
+                                Spacer()
+                                Label("계단사랑단인 친구 찾기", systemImage: "figure.socialdance")
+                                    .font(Font.custom("SF Pro", size: 17))
+                                    .foregroundColor(Color.white)
+                                Spacer()
+                            }
+                            .padding(.vertical, 14)
+                        }
+                        .background(.green800, in: RoundedRectangle(cornerRadius: 12))
+                        .padding(.top, 16)
+                        .padding(.bottom, 51)
+                        .padding(.horizontal, 36)
+                    }
+                    
                 }
-                .ignoresSafeArea()
+                .refreshable {
+                    healthManager.getWeeklyStairDataAndSave()
+                    healthManager.fetchAndSaveFlightsClimbedSinceAuthorization()
+                    updateLevelsAndGameCenter()
+                }
+                .scrollIndicators(ScrollIndicatorVisibility.hidden)
+                .onChange(of: isHealthKitAuthorized) {
+                    if isHealthKitAuthorized { // 헬스킷 권한 허용 후 입단 뱃지 받기
+                        gameCenterManager.reportCompletedAchievement(achievementId: "memberOfStepSquad")
+                    }
+                }
             }
-            .navigationBarBackButtonHidden(true)
-            .accentColor(.Green800)
+        }
+        .ignoresSafeArea()
     }
     
     private var GetHealthKitView: some View {
