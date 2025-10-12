@@ -30,7 +30,6 @@ struct MainTabView: View {
     // MARK: game center 관련 데이터
     let gameCenterManager = GameCenterManager()
     @State var userProfileImage: Image?
-    let userName: String? = GKLocalPlayer.local.displayName
     
     // MARK: healthkit 관련 데이터
     @ObservedObject var healthManager = HealthKitService()
@@ -45,7 +44,7 @@ struct MainTabView: View {
         TabView {
             TabView {
                 Tab("k-stairs", systemImage: "stairs") {
-                    GPSStaircaseMainView(localPlayerImage: userProfileImage, localPlayerName: userName, collectedItems: $collectedItems, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, gameCenterManager: gameCenterManager, isShowingNewItem: $isShowingNewItem)
+                    GPSStaircaseMainView(localPlayerImage: userProfileImage, localPlayerName: GKLocalPlayer.local.displayName, collectedItems: $collectedItems, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, gameCenterManager: gameCenterManager, isShowingNewItem: $isShowingNewItem)
                 }
                 
                 Tab("home", systemImage: "house.fill") {
@@ -53,12 +52,22 @@ struct MainTabView: View {
                 }
                 
                 Tab("my record", systemImage: "person.crop.rectangle.stack.fill") {
-                    if let userProfileImage = userProfileImage {
-                        userProfileImage
-                            .resizable()
-                            .frame(width: 44, height: 44)
-                    } else {
-                        Image(systemName: "person.circle.fill")
+                    VStack {
+                        if let userProfileImage = userProfileImage {
+                            userProfileImage
+                                .resizable()
+                                .frame(width: 44, height: 44)
+                        } else {
+                            Image(systemName: "person.circle.fill")
+                        }
+                        
+                        Button("request notification") {
+                            //                            notificationManager.requestAuthorization()
+                        }
+                        
+                        Button("send notification") {
+                            //                            notificationManager.requestLocationTriggerNotification()
+                        }
                     }
                 }
                 .badge("N")
