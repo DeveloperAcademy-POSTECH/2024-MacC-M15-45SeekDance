@@ -172,7 +172,7 @@ class HealthKitService: ObservableObject {
         
         let query = HKStatisticsQuery(quantityType: flightsClimbedType, quantitySamplePredicate: combinedPredicate, options: .cumulativeSum) { [weak self] _, result, error in
             if let error = error {
-                print("3. 전체 계단 오르기 데이터 가져오기 오류: \(error.localizedDescription)")
+//                print("3. 전체 계단 오르기 데이터 가져오기 오류: \(error.localizedDescription)")
                 DispatchQueue.main.async {
                     self?.isHealthKitAuthorized = false
                 }
