@@ -177,7 +177,7 @@ struct MainViewPhase3: View {
                             .padding(.top, 8)
                             .padding(.horizontal, 36)
                             
-                            NavigationLink(destination: GPSStaircaseMainView(localPlayerImage: userProfileImage, localPlayerName: gameCenterManager.loadLocalPlayerName(), collectedItems: $collectedItems, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, gameCenterManager: gameCenterManager, isShowingNewItem: $isShowingNewItem), label: {
+                            NavigationLink(destination: GPSStaircaseMainView(localPlayerImage: userProfileImage, localPlayerName: nil, collectedItems: $collectedItems, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, gameCenterManager: gameCenterManager, isShowingNewItem: $isShowingNewItem), label: {
                                 HStack {
                                     Image("gpsStaircaseLogo")
                                         .resizable()
@@ -212,7 +212,7 @@ struct MainViewPhase3: View {
                                     .padding(.vertical, 24)
                                 
                                 ZStack {
-                                    EntryCertificateView(manager: climbingManager, userPlayerImage: userProfileImage, nickName: gameCenterManager.loadLocalPlayerName())
+                                    EntryCertificateView(manager: climbingManager, userPlayerImage: userProfileImage, nickName: nil)
                                         .rotation3DEffect(.degrees(isCardFlipped ? 0.001 : -90), axis: (x: 0.001, y: 1, z: 0.001))
                                         .animation(isCardFlipped ? .linear.delay(0.35) : .linear, value: isCardFlipped)
                                     DescendRecordView(climbManager: climbingManager)

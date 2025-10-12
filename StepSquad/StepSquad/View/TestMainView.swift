@@ -168,7 +168,7 @@ struct MainView: View {
                                     .padding(.vertical, 24)
                                 
                                 ZStack {
-                                    EntryCertificateView(manager: climbingManager, userPlayerImage: userProfileImage, nickName: gameCenterManager.loadLocalPlayerName())
+                                    EntryCertificateView(manager: climbingManager, userPlayerImage: userProfileImage, nickName: nil)
                                         .rotation3DEffect(.degrees(isCardFlipped ? 0.001 : -90), axis: (x: 0.001, y: 1, z: 0.001))
                                         .animation(isCardFlipped ? .linear.delay(0.35) : .linear, value: isCardFlipped)
                                     DescendRecordView(climbManager: climbingManager)
