@@ -224,7 +224,7 @@ class HealthKitService: ObservableObject {
             
             // 권한 허용 날짜 가져오기
             guard let authorizationDate = UserDefaults.standard.object(forKey: "HealthKitAuthorizationDate") as? Date else {
-                print("4. 권한 허용 날짜가 설정되지 않았습니다.")
+//                print("4. 권한 허용 날짜가 설정되지 않았습니다.")
                 return
             }
             
