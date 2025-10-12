@@ -74,7 +74,7 @@ class HealthKitService: ObservableObject {
         } else {
             // 이미 날짜가 저장된 경우, 기존 날짜를 사용
             if UserDefaults.standard.object(forKey: authorizationDateKey) is Date {
-                print("1. Authorization Date: \(String(describing: authorizationDateKey))")
+//                print("1. Authorization Date: \(String(describing: authorizationDateKey))")
             }
         }
     }
@@ -103,7 +103,7 @@ class HealthKitService: ObservableObject {
         let query = HKStatisticsQuery(quantityType: flightsClimbedType, quantitySamplePredicate: combinedPredicate, options: .cumulativeSum) { _, result, error in
             // 오류가 발생한 경우 기본값을 0.0으로 설정
             if let error = error {
-                print("2.계단 오르기 데이터를 가져오는 중 오류 발생: \(error.localizedDescription)")
+//                print("2.계단 오르기 데이터를 가져오는 중 오류 발생: \(error.localizedDescription)")
                 self.saveFlightsClimbedToDefaults(0.0, authorizationDate: authorizationDate)
                 return
             }
@@ -253,7 +253,7 @@ class HealthKitService: ObservableObject {
             
             let query = HKStatisticsQuery(quantityType: stairType, quantitySamplePredicate: combinedPredicate, options: .cumulativeSum) { _, result, error in
                 guard error == nil else {
-                    print("4.주간 계단 데이터 가져오기 오류: \(error!.localizedDescription) 혹은 데이터가 0입니다.")
+//                    print("4.주간 계단 데이터 가져오기 오류: \(error!.localizedDescription) 혹은 데이터가 0입니다.")
                     DispatchQueue.main.async {
                         self.weeklyFlightsClimbed = 0.0
                     }
