@@ -462,7 +462,7 @@ struct MainViewPhase3: View {
                 service.getWeeklyStairDataAndSave()
                 service.fetchAndSaveFlightsClimbedSinceAuthorization()
                 updateLevelsAndGameCenter()
-                //                printAll()
+                printAll()
             }
         })
     }
@@ -720,7 +720,6 @@ struct MainViewPhase3: View {
         gameCenterManager.resetAchievements()
         completedLevels.resetLevels()
         collectedItems.resetItems()
-        //        printAll()
     }
     
     // MARK: Level 관련 테스트 프린트문
