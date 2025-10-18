@@ -48,26 +48,26 @@ struct MainTabView: View {
                 }
                 
                 Tab("home", systemImage: "house.fill") {
-                    TestHomeView(isShowingNewItem: $isShowingNewItem, isResetCompleted: $isResetCompleted, completedLevels: completedLevels, collectedItems: collectedItems, lastElectricAchievementKwh: $lastElectricAchievementKwh, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, currentStatus: currentStatus, gameCenterManager: gameCenterManager, healthManager: healthManager, isHealthKitAuthorized: $isHealthKitAuthorized, climbManager: climbingManager)
+                    TestHomeView(isShowingNewItem: $isShowingNewItem, isResetCompleted: $isResetCompleted, completedLevels: $completedLevels, collectedItems: $collectedItems, lastElectricAchievementKwh: $lastElectricAchievementKwh, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, currentStatus: currentStatus, gameCenterManager: gameCenterManager, healthManager: healthManager, isHealthKitAuthorized: $isHealthKitAuthorized, climbManager: climbingManager)
                 }
                 
                 Tab("my record", systemImage: "person.crop.rectangle.stack.fill") {
-                    VStack {
-                        if let userProfileImage = userProfileImage {
-                            userProfileImage
-                                .resizable()
-                                .frame(width: 44, height: 44)
-                        } else {
-                            Image(systemName: "person.circle.fill")
+                    ZStack {
+                        EntryCertificateView(manager: climbingManager, userPlayerImage: userProfileImage, nickName: nil)
+                            .rotation3DEffect(.degrees(isCardFlipped ? 0.001 : -90), axis: (x: 0.001, y: 1, z: 0.001))
+                            .animation(isCardFlipped ? .linear.delay(0.35) : .linear, value: isCardFlipped)
+                        DescendRecordView(climbManager: climbingManager)
+                            .rotation3DEffect(.degrees(isCardFlipped ? 90 : 0.001), axis: (x: 0.001, y: 1, z: 0.001))
+                            .animation(isCardFlipped ? .linear : .linear.delay(0.35), value: isCardFlipped)
+                        Button("Show materials") {
+                            isMaterialSheetPresented = true
                         }
-                        
-                        Button("request notification") {
-                            //                            notificationManager.requestAuthorization()
-                        }
-                        
-                        Button("send notification") {
-                            //                            notificationManager.requestLocationTriggerNotification()
-                        }
+                    }
+                    .onTapGesture {
+                        isCardFlipped.toggle()
+                    }
+                    .sheet(isPresented: $isMaterialSheetPresented) {
+                        MaterialsView(isMaterialSheetPresented: $isMaterialSheetPresented, isShowingNewItem: $isShowingNewItem, completedLevels: completedLevels, collectedItems: collectedItems)
                     }
                 }
                 .badge("N")

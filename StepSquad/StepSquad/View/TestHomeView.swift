@@ -33,9 +33,9 @@ struct TestHomeView: View {
     
     // MARK: 기록 관련 데이터
     //    @State private var completedLevels = CompletedLevels() // TODO: 필요없을 듯
-    var completedLevels: CompletedLevels
+    @Binding var completedLevels: CompletedLevels
     //    @State private var collectedItems = CollectedItems() // TODO: 필요없을 듯
-    var collectedItems: CollectedItems
+    @Binding var collectedItems: CollectedItems
     //    @AppStorage("lastElectricAchievementKwh") var lastElectricAchievementKwh = 0 // TODO: 필요없을 듯
     @Binding var lastElectricAchievementKwh: Int
     //    @State private var gpsStaircaseWeeklyScore = GPSStaircaseWeeklyScore() 탭 뷰면 충분할 듯
