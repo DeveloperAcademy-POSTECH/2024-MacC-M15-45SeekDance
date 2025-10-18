@@ -25,8 +25,6 @@ class NotificationManager {
     }
     
     func requestLocationTriggerNotification() {
-        UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: ["gpsStaircaseLocationNotification"]) // 이전 위치 알림 삭제
-        
         for gpsStaircase in gpsStaircases {
             let content = UNMutableNotificationContent()
             content.title = "주변에 계단 명소가?!"
@@ -40,19 +38,23 @@ class NotificationManager {
             let region = CLCircularRegion(
                 center: coordinates,
                 radius: 3000,
-                identifier: "gpsStaircaseLocation")
+                identifier: "\(gpsStaircase.verificationLocation)")
             region.notifyOnEntry = true
             region.notifyOnExit = false
             let trigger = UNLocationNotificationTrigger(region: region, repeats: true)
             
             let request = UNNotificationRequest(
-                identifier: "gpsStaircaseLocationNotification",
+                identifier: "\(gpsStaircase.id)",
                 content: content,
                 trigger: trigger)
             
-            UNUserNotificationCenter.current().add(request)
-            
-            print("noti center: \(gpsStaircase.name) request added")
+            UNUserNotificationCenter.current().add(request) { error in
+                if let error {
+                    print(error.localizedDescription)
+                } else {
+                    print("noti center: \(gpsStaircase.name) request added")
+                }
+            }
         }
         print("🚩noti center: completed request")
     }
