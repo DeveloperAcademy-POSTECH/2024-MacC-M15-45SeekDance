@@ -20,6 +20,8 @@ struct GPSStaircaseDetailView: View {
     let locationManager: LocationManager
     @State private var currentLocation: CLLocationCoordinate2D?
     
+    let notificationManager = NotificationManager.instance
+    
     @State private var isAtLocation: Bool = false
     @State private var isShowingMissionSheet: Bool = false
     @AppStorage("isVerificationActive") var isVerificationActive: Bool = true
@@ -220,11 +222,17 @@ struct GPSStaircaseDetailView: View {
                             }
                         }
                     } else if (locationManager.getAuthorizationStatus() == .denied) { // 위치 권한을 거절한 경우
-                        if let url = URL(string: UIApplication.openSettingsURLString) {
-                            UIApplication.shared.open(url)
+                        Task {
+                            notificationManager.requestAuthorization()
+                            if let url = URL(string: UIApplication.openSettingsURLString) {
+                                UIApplication.shared.open(url)
+                            }
                         }
                     } else { // 위치 권한을 결정하지 않은 경우
-                        locationManager.requestAlwaysAuthorization()
+                        Task {
+                            locationManager.requestAlwaysAuthorization()
+                            notificationManager.requestAuthorization()
+                        }
                     }
                 }) {
                     HStack {

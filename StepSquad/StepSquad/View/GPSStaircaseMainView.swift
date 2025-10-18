@@ -20,6 +20,7 @@ struct GPSStaircaseMainView: View {
     @State var filteredGPSStaircases = gpsStaircases
     
     let locationManager = LocationManager()
+    let notificationManager = NotificationManager.instance
     
     let gameCenterManager: GameCenterManager
     
@@ -46,6 +47,11 @@ struct GPSStaircaseMainView: View {
                                 .padding(.top, 122)
                             
                             Spacer()
+                            
+                            Button("전국의 계단 위치 알림") {
+                                notificationManager.requestLocationTriggerNotification()
+                            }
+                            .buttonStyle(.borderedProminent)
                             
                             Button(action: {
                                 proxy.scrollTo("GPSStaircaseListView", anchor: .top)
