@@ -29,6 +29,7 @@ struct MainTabView: View {
     // MARK: game center 관련 데이터
     let gameCenterManager = GameCenterManager()
     @State var userProfileImage: Image?
+    @State var userName: String = "계단 오르기를 실천하는 사람"
     
     // MARK: healthkit 관련 데이터
     @ObservedObject var healthManager = HealthKitService()
@@ -47,14 +48,14 @@ struct MainTabView: View {
                     Text("홈")
                 }
             
-            GPSStaircaseMainView(localPlayerImage: userProfileImage, localPlayerName: GKLocalPlayer.local.displayName, collectedItems: $collectedItems, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, gameCenterManager: gameCenterManager, isShowingNewItem: $isShowingNewItem)
+            GPSStaircaseMainView(localPlayerImage: userProfileImage, localPlayerName: userName, collectedItems: $collectedItems, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, gameCenterManager: gameCenterManager, isShowingNewItem: $isShowingNewItem)
                 .tabItem {
                     Image(systemName: "stairs")
                     Text("전국의 계단")
                 }
             
             ZStack {
-                EntryCertificateView(manager: climbingManager, userPlayerImage: userProfileImage, nickName: nil)
+                EntryCertificateView(manager: climbingManager, userPlayerImage: userProfileImage, nickName: userName)
                     .rotation3DEffect(.degrees(isCardFlipped ? 0.001 : -90), axis: (x: 0.001, y: 1, z: 0.001))
                     .animation(isCardFlipped ? .linear.delay(0.35) : .linear, value: isCardFlipped)
                 DescendRecordView(climbManager: climbingManager)
@@ -91,6 +92,7 @@ struct MainTabView: View {
             } else {
                 Task {
                     userProfileImage = try await gameCenterManager.loadLocalPlayerImage()
+                    userName = GKLocalPlayer.local.displayName
                 }
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
@@ -100,6 +102,7 @@ struct MainTabView: View {
                     } else if userProfileImage == nil {
                         Task {
                             userProfileImage = try await gameCenterManager.loadLocalPlayerImage()
+                            userName = GKLocalPlayer.local.displayName
                         }
                     }
                 }
