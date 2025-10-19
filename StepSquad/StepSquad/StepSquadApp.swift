@@ -26,14 +26,10 @@ struct StepSquadApp: App {
     
     var body: some Scene {
         WindowGroup {
-            if #available(iOS 18.0, *) {
-                MainTabView()
-                    .onOpenURL { url in
-                        print("App opened via URL Scheme: \(url.absoluteString)")
-                    }
-            } else {
-                // TODO: Fallback on earlier versions
-            }
+            MainTabView()
+                .onOpenURL { url in
+                    print("App opened via URL Scheme: \(url.absoluteString)")
+                }
         }
         .modelContainer(stairStepContainer)
     }

@@ -9,7 +9,6 @@ import SwiftUI
 import SwiftData
 import GameKit
 
-@available(iOS 18.0, *)
 struct MainTabView: View {
     // MARK: 뷰 상태 관련 변수
     @State var isMaterialSheetPresented: Bool = false
@@ -42,38 +41,46 @@ struct MainTabView: View {
     
     var body: some View {
         TabView {
-            Tab("k-stairs", systemImage: "stairs") {
-                GPSStaircaseMainView(localPlayerImage: userProfileImage, localPlayerName: GKLocalPlayer.local.displayName, collectedItems: $collectedItems, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, gameCenterManager: gameCenterManager, isShowingNewItem: $isShowingNewItem)
-            }
+            TestHomeView(isShowingNewItem: $isShowingNewItem, isResetCompleted: $isResetCompleted, completedLevels: $completedLevels, collectedItems: $collectedItems, lastElectricAchievementKwh: $lastElectricAchievementKwh, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, currentStatus: currentStatus, gameCenterManager: gameCenterManager, healthManager: healthManager, isHealthKitAuthorized: $isHealthKitAuthorized, climbManager: climbingManager)
+                .tabItem {
+                    Image(systemName: "house.fill")
+                    Text("홈")
+                }
             
-            Tab("home", systemImage: "house.fill") {
-                TestHomeView(isShowingNewItem: $isShowingNewItem, isResetCompleted: $isResetCompleted, completedLevels: $completedLevels, collectedItems: $collectedItems, lastElectricAchievementKwh: $lastElectricAchievementKwh, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, currentStatus: currentStatus, gameCenterManager: gameCenterManager, healthManager: healthManager, isHealthKitAuthorized: $isHealthKitAuthorized, climbManager: climbingManager)
-            }
+            GPSStaircaseMainView(localPlayerImage: userProfileImage, localPlayerName: GKLocalPlayer.local.displayName, collectedItems: $collectedItems, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, gameCenterManager: gameCenterManager, isShowingNewItem: $isShowingNewItem)
+                .tabItem {
+                    Image(systemName: "stairs")
+                    Text("전국의 계단")
+                }
             
-            Tab("my record", systemImage: "person.crop.rectangle.stack.fill") {
-                ZStack {
-                    EntryCertificateView(manager: climbingManager, userPlayerImage: userProfileImage, nickName: nil)
-                        .rotation3DEffect(.degrees(isCardFlipped ? 0.001 : -90), axis: (x: 0.001, y: 1, z: 0.001))
-                        .animation(isCardFlipped ? .linear.delay(0.35) : .linear, value: isCardFlipped)
-                    DescendRecordView(climbManager: climbingManager)
-                        .rotation3DEffect(.degrees(isCardFlipped ? 90 : 0.001), axis: (x: 0.001, y: 1, z: 0.001))
-                        .animation(isCardFlipped ? .linear : .linear.delay(0.35), value: isCardFlipped)
-                    Button("Show materials") {
-                        isMaterialSheetPresented = true
-                    }
+            ZStack {
+                EntryCertificateView(manager: climbingManager, userPlayerImage: userProfileImage, nickName: nil)
+                    .rotation3DEffect(.degrees(isCardFlipped ? 0.001 : -90), axis: (x: 0.001, y: 1, z: 0.001))
+                    .animation(isCardFlipped ? .linear.delay(0.35) : .linear, value: isCardFlipped)
+                DescendRecordView(climbManager: climbingManager)
+                    .rotation3DEffect(.degrees(isCardFlipped ? 90 : 0.001), axis: (x: 0.001, y: 1, z: 0.001))
+                    .animation(isCardFlipped ? .linear : .linear.delay(0.35), value: isCardFlipped)
+                Button("Show materials") {
+                    isMaterialSheetPresented = true
                 }
-                .onTapGesture {
-                    isCardFlipped.toggle()
-                }
-                .sheet(isPresented: $isMaterialSheetPresented) {
-                    MaterialsView(isMaterialSheetPresented: $isMaterialSheetPresented, isShowingNewItem: $isShowingNewItem, completedLevels: completedLevels, collectedItems: collectedItems)
-                }
+            }
+            .onTapGesture {
+                isCardFlipped.toggle()
+            }
+            .sheet(isPresented: $isMaterialSheetPresented) {
+                MaterialsView(isMaterialSheetPresented: $isMaterialSheetPresented, isShowingNewItem: $isShowingNewItem, completedLevels: completedLevels, collectedItems: collectedItems)
             }
             .badge("N")
-            
-            Tab("setting", systemImage: "gear") {
-                ExplainView()
+            .tabItem {
+                Image(systemName: "person.crop.rectangle.stack.fill")
+                Text("나의 기록")
             }
+            
+            ExplainView()
+                .tabItem {
+                    Image(systemName: "gear")
+                    Text("설정")
+                }
         }
         .onAppear {
             healthManager.getWeeklyStairDataAndSave()
