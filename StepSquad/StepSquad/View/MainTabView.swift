@@ -42,39 +42,37 @@ struct MainTabView: View {
     
     var body: some View {
         TabView {
-            TabView {
-                Tab("k-stairs", systemImage: "stairs") {
-                    GPSStaircaseMainView(localPlayerImage: userProfileImage, localPlayerName: GKLocalPlayer.local.displayName, collectedItems: $collectedItems, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, gameCenterManager: gameCenterManager, isShowingNewItem: $isShowingNewItem)
-                }
-                
-                Tab("home", systemImage: "house.fill") {
-                    TestHomeView(isShowingNewItem: $isShowingNewItem, isResetCompleted: $isResetCompleted, completedLevels: $completedLevels, collectedItems: $collectedItems, lastElectricAchievementKwh: $lastElectricAchievementKwh, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, currentStatus: currentStatus, gameCenterManager: gameCenterManager, healthManager: healthManager, isHealthKitAuthorized: $isHealthKitAuthorized, climbManager: climbingManager)
-                }
-                
-                Tab("my record", systemImage: "person.crop.rectangle.stack.fill") {
-                    ZStack {
-                        EntryCertificateView(manager: climbingManager, userPlayerImage: userProfileImage, nickName: nil)
-                            .rotation3DEffect(.degrees(isCardFlipped ? 0.001 : -90), axis: (x: 0.001, y: 1, z: 0.001))
-                            .animation(isCardFlipped ? .linear.delay(0.35) : .linear, value: isCardFlipped)
-                        DescendRecordView(climbManager: climbingManager)
-                            .rotation3DEffect(.degrees(isCardFlipped ? 90 : 0.001), axis: (x: 0.001, y: 1, z: 0.001))
-                            .animation(isCardFlipped ? .linear : .linear.delay(0.35), value: isCardFlipped)
-                        Button("Show materials") {
-                            isMaterialSheetPresented = true
-                        }
-                    }
-                    .onTapGesture {
-                        isCardFlipped.toggle()
-                    }
-                    .sheet(isPresented: $isMaterialSheetPresented) {
-                        MaterialsView(isMaterialSheetPresented: $isMaterialSheetPresented, isShowingNewItem: $isShowingNewItem, completedLevels: completedLevels, collectedItems: collectedItems)
+            Tab("k-stairs", systemImage: "stairs") {
+                GPSStaircaseMainView(localPlayerImage: userProfileImage, localPlayerName: GKLocalPlayer.local.displayName, collectedItems: $collectedItems, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, gameCenterManager: gameCenterManager, isShowingNewItem: $isShowingNewItem)
+            }
+            
+            Tab("home", systemImage: "house.fill") {
+                TestHomeView(isShowingNewItem: $isShowingNewItem, isResetCompleted: $isResetCompleted, completedLevels: $completedLevels, collectedItems: $collectedItems, lastElectricAchievementKwh: $lastElectricAchievementKwh, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, currentStatus: currentStatus, gameCenterManager: gameCenterManager, healthManager: healthManager, isHealthKitAuthorized: $isHealthKitAuthorized, climbManager: climbingManager)
+            }
+            
+            Tab("my record", systemImage: "person.crop.rectangle.stack.fill") {
+                ZStack {
+                    EntryCertificateView(manager: climbingManager, userPlayerImage: userProfileImage, nickName: nil)
+                        .rotation3DEffect(.degrees(isCardFlipped ? 0.001 : -90), axis: (x: 0.001, y: 1, z: 0.001))
+                        .animation(isCardFlipped ? .linear.delay(0.35) : .linear, value: isCardFlipped)
+                    DescendRecordView(climbManager: climbingManager)
+                        .rotation3DEffect(.degrees(isCardFlipped ? 90 : 0.001), axis: (x: 0.001, y: 1, z: 0.001))
+                        .animation(isCardFlipped ? .linear : .linear.delay(0.35), value: isCardFlipped)
+                    Button("Show materials") {
+                        isMaterialSheetPresented = true
                     }
                 }
-                .badge("N")
-                
-                Tab("setting", systemImage: "gear") {
-                    ExplainView()
+                .onTapGesture {
+                    isCardFlipped.toggle()
                 }
+                .sheet(isPresented: $isMaterialSheetPresented) {
+                    MaterialsView(isMaterialSheetPresented: $isMaterialSheetPresented, isShowingNewItem: $isShowingNewItem, completedLevels: completedLevels, collectedItems: collectedItems)
+                }
+            }
+            .badge("N")
+            
+            Tab("setting", systemImage: "gear") {
+                ExplainView()
             }
         }
         .onAppear {
