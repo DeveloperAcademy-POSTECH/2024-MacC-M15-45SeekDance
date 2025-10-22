@@ -130,7 +130,7 @@ struct MainTabView: View {
                 isCardFlipped.toggle()
             }
         }
-        .tint(.primaryColor)
+        .tint(.green600)
     }
     
     // MARK: - 생성자
