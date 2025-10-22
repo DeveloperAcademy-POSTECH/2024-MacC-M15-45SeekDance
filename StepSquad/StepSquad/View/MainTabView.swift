@@ -15,6 +15,7 @@ struct MainTabView: View {
     @State var isCardFlipped: Bool = true
     @State var isLaunching: Bool = true
     @AppStorage("isShowingNewItem") private var isShowingNewItem = false
+    @State var isRecordSheetPresented: Bool = false
     
     // MARK: 리셋 관련 변수
     @State var isResetCompleted: Bool = false
@@ -54,23 +55,8 @@ struct MainTabView: View {
                     Text("전국의 계단")
                 }
             
-            ZStack {
-                EntryCertificateView(climbManager: climbingManager, userPlayerImage: userProfileImage, nickName: userName)
-                    .rotation3DEffect(.degrees(isCardFlipped ? 0.001 : -90), axis: (x: 0.001, y: 1, z: 0.001))
-                    .animation(isCardFlipped ? .linear.delay(0.35) : .linear, value: isCardFlipped)
-                DescendRecordView(climbManager: climbingManager)
-                    .rotation3DEffect(.degrees(isCardFlipped ? 90 : 0.001), axis: (x: 0.001, y: 1, z: 0.001))
-                    .animation(isCardFlipped ? .linear : .linear.delay(0.35), value: isCardFlipped)
-                Button("Show materials") {
-                    isMaterialSheetPresented = true
-                }
-            }
-            .onTapGesture {
-                isCardFlipped.toggle()
-            }
-            .sheet(isPresented: $isMaterialSheetPresented) {
-                MaterialsView(isMaterialSheetPresented: $isMaterialSheetPresented, isShowingNewItem: $isShowingNewItem, completedLevels: completedLevels, collectedItems: collectedItems)
-            }
+            
+            myRecordView(userPlayerImage: userProfileImage, nickName: userName, isRecordSheetPresented: $isRecordSheetPresented)
             .badge("N")
             .tabItem {
                 Image(systemName: "person.crop.rectangle.stack.fill")
@@ -106,6 +92,42 @@ struct MainTabView: View {
                         }
                     }
                 }
+            }
+        }
+        .sheet(isPresented: $isRecordSheetPresented) {
+            VStack {
+                ZStack {
+                    EntryCertificateView(climbManager: climbingManager, userPlayerImage: userProfileImage, nickName: userName)
+                        .rotation3DEffect(.degrees(isCardFlipped ? 0.001 : -90), axis: (x: 0.001, y: 1, z: 0.001))
+                        .animation(isCardFlipped ? .linear.delay(0.35) : .linear, value: isCardFlipped)
+                    DescendRecordView(climbManager: climbingManager)
+                        .rotation3DEffect(.degrees(isCardFlipped ? 90 : 0.001), axis: (x: 0.001, y: 1, z: 0.001))
+                        .animation(isCardFlipped ? .linear : .linear.delay(0.35), value: isCardFlipped)
+                }
+                Button {
+                    gameCenterManager.showFriendsList()
+                    gameCenterManager.reportCompletedAchievement(achievementId: "clover")
+                    if !collectedItems.isCollected(item: "Clover") { // 클로버를 처음 획득한다면
+                        collectedItems.collectItem(item: "Clover", collectedDate: Date.now)
+                        isShowingNewItem = true
+                    }
+                } label: {
+                    HStack() {
+                        Spacer()
+                        Label("계단사랑단인 친구 찾기", systemImage: "figure.socialdance")
+                            .font(Font.custom("SF Pro", size: 17))
+                            .foregroundColor(Color.white)
+                        Spacer()
+                    }
+                    .padding(.vertical, 16)
+                }
+                .background(.green800, in: RoundedRectangle(cornerRadius: 12))
+                .padding(.top, 20)
+                .padding(.horizontal, 36)
+            }
+            .navigationTitle("입단증")
+            .onTapGesture {
+                isCardFlipped.toggle()
             }
         }
         .tint(.primaryColor)

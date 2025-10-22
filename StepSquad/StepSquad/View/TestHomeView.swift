@@ -130,31 +130,6 @@ struct TestHomeView: View {
                     }
                     .padding(.top, 8)
                     .padding(.horizontal, 36)
-                    
-                    if isHealthKitAuthorized {
-                        Button {
-                            gameCenterManager.showFriendsList()
-                            gameCenterManager.reportCompletedAchievement(achievementId: "clover")
-                            if !collectedItems.isCollected(item: "Clover") { // 클로버를 처음 획득한다면
-                                collectedItems.collectItem(item: "Clover", collectedDate: Date.now)
-                                isShowingNewItem = true
-                            }
-                        } label: {
-                            HStack() {
-                                Spacer()
-                                Label("계단사랑단인 친구 찾기", systemImage: "figure.socialdance")
-                                    .font(Font.custom("SF Pro", size: 17))
-                                    .foregroundColor(Color.white)
-                                Spacer()
-                            }
-                            .padding(.vertical, 14)
-                        }
-                        .background(.green800, in: RoundedRectangle(cornerRadius: 12))
-                        .padding(.top, 16)
-                        .padding(.bottom, 51)
-                        .padding(.horizontal, 36)
-                    }
-                    
                 }
                 .refreshable {
                     healthManager.getWeeklyStairDataAndSave()
