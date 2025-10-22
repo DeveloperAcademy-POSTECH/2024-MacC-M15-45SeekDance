@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct myRecordView: View {
+    var userPlayerImage: Image?
+    var nickName: String?
+    
+    @Binding var isRecordSheetPresented: Bool
+    
     var body: some View {
         ZStack {
             Color.grey100
@@ -15,11 +20,20 @@ struct myRecordView: View {
             ScrollView {
                 VStack {
                     Button(action: {
-                        
+                        isRecordSheetPresented = true
                     }, label: {
                         HStack {
-                            Circle()
-                                .frame(width: 60, height: 60)
+                            if userPlayerImage != nil {
+                                userPlayerImage!
+                                    .resizable()
+                                    .frame(width: 60, height: 60)
+                                    .clipShape(.circle)
+                            } else {
+                                Image("defaultProfile")
+                                    .resizable()
+                                    .frame(width: 60, height: 60)
+                                    .clipShape(.circle)
+                            }
                             
                             
                             VStack {
@@ -80,8 +94,4 @@ struct myRecordView: View {
         }
         .ignoresSafeArea()
     }
-}
-
-#Preview {
-    myRecordView()
 }
