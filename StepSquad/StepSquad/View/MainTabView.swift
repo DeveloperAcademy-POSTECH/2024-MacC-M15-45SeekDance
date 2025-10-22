@@ -55,7 +55,7 @@ struct MainTabView: View {
                 }
             
             ZStack {
-                EntryCertificateView(manager: climbingManager, userPlayerImage: userProfileImage, nickName: userName)
+                EntryCertificateView(climbManager: climbingManager, userPlayerImage: userProfileImage, nickName: userName)
                     .rotation3DEffect(.degrees(isCardFlipped ? 0.001 : -90), axis: (x: 0.001, y: 1, z: 0.001))
                     .animation(isCardFlipped ? .linear.delay(0.35) : .linear, value: isCardFlipped)
                 DescendRecordView(climbManager: climbingManager)
