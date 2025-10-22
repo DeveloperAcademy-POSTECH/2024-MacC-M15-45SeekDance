@@ -55,13 +55,26 @@ struct myRecordView: View {
                     
                     Image("bag")
                     
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 100)
-                            .frame(height: 1000)
-                            .foregroundStyle(.white)
+                    VStack {
+                        Text("획득 재료")
+                            .bold()
+                            .padding(.bottom, 8)
+                        
+                        Text("주의: 계단사랑단 앱을 실제 의학적 참고를 위해 활용하면 안 됩니다.")
+                            .frame(width: 194)
+                            .font(.caption2)
+                            .foregroundStyle(.grey600)
+                            .multilineTextAlignment(.center)
                     }
+                    .frame(width: 360)
+                    .padding(.vertical, 24)
+                    .background(
+                        RoundedRectangle(cornerRadius: 100)
+                            .foregroundStyle(.white)
+                    )
                     .padding(.horizontal, 16)
                     .offset(y: -30)
+                    .padding(.bottom, 84)
                 }
             }
         }
