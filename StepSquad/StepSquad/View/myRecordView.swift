@@ -13,6 +13,15 @@ struct myRecordView: View {
     
     @Binding var isRecordSheetPresented: Bool
     
+    var completedLevels: CompletedLevels
+    var collectedItems: CollectedItems
+    
+    let columns: [GridItem] = [
+        GridItem(.fixed(112)),
+        GridItem(.fixed(112)),
+        GridItem(.fixed(112))
+    ]
+    
     var body: some View {
         ZStack {
             Color.grey100
@@ -79,19 +88,70 @@ struct myRecordView: View {
                             .font(.caption2)
                             .foregroundStyle(.grey600)
                             .multilineTextAlignment(.center)
+                        
+                        LazyVGrid(columns: columns, spacing: 0) {
+                            ForEach(collectedItems.getSortedItemsNameList(), id: \.self) { item in
+                                if Array(gpsStaircasesDictionary.keys).contains(item) { // 전국의 계단 관련 보상
+                                    itemView(keyword: "미션", imageName: "\(gpsStaircasesDictionary[item]!.id)_reward", itemName: "\(gpsStaircasesDictionary[item]!.reward)", keywordForegroundColor: .white, keywordBackgroundColor: .green600)
+                                } else {
+                                    itemView(keyword: hiddenItemsDictionary[item]!.keyword, imageName: hiddenItemsDictionary[item]!.itemImage, itemName: "\(hiddenItemsDictionary[item]!.item)", keywordForegroundColor: .white, keywordBackgroundColor: Color(hex: hiddenItemsDictionary[item]!.itemColor))
+                                }
+                            }
+                            if completedLevels.lastUpdatedLevel >= 1 { // 획득한 약재가 있을 때
+                                ForEach((1...completedLevels.lastUpdatedLevel).reversed(), id: \.self) { level in
+                                    itemView(keyword: "레벨 \(level)", imageName: levels[level]!.itemImage, itemName: "\(levels[level]!.item)", keywordForegroundColor: getDifficultyColor(difficulty: levels[level]!.difficulty), keywordBackgroundColor: getDifficultyPaleColor(difficulty: levels[level]!.difficulty))
+                                }
+                            }
+                        }
                     }
-                    .frame(width: 360)
                     .padding(.vertical, 24)
+                    .frame(width: 360)
                     .background(
                         RoundedRectangle(cornerRadius: 100)
                             .foregroundStyle(.white)
                     )
-                    .padding(.horizontal, 16)
                     .offset(y: -30)
                     .padding(.bottom, 84)
                 }
+                .padding(.horizontal, 16)
             }
         }
         .ignoresSafeArea()
+    }
+}
+
+struct itemView: View {
+    let keyword: String
+    let imageName: String
+    let itemName: String
+    let keywordForegroundColor: Color
+    let keywordBackgroundColor: Color
+    
+    var body: some View {
+        VStack {
+            Text(keyword)
+                .font(.body)
+                .padding(4)
+                .foregroundStyle(keywordForegroundColor)
+                .background(keywordBackgroundColor)
+                .clipShape(RoundedRectangle(cornerRadius: 4))
+                .padding(.bottom, 8)
+            
+            Image(imageName)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 78, height: 78)
+            
+            Text(itemName)
+                .font(.body)
+                .padding(.bottom, 8)
+                .multilineTextAlignment(.center)
+            
+            Spacer()
+        }
+        .frame(width: 78) // TODO: height 설정
+        .padding(.horizontal, 17)
+        .padding(.vertical, 12)
+//        .background(.yellow)
     }
 }
