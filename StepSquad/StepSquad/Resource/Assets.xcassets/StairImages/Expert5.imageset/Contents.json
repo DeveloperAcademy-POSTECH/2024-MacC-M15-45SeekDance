@@ -1,16 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Expert5.png",
+      "filename" : "Expert5_1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Expert5_2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Expert5 1.png",
+      "filename" : "Expert5_3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

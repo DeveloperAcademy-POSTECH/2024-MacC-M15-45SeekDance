@@ -1,16 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Hard4.png",
+      "filename" : "Hard4_1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Hard4_2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Hard4 1.png",
+      "filename" : "Hard4_3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

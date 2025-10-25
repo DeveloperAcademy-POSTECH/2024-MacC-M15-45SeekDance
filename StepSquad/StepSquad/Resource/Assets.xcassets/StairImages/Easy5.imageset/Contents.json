@@ -1,22 +1,62 @@
 {
   "images" : [
     {
-      "filename" : "Easy5.png",
+      "filename" : "Easy5_1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Easy5_2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Easy5 1.png",
+      "filename" : "Easy5_3x.png",
       "idiom" : "universal",
+      "scale" : "3x"
+    },
+    {
+      "filename" : "Easy5_1x 1.png",
+      "idiom" : "universal",
+      "locale" : "ko",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "Easy5_2x 1.png",
+      "idiom" : "universal",
+      "locale" : "ko",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "Easy5_3x 1.png",
+      "idiom" : "universal",
+      "locale" : "ko",
+      "scale" : "3x"
+    },
+    {
+      "filename" : "Easy5_Eng_1x.png",
+      "idiom" : "universal",
+      "locale" : "en",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "Easy5_Eng_2x.png",
+      "idiom" : "universal",
+      "locale" : "en",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "Easy5_Eng_3x.png",
+      "idiom" : "universal",
+      "locale" : "en",
       "scale" : "3x"
     }
   ],
   "info" : {
     "author" : "xcode",
     "version" : 1
+  },
+  "properties" : {
+    "localizable" : true
   }
 }
