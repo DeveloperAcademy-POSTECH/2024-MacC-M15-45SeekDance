@@ -51,7 +51,7 @@ struct MainTabView: View {
             
             GPSStaircaseMainView(localPlayerImage: userProfileImage, localPlayerName: userName, collectedItems: $collectedItems, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, gameCenterManager: gameCenterManager, isShowingNewItem: $isShowingNewItem)
                 .tabItem {
-                    Image(systemName: "stairs")
+                    Image(systemName: "globe")
                     Text("전국의 계단")
                 }
             
@@ -59,7 +59,7 @@ struct MainTabView: View {
             myRecordView(userPlayerImage: userProfileImage, nickName: userName, isRecordSheetPresented: $isRecordSheetPresented, completedLevels: completedLevels, collectedItems: collectedItems)
             .badge("N")
             .tabItem {
-                Image(systemName: "person.crop.rectangle.stack.fill")
+                Image(systemName: "person.text.rectangle.fill")
                 Text("나의 기록")
             }
             
