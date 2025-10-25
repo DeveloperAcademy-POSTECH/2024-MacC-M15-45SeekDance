@@ -110,10 +110,9 @@ struct MyRecordView: View {
                     }
                     .padding(.vertical, 24)
                     .frame(width: 360)
-                    .background(
-                        RoundedRectangle(cornerRadius: 100)
-                            .foregroundStyle(.white)
-                    )
+                    .background(.white)
+                    .clipShape(RoundedCorner(radius: 100, corners: [.topLeft, .topRight]))
+                    .clipShape(RoundedCorner(radius: 40, corners: [.bottomLeft, .bottomRight]))
                     .offset(y: -30)
                     .padding(.bottom, 84)
                 }
