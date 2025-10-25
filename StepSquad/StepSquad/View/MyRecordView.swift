@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct myRecordView: View {
+struct MyRecordView: View {
     var userPlayerImage: Image?
     var nickName: String?
     

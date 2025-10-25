@@ -56,7 +56,7 @@ struct MainTabView: View {
                 }
             
             
-            myRecordView(userPlayerImage: userProfileImage, nickName: userName, isRecordSheetPresented: $isRecordSheetPresented, isShowingNewItem: $isShowingNewItem, completedLevels: completedLevels, collectedItems: collectedItems)
+            MyRecordView(userPlayerImage: userProfileImage, nickName: userName, isRecordSheetPresented: $isRecordSheetPresented, isShowingNewItem: $isShowingNewItem, completedLevels: completedLevels, collectedItems: collectedItems)
                 .badge(isShowingNewItem ? "N" : nil)
             .tabItem {
                 Image(systemName: "person.text.rectangle.fill")
