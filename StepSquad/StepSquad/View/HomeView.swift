@@ -60,7 +60,7 @@ struct HomeView: View {
                             GetHealthKitView
                         }
                     }
-                    .frame(width: 321, height: 467)
+                    .frame(width: 321, height: 436)
                     .background(Color.white)
                     .cornerRadius(16)
                     .padding(.top, 12)
