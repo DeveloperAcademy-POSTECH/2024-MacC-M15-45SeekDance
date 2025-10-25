@@ -9,51 +9,30 @@ import SwiftUI
 
 struct HomeView: View {
     // MARK: 뷰 상태 관련 변수
-    // TODO: 탭 뷰 위에 꽉 채울 수 있나
     @State private var isResetViewPresented = false
     @State private var isShowNewBirdPresented = false
     @State private var isWifiAlertPresented = false
-    var isHighestLevel: Bool { // TODO: 여기에만 있으면 됨
+    @Binding var isShowingNewItem: Bool
+    var isHighestLevel: Bool {
         return currentStatus.currentLevel.level == 20
     }
     
-    //    @AppStorage("isShowingNewItem") private var isShowingNewItem = false // TODO: 전달받아야 함
-    @Binding var isShowingNewItem: Bool
-    //    @Environment(\.scenePhase) private var scenePhase // TODO: 필요없을 듯
-    
-    // TODO: 다른 탭으로 뺌
-    //    @State var isMaterialSheetPresented: Bool = false
-    //    @State var isCardFlipped: Bool = true
-    //    @State var isLaunching: Bool = true
-    
     // MARK: 리셋 관련 변수
-    // TODO: 탭 뷰 위에 꽉 채울 수 있나
-    //    @State var isResetCompleted: Bool = false // TODO: 전달받아야 함
     @Binding var isResetCompleted: Bool
     
     // MARK: 기록 관련 데이터
-    //    @State private var completedLevels = CompletedLevels() // TODO: 필요없을 듯
     @Binding var completedLevels: CompletedLevels
-    //    @State private var collectedItems = CollectedItems() // TODO: 필요없을 듯
     @Binding var collectedItems: CollectedItems
-    //    @AppStorage("lastElectricAchievementKwh") var lastElectricAchievementKwh = 0 // TODO: 필요없을 듯
     @Binding var lastElectricAchievementKwh: Int
-    //    @State private var gpsStaircaseWeeklyScore = GPSStaircaseWeeklyScore() 탭 뷰면 충분할 듯
     @Binding var gpsStaircaseWeeklyScore: GPSStaircaseWeeklyScore
-    //    var currentStatus: CurrentStatus = CurrentStatus() // TODO: 전달받아야 함
     var currentStatus: CurrentStatus
     
     // MARK: game center 관련 데이터
-    //    let gameCenterManager = GameCenterManager() // TODO: 전달받아야 함
     let gameCenterManager: GameCenterManager
-    //    @State var userProfileImage: Image? // TODO: 필요없을 듯
     
     // MARK: healthkit 관련 데이터
-    //    @ObservedObject var service = HealthKitService()
     @ObservedObject var healthManager: HealthKitService
-    //    @AppStorage("HealthKitAuthorized") var isHealthKitAuthorized: Bool = false // TODO: 전달받아야 함
     @Binding var isHealthKitAuthorized: Bool
-    //    @ObservedObject var climbingManager = ClimbingManager()  // TODO: 리셋 위해서 전달받아야 함
     @ObservedObject var climbManager: ClimbingManager
     
     var body: some View {
@@ -172,7 +151,6 @@ struct HomeView: View {
             } label: {
                 Label("오른 층수 추가하기",
                       image: "custom.figure.stairs.badge.plus")
-                //Text("오른 층수 추가하기")
                 .padding(.vertical, 12)
                 .padding(.horizontal, 16)
                 .foregroundColor(Color.white)
