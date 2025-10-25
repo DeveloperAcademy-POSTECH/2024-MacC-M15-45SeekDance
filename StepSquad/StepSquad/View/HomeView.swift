@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TestHomeView: View {
+struct HomeView: View {
     // MARK: 뷰 상태 관련 변수
     // TODO: 탭 뷰 위에 꽉 채울 수 있나
     @State private var isResetViewPresented = false
