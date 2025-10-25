@@ -368,6 +368,9 @@
         }
       }
     },
+    "Achieve this" : {
+
+    },
     "Apple 건강 앱 → 둘러보기 → 오른 층수 → 데이터 소스 및 접근에서 '계단사랑단'의 데이터 읽기 권한이 활성화되어 있는지 확인하세요." : {
       "localizations" : {
         "en" : {
@@ -1000,6 +1003,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hidden Items"
+          }
+        }
+      }
+    },
+    "나의 기록" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "My Record"
           }
         }
       }
@@ -1767,6 +1780,16 @@
         }
       }
     },
+    "설정" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Setting"
+          }
+        }
+      }
+    },
     "성산일출봉" : {
       "localizations" : {
         "en" : {
@@ -2338,6 +2361,16 @@
         }
       }
     },
+    "일 차" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " days"
+          }
+        }
+      }
+    },
     "일반 재료" : {
       "localizations" : {
         "en" : {
@@ -2384,6 +2417,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Entrance parking lot"
+          }
+        }
+      }
+    },
+    "입단증" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Certificate of admission"
           }
         }
       }
@@ -2454,6 +2497,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "All"
+          }
+        }
+      }
+    },
+    "전국의 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "K-Stairs"
           }
         }
       }
@@ -2624,6 +2677,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "CAUTION: StepSquad is a game. You should not use the app for actual medical reference, recommendations, diagnoses, etc."
+          }
+        }
+      }
+    },
+    "주의: 계단사랑단 앱을 실제 의학적 참고를 위해 활용하면 안 됩니다." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caution: StepSquad should not be used for actual medical reference."
           }
         }
       }
@@ -3254,6 +3317,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hodoo(Walnut)"
+          }
+        }
+      }
+    },
+    "홈" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Home"
           }
         }
       }
