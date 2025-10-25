@@ -23,6 +23,9 @@ struct myRecordView: View {
         GridItem(.fixed(112))
     ]
     
+    @State private var formattedDate: String = "입단하세요"
+    @State private var dDay: Int = 0
+    
     var body: some View {
         ZStack {
             Color.grey100
@@ -46,16 +49,16 @@ struct myRecordView: View {
                             }
                             
                             
-                            VStack {
+                            VStack(alignment: .leading) {
                                 Text("계단 오르기 맹세한 지")
                                     .font(.callout)
                                     .foregroundStyle(Color(hex: 0xB1D998))
                                 
-                                HStack(spacing: 0) {
-                                    Text("8222")
+                                HStack(alignment: .lastTextBaseline, spacing: 0) {
+                                    Text("\(dDay)")
                                         .font(.largeTitle)
                                     
-                                    Text("일차") // TODO: 글자 아래 맞춤
+                                    Text("일 차")
                                         .font(.title2)
                                 }
                                 .bold()
@@ -120,7 +123,51 @@ struct myRecordView: View {
         .ignoresSafeArea()
         .onAppear {
             isShowingNewItem = false
+            loadHealthKitAuthorizationDate()
         }
+    }
+    
+    // MARK: - 유저디폴트에 저장된 날짜 가져오기
+    func loadHealthKitAuthorizationDate() {
+        let userDefaults = UserDefaults.standard
+        
+        if let storedDate = userDefaults.object(forKey: "HealthKitAuthorizationDate") as? Date {
+            let formatter = DateFormatter()
+            
+            formatter.dateFormat = "yyyy년 MM월 dd일"
+            formatter.locale = Locale(identifier: "ko_KR")
+            formatter.timeZone = TimeZone(identifier: "Asia/Seoul")
+            
+            formattedDate = formatter.string(from: storedDate)
+            
+            calculateDDay(from: storedDate)
+            saveDDayToDefaults()
+        } else {
+            formattedDate = "날짜 없음"
+            dDay = 0
+        }
+    }
+    
+    // MARK: - 디데이 계산
+    func calculateDDay(from date: Date) {
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+        let targetDate = calendar.startOfDay(for: date)
+        
+        let components = calendar.dateComponents([.day], from: targetDate, to: today)
+        
+        if let daysPassed = components.day {
+            dDay = daysPassed + 1
+        } else {
+            dDay = 0
+        }
+    }
+    
+    // MARK: - dDay 저장
+    func saveDDayToDefaults() {
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(dDay, forKey: "DDayValue")
+        print("dDay (\(dDay))가 UserDefaults에 저장되었습니다.")
     }
 }
 
