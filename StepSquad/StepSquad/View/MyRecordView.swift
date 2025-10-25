@@ -183,7 +183,7 @@ struct itemView: View {
     var body: some View {
         VStack {
             Text(keyword)
-                .font(.body)
+                .font(.system(size: 12))
                 .padding(4)
                 .foregroundStyle(keywordForegroundColor)
                 .background(keywordBackgroundColor)
@@ -196,7 +196,8 @@ struct itemView: View {
                 .frame(width: 78, height: 78)
             
             Text(itemName)
-                .font(.body)
+                .font(.system(size: 12))
+                .frame(height: 32)
                 .padding(.bottom, 8)
                 .multilineTextAlignment(.center)
             
