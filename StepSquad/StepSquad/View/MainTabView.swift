@@ -56,8 +56,8 @@ struct MainTabView: View {
                 }
             
             
-            myRecordView(userPlayerImage: userProfileImage, nickName: userName, isRecordSheetPresented: $isRecordSheetPresented, completedLevels: completedLevels, collectedItems: collectedItems)
-            .badge("N")
+            myRecordView(userPlayerImage: userProfileImage, nickName: userName, isRecordSheetPresented: $isRecordSheetPresented, isShowingNewItem: $isShowingNewItem, completedLevels: completedLevels, collectedItems: collectedItems)
+                .badge(isShowingNewItem ? "N" : nil)
             .tabItem {
                 Image(systemName: "person.text.rectangle.fill")
                 Text("나의 기록")

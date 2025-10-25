@@ -12,6 +12,7 @@ struct myRecordView: View {
     var nickName: String?
     
     @Binding var isRecordSheetPresented: Bool
+    @Binding var isShowingNewItem: Bool
     
     var completedLevels: CompletedLevels
     var collectedItems: CollectedItems
@@ -117,6 +118,9 @@ struct myRecordView: View {
             }
         }
         .ignoresSafeArea()
+        .onAppear {
+            isShowingNewItem = false
+        }
     }
 }
 
