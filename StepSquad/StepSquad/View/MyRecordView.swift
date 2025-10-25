@@ -73,6 +73,7 @@ struct MyRecordView: View {
                         }
                         .padding(.horizontal, 16)
                         .padding(.vertical, 24)
+                        .frame(width: 354)
                         .background(Color(hex: 0x4C6D38))
                         .clipShape(RoundedRectangle(cornerRadius: 12))
                     })
@@ -92,6 +93,7 @@ struct MyRecordView: View {
                             .font(.caption2)
                             .foregroundStyle(.grey600)
                             .multilineTextAlignment(.center)
+                            .padding(.bottom, 12)
                         
                         LazyVGrid(columns: columns, spacing: 0) {
                             ForEach(collectedItems.getSortedItemsNameList(), id: \.self) { item in
@@ -107,9 +109,10 @@ struct MyRecordView: View {
                                 }
                             }
                         }
+                        .frame(width: 336)
                     }
-                    .padding(.vertical, 24)
                     .frame(width: 360)
+                    .padding(.vertical, 24)
                     .background(.white)
                     .clipShape(RoundedCorner(radius: 100, corners: [.topLeft, .topRight]))
                     .clipShape(RoundedCorner(radius: 40, corners: [.bottomLeft, .bottomRight]))
@@ -201,7 +204,5 @@ struct itemView: View {
         }
         .frame(width: 78) // TODO: height 설정
         .padding(.horizontal, 17)
-        .padding(.vertical, 12)
-//        .background(.yellow)
     }
 }
