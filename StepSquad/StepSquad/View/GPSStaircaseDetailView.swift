@@ -96,6 +96,7 @@ struct GPSStaircaseDetailView: View {
                         }
                         .padding(.bottom, 42)
                         .padding(.horizontal, 40)
+                        .multilineTextAlignment(.center)
                         
                         // 뱃지
                         if collectedItems.isCollected(item: gpsStaircase.id) {
