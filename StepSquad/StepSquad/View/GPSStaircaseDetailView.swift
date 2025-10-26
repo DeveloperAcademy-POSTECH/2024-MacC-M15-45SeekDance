@@ -257,6 +257,7 @@ struct GPSStaircaseDetailView: View {
                 .cornerRadius(12)
                 .padding(.horizontal, 36)
             }
+            .toolbar(.hidden, for: .tabBar)
             .sheet(isPresented: $isShowingMissionSheet) {
                 VStack {
                     if (currentLocation == nil) {
@@ -478,7 +479,7 @@ struct FailedLocationView: View {
                     }, label: {
                         HStack {
                             Spacer()
-                            Text("인증 위치 보기")
+                            Text("장소 확인하기")
                                 .foregroundStyle(.white)
                                 .padding(.vertical, 14)
                                 .padding(.horizontal, 20)
