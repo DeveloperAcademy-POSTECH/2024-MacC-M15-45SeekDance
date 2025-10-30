@@ -368,9 +368,6 @@
         }
       }
     },
-    "Achieve this" : {
-
-    },
     "Apple 건강 앱 → 둘러보기 → 오른 층수 → 데이터 소스 및 접근에서 '계단사랑단'의 데이터 읽기 권한이 활성화되어 있는지 확인하세요." : {
       "localizations" : {
         "en" : {
@@ -1629,6 +1626,16 @@
         }
       }
     },
+    "보상" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reward"
+          }
+        }
+      }
+    },
     "부산 40 계단" : {
       "localizations" : {
         "en" : {
@@ -2311,16 +2318,6 @@
         }
       }
     },
-    "인증 위치 보기" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "View Spot"
-          }
-        }
-      }
-    },
     "인증 위치를 다시 확인해주세요." : {
       "localizations" : {
         "en" : {
@@ -2467,6 +2464,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "FAQ"
+          }
+        }
+      }
+    },
+    "장소 확인하기" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "View Spot"
           }
         }
       }
@@ -3396,7 +3403,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Special item"
+            "value" : "Inventory"
           }
         }
       }

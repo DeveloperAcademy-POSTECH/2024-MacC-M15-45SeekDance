@@ -166,7 +166,7 @@ struct GPSStaircaseDetailView: View {
                             
                             VStack(spacing: 12) {
                                 Label {
-                                    Text("획득 재료")
+                                    Text("보상")
                                         .font(.footnote)
                                         .bold()
                                         .foregroundColor(Color.Green700)
@@ -360,7 +360,7 @@ struct VerifiedLocationView: View {
                 .padding(.bottom, 12)
             
             HStack(spacing: 12) {
-                GradientSquareView(type: String(localized: "획득 재료"), text: gpsStaircase.reward, isWithSymbol: false)
+                GradientSquareView(type: String(localized: "보상"), text: gpsStaircase.reward, isWithSymbol: false)
                 GradientSquareView(type: String(localized: "추가 점수"), text: String(localized: "\(gpsStaircase.steps)칸"), isWithSymbol: true)
             }
             
