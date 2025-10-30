@@ -26,6 +26,10 @@ struct MyRecordView: View {
     @State private var formattedDate: String = "입단하세요"
     @State private var dDay: Int = 0
     
+    var isInventoryEmpty: Bool {
+        return completedLevels.lastUpdatedLevel == 0 && collectedItems.isEmpty()
+    }
+    
     var body: some View {
         ZStack {
             Color.grey100
@@ -95,21 +99,25 @@ struct MyRecordView: View {
                             .multilineTextAlignment(.center)
                             .padding(.bottom, 12)
                         
-                        LazyVGrid(columns: columns, spacing: 0) {
-                            ForEach(collectedItems.getSortedItemsNameList(), id: \.self) { item in
-                                if Array(gpsStaircasesDictionary.keys).contains(item) { // 전국의 계단 관련 보상
-                                    itemView(keyword: "미션", imageName: "\(gpsStaircasesDictionary[item]!.id)_reward", itemName: "\(gpsStaircasesDictionary[item]!.reward)", keywordForegroundColor: .white, keywordBackgroundColor: .green600)
-                                } else {
-                                    itemView(keyword: hiddenItemsDictionary[item]!.keyword, imageName: hiddenItemsDictionary[item]!.itemImage, itemName: "\(hiddenItemsDictionary[item]!.item)", keywordForegroundColor: .white, keywordBackgroundColor: Color(hex: hiddenItemsDictionary[item]!.itemColor))
+                        if isInventoryEmpty {
+                            EmptyItemView()
+                        } else {
+                            LazyVGrid(columns: columns, spacing: 0) {
+                                ForEach(collectedItems.getSortedItemsNameList(), id: \.self) { item in
+                                    if Array(gpsStaircasesDictionary.keys).contains(item) { // 전국의 계단 관련 보상
+                                        itemView(keyword: "미션", imageName: "\(gpsStaircasesDictionary[item]!.id)_reward", itemName: "\(gpsStaircasesDictionary[item]!.reward)", keywordForegroundColor: .white, keywordBackgroundColor: .green600)
+                                    } else {
+                                        itemView(keyword: hiddenItemsDictionary[item]!.keyword, imageName: hiddenItemsDictionary[item]!.itemImage, itemName: "\(hiddenItemsDictionary[item]!.item)", keywordForegroundColor: .white, keywordBackgroundColor: Color(hex: hiddenItemsDictionary[item]!.itemColor))
+                                    }
+                                }
+                                if completedLevels.lastUpdatedLevel >= 1 { // 획득한 약재가 있을 때
+                                    ForEach((1...completedLevels.lastUpdatedLevel).reversed(), id: \.self) { level in
+                                        itemView(keyword: "레벨 \(level)", imageName: levels[level]!.itemImage, itemName: "\(levels[level]!.item)", keywordForegroundColor: getDifficultyColor(difficulty: levels[level]!.difficulty), keywordBackgroundColor: getDifficultyPaleColor(difficulty: levels[level]!.difficulty))
+                                    }
                                 }
                             }
-                            if completedLevels.lastUpdatedLevel >= 1 { // 획득한 약재가 있을 때
-                                ForEach((1...completedLevels.lastUpdatedLevel).reversed(), id: \.self) { level in
-                                    itemView(keyword: "레벨 \(level)", imageName: levels[level]!.itemImage, itemName: "\(levels[level]!.item)", keywordForegroundColor: getDifficultyColor(difficulty: levels[level]!.difficulty), keywordBackgroundColor: getDifficultyPaleColor(difficulty: levels[level]!.difficulty))
-                                }
-                            }
+                            .frame(width: 336)
                         }
-                        .frame(width: 336)
                     }
                     .frame(width: 360)
                     .padding(.vertical, 24)
