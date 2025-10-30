@@ -42,95 +42,104 @@ struct MainTabView: View {
     @Environment(\.modelContext) var context
     
     var body: some View {
-        TabView {
-            HomeView(isShowingNewItem: $isShowingNewItem, isResetCompleted: $isResetCompleted, completedLevels: $completedLevels, collectedItems: $collectedItems, lastElectricAchievementKwh: $lastElectricAchievementKwh, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, currentStatus: currentStatus, gameCenterManager: gameCenterManager, healthManager: healthManager, isHealthKitAuthorized: $isHealthKitAuthorized, climbManager: climbingManager)
-                .tabItem {
-                    Image(systemName: "house.fill")
-                    Text("홈")
+        if isLaunching {
+            SplashView()
+                .onAppear {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        isLaunching = false
+                    }
                 }
-            
-            GPSStaircaseMainView(localPlayerImage: userProfileImage, localPlayerName: userName, collectedItems: $collectedItems, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, gameCenterManager: gameCenterManager, isShowingNewItem: $isShowingNewItem)
-                .tabItem {
-                    Image(systemName: "globe")
-                    Text("전국의 계단")
-                }
-            
-            
-            MyRecordView(userPlayerImage: userProfileImage, nickName: userName, isRecordSheetPresented: $isRecordSheetPresented, isShowingNewItem: $isShowingNewItem, completedLevels: completedLevels, collectedItems: collectedItems)
-                .badge(isShowingNewItem ? "N" : nil)
-            .tabItem {
-                Image(systemName: "person.text.rectangle.fill")
-                Text("나의 기록")
+        } else {
+            TabView {
+                HomeView(isShowingNewItem: $isShowingNewItem, isResetCompleted: $isResetCompleted, completedLevels: $completedLevels, collectedItems: $collectedItems, lastElectricAchievementKwh: $lastElectricAchievementKwh, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, currentStatus: currentStatus, gameCenterManager: gameCenterManager, healthManager: healthManager, isHealthKitAuthorized: $isHealthKitAuthorized, climbManager: climbingManager)
+                    .tabItem {
+                        Image(systemName: "house.fill")
+                        Text("홈")
+                    }
+                
+                GPSStaircaseMainView(localPlayerImage: userProfileImage, localPlayerName: userName, collectedItems: $collectedItems, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, gameCenterManager: gameCenterManager, isShowingNewItem: $isShowingNewItem)
+                    .tabItem {
+                        Image(systemName: "globe")
+                        Text("전국의 계단")
+                    }
+                
+                
+                MyRecordView(userPlayerImage: userProfileImage, nickName: userName, isRecordSheetPresented: $isRecordSheetPresented, isShowingNewItem: $isShowingNewItem, completedLevels: completedLevels, collectedItems: collectedItems)
+                    .badge(isShowingNewItem ? "N" : nil)
+                    .tabItem {
+                        Image(systemName: "person.text.rectangle.fill")
+                        Text("나의 기록")
+                    }
+                
+                ExplainView()
+                    .tabItem {
+                        Image(systemName: "gear")
+                        Text("설정")
+                    }
             }
-            
-            ExplainView()
-                .tabItem {
-                    Image(systemName: "gear")
-                    Text("설정")
+            .onAppear {
+                healthManager.getWeeklyStairDataAndSave()
+                healthManager.fetchAndSaveFlightsClimbedSinceAuthorization()
+                healthManager.fetchAllFlightsClimbedData()
+                if !GKLocalPlayer.local.isAuthenticated {
+                    gameCenterManager.authenticateUser()
+                } else {
+                    Task {
+                        userProfileImage = try await gameCenterManager.loadLocalPlayerImage()
+                        userName = GKLocalPlayer.local.displayName
+                    }
                 }
-        }
-        .onAppear {
-            healthManager.getWeeklyStairDataAndSave()
-            healthManager.fetchAndSaveFlightsClimbedSinceAuthorization()
-            healthManager.fetchAllFlightsClimbedData()
-            if !GKLocalPlayer.local.isAuthenticated {
-                gameCenterManager.authenticateUser()
-            } else {
-                Task {
-                    userProfileImage = try await gameCenterManager.loadLocalPlayerImage()
-                    userName = GKLocalPlayer.local.displayName
-                }
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                withAnimation {
-                    if !GKLocalPlayer.local.isAuthenticated {
-                        gameCenterManager.authenticateUser()
-                    } else if userProfileImage == nil {
-                        Task {
-                            userProfileImage = try await gameCenterManager.loadLocalPlayerImage()
-                            userName = GKLocalPlayer.local.displayName
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                    withAnimation {
+                        if !GKLocalPlayer.local.isAuthenticated {
+                            gameCenterManager.authenticateUser()
+                        } else if userProfileImage == nil {
+                            Task {
+                                userProfileImage = try await gameCenterManager.loadLocalPlayerImage()
+                                userName = GKLocalPlayer.local.displayName
+                            }
                         }
                     }
                 }
             }
-        }
-        .sheet(isPresented: $isRecordSheetPresented) {
-            VStack {
-                ZStack {
-                    EntryCertificateView(climbManager: climbingManager, userPlayerImage: userProfileImage, nickName: userName)
-                        .rotation3DEffect(.degrees(isCardFlipped ? 0.001 : -90), axis: (x: 0.001, y: 1, z: 0.001))
-                        .animation(isCardFlipped ? .linear.delay(0.35) : .linear, value: isCardFlipped)
-                    DescendRecordView(climbManager: climbingManager)
-                        .rotation3DEffect(.degrees(isCardFlipped ? 90 : 0.001), axis: (x: 0.001, y: 1, z: 0.001))
-                        .animation(isCardFlipped ? .linear : .linear.delay(0.35), value: isCardFlipped)
-                }
-                Button {
-                    gameCenterManager.showFriendsList()
-                    gameCenterManager.reportCompletedAchievement(achievementId: "clover")
-                    if !collectedItems.isCollected(item: "Clover") { // 클로버를 처음 획득한다면
-                        collectedItems.collectItem(item: "Clover", collectedDate: Date.now)
-                        isShowingNewItem = true
+            .sheet(isPresented: $isRecordSheetPresented) {
+                VStack {
+                    ZStack {
+                        EntryCertificateView(climbManager: climbingManager, userPlayerImage: userProfileImage, nickName: userName)
+                            .rotation3DEffect(.degrees(isCardFlipped ? 0.001 : -90), axis: (x: 0.001, y: 1, z: 0.001))
+                            .animation(isCardFlipped ? .linear.delay(0.35) : .linear, value: isCardFlipped)
+                        DescendRecordView(climbManager: climbingManager)
+                            .rotation3DEffect(.degrees(isCardFlipped ? 90 : 0.001), axis: (x: 0.001, y: 1, z: 0.001))
+                            .animation(isCardFlipped ? .linear : .linear.delay(0.35), value: isCardFlipped)
                     }
-                } label: {
-                    HStack() {
-                        Spacer()
-                        Label("계단사랑단인 친구 찾기", systemImage: "figure.socialdance")
-                            .font(Font.custom("SF Pro", size: 17))
-                            .foregroundColor(Color.white)
-                        Spacer()
+                    Button {
+                        gameCenterManager.showFriendsList()
+                        gameCenterManager.reportCompletedAchievement(achievementId: "clover")
+                        if !collectedItems.isCollected(item: "Clover") { // 클로버를 처음 획득한다면
+                            collectedItems.collectItem(item: "Clover", collectedDate: Date.now)
+                            isShowingNewItem = true
+                        }
+                    } label: {
+                        HStack() {
+                            Spacer()
+                            Label("계단사랑단인 친구 찾기", systemImage: "figure.socialdance")
+                                .font(Font.custom("SF Pro", size: 17))
+                                .foregroundColor(Color.white)
+                            Spacer()
+                        }
+                        .padding(.vertical, 16)
                     }
-                    .padding(.vertical, 16)
+                    .background(.green800, in: RoundedRectangle(cornerRadius: 12))
+                    .padding(.top, 20)
+                    .padding(.horizontal, 36)
                 }
-                .background(.green800, in: RoundedRectangle(cornerRadius: 12))
-                .padding(.top, 20)
-                .padding(.horizontal, 36)
+                .navigationTitle("입단증")
+                .onTapGesture {
+                    isCardFlipped.toggle()
+                }
             }
-            .navigationTitle("입단증")
-            .onTapGesture {
-                isCardFlipped.toggle()
-            }
+            .tint(.green600)
         }
-        .tint(.green600)
     }
     
     // MARK: - 생성자
