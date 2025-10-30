@@ -307,7 +307,7 @@ struct HomeView: View {
     // MARK: UserDefaults에 currentStatus 저장하기
     func saveCurrentStatus() {
         if let encodedData = try? JSONEncoder().encode(currentStatus) {
-            UserDefaults.standard.setValue(encodedData, forKey: "currentStatus") // TODO: 다른 뷰에서 저장해도 되는지
+            UserDefaults.standard.setValue(encodedData, forKey: "currentStatus")
         }
     }
     

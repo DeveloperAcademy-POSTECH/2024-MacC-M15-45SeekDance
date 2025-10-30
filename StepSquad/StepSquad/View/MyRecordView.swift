@@ -211,7 +211,7 @@ struct itemView: View {
             
             Spacer()
         }
-        .frame(width: 78) // TODO: height 설정
+        .frame(width: 78)
         .padding(.horizontal, 17)
     }
 }
