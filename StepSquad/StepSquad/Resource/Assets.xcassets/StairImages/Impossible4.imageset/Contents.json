@@ -1,16 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Impossible4.png",
+      "filename" : "Impossible4_1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Impossible4_2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Impossible4 1.png",
+      "filename" : "Impossible4_3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

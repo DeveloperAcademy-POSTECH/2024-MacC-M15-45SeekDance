@@ -10,7 +10,6 @@ import SwiftUI
 struct EmptyItemView: View {
     var body: some View {
         VStack {
-            Image("BlankInMaterialsView")
             Image("LazyBird")
                 .resizable()
                 .frame(width: 222, height: 222)
@@ -23,7 +22,6 @@ struct EmptyItemView: View {
                     .font(.system(size: 15))
                     .foregroundStyle(.grey600)
             }
-            Spacer()
         }
     }
 }

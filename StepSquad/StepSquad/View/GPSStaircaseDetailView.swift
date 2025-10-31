@@ -96,6 +96,7 @@ struct GPSStaircaseDetailView: View {
                         }
                         .padding(.bottom, 42)
                         .padding(.horizontal, 40)
+                        .multilineTextAlignment(.center)
                         
                         // 뱃지
                         if collectedItems.isCollected(item: gpsStaircase.id) {
@@ -165,7 +166,7 @@ struct GPSStaircaseDetailView: View {
                             
                             VStack(spacing: 12) {
                                 Label {
-                                    Text("획득 재료")
+                                    Text("보상")
                                         .font(.footnote)
                                         .bold()
                                         .foregroundColor(Color.Green700)
@@ -257,6 +258,7 @@ struct GPSStaircaseDetailView: View {
                 .cornerRadius(12)
                 .padding(.horizontal, 36)
             }
+            .toolbar(.hidden, for: .tabBar)
             .sheet(isPresented: $isShowingMissionSheet) {
                 VStack {
                     if (currentLocation == nil) {
@@ -358,7 +360,7 @@ struct VerifiedLocationView: View {
                 .padding(.bottom, 12)
             
             HStack(spacing: 12) {
-                GradientSquareView(type: String(localized: "획득 재료"), text: gpsStaircase.reward, isWithSymbol: false)
+                GradientSquareView(type: String(localized: "보상"), text: gpsStaircase.reward, isWithSymbol: false)
                 GradientSquareView(type: String(localized: "추가 점수"), text: String(localized: "\(gpsStaircase.steps)칸"), isWithSymbol: true)
             }
             
@@ -478,7 +480,7 @@ struct FailedLocationView: View {
                     }, label: {
                         HStack {
                             Spacer()
-                            Text("인증 위치 보기")
+                            Text("장소 확인하기")
                                 .foregroundStyle(.white)
                                 .padding(.vertical, 14)
                                 .padding(.horizontal, 20)

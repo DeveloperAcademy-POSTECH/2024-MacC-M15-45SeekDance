@@ -74,7 +74,7 @@ class HealthKitService: ObservableObject {
         } else {
             // 이미 날짜가 저장된 경우, 기존 날짜를 사용
             if UserDefaults.standard.object(forKey: authorizationDateKey) is Date {
-                print("1. Authorization Date: \(String(describing: authorizationDateKey))")
+//                print("1. Authorization Date: \(String(describing: authorizationDateKey))")
             }
         }
     }
@@ -103,7 +103,7 @@ class HealthKitService: ObservableObject {
         let query = HKStatisticsQuery(quantityType: flightsClimbedType, quantitySamplePredicate: combinedPredicate, options: .cumulativeSum) { _, result, error in
             // 오류가 발생한 경우 기본값을 0.0으로 설정
             if let error = error {
-                print("2.계단 오르기 데이터를 가져오는 중 오류 발생: \(error.localizedDescription)")
+//                print("2.계단 오르기 데이터를 가져오는 중 오류 발생: \(error.localizedDescription)")
                 self.saveFlightsClimbedToDefaults(0.0, authorizationDate: authorizationDate)
                 return
             }
@@ -137,8 +137,8 @@ class HealthKitService: ObservableObject {
         appGroupDefaults?.set(formattedFetchTime, forKey: "LastFetchTime")
         
         // 저장 결과 출력
-        print("2. 총 계단 오르기 수 \(flightsClimbed)를 저장했습니다. (패치 시각: \(formattedFetchTime))")
-        print("2. Authorization Date: \(authorizationDate)")
+//        print("2. 총 계단 오르기 수 \(flightsClimbed)를 저장했습니다. (패치 시각: \(formattedFetchTime))")
+//        print("2. Authorization Date: \(authorizationDate)")
     }
     
     func getSavedFlightsClimbedFromDefaults() -> Double {
@@ -172,7 +172,7 @@ class HealthKitService: ObservableObject {
         
         let query = HKStatisticsQuery(quantityType: flightsClimbedType, quantitySamplePredicate: combinedPredicate, options: .cumulativeSum) { [weak self] _, result, error in
             if let error = error {
-                print("3. 전체 계단 오르기 데이터 가져오기 오류: \(error.localizedDescription)")
+//                print("3. 전체 계단 오르기 데이터 가져오기 오류: \(error.localizedDescription)")
                 DispatchQueue.main.async {
                     self?.isHealthKitAuthorized = false
                 }
@@ -189,7 +189,7 @@ class HealthKitService: ObservableObject {
                     self?.isHealthKitAuthorized = false
                 }
                 
-                print("3. 전체 계단 오르기 데이터: \(totalFlightsClimbed)")
+//                print("3. 전체 계단 오르기 데이터: \(totalFlightsClimbed)")
             }
         }
         
@@ -224,7 +224,7 @@ class HealthKitService: ObservableObject {
             
             // 권한 허용 날짜 가져오기
             guard let authorizationDate = UserDefaults.standard.object(forKey: "HealthKitAuthorizationDate") as? Date else {
-                print("4. 권한 허용 날짜가 설정되지 않았습니다.")
+//                print("4. 권한 허용 날짜가 설정되지 않았습니다.")
                 return
             }
             
@@ -253,7 +253,7 @@ class HealthKitService: ObservableObject {
             
             let query = HKStatisticsQuery(quantityType: stairType, quantitySamplePredicate: combinedPredicate, options: .cumulativeSum) { _, result, error in
                 guard error == nil else {
-                    print("4.주간 계단 데이터 가져오기 오류: \(error!.localizedDescription) 혹은 데이터가 0입니다.")
+//                    print("4.주간 계단 데이터 가져오기 오류: \(error!.localizedDescription) 혹은 데이터가 0입니다.")
                     DispatchQueue.main.async {
                         self.weeklyFlightsClimbed = 0.0
                     }
@@ -266,8 +266,8 @@ class HealthKitService: ObservableObject {
                 DispatchQueue.main.async {
                     self.weeklyFlightsClimbed = totalFlightsClimbed
                 }
-                print("4.주간 계단 수 (토-금): \(totalFlightsClimbed)를 UserDefaults에 저장했습니다.")
-                print("4.Authorization Date: \(String(describing: authorizationDate)), Start: \(adjustedStartDate), End: \(endOfWeekDate)")
+//                print("4.주간 계단 수 (토-금): \(totalFlightsClimbed)를 UserDefaults에 저장했습니다.")
+//                print("4.Authorization Date: \(String(describing: authorizationDate)), Start: \(adjustedStartDate), End: \(endOfWeekDate)")
             }
             healthStore.execute(query)
         }

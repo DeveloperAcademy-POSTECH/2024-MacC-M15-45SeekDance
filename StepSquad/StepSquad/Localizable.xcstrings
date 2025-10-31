@@ -4,16 +4,6 @@
     "" : {
 
     },
-    " %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@"
-          }
-        }
-      }
-    },
     " %lld" : {
       "localizations" : {
         "en" : {
@@ -126,22 +116,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@ is conquered!"
-          }
-        }
-      }
-    },
-    "%@의 %lld칸을 걸었어요!" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Walked %2$lld steps at %1$@!"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@의 %2$lld칸을 걸었어요!"
           }
         }
       }
@@ -318,16 +292,6 @@
         }
       }
     },
-    "5분마다 획득할 수 있어요!" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Available every 5 minutes!"
-          }
-        }
-      }
-    },
     "7호선 상도역 앞 의문스러운 계단" : {
       "localizations" : {
         "en" : {
@@ -394,16 +358,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "N"
-          }
-        }
-      }
-    },
-    "NFC로 특별 재료 얻기" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "By tagging NFC, get hidden items"
           }
         }
       }
@@ -994,12 +948,12 @@
         }
       }
     },
-    "깜짝 재료" : {
+    "나의 기록" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hidden Items"
+            "value" : "My Record"
           }
         }
       }
@@ -1616,6 +1570,16 @@
         }
       }
     },
+    "보상" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reward"
+          }
+        }
+      }
+    },
     "부산 40 계단" : {
       "localizations" : {
         "en" : {
@@ -1767,22 +1731,22 @@
         }
       }
     },
+    "설정" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Setting"
+          }
+        }
+      }
+    },
     "성산일출봉" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Seongsan Ilchulbong"
-          }
-        }
-      }
-    },
-    "세상에 이런 계단이?!" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Step into the Legend"
           }
         }
       }
@@ -2078,16 +2042,6 @@
         }
       }
     },
-    "열기" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open"
-          }
-        }
-      }
-    },
     "영광 365 계단" : {
       "localizations" : {
         "en" : {
@@ -2288,16 +2242,6 @@
         }
       }
     },
-    "인증 위치 보기" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "View Spot"
-          }
-        }
-      }
-    },
     "인증 위치를 다시 확인해주세요." : {
       "localizations" : {
         "en" : {
@@ -2338,22 +2282,12 @@
         }
       }
     },
-    "일반 재료" : {
+    "일 차" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Normal Items"
-          }
-        }
-      }
-    },
-    "일반 재료는 계단 오르기만을 통해서만 얻을 수 있습니다." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You can get normal items by climbing staircases."
+            "value" : " days"
           }
         }
       }
@@ -2384,6 +2318,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Entrance parking lot"
+          }
+        }
+      }
+    },
+    "입단증" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Certificate of admission"
           }
         }
       }
@@ -2428,12 +2372,12 @@
         }
       }
     },
-    "재료 획득" : {
+    "장소 확인하기" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "New item"
+            "value" : "View Spot"
           }
         }
       }
@@ -2458,22 +2402,22 @@
         }
       }
     },
+    "전국의 계단" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "K-Stairs"
+          }
+        }
+      }
+    },
     "전국의 계단 리스트 보기" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "See list of K-Stairs"
-          }
-        }
-      }
-    },
-    "전국의 계단 미션을 깨보세요!" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Master K-Stairs!"
           }
         }
       }
@@ -2618,12 +2562,12 @@
         }
       }
     },
-    "주의: 계단사랑단 앱은 게임입니다. 실제 의학적 참고, 권고, 진단등을 위해 앱을 활용하면 안 됩니다." : {
+    "주의: 계단사랑단 앱을 실제 의학적 참고를 위해 활용하면 안 됩니다." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "CAUTION: StepSquad is a game. You should not use the app for actual medical reference, recommendations, diagnoses, etc."
+            "value" : "Caution: StepSquad should not be used for actual medical reference."
           }
         }
       }
@@ -2914,16 +2858,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Special items and double score event"
-          }
-        }
-      }
-    },
-    "특별 점수" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Special score"
           }
         }
       }
@@ -3258,6 +3192,16 @@
         }
       }
     },
+    "홈" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Home"
+          }
+        }
+      }
+    },
     "확인" : {
       "localizations" : {
         "en" : {
@@ -3323,27 +3267,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Special item"
-          }
-        }
-      }
-    },
-    "획득 재료 보기" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Inventory"
-          }
-        }
-      }
-    },
-    "획득 재료 확인하기" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "See Inventory"
           }
         }
       }

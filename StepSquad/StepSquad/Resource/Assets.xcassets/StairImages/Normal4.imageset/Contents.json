@@ -1,16 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Normal4.png",
+      "filename" : "Normal4_1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Normal4_2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Normal4 1.png",
+      "filename" : "Normal4_3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

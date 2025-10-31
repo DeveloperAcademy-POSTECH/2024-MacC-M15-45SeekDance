@@ -1,16 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Easy4.png",
+      "filename" : "Easy4_1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Easy4_2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Easy4 1.png",
+      "filename" : "Easy4_3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
