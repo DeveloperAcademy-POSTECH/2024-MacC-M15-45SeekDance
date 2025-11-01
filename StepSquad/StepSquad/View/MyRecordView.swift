@@ -105,14 +105,14 @@ struct MyRecordView: View {
                             LazyVGrid(columns: columns, spacing: 0) {
                                 ForEach(collectedItems.getSortedItemsNameList(), id: \.self) { item in
                                     if Array(gpsStaircasesDictionary.keys).contains(item) { // 전국의 계단 관련 보상
-                                        itemView(keyword: "미션", imageName: "\(gpsStaircasesDictionary[item]!.id)_reward", itemName: "\(gpsStaircasesDictionary[item]!.reward)", keywordForegroundColor: .white, keywordBackgroundColor: .green600)
+                                        itemView(keyword: String(localized: "미션"), imageName: "\(gpsStaircasesDictionary[item]!.id)_reward", itemName: "\(gpsStaircasesDictionary[item]!.reward)", keywordForegroundColor: .white, keywordBackgroundColor: .green600)
                                     } else {
                                         itemView(keyword: hiddenItemsDictionary[item]!.keyword, imageName: hiddenItemsDictionary[item]!.itemImage, itemName: "\(hiddenItemsDictionary[item]!.item)", keywordForegroundColor: .white, keywordBackgroundColor: Color(hex: hiddenItemsDictionary[item]!.itemColor))
                                     }
                                 }
                                 if completedLevels.lastUpdatedLevel >= 1 { // 획득한 약재가 있을 때
                                     ForEach((1...completedLevels.lastUpdatedLevel).reversed(), id: \.self) { level in
-                                        itemView(keyword: "레벨 \(level)", imageName: levels[level]!.itemImage, itemName: "\(levels[level]!.item)", keywordForegroundColor: getDifficultyColor(difficulty: levels[level]!.difficulty), keywordBackgroundColor: getDifficultyPaleColor(difficulty: levels[level]!.difficulty))
+                                        itemView(keyword: String(localized: "레벨 \(level)"), imageName: levels[level]!.itemImage, itemName: "\(levels[level]!.item)", keywordForegroundColor: getDifficultyColor(difficulty: levels[level]!.difficulty), keywordBackgroundColor: getDifficultyPaleColor(difficulty: levels[level]!.difficulty))
                                     }
                                 }
                             }
