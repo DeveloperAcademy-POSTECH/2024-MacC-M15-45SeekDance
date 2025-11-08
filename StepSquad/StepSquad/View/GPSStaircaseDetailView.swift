@@ -27,7 +27,7 @@ struct GPSStaircaseDetailView: View {
     @AppStorage("lastVerificationTime") var lastVerificationTime: Date = dateFormatter.date(from: "2000-01-01")!
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @State var timeDifference: Int = 0
-    let timeLimit: Int = 60 * 5
+    let timeLimit: Int = 10
     
     let gameCenterManager: GameCenterManager
     
