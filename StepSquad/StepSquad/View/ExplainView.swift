@@ -11,6 +11,10 @@ import SwiftUI
 struct ExplainView: View {
     @Binding var testFlightsClimbed: Int
     @Binding var isHealthKitAuthorized: Bool
+    let gameCenterManager: GameCenterManager
+    @Binding var collectedItems: CollectedItems
+    @Binding var completedLevels: CompletedLevels
+    
     var body: some View {
         NavigationStack {
             ZStack(alignment: .topTrailing) {
@@ -62,8 +66,14 @@ struct ExplainView: View {
                         }
                     }
                     Button("테스트 버전 리셋하기") {
+                        gameCenterManager.resetCompletedAchievement(achievementId: levels[1]!.achievementId)
+                        gameCenterManager.resetCompletedAchievement(achievementId: levels[2]!.achievementId)
+                        gameCenterManager.resetCompletedAchievement(achievementId: "memberOfStepSquad")
+                        
                         testFlightsClimbed = 0
                         isHealthKitAuthorized = false
+                        collectedItems.resetItems()
+                        completedLevels.resetLevels()
                     }
                     .buttonStyle(.borderedProminent)
                     .tint(.green100)
