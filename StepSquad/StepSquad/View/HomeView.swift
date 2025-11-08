@@ -44,8 +44,8 @@ struct HomeView: View {
             
             VStack(spacing: 0) {
                 HStack(spacing: 0) {
-                    Text(testFlightsClimbed == 0
-                         ? "당겨서 계단 정보 불러오기\n계단 업데이트: \(lastFetchTime)"
+                    Text(testFlightsClimbed != 0
+                         ? "당겨서 계단 정보 불러오기\n계단 업데이트: \(lastFetchTime.formatted(date: .numeric, time: .shortened))"
                          : "아직 계단을 안 오르셨군요!\n계단을 오르고 10분 뒤 다시 당겨보세요!")
                     .font(.footnote)
                     .foregroundColor(Color(hex: 0x808080))
