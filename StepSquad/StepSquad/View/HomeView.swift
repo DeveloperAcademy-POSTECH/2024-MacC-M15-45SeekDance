@@ -36,6 +36,7 @@ struct HomeView: View {
 //    @ObservedObject var climbManager: ClimbingManager
     
     @Binding var testFlightsClimbed: Int
+    @AppStorage("lastFetchTime") var lastFetchTime: Date = Date.now
     
     var body: some View {
         ZStack() {
@@ -44,7 +45,7 @@ struct HomeView: View {
             VStack(spacing: 0) {
                 HStack(spacing: 0) {
                     Text(testFlightsClimbed == 0
-                         ? "당겨서 계단 정보 불러오기\n계단 업데이트: \(Date.now)"
+                         ? "당겨서 계단 정보 불러오기\n계단 업데이트: \(lastFetchTime)"
                          : "아직 계단을 안 오르셨군요!\n계단을 오르고 10분 뒤 다시 당겨보세요!")
                     .font(.footnote)
                     .foregroundColor(Color(hex: 0x808080))
@@ -116,6 +117,10 @@ struct HomeView: View {
 //                    healthManager.getWeeklyStairDataAndSave()
 //                    healthManager.fetchAndSaveFlightsClimbedSinceAuthorization()
 //                    updateLevelsAndGameCenter()
+                    lastFetchTime = Date.now
+                    testFlightsClimbed += 1
+                    print("testFlightsClimbed: \(testFlightsClimbed)")
+                    updateLevelsAndGameCenter()
                 }
                 .scrollIndicators(ScrollIndicatorVisibility.hidden)
                 .onChange(of: isHealthKitAuthorized) {
@@ -339,7 +344,7 @@ struct HomeView: View {
     
     // MARK: 헬스킷 업데이트 주기마다 레벨 관련 변경하고, 게임센터 업데이트하는 것 모두 모은 함수
     func updateLevelsAndGameCenter() {
-        currentStatus.updateStaircase(0)
+        currentStatus.updateStaircase(testFlightsClimbed)
         saveCurrentStatus()
         compareCurrentLevelAndUpdate()
         updateLeaderboard()
