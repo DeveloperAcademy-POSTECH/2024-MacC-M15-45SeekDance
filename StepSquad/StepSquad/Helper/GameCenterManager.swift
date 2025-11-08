@@ -107,7 +107,7 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
                 print(error?.localizedDescription ?? "")
                 return
             }
-            print("game center: updated leaderboard")
+            print("game center: updated leaderboard with \(point)")
         }
     }
         

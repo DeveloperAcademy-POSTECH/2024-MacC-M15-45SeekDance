@@ -74,6 +74,9 @@ struct ExplainView: View {
                         collectedItems.resetItems()
                         completedLevels.resetLevels()
                         gpsStaircaseWeeklyScore.resetScores()
+                        Task {
+                            await gameCenterManager.submitPoint(point: 0)
+                        }
                     }
                     .buttonStyle(.borderedProminent)
                     .tint(.green100)
