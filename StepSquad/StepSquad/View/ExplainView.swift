@@ -66,10 +66,8 @@ struct ExplainView: View {
                         }
                     }
                     Button("테스트 버전 리셋하기") {
-                        gameCenterManager.resetCompletedAchievement(achievementId: levels[1]!.achievementId)
-                        gameCenterManager.resetCompletedAchievement(achievementId: levels[2]!.achievementId)
-                        gameCenterManager.resetCompletedAchievement(achievementId: "memberOfStepSquad")
-                        
+                        print("🚩 reset")
+                        gameCenterManager.resetAchievements()
                         testFlightsClimbed = 0
                         isHealthKitAuthorized = false
                         collectedItems.resetItems()

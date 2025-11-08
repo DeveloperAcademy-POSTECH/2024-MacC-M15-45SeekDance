@@ -117,10 +117,12 @@ struct HomeView: View {
 //                    healthManager.getWeeklyStairDataAndSave()
 //                    healthManager.fetchAndSaveFlightsClimbedSinceAuthorization()
 //                    updateLevelsAndGameCenter()
-                    lastFetchTime = Date.now
-                    testFlightsClimbed += 1
-                    print("testFlightsClimbed: \(testFlightsClimbed)")
-                    updateLevelsAndGameCenter()
+                    if isHealthKitAuthorized {
+                        lastFetchTime = Date.now
+                        testFlightsClimbed += 1
+                        print("testFlightsClimbed: \(testFlightsClimbed)")
+                        updateLevelsAndGameCenter()
+                    }
                 }
                 .scrollIndicators(ScrollIndicatorVisibility.hidden)
                 .onChange(of: isHealthKitAuthorized) {
