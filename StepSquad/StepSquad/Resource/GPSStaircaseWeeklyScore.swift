@@ -71,6 +71,11 @@ class GPSStaircaseWeeklyScore: Codable {
         save()
     }
     
+    func resetScores() {
+        scores.removeAll()
+        save()
+    }
+    
     func save() {
         do {
             let data = try JSONEncoder().encode(scores)

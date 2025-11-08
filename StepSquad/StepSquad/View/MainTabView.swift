@@ -74,7 +74,7 @@ struct MainTabView: View {
                         Text("나의 기록")
                     }
                 
-                ExplainView(testFlightsClimbed: $testFlightsClimbed, isHealthKitAuthorized: $isHealthKitAuthorized, gameCenterManager: gameCenterManager, collectedItems: $collectedItems, completedLevels: $completedLevels)
+                ExplainView(testFlightsClimbed: $testFlightsClimbed, isHealthKitAuthorized: $isHealthKitAuthorized, gameCenterManager: gameCenterManager, collectedItems: $collectedItems, completedLevels: $completedLevels, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore)
                     .tabItem {
                         Image(systemName: "gear")
                         Text("설정")

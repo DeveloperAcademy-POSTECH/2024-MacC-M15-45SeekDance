@@ -14,6 +14,7 @@ struct ExplainView: View {
     let gameCenterManager: GameCenterManager
     @Binding var collectedItems: CollectedItems
     @Binding var completedLevels: CompletedLevels
+    @Binding var gpsStaircaseWeeklyScore: GPSStaircaseWeeklyScore
     
     var body: some View {
         NavigationStack {
@@ -72,6 +73,7 @@ struct ExplainView: View {
                         isHealthKitAuthorized = false
                         collectedItems.resetItems()
                         completedLevels.resetLevels()
+                        gpsStaircaseWeeklyScore.resetScores()
                     }
                     .buttonStyle(.borderedProminent)
                     .tint(.green100)

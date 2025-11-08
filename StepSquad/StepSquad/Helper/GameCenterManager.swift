@@ -130,7 +130,7 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate, ObservableObj
             })
         }
     }
-    
+        
     // MARK: 성취 달성 여부 확인 후 성취 업데이트하기, 달성 여부 반환, 현재 사용 안 함
     func reportCompletedAchievementWithReturn(achievementId: String) -> Bool {
         var isReported = false
