@@ -15,14 +15,14 @@ struct EntryCertificateView: View {
     @State private var isButtonClicked: Bool = false
     
     // ClimbingManager 추가
-    @ObservedObject var climbManager: ClimbingManager
+//    @ObservedObject var climbManager: ClimbingManager
     
     var userPlayerImage: Image?
     var nickName: String?
     
     // 현재 회차 계산
     private var currentRound: Int {
-        return climbManager.records.isEmpty ? 1 : climbManager.getCurrentRound
+        return 1
     }
     
     var body: some View {
@@ -185,8 +185,4 @@ struct EntryCertificateView: View {
             isSharing = true
         }
     }
-}
-
-#Preview {
-    EntryCertificateView(climbManager: ClimbingManager())
 }

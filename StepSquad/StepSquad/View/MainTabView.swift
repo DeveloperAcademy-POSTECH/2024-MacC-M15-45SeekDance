@@ -33,13 +33,16 @@ struct MainTabView: View {
     @State var userName: String = "계단 오르기를 실천하는 사람"
     
     // MARK: healthkit 관련 데이터
-    @ObservedObject var healthManager = HealthKitService()
+//    @ObservedObject var healthManager = HealthKitService()
     @AppStorage("HealthKitAuthorized") var isHealthKitAuthorized: Bool = false
-    @ObservedObject var climbingManager = ClimbingManager()
+//    @ObservedObject var climbingManager = ClimbingManager()
     
     // TODO: - nfc 관련 콘텐츠 삭제
     @Query(sort: [SortDescriptor(\StairStepModel.stairStepDate, order: .forward)]) var stairSteps: [StairStepModel]
     @Environment(\.modelContext) var context
+    
+    // MARK: 시연용 오른 층수 데이터
+    @State var testFlightsClimbed = 0
     
     var body: some View {
         if isLaunching {
@@ -51,7 +54,7 @@ struct MainTabView: View {
                 }
         } else {
             TabView {
-                HomeView(isShowingNewItem: $isShowingNewItem, isResetCompleted: $isResetCompleted, completedLevels: $completedLevels, collectedItems: $collectedItems, lastElectricAchievementKwh: $lastElectricAchievementKwh, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, currentStatus: currentStatus, gameCenterManager: gameCenterManager, healthManager: healthManager, isHealthKitAuthorized: $isHealthKitAuthorized, climbManager: climbingManager)
+                HomeView(isShowingNewItem: $isShowingNewItem, isResetCompleted: $isResetCompleted, completedLevels: $completedLevels, collectedItems: $collectedItems, lastElectricAchievementKwh: $lastElectricAchievementKwh, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, currentStatus: currentStatus, gameCenterManager: gameCenterManager, isHealthKitAuthorized: $isHealthKitAuthorized, testFlightsClimbed: $testFlightsClimbed)
                     .tabItem {
                         Image(systemName: "house.fill")
                         Text("홈")
@@ -78,9 +81,9 @@ struct MainTabView: View {
                     }
             }
             .onAppear {
-                healthManager.getWeeklyStairDataAndSave()
-                healthManager.fetchAndSaveFlightsClimbedSinceAuthorization()
-                healthManager.fetchAllFlightsClimbedData()
+//                healthManager.getWeeklyStairDataAndSave()
+//                healthManager.fetchAndSaveFlightsClimbedSinceAuthorization()
+//                healthManager.fetchAllFlightsClimbedData()
                 if !GKLocalPlayer.local.isAuthenticated {
                     gameCenterManager.authenticateUser()
                 } else {
@@ -105,10 +108,10 @@ struct MainTabView: View {
             .sheet(isPresented: $isRecordSheetPresented) {
                 VStack {
                     ZStack {
-                        EntryCertificateView(climbManager: climbingManager, userPlayerImage: userProfileImage, nickName: userName)
+                        EntryCertificateView(userPlayerImage: userProfileImage, nickName: userName)
                             .rotation3DEffect(.degrees(isCardFlipped ? 0.001 : -90), axis: (x: 0.001, y: 1, z: 0.001))
                             .animation(isCardFlipped ? .linear.delay(0.35) : .linear, value: isCardFlipped)
-                        DescendRecordView(climbManager: climbingManager)
+                        DescendRecordView()
                             .rotation3DEffect(.degrees(isCardFlipped ? 90 : 0.001), axis: (x: 0.001, y: 1, z: 0.001))
                             .animation(isCardFlipped ? .linear : .linear.delay(0.35), value: isCardFlipped)
                     }

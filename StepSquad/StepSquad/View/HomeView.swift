@@ -31,9 +31,11 @@ struct HomeView: View {
     let gameCenterManager: GameCenterManager
     
     // MARK: healthkit 관련 데이터
-    @ObservedObject var healthManager: HealthKitService
+//    @ObservedObject var healthManager: HealthKitService
     @Binding var isHealthKitAuthorized: Bool
-    @ObservedObject var climbManager: ClimbingManager
+//    @ObservedObject var climbManager: ClimbingManager
+    
+    @Binding var testFlightsClimbed: Int
     
     var body: some View {
         ZStack() {
@@ -41,8 +43,8 @@ struct HomeView: View {
             
             VStack(spacing: 0) {
                 HStack(spacing: 0) {
-                    Text(healthManager.LastFetchTime.isEmpty == false
-                         ? "당겨서 계단 정보 불러오기\n계단 업데이트: \(healthManager.LastFetchTime)"
+                    Text(testFlightsClimbed == 0
+                         ? "당겨서 계단 정보 불러오기\n계단 업데이트: \(Date.now)"
                          : "아직 계단을 안 오르셨군요!\n계단을 오르고 10분 뒤 다시 당겨보세요!")
                     .font(.footnote)
                     .foregroundColor(Color(hex: 0x808080))
@@ -65,8 +67,8 @@ struct HomeView: View {
                     .cornerRadius(16)
                     .padding(.top, 12)
                     .onAppear() {
-                        healthManager.fetchAllFlightsClimbedData()
-                        healthManager.migrateAuthorizationDataToSharedDefaults()
+//                        healthManager.fetchAllFlightsClimbedData()
+//                        healthManager.migrateAuthorizationDataToSharedDefaults()
                     }
                     
                     HStack {
@@ -111,9 +113,9 @@ struct HomeView: View {
                     .padding(.horizontal, 36)
                 }
                 .refreshable {
-                    healthManager.getWeeklyStairDataAndSave()
-                    healthManager.fetchAndSaveFlightsClimbedSinceAuthorization()
-                    updateLevelsAndGameCenter()
+//                    healthManager.getWeeklyStairDataAndSave()
+//                    healthManager.fetchAndSaveFlightsClimbedSinceAuthorization()
+//                    updateLevelsAndGameCenter()
                 }
                 .scrollIndicators(ScrollIndicatorVisibility.hidden)
                 .onChange(of: isHealthKitAuthorized) {
@@ -147,7 +149,7 @@ struct HomeView: View {
                 .padding(.top, 8)
             
             Button {
-                healthManager.configure()
+//                healthManager.configure()
             } label: {
                 Label("오른 층수 추가하기",
                       image: "custom.figure.stairs.badge.plus")
@@ -289,7 +291,7 @@ struct HomeView: View {
         }
         .onAppear {
             // MARK: 일단 임시로 onAppear 사용해서 권한 받자마자 뷰를 그릴 수 있도록 임시 조치함.
-            updateLevelsAndGameCenter()
+//            updateLevelsAndGameCenter()
         }
         .onChange(of: isResetViewPresented, {
             // MARK: 리셋 조건 달성 확인 후, 데이터 리셋 시작
@@ -297,8 +299,8 @@ struct HomeView: View {
                 resetLevel()
                 isResetCompleted = false
                 // 완료 후 새로 고침
-                healthManager.getWeeklyStairDataAndSave()
-                healthManager.fetchAndSaveFlightsClimbedSinceAuthorization()
+//                healthManager.getWeeklyStairDataAndSave()
+//                healthManager.fetchAndSaveFlightsClimbedSinceAuthorization()
                 updateLevelsAndGameCenter()
             }
         })
@@ -337,7 +339,7 @@ struct HomeView: View {
     
     // MARK: 헬스킷 업데이트 주기마다 레벨 관련 변경하고, 게임센터 업데이트하는 것 모두 모은 함수
     func updateLevelsAndGameCenter() {
-        currentStatus.updateStaircase(Int(healthManager.TotalFlightsClimbedSinceAuthorization))
+        currentStatus.updateStaircase(0)
         saveCurrentStatus()
         compareCurrentLevelAndUpdate()
         updateLeaderboard()
@@ -365,8 +367,8 @@ struct HomeView: View {
     
     // MARK: - 이번주 총 점수(전국의 계단 점수 + 오른 계단 칸) 계산 후 순위표 업데이트하기
     func updateLeaderboard() {
-        healthManager.getWeeklyStairDataAndSave()
-        let weeklyStairPoint = healthManager.weeklyFlightsClimbed * 16
+//        healthManager.getWeeklyStairDataAndSave()
+        let weeklyStairPoint = testFlightsClimbed * 16
         let weeklyGpsStaircaseScore = gpsStaircaseWeeklyScore.getWeeklyScore()
         Task {
             await gameCenterManager.submitPoint(point: Int(weeklyGpsStaircaseScore) + Int(weeklyStairPoint))

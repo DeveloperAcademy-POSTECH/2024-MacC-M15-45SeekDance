@@ -13,7 +13,7 @@ struct DescendRecordView: View {
     @State private var isShareButtonClicked: Bool = false
     @State private var infoButtonClicked: Bool = false
 
-    @ObservedObject var climbManager: ClimbingManager
+//    @ObservedObject var climbManager: ClimbingManager
 
     var body: some View {
         VStack() {
@@ -43,7 +43,7 @@ struct DescendRecordView: View {
                 }
             }
 
-            if !climbManager.records.isEmpty {
+            if false {
                 VStack() {
                     HStack() {
                         Image("DescendRecordImage")
