@@ -42,7 +42,7 @@ struct MainTabView: View {
     @Environment(\.modelContext) var context
     
     // MARK: 시연용 오른 층수 데이터
-    @State var testFlightsClimbed = 0
+    @AppStorage("testFlightsClimbed") var testFlightsClimbed = 0
     
     var body: some View {
         if isLaunching {
@@ -74,7 +74,7 @@ struct MainTabView: View {
                         Text("나의 기록")
                     }
                 
-                ExplainView()
+                ExplainView(testFlightsClimbed: $testFlightsClimbed, isHealthKitAuthorized: $isHealthKitAuthorized)
                     .tabItem {
                         Image(systemName: "gear")
                         Text("설정")
