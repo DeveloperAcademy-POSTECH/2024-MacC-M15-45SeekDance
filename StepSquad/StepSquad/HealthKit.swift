@@ -41,7 +41,7 @@ class HealthKitService: ObservableObject {
             
             if success {
                 //   print("HealthKit 권한 허용됨")
-                //                self?.isHealthKitAuthorized = true
+//                self?.isHealthKitAuthorized = true
                 //                UserDefaults.standard.set(true, forKey: "HealthKitAuthorized")
                 self?.fetchAllFlightsClimbedData()
                 // 권한 요청 날짜를 기록하는 로직
@@ -52,8 +52,7 @@ class HealthKitService: ObservableObject {
                 self?.fetchAndSaveFlightsClimbedSinceAuthorization()
                 //                self?.fetchAndSaveFlightsClimbedSinceButtonPress()
             } else {
-                self?.isHealthKitAuthorized = false
-                //                self?.isHealthKitAuthorized = false
+//                self?.isHealthKitAuthorized = false
                 print("HealthKit 권한 거부됨")
                 //                UserDefaults.standard.set(false, forKey: "HealthKitAuthorized")
             }

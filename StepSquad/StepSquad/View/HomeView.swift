@@ -31,7 +31,7 @@ struct HomeView: View {
     let gameCenterManager: GameCenterManager
     
     // MARK: healthkit 관련 데이터
-//    @ObservedObject var healthManager: HealthKitService
+    @ObservedObject var healthManager: HealthKitService
     @Binding var isHealthKitAuthorized: Bool
 //    @ObservedObject var climbManager: ClimbingManager
     
@@ -149,7 +149,7 @@ struct HomeView: View {
                 .padding(.top, 8)
             
             Button {
-//                healthManager.configure()
+                healthManager.configure()
             } label: {
                 Label("오른 층수 추가하기",
                       image: "custom.figure.stairs.badge.plus")

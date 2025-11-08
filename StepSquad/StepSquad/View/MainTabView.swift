@@ -33,7 +33,7 @@ struct MainTabView: View {
     @State var userName: String = "계단 오르기를 실천하는 사람"
     
     // MARK: healthkit 관련 데이터
-//    @ObservedObject var healthManager = HealthKitService()
+    @ObservedObject var healthManager = HealthKitService()
     @AppStorage("HealthKitAuthorized") var isHealthKitAuthorized: Bool = false
 //    @ObservedObject var climbingManager = ClimbingManager()
     
@@ -54,7 +54,7 @@ struct MainTabView: View {
                 }
         } else {
             TabView {
-                HomeView(isShowingNewItem: $isShowingNewItem, isResetCompleted: $isResetCompleted, completedLevels: $completedLevels, collectedItems: $collectedItems, lastElectricAchievementKwh: $lastElectricAchievementKwh, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, currentStatus: currentStatus, gameCenterManager: gameCenterManager, isHealthKitAuthorized: $isHealthKitAuthorized, testFlightsClimbed: $testFlightsClimbed)
+                HomeView(isShowingNewItem: $isShowingNewItem, isResetCompleted: $isResetCompleted, completedLevels: $completedLevels, collectedItems: $collectedItems, lastElectricAchievementKwh: $lastElectricAchievementKwh, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, currentStatus: currentStatus, gameCenterManager: gameCenterManager, healthManager: healthManager, isHealthKitAuthorized: $isHealthKitAuthorized, testFlightsClimbed: $testFlightsClimbed)
                     .tabItem {
                         Image(systemName: "house.fill")
                         Text("홈")
