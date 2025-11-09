@@ -128,6 +128,8 @@ struct HomeView: View {
                 .onChange(of: isHealthKitAuthorized) {
                     if isHealthKitAuthorized { // 헬스킷 권한 허용 후 입단 뱃지 받기
                         gameCenterManager.reportCompletedAchievement(achievementId: "memberOfStepSquad")
+                    } else {
+                        resetLevel()
                     }
                 }
             }
@@ -384,12 +386,18 @@ struct HomeView: View {
     
     // MARK: 만렙 이후 리셋하기
     func resetLevel() {
+        print("🛠️ reset")
+        testFlightsClimbed = 0
+        gpsStaircaseWeeklyScore.resetScores()
         currentStatus.updateStaircase(0)
         saveCurrentStatus()
         lastElectricAchievementKwh = 0
         gameCenterManager.resetAchievements()
         completedLevels.resetLevels()
         collectedItems.resetItems()
+        Task {
+            await gameCenterManager.submitPoint(point: 0)
+        }
     }
     
     // MARK: Level 관련 테스트 프린트문

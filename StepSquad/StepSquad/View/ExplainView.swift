@@ -67,16 +67,7 @@ struct ExplainView: View {
                         }
                     }
                     Button("테스트 버전 리셋하기") {
-                        print("🚩 reset")
-                        gameCenterManager.resetAchievements()
-                        testFlightsClimbed = 0
                         isHealthKitAuthorized = false
-                        collectedItems.resetItems()
-                        completedLevels.resetLevels()
-                        gpsStaircaseWeeklyScore.resetScores()
-                        Task {
-                            await gameCenterManager.submitPoint(point: 0)
-                        }
                     }
                     .buttonStyle(.borderedProminent)
                     .tint(.green100)
