@@ -26,11 +26,13 @@ struct GPSStaircaseListView: View {
         GridItem(.fixed(176))
     ]
     
+    @Binding var testFlightsClimbed: Int
+    
     var body: some View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 12) {
                 ForEach(filteredStaircases) { staircase in
-                    NavigationLink(destination: GPSStaircaseDetailView(bookmarks: $bookmarks, collectedItems: $collectedItems, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, gpsStaircase: staircase, locationManager: locationManager, gameCenterManager: gameCenterManager, isShowingNewItem: $isShowingNewItem, healthkitService: service), label: {
+                    NavigationLink(destination: GPSStaircaseDetailView(bookmarks: $bookmarks, collectedItems: $collectedItems, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, gpsStaircase: staircase, locationManager: locationManager, gameCenterManager: gameCenterManager, isShowingNewItem: $isShowingNewItem, healthkitService: service, testFlightsClimbed: $testFlightsClimbed), label: {
                         VStack(alignment: .leading) {
                             ZStack {
                                 Image(staircase.imageName)

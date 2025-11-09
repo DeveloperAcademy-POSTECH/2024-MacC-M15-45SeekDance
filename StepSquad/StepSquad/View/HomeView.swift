@@ -379,6 +379,7 @@ struct HomeView: View {
 //        healthManager.getWeeklyStairDataAndSave()
         let weeklyStairPoint = testFlightsClimbed * 16
         let weeklyGpsStaircaseScore = gpsStaircaseWeeklyScore.getWeeklyScore()
+        print("weekly score: \(weeklyGpsStaircaseScore) \(weeklyStairPoint)")
         Task {
             await gameCenterManager.submitPoint(point: Int(weeklyGpsStaircaseScore) + Int(weeklyStairPoint))
         }

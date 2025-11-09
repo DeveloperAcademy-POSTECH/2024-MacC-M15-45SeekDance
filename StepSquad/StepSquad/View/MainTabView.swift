@@ -60,7 +60,7 @@ struct MainTabView: View {
                         Text("홈")
                     }
                 
-                GPSStaircaseMainView(localPlayerImage: userProfileImage, localPlayerName: userName, collectedItems: $collectedItems, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, gameCenterManager: gameCenterManager, isShowingNewItem: $isShowingNewItem)
+                GPSStaircaseMainView(localPlayerImage: userProfileImage, localPlayerName: userName, collectedItems: $collectedItems, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, gameCenterManager: gameCenterManager, isShowingNewItem: $isShowingNewItem, testFlightsClimbed: $testFlightsClimbed)
                     .tabItem {
                         Image(systemName: "globe")
                         Text("전국의 계단")

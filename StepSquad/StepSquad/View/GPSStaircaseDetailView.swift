@@ -37,6 +37,8 @@ struct GPSStaircaseDetailView: View {
     
     @Environment(\.scenePhase) var scenePhase
     
+    @Binding var testFlightsClimbed: Int
+    
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottom) {
@@ -272,7 +274,7 @@ struct GPSStaircaseDetailView: View {
                         Spacer()
                     } else {
                         if (isAtLocation) { // 위치 인증을 성공했을 때
-                            VerifiedLocationView(gpsStaircase: gpsStaircase, isShowingMissionSheet: $isShowingMissionSheet, gameCenterManager: gameCenterManager, collectedItems: $collectedItems, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, isShowingNewItem: $isShowingNewItem, isVerificationActive: $isVerificationActive, healthKitService: healthkitService, lastVerificationTime: $lastVerificationTime)
+                            VerifiedLocationView(gpsStaircase: gpsStaircase, isShowingMissionSheet: $isShowingMissionSheet, gameCenterManager: gameCenterManager, collectedItems: $collectedItems, gpsStaircaseWeeklyScore: $gpsStaircaseWeeklyScore, isShowingNewItem: $isShowingNewItem, isVerificationActive: $isVerificationActive, healthKitService: healthkitService, lastVerificationTime: $lastVerificationTime, testFlightsClimbed: $testFlightsClimbed)
                         } else { // 위치 인증을 성공하지 못 했을 때
                             FailedLocationView(locationManager: locationManager, currentLocation: $currentLocation, isAtLocation: $isAtLocation, isShowingMissionSheet: $isShowingMissionSheet, gpsStaircase: gpsStaircase)
                         }
@@ -325,6 +327,9 @@ struct VerifiedLocationView: View {
     @Binding var lastVerificationTime: Date
     
     @State private var animationAmount = 0.0
+    
+    @Binding var testFlightsClimbed: Int
+    
     var body: some View {
         VStack {
             Text("전국의 계단 성공!")
@@ -390,7 +395,7 @@ struct VerifiedLocationView: View {
             healthKitService.getWeeklyStairDataAndSave()
             Task {
                 gpsStaircaseWeeklyScore.addScore(score: gpsStaircase.steps)
-                let weeklyScore = gpsStaircaseWeeklyScore.getWeeklyScore() + Int(healthKitService.weeklyFlightsClimbed) * 16
+                let weeklyScore = gpsStaircaseWeeklyScore.getWeeklyScore() + Int(testFlightsClimbed) * 16
                 await gameCenterManager.submitPoint(point: weeklyScore)
             }
             if (!collectedItems.isCollected(item: gpsStaircase.id)) {
